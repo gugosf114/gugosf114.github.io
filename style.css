@@ -186,10 +186,44 @@ nav {
     text-align: center;
     padding: 8rem 2rem 4rem;
     background: linear-gradient(180deg, var(--white) 0%, var(--cream) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 80'%3E%3Cpath fill='%23622D2B' d='M0 0h1200v50c-50 30-100 0-150 15-50 15-100-10-150 10-50 20-100-5-150 5s-100 10-150-5c-50-15-100 10-150-10-50-20-100 15-150-15-50-30-100 0-150 15V0z'/%3E%3C/svg%3E");
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 1;
+    opacity: 0.4;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('https://raw.githubusercontent.com/gugosf114/mybakingcreations/main/logo_icon.png');
+    background-size: 120px 120px;
+    background-position: 10% 20%, 85% 15%, 15% 70%, 90% 75%, 20% 45%, 80% 50%;
+    background-repeat: no-repeat;
+    opacity: 0.08;
+    z-index: 0;
+    animation: heroFloat 20s ease-in-out infinite;
 }
 
 .hero-content {
     max-width: 800px;
+    position: relative;
+    z-index: 2;
 }
 
 .hero-logo {
@@ -201,6 +235,11 @@ nav {
 @keyframes bounce {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
+}
+
+@keyframes heroFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
 }
 
 .hero-badge {
