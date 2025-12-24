@@ -529,6 +529,259 @@ footer {
     color: rgba(255, 255, 255, 0.5);
 }
 
+/* ==================== FLOATING ORDER BUTTON ==================== */
+.floating-order-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--pink);
+    color: var(--white);
+    border: none;
+    padding: 18px 30px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 6px 30px rgba(236, 38, 143, 0.5);
+    z-index: 999;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: pulse 2s infinite;
+}
+
+.floating-order-btn:hover {
+    background: var(--pink-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 40px rgba(236, 38, 143, 0.6);
+}
+
+.floating-order-btn .btn-icon {
+    font-size: 1.3rem;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* ==================== ORDER FORM MODAL ==================== */
+.order-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(98, 45, 43, 0.9);
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.modal-content {
+    background: var(--cream);
+    border-radius: 30px;
+    max-width: 700px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 40px;
+    font-weight: bold;
+    color: var(--dark-brown);
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+    color: var(--pink);
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+    color: var(--white);
+    padding: 40px 40px 30px;
+    border-radius: 30px 30px 0 0;
+    text-align: center;
+}
+
+.modal-header h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2rem;
+    margin: 0 0 10px;
+}
+
+.modal-header p {
+    margin: 0;
+    font-size: 1rem;
+    opacity: 0.95;
+}
+
+#orderForm {
+    padding: 40px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 700;
+    color: var(--dark-brown);
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="date"],
+.form-group textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid #E5D5C4;
+    border-radius: 15px;
+    font-size: 1rem;
+    font-family: 'Nunito', sans-serif;
+    transition: all 0.3s ease;
+    background: var(--white);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--pink);
+    box-shadow: 0 0 0 3px rgba(236, 38, 143, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.85rem;
+    color: var(--brown);
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border: 2px solid #E5D5C4;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--white);
+}
+
+.radio-option:hover {
+    border-color: var(--pink);
+    background: rgba(236, 38, 143, 0.05);
+}
+
+.radio-option input[type="radio"] {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.radio-option input[type="radio"]:checked + span {
+    font-weight: 700;
+    color: var(--pink);
+}
+
+.radio-option span {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.form-group input[type="file"] {
+    padding: 10px;
+    border: 2px dashed #E5D5C4;
+    border-radius: 12px;
+    width: 100%;
+    cursor: pointer;
+    background: var(--white);
+    font-family: 'Nunito', sans-serif;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 18px;
+    background: var(--pink);
+    color: var(--white);
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 25px rgba(236, 38, 143, 0.4);
+}
+
+.submit-btn:hover {
+    background: var(--pink-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 35px rgba(236, 38, 143, 0.5);
+}
+
+.submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--brown);
+    font-size: 0.9rem;
+}
+
+.form-footer strong {
+    color: var(--pink);
+}
+
 /* RESPONSIVE */
 @media (max-width: 968px) {
     .nav-links {
@@ -585,6 +838,40 @@ footer {
     /* Contact page 2-column to 1-column */
     div[style*="grid-template-columns: 1fr 1fr"] {
         grid-template-columns: 1fr !important;
+    }
+    
+    .floating-order-btn {
+        bottom: 20px;
+        right: 20px;
+        padding: 15px 25px;
+        font-size: 1rem;
+    }
+    
+    .modal-content {
+        max-height: 95vh;
+        border-radius: 20px;
+    }
+    
+    .modal-header {
+        padding: 30px 25px 25px;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.6rem;
+    }
+    
+    #orderForm {
+        padding: 30px 25px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .close-modal {
+        top: 15px;
+        right: 20px;
+        font-size: 35px;
     }
 }
 
