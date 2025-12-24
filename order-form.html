@@ -1,0 +1,100 @@
+<!-- Floating Order Button -->
+<button id="floatingOrderBtn" class="floating-order-btn">
+    <span class="btn-icon">🎂</span> Order Now
+</button>
+
+<!-- Order Form Modal -->
+<div id="orderModal" class="order-modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div class="modal-header">
+            <h2>Request Your Custom Order</h2>
+            <p>Tell us about your celebration and we'll create something amazing!</p>
+        </div>
+        
+        <form id="orderForm">
+            <!-- Web3Forms Access Key (GET YOUR FREE KEY AT web3forms.com) -->
+            <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+            <input type="hidden" name="subject" value="New Order Inquiry - My Baking Creations">
+            <input type="hidden" name="from_name" value="My Baking Creations Website">
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Your Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Jane Smith">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required placeholder="jane@example.com">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" required placeholder="(415) 555-1234">
+            </div>
+            
+            <div class="form-group">
+                <label>What are you ordering? *</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="product_type" value="Custom Cake" required>
+                        <span>🎂 Custom Cake</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="product_type" value="Custom Cookies">
+                        <span>🍪 Custom Cookies</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="product_type" value="Cake Pops">
+                        <span>🍰 Cake Pops</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="product_type" value="Cupcakes">
+                        <span>🧁 Cupcakes</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="event_date">Event Date *</label>
+                    <input type="date" id="event_date" name="event_date" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Pickup or Delivery? *</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="delivery_method" value="Pickup" required>
+                            <span>Pickup (Sunset SF)</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="delivery_method" value="Delivery">
+                            <span>Delivery</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="order_details">Tell us about your order *</label>
+                <textarea id="order_details" name="order_details" rows="5" required placeholder="Tell us about your theme, colors, size, dietary restrictions, and any special requests..."></textarea>
+                <small>Include: theme, colors, serving size, dietary needs (gluten-free, vegan, etc.)</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="reference_photo">Reference Photo (Optional)</label>
+                <input type="file" id="reference_photo" name="attachment" accept="image/*,.pdf">
+                <small>Upload a photo or sketch of what you'd like (Max 5MB)</small>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="submit-btn">Send Order Inquiry</button>
+            </div>
+            
+            <p class="form-footer">We'll respond within 24 hours. For urgent requests, call <strong>(415) 632-8008</strong></p>
+        </form>
+    </div>
+</div>
