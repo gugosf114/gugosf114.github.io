@@ -533,7 +533,7 @@ footer {
 .floating-order-btn {
     position: fixed;
     bottom: 30px;
-    right: 30px;
+    left: 30px;
     background: var(--pink);
     color: var(--white);
     border: none;
@@ -842,7 +842,7 @@ footer {
     
     .floating-order-btn {
         bottom: 20px;
-        right: 20px;
+        left: 20px;
         padding: 15px 25px;
         font-size: 1rem;
     }
