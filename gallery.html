@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Baking Creations | Custom Cakes, Cookies & Cake Pops | San Francisco Bay Area</title>
-    <meta name="description" content="Family-owned Bay Area bakery since 2012. Custom cakes, cookies, and cake pops for birthdays, weddings, corporate events.">
+    <title>Gallery | My Baking Creations</title>
+    <meta name="description" content="Browse our portfolio of custom cakes, cookies, cake pops, and cupcakes created for Bay Area celebrations.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -22,10 +22,10 @@
                 </div>
             </a>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li class="dropdown">
-                    <a href="gallery.html">Gallery ▾</a>
+                    <a href="gallery.html" class="active">Gallery ▾</a>
                     <ul class="dropdown-menu">
                         <li><a href="gallery-cakes.html">Custom Cakes</a></li>
                         <li><a href="gallery-cookies.html">Custom Cookies</a></li>
@@ -40,69 +40,51 @@
         </nav>
     </header>
 
-    <!-- HERO -->
-    <section class="hero">
+    <!-- GALLERY HERO -->
+    <section class="hero" style="padding-top: 10rem; min-height: 60vh;">
         <div class="hero-content">
-            <img src="https://raw.githubusercontent.com/gugosf114/mybakingcreations/main/logo_icon.png" alt="My Baking Creations" class="hero-logo">
-            <div class="hero-badge">✨ Family-Owned Since 2012</div>
-            <h1>The Bay Area's Best<br><span class="highlight">Custom Cakes,</span> <span class="highlight-yellow">Cookies</span><br>& <span class="highlight">Cake Pops</span></h1>
-            <p class="hero-subtitle">Handcrafted with love by cake designer Yana Yatsevich.<br>Every creation starts with a conversation and a custom sketch.</p>
-            <div class="hero-buttons">
-                <a href="contact.html" class="btn btn-primary">Request an Order</a>
-                <a href="gallery.html" class="btn btn-secondary">View Our Work</a>
-            </div>
+            <h1>Our <span class="highlight">Gallery</span></h1>
+            <p class="hero-subtitle">Browse our collection of custom creations</p>
         </div>
     </section>
 
-    <!-- SERVICES PREVIEW -->
+    <!-- GALLERY CATEGORIES -->
     <section class="services-preview">
         <div class="container">
-            <div class="section-header">
-                <h2>What We <span class="highlight">Create</span></h2>
-                <p>From elegant wedding cakes to playful birthday treats, every creation is custom-designed for your celebration.</p>
-            </div>
             <div class="services-grid">
-                <div class="service-card">
+                <a href="gallery-cakes.html" class="service-card" style="text-decoration: none;">
                     <div class="service-icon">🎂</div>
                     <h3>Custom Cakes</h3>
-                    <p>Sculpted, tiered, and ultra-realistic designs. Each cake is a unique work of art.</p>
-                    <span class="price">$250 – $650+</span>
-                    <a href="gallery-cakes.html" class="btn btn-secondary">View Cakes</a>
-                </div>
-                <div class="service-card">
+                    <p>Sculpted designs, tiered masterpieces, and ultra-realistic creations</p>
+                    <span class="btn btn-secondary" style="display: inline-block; margin-top: 1rem;">View Cakes →</span>
+                </a>
+
+                <a href="gallery-cookies.html" class="service-card" style="text-decoration: none;">
                     <div class="service-icon">🍪</div>
                     <h3>Custom Cookies</h3>
-                    <p>Logo cookies and decorated sugar cookies for any occasion.</p>
-                    <span class="price">Starting at $4/cookie</span>
-                    <a href="gallery-cookies.html" class="btn btn-secondary">View Cookies</a>
-                </div>
-                <div class="service-card">
+                    <p>Logo cookies, decorated sugar cookies, and themed sets</p>
+                    <span class="btn btn-secondary" style="display: inline-block; margin-top: 1rem;">View Cookies →</span>
+                </a>
+
+                <a href="gallery-cakepops.html" class="service-card" style="text-decoration: none;">
                     <div class="service-icon">🍰</div>
                     <h3>Cake Pops</h3>
-                    <p>Hand-decorated cake pops in any theme or color.</p>
-                    <span class="price">Starting at $3.50/pop</span>
-                    <a href="gallery-cakepops.html" class="btn btn-secondary">View Cake Pops</a>
-                </div>
-            </div>
-        </div>
-    </section>
+                    <p>Hand-decorated cake pops in any theme or color scheme</p>
+                    <span class="btn btn-secondary" style="display: inline-block; margin-top: 1rem;">View Cake Pops →</span>
+                </a>
 
-    <!-- TRUSTED BY -->
-    <section class="trusted-by">
-        <div class="container">
-            <div class="section-header">
-                <h2>Trusted by Leading Companies</h2>
-                <p>We've created custom treats for corporate events and employee appreciation.</p>
+                <a href="gallery-cupcakes.html" class="service-card" style="text-decoration: none;">
+                    <div class="service-icon">🧁</div>
+                    <h3>Cupcakes</h3>
+                    <p>Elegantly decorated cupcakes for any celebration</p>
+                    <span class="btn btn-secondary" style="display: inline-block; margin-top: 1rem;">View Cupcakes →</span>
+                </a>
             </div>
-            <div class="client-logos">
-                <span>GOOGLE</span>
-                <span>META</span>
-                <span>SALESFORCE</span>
-                <span>DOCUSIGN</span>
-                <span>GAP</span>
-                <span>ALASKA AIRLINES</span>
+
+            <div style="text-align: center; margin-top: 4rem;">
+                <p style="font-size: 1.2rem; font-weight: 700; color: var(--dark-brown); margin-bottom: 1.5rem;">Ready to order your custom creation?</p>
+                <a href="contact.html" class="btn btn-primary" style="font-size: 1.1rem;">Request an Order</a>
             </div>
-            <a href="corporate.html" class="btn btn-primary" style="margin-top: 2rem;">Learn About Corporate Orders</a>
         </div>
     </section>
 
