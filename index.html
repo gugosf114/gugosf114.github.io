@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Baking Creations | Custom Cakes, Cookies & Cake Pops | San Francisco Bay Area</title>
+    <meta name="description" content="Family-owned Bay Area bakery since 2012. Custom cakes, logo cookies, and cake pops for birthdays, weddings, corporate events. Founded by cake designer Yana Yatsevich.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink: #EC268F;
+            --pink-dark: #D11F7E;
+            --yellow: #FFC532;
+            --yellow-dark: #E5AF2D;
+            --brown: #C36239;
+            --dark-brown: #622D2B;
+            --cream: #FFF9F0;
+            --white: #FFFFFF;
+        }
+        * {margin: 0; padding: 0; box-sizing: border-box;}
+        html {scroll-behavior: smooth;}
+        body {font-family: 'Nunito', sans-serif; background: var(--cream); color: var(--dark-brown); line-height: 1.7;}
+        header {position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--white); padding: 1.2rem 2rem; box-shadow: 0 2px 20px rgba(98, 45, 43, 0.1);}
+        nav {max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;}
+        .logo {display: flex; align-items: center; gap: 0.75rem; text-decoration: none;}
+        .logo-icon {height: 65px;}
+        .logo-text {font-family: 'Fredoka One', cursive; font-size: 1.8rem;}
+        .logo-text .my {color: var(--pink);}
+        .logo-text .baking {color: var(--yellow);}
+        .logo-text .creations {display: block; font-family: 'Nunito', sans-serif; font-size: 0.8rem; letter-spacing: 4px; color: var(--pink); text-transform: uppercase; margin-top: -5px;}
+        .nav-links {display: flex; gap: 2.5rem; list-style: none;}
+        .nav-links a {text-decoration: none; color: var(--dark-brown); font-weight: 800; font-size: 1.1rem;}
+        .nav-cta {background: var(--yellow); color: var(--dark-brown) !important; padding: 0.8rem 1.8rem; border-radius: 30px;}
+        .hero {min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 8rem 2rem 4rem; background: linear-gradient(180deg, var(--white) 0%, var(--cream) 100%);}
+        .hero h1 {font-family: 'Fredoka One', cursive; font-size: clamp(2.5rem, 6vw, 4rem); margin: 2rem 0 1rem;}
+        .hero .highlight {color: var(--pink);}
+        .hero .highlight-yellow {color: var(--yellow-dark);}
+        .btn {padding: 1rem 2.5rem; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; margin: 0.5rem;}
+        .btn-primary {background: var(--pink); color: var(--white);}
+        .btn-secondary {background: var(--yellow); color: var(--dark-brown);}
+        .section-header {text-align: center; margin: 4rem 0;}
+        .section-header h2 {font-family: 'Fredoka One', cursive; font-size: 3rem;}
+        .about, .services, .order, .contact {padding: 4rem 2rem;}
+        .gallery, .corporate {padding: 4rem 2rem; background: var(--dark-brown); color: var(--white);}
+        footer {background: var(--dark-brown); color: var(--white); padding: 3rem 2rem; text-align: center;}
+        @media (max-width: 968px) {.nav-links {display: none;}}
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#" class="logo">
+                <img src="https://raw.githubusercontent.com/gugosf114/mybakingcreations/main/logo_icon.png" alt="My Baking Creations" class="logo-icon">
+                <div class="logo-text">
+                    <span class="my">my</span><span class="baking">baking</span>
+                    <span class="creations">CREATIONS</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#order" class="nav-cta">Order Now</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="hero">
+        <div>
+            <div style="background: var(--yellow); padding: 0.5rem 1.2rem; border-radius: 30px; display: inline-block; margin-bottom: 1rem;">✨ Family-Owned Since 2012</div>
+            <h1>The Bay Area's Best<br><span class="highlight">Custom Cakes,</span> <span class="highlight-yellow">Cookies</span> & <span class="highlight">Cake Pops</span></h1>
+            <p style="font-size: 1.2rem; margin: 2rem 0;">Handcrafted with love by cake designer Yana Yatsevich</p>
+            <a href="#order" class="btn btn-primary">Request an Order</a>
+            <a href="https://instagram.com/mybakingcreationscompany" class="btn btn-secondary">View Gallery</a>
+        </div>
+    </section>
+    <section class="about" id="about">
+        <div class="section-header">
+            <h2>Every Celebration Deserves Something <span class="highlight">Extraordinary</span></h2>
+            <p>My Baking Creations is a family-owned bakery founded by Yana Yatsevich. We specialize in sculpted cakes, logo cookies, and custom cake pops for birthdays, weddings, and corporate events.</p>
+        </div>
+    </section>
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2>What We Create</h2>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto;">
+            <div style="background: white; padding: 2rem; border-radius: 30px; text-align: center;">
+                <div style="font-size: 3rem;">🎂</div>
+                <h3>Custom Cakes</h3>
+                <p>Sculpted, tiered, ultra-realistic designs.</p>
+                <strong>$250 – $650+</strong>
+            </div>
+            <div style="background: white; padding: 2rem; border-radius: 30px; text-align: center;">
+                <div style="font-size: 3rem;">🍪</div>
+                <h3>Logo Cookies</h3>
+                <p>Your brand printed on delicious cookies.</p>
+                <strong>Starting at $4/cookie</strong>
+            </div>
+            <div style="background: white; padding: 2rem; border-radius: 30px; text-align: center;">
+                <div style="font-size: 3rem;">🍰</div>
+                <h3>Cake Pops</h3>
+                <p>Hand-decorated in any theme or color.</p>
+                <strong>Starting at $3.50/pop</strong>
+            </div>
+        </div>
+    </section>
+    <section class="corporate">
+        <div class="section-header">
+            <h2>Trusted by Leading Companies</h2>
+            <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 2rem;">
+                <span>GOOGLE</span>
+                <span>META</span>
+                <span>SALESFORCE</span>
+                <span>DOCUSIGN</span>
+                <span>GAP</span>
+                <span>ALASKA AIRLINES</span>
+            </div>
+        </div>
+    </section>
+    <section class="order" id="order">
+        <div class="section-header">
+            <h2>Request an Order</h2>
+        </div>
+        <div style="max-width: 700px; margin: 0 auto;">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfxqq3dduwFFpQQVjTA/viewform?embedded=true" width="100%" height="1400" frameborder="0">Loading…</iframe>
+        </div>
+    </section>
+    <section class="contact">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; text-align: center;">
+            <div>
+                <h4>📍 Location</h4>
+                <p>San Francisco Bay Area<br>Pickup in Sunset District</p>
+            </div>
+            <div>
+                <h4>📞 Contact</h4>
+                <p><a href="tel:4156328008" style="color: var(--pink);">(415) 632-8008</a><br>
+                <a href="mailto:info@mybakingcreations.com" style="color: var(--pink);">info@mybakingcreations.com</a></p>
+            </div>
+            <div>
+                <h4>📸 Follow Us</h4>
+                <p><a href="https://instagram.com/mybakingcreationscompany" style="color: var(--pink);">@mybakingcreationscompany</a></p>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div style="font-family: 'Fredoka One', cursive; font-size: 1.8rem; margin-bottom: 1rem;">
+            <span style="color: var(--pink);">my</span><span style="color: var(--yellow);">baking</span> Creations
+        </div>
+        <p>© 2024 My Baking Creations. All rights reserved. Made with 💖 in San Francisco.</p>
+    </footer>
+</body>
+</html>
