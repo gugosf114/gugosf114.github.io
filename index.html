@@ -161,7 +161,17 @@
         </div>
     </footer>
 
- <script src="script.js"></script>
-    <script>fetch('order-form.html').then(r=>r.text()).then(h=>document.body.insertAdjacentHTML('beforeend',h))</script>
+    <script>
+    // Load order form HTML first
+    fetch('order-form.html')
+        .then(r => r.text())
+        .then(h => {
+            document.body.insertAdjacentHTML('beforeend', h);
+            // Then load the script.js which has the event listeners
+            const script = document.createElement('script');
+            script.src = 'script.js';
+            document.body.appendChild(script);
+        });
+    </script>
 </body>
 </html>
