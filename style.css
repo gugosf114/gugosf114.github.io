@@ -44,32 +44,7 @@ header {
     background: var(--white);
     padding: 1rem 2rem;
     box-shadow: 0 2px 20px rgba(98, 45, 43, 0.1);
-    border-bottom: none;
-}
-
-/* Chocolate drip effect - matching sketch style */
-header::after {
-    content: '';
-    position: absolute;
-    bottom: -35px;
-    left: 0;
-    right: 0;
-    height: 40px;
-    background: 
-        radial-gradient(ellipse 45px 35px at 5% 0%, var(--dark-brown) 50%, transparent 50%),
-        radial-gradient(ellipse 65px 40px at 12% 0%, var(--dark-brown) 50%, transparent 50%),
-        radial-gradient(ellipse 35px 28px at 20% 0%, var(--dark-brown) 50%, transparent 50%),
-        radial-gradient(ellipse 70px 40px at 28% 0%, var(--dark-brown) 50%, transparent 50%),
-        radial-gradient(ellipse 40px 30px at 37% 0%, var(--dark-brown) 50%, transparent 50%),
-        radial-gradient(ellipse 55px 38px at 45% 0%, var(--dark-brown) 50%, transparent 50%),
-        radial-gradient(ellipse 38px 28px at 53% 0%, var(--dark-brown) 50%, transparent 50%),
-        radial-gradient(ellipse 62px 40px at 61% 0%, var(--dark-brown) 50%, transparent 50%),
-        radial-gradient(ellipse 48px 32px at 70% 0%, var(--dark-brown) 50%, transparent 50%),
-        radial-gradient(ellipse 58px 38px at 78% 0%, var(--dark-brown) 50%, transparent 50%),
-        radial-gradient(ellipse 42px 30px at 86% 0%, var(--dark-brown) 50%, transparent 50%),
-        radial-gradient(ellipse 50px 35px at 94% 0%, var(--dark-brown) 50%, transparent 50%);
-    background-repeat: no-repeat;
-    pointer-events: none;
+    border-bottom: 3px solid var(--border-beige);
 }
 
 nav {
