@@ -44,7 +44,21 @@ header {
     background: var(--white);
     padding: 1rem 2rem;
     box-shadow: 0 2px 20px rgba(98, 45, 43, 0.1);
-    border-bottom: 3px solid var(--border-beige);
+    border-bottom: none;
+}
+
+/* Brown drip border effect using background image */
+header::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    right: 0;
+    height: 25px;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 25" preserveAspectRatio="none"><path d="M0,0 Q50,20 100,10 T200,15 T300,8 T400,18 T500,12 T600,16 T700,9 T800,17 T900,11 T1000,14 T1100,10 L1200,8 L1200,25 L0,25 Z" fill="%23622D2B"/></svg>');
+    background-size: 100% 100%;
+    background-repeat: repeat-x;
+    pointer-events: none;
 }
 
 nav {
@@ -63,13 +77,13 @@ nav {
 }
 
 .logo-icon {
-    height: 60px;
+    height: 78px;
     width: auto;
 }
 
 .logo-text {
     font-family: 'Fredoka One', cursive;
-    font-size: 1.5rem;
+    font-size: 1.95rem;
 }
 
 .logo-text .my {
@@ -83,11 +97,12 @@ nav {
 .logo-text .creations {
     display: block;
     font-family: 'Nunito', sans-serif;
-    font-size: 0.7rem;
+    font-size: 0.91rem;
     letter-spacing: 4px;
     color: var(--pink);
     text-transform: uppercase;
     margin-top: -5px;
+    font-weight: 800;
 }
 
 .nav-links {
