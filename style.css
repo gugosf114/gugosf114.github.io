@@ -187,7 +187,7 @@ nav {
     justify-content: center;
     text-align: center;
     padding: 8rem 2rem 4rem;
-    background: linear-gradient(180deg, var(--white) 0%, var(--cream) 100%);
+    background: linear-gradient(180deg, #f5f5dc 0%, var(--cream) 100%);
     position: relative;
     overflow: hidden;
     border-bottom: 2px solid var(--border-beige);
@@ -378,7 +378,7 @@ nav {
 }
 
 .service-card {
-    background: var(--cream);
+    background: #f5f5dc;
     padding: 2.5rem;
     border-radius: 30px;
     text-align: center;
