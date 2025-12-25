@@ -47,17 +47,28 @@ header {
     border-bottom: none;
 }
 
-/* Brown drip border effect using background image */
+/* Chocolate drip effect - matching sketch style */
 header::after {
     content: '';
     position: absolute;
-    bottom: -20px;
+    bottom: -35px;
     left: 0;
     right: 0;
-    height: 25px;
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 25" preserveAspectRatio="none"><path d="M0,0 Q50,20 100,10 T200,15 T300,8 T400,18 T500,12 T600,16 T700,9 T800,17 T900,11 T1000,14 T1100,10 L1200,8 L1200,25 L0,25 Z" fill="%23622D2B"/></svg>');
-    background-size: 100% 100%;
-    background-repeat: repeat-x;
+    height: 40px;
+    background: 
+        radial-gradient(ellipse 45px 35px at 5% 0%, var(--dark-brown) 50%, transparent 50%),
+        radial-gradient(ellipse 65px 40px at 12% 0%, var(--dark-brown) 50%, transparent 50%),
+        radial-gradient(ellipse 35px 28px at 20% 0%, var(--dark-brown) 50%, transparent 50%),
+        radial-gradient(ellipse 70px 40px at 28% 0%, var(--dark-brown) 50%, transparent 50%),
+        radial-gradient(ellipse 40px 30px at 37% 0%, var(--dark-brown) 50%, transparent 50%),
+        radial-gradient(ellipse 55px 38px at 45% 0%, var(--dark-brown) 50%, transparent 50%),
+        radial-gradient(ellipse 38px 28px at 53% 0%, var(--dark-brown) 50%, transparent 50%),
+        radial-gradient(ellipse 62px 40px at 61% 0%, var(--dark-brown) 50%, transparent 50%),
+        radial-gradient(ellipse 48px 32px at 70% 0%, var(--dark-brown) 50%, transparent 50%),
+        radial-gradient(ellipse 58px 38px at 78% 0%, var(--dark-brown) 50%, transparent 50%),
+        radial-gradient(ellipse 42px 30px at 86% 0%, var(--dark-brown) 50%, transparent 50%),
+        radial-gradient(ellipse 50px 35px at 94% 0%, var(--dark-brown) 50%, transparent 50%);
+    background-repeat: no-repeat;
     pointer-events: none;
 }
 
