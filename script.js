@@ -54,6 +54,43 @@ orderModal?.addEventListener('click', (e) => {
     }
 });
 
+// DELIVERY TOGGLE FUNCTIONALITY
+function initDeliveryToggle() {
+    const pickupOption = document.getElementById('pickup_option');
+    const deliveryOption = document.getElementById('delivery_option');
+    const deliveryDetailsSection = document.getElementById('deliveryDetailsSection');
+    const deliveryAddress = document.getElementById('delivery_address');
+    const deliveryCity = document.getElementById('delivery_city');
+
+    if (!pickupOption || !deliveryOption || !deliveryDetailsSection) {
+        // Elements not loaded yet, try again in 100ms
+        setTimeout(initDeliveryToggle, 100);
+        return;
+    }
+
+    function toggleDeliverySection() {
+        if (deliveryOption.checked) {
+            deliveryDetailsSection.style.display = 'block';
+            deliveryAddress.required = true;
+            deliveryCity.required = true;
+        } else {
+            deliveryDetailsSection.style.display = 'none';
+            deliveryAddress.required = false;
+            deliveryCity.required = false;
+        }
+    }
+
+    pickupOption.addEventListener('change', toggleDeliverySection);
+    deliveryOption.addEventListener('change', toggleDeliverySection);
+}
+
+// Initialize delivery toggle when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDeliveryToggle);
+} else {
+    initDeliveryToggle();
+}
+
 // Form submission
 if (orderForm) {
     orderForm.addEventListener('submit', async (e) => {
