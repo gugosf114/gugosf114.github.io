@@ -1,202 +1,248 @@
-<!-- Floating Order Button -->
-<button id="floatingOrderBtn" class="floating-order-btn">
-    <span class="btn-icon">🎂</span> Order Now
-</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Form | My Baking Creations | Bay Area Custom Cakes & Cookies</title>
+    <meta name="description" content="Request a custom order from My Baking Creations. Custom cakes, cookies, cake pops, and cupcakes for your special occasion.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="https://raw.githubusercontent.com/gugosf114/mybakingcreations/main/logo_icon.png" alt="My Baking Creations" class="logo-icon">
+                <div class="logo-text">
+                    <span class="my">my</span><span class="baking">baking</span>
+                    <span class="creations">CREATIONS</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a href="gallery.html">Gallery ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="gallery-cakes.html">Custom Cakes</a></li>
+                        <li><a href="gallery-cookies.html">Custom Cookies</a></li>
+                        <li><a href="gallery-cakepops.html">Cake Pops</a></li>
+                        <li><a href="gallery-cupcakes.html">Cupcakes</a></li>
+                    </ul>
+                </li>
+                <li><a href="corporate.html">Corporate Orders</a></li>
+                <li><a href="contact.html" class="nav-cta">Order Now</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+        </nav>
+    </header>
 
-<!-- Order Form Modal -->
-<div id="orderModal" class="order-modal">
-    <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <div class="modal-header">
-            <h2>Request Your Custom Order</h2>
-            <p>Tell us about your celebration and we'll create something amazing!</p>
+    <section class="hero" style="padding-top: 10rem; min-height: 60vh;">
+        <div class="hero-content">
+            <h1>Request Your <span class="highlight">Custom Order</span></h1>
+            <p class="hero-subtitle">Tell us about your celebration and we'll create something amazing!</p>
         </div>
-        
-        <form id="orderForm">
-            <!-- Web3Forms Access Key -->
-            <input type="hidden" name="access_key" value="bb1321a2-591e-405f-afb6-d93a8e4f721d">
-            <input type="hidden" name="subject" value="New Order Inquiry - My Baking Creations">
-            <input type="hidden" name="from_name" value="My Baking Creations Website">
-            
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="name">Your Name *</label>
-                    <input type="text" id="name" name="name" required placeholder="Jane Smith">
+    </section>
+
+    <section class="services-preview">
+        <div class="container" style="max-width: 800px;">
+            <form id="orderForm" style="background: var(--white); padding: 3rem; border-radius: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
+                <!-- Web3Forms Access Key -->
+                <input type="hidden" name="access_key" value="bb1321a2-591e-405f-afb6-d93a8e4f721d">
+                <input type="hidden" name="subject" value="New Order Inquiry - My Baking Creations">
+                <input type="hidden" name="from_name" value="My Baking Creations Website">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Your Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="Jane Smith">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required placeholder="jane@example.com">
+                    </div>
                 </div>
-                
+
                 <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input type="email" id="email" name="email" required placeholder="jane@example.com">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="(415) 555-1234">
                 </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="phone">Phone Number *</label>
-                <input type="tel" id="phone" name="phone" required placeholder="(415) 555-1234">
-            </div>
-            
-            <div class="form-group">
-                <label>What are you ordering? *</label>
-                <div class="radio-group">
-                    <label class="radio-option">
-                        <input type="radio" name="product_type" value="Custom Cake" required>
-                        <span>🎂 Custom Cake</span>
-                    </label>
-                    <label class="radio-option">
-                        <input type="radio" name="product_type" value="Custom Cookies">
-                        <span>🍪 Custom Cookies</span>
-                    </label>
-                    <label class="radio-option">
-                        <input type="radio" name="product_type" value="Cake Pops">
-                        <span>🍰 Cake Pops</span>
-                    </label>
-                    <label class="radio-option">
-                        <input type="radio" name="product_type" value="Cupcakes">
-                        <span>🧁 Cupcakes</span>
-                    </label>
-                </div>
-            </div>
-            
-            <div class="form-row">
+
                 <div class="form-group">
-                    <label for="event_date">Event Date *</label>
-                    <input type="date" id="event_date" name="event_date" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>Pickup or Delivery? *</label>
+                    <label>What are you ordering? *</label>
                     <div class="radio-group">
                         <label class="radio-option">
-                            <input type="radio" name="delivery_method" value="Pickup" id="pickup_option" required>
-                            <span>Pickup</span>
+                            <input type="radio" name="product_type" value="Custom Cake" required>
+                            <span>Custom Cake</span>
                         </label>
                         <label class="radio-option">
-                            <input type="radio" name="delivery_method" value="Delivery" id="delivery_option">
-                            <span>Delivery</span>
+                            <input type="radio" name="product_type" value="Custom Cookies">
+                            <span>Custom Cookies</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="product_type" value="Cake Pops">
+                            <span>Cake Pops</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="product_type" value="Cupcakes">
+                            <span>Cupcakes</span>
                         </label>
                     </div>
-                    <small style="display: block; margin-top: 8px; color: var(--brown); font-size: 0.9rem; font-weight: 600;">
-                        📍 Delivery available within 60 miles of San Francisco, CA
-                    </small>
                 </div>
-            </div>
-            
-            <!-- DELIVERY DETAILS SECTION - Hidden by default -->
-            <div id="deliveryDetailsSection" style="display: none;">
-                <div class="section-divider">
-                    <h3 style="font-family: 'Fredoka One', cursive; color: var(--pink); font-size: 1.3rem; margin: 1.5rem 0 1rem;">Delivery Details</h3>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="event_date">Event Date *</label>
+                        <input type="date" id="event_date" name="event_date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Pickup or Delivery? *</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="delivery_method" value="Pickup" id="pickup_option" required>
+                                <span>Pickup</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="delivery_method" value="Delivery" id="delivery_option">
+                                <span>Delivery</span>
+                            </label>
+                        </div>
+                        <small style="display: block; margin-top: 8px; color: var(--brown); font-size: 0.9rem; font-weight: 600;">
+                            Delivery available within 60 miles of San Francisco, CA
+                        </small>
+                    </div>
                 </div>
-                
+
+                <!-- DELIVERY DETAILS SECTION - Hidden by default -->
+                <div id="deliveryDetailsSection" style="display: none;">
+                    <div class="section-divider">
+                        <h3 style="font-family: 'Fredoka One', cursive; color: var(--pink); font-size: 1.3rem; margin: 1.5rem 0 1rem;">Delivery Details</h3>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="delivery_address">Delivery Address *</label>
+                        <textarea id="delivery_address" name="delivery_address" rows="3" placeholder="Street, unit number, gate code, or any instructions..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="delivery_city">City / Area *</label>
+                        <input type="text" id="delivery_city" name="delivery_city" placeholder="San Francisco">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="delivery_notes">Delivery Instructions (Optional)</label>
+                        <textarea id="delivery_notes" name="delivery_notes" rows="2" placeholder="Any special delivery instructions..."></textarea>
+                    </div>
+                </div>
+
                 <div class="form-group">
-                    <label for="delivery_notes">Delivery Instructions (Optional)</label>
-                    <textarea id="delivery_notes" name="delivery_notes" rows="3" placeholder="Any special delivery instructions..."></textarea>
+                    <label for="order_details">Tell us about your order *</label>
+                    <textarea id="order_details" name="order_details" rows="5" required placeholder="Tell us about your theme, colors, size, dietary restrictions, and any special requests..."></textarea>
+                    <small>Include: theme, colors, serving size, dietary needs (gluten-free, vegan, etc.)</small>
                 </div>
-                
+
                 <div class="form-group">
-                    <label for="delivery_address">Delivery Address *</label>
-                    <textarea id="delivery_address" name="delivery_address" rows="3" placeholder="Street, unit number, gate code, or any instructions..." required></textarea>
-                    <small>Street, unit number, gate code, or any instructions</small>
+                    <label for="reference_photo">Reference Photo (Optional)</label>
+                    <input type="file" id="reference_photo" name="attachment" accept="image/*,.pdf">
+                    <small>Upload a photo or sketch of what you'd like (Max 5MB)</small>
                 </div>
-                
+
                 <div class="form-group">
-                    <label for="delivery_city">City / Area *</label>
-                    <input type="text" id="delivery_city" name="delivery_city" placeholder="San Francisco" required>
+                    <button type="submit" class="btn" style="width: 100%; padding: 1rem 2rem; font-size: 1.1rem;">Send Order Inquiry</button>
                 </div>
+
+                <p style="text-align: center; color: var(--brown); font-weight: 600; margin-top: 1.5rem;">We'll respond within 24 hours. For urgent requests, call <strong>(415) 568-8060</strong></p>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="my">my</span><span class="baking">baking</span> Creations
             </div>
-            
-            <div class="form-group">
-                <label for="order_details">Tell us about your order *</label>
-                <textarea id="order_details" name="order_details" rows="5" required placeholder="Tell us about your theme, colors, size, dietary restrictions, and any special requests..."></textarea>
-                <small>Include: theme, colors, serving size, dietary needs (gluten-free, vegan, etc.)</small>
+            <p class="footer-tagline">Family-owned Bay Area bakery since 2012</p>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="corporate.html">Corporate Orders</a>
+                <a href="contact.html">Contact</a>
             </div>
-            
-            <div class="form-group">
-                <label for="reference_photo">Reference Photo (Optional)</label>
-                <input type="file" id="reference_photo" name="attachment" accept="image/*,.pdf">
-                <small>Upload a photo or sketch of what you'd like (Max 5MB)</small>
+            <div class="social-links">
+                <a href="https://instagram.com/mybakingcreationscompany" target="_blank">📷</a>
+                <a href="https://yelp.com/biz/my-baking-creations-san-francisco" target="_blank">⭐</a>
             </div>
-            
-            <div class="form-group">
-                <button type="submit" class="submit-btn">Send Order Inquiry</button>
+            <div class="footer-contact">
+                <p><a href="tel:4155688060">(415) 568-8060</a> | <a href="mailto:info@mybakingcreations.com">info@mybakingcreations.com</a></p>
+                <p>1096 Wildwood Ave, Daly City, CA 94015</p>
             </div>
-            
-            <p class="form-footer">We'll respond within 24 hours. For urgent requests, call <strong>(415) 568-8060</strong></p>
-        </form>
-    </div>
-</div>
+            <div class="footer-bottom">
+                <p>© 2024 My Baking Creations. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-<script>
-// Show/hide delivery details section based on radio selection
-const pickupOption = document.getElementById('pickup_option');
-const deliveryOption = document.getElementById('delivery_option');
-const deliveryDetailsSection = document.getElementById('deliveryDetailsSection');
-const deliveryAddress = document.getElementById('delivery_address');
-const deliveryCity = document.getElementById('delivery_city');
+    <script src="script.js"></script>
+    <script>
+    // Show/hide delivery details section based on radio selection
+    const pickupOption = document.getElementById('pickup_option');
+    const deliveryOption = document.getElementById('delivery_option');
+    const deliveryDetailsSection = document.getElementById('deliveryDetailsSection');
+    const deliveryAddress = document.getElementById('delivery_address');
+    const deliveryCity = document.getElementById('delivery_city');
 
-function toggleDeliverySection() {
-    if (deliveryOption.checked) {
-        deliveryDetailsSection.style.display = 'block';
-        deliveryAddress.required = true;
-        deliveryCity.required = true;
-    } else {
-        deliveryDetailsSection.style.display = 'none';
-        deliveryAddress.required = false;
-        deliveryCity.required = false;
-    }
-}
-
-pickupOption.addEventListener('change', toggleDeliverySection);
-deliveryOption.addEventListener('change', toggleDeliverySection);
-
-// Existing modal code
-const modal = document.getElementById('orderModal');
-const btn = document.getElementById('floatingOrderBtn');
-const span = document.getElementsByClassName('close-modal')[0];
-
-btn.onclick = function() {
-    modal.style.display = 'flex';
-}
-
-span.onclick = function() {
-    modal.style.display = 'none';
-}
-
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = 'none';
-    }
-}
-
-// Form submission
-document.getElementById('orderForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    const formData = new FormData(this);
-    const submitBtn = this.querySelector('.submit-btn');
-    
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending...';
-    
-    try {
-        const response = await fetch('https://api.web3forms.com/submit', {
-            method: 'POST',
-            body: formData
-        });
-        
-        const data = await response.json();
-        
-        if (data.success) {
-            alert('Thank you! Your order inquiry has been sent. We\'ll respond within 24 hours.');
-            modal.style.display = 'none';
-            this.reset();
+    function toggleDeliverySection() {
+        if (deliveryOption.checked) {
+            deliveryDetailsSection.style.display = 'block';
+            deliveryAddress.required = true;
+            deliveryCity.required = true;
         } else {
-            alert('Something went wrong. Please call us at (415) 568-8060 or email directly.');
+            deliveryDetailsSection.style.display = 'none';
+            deliveryAddress.required = false;
+            deliveryCity.required = false;
         }
-    } catch (error) {
-        alert('Something went wrong. Please call us at (415) 568-8060 or email directly.');
-    } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Send Order Inquiry';
     }
-});
-</script>
+
+    pickupOption.addEventListener('change', toggleDeliverySection);
+    deliveryOption.addEventListener('change', toggleDeliverySection);
+
+    // Form submission
+    document.getElementById('orderForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+        const submitBtn = this.querySelector('.btn');
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+
+        try {
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                alert('Thank you! Your order inquiry has been sent. We\'ll respond within 24 hours.');
+                this.reset();
+                deliveryDetailsSection.style.display = 'none';
+            } else {
+                alert('Something went wrong. Please call us at (415) 568-8060 or email directly.');
+            }
+        } catch (error) {
+            alert('Something went wrong. Please call us at (415) 568-8060 or email directly.');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Order Inquiry';
+        }
+    });
+    </script>
+</body>
+</html>
