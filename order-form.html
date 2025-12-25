@@ -67,17 +67,40 @@
                     <label>Pickup or Delivery? *</label>
                     <div class="radio-group">
                         <label class="radio-option">
-                            <input type="radio" name="delivery_method" value="Pickup" required>
+                            <input type="radio" name="delivery_method" value="Pickup" id="pickup_option" required>
                             <span>Pickup</span>
                         </label>
                         <label class="radio-option">
-                            <input type="radio" name="delivery_method" value="Delivery">
+                            <input type="radio" name="delivery_method" value="Delivery" id="delivery_option">
                             <span>Delivery</span>
                         </label>
                     </div>
                     <small style="display: block; margin-top: 8px; color: var(--brown); font-size: 0.9rem; font-weight: 600;">
                         📍 Delivery available within 60 miles of San Francisco, CA
                     </small>
+                </div>
+            </div>
+            
+            <!-- DELIVERY DETAILS SECTION - Hidden by default -->
+            <div id="deliveryDetailsSection" style="display: none;">
+                <div class="section-divider">
+                    <h3 style="font-family: 'Fredoka One', cursive; color: var(--pink); font-size: 1.3rem; margin: 1.5rem 0 1rem;">Delivery Details</h3>
+                </div>
+                
+                <div class="form-group">
+                    <label for="delivery_notes">Delivery Instructions (Optional)</label>
+                    <textarea id="delivery_notes" name="delivery_notes" rows="3" placeholder="Any special delivery instructions..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="delivery_address">Delivery Address *</label>
+                    <textarea id="delivery_address" name="delivery_address" rows="3" placeholder="Street, unit number, gate code, or any instructions..." required></textarea>
+                    <small>Street, unit number, gate code, or any instructions</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="delivery_city">City / Area *</label>
+                    <input type="text" id="delivery_city" name="delivery_city" placeholder="San Francisco" required>
                 </div>
             </div>
             
@@ -101,3 +124,79 @@
         </form>
     </div>
 </div>
+
+<script>
+// Show/hide delivery details section based on radio selection
+const pickupOption = document.getElementById('pickup_option');
+const deliveryOption = document.getElementById('delivery_option');
+const deliveryDetailsSection = document.getElementById('deliveryDetailsSection');
+const deliveryAddress = document.getElementById('delivery_address');
+const deliveryCity = document.getElementById('delivery_city');
+
+function toggleDeliverySection() {
+    if (deliveryOption.checked) {
+        deliveryDetailsSection.style.display = 'block';
+        deliveryAddress.required = true;
+        deliveryCity.required = true;
+    } else {
+        deliveryDetailsSection.style.display = 'none';
+        deliveryAddress.required = false;
+        deliveryCity.required = false;
+    }
+}
+
+pickupOption.addEventListener('change', toggleDeliverySection);
+deliveryOption.addEventListener('change', toggleDeliverySection);
+
+// Existing modal code
+const modal = document.getElementById('orderModal');
+const btn = document.getElementById('floatingOrderBtn');
+const span = document.getElementsByClassName('close-modal')[0];
+
+btn.onclick = function() {
+    modal.style.display = 'flex';
+}
+
+span.onclick = function() {
+    modal.style.display = 'none';
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Form submission
+document.getElementById('orderForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const submitBtn = this.querySelector('.submit-btn');
+    
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+    
+    try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: formData
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            alert('Thank you! Your order inquiry has been sent. We\'ll respond within 24 hours.');
+            modal.style.display = 'none';
+            this.reset();
+        } else {
+            alert('Something went wrong. Please call us at (415) 568-8060 or email directly.');
+        }
+    } catch (error) {
+        alert('Something went wrong. Please call us at (415) 568-8060 or email directly.');
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Order Inquiry';
+    }
+});
+</script>
