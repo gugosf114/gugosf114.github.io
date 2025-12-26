@@ -13,7 +13,7 @@
     <header>
         <nav>
             <a href="index.html" class="logo">
-                <img src="https://raw.githubusercontent.com/gugosf114/mybakingcreations/main/logo_icon.png" alt="My Baking Creations" class="logo-icon">
+                <img src="logo_icon.png" alt="My Baking Creations" class="logo-icon">
                 <div class="logo-text">
                     <span class="my">my</span><span class="baking">baking</span>
                     <span class="creations">CREATIONS</span>
@@ -32,7 +32,7 @@
                     </ul>
                 </li>
                 <li><a href="corporate.html">Corporate Orders</a></li>
-                <li><a href="contact.html" class="nav-cta">Order Now</a></li>
+                <li><a href="#" class="nav-cta open-order-form">Order Now</a></li>
             </ul>
             <button class="mobile-menu-btn">☰</button>
         </nav>
@@ -98,8 +98,8 @@
                 <a href="https://yelp.com/biz/my-baking-creations-san-francisco" target="_blank">⭐</a>
             </div>
             <div class="footer-contact">
-                <p><a href="tel:4156328008">(415) 632-8008</a> | <a href="mailto:info@mybakingcreations.com">info@mybakingcreations.com</a></p>
-                <p>San Francisco Bay Area | Pickup in Sunset District</p>
+                <p><a href="tel:4155688060">(415) 568-8060</a> | <a href="mailto:info@mybakingcreations.com">info@mybakingcreations.com</a></p>
+                <p>1096 Wildwood Ave, Daly City CA 94015</p>
             </div>
             <div class="footer-bottom">
                 <p>© 2024 My Baking Creations. All rights reserved.</p>
@@ -107,6 +107,16 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+    // Load order form modal HTML first
+    fetch('order-form-modal.html')
+        .then(r => r.text())
+        .then(h => {
+            document.body.insertAdjacentHTML('beforeend', h);
+            const script = document.createElement('script');
+            script.src = 'script.js';
+            document.body.appendChild(script);
+        });
+    </script>
 </body>
 </html>

@@ -117,10 +117,10 @@ if (orderForm) {
                 orderModal.style.display = 'none';
                 document.body.style.overflow = 'auto';
             } else {
-                alert('Oops! Something went wrong. Please call us at (415) 632-8008 or email info@mybakingcreations.com');
+                alert('Oops! Something went wrong. Please call us at (415) 568-8060 or email info@mybakingcreations.com');
             }
         } catch (error) {
-            alert('Oops! Something went wrong. Please call us at (415) 632-8008 or email info@mybakingcreations.com');
+            alert('Oops! Something went wrong. Please call us at (415) 568-8060 or email info@mybakingcreations.com');
         }
         
         submitBtn.textContent = originalText;

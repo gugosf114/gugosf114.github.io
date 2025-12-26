@@ -142,8 +142,8 @@
     </footer>
 
     <script>
-    // Load order form HTML first
-    fetch('order-form.html')
+    // Load order form modal HTML first
+    fetch('order-form-modal.html')
         .then(r => r.text())
         .then(h => {
             document.body.insertAdjacentHTML('beforeend', h);

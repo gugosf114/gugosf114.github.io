@@ -1,0 +1,117 @@
+<!-- Order Form Modal - Injected into pages via fetch -->
+<div id="orderModal" class="modal" style="display: none;">
+    <div class="modal-content" style="padding: 2.5rem;">
+        <button class="close-modal">&times;</button>
+        <h2 style="font-family: 'Fredoka One', cursive; font-size: 2rem; color: var(--dark-brown); margin-bottom: 1.5rem; text-align: center;">Request Your Custom Order</h2>
+
+        <form id="orderForm" style="padding: 0;">
+            <!-- Web3Forms Access Key -->
+            <input type="hidden" name="access_key" value="bb1321a2-591e-405f-afb6-d93a8e4f721d">
+            <input type="hidden" name="subject" value="New Order Inquiry - My Baking Creations">
+            <input type="hidden" name="from_name" value="My Baking Creations Website">
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Your Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Jane Smith">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required placeholder="jane@example.com">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" required placeholder="(415) 555-1234">
+            </div>
+
+            <div class="form-group">
+                <label>What are you ordering? *</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="product_type" value="Custom Cake" required>
+                        <span>Custom Cake</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="product_type" value="Custom Cookies">
+                        <span>Custom Cookies</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="product_type" value="Cake Pops">
+                        <span>Cake Pops</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="product_type" value="Cupcakes">
+                        <span>Cupcakes</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="event_date">Event Date *</label>
+                    <input type="date" id="event_date" name="event_date" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Pickup or Delivery? *</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="delivery_method" value="Pickup" id="pickup_option" required>
+                            <span>Pickup</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="delivery_method" value="Delivery" id="delivery_option">
+                            <span>Delivery</span>
+                        </label>
+                    </div>
+                    <small style="display: block; margin-top: 8px; color: var(--brown); font-size: 0.9rem; font-weight: 600;">
+                        Delivery available within 60 miles of San Francisco, CA
+                    </small>
+                </div>
+            </div>
+
+            <!-- DELIVERY DETAILS SECTION - Hidden by default -->
+            <div id="deliveryDetailsSection" style="display: none;">
+                <div class="section-divider">
+                    <h3 style="font-family: 'Fredoka One', cursive; color: var(--pink); font-size: 1.3rem; margin: 1.5rem 0 1rem;">Delivery Details</h3>
+                </div>
+
+                <div class="form-group">
+                    <label for="delivery_address">Delivery Address *</label>
+                    <textarea id="delivery_address" name="delivery_address" rows="3" placeholder="Street, unit number, gate code, or any instructions..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="delivery_city">City / Area *</label>
+                    <input type="text" id="delivery_city" name="delivery_city" placeholder="San Francisco">
+                </div>
+
+                <div class="form-group">
+                    <label for="delivery_notes">Delivery Instructions (Optional)</label>
+                    <textarea id="delivery_notes" name="delivery_notes" rows="2" placeholder="Any special delivery instructions..."></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="order_details">Tell us about your order *</label>
+                <textarea id="order_details" name="order_details" rows="5" required placeholder="Tell us about your theme, colors, size, dietary restrictions, and any special requests..."></textarea>
+                <small>Include: theme, colors, serving size, dietary needs (gluten-free, vegan, etc.)</small>
+            </div>
+
+            <div class="form-group">
+                <label for="reference_photo">Reference Photo (Optional)</label>
+                <input type="file" id="reference_photo" name="attachment" accept="image/*,.pdf">
+                <small>Upload a photo or sketch of what you'd like (Max 5MB)</small>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn" style="width: 100%; padding: 1rem 2rem; font-size: 1.1rem;">Send Order Inquiry</button>
+            </div>
+
+            <p style="text-align: center; color: var(--brown); font-weight: 600; margin-top: 1.5rem;">We'll respond within 24 hours. For urgent requests, call <strong>(415) 568-8060</strong></p>
+        </form>
+    </div>
+</div>

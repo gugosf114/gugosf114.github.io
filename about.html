@@ -15,7 +15,7 @@
     <header>
         <nav>
             <a href="index.html" class="logo">
-                <img src="https://raw.githubusercontent.com/gugosf114/mybakingcreations/main/logo_icon.png" alt="My Baking Creations" class="logo-icon">
+                <img src="logo_icon.png" alt="My Baking Creations" class="logo-icon">
                 <div class="logo-text">
                     <span class="my">my</span><span class="baking">baking</span>
                     <span class="creations">CREATIONS</span>
@@ -169,7 +169,7 @@
             <div style="text-align: center; background: linear-gradient(135deg, var(--pink), var(--pink-dark)); padding: 3rem; border-radius: 30px; color: var(--white);">
                 <h2 style="font-family: 'Fredoka One', cursive; font-size: 2rem; margin-bottom: 1rem;">Ready to Create Something Amazing?</h2>
                 <p style="font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.95;">Whether you're planning a personal celebration or a corporate event, we bring artistry, flavor, and professionalism to every project.</p>
-                <a href="#" class="btn" style="background: var(--white); color: var(--pink); font-size: 1.2rem; padding: 1.2rem 3rem; display: inline-block;">Request a Free Consultation</a>
+                <a href="contact.html" class="btn" style="background: var(--white); color: var(--pink); font-size: 1.2rem; padding: 1.2rem 3rem; display: inline-block;">Request a Free Consultation</a>
             </div>
 
         </div>
@@ -204,7 +204,8 @@
     </footer>
 
     <script>
-    fetch('order-form.html')
+    // Load order form modal HTML first
+    fetch('order-form-modal.html')
         .then(r => r.text())
         .then(h => {
             document.body.insertAdjacentHTML('beforeend', h);

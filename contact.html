@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact & Order | My Baking Creations</title>
-    <meta name="description" content="Order custom cakes, cookies, and treats in San Francisco Bay Area. Call (415) 632-8008 or fill out our order form.">
+    <meta name="description" content="Order custom cakes, cookies, and treats in San Francisco Bay Area. Call (415) 568-8060 or fill out our order form.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
     <header>
         <nav>
             <a href="index.html" class="logo">
-                <img src="https://raw.githubusercontent.com/gugosf114/mybakingcreations/main/logo_icon.png" alt="My Baking Creations" class="logo-icon">
+                <img src="logo_icon.png" alt="My Baking Creations" class="logo-icon">
                 <div class="logo-text">
                     <span class="my">my</span><span class="baking">baking</span>
                     <span class="creations">CREATIONS</span>
@@ -33,7 +33,7 @@
                     </ul>
                 </li>
                 <li><a href="corporate.html">Corporate Orders</a></li>
-                <li><a href="contact.html" class="nav-cta active">Order Now</a></li>
+                <li><a href="#" class="nav-cta active open-order-form">Order Now</a></li>
             </ul>
             <button class="mobile-menu-btn">☰</button>
         </nav>
@@ -55,7 +55,7 @@
                     
                     <div style="background: var(--white); padding: 2rem; border-radius: 20px; margin-bottom: 2rem;">
                         <h3 style="font-weight: 800; color: var(--dark-brown); margin-bottom: 1rem; font-size: 1.2rem;">📞 Call or Text</h3>
-                        <p style="font-size: 1.3rem; font-weight: 700; color: var(--pink); margin-bottom: 0.5rem;"><a href="tel:4156328008" style="color: var(--pink); text-decoration: none;">(415) 632-8008</a></p>
+                        <p style="font-size: 1.3rem; font-weight: 700; color: var(--pink); margin-bottom: 0.5rem;"><a href="tel:4155688060" style="color: var(--pink); text-decoration: none;">(415) 568-8060</a></p>
                         <p style="color: var(--brown); font-weight: 600;">Mon-Fri: 9am-6pm PST</p>
                     </div>
 
@@ -68,8 +68,8 @@
                     <div style="background: var(--white); padding: 2rem; border-radius: 20px;">
                         <h3 style="font-weight: 800; color: var(--dark-brown); margin-bottom: 1rem; font-size: 1.2rem;">📍 Pickup Location</h3>
                         <p style="color: var(--brown); font-weight: 600; line-height: 1.7;">
-                            Sunset District<br>
-                            San Francisco, CA<br>
+                            1096 Wildwood Ave<br>
+                            Daly City, CA 94015<br>
                             Pickup: 9am-12pm
                         </p>
                     </div>
@@ -87,7 +87,7 @@
                 <div>
                     <h2 style="font-family: 'Fredoka One', cursive; font-size: 2rem; color: var(--dark-brown); margin-bottom: 2rem;">Request an Order</h2>
                     <div style="background: var(--white); padding: 2rem; border-radius: 20px;">
-                        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfxqq3dduwFFpQQVjTA/viewform?embedded=true" width="100%" height="1400" frameborder="0" marginheight="0" marginwidth="0" style="border-radius: 10px;">Loading…</iframe>
+                        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfxqq3dduwFFpQQVjTA7RkbyRViurWuE7zy8dBSTRmMABRYLA/viewform?embedded=true" width="100%" height="1400" frameborder="0" marginheight="0" marginwidth="0" style="border-radius: 10px;">Loading…</iframe>
                     </div>
                 </div>
             </div>
@@ -131,8 +131,8 @@
                 <a href="https://yelp.com/biz/my-baking-creations-san-francisco" target="_blank">⭐</a>
             </div>
             <div class="footer-contact">
-                <p><a href="tel:4156328008">(415) 632-8008</a> | <a href="mailto:info@mybakingcreations.com">info@mybakingcreations.com</a></p>
-                <p>San Francisco Bay Area | Pickup in Sunset District</p>
+                <p><a href="tel:4155688060">(415) 568-8060</a> | <a href="mailto:info@mybakingcreations.com">info@mybakingcreations.com</a></p>
+                <p>1096 Wildwood Ave, Daly City CA 94015</p>
             </div>
             <div class="footer-bottom">
                 <p>© 2024 My Baking Creations. All rights reserved.</p>
@@ -140,6 +140,16 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+    // Load order form modal HTML first
+    fetch('order-form-modal.html')
+        .then(r => r.text())
+        .then(h => {
+            document.body.insertAdjacentHTML('beforeend', h);
+            const script = document.createElement('script');
+            script.src = 'script.js';
+            document.body.appendChild(script);
+        });
+    </script>
 </body>
 </html>

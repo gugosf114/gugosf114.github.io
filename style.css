@@ -582,6 +582,7 @@ footer {
 }
 
 /* ==================== ORDER FORM MODAL ==================== */
+.modal,
 .order-modal {
     display: none;
     position: fixed;
