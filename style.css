@@ -30,6 +30,20 @@ body {
     overflow-x: hidden;
 }
 
+/* HEADER DRIP EFFECT */
+.header-drip {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 25px;
+    z-index: 1001;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 25' preserveAspectRatio='none'%3E%3Cpath fill='%23622D2B' d='M0,0 L1200,0 L1200,8 Q1180,8 1175,12 Q1170,18 1172,25 Q1168,18 1160,8 L1100,8 Q1095,8 1092,14 Q1089,20 1090,25 Q1085,18 1080,8 L980,8 Q975,8 970,16 Q966,24 968,25 Q962,18 955,8 L850,8 Q845,8 840,12 Q836,16 838,25 Q832,16 825,8 L720,8 Q715,8 712,15 Q709,22 710,25 Q705,18 698,8 L580,8 Q575,8 570,14 Q566,20 568,25 Q562,18 555,8 L420,8 Q415,8 410,16 Q406,24 408,25 Q402,18 395,8 L280,8 Q275,8 272,12 Q269,16 270,25 Q265,16 258,8 L150,8 Q145,8 140,14 Q136,20 138,25 Q132,18 125,8 L50,8 Q45,8 42,15 Q39,22 40,25 Q35,18 28,8 L0,8 Z'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
