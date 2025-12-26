@@ -842,6 +842,7 @@ footer {
     
     .hero-logo {
         width: 100px;
+        animation: none;
     }
     
     .services-grid {
@@ -881,6 +882,7 @@ footer {
     .hero-logo {
         width: 90px;
         margin-bottom: 1rem;
+        animation: none;
     }
     
     .hero-badge {
@@ -946,9 +948,10 @@ footer {
     .hero {
         padding: 4.5rem 1rem 2rem;
     }
-    
+
     .hero-logo {
         width: 80px;
+        animation: none;
     }
     
     .hero h1 {
