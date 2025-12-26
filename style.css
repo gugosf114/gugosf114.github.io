@@ -799,8 +799,42 @@ footer {
     color: var(--pink);
 }
 
+/* ==================== ABOUT PAGE GRIDS ==================== */
+.about-founder {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+.about-services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.about-process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
 /* ==================== RESPONSIVE - MOBILE FIXES ==================== */
 @media (max-width: 968px) {
+    .about-founder {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .about-services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-process-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
     .nav-links {
         position: fixed;
         top: 90px;
