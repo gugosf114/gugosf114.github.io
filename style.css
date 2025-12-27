@@ -30,18 +30,97 @@ body {
     overflow-x: hidden;
 }
 
-/* HEADER DRIP EFFECT */
+/* HEADER DRIP EFFECT - Chocolate drip style matching branding */
 .header-drip {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: 25px;
+    height: 18px;
     z-index: 1001;
     pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 25' preserveAspectRatio='none'%3E%3Cpath fill='%23622D2B' d='M0,0 L1200,0 L1200,8 Q1180,8 1175,12 Q1170,18 1172,25 Q1168,18 1160,8 L1100,8 Q1095,8 1092,14 Q1089,20 1090,25 Q1085,18 1080,8 L980,8 Q975,8 970,16 Q966,24 968,25 Q962,18 955,8 L850,8 Q845,8 840,12 Q836,16 838,25 Q832,16 825,8 L720,8 Q715,8 712,15 Q709,22 710,25 Q705,18 698,8 L580,8 Q575,8 570,14 Q566,20 568,25 Q562,18 555,8 L420,8 Q415,8 410,16 Q406,24 408,25 Q402,18 395,8 L280,8 Q275,8 272,12 Q269,16 270,25 Q265,16 258,8 L150,8 Q145,8 140,14 Q136,20 138,25 Q132,18 125,8 L50,8 Q45,8 42,15 Q39,22 40,25 Q35,18 28,8 L0,8 Z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 18' preserveAspectRatio='none'%3E%3Cpath fill='%23622D2B' d='M0,0 L1200,0 L1200,5 C1185,5 1182,6 1180,9 C1178,13 1180,17 1180,18 C1176,12 1172,5 1155,5 L1090,5 C1078,5 1075,7 1073,11 C1071,15 1073,18 1073,18 C1069,12 1065,5 1050,5 L985,5 C973,5 970,6 968,9 C966,12 967,16 968,18 C964,12 960,5 945,5 L870,5 C858,5 855,7 853,12 C851,16 853,18 853,18 C849,12 845,5 830,5 L755,5 C743,5 740,6 738,10 C736,14 737,17 738,18 C734,12 730,5 715,5 L635,5 C623,5 620,7 618,11 C616,15 618,18 618,18 C614,12 610,5 595,5 L520,5 C508,5 505,6 503,9 C501,12 502,16 503,18 C499,12 495,5 480,5 L400,5 C388,5 385,7 383,12 C381,16 383,18 383,18 C379,12 375,5 360,5 L285,5 C273,5 270,6 268,10 C266,14 267,17 268,18 C264,12 260,5 245,5 L170,5 C158,5 155,7 153,11 C151,15 153,18 153,18 C149,12 145,5 130,5 L60,5 C48,5 45,6 43,10 C41,14 42,17 43,18 C39,12 35,5 20,5 L0,5 Z'/%3E%3C/svg%3E");
     background-size: 100% 100%;
     background-repeat: no-repeat;
+}
+
+/* FLOATING SOCIAL SIDEBAR */
+.social-sidebar {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.social-sidebar a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.social-sidebar a:hover {
+    width: 52px;
+}
+
+.social-sidebar a svg {
+    width: 22px;
+    height: 22px;
+    fill: white;
+}
+
+.social-sidebar .social-instagram {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    border-radius: 8px 0 0 0;
+}
+
+.social-sidebar .social-facebook {
+    background: #1877F2;
+}
+
+.social-sidebar .social-pinterest {
+    background: #E60023;
+}
+
+.social-sidebar .social-yelp {
+    background: #FF1A1A;
+    border-radius: 0 0 0 8px;
+}
+
+/* Mobile: reposition social sidebar */
+@media (max-width: 768px) {
+    .social-sidebar {
+        top: auto;
+        bottom: 90px;
+        right: 10px;
+        transform: none;
+    }
+
+    .social-sidebar a {
+        width: 38px;
+        height: 38px;
+        border-radius: 50% !important;
+        margin-bottom: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .social-sidebar a:hover {
+        width: 38px;
+    }
+
+    .social-sidebar a svg {
+        width: 18px;
+        height: 18px;
+    }
 }
 
 .container {
