@@ -137,7 +137,7 @@ header {
     background: var(--white);
     padding: 1rem 2rem;
     box-shadow: 0 2px 20px rgba(98, 45, 43, 0.1);
-    border-bottom: 3px solid var(--border-beige);
+    border-bottom: 5px solid var(--border-beige);
 }
 
 nav {
@@ -284,7 +284,7 @@ nav {
     background: linear-gradient(180deg, #f5f5dc 0%, var(--cream) 100%);
     position: relative;
     overflow: hidden;
-    border-bottom: 2px solid var(--border-beige);
+    border-bottom: 5px solid var(--border-beige);
 }
 
 /* Floating beige geometric shapes */
@@ -442,12 +442,12 @@ nav {
 
 .section-beige {
     background: var(--cream);
-    border: 3px solid var(--section-border);
+    border: 5px solid var(--section-border);
 }
 
 .section-white {
     background: var(--white);
-    border: 3px solid var(--section-border);
+    border: 5px solid var(--section-border);
 }
 
 /* Alternating sections container */
@@ -540,7 +540,7 @@ nav {
     border-radius: 30px;
     text-align: center;
     transition: all 0.3s ease;
-    border: 3px solid var(--section-border);
+    border: 5px solid var(--section-border);
 }
 
 .service-card:hover {
