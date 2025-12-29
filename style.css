@@ -1263,3 +1263,16 @@ footer {
         font-size: 0.9rem;
     }
 }
+
+/* CONTACT FORM IFRAME RESPONSIVE */
+@media (max-width: 968px) {
+    .contact-form-iframe {
+        height: 1000px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-form-iframe {
+        height: 800px !important;
+    }
+}
