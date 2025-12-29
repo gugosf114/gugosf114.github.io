@@ -95,7 +95,18 @@ if (document.readyState === 'loading') {
 if (orderForm) {
     orderForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
+        // File size validation (5MB max)
+        const fileInput = document.getElementById('reference_photo');
+        if (fileInput && fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+            if (file.size > maxSize) {
+                alert('File is too large. Please upload a file smaller than 5MB.');
+                return;
+            }
+        }
+
         const submitBtn = orderForm.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;
         submitBtn.textContent = 'Sending...';
