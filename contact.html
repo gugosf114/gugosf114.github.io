@@ -140,11 +140,47 @@
                     </div>
                 </div>
 
-                <!-- Order Form -->
+                <!-- Contact Form -->
                 <div>
-                    <h2 style="font-family: 'Fredoka One', cursive; font-size: 2rem; color: var(--dark-brown); margin-bottom: 2rem;">Request an Order</h2>
+                    <h2 style="font-family: 'Fredoka One', cursive; font-size: 2rem; color: var(--dark-brown); margin-bottom: 2rem;">Send Us a Message</h2>
                     <div style="background: var(--white); padding: 2rem; border-radius: 20px;">
-                        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfxqq3dduwFFpQQVjTA7RkbyRViurWuE7zy8dBSTRmMABRYLA/viewform?embedded=true" width="100%" height="1400" frameborder="0" marginheight="0" marginwidth="0" class="contact-form-iframe" style="border-radius: 10px;">Loading…</iframe>
+                        <form id="contactForm">
+                            <input type="hidden" name="access_key" value="bb1321a2-591e-405f-afb6-d93a8e4f721d">
+                            <input type="hidden" name="subject" value="New Contact Message - My Baking Creations">
+                            <input type="hidden" name="from_name" value="My Baking Creations Website">
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="first_name">First Name *</label>
+                                    <input type="text" id="first_name" name="first_name" required placeholder="Jane">
+                                </div>
+                                <div class="form-group">
+                                    <label for="last_name">Last Name *</label>
+                                    <input type="text" id="last_name" name="last_name" required placeholder="Smith">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required placeholder="jane@example.com">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Phone (optional)</label>
+                                <input type="tel" id="phone" name="phone" placeholder="(415) 555-1234">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Message *</label>
+                                <textarea id="message" name="message" rows="5" required placeholder="How can we help you?"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem 2rem; font-size: 1.1rem;">Send Message</button>
+                            </div>
+
+                            <p style="text-align: center; color: var(--brown); font-weight: 600; margin-top: 1rem;">We'll reply within 24 hours or less</p>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -205,6 +241,38 @@
             script.src = 'script.js';
             document.body.appendChild(script);
         });
+
+    // Contact form submission
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+        const submitBtn = this.querySelector('.btn');
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+
+        try {
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                alert('Thank you! Your message has been sent. We\'ll reply within 24 hours.');
+                this.reset();
+            } else {
+                alert('Something went wrong. Please call us at (415) 568-8060 or email directly.');
+            }
+        } catch (error) {
+            alert('Something went wrong. Please call us at (415) 568-8060 or email directly.');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Message';
+        }
+    });
     </script>
 </body>
 </html>
