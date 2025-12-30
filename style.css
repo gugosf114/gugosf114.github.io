@@ -490,11 +490,6 @@ nav {
 }
 
 /* SERVICES */
-.services-preview {
-    padding: 5rem 2rem;
-    background: var(--cream);
-}
-
 .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -580,47 +575,6 @@ nav {
 
 .service-card .btn {
     margin-top: 1rem;
-}
-
-/* TRUSTED BY */
-.trusted-by {
-    padding: 5rem 2rem;
-    background: var(--cream);
-}
-
-/* Decorative floating images */
-.decorative-img {
-    position: absolute;
-    z-index: 1;
-    opacity: 0.9;
-    pointer-events: none;
-}
-
-.decorative-img.top-right {
-    top: 15%;
-    right: 5%;
-    max-width: 150px;
-    animation: float1 20s ease-in-out infinite;
-}
-
-.decorative-img.bottom-left {
-    bottom: 15%;
-    left: 5%;
-    max-width: 120px;
-    animation: float2 18s ease-in-out infinite;
-}
-
-.decorative-img.mid-left {
-    top: 40%;
-    left: 3%;
-    max-width: 100px;
-    animation: float1 22s ease-in-out infinite;
-}
-
-@media (max-width: 968px) {
-    .decorative-img {
-        display: none;
-    }
 }
 
 /* Gallery grid for category tiles */
@@ -773,43 +727,6 @@ footer {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.5);
-}
-
-/* ==================== FLOATING ORDER BUTTON ==================== */
-.floating-order-btn {
-    position: fixed;
-    bottom: 30px;
-    left: 30px;
-    background: var(--pink);
-    color: var(--white);
-    border: none;
-    padding: 18px 30px;
-    border-radius: 50px;
-    font-size: 1.1rem;
-    font-weight: 800;
-    cursor: pointer;
-    box-shadow: 0 6px 30px rgba(236, 38, 143, 0.5);
-    z-index: 999;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    animation: pulse 2s infinite;
-}
-
-.floating-order-btn:hover {
-    background: var(--pink-dark);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 40px rgba(236, 38, 143, 0.6);
-}
-
-.floating-order-btn .btn-icon {
-    font-size: 1.3rem;
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
 }
 
 /* ==================== ORDER FORM MODAL ==================== */
