@@ -453,7 +453,7 @@ nav {
 /* Alternating sections container */
 .page-content {
     padding: 3rem 2rem;
-    background: var(--cream);
+    background: transparent;
 }
 
 .page-content .section-wrapper {
