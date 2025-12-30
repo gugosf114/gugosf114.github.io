@@ -24,7 +24,7 @@ html {
 
 body {
     font-family: 'Nunito', sans-serif;
-    background-color: var(--cream);
+    background-color: #FFFFFF;
     color: var(--dark-brown);
     line-height: 1.7;
     overflow-x: hidden;
