@@ -101,13 +101,27 @@
     </section>
 
     <section class="page-content">
-        <!-- Coming Soon Message -->
+        <!-- Cake Gallery -->
         <div class="section-wrapper section-beige" style="margin-bottom: 3rem;">
-            <div style="text-align: center; padding: 4rem 2rem;">
-                <div style="font-size: 5rem; margin-bottom: 1.5rem;">💒</div>
-                <h2 style="font-family: 'Fredoka One', cursive; font-size: 2.5rem; color: var(--dark-brown); margin-bottom: 1rem;">Gallery Coming Soon</h2>
-                <p style="font-size: 1.2rem; color: var(--brown); font-weight: 600; max-width: 600px; margin: 0 auto 2rem;">We're adding photos of our beautiful wedding cakes. In the meantime, contact us to discuss your dream wedding cake!</p>
-                <a href="contact.html" class="btn btn-primary open-order-form" style="font-size: 1.1rem;">Request a Consultation</a>
+            <div class="cake-gallery-grid">
+                <div class="cake-thumb" onclick="openLightbox(0)">
+                    <img src="images/gallery/wedding/3 tier white patterned wedding cake.png" alt="3 Tier White Patterned Wedding Cake" loading="lazy">
+                </div>
+                <div class="cake-thumb" onclick="openLightbox(1)">
+                    <img src="images/gallery/wedding/3 tier white wedding cake with gold accents.png" alt="3 Tier White Wedding Cake with Gold Accents" loading="lazy">
+                </div>
+                <div class="cake-thumb" onclick="openLightbox(2)">
+                    <img src="images/gallery/wedding/3 tier white wedding cake.png" alt="3 Tier White Wedding Cake" loading="lazy">
+                </div>
+                <div class="cake-thumb" onclick="openLightbox(3)">
+                    <img src="images/gallery/wedding/Heart shaped pink wedding cake.png" alt="Heart Shaped Pink Wedding Cake" loading="lazy">
+                </div>
+                <div class="cake-thumb" onclick="openLightbox(4)">
+                    <img src="images/gallery/wedding/pink wedding cake.jpg" alt="Pink Wedding Cake" loading="lazy">
+                </div>
+                <div class="cake-thumb" onclick="openLightbox(5)">
+                    <img src="images/gallery/wedding/rose wedding cake.png" alt="Rose Wedding Cake" loading="lazy">
+                </div>
             </div>
         </div>
 
@@ -147,6 +161,140 @@
             </div>
         </div>
     </footer>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+        <button type="button" class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
+        <button type="button" class="lightbox-prev" onclick="changeSlide(event, -1)">&#10094;</button>
+        <img id="lightbox-img" src="" alt="">
+        <button type="button" class="lightbox-next" onclick="changeSlide(event, 1)">&#10095;</button>
+    </div>
+
+    <style>
+    /* Cake Gallery Grid - 5 columns desktop, 2 mobile */
+    .cake-gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1rem;
+    }
+    @media (max-width: 768px) {
+        .cake-gallery-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    .cake-thumb {
+        cursor: pointer;
+        border-radius: 15px;
+        overflow: hidden;
+        aspect-ratio: 1;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .cake-thumb:hover {
+        transform: scale(1.03);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+    .cake-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    /* Lightbox */
+    .lightbox {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.95);
+        z-index: 10000;
+        justify-content: center;
+        align-items: center;
+    }
+    .lightbox.active {
+        display: flex;
+    }
+    .lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+        border-radius: 10px;
+    }
+    .lightbox-close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: 3rem;
+        color: white;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 10001;
+    }
+    .lightbox-prev, .lightbox-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 2.5rem;
+        color: white;
+        background: rgba(255,255,255,0.1);
+        border: none;
+        cursor: pointer;
+        padding: 1rem;
+        border-radius: 50%;
+        transition: background 0.3s;
+    }
+    .lightbox-prev:hover, .lightbox-next:hover {
+        background: rgba(255,255,255,0.3);
+    }
+    .lightbox-prev { left: 20px; }
+    .lightbox-next { right: 20px; }
+    </style>
+
+    <script>
+    const cakeImages = [
+        'images/gallery/wedding/3 tier white patterned wedding cake.png',
+        'images/gallery/wedding/3 tier white wedding cake with gold accents.png',
+        'images/gallery/wedding/3 tier white wedding cake.png',
+        'images/gallery/wedding/Heart shaped pink wedding cake.png',
+        'images/gallery/wedding/pink wedding cake.jpg',
+        'images/gallery/wedding/rose wedding cake.png'
+    ];
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+        currentIndex = index;
+        document.getElementById('lightbox-img').src = cakeImages[currentIndex];
+        document.getElementById('lightbox').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox(event) {
+        if (event.target.classList.contains('lightbox') || event.target.classList.contains('lightbox-close')) {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+
+    function changeSlide(event, direction) {
+        event.stopPropagation();
+        currentIndex += direction;
+        if (currentIndex < 0) currentIndex = cakeImages.length - 1;
+        if (currentIndex >= cakeImages.length) currentIndex = 0;
+        document.getElementById('lightbox-img').src = cakeImages[currentIndex];
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (!document.getElementById('lightbox').classList.contains('active')) return;
+        if (e.key === 'Escape') {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        if (e.key === 'ArrowLeft') changeSlide(e, -1);
+        if (e.key === 'ArrowRight') changeSlide(e, 1);
+    });
+    </script>
 
     <script>
     // Load order form modal HTML first
