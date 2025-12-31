@@ -262,6 +262,12 @@ nav {
     color: var(--pink);
 }
 
+.dropdown-subcategory a {
+    padding-left: 2.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
 .mobile-menu-btn {
     display: none;
     background: var(--pink);
