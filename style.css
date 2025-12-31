@@ -275,12 +275,12 @@ nav {
 
 /* HERO */
 .hero {
-    min-height: 100vh;
+    min-height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 8rem 2rem 4rem;
+    padding: 8rem 2rem 3rem;
     background: linear-gradient(180deg, #f5f5dc 0%, var(--cream) 100%);
     position: relative;
     overflow: hidden;
