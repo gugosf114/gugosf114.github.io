@@ -170,16 +170,17 @@
             <div class="hero-slide" style="background-image: url('images/gallery/carousel/carousel 2.jpg');"></div>
             <div class="hero-slide" style="background-image: url('images/gallery/carousel/carousel 3.jpg');"></div>
         </div>
-        <div class="hero-overlay"></div>
         <div class="hero-content">
-            <img src="logo_icon.png" alt="My Baking Creations cake logo" class="hero-logo">
-            <div class="hero-badge">Family-Owned Since 2012</div>
-            <h1><span class="highlight">Custom Cakes, Cookies</span> <span class="highlight-yellow">&</span> <span class="highlight">Cake Pops</span></h1>
-            <p class="hero-subtitle">Handcrafted in San Francisco</p>
-            <p style="font-size: 1.1rem; color: var(--brown); font-weight: 600; max-width: 700px; margin: 0 auto 2rem;">My Baking Creations is a family-owned bakery serving the Bay Area with custom desserts for birthdays, weddings, corporate events, and every celebration in between.</p>
-            <div class="hero-buttons">
-                <a href="contact.html" class="btn btn-primary open-order-form">Request an Order</a>
-                <a href="gallery.html" class="btn btn-secondary">View Our Work</a>
+            <div class="hero-text-box">
+                <img src="logo_icon.png" alt="My Baking Creations cake logo" class="hero-logo">
+                <div class="hero-badge">Family-Owned Since 2012</div>
+                <h1><span class="highlight">Custom Cakes, Cookies</span> <span class="highlight-yellow">&</span> <span class="highlight">Cake Pops</span></h1>
+                <p class="hero-subtitle">Handcrafted in San Francisco</p>
+                <p class="hero-description">My Baking Creations is a family-owned bakery serving the Bay Area with custom desserts for birthdays, weddings, corporate events, and every celebration in between.</p>
+                <div class="hero-buttons">
+                    <a href="contact.html" class="btn btn-primary open-order-form">Request an Order</a>
+                    <a href="gallery.html" class="btn btn-secondary">View Our Work</a>
+                </div>
             </div>
         </div>
         <!-- Navigation Dots -->
@@ -291,6 +292,11 @@
     .hero-carousel {
         position: relative;
         overflow: hidden;
+        background: #1a1a1a;
+    }
+    .hero-carousel::before,
+    .hero-carousel::after {
+        display: none;
     }
     .hero-slides {
         position: absolute;
@@ -314,22 +320,49 @@
     .hero-slide.active {
         opacity: 1;
     }
-    .hero-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(180deg, rgba(245, 245, 220, 0.85) 0%, rgba(230, 213, 195, 0.9) 100%);
-        z-index: 1;
-    }
     .hero-carousel .hero-content {
         position: relative;
         z-index: 2;
     }
-    .hero-carousel::before,
-    .hero-carousel::after {
-        z-index: 3;
+    /* Text box with subtle dark gradient for readability */
+    .hero-text-box {
+        background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.4) 100%);
+        padding: 2.5rem 3rem;
+        border-radius: 20px;
+        max-width: 850px;
+        margin: 0 auto;
+    }
+    .hero-carousel .hero-logo {
+        filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+    }
+    .hero-carousel .hero-badge {
+        background: var(--yellow);
+        color: var(--dark-brown);
+        text-shadow: none;
+    }
+    .hero-carousel h1 {
+        color: white;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    }
+    .hero-carousel h1 .highlight {
+        color: var(--pink);
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    }
+    .hero-carousel h1 .highlight-yellow {
+        color: var(--yellow);
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    }
+    .hero-carousel .hero-subtitle {
+        color: white;
+        text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+    }
+    .hero-carousel .hero-description {
+        font-size: 1.1rem;
+        color: rgba(255,255,255,0.95);
+        font-weight: 600;
+        max-width: 700px;
+        margin: 0 auto 2rem;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
     }
     .hero-dots {
         position: absolute;
@@ -344,11 +377,12 @@
         width: 12px;
         height: 12px;
         border-radius: 50%;
-        border: 2px solid var(--dark-brown);
+        border: 2px solid white;
         background: transparent;
         cursor: pointer;
         transition: all 0.3s ease;
         padding: 0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
     .hero-dot:hover {
         background: var(--pink);
@@ -360,6 +394,10 @@
         transform: scale(1.2);
     }
     @media (max-width: 768px) {
+        .hero-text-box {
+            padding: 1.5rem 1.5rem;
+            margin: 0 1rem;
+        }
         .hero-dots {
             bottom: 20px;
         }
