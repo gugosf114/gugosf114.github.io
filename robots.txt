@@ -1,0 +1,9 @@
+# robots.txt for mybakingcreations.com
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://mybakingcreations.com/sitemap.xml
+
+# Crawl-delay (optional, be kind to server)
+Crawl-delay: 1
