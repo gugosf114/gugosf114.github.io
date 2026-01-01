@@ -163,7 +163,14 @@
     </header>
 
     <!-- HERO -->
-    <section class="hero">
+    <section class="hero hero-carousel">
+        <!-- Background Carousel -->
+        <div class="hero-slides">
+            <div class="hero-slide active" style="background-image: url('images/gallery/carousel/carousel 1.jpg');"></div>
+            <div class="hero-slide" style="background-image: url('images/gallery/carousel/carousel 2.jpg');"></div>
+            <div class="hero-slide" style="background-image: url('images/gallery/carousel/carousel 3.jpg');"></div>
+        </div>
+        <div class="hero-overlay"></div>
         <div class="hero-content">
             <img src="logo_icon.png" alt="My Baking Creations cake logo" class="hero-logo">
             <div class="hero-badge">Family-Owned Since 2012</div>
@@ -174,6 +181,12 @@
                 <a href="contact.html" class="btn btn-primary open-order-form">Request an Order</a>
                 <a href="gallery.html" class="btn btn-secondary">View Our Work</a>
             </div>
+        </div>
+        <!-- Navigation Dots -->
+        <div class="hero-dots">
+            <button class="hero-dot active" onclick="goToSlide(0)" aria-label="Slide 1"></button>
+            <button class="hero-dot" onclick="goToSlide(1)" aria-label="Slide 2"></button>
+            <button class="hero-dot" onclick="goToSlide(2)" aria-label="Slide 3"></button>
         </div>
     </section>
 
@@ -272,6 +285,122 @@
             </div>
         </div>
     </footer>
+
+    <style>
+    /* Hero Carousel Styles */
+    .hero-carousel {
+        position: relative;
+        overflow: hidden;
+    }
+    .hero-slides {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+    }
+    .hero-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+    .hero-slide.active {
+        opacity: 1;
+    }
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(180deg, rgba(245, 245, 220, 0.85) 0%, rgba(230, 213, 195, 0.9) 100%);
+        z-index: 1;
+    }
+    .hero-carousel .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+    .hero-carousel::before,
+    .hero-carousel::after {
+        z-index: 3;
+    }
+    .hero-dots {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 12px;
+        z-index: 4;
+    }
+    .hero-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 2px solid var(--dark-brown);
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        padding: 0;
+    }
+    .hero-dot:hover {
+        background: var(--pink);
+        border-color: var(--pink);
+    }
+    .hero-dot.active {
+        background: var(--pink);
+        border-color: var(--pink);
+        transform: scale(1.2);
+    }
+    @media (max-width: 768px) {
+        .hero-dots {
+            bottom: 20px;
+        }
+        .hero-dot {
+            width: 10px;
+            height: 10px;
+        }
+    }
+    </style>
+
+    <script>
+    // Hero Carousel
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.hero-dot');
+    const totalSlides = slides.length;
+    let autoRotate;
+
+    function goToSlide(index) {
+        slides[currentSlide].classList.remove('active');
+        dots[currentSlide].classList.remove('active');
+        currentSlide = index;
+        if (currentSlide >= totalSlides) currentSlide = 0;
+        if (currentSlide < 0) currentSlide = totalSlides - 1;
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
+        resetAutoRotate();
+    }
+
+    function nextSlide() {
+        goToSlide(currentSlide + 1);
+    }
+
+    function resetAutoRotate() {
+        clearInterval(autoRotate);
+        autoRotate = setInterval(nextSlide, 5000);
+    }
+
+    // Start auto-rotation
+    autoRotate = setInterval(nextSlide, 5000);
+    </script>
 
     <script>
     // Load order form modal HTML first
