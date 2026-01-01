@@ -390,7 +390,7 @@ nav {
 }
 
 .hero-subtitle {
-    font-size: 1.1rem;
+    font-size: 1.43rem;
     color: var(--brown);
     margin-bottom: 2rem;
     font-weight: 600;
@@ -1093,7 +1093,7 @@ footer {
     }
     
     .hero-subtitle {
-        font-size: 1rem;
+        font-size: 1.3rem;
         margin-bottom: 1.5rem;
     }
     
