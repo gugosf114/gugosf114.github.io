@@ -97,22 +97,19 @@
         </nav>
     </header>
 
-    <section class="hero hero-carousel">
-        <div class="hero-slides">
-            <div class="hero-slide active">
-                <img src="images/gallery/carousel/carousel 5.jpg" alt="Custom cake creation">
-            </div>
-            <div class="hero-slide">
-                <img src="images/gallery/carousel/carousel 2.jpg" alt="Custom cake creation">
-            </div>
-            <div class="hero-slide">
-                <img src="images/gallery/carousel/carousel 4.jpg" alt="Custom cake creation">
-            </div>
-            <div class="hero-slide">
-                <img src="images/gallery/carousel/carousel 1.jpg" alt="Custom cake creation">
-            </div>
-            <div class="hero-slide">
-                <img src="images/gallery/carousel/carousel 3.jpg" alt="Custom cake creation">
+    <section class="hero hero-carousel hero-subpage">
+        <!-- 3-Image Carousel Track - Starting at image 4 -->
+        <div class="carousel-track-container">
+            <div class="carousel-track">
+                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 4.jpg" alt="Custom cake creation"></div>
+                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 5.jpg" alt="Custom cake creation"></div>
+                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 1.jpg" alt="Custom cake creation"></div>
+                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 2.jpg" alt="Custom cake creation"></div>
+                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 3.jpg" alt="Custom cake creation"></div>
+                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 4.jpg" alt="Custom cake creation"></div>
+                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 5.jpg" alt="Custom cake creation"></div>
+                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 1.jpg" alt="Custom cake creation"></div>
+                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 2.jpg" alt="Custom cake creation"></div>
             </div>
         </div>
         <div class="hero-content">
@@ -128,6 +125,10 @@
             <button class="hero-dot" onclick="goToSlide(2)" aria-label="Slide 3"></button>
             <button class="hero-dot" onclick="goToSlide(3)" aria-label="Slide 4"></button>
             <button class="hero-dot" onclick="goToSlide(4)" aria-label="Slide 5"></button>
+            <button class="hero-dot" onclick="goToSlide(5)" aria-label="Slide 6"></button>
+            <button class="hero-dot" onclick="goToSlide(6)" aria-label="Slide 7"></button>
+            <button class="hero-dot" onclick="goToSlide(7)" aria-label="Slide 8"></button>
+            <button class="hero-dot" onclick="goToSlide(8)" aria-label="Slide 9"></button>
         </div>
     </section>
 
@@ -295,23 +296,30 @@
     </footer>
 
     <style>
-    /* Hero Carousel Styles */
-    .hero-carousel { position: relative; overflow: hidden; background: #f5f0e8; }
-    .hero-carousel::before, .hero-carousel::after { display: none; }
-    .hero-slides { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
-    .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 1s ease-in-out; }
-    .hero-slide img { width: 100%; height: 100%; object-fit: contain; }
-    .hero-slide.active { opacity: 1; }
-    .hero-carousel .hero-content { position: relative; z-index: 2; }
-    .hero-text-box { background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.4) 100%); padding: 2.5rem 3rem; border-radius: 20px; max-width: 850px; margin: 0 auto; }
-    .hero-carousel h1 { color: white; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); }
-    .hero-carousel h1 .highlight { color: var(--pink); text-shadow: 2px 2px 8px rgba(0,0,0,0.7); }
-    .hero-carousel .hero-subtitle { color: white; text-shadow: 1px 1px 4px rgba(0,0,0,0.7); }
-    .hero-dots { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 4; }
-    .hero-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; background: transparent; cursor: pointer; transition: all 0.3s ease; padding: 0; box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
-    .hero-dot:hover { background: var(--pink); border-color: var(--pink); }
-    .hero-dot.active { background: var(--pink); border-color: var(--pink); transform: scale(1.2); }
-    @media (max-width: 768px) { .hero-text-box { padding: 1.5rem 1.5rem; margin: 0 1rem; } .hero-dots { bottom: 20px; } .hero-dot { width: 10px; height: 10px; } }
+/* Hero Carousel Styles - 3 Images at Once */
+.hero-carousel { position: relative; overflow: hidden; background: #f5f0e8; }
+.hero-carousel::before, .hero-carousel::after { display: none; }
+.hero-subpage { min-height: 400px; padding: 6rem 2rem 3rem; }
+.carousel-track-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; }
+.carousel-track { display: flex; height: 100%; transition: transform 0.6s ease-in-out; }
+.carousel-slide { flex: 0 0 33.333%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 0 4px; box-sizing: border-box; }
+.carousel-slide img { width: 100%; height: 100%; object-fit: contain; background: #f5f0e8; }
+.hero-carousel .hero-content { position: relative; z-index: 2; }
+.hero-text-box { background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.45) 100%); padding: 2rem 2.5rem; border-radius: 20px; max-width: 850px; margin: 0 auto; }
+.hero-carousel h1 { color: white; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); }
+.hero-carousel h1 .highlight { color: var(--pink); text-shadow: 2px 2px 8px rgba(0,0,0,0.7); }
+.hero-carousel .hero-subtitle { color: white; text-shadow: 1px 1px 4px rgba(0,0,0,0.7); }
+.hero-dots { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 4; }
+.hero-dot { width: 10px; height: 10px; border-radius: 50%; border: 2px solid white; background: transparent; cursor: pointer; transition: all 0.3s ease; padding: 0; box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+.hero-dot:hover { background: var(--pink); border-color: var(--pink); }
+.hero-dot.active { background: var(--pink); border-color: var(--pink); transform: scale(1.2); }
+@media (max-width: 768px) {
+    .carousel-slide { flex: 0 0 100%; }
+    .hero-subpage { min-height: 350px; padding: 5rem 1.5rem 2.5rem; }
+    .hero-text-box { padding: 1.5rem 1.5rem; margin: 0 1rem; }
+    .hero-dots { bottom: 15px; gap: 6px; }
+    .hero-dot { width: 8px; height: 8px; }
+}
     /* Cake Gallery Grid - 5 columns desktop, 2 mobile */
     .cake-gallery-grid {
         display: grid;
@@ -467,26 +475,28 @@
     </script>
 
     <script>
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.hero-slide');
-    const dots = document.querySelectorAll('.hero-dot');
-    const totalSlides = slides.length;
-    let autoRotate;
-
-    function goToSlide(index) {
-        slides[currentSlide].classList.remove('active');
-        dots[currentSlide].classList.remove('active');
-        currentSlide = index;
-        if (currentSlide >= totalSlides) currentSlide = 0;
-        if (currentSlide < 0) currentSlide = totalSlides - 1;
-        slides[currentSlide].classList.add('active');
-        dots[currentSlide].classList.add('active');
-        resetAutoRotate();
-    }
-    function nextSlide() { goToSlide(currentSlide + 1); }
-    function resetAutoRotate() { clearInterval(autoRotate); autoRotate = setInterval(nextSlide, 5000); }
-    autoRotate = setInterval(nextSlide, 5000);
-    </script>
+let currentSlide = 0;
+const track = document.querySelector('.carousel-track');
+const dots = document.querySelectorAll('.hero-dot');
+const totalSlides = 9;
+let autoRotate;
+let isMobile = window.innerWidth <= 768;
+function getSlideWidth() { return isMobile ? 100 : 33.333; }
+function goToSlide(index) {
+    dots[currentSlide].classList.remove('active');
+    currentSlide = index;
+    if (currentSlide >= totalSlides) currentSlide = 0;
+    if (currentSlide < 0) currentSlide = totalSlides - 1;
+    track.style.transform = `translateX(-${currentSlide * getSlideWidth()}%)`;
+    dots[currentSlide].classList.add('active');
+    resetAutoRotate();
+}
+function nextSlide() { goToSlide(currentSlide + 1); }
+function resetAutoRotate() { clearInterval(autoRotate); autoRotate = setInterval(nextSlide, 4000); }
+window.addEventListener('resize', () => { isMobile = window.innerWidth <= 768; goToSlide(currentSlide); });
+autoRotate = setInterval(nextSlide, 4000);
+goToSlide(3);
+</script>
 
     <script>
     // Load order form modal HTML first
