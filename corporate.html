@@ -291,36 +291,40 @@
     /* Corporate Logos Grid - Larger logos, tight rows */
     .corporate-logos-grid {
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         gap: 0;
-        padding: 1.5rem 2rem;
+        padding: 2rem;
         border: 2px solid var(--section-border);
         border-radius: 20px;
         background: var(--white);
-        max-width: 900px;
+        max-width: 1000px;
         margin: 0 auto;
     }
     .corporate-logos-grid img {
-        height: 60px;
+        height: 100px;
         width: auto;
         max-width: 100%;
         object-fit: contain;
         margin: 0 auto;
-        padding: 1rem;
+        padding: 1.25rem;
         display: block;
     }
-    @media (max-width: 900px) {
-        .corporate-logos-grid {
-            grid-template-columns: repeat(4, 1fr);
-        }
-    }
-    @media (max-width: 600px) {
+    @media (max-width: 800px) {
         .corporate-logos-grid {
             grid-template-columns: repeat(3, 1fr);
+        }
+        .corporate-logos-grid img {
+            height: 80px;
+            padding: 1rem;
+        }
+    }
+    @media (max-width: 500px) {
+        .corporate-logos-grid {
+            grid-template-columns: repeat(2, 1fr);
             padding: 1rem;
         }
         .corporate-logos-grid img {
-            height: 45px;
+            height: 60px;
             padding: 0.75rem;
         }
     }
