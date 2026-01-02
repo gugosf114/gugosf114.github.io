@@ -1503,3 +1503,98 @@ footer {
     margin: 0 0 1rem 0;
     line-height: 1.5;
 }
+
+/* ===========================================
+   CONSOLIDATED UTILITY CLASSES
+   =========================================== */
+
+/* Gallery CTA Section */
+.gallery-cta {
+    text-align: center;
+}
+
+.gallery-cta h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2rem;
+    color: var(--dark-brown);
+    margin-bottom: 1rem;
+}
+
+.gallery-cta p {
+    font-size: 1.1rem;
+    color: var(--brown);
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.gallery-cta .btn {
+    font-size: 1.1rem;
+}
+
+/* Gallery Category Card Images */
+.category-card-image {
+    width: 100%;
+    max-width: 280px;
+    height: 180px;
+    object-fit: contain;
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+}
+
+/* Back to Gallery Link */
+.back-link {
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* Section Description Text */
+.section-description {
+    text-align: center;
+    font-size: 1.15rem;
+    color: var(--brown);
+    font-weight: 600;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    line-height: 1.8;
+}
+
+/* Gallery Page CTA Container */
+.gallery-order-cta {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.gallery-order-cta p {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--dark-brown);
+    margin-bottom: 1.5rem;
+}
+
+.gallery-order-cta .btn {
+    font-size: 1.1rem;
+}
+
+/* Service Card Button Spacing */
+.service-card .btn-secondary {
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+/* Related Categories Section */
+.related-categories {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Section with bottom margin */
+.section-mb {
+    margin-bottom: 3rem;
+}
