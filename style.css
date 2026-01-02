@@ -1490,3 +1490,16 @@ footer {
         transition: none;
     }
 }
+
+/* ===========================================
+   ORDER FORM DISCLAIMER NOTICE
+   =========================================== */
+.order-disclaimer {
+    font-style: italic;
+    font-size: 0.9rem;
+    color: rgba(139, 90, 43, 0.85);
+    text-align: center;
+    padding: 0.75rem 1rem 1.25rem;
+    margin: 0 0 1rem 0;
+    line-height: 1.5;
+}
