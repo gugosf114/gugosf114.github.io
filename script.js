@@ -175,17 +175,17 @@ if (orderForm) {
         const originalText = submitBtn.textContent;
         submitBtn.textContent = 'Sending...';
         submitBtn.disabled = true;
-        
+
         const formData = new FormData(orderForm);
-        
+
         try {
             const response = await fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
                 body: formData
             });
-            
+
             const data = await response.json();
-            
+
             if (data.success) {
                 alert('Thank you! Your order inquiry has been sent. We\'ll get back to you within 24 hours.');
                 orderForm.reset();
@@ -197,8 +197,176 @@ if (orderForm) {
         } catch (error) {
             alert('Oops! Something went wrong. Please call us at (415) 568-8060 or email info@mybakingcreations.com');
         }
-        
+
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
     });
+}
+
+// ===========================================
+// HERO CAROUSEL FUNCTIONALITY (Consolidated)
+// ===========================================
+function initHeroCarousel(startSlide = 0) {
+    const track = document.querySelector('.carousel-track');
+    const dots = document.querySelectorAll('.hero-dot');
+
+    if (!track || !dots.length) return;
+
+    let currentSlide = 0;
+    const totalSlides = dots.length;
+    let autoRotate;
+    let isMobile = window.innerWidth <= 768;
+
+    function getSlideWidth() {
+        return isMobile ? 100 : 33.333;
+    }
+
+    function goToSlide(index) {
+        dots[currentSlide].classList.remove('active');
+        currentSlide = index;
+        if (currentSlide >= totalSlides) currentSlide = 0;
+        if (currentSlide < 0) currentSlide = totalSlides - 1;
+        track.style.transform = `translateX(-${currentSlide * getSlideWidth()}%)`;
+        dots[currentSlide].classList.add('active');
+        resetAutoRotate();
+    }
+
+    function nextSlide() {
+        goToSlide(currentSlide + 1);
+    }
+
+    function resetAutoRotate() {
+        clearInterval(autoRotate);
+        autoRotate = setInterval(nextSlide, 4000);
+    }
+
+    // Expose goToSlide globally for dot onclick handlers
+    window.goToSlide = goToSlide;
+
+    // Handle resize
+    window.addEventListener('resize', () => {
+        isMobile = window.innerWidth <= 768;
+        goToSlide(currentSlide);
+    });
+
+    // Set up dot click handlers (replacing inline onclick)
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => goToSlide(index));
+    });
+
+    // Start carousel
+    autoRotate = setInterval(nextSlide, 4000);
+    goToSlide(startSlide);
+}
+
+// ===========================================
+// LIGHTBOX FUNCTIONALITY (Consolidated)
+// ===========================================
+function initLightbox(images) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = lightbox?.querySelector('.lightbox-close');
+    const prevBtn = lightbox?.querySelector('.lightbox-prev');
+    const nextBtn = lightbox?.querySelector('.lightbox-next');
+
+    if (!lightbox || !lightboxImg) return;
+
+    let currentIndex = 0;
+    let imageList = images || [];
+
+    function openLightbox(index) {
+        currentIndex = index;
+        if (imageList.length > 0) {
+            lightboxImg.src = imageList[currentIndex];
+        }
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function changeSlide(direction) {
+        currentIndex += direction;
+        if (currentIndex < 0) currentIndex = imageList.length - 1;
+        if (currentIndex >= imageList.length) currentIndex = 0;
+        lightboxImg.src = imageList[currentIndex];
+    }
+
+    // Event listeners
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeLightbox);
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            changeSlide(-1);
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            changeSlide(1);
+        });
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft' && prevBtn) changeSlide(-1);
+        if (e.key === 'ArrowRight' && nextBtn) changeSlide(1);
+    });
+
+    // Expose openLightbox globally
+    window.openLightbox = openLightbox;
+
+    return { openLightbox, closeLightbox, changeSlide };
+}
+
+// Simple lightbox for cupcakes (no prev/next)
+function initSimpleLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    if (!lightbox || !lightboxImg) return;
+
+    function openLightbox(element) {
+        const img = element.querySelector('img');
+        if (img) {
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox || e.target.classList.contains('lightbox-close')) {
+            closeLightbox();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            closeLightbox();
+        }
+    });
+
+    window.openLightbox = openLightbox;
+
+    return { openLightbox, closeLightbox };
 }

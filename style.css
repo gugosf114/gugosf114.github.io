@@ -1207,3 +1207,282 @@ footer {
         height: 800px !important;
     }
 }
+
+/* ===========================================
+   HERO CAROUSEL STYLES (Consolidated)
+   =========================================== */
+.hero-carousel {
+    position: relative;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.hero-carousel::before,
+.hero-carousel::after {
+    display: none;
+}
+
+.hero-subpage {
+    min-height: 600px;
+    padding: 6rem 2rem 3rem;
+}
+
+.carousel-track-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.carousel-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.6s ease-in-out;
+}
+
+.carousel-slide {
+    flex: 0 0 33.333%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    box-sizing: border-box;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #ffffff;
+}
+
+.hero-carousel .hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-text-box {
+    background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.45) 100%);
+    padding: 2rem 2.5rem;
+    border-radius: 20px;
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.hero-carousel h1 {
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+
+.hero-carousel h1 .highlight {
+    color: var(--pink);
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+
+.hero-carousel .hero-subtitle {
+    font-size: 1.43rem;
+    color: white;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+}
+
+.hero-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 4;
+}
+
+.hero-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid white;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero-dot:hover {
+    background: var(--pink);
+    border-color: var(--pink);
+}
+
+.hero-dot.active {
+    background: var(--pink);
+    border-color: var(--pink);
+    transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+    .carousel-slide {
+        flex: 0 0 100%;
+    }
+
+    .hero-subpage {
+        min-height: 500px;
+        padding: 5rem 1.5rem 2.5rem;
+    }
+
+    .hero-text-box {
+        padding: 1.5rem 1.5rem;
+        margin: 0 1rem;
+    }
+
+    .hero-dots {
+        bottom: 15px;
+        gap: 6px;
+    }
+
+    .hero-dot {
+        width: 8px;
+        height: 8px;
+    }
+}
+
+/* ===========================================
+   GALLERY GRID STYLES (Consolidated)
+   =========================================== */
+.cake-gallery-grid,
+.cupcakes-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+    .cake-gallery-grid,
+    .cupcakes-gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+}
+
+.cake-thumb,
+.gallery-item {
+    cursor: pointer;
+    border-radius: 15px;
+    overflow: hidden;
+    aspect-ratio: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cake-thumb:hover,
+.gallery-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+.cake-thumb img,
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ===========================================
+   LIGHTBOX STYLES (Consolidated)
+   =========================================== */
+.lightbox,
+.lightbox-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.95);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.lightbox.active,
+.lightbox-modal.active {
+    display: flex;
+}
+
+.lightbox img,
+.lightbox-modal img {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.5);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 3rem;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 10001;
+    line-height: 1;
+    font-weight: 300;
+    transition: color 0.3s ease;
+}
+
+.lightbox-close:hover {
+    color: var(--pink);
+}
+
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.5rem;
+    color: white;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    cursor: pointer;
+    padding: 1rem;
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+.lightbox-prev {
+    left: 20px;
+}
+
+.lightbox-next {
+    right: 20px;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .carousel-track {
+        transition: none;
+    }
+
+    .hero-dot,
+    .cake-thumb,
+    .gallery-item,
+    .lightbox-close,
+    .lightbox-prev,
+    .lightbox-next {
+        transition: none;
+    }
+}
