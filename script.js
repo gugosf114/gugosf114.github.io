@@ -54,6 +54,26 @@ orderModal?.addEventListener('click', (e) => {
     }
 });
 
+// FLAVOR DROPDOWN TOGGLE FUNCTIONALITY
+function initFlavorToggle() {
+    const productRadios = document.querySelectorAll('input[name="product_type"]');
+    const flavorSection = document.getElementById('flavorSection');
+
+    if (!productRadios.length || !flavorSection) {
+        // Elements not loaded yet, try again in 100ms
+        setTimeout(initFlavorToggle, 100);
+        return;
+    }
+
+    function showFlavorSection() {
+        flavorSection.style.display = 'block';
+    }
+
+    productRadios.forEach(radio => {
+        radio.addEventListener('change', showFlavorSection);
+    });
+}
+
 // DELIVERY TOGGLE FUNCTIONALITY
 function initDeliveryToggle() {
     const pickupOption = document.getElementById('pickup_option');
@@ -84,10 +104,14 @@ function initDeliveryToggle() {
     deliveryOption.addEventListener('change', toggleDeliverySection);
 }
 
-// Initialize delivery toggle when DOM is ready
+// Initialize form toggles when DOM is ready
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initDeliveryToggle);
+    document.addEventListener('DOMContentLoaded', () => {
+        initFlavorToggle();
+        initDeliveryToggle();
+    });
 } else {
+    initFlavorToggle();
     initDeliveryToggle();
 }
 
