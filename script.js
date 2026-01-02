@@ -58,19 +58,59 @@ orderModal?.addEventListener('click', (e) => {
 function initFlavorToggle() {
     const productRadios = document.querySelectorAll('input[name="product_type"]');
     const flavorSection = document.getElementById('flavorSection');
+    const flavorSelect = document.getElementById('flavor');
 
-    if (!productRadios.length || !flavorSection) {
+    if (!productRadios.length || !flavorSection || !flavorSelect) {
         // Elements not loaded yet, try again in 100ms
         setTimeout(initFlavorToggle, 100);
         return;
     }
 
-    function showFlavorSection() {
+    // Flavor options by product type
+    const flavorOptions = {
+        'Cake': [
+            'Strawberry Vanilla Cream',
+            'Chocolate Mousse',
+            'Lemon Orange Cream',
+            'Blueberry Lavender Cream'
+        ],
+        'Cookies': [
+            'Vanilla Shortbread',
+            'Chocolate Shortbread',
+            'Lemon Orange Shortbread',
+            'Gingerbread'
+        ],
+        'Cake Pops': [
+            'Vanilla',
+            'Chocolate'
+        ],
+        'Cupcakes': [
+            'Vanilla',
+            'Chocolate'
+        ]
+    };
+
+    function updateFlavorOptions(productType) {
+        // Clear existing options except the first placeholder
+        flavorSelect.innerHTML = '<option value="">Select flavor (optional)</option>';
+
+        // Add options for selected product type
+        const flavors = flavorOptions[productType] || [];
+        flavors.forEach(flavor => {
+            const option = document.createElement('option');
+            option.value = flavor;
+            option.textContent = flavor;
+            flavorSelect.appendChild(option);
+        });
+
+        // Show the flavor section
         flavorSection.style.display = 'block';
     }
 
     productRadios.forEach(radio => {
-        radio.addEventListener('change', showFlavorSection);
+        radio.addEventListener('change', function() {
+            updateFlavorOptions(this.value);
+        });
     });
 }
 
