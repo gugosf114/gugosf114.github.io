@@ -166,20 +166,20 @@
             <div class="section-header">
                 <h2>Trusted by Leading Companies</h2>
             </div>
-            <div class="client-logos" style="border: 2px solid var(--section-border);">
-                <img src="company logos/google-logo.png" alt="Google" style="height: 40px; width: auto;">
-                <img src="company logos/meta-logo.png" alt="Meta" style="height: 40px; width: auto;">
-                <img src="company logos/microsoft-logo.png" alt="Microsoft" style="height: 40px; width: auto;">
-                <img src="company logos/salesforce-logo.png" alt="Salesforce" style="height: 40px; width: auto;">
-                <img src="company logos/docusign-logo.png" alt="DocuSign" style="height: 40px; width: auto;">
-                <img src="company logos/facebook-logo.png" alt="Facebook" style="height: 40px; width: auto;">
-                <img src="company logos/instagram-logo.png" alt="Instagram" style="height: 40px; width: auto;">
-                <img src="company logos/paypal-logo.png" alt="PayPal" style="height: 40px; width: auto;">
-                <img src="company logos/gap-logo.png" alt="Gap" style="height: 40px; width: auto;">
-                <img src="company logos/alaska-airlines-logo.png" alt="Alaska Airlines" style="height: 40px; width: auto;">
-                <img src="company logos/warriors-logo.png" alt="Warriors" style="height: 40px; width: auto;">
-                <img src="company logos/twitch-logo.webp" alt="Twitch" style="height: 40px; width: auto;">
-                <img src="company logos/discord-logo.png" alt="Discord" style="height: 40px; width: auto;">
+            <div class="corporate-logos-grid">
+                <img src="company logos/google-logo.png" alt="Google">
+                <img src="company logos/meta-logo.png" alt="Meta">
+                <img src="company logos/microsoft-logo.png" alt="Microsoft">
+                <img src="company logos/salesforce-logo.png" alt="Salesforce">
+                <img src="company logos/docusign-logo.png" alt="DocuSign">
+                <img src="company logos/facebook-logo.png" alt="Facebook">
+                <img src="company logos/instagram-logo.png" alt="Instagram">
+                <img src="company logos/paypal-logo.png" alt="PayPal">
+                <img src="company logos/gap-logo.png" alt="Gap">
+                <img src="company logos/alaska-airlines-logo.png" alt="Alaska Airlines">
+                <img src="company logos/warriors-logo.png" alt="Warriors">
+                <img src="company logos/twitch-logo.webp" alt="Twitch">
+                <img src="company logos/discord-logo.png" alt="Discord">
             </div>
         </div>
 
@@ -288,6 +288,43 @@
     </footer>
 
     <style>
+    /* Corporate Logos Grid - Larger logos, tight rows */
+    .corporate-logos-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 0;
+        padding: 1.5rem 2rem;
+        border: 2px solid var(--section-border);
+        border-radius: 20px;
+        background: var(--white);
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    .corporate-logos-grid img {
+        height: 60px;
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
+        margin: 0 auto;
+        padding: 1rem;
+        display: block;
+    }
+    @media (max-width: 900px) {
+        .corporate-logos-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+    @media (max-width: 600px) {
+        .corporate-logos-grid {
+            grid-template-columns: repeat(3, 1fr);
+            padding: 1rem;
+        }
+        .corporate-logos-grid img {
+            height: 45px;
+            padding: 0.75rem;
+        }
+    }
+
     /* Hero Carousel Styles - 3 Images at Once */
     .hero-carousel { position: relative; overflow: hidden; background: #ffffff; }
     .hero-carousel::before, .hero-carousel::after { display: none; }
