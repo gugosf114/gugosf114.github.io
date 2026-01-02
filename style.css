@@ -590,6 +590,9 @@ nav {
 
 .service-card .btn {
     margin-top: 1rem;
+    white-space: nowrap;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.95rem;
 }
 
 /* Gallery grid for category tiles */
