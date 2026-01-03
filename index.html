@@ -256,20 +256,23 @@
                 <h2>Trusted by Leading Companies</h2>
                 <p>Silicon Valley's trusted bakery for employee appreciation gifts, client thank-you packages, product launch celebrations, and company milestone events.</p>
             </div>
-            <div class="client-logos" style="border: 2px solid var(--section-border);">
-                <img src="company logos/google-logo.png" alt="Google" style="height: 50px; width: auto;">
-                <img src="company logos/meta-logo.png" alt="Meta" style="height: 50px; width: auto;">
-                <img src="images/gallery/companylogos/microsoft logo.jpg" alt="Microsoft" style="height: 50px; width: auto;">
-                <img src="company logos/salesforce-logo.png" alt="Salesforce" style="height: 50px; width: auto;">
-                <img src="company logos/docusign-logo.png" alt="DocuSign" style="height: 50px; width: auto;">
-                <img src="company logos/facebook-logo.png" alt="Facebook" style="height: 50px; width: auto;">
-                <img src="company logos/instagram-logo.png" alt="Instagram" style="height: 50px; width: auto;">
-                <img src="company logos/paypal-logo.png" alt="PayPal" style="height: 50px; width: auto;">
-                <img src="company logos/gap-logo.png" alt="Gap" style="height: 50px; width: auto;">
-                <img src="company logos/alaska-airlines-logo.png" alt="Alaska Airlines" style="height: 50px; width: auto;">
-                <img src="company logos/warriors-logo.png" alt="Golden State Warriors" style="height: 50px; width: auto;">
-                <img src="company logos/twitch-logo.webp" alt="Twitch" style="height: 50px; width: auto;">
-                <img src="company logos/discord-logo.png" alt="Discord" style="height: 50px; width: auto;">
+            <div class="corporate-logos-grid">
+                <img src="company logos/google-logo.png" alt="Google">
+                <img src="company logos/meta-logo.png" alt="Meta">
+                <img src="images/gallery/companylogos/microsoft logo.jpg" alt="Microsoft">
+                <img src="company logos/salesforce-logo.png" alt="Salesforce">
+                <img src="company logos/docusign-logo.png" alt="DocuSign">
+                <img src="company logos/facebook-logo.png" alt="Facebook">
+                <img src="company logos/instagram-logo.png" alt="Instagram">
+                <img src="company logos/paypal-logo.png" alt="PayPal">
+                <img src="company logos/gap-logo.png" alt="Gap">
+                <img src="company logos/alaska-airlines-logo.png" alt="Alaska Airlines">
+                <img src="company logos/warriors-logo.png" alt="Golden State Warriors">
+                <img src="company logos/twitch-logo.webp" alt="Twitch">
+                <img src="images/gallery/companylogos/cooley logo.png" alt="Cooley">
+                <img src="images/gallery/companylogos/athleta logo.png" alt="Athleta">
+                <img src="images/gallery/companylogos/Levi's logo.png" alt="Levi's">
+                <img src="images/gallery/companylogos/Waypoint logo.jpg" alt="Waypoint">
             </div>
             <div style="text-align: center;">
                 <a href="corporate.html" class="btn btn-primary" style="margin-top: 2rem;">Learn About Corporate Orders</a>
@@ -323,6 +326,48 @@
     </footer>
 
     <style>
+    /* Corporate Logos Grid - Larger logos, tight rows */
+    .corporate-logos-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        padding: 2rem;
+        border: 2px solid var(--section-border);
+        border-radius: 20px;
+        background: var(--white);
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    .corporate-logos-grid img {
+        height: 100px;
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
+        margin: 0 auto;
+        padding: 1.25rem;
+        display: block;
+        background-color: #ffffff;
+    }
+    @media (max-width: 800px) {
+        .corporate-logos-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .corporate-logos-grid img {
+            height: 80px;
+            padding: 1rem;
+        }
+    }
+    @media (max-width: 500px) {
+        .corporate-logos-grid {
+            grid-template-columns: repeat(2, 1fr);
+            padding: 1rem;
+        }
+        .corporate-logos-grid img {
+            height: 60px;
+            padding: 0.75rem;
+        }
+    }
+
     /* Hero Carousel Styles - 3 Images at Once */
     .hero-carousel {
         position: relative;
