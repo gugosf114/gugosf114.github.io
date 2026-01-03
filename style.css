@@ -478,7 +478,7 @@ nav {
 
 /* Typewriter Effect */
 .typewriter-headline {
-    display: inline;
+    display: block;
 }
 
 .typewriter-headline.typing .typewriter-text {

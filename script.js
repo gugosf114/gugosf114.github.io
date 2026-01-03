@@ -514,10 +514,27 @@ function initTypewriter() {
     // Store original HTML structure (preserves spans for SEO and styling)
     const originalHTML = headline.innerHTML;
 
-    // Extract plain text for typing (preserves spaces between spans)
+    // Build a character map with styling info from original spans
+    const charMap = [];
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = originalHTML;
-    const fullText = tempDiv.textContent || tempDiv.innerText;
+
+    function extractChars(node, className) {
+        if (node.nodeType === Node.TEXT_NODE) {
+            for (const char of node.textContent) {
+                charMap.push({ char: char, className: className });
+            }
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+            const newClass = node.className || className;
+            for (const child of node.childNodes) {
+                extractChars(child, newClass);
+            }
+        }
+    }
+
+    for (const child of tempDiv.childNodes) {
+        extractChars(child, '');
+    }
 
     // Clear headline and add cursor
     headline.innerHTML = '';
@@ -527,15 +544,37 @@ function initTypewriter() {
     cursor.classList.add('typewriter-cursor');
     headline.appendChild(cursor);
 
-    // Type characters one by one
+    // Type characters one by one with colors
     let charIndex = 0;
     const typeSpeed = 65; // ms per character
 
+    // Track current span for grouping same-styled characters
+    let currentSpan = null;
+    let currentClass = null;
+
     function typeNextChar() {
-        if (charIndex < fullText.length) {
-            // Insert character before cursor
-            const textNode = document.createTextNode(fullText[charIndex]);
-            headline.insertBefore(textNode, cursor);
+        if (charIndex < charMap.length) {
+            const { char, className } = charMap[charIndex];
+
+            // If class changed or no current span, create new span
+            if (className !== currentClass) {
+                if (className) {
+                    currentSpan = document.createElement('span');
+                    currentSpan.className = className;
+                    headline.insertBefore(currentSpan, cursor);
+                } else {
+                    currentSpan = null;
+                }
+                currentClass = className;
+            }
+
+            // Add character to current span or directly to headline
+            if (currentSpan) {
+                currentSpan.appendChild(document.createTextNode(char));
+            } else {
+                headline.insertBefore(document.createTextNode(char), cursor);
+            }
+
             charIndex++;
             setTimeout(typeNextChar, typeSpeed);
         } else {
