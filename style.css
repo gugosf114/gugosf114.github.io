@@ -559,6 +559,10 @@ nav {
     box-shadow: 0 20px 60px rgba(236, 38, 143, 0.15);
 }
 
+.service-card:hover h3 {
+    color: var(--pink);
+}
+
 .service-icon {
     font-size: 4rem;
     margin-bottom: 1rem;
@@ -569,6 +573,7 @@ nav {
     font-size: 1.5rem;
     color: var(--dark-brown);
     margin-bottom: 1rem;
+    transition: color 0.3s ease;
 }
 
 .service-card p {
@@ -724,6 +729,12 @@ footer {
 .social-links a:hover {
     background: var(--pink);
     transform: translateY(-3px);
+}
+
+.social-links a svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
 }
 
 .footer-contact {
