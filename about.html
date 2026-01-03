@@ -206,15 +206,15 @@
                 <div class="stat-card" data-effect="pulse">
                     <span class="stat-icon">🎂</span>
                     <div class="stat-number-wrap">
-                        <span class="stat-number" data-target="13">0</span><span class="stat-plus">+</span>
+                        <span class="stat-number" data-target="13">13</span><span class="stat-plus">+</span>
                     </div>
                     <span class="stat-label">Years of Excellence</span>
                     <div class="celebration-effect"></div>
                 </div>
                 <div class="stat-card" data-effect="stars">
-                    <span class="stat-icon">⭐</span>
+                    <span class="stat-icon">⭐⭐⭐⭐⭐</span>
                     <div class="stat-number-wrap">
-                        <span class="stat-number" data-target="5">0</span><span class="stat-suffix"> Star</span>
+                        <span class="stat-number" data-target="5">5</span><span class="stat-suffix"> Star</span>
                     </div>
                     <span class="stat-label">Yelp & Google Rating</span>
                     <div class="celebration-effect"></div>
@@ -222,7 +222,7 @@
                 <div class="stat-card" data-effect="shimmer">
                     <span class="stat-icon">✨</span>
                     <div class="stat-number-wrap">
-                        <span class="stat-number" data-target="100">0</span><span class="stat-suffix">%</span>
+                        <span class="stat-number" data-target="100">100</span><span class="stat-suffix">%</span>
                     </div>
                     <span class="stat-label">Custom Creations</span>
                     <div class="celebration-effect"></div>
@@ -523,6 +523,12 @@
         animation: gentleFloat 3s ease-in-out infinite;
     }
 
+    /* 5-star rating row - smaller stars */
+    .stat-card:nth-child(2) .stat-icon {
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+    }
+
     @keyframes gentleFloat {
         0%, 100% { transform: translateY(0); }
         50% { transform: translateY(-4px); }
@@ -787,7 +793,7 @@
             if (isAnimating) return;
             isAnimating = true;
 
-            // Reset to 0 first
+            // Reset to 0 first for count-up effect
             numberEl.textContent = '0';
 
             // Animate the counter
@@ -806,12 +812,12 @@
             });
         });
 
-        // Optional: Reset on mouse leave (comment out if you prefer it stays at final value)
-        // card.addEventListener('mouseleave', () => {
-        //     if (!isAnimating) {
-        //         numberEl.textContent = '0';
-        //     }
-        // });
+        // On mouse leave, ensure final value is shown (not 0)
+        card.addEventListener('mouseleave', () => {
+            // Always show target value when mouse leaves
+            numberEl.textContent = target;
+            isAnimating = false;
+        });
     });
 
     // For reduced motion: show final values, disable animations
