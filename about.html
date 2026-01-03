@@ -160,27 +160,6 @@
         </div>
     </section>
 
-    <!-- TRUST BADGES / STATS -->
-    <section class="stats-section">
-        <div class="stats-container">
-            <div class="stat-card" data-count="13">
-                <span class="stat-icon">🎂</span>
-                <span class="stat-number" data-target="13">0</span><span class="stat-plus">+</span>
-                <span class="stat-label">Years of Excellence</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-icon">⭐</span>
-                <span class="stat-number">5</span><span class="stat-suffix">-Star</span>
-                <span class="stat-label">Yelp & Google Rating</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-icon">✨</span>
-                <span class="stat-number">100</span><span class="stat-suffix">%</span>
-                <span class="stat-label">Custom Creations</span>
-            </div>
-        </div>
-    </section>
-
     <!-- MAIN STORY -->
     <section class="page-content">
         <!-- Founder Section (Beige) -->
@@ -218,6 +197,36 @@
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen>
                 </iframe>
+            </div>
+        </div>
+
+        <!-- TRUST BADGES / STATS - Positioned after YouTube video -->
+        <div class="section-wrapper section-white stats-section" style="margin-bottom: 3rem;">
+            <div class="stats-container">
+                <div class="stat-card" data-effect="pulse">
+                    <span class="stat-icon">🎂</span>
+                    <div class="stat-number-wrap">
+                        <span class="stat-number" data-target="13">0</span><span class="stat-plus">+</span>
+                    </div>
+                    <span class="stat-label">Years of Excellence</span>
+                    <div class="celebration-effect"></div>
+                </div>
+                <div class="stat-card" data-effect="stars">
+                    <span class="stat-icon">⭐</span>
+                    <div class="stat-number-wrap">
+                        <span class="stat-number" data-target="5">0</span><span class="stat-suffix"> Star</span>
+                    </div>
+                    <span class="stat-label">Yelp & Google Rating</span>
+                    <div class="celebration-effect"></div>
+                </div>
+                <div class="stat-card" data-effect="shimmer">
+                    <span class="stat-icon">✨</span>
+                    <div class="stat-number-wrap">
+                        <span class="stat-number" data-target="100">0</span><span class="stat-suffix">%</span>
+                    </div>
+                    <span class="stat-label">Custom Creations</span>
+                    <div class="celebration-effect"></div>
+                </div>
             </div>
         </div>
 
@@ -474,10 +483,7 @@
        STATS / TRUST BADGES SECTION
        =========================================== */
     .stats-section {
-        background: var(--cream);
-        padding: 3rem 2rem;
-        margin-top: 3rem;
-        border-bottom: 5px solid var(--border-beige);
+        padding: 2rem 2rem;
     }
 
     .stats-container {
@@ -498,19 +504,11 @@
         flex-direction: column;
         align-items: center;
         gap: 0.5rem;
-        opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     }
-
-    .stat-card.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    .stat-card:nth-child(1) { transition-delay: 0s; }
-    .stat-card:nth-child(2) { transition-delay: 0.15s; }
-    .stat-card:nth-child(3) { transition-delay: 0.3s; }
 
     .stat-card:hover {
         transform: translateY(-4px);
@@ -518,6 +516,7 @@
         border-color: var(--pink);
     }
 
+    /* Floating icon animation - runs continuously */
     .stat-icon {
         font-size: 2.5rem;
         display: block;
@@ -533,11 +532,18 @@
     .stat-card:nth-child(2) .stat-icon { animation-delay: 0.5s; }
     .stat-card:nth-child(3) .stat-icon { animation-delay: 1s; }
 
+    .stat-number-wrap {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+    }
+
     .stat-number {
         font-family: 'Fredoka One', cursive;
         font-size: 3rem;
         color: var(--pink);
         line-height: 1;
+        min-width: 2ch;
     }
 
     .stat-plus,
@@ -552,6 +558,66 @@
         font-weight: 700;
         color: var(--dark-brown);
         margin-top: 0.25rem;
+    }
+
+    /* Celebration effect container */
+    .celebration-effect {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    /* Pulse effect for 13 Years card */
+    @keyframes celebratePulse {
+        0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(236, 38, 143, 0.4); }
+        50% { transform: scale(1.02); box-shadow: 0 0 20px 10px rgba(236, 38, 143, 0.2); }
+        100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(236, 38, 143, 0); }
+    }
+
+    .stat-card.celebrating-pulse {
+        animation: celebratePulse 0.6s ease-out;
+    }
+
+    /* Star burst effect for 5-Star card */
+    .star-particle {
+        position: absolute;
+        font-size: 1.2rem;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    @keyframes starBurst {
+        0% { opacity: 1; transform: translate(0, 0) scale(0.5); }
+        100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(1); }
+    }
+
+    .star-particle.animate {
+        animation: starBurst 0.8s ease-out forwards;
+    }
+
+    /* Shimmer effect for 100% card */
+    @keyframes shimmerGlow {
+        0% { opacity: 0; left: -100%; }
+        50% { opacity: 1; }
+        100% { opacity: 0; left: 100%; }
+    }
+
+    .shimmer-overlay {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+        pointer-events: none;
+    }
+
+    .shimmer-overlay.animate {
+        animation: shimmerGlow 0.8s ease-out forwards;
     }
 
     @media (max-width: 768px) {
@@ -580,18 +646,16 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-        .stat-card {
-            opacity: 1;
-            transform: none;
-            transition: box-shadow 0.3s ease;
-        }
-
         .stat-icon {
             animation: none;
         }
 
         .stat-card:hover {
             transform: none;
+        }
+
+        .stat-card.celebrating-pulse {
+            animation: none;
         }
     }
     </style>
@@ -637,70 +701,121 @@
     autoRotate = setInterval(nextSlide, 4000);
 
     // ===========================================
-    // STATS SECTION ANIMATIONS
+    // STATS SECTION ANIMATIONS - HOVER TRIGGERED
     // ===========================================
 
-    // Function to reveal stats cards
-    function revealStats() {
-        const cards = document.querySelectorAll('.stat-card');
-        cards.forEach(card => card.classList.add('visible'));
-        animateCounters();
+    // Animate counter from 0 to target on hover
+    function animateCounter(numberEl, target, duration, onComplete) {
+        const startTime = performance.now();
+
+        function updateCounter(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+            const current = Math.floor(easeOutQuart * target);
+            numberEl.textContent = current;
+
+            if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+            } else {
+                numberEl.textContent = target;
+                if (onComplete) onComplete();
+            }
+        }
+        requestAnimationFrame(updateCounter);
     }
 
-    // Intersection Observer for scroll reveal
-    const statsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                revealStats();
-                statsObserver.unobserve(entry.target);
-            }
+    // Create star burst effect
+    function createStarBurst(container) {
+        const stars = ['⭐', '✨', '🌟'];
+        const positions = [
+            { tx: '-40px', ty: '-30px' },
+            { tx: '40px', ty: '-30px' },
+            { tx: '-50px', ty: '10px' },
+            { tx: '50px', ty: '10px' },
+            { tx: '0px', ty: '-40px' }
+        ];
+
+        positions.forEach((pos, i) => {
+            const star = document.createElement('span');
+            star.className = 'star-particle';
+            star.textContent = stars[i % stars.length];
+            star.style.left = '50%';
+            star.style.top = '50%';
+            star.style.setProperty('--tx', pos.tx);
+            star.style.setProperty('--ty', pos.ty);
+            container.appendChild(star);
+
+            // Trigger animation
+            requestAnimationFrame(() => {
+                star.classList.add('animate');
+            });
+
+            // Clean up after animation
+            setTimeout(() => star.remove(), 800);
         });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px 0px 0px'
+    }
+
+    // Create shimmer effect
+    function createShimmer(container) {
+        const shimmer = document.createElement('div');
+        shimmer.className = 'shimmer-overlay';
+        container.appendChild(shimmer);
+
+        requestAnimationFrame(() => {
+            shimmer.classList.add('animate');
+        });
+
+        setTimeout(() => shimmer.remove(), 800);
+    }
+
+    // Set up hover animations for each stat card
+    document.querySelectorAll('.stat-card').forEach(card => {
+        const numberEl = card.querySelector('.stat-number[data-target]');
+        const effectContainer = card.querySelector('.celebration-effect');
+        const effectType = card.getAttribute('data-effect');
+
+        if (!numberEl) return;
+
+        const target = parseInt(numberEl.getAttribute('data-target'));
+        let isAnimating = false;
+
+        // Calculate duration based on target value
+        const duration = target <= 13 ? 800 : (target <= 50 ? 1000 : 1200);
+
+        card.addEventListener('mouseenter', () => {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            // Reset to 0 first
+            numberEl.textContent = '0';
+
+            // Animate the counter
+            animateCounter(numberEl, target, duration, () => {
+                // Trigger celebration effect when complete
+                if (effectType === 'pulse') {
+                    card.classList.add('celebrating-pulse');
+                    setTimeout(() => card.classList.remove('celebrating-pulse'), 600);
+                } else if (effectType === 'stars' && effectContainer) {
+                    createStarBurst(effectContainer);
+                } else if (effectType === 'shimmer' && effectContainer) {
+                    createShimmer(effectContainer);
+                }
+
+                isAnimating = false;
+            });
+        });
+
+        // Optional: Reset on mouse leave (comment out if you prefer it stays at final value)
+        // card.addEventListener('mouseleave', () => {
+        //     if (!isAnimating) {
+        //         numberEl.textContent = '0';
+        //     }
+        // });
     });
 
-    const statsSection = document.querySelector('.stats-section');
-    if (statsSection) {
-        statsObserver.observe(statsSection);
-
-        // Fallback: Check if already visible on load (for above-the-fold content)
-        setTimeout(() => {
-            const rect = statsSection.getBoundingClientRect();
-            const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-            if (isVisible && !document.querySelector('.stat-card.visible')) {
-                revealStats();
-            }
-        }, 100);
-    }
-
-    function animateCounters() {
-        const counters = document.querySelectorAll('.stat-number[data-target]');
-        counters.forEach(counter => {
-            const target = parseInt(counter.getAttribute('data-target'));
-            const duration = 1500;
-            const startTime = performance.now();
-
-            function updateCounter(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-                const current = Math.floor(easeOutQuart * target);
-                counter.textContent = current;
-                if (progress < 1) {
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    counter.textContent = target;
-                }
-            }
-            requestAnimationFrame(updateCounter);
-        });
-    }
-
+    // For reduced motion: show final values, disable animations
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        document.querySelectorAll('.stat-card').forEach(card => {
-            card.classList.add('visible');
-        });
         document.querySelectorAll('.stat-number[data-target]').forEach(el => {
             el.textContent = el.getAttribute('data-target');
         });
