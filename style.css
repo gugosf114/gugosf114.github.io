@@ -662,6 +662,7 @@ nav {
 a.service-card {
     text-decoration: none;
     color: inherit;
+    cursor: pointer;
 }
 
 a.service-card p {
