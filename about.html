@@ -638,23 +638,39 @@
     // ===========================================
     // STATS SECTION ANIMATIONS
     // ===========================================
+
+    // Function to reveal stats cards
+    function revealStats() {
+        const cards = document.querySelectorAll('.stat-card');
+        cards.forEach(card => card.classList.add('visible'));
+        animateCounters();
+    }
+
+    // Intersection Observer for scroll reveal
     const statsObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const cards = entry.target.querySelectorAll('.stat-card');
-                cards.forEach(card => card.classList.add('visible'));
-                animateCounters();
+                revealStats();
                 statsObserver.unobserve(entry.target);
             }
         });
     }, {
-        threshold: 0.3,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: 0.1,
+        rootMargin: '0px 0px 0px 0px'
     });
 
     const statsSection = document.querySelector('.stats-section');
     if (statsSection) {
         statsObserver.observe(statsSection);
+
+        // Fallback: Check if already visible on load (for above-the-fold content)
+        setTimeout(() => {
+            const rect = statsSection.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+            if (isVisible && !document.querySelector('.stat-card.visible')) {
+                revealStats();
+            }
+        }, 100);
     }
 
     function animateCounters() {
