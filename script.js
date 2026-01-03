@@ -536,59 +536,120 @@ function initTypewriter() {
         extractChars(child, '');
     }
 
-    // Clear headline and add cursor
-    headline.innerHTML = '';
-    headline.classList.add('typing');
+    // Timing configuration
+    const typeSpeed = 65;        // ms per character when typing
+    const deleteSpeed = 35;      // ms per character when deleting (faster)
+    const pauseAfterType = 3000; // 3 seconds pause after typing complete
+    const pauseBeforeRestart = 500; // 0.5 seconds before restarting
 
+    // Create persistent cursor
     const cursor = document.createElement('span');
     cursor.classList.add('typewriter-cursor');
-    headline.appendChild(cursor);
 
-    // Type characters one by one with colors
-    let charIndex = 0;
-    const typeSpeed = 65; // ms per character
+    // Start the loop
+    function startTypewriterLoop() {
+        // Clear headline and add cursor
+        headline.innerHTML = '';
+        headline.classList.add('typing');
+        headline.appendChild(cursor);
+        cursor.classList.remove('hidden');
 
-    // Track current span for grouping same-styled characters
-    let currentSpan = null;
-    let currentClass = null;
+        let charIndex = 0;
+        let currentSpan = null;
+        let currentClass = null;
 
-    function typeNextChar() {
-        if (charIndex < charMap.length) {
-            const { char, className } = charMap[charIndex];
+        function typeNextChar() {
+            if (charIndex < charMap.length) {
+                const { char, className } = charMap[charIndex];
 
-            // If class changed or no current span, create new span
-            if (className !== currentClass) {
-                if (className) {
-                    currentSpan = document.createElement('span');
-                    currentSpan.className = className;
-                    headline.insertBefore(currentSpan, cursor);
-                } else {
-                    currentSpan = null;
+                // If class changed or no current span, create new span
+                if (className !== currentClass) {
+                    if (className) {
+                        currentSpan = document.createElement('span');
+                        currentSpan.className = className;
+                        headline.insertBefore(currentSpan, cursor);
+                    } else {
+                        currentSpan = null;
+                    }
+                    currentClass = className;
                 }
-                currentClass = className;
-            }
 
-            // Add character to current span or directly to headline
-            if (currentSpan) {
-                currentSpan.appendChild(document.createTextNode(char));
+                // Add character to current span or directly to headline
+                if (currentSpan) {
+                    currentSpan.appendChild(document.createTextNode(char));
+                } else {
+                    headline.insertBefore(document.createTextNode(char), cursor);
+                }
+
+                charIndex++;
+                setTimeout(typeNextChar, typeSpeed);
             } else {
-                headline.insertBefore(document.createTextNode(char), cursor);
+                // Typing complete - pause then start deleting
+                setTimeout(startDeleting, pauseAfterType);
+            }
+        }
+
+        function startDeleting() {
+            // Get all text content for deletion
+            let textContent = '';
+            for (const node of headline.childNodes) {
+                if (node !== cursor) {
+                    textContent += node.textContent || '';
+                }
             }
 
-            charIndex++;
-            setTimeout(typeNextChar, typeSpeed);
-        } else {
-            // Typing complete - blink cursor for 1 second, then hide
-            setTimeout(() => {
-                cursor.classList.add('hidden');
-                // Restore original HTML with spans for proper styling
-                headline.innerHTML = originalHTML;
-            }, 1000);
+            let deleteIndex = textContent.length;
+
+            function deleteNextChar() {
+                if (deleteIndex > 0) {
+                    // Remove one character from the end
+                    deleteIndex--;
+
+                    // Rebuild content up to deleteIndex
+                    headline.innerHTML = '';
+                    let builtChars = 0;
+                    let currentSpan = null;
+                    let currentClass = null;
+
+                    for (let i = 0; i < charMap.length && builtChars < deleteIndex; i++) {
+                        const { char, className } = charMap[i];
+
+                        if (className !== currentClass) {
+                            if (className) {
+                                currentSpan = document.createElement('span');
+                                currentSpan.className = className;
+                                headline.appendChild(currentSpan);
+                            } else {
+                                currentSpan = null;
+                            }
+                            currentClass = className;
+                        }
+
+                        if (currentSpan) {
+                            currentSpan.appendChild(document.createTextNode(char));
+                        } else {
+                            headline.appendChild(document.createTextNode(char));
+                        }
+                        builtChars++;
+                    }
+
+                    headline.appendChild(cursor);
+                    setTimeout(deleteNextChar, deleteSpeed);
+                } else {
+                    // Deletion complete - pause then restart
+                    setTimeout(startTypewriterLoop, pauseBeforeRestart);
+                }
+            }
+
+            deleteNextChar();
         }
+
+        // Start typing
+        typeNextChar();
     }
 
-    // Start typing
-    typeNextChar();
+    // Begin the loop
+    startTypewriterLoop();
 }
 
 // Initialize typewriter when DOM is ready
