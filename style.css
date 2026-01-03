@@ -414,6 +414,8 @@ nav {
     transition: all 0.3s ease;
     cursor: pointer;
     border: none;
+    position: relative;
+    overflow: hidden;
 }
 
 .btn-primary {
@@ -437,6 +439,41 @@ nav {
 .btn-secondary:hover {
     background: var(--yellow-dark);
     transform: translateY(-3px);
+}
+
+/* Button Ripple Effect */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple-expand 0.6s ease-out forwards;
+    pointer-events: none;
+}
+
+.btn-primary .ripple {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.btn-secondary .ripple {
+    background: rgba(236, 38, 143, 0.25);
+}
+
+@keyframes ripple-expand {
+    from {
+        transform: scale(0);
+        opacity: 1;
+    }
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ripple {
+        animation: none;
+        display: none;
+    }
 }
 
 /* SECTION WRAPPER - Wrap-around effect with margins */

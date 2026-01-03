@@ -451,3 +451,49 @@ if (document.readyState === 'loading') {
 } else {
     initScrollReveal();
 }
+
+// ===========================================
+// BUTTON RIPPLE EFFECT
+// ===========================================
+function initButtonRipple() {
+    // Respect reduced motion preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+    }
+
+    // Target all buttons with .btn class
+    document.addEventListener('click', (e) => {
+        const button = e.target.closest('.btn');
+        if (!button) return;
+
+        // Create ripple element
+        const ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+
+        // Get button dimensions and click position
+        const rect = button.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+
+        // Style the ripple
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+
+        // Add ripple to button
+        button.appendChild(ripple);
+
+        // Remove ripple after animation completes
+        ripple.addEventListener('animationend', () => {
+            ripple.remove();
+        });
+    });
+}
+
+// Initialize ripple effect when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initButtonRipple);
+} else {
+    initButtonRipple();
+}
