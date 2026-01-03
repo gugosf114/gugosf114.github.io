@@ -585,6 +585,21 @@ nav {
     text-decoration: none;
 }
 
+/* When service-card is a link, remove link styling from text */
+a.service-card {
+    text-decoration: none;
+    color: inherit;
+}
+
+a.service-card p {
+    color: var(--brown);
+    text-decoration: none;
+}
+
+a.service-card h3 {
+    color: var(--dark-brown);
+}
+
 .service-card .price {
     display: inline-block;
     background: var(--white);
