@@ -426,8 +426,8 @@ function initScrollReveal() {
 
     const observerOptions = {
         root: null, // viewport
-        rootMargin: '0px',
-        threshold: 0.15 // 15% visible triggers animation
+        rootMargin: '0px 0px 100px 0px', // trigger 100px before element enters viewport
+        threshold: 0.1
     };
 
     const revealObserver = new IntersectionObserver((entries, observer) => {
