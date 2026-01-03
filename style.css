@@ -551,6 +551,8 @@ nav {
     text-align: center;
     transition: all 0.3s ease;
     border: 5px solid var(--section-border);
+    display: flex;
+    flex-direction: column;
 }
 
 .service-card:hover {
@@ -595,7 +597,7 @@ nav {
 }
 
 .service-card .btn {
-    margin-top: 1rem;
+    margin-top: auto;
     white-space: nowrap;
     padding: 0.8rem 1.5rem;
     font-size: 0.95rem;
