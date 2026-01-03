@@ -499,18 +499,25 @@ if (document.readyState === 'loading') {
 }
 
 // ===========================================
-// TYPEWRITER EFFECT (Home Page Hero Only)
+// TYPEWRITER EFFECT (All Pages with .typewriter-headline)
 // ===========================================
 function initTypewriter() {
-    // Only run on home page (index.html)
-    const headline = document.querySelector('.hero-home .typewriter-headline');
-    if (!headline) return;
-
     // Respect reduced motion preference - show text immediately
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         return;
     }
 
+    // Find all typewriter headlines on the page
+    const headlines = document.querySelectorAll('.typewriter-headline');
+    if (headlines.length === 0) return;
+
+    // Initialize typewriter for each headline
+    headlines.forEach(headline => {
+        initSingleTypewriter(headline);
+    });
+}
+
+function initSingleTypewriter(headline) {
     // Store original HTML structure (preserves spans for SEO and styling)
     const originalHTML = headline.innerHTML;
 
