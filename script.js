@@ -404,3 +404,50 @@ function initSimpleLightbox() {
 
     return { openLightbox, closeLightbox };
 }
+
+// ===========================================
+// SCROLL REVEAL ANIMATIONS
+// ===========================================
+function initScrollReveal() {
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+        // If reduced motion is preferred, make all reveal elements visible immediately
+        document.querySelectorAll('.reveal').forEach(el => {
+            el.classList.add('visible');
+        });
+        return;
+    }
+
+    const revealElements = document.querySelectorAll('.reveal');
+
+    if (revealElements.length === 0) return;
+
+    const observerOptions = {
+        root: null, // viewport
+        rootMargin: '0px',
+        threshold: 0.15 // 15% visible triggers animation
+    };
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // Stop observing once revealed
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    revealElements.forEach(el => {
+        revealObserver.observe(el);
+    });
+}
+
+// Initialize scroll reveal when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initScrollReveal);
+} else {
+    initScrollReveal();
+}
