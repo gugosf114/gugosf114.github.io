@@ -575,6 +575,7 @@ nav {
     color: var(--brown);
     margin-bottom: 1.5rem;
     font-weight: 600;
+    text-decoration: none;
 }
 
 .service-card .price {
