@@ -326,6 +326,40 @@ function initLightbox(images) {
         if (e.key === 'ArrowRight' && nextBtn) changeSlide(1);
     });
 
+    // Touch swipe navigation for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let touchStartY = 0;
+    let touchEndY = 0;
+    const swipeThreshold = 50; // Minimum distance for swipe
+
+    lightbox.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    lightbox.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+        handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = touchEndY - touchStartY;
+
+        // Only trigger if horizontal swipe is greater than vertical (prevent scroll conflicts)
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > swipeThreshold) {
+            if (deltaX < 0) {
+                // Swipe left → next image
+                changeSlide(1);
+            } else {
+                // Swipe right → previous image
+                changeSlide(-1);
+            }
+        }
+    }
+
     // Expose openLightbox globally
     window.openLightbox = openLightbox;
 
