@@ -497,3 +497,64 @@ if (document.readyState === 'loading') {
 } else {
     initButtonRipple();
 }
+
+// ===========================================
+// TYPEWRITER EFFECT (Home Page Hero Only)
+// ===========================================
+function initTypewriter() {
+    // Only run on home page (index.html)
+    const headline = document.querySelector('.hero-home .typewriter-headline');
+    if (!headline) return;
+
+    // Respect reduced motion preference - show text immediately
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+    }
+
+    // Store original HTML structure (preserves spans for SEO and styling)
+    const originalHTML = headline.innerHTML;
+
+    // Extract plain text for typing (preserves spaces between spans)
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = originalHTML;
+    const fullText = tempDiv.textContent || tempDiv.innerText;
+
+    // Clear headline and add cursor
+    headline.innerHTML = '';
+    headline.classList.add('typing');
+
+    const cursor = document.createElement('span');
+    cursor.classList.add('typewriter-cursor');
+    headline.appendChild(cursor);
+
+    // Type characters one by one
+    let charIndex = 0;
+    const typeSpeed = 65; // ms per character
+
+    function typeNextChar() {
+        if (charIndex < fullText.length) {
+            // Insert character before cursor
+            const textNode = document.createTextNode(fullText[charIndex]);
+            headline.insertBefore(textNode, cursor);
+            charIndex++;
+            setTimeout(typeNextChar, typeSpeed);
+        } else {
+            // Typing complete - blink cursor for 1 second, then hide
+            setTimeout(() => {
+                cursor.classList.add('hidden');
+                // Restore original HTML with spans for proper styling
+                headline.innerHTML = originalHTML;
+            }, 1000);
+        }
+    }
+
+    // Start typing
+    typeNextChar();
+}
+
+// Initialize typewriter when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTypewriter);
+} else {
+    initTypewriter();
+}
