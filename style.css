@@ -721,7 +721,6 @@ footer {
     justify-content: center;
     width: 50px;
     height: 50px;
-    background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     color: var(--white);
     font-size: 1.5rem;
@@ -729,14 +728,31 @@ footer {
 }
 
 .social-links a:hover {
-    background: var(--pink);
     transform: translateY(-3px);
+    filter: brightness(1.15);
 }
 
 .social-links a svg {
     width: 24px;
     height: 24px;
     fill: white;
+}
+
+/* Footer social brand colors */
+.social-links a[aria-label="Instagram"] {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+}
+
+.social-links a[aria-label="Facebook"] {
+    background: #1877F2;
+}
+
+.social-links a[aria-label="Pinterest"] {
+    background: #E60023;
+}
+
+.social-links a[aria-label="Yelp"] {
+    background: #FF1A1A;
 }
 
 .footer-contact {
