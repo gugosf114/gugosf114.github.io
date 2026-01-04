@@ -101,13 +101,10 @@ body {
 }
 
 .social-sidebar .social-yelp img {
-    /* Yelp image scaled up to fill, negative margin crops whitespace */
-    width: 62px !important;
-    height: 62px !important;
-    max-width: none !important;
-    max-height: none !important;
-    object-fit: contain;
-    margin: -9px;
+    width: 44px !important;
+    height: 44px !important;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
 /* Mobile: reposition social sidebar */
@@ -869,12 +866,10 @@ footer {
 }
 
 .social-links a[aria-label="Yelp"] img {
-    width: 70px !important;
-    height: 70px !important;
-    max-width: none !important;
-    max-height: none !important;
-    object-fit: contain;
-    margin: -10px;
+    width: 50px !important;
+    height: 50px !important;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 .footer-contact {
