@@ -869,12 +869,12 @@ footer {
 }
 
 .social-links a[aria-label="Yelp"] img {
-    width: 90px !important;
-    height: 90px !important;
+    width: 70px !important;
+    height: 70px !important;
     max-width: none !important;
     max-height: none !important;
     object-fit: contain;
-    margin: -20px;
+    margin: -10px;
 }
 
 .footer-contact {
