@@ -102,12 +102,12 @@ body {
 
 .social-sidebar .social-yelp img {
     /* Yelp image scaled up to fill, negative margin crops whitespace */
-    width: 80px !important;
-    height: 80px !important;
+    width: 62px !important;
+    height: 62px !important;
     max-width: none !important;
     max-height: none !important;
     object-fit: contain;
-    margin: -18px;
+    margin: -9px;
 }
 
 /* Mobile: reposition social sidebar */
