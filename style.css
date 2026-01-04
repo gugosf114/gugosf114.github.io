@@ -197,29 +197,6 @@ nav {
     font-weight: 700;
     font-size: 1.25rem;
     transition: color 0.3s ease;
-    position: relative;
-}
-
-/* Animated underline for nav links */
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--dark-brown);
-    transition: width 0.3s ease;
-}
-
-.nav-links a:hover::after,
-.nav-links a.active::after {
-    width: 100%;
-}
-
-/* Exclude the CTA button from underline */
-.nav-links a.nav-cta::after {
-    display: none;
 }
 
 .nav-links a:hover,
