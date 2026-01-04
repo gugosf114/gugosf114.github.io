@@ -92,6 +92,20 @@ body {
 .social-sidebar .social-yelp {
     background: #FF1A1A;
     border-radius: 0 0 0 8px;
+    /* Force dimensions - prevent collapse */
+    min-width: 44px !important;
+    min-height: 44px !important;
+    width: 44px !important;
+    height: 44px !important;
+}
+
+.social-sidebar .social-yelp svg {
+    /* Force Yelp SVG size */
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    min-height: 22px !important;
+    flex-shrink: 0 !important;
 }
 
 /* Mobile: reposition social sidebar */
