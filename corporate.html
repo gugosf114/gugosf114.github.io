@@ -196,21 +196,36 @@
             <a href="gallery.html" class="logo-tagline">Don't just take our word for it — we've got the cookies to prove it. 🍪</a>
         </div>
 
-        <!-- Section 1: Corporate Cookies (Beige) -->
-        <a href="gallery-corporate-cookies.html" class="corporate-tile-link" style="text-decoration: none; display: block;">
-            <div class="section-wrapper section-beige reveal" style="margin-bottom: 3rem; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease;">
-                <div class="section-header">
-                    <h2><span class="highlight">Corporate Cookies</span></h2>
-                </div>
-                <div class="service-card" style="max-width: 800px; margin: 0 auto; text-align: center;">
-                    <img src="images/gallery/categoryplaceholder/corporatecookies.jpg" alt="Corporate cookies by My Baking Creations" style="width: 100%; max-width: 300px; height: 150px; object-fit: contain; background-color: #FFFFFF; border-radius: 15px; margin-bottom: 1rem;">
-                    <p style="font-size: 1.15rem; line-height: 1.8; color: var(--dark-brown); font-weight: 600;">
-                        Your logo or design in high-resolution edible print. Consistent, scalable, perfect for large orders. Ships nationwide with 2-week shelf life.
-                    </p>
-                    <span style="display: inline-block; margin-top: 1rem; color: var(--pink); font-weight: 700; font-size: 1rem;">View Gallery →</span>
-                </div>
+        <!-- Section 1: Corporate Cookies - Two subcategories side by side -->
+        <div class="section-wrapper section-beige reveal" style="margin-bottom: 3rem;">
+            <div class="section-header">
+                <h2><span class="highlight">Corporate Cookies</span></h2>
             </div>
-        </a>
+            <div class="corporate-cookies-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 900px; margin: 0 auto;">
+                <!-- Hand Piped Cookies -->
+                <a href="gallery-corporate-cookies.html" class="corporate-tile-link" style="text-decoration: none; display: block;">
+                    <div class="service-card" style="text-align: center; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; height: 100%;">
+                        <img src="images/gallery/Corporatehandpiped/01 Paypal and Venmo logo Cookies.JPG" alt="Corporate hand piped cookies by My Baking Creations" style="width: 100%; max-width: 250px; height: 150px; object-fit: contain; background-color: #FFFFFF; border-radius: 15px; margin-bottom: 1rem;">
+                        <h3 style="font-family: 'Fredoka One', cursive; font-size: 1.3rem; color: var(--dark-brown); margin-bottom: 0.75rem;">Hand Piped Cookies</h3>
+                        <p style="font-size: 1rem; line-height: 1.6; color: var(--dark-brown); font-weight: 600;">
+                            Artisan royal icing designs, hand-crafted for unique branding. Perfect for premium gifts and special events.
+                        </p>
+                        <span style="display: inline-block; margin-top: 1rem; color: var(--pink); font-weight: 700; font-size: 1rem;">View Gallery →</span>
+                    </div>
+                </a>
+                <!-- Printed Image Cookies -->
+                <a href="gallery-corporate-cookies-printed.html" class="corporate-tile-link" style="text-decoration: none; display: block;">
+                    <div class="service-card" style="text-align: center; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; height: 100%;">
+                        <img src="images/gallery/corporatecookies/01 Meta Branded Cookie Order FB.jpg" alt="Corporate printed image cookies by My Baking Creations" style="width: 100%; max-width: 250px; height: 150px; object-fit: contain; background-color: #FFFFFF; border-radius: 15px; margin-bottom: 1rem;">
+                        <h3 style="font-family: 'Fredoka One', cursive; font-size: 1.3rem; color: var(--dark-brown); margin-bottom: 0.75rem;">Printed Image Cookies</h3>
+                        <p style="font-size: 1rem; line-height: 1.6; color: var(--dark-brown); font-weight: 600;">
+                            Your logo in high-resolution edible print. Consistent, scalable, perfect for large orders. Ships nationwide.
+                        </p>
+                        <span style="display: inline-block; margin-top: 1rem; color: var(--pink); font-weight: 700; font-size: 1rem;">View Gallery →</span>
+                    </div>
+                </a>
+            </div>
+        </div>
 
         <!-- Section 2: Corporate Cake Pops (White) -->
         <a href="gallery-corporate-cakepops.html" class="corporate-tile-link" style="text-decoration: none; display: block;">
@@ -367,6 +382,14 @@
         .corporate-logos-grid img {
             height: 60px;
             padding: 0.75rem;
+        }
+    }
+
+    /* Corporate Cookies Grid - 2 tiles side by side */
+    @media (max-width: 600px) {
+        .corporate-cookies-grid {
+            grid-template-columns: 1fr !important;
+            gap: 1.5rem !important;
         }
     }
 
