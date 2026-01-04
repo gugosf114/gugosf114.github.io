@@ -328,23 +328,19 @@ function initLightbox(images) {
 
     // Touch swipe navigation for mobile
     let touchStartX = 0;
-    let touchEndX = 0;
     let touchStartY = 0;
-    let touchEndY = 0;
     const swipeThreshold = 50; // Minimum distance for swipe
 
-    lightbox.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-        touchStartY = e.changedTouches[0].screenY;
-    }, { passive: true });
+    function handleTouchStart(e) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    }
 
-    lightbox.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        touchEndY = e.changedTouches[0].screenY;
-        handleSwipe();
-    }, { passive: true });
+    function handleTouchEnd(e) {
+        if (!touchStartX) return;
 
-    function handleSwipe() {
+        const touchEndX = e.changedTouches[0].clientX;
+        const touchEndY = e.changedTouches[0].clientY;
         const deltaX = touchEndX - touchStartX;
         const deltaY = touchEndY - touchStartY;
 
@@ -358,7 +354,17 @@ function initLightbox(images) {
                 changeSlide(-1);
             }
         }
+
+        // Reset
+        touchStartX = 0;
+        touchStartY = 0;
     }
+
+    // Attach to both lightbox overlay and image for reliable detection
+    lightbox.addEventListener('touchstart', handleTouchStart, { passive: true });
+    lightbox.addEventListener('touchend', handleTouchEnd, { passive: true });
+    lightboxImg.addEventListener('touchstart', handleTouchStart, { passive: true });
+    lightboxImg.addEventListener('touchend', handleTouchEnd, { passive: true });
 
     // Expose openLightbox globally
     window.openLightbox = openLightbox;
