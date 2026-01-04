@@ -720,3 +720,117 @@ if (document.readyState === 'loading') {
         }
     }, { passive: true });
 })();
+
+// ===========================================
+// BLUR-UP LAZY LOADING EFFECT
+// Premium progressive image loading
+// ===========================================
+function initBlurUpLazyLoad() {
+    // Respect reduced motion preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        // Just show images normally
+        document.querySelectorAll('.blur-up-container').forEach(container => {
+            container.classList.add('loaded');
+        });
+        return;
+    }
+
+    // Find all blur-up containers
+    const containers = document.querySelectorAll('.blur-up-container');
+    if (containers.length === 0) return;
+
+    // Create intersection observer for lazy loading
+    const observerOptions = {
+        root: null,
+        rootMargin: '50px 0px', // Start loading 50px before entering viewport
+        threshold: 0.01
+    };
+
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const container = entry.target;
+                const fullImage = container.querySelector('.blur-up-full');
+
+                if (fullImage && fullImage.dataset.src) {
+                    // Create a new image to preload
+                    const img = new Image();
+
+                    img.onload = function() {
+                        // Set the actual src and mark as loaded
+                        fullImage.src = fullImage.dataset.src;
+                        // Small delay for smooth transition
+                        requestAnimationFrame(() => {
+                            container.classList.add('loaded');
+                        });
+                    };
+
+                    img.onerror = function() {
+                        // On error, still show the placeholder
+                        console.warn('Failed to load image:', fullImage.dataset.src);
+                        container.classList.add('loaded');
+                    };
+
+                    // Start loading the full image
+                    img.src = fullImage.dataset.src;
+                }
+
+                // Stop observing this container
+                observer.unobserve(container);
+            }
+        });
+    }, observerOptions);
+
+    // Observe all containers
+    containers.forEach(container => {
+        imageObserver.observe(container);
+    });
+}
+
+// Auto-convert standard lazy images to blur-up (optional enhancement)
+function convertToBlurUp(selector) {
+    const images = document.querySelectorAll(selector);
+
+    images.forEach(img => {
+        // Skip if already converted or no src
+        if (img.closest('.blur-up-container') || !img.src) return;
+
+        // Get the parent element
+        const parent = img.parentElement;
+
+        // Create container
+        const container = document.createElement('div');
+        container.className = 'blur-up-container';
+        container.style.width = '100%';
+        container.style.height = '100%';
+
+        // Create placeholder (tiny base64 placeholder or use same src with blur)
+        const placeholder = document.createElement('img');
+        placeholder.className = 'blur-up-placeholder';
+        placeholder.src = img.src; // Use same image, CSS will blur it
+        placeholder.alt = '';
+        placeholder.setAttribute('aria-hidden', 'true');
+
+        // Modify original image
+        img.className = (img.className + ' blur-up-full').trim();
+        img.dataset.src = img.src;
+        img.removeAttribute('src'); // Remove src so it doesn't load immediately
+
+        // Build the structure
+        container.appendChild(placeholder);
+        container.appendChild(img);
+
+        // Replace in DOM
+        parent.appendChild(container);
+    });
+
+    // Initialize the blur-up effect
+    initBlurUpLazyLoad();
+}
+
+// Initialize blur-up when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initBlurUpLazyLoad);
+} else {
+    initBlurUpLazyLoad();
+}
