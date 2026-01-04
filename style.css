@@ -136,6 +136,7 @@ body {
     .social-sidebar .social-yelp img {
         width: 44px !important;
         height: 44px !important;
+        object-fit: cover;
         border-radius: 50% !important;
     }
 }
