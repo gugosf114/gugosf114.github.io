@@ -633,6 +633,67 @@ if (document.readyState === 'loading') {
 }
 
 // ===========================================
+// TYPEWRITER EFFECT FOR COOKIE TITLES (One-time, on scroll)
+// ===========================================
+function initCookieTypewriter() {
+    // Respect reduced motion preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+    }
+
+    const cookieElements = document.querySelectorAll('.typewriter-cookie');
+    if (cookieElements.length === 0) return;
+
+    cookieElements.forEach(element => {
+        const originalText = element.textContent;
+        element.setAttribute('data-text', originalText);
+        element.textContent = '';
+        element.style.borderRight = '2px solid var(--yellow)';
+
+        let hasTyped = false;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !hasTyped) {
+                    hasTyped = true;
+                    typeCookieText(element, originalText);
+                    observer.unobserve(element);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(element);
+    });
+}
+
+function typeCookieText(element, text) {
+    let charIndex = 0;
+    const typeSpeed = 80;
+
+    function typeNext() {
+        if (charIndex < text.length) {
+            element.textContent += text.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeNext, typeSpeed);
+        } else {
+            // Remove cursor after typing complete
+            setTimeout(() => {
+                element.style.borderRight = 'none';
+            }, 500);
+        }
+    }
+
+    typeNext();
+}
+
+// Initialize cookie typewriter when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCookieTypewriter);
+} else {
+    initCookieTypewriter();
+}
+
+// ===========================================
 // SIMPLE SWIPE DETECTION FOR LIGHTBOX
 // ===========================================
 (function() {
