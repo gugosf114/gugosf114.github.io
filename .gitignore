@@ -1,0 +1,61 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Node modules (if ever added)
+node_modules/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.egg-info/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Build artifacts
+dist/
+build/
+
+# Image editing files (not web-compatible)
+*.psd
+*.ai
+*.sketch
+*.HEIC
+*.heic
+*.tif
+*.tiff
+
+# Large media files that shouldn't be in repo
+*.pdf
+!MBC Branding Guide.pdf
+
+# Backup files
+*~
+*.orig

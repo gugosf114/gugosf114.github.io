@@ -55,14 +55,18 @@ orderModal?.addEventListener('click', (e) => {
 });
 
 // FLAVOR DROPDOWN TOGGLE FUNCTIONALITY
-function initFlavorToggle() {
+const MAX_INIT_RETRIES = 20; // Max 2 seconds of retrying
+
+function initFlavorToggle(retryCount = 0) {
     const productRadios = document.querySelectorAll('input[name="product_type"]');
     const flavorSection = document.getElementById('flavorSection');
     const flavorSelect = document.getElementById('flavor');
 
     if (!productRadios.length || !flavorSection || !flavorSelect) {
-        // Elements not loaded yet, try again in 100ms
-        setTimeout(initFlavorToggle, 100);
+        // Elements not loaded yet, retry with limit
+        if (retryCount < MAX_INIT_RETRIES) {
+            setTimeout(() => initFlavorToggle(retryCount + 1), 100);
+        }
         return;
     }
 
@@ -115,7 +119,7 @@ function initFlavorToggle() {
 }
 
 // DELIVERY TOGGLE FUNCTIONALITY
-function initDeliveryToggle() {
+function initDeliveryToggle(retryCount = 0) {
     const pickupOption = document.getElementById('pickup_option');
     const deliveryOption = document.getElementById('delivery_option');
     const deliveryDetailsSection = document.getElementById('deliveryDetailsSection');
@@ -123,8 +127,10 @@ function initDeliveryToggle() {
     const deliveryCity = document.getElementById('delivery_city');
 
     if (!pickupOption || !deliveryOption || !deliveryDetailsSection) {
-        // Elements not loaded yet, try again in 100ms
-        setTimeout(initDeliveryToggle, 100);
+        // Elements not loaded yet, retry with limit
+        if (retryCount < MAX_INIT_RETRIES) {
+            setTimeout(() => initDeliveryToggle(retryCount + 1), 100);
+        }
         return;
     }
 
@@ -184,6 +190,10 @@ if (orderForm) {
                 body: formData
             });
 
+            if (!response.ok) {
+                throw new Error(`HTTP error: ${response.status}`);
+            }
+
             const data = await response.json();
 
             if (data.success) {
@@ -195,6 +205,7 @@ if (orderForm) {
                 alert('Oops! Something went wrong. Please call us at (415) 568-8060 or email info@mybakingcreations.com');
             }
         } catch (error) {
+            console.error('Form submission error:', error);
             alert('Oops! Something went wrong. Please call us at (415) 568-8060 or email info@mybakingcreations.com');
         }
 
@@ -206,6 +217,9 @@ if (orderForm) {
 // ===========================================
 // HERO CAROUSEL FUNCTIONALITY (Consolidated)
 // ===========================================
+// Track if carousel resize handler is already attached
+let heroCarouselResizeHandler = null;
+
 function initHeroCarousel(startSlide = 0) {
     const track = document.querySelector('.carousel-track');
     const dots = document.querySelectorAll('.hero-dot');
@@ -243,11 +257,15 @@ function initHeroCarousel(startSlide = 0) {
     // Expose goToSlide globally for dot onclick handlers
     window.goToSlide = goToSlide;
 
-    // Handle resize
-    window.addEventListener('resize', () => {
+    // Handle resize - remove previous handler to prevent memory leaks
+    if (heroCarouselResizeHandler) {
+        window.removeEventListener('resize', heroCarouselResizeHandler);
+    }
+    heroCarouselResizeHandler = () => {
         isMobile = window.innerWidth <= 768;
         goToSlide(currentSlide);
-    });
+    };
+    window.addEventListener('resize', heroCarouselResizeHandler);
 
     // Set up dot click handlers (replacing inline onclick)
     dots.forEach((dot, index) => {
@@ -339,7 +357,7 @@ function initSimpleLightbox() {
 
     if (!lightbox || !lightboxImg) return;
 
-    function openLightbox(element) {
+    function openSimpleLightbox(element) {
         const img = element.querySelector('img');
         if (img) {
             lightboxImg.src = img.src;
@@ -366,9 +384,9 @@ function initSimpleLightbox() {
         }
     });
 
-    window.openLightbox = openLightbox;
+    window.openSimpleLightbox = openSimpleLightbox;
 
-    return { openLightbox, closeLightbox };
+    return { openSimpleLightbox, closeLightbox };
 }
 
 // ===========================================
