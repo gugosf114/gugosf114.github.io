@@ -212,14 +212,14 @@
                     <span class="stat-label">Years of Excellence</span>
                     <div class="celebration-effect"></div>
                 </div>
-                <div class="stat-card" data-effect="stars">
+                <a href="https://share.google/cetjqArJ5b3QcOMh9" target="_blank" rel="noopener noreferrer" class="stat-card stat-card-link" data-effect="stars">
                     <span class="stat-icon">⭐⭐⭐⭐⭐</span>
                     <div class="stat-number-wrap">
                         <span class="stat-number" data-target="5">5</span><span class="stat-suffix"> Star</span>
                     </div>
                     <span class="stat-label">Yelp & Google Rating</span>
                     <div class="celebration-effect"></div>
-                </div>
+                </a>
                 <div class="stat-card" data-effect="shimmer">
                     <span class="stat-icon">✨</span>
                     <div class="stat-number-wrap">
@@ -514,6 +514,17 @@
     .stat-card:hover {
         transform: translateY(-4px);
         box-shadow: 0 12px 35px rgba(98, 45, 43, 0.15);
+        border-color: var(--pink);
+    }
+
+    /* Clickable stat card link */
+    a.stat-card-link {
+        text-decoration: none;
+        color: inherit;
+    }
+    a.stat-card-link:hover {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: 0 15px 40px rgba(98, 45, 43, 0.2);
         border-color: var(--pink);
     }
 
