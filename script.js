@@ -326,46 +326,6 @@ function initLightbox(images) {
         if (e.key === 'ArrowRight' && nextBtn) changeSlide(1);
     });
 
-    // Touch swipe navigation for mobile
-    let touchStartX = 0;
-    let touchStartY = 0;
-    const swipeThreshold = 50; // Minimum distance for swipe
-
-    function handleTouchStart(e) {
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
-    }
-
-    function handleTouchEnd(e) {
-        if (!touchStartX) return;
-
-        const touchEndX = e.changedTouches[0].clientX;
-        const touchEndY = e.changedTouches[0].clientY;
-        const deltaX = touchEndX - touchStartX;
-        const deltaY = touchEndY - touchStartY;
-
-        // Only trigger if horizontal swipe is greater than vertical (prevent scroll conflicts)
-        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > swipeThreshold) {
-            if (deltaX < 0) {
-                // Swipe left → next image
-                changeSlide(1);
-            } else {
-                // Swipe right → previous image
-                changeSlide(-1);
-            }
-        }
-
-        // Reset
-        touchStartX = 0;
-        touchStartY = 0;
-    }
-
-    // Attach to both lightbox overlay and image for reliable detection
-    lightbox.addEventListener('touchstart', handleTouchStart, { passive: true });
-    lightbox.addEventListener('touchend', handleTouchEnd, { passive: true });
-    lightboxImg.addEventListener('touchstart', handleTouchStart, { passive: true });
-    lightboxImg.addEventListener('touchend', handleTouchEnd, { passive: true });
-
     // Expose openLightbox globally
     window.openLightbox = openLightbox;
 
@@ -671,3 +631,31 @@ if (document.readyState === 'loading') {
 } else {
     initTypewriter();
 }
+
+// ===========================================
+// SIMPLE SWIPE DETECTION FOR LIGHTBOX
+// ===========================================
+(function() {
+    let startX = 0;
+
+    document.addEventListener('touchstart', function(e) {
+        if (!document.getElementById('lightbox')?.classList.contains('active')) return;
+        startX = e.touches[0].clientX;
+    }, { passive: true });
+
+    document.addEventListener('touchend', function(e) {
+        if (!document.getElementById('lightbox')?.classList.contains('active')) return;
+        const endX = e.changedTouches[0].clientX;
+        const diff = endX - startX;
+
+        if (Math.abs(diff) > 50) {
+            if (diff < 0) {
+                // Swipe left - next
+                document.querySelector('.lightbox-next')?.click();
+            } else {
+                // Swipe right - prev
+                document.querySelector('.lightbox-prev')?.click();
+            }
+        }
+    }, { passive: true });
+})();
