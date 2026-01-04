@@ -90,7 +90,7 @@ body {
 }
 
 .social-sidebar .social-yelp {
-    background: #FF1A1A;
+    background: #000000;
     border-radius: 0 0 0 8px;
     /* Force dimensions - prevent collapse */
     min-width: 44px !important;
@@ -99,13 +99,12 @@ body {
     height: 44px !important;
 }
 
-.social-sidebar .social-yelp svg {
-    /* Force Yelp SVG size */
-    width: 22px !important;
-    height: 22px !important;
-    min-width: 22px !important;
-    min-height: 22px !important;
-    flex-shrink: 0 !important;
+.social-sidebar .social-yelp img {
+    /* Yelp image fills the container */
+    width: 44px !important;
+    height: 44px !important;
+    object-fit: cover;
+    border-radius: 0 0 0 8px;
 }
 
 /* Mobile: reposition social sidebar */
@@ -132,6 +131,12 @@ body {
     .social-sidebar a svg {
         width: 20px;
         height: 20px;
+    }
+
+    .social-sidebar .social-yelp img {
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 50% !important;
     }
 }
 
@@ -856,7 +861,14 @@ footer {
 }
 
 .social-links a[aria-label="Yelp"] {
-    background: #FF1A1A;
+    background: #000000;
+}
+
+.social-links a[aria-label="Yelp"] img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .footer-contact {
