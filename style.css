@@ -97,10 +97,13 @@ body {
     min-height: 44px !important;
     width: 44px !important;
     height: 44px !important;
+    overflow: hidden !important;
 }
 
 .social-sidebar .social-yelp img {
     /* Yelp image fills the container */
+    max-width: 44px !important;
+    max-height: 44px !important;
     width: 44px !important;
     height: 44px !important;
     object-fit: cover;
@@ -862,11 +865,14 @@ footer {
 
 .social-links a[aria-label="Yelp"] {
     background: #000000;
+    overflow: hidden;
 }
 
 .social-links a[aria-label="Yelp"] img {
-    width: 50px;
-    height: 50px;
+    max-width: 50px !important;
+    max-height: 50px !important;
+    width: 50px !important;
+    height: 50px !important;
     border-radius: 50%;
     object-fit: cover;
 }
