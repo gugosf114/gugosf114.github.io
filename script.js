@@ -834,3 +834,131 @@ if (document.readyState === 'loading') {
 } else {
     initBlurUpLazyLoad();
 }
+
+// ===========================================
+// TESTIMONIAL CAROUSEL
+// Responsive carousel with touch support
+// ===========================================
+function initTestimonialCarousel() {
+    const track = document.getElementById('testimonialTrack');
+    const prevBtn = document.getElementById('testimonialPrev');
+    const nextBtn = document.getElementById('testimonialNext');
+    const dotsContainer = document.getElementById('testimonialDots');
+
+    if (!track || !prevBtn || !nextBtn || !dotsContainer) return;
+
+    const cards = track.querySelectorAll('.testimonial-card');
+    if (cards.length === 0) return;
+
+    let currentIndex = 0;
+    let cardsPerView = getCardsPerView();
+    let totalPages = Math.ceil(cards.length / cardsPerView);
+    let autoPlayInterval;
+
+    function getCardsPerView() {
+        if (window.innerWidth >= 1024) return 3;
+        if (window.innerWidth >= 768) return 2;
+        return 1;
+    }
+
+    function createDots() {
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < totalPages; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'testimonial-dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', `Go to page ${i + 1}`);
+            dot.addEventListener('click', () => goToPage(i));
+            dotsContainer.appendChild(dot);
+        }
+    }
+
+    function updateDots() {
+        const dots = dotsContainer.querySelectorAll('.testimonial-dot');
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentIndex);
+        });
+    }
+
+    function goToPage(index) {
+        currentIndex = Math.max(0, Math.min(index, totalPages - 1));
+        const cardWidth = 100 / cardsPerView;
+        const offset = currentIndex * cardsPerView * cardWidth;
+        track.style.transform = `translateX(-${offset}%)`;
+        updateDots();
+        resetAutoPlay();
+    }
+
+    function next() {
+        goToPage(currentIndex + 1 >= totalPages ? 0 : currentIndex + 1);
+    }
+
+    function prev() {
+        goToPage(currentIndex - 1 < 0 ? totalPages - 1 : currentIndex - 1);
+    }
+
+    function handleResize() {
+        const newCardsPerView = getCardsPerView();
+        if (newCardsPerView !== cardsPerView) {
+            cardsPerView = newCardsPerView;
+            totalPages = Math.ceil(cards.length / cardsPerView);
+            currentIndex = Math.min(currentIndex, totalPages - 1);
+            createDots();
+            goToPage(currentIndex);
+        }
+    }
+
+    function startAutoPlay() {
+        autoPlayInterval = setInterval(next, 5000);
+    }
+
+    function resetAutoPlay() {
+        clearInterval(autoPlayInterval);
+        startAutoPlay();
+    }
+
+    // Touch/swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    track.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+
+    track.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].clientX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) {
+                next();
+            } else {
+                prev();
+            }
+        }
+    }, { passive: true });
+
+    // Pause autoplay on hover
+    track.addEventListener('mouseenter', () => {
+        clearInterval(autoPlayInterval);
+    });
+
+    track.addEventListener('mouseleave', () => {
+        startAutoPlay();
+    });
+
+    // Event listeners
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
+    window.addEventListener('resize', handleResize);
+
+    // Initialize
+    createDots();
+    goToPage(0);
+    startAutoPlay();
+}
+
+// Initialize testimonial carousel when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTestimonialCarousel);
+} else {
+    initTestimonialCarousel();
+}
