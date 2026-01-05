@@ -562,6 +562,15 @@ nav {
     }
 }
 
+@keyframes bounce-scroll-mobile {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(10px);
+    }
+}
+
 /* Dark hero variant (for carousel pages) */
 .hero-carousel .scroll-indicator-text {
     color: var(--pink);
@@ -587,6 +596,7 @@ nav {
         right: auto;
         left: 50%;
         transform: translateX(-50%);
+        animation: bounce-scroll-mobile 2s ease-in-out infinite;
     }
     .scroll-indicator-text {
         font-size: 0.7rem;
