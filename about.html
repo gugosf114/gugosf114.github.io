@@ -180,25 +180,37 @@
 
     <!-- MAIN STORY -->
     <section id="about-content" class="page-content">
-        <!-- Founder Section (Beige) -->
+        <!-- Founder Section with Hand-Drawn Border -->
         <div class="section-wrapper section-beige reveal" style="margin-bottom: 3rem;">
-            <div style="background: var(--white); border-radius: 20px; padding: 2.5rem; border: 2px solid var(--section-border);">
-                <div class="about-founder">
-                    <div style="text-align: center;">
-                        <img src="images/yana-about.png" alt="Yana - Founder & Master Cake Designer" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; object-position: center 10%; box-shadow: 0 10px 40px rgba(236, 38, 143, 0.3); border: 4px solid var(--pink);">
-                        <h2 style="font-family: 'Fredoka One', cursive; font-size: 1.6rem; color: var(--dark-brown); margin: 1.5rem 0 0.5rem;">Yana</h2>
-                        <p style="font-size: 1rem; color: var(--brown); font-weight: 700;">Founder & Master Cake Designer</p>
+            <div class="founder-card">
+                <div class="founder-content">
+                    <div class="founder-photo-side">
+                        <div class="founder-photo-wrapper">
+                            <img src="images/yana-about.png" alt="Yana - Founder & Master Cake Designer">
+                        </div>
+                        <h2 class="founder-name">Yana</h2>
+                        <p class="founder-title">Founder & Master Cake Designer</p>
                     </div>
-                    <div>
-                        <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem; font-weight: 600; color: var(--dark-brown);">
-                            Founded in 2012 by Yana, a professional baker and cake designer from St. Petersburg, Russia, My Baking Creations has become one of the Bay Area's most trusted bakeries for ultra-realistic, highly artistic custom cake designs. Known locally for our edible art—every creation that leaves our kitchen is a handcrafted masterpiece.
-                        </p>
-                        <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem; font-weight: 600; color: var(--dark-brown);">
-                            Every creation that leaves our bakery — whether it's a <a href="gallery-cakes-sculpted.html" style="color: var(--pink); text-decoration: none; font-weight: 700;">sculpted birthday cake</a>, <a href="gallery-cookies.html" style="color: var(--pink); text-decoration: none; font-weight: 700;">branded corporate cookies</a>, or <a href="gallery-cakepops.html" style="color: var(--pink); text-decoration: none; font-weight: 700;">themed cake pops</a> — is made from scratch by hand using only the freshest, finest ingredients.
-                        </p>
-                        <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 0; font-weight: 600; color: var(--dark-brown);">
-                            Today, My Baking Creations serves both intimate family celebrations and major corporate events across the Bay Area. From milestone birthday cakes and elegant wedding cakes to corporate logo cookies for employee appreciation and client gifting—every creation is still handcrafted by Yana and her small team using only the freshest ingredients. Our client list includes Google, Meta, Salesforce, DocuSign, Microsoft, PayPal, Alaska Airlines, Golden State Warriors, Twitch, Discord, Gap, Levi's, Cooley, and Athleta, alongside hundreds of Bay Area families celebrating life's most important moments.
-                        </p>
+                    <div class="founder-text-bubble">
+                        <svg class="bubble-border" viewBox="0 0 600 400" preserveAspectRatio="none">
+                            <path d="M25,15 Q8,15 8,35 L5,365 Q5,390 28,392 L572,395 Q595,395 597,370 L598,32 Q598,12 575,10 L25,15"
+                                  fill="#FFFFFF"
+                                  stroke="#622D2B"
+                                  stroke-width="3"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                        </svg>
+                        <div class="bubble-content">
+                            <p>
+                                Founded in 2012 by Yana, a professional baker and cake designer from St. Petersburg, Russia, My Baking Creations has become one of the Bay Area's most trusted bakeries for ultra-realistic, highly artistic custom cake designs. Known locally for our edible art—every creation that leaves our kitchen is a handcrafted masterpiece.
+                            </p>
+                            <p>
+                                Every creation that leaves our bakery — whether it's a <a href="gallery-cakes-sculpted.html">sculpted birthday cake</a>, <a href="gallery-cookies.html">branded corporate cookies</a>, or <a href="gallery-cakepops.html">themed cake pops</a> — is made from scratch by hand using only the freshest, finest ingredients.
+                            </p>
+                            <p>
+                                Today, My Baking Creations serves both intimate family celebrations and major corporate events across the Bay Area. From milestone birthday cakes and elegant wedding cakes to corporate logo cookies for employee appreciation and client gifting—every creation is still handcrafted by Yana and her small team using only the freshest ingredients. Our client list includes Google, Meta, Salesforce, DocuSign, Microsoft, PayPal, Alaska Airlines, Golden State Warriors, Twitch, Discord, Gap, Levi's, Cooley, and Athleta, alongside hundreds of Bay Area families celebrating life's most important moments.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -352,6 +364,142 @@
     </footer>
 
     <style>
+    /* ===========================================
+       FOUNDER CARD - HAND-DRAWN STYLE
+       =========================================== */
+    .founder-card {
+        position: relative;
+        background: #F5EDE4;
+        border-radius: 30px;
+        padding: 3rem;
+        min-height: 400px;
+    }
+
+    .founder-border {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .founder-content {
+        position: relative;
+        display: flex;
+        gap: 2.5rem;
+        align-items: flex-start;
+    }
+
+    .founder-photo-side {
+        flex-shrink: 0;
+        text-align: center;
+        padding-top: 1rem;
+    }
+
+    .founder-photo-wrapper {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        padding: 5px;
+        background: linear-gradient(135deg, #EC268F, #D91A7A);
+        box-shadow: 0 8px 30px rgba(236, 38, 143, 0.3);
+    }
+
+    .founder-photo-wrapper img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center 10%;
+    }
+
+    .founder-name {
+        font-family: 'Fredoka One', cursive;
+        font-size: 1.6rem;
+        color: #622D2B;
+        margin: 1.5rem 0 0.3rem;
+    }
+
+    .founder-title {
+        font-size: 1rem;
+        color: #EC268F;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .founder-text-bubble {
+        flex: 1;
+        position: relative;
+    }
+
+    .bubble-border {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .bubble-content {
+        position: relative;
+        padding: 2rem 2.5rem;
+    }
+
+    .bubble-content p {
+        font-size: 1.05rem;
+        line-height: 1.75;
+        color: #622D2B;
+        font-weight: 600;
+        margin-bottom: 1.25rem;
+    }
+
+    .bubble-content p:last-child {
+        margin-bottom: 0;
+    }
+
+    .bubble-content a {
+        color: #EC268F;
+        text-decoration: none;
+        font-weight: 700;
+    }
+
+    .bubble-content a:hover {
+        text-decoration: underline;
+    }
+
+    @media (max-width: 900px) {
+        .founder-content {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .founder-photo-side {
+            padding-top: 0;
+        }
+
+        .founder-text-bubble {
+            width: 100%;
+        }
+
+        .bubble-content p {
+            text-align: left;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .founder-card {
+            padding: 2rem 1.5rem;
+        }
+
+        .founder-photo-wrapper {
+            width: 160px;
+            height: 160px;
+        }
+    }
+
     /* Hero Carousel Styles - 3 Images at Once */
     .hero-carousel {
         position: relative;
