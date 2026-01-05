@@ -584,7 +584,9 @@ nav {
 @media (max-width: 768px) {
     .scroll-indicator {
         bottom: 12px;
-        right: 15px;
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
     }
     .scroll-indicator-text {
         font-size: 0.7rem;
