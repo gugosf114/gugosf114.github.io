@@ -1022,3 +1022,20 @@ if (document.readyState === 'loading') {
 } else {
     initTestimonialCarousel();
 }
+
+// ===========================================
+// SCROLL INDICATOR - Scroll down on each click
+// ===========================================
+(function() {
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    if (!scrollIndicator) return;
+
+    scrollIndicator.addEventListener('click', function(e) {
+        e.preventDefault();
+        // Scroll down by 80% of viewport height each click
+        window.scrollBy({
+            top: window.innerHeight * 0.8,
+            behavior: 'smooth'
+        });
+    });
+})();
