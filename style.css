@@ -179,7 +179,7 @@ header {
     right: 0;
     z-index: 1000;
     background: var(--white);
-    padding: 1rem 2rem;
+    padding: 0.75rem 1.5rem;
     box-shadow: 0 2px 20px rgba(98, 45, 43, 0.1);
     border-bottom: 5px solid var(--border-beige);
 }
@@ -200,13 +200,13 @@ nav {
 }
 
 .logo-icon {
-    height: 78px;
+    height: 60px;
     width: auto;
 }
 
 .logo-text {
     font-family: 'Fredoka One', cursive;
-    font-size: 2.44rem;
+    font-size: 1.9rem;
 }
 
 .logo-text .my {
@@ -220,17 +220,17 @@ nav {
 .logo-text .creations {
     display: block;
     font-family: 'Nunito', sans-serif;
-    font-size: 1.14rem;
-    letter-spacing: 4px;
+    font-size: 0.9rem;
+    letter-spacing: 3px;
     color: var(--pink);
     text-transform: uppercase;
-    margin-top: -5px;
+    margin-top: -3px;
     font-weight: 800;
 }
 
 .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 1.25rem;
     list-style: none;
     align-items: center;
 }
@@ -239,7 +239,7 @@ nav {
     text-decoration: none;
     color: var(--dark-brown);
     font-weight: 700;
-    font-size: 1.25rem;
+    font-size: 1rem;
     transition: color 0.3s ease;
     position: relative;
     padding-bottom: 4px;
@@ -271,10 +271,11 @@ nav {
 .nav-cta {
     background: var(--yellow);
     color: var(--dark-brown) !important;
-    padding: 0.7rem 1.5rem;
+    padding: 0.5rem 1rem;
     border-radius: 30px;
     font-weight: 800;
-    font-size: 1.25rem;
+    font-size: 0.95rem;
+    white-space: nowrap;
 }
 
 .nav-cta::after {
@@ -2883,7 +2884,7 @@ footer {
    =========================================== */
 .search-container {
     position: relative;
-    margin-left: 1rem;
+    margin-left: 0.75rem;
     overflow: visible;
     flex-shrink: 0;
     display: flex;
@@ -2938,12 +2939,12 @@ header nav .search-container svg {
 }
 
 .search-input {
-    width: 200px;
-    padding: 0.5rem 1rem 0.5rem 2.5rem;
+    width: 160px;
+    padding: 0.4rem 0.75rem 0.4rem 2.25rem;
     border: 2px solid var(--border-beige);
     border-radius: 25px;
     font-family: 'Nunito', sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
     color: var(--dark-brown);
     background: var(--white);
@@ -2956,7 +2957,7 @@ header nav .search-container svg {
 .search-input:focus {
     border-color: var(--pink);
     box-shadow: 0 0 0 3px rgba(236, 38, 143, 0.1);
-    width: 250px;
+    width: 200px;
 }
 
 .search-input::placeholder {
@@ -2972,12 +2973,12 @@ header nav .search-container svg {
 .typewriter-placeholder,
 #search-typewriter {
     position: absolute !important;
-    left: 2.5rem !important;
+    left: 2.25rem !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
     color: var(--brown) !important;
     opacity: 0.7 !important;
-    font-size: 0.9rem !important;
+    font-size: 0.85rem !important;
     font-weight: 600 !important;
     font-family: 'Nunito', sans-serif !important;
     pointer-events: none !important;
@@ -3152,7 +3153,7 @@ header nav .search-container svg {
     /* Mobile: typewriter placeholder */
     .search-container.mobile-search .typewriter-placeholder,
     .search-container.mobile-search #search-typewriter {
-        left: 2.5rem !important;
-        font-size: 0.9rem !important;
+        left: 2.25rem !important;
+        font-size: 0.85rem !important;
     }
 }
