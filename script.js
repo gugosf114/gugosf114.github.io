@@ -9,6 +9,42 @@ if (mobileMenuBtn) {
     });
 }
 
+// Close mobile menu when clicking a link (for navigation)
+if (navLinks) {
+    navLinks.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        // Close menu when clicking a navigation link (not dropdown parent)
+        if (link && !link.closest('.dropdown') || (link && link.getAttribute('href') !== 'gallery.html')) {
+            if (window.innerWidth <= 968 && navLinks.classList.contains('active')) {
+                // Only close if it's not the gallery dropdown toggle
+                if (!link.closest('.dropdown') || link.closest('.dropdown-menu')) {
+                    navLinks.classList.remove('active');
+                    if (mobileMenuBtn) {
+                        mobileMenuBtn.textContent = '☰';
+                    }
+                }
+            }
+        }
+    });
+}
+
+// Mobile dropdown toggle - make gallery dropdown expandable on mobile
+document.querySelectorAll('.dropdown > a').forEach(dropdownToggle => {
+    dropdownToggle.addEventListener('click', (e) => {
+        if (window.innerWidth <= 968) {
+            // On mobile, first click expands dropdown, don't navigate
+            const dropdown = dropdownToggle.closest('.dropdown');
+            const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+
+            if (dropdownMenu && !dropdown.classList.contains('expanded')) {
+                e.preventDefault();
+                dropdown.classList.add('expanded');
+            }
+            // If already expanded, allow navigation to gallery.html
+        }
+    });
+});
+
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -865,7 +901,8 @@ function initTestimonialCarousel() {
 
     if (!track || !prevBtn || !nextBtn || !dotsContainer) return;
 
-    const cards = track.querySelectorAll('.testimonial-card');
+    // Select both linked and non-linked testimonial cards
+    const cards = track.querySelectorAll('.testimonial-card-link, .testimonial-card:not(.testimonial-card-link .testimonial-card)');
     if (cards.length === 0) return;
 
     let currentIndex = 0;
