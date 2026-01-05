@@ -232,6 +232,26 @@ nav {
     font-weight: 700;
     font-size: 1.25rem;
     transition: color 0.3s ease;
+    position: relative;
+    padding-bottom: 4px;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: var(--yellow);
+    border-radius: 2px;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+    left: 0;
 }
 
 .nav-links a:hover,
@@ -248,9 +268,14 @@ nav {
     font-size: 1.25rem;
 }
 
+.nav-cta::after {
+    display: none;
+}
+
 .nav-cta:hover {
     background: var(--yellow-dark);
     transform: translateY(-2px);
+    color: var(--dark-brown) !important;
 }
 
 /* DROPDOWN */
