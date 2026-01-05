@@ -2884,12 +2884,33 @@ footer {
 .search-container {
     position: relative;
     margin-left: 1rem;
+    overflow: visible;
+    flex-shrink: 0;
+}
+
+/* Ensure header nav search icon stays small */
+header nav .search-container svg,
+header .search-wrapper svg,
+header .search-icon {
+    width: 16px !important;
+    height: 16px !important;
+    max-width: 16px !important;
+    max-height: 16px !important;
 }
 
 .search-wrapper {
     position: relative;
     display: flex;
     align-items: center;
+    overflow: hidden;
+}
+
+.search-wrapper svg {
+    width: 16px !important;
+    height: 16px !important;
+    max-width: 16px !important;
+    max-height: 16px !important;
+    flex-shrink: 0;
 }
 
 .search-input {
@@ -2922,10 +2943,15 @@ footer {
     left: 12px;
     top: 50%;
     transform: translateY(-50%);
-    width: 16px;
-    height: 16px;
+    width: 16px !important;
+    height: 16px !important;
+    min-width: 16px !important;
+    max-width: 16px !important;
+    min-height: 16px !important;
+    max-height: 16px !important;
     fill: var(--brown);
     pointer-events: none;
+    overflow: hidden;
 }
 
 /* Typewriter placeholder styles */
