@@ -1039,3 +1039,184 @@ if (document.readyState === 'loading') {
         });
     });
 })();
+
+// ===========================================
+// SITE SEARCH FUNCTIONALITY
+// ===========================================
+(function() {
+    const searchInput = document.getElementById('site-search');
+    const searchResults = document.getElementById('search-results');
+    const typewriterEl = document.getElementById('search-typewriter');
+
+    if (!searchInput || !searchResults) return;
+
+    let searchData = null;
+    let typewriterInterval = null;
+    let currentPlaceholderIndex = 0;
+    let currentCharIndex = 0;
+    let isDeleting = false;
+    let isPaused = false;
+
+    // Load search data
+    fetch('search-data.json')
+        .then(response => response.json())
+        .then(data => {
+            searchData = data;
+            startTypewriterEffect();
+        })
+        .catch(err => console.log('Search data not loaded:', err));
+
+    // Typewriter effect for placeholder
+    function startTypewriterEffect() {
+        if (!searchData || !typewriterEl) return;
+
+        const examples = searchData.placeholderExamples || ['Baby Yoda cake', 'Corporate cookies', 'Wedding cake'];
+
+        function typeChar() {
+            if (searchInput.value !== '' || document.activeElement === searchInput) {
+                // Hide typewriter when user is typing or focused
+                typewriterEl.innerHTML = '';
+                return;
+            }
+
+            const currentText = examples[currentPlaceholderIndex];
+
+            if (isPaused) {
+                return;
+            }
+
+            if (!isDeleting) {
+                // Typing
+                currentCharIndex++;
+                typewriterEl.innerHTML = currentText.substring(0, currentCharIndex) + '<span class="cursor"></span>';
+
+                if (currentCharIndex === currentText.length) {
+                    isPaused = true;
+                    setTimeout(() => {
+                        isPaused = false;
+                        isDeleting = true;
+                    }, 2000); // Pause at end
+                }
+            } else {
+                // Deleting
+                currentCharIndex--;
+                typewriterEl.innerHTML = currentText.substring(0, currentCharIndex) + '<span class="cursor"></span>';
+
+                if (currentCharIndex === 0) {
+                    isDeleting = false;
+                    currentPlaceholderIndex = (currentPlaceholderIndex + 1) % examples.length;
+                }
+            }
+        }
+
+        typewriterInterval = setInterval(typeChar, isDeleting ? 50 : 100);
+    }
+
+    // Search functionality
+    function performSearch(query) {
+        if (!searchData || query.length < 2) {
+            searchResults.classList.remove('active');
+            return;
+        }
+
+        const lowerQuery = query.toLowerCase();
+        const results = [];
+
+        // Search images
+        const imageResults = searchData.images.filter(img =>
+            img.alt.toLowerCase().includes(lowerQuery)
+        ).slice(0, 6);
+
+        // Search blogs
+        const blogResults = searchData.blogs.filter(blog =>
+            blog.title.toLowerCase().includes(lowerQuery) ||
+            blog.description.toLowerCase().includes(lowerQuery) ||
+            (blog.keywords && blog.keywords.toLowerCase().includes(lowerQuery))
+        );
+
+        // Build results HTML
+        let html = '';
+
+        if (imageResults.length > 0) {
+            html += '<div class="search-section-header">Gallery</div>';
+            imageResults.forEach(img => {
+                // Extract a cleaner title from alt text
+                const title = img.alt
+                    .replace(/Custom |San Francisco |Bay Area |bakery/gi, '')
+                    .trim();
+                html += `
+                    <a href="${img.url}" class="search-result-item">
+                        <img src="${img.src}" alt="${img.alt}" class="search-result-image" loading="lazy">
+                        <div class="search-result-info">
+                            <div class="search-result-title">${title}</div>
+                            <div class="search-result-category">${img.category}</div>
+                        </div>
+                    </a>
+                `;
+            });
+        }
+
+        if (blogResults.length > 0) {
+            html += '<div class="search-section-header">Blog Posts</div>';
+            blogResults.forEach(blog => {
+                html += `
+                    <a href="${blog.url}" class="search-result-item">
+                        <div class="search-result-blog-icon">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                        </div>
+                        <div class="search-result-info">
+                            <div class="search-result-title">${blog.title}</div>
+                            <div class="search-result-category">Blog</div>
+                        </div>
+                    </a>
+                `;
+            });
+        }
+
+        if (html === '') {
+            html = '<div class="search-results-empty">No results found for "' + query + '"</div>';
+        }
+
+        searchResults.innerHTML = html;
+        searchResults.classList.add('active');
+    }
+
+    // Event listeners
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.trim();
+
+        // Hide typewriter when typing
+        if (typewriterEl) {
+            typewriterEl.style.display = query ? 'none' : 'block';
+        }
+
+        performSearch(query);
+    });
+
+    searchInput.addEventListener('focus', () => {
+        if (typewriterEl) {
+            typewriterEl.style.display = 'none';
+        }
+        searchInput.classList.remove('typewriter-active');
+    });
+
+    searchInput.addEventListener('blur', () => {
+        // Delay to allow click on results
+        setTimeout(() => {
+            if (searchInput.value === '') {
+                searchInput.classList.add('typewriter-active');
+                if (typewriterEl) {
+                    typewriterEl.style.display = 'block';
+                }
+            }
+            searchResults.classList.remove('active');
+        }, 200);
+    });
+
+    // Close results when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.search-container')) {
+            searchResults.classList.remove('active');
+        }
+    });
+})();
