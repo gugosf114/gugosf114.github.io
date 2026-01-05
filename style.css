@@ -30,6 +30,21 @@ body {
     overflow-x: hidden;
 }
 
+/* BREADCRUMBS */
+.hero-breadcrumb {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+.hero-breadcrumb a {
+    color: var(--pink);
+    text-decoration: none;
+}
+.hero-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
 /* HEADER TOP STRIP - Simple solid brown bar */
 .header-drip {
     position: fixed;
