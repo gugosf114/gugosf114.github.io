@@ -32,15 +32,20 @@ if (navLinks) {
 document.querySelectorAll('.dropdown > a').forEach(dropdownToggle => {
     dropdownToggle.addEventListener('click', (e) => {
         if (window.innerWidth <= 968) {
-            // On mobile, first click expands dropdown, don't navigate
             const dropdown = dropdownToggle.closest('.dropdown');
             const dropdownMenu = dropdown.querySelector('.dropdown-menu');
 
-            if (dropdownMenu && !dropdown.classList.contains('expanded')) {
-                e.preventDefault();
-                dropdown.classList.add('expanded');
+            if (dropdownMenu) {
+                e.preventDefault(); // Always prevent navigation on the toggle
+
+                if (dropdown.classList.contains('expanded')) {
+                    // Second tap - collapse the dropdown
+                    dropdown.classList.remove('expanded');
+                } else {
+                    // First tap - expand the dropdown
+                    dropdown.classList.add('expanded');
+                }
             }
-            // If already expanded, allow navigation to gallery.html
         }
     });
 });
