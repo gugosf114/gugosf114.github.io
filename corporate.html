@@ -197,6 +197,37 @@
             <a href="gallery.html" class="logo-tagline">Don't just take our word for it — we've got the cookies to prove it. 🍪</a>
         </div>
 
+        <!-- NEW FEATURE: Logo Preview Tool -->
+        <div class="section-wrapper section-white reveal" style="margin-bottom: 3rem;">
+            <div class="section-header">
+                <span class="new-feature-badge">NEW FEATURE</span>
+                <h2>Preview Your <span class="highlight">Logo</span> on a Cookie</h2>
+                <p style="font-size: 1.1rem; color: var(--brown); margin-top: 0.5rem;">Upload your company logo and see how it looks on our signature round cookie!</p>
+            </div>
+            <div class="logo-preview-container">
+                <div class="logo-preview-upload-area" id="uploadArea">
+                    <div class="upload-icon">
+                        <svg viewBox="0 0 24 24" width="48" height="48" fill="var(--pink)">
+                            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/>
+                        </svg>
+                    </div>
+                    <p class="upload-text">Click to upload your logo</p>
+                    <p class="upload-hint">PNG, JPG, or SVG (transparent background works best)</p>
+                    <input type="file" id="logoUpload" accept="image/*" style="display: none;">
+                </div>
+                <div class="logo-preview-result" id="previewResult" style="display: none;">
+                    <canvas id="cookieCanvas" width="400" height="400"></canvas>
+                    <div class="preview-actions">
+                        <button class="btn btn-preview-download" id="downloadBtn">Download Preview</button>
+                        <button class="btn btn-preview-reset" id="resetBtn">Try Another Logo</button>
+                    </div>
+                </div>
+            </div>
+            <p style="text-align: center; font-size: 0.95rem; color: var(--brown); margin-top: 1.5rem; font-weight: 600;">
+                Love what you see? <a href="contact.html" class="open-order-form" style="color: var(--pink); text-decoration: underline;">Request a quote</a> and let's make it real!
+            </p>
+        </div>
+
         <!-- Section 1: Corporate Cookies - Two subcategories side by side -->
         <div class="section-wrapper section-beige reveal" style="margin-bottom: 3rem;">
             <div class="section-header">
@@ -420,6 +451,123 @@
         }
     }
 
+    /* NEW FEATURE Badge */
+    .new-feature-badge {
+        display: inline-block;
+        background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+        color: white;
+        font-size: 0.85rem;
+        font-weight: 700;
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        margin-bottom: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        animation: pulse-badge 2s ease-in-out infinite;
+    }
+    @keyframes pulse-badge {
+        0%, 100% { transform: scale(1); box-shadow: 0 2px 10px rgba(255, 107, 139, 0.3); }
+        50% { transform: scale(1.05); box-shadow: 0 4px 20px rgba(255, 107, 139, 0.5); }
+    }
+
+    /* Logo Preview Tool Styles */
+    .logo-preview-container {
+        max-width: 450px;
+        margin: 2rem auto 0;
+    }
+    .logo-preview-upload-area {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 3rem 2rem;
+        border: 3px dashed var(--pink);
+        border-radius: 20px;
+        background: linear-gradient(135deg, #fff9fa 0%, #fff 100%);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .logo-preview-upload-area:hover,
+    .logo-preview-upload-area.dragover {
+        border-color: var(--yellow);
+        background: linear-gradient(135deg, #fffbf0 0%, #fff 100%);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(255, 193, 7, 0.2);
+    }
+    .upload-icon {
+        margin-bottom: 1rem;
+    }
+    .upload-text {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--dark-brown);
+        margin-bottom: 0.5rem;
+    }
+    .upload-hint {
+        font-size: 0.9rem;
+        color: var(--brown);
+    }
+    .logo-preview-result {
+        text-align: center;
+    }
+    #cookieCanvas {
+        max-width: 100%;
+        height: auto;
+        border-radius: 50%;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    }
+    .preview-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 1.5rem;
+        flex-wrap: wrap;
+    }
+    .btn-preview-download {
+        background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+        color: white;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 30px;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .btn-preview-download:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(255, 107, 139, 0.4);
+    }
+    .btn-preview-reset {
+        background: white;
+        color: var(--pink);
+        border: 2px solid var(--pink);
+        padding: 0.8rem 1.5rem;
+        border-radius: 30px;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .btn-preview-reset:hover {
+        background: var(--pink);
+        color: white;
+    }
+    @media (max-width: 500px) {
+        .logo-preview-upload-area {
+            padding: 2rem 1.5rem;
+        }
+        .preview-actions {
+            flex-direction: column;
+            align-items: center;
+        }
+        .btn-preview-download,
+        .btn-preview-reset {
+            width: 100%;
+            max-width: 250px;
+        }
+    }
+
     /* Hero Carousel Styles - 3 Images at Once */
     .hero-carousel { position: relative; overflow: hidden; background: #ffffff; }
     .hero-carousel::before, .hero-carousel::after { display: none; }
@@ -467,6 +615,113 @@
     function resetAutoRotate() { clearInterval(autoRotate); autoRotate = setInterval(nextSlide, 4000); }
     window.addEventListener('resize', () => { isMobile = window.innerWidth <= 768; goToSlide(currentSlide); });
     autoRotate = setInterval(nextSlide, 4000);
+    </script>
+
+    <!-- Logo Preview Tool Script -->
+    <script>
+    (function() {
+        const cookieImageSrc = 'images/gallery/yana/blank Round cookie with white icing.png';
+        const uploadArea = document.getElementById('uploadArea');
+        const logoUpload = document.getElementById('logoUpload');
+        const previewResult = document.getElementById('previewResult');
+        const canvas = document.getElementById('cookieCanvas');
+        const ctx = canvas.getContext('2d');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        let cookieImage = new Image();
+        cookieImage.crossOrigin = 'anonymous';
+        cookieImage.src = cookieImageSrc;
+
+        // Click to upload
+        uploadArea.addEventListener('click', () => logoUpload.click());
+
+        // Drag and drop
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                processLogo(file);
+            }
+        });
+
+        // File input change
+        logoUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) processLogo(file);
+        });
+
+        function processLogo(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const logoImg = new Image();
+                logoImg.onload = () => {
+                    renderPreview(logoImg);
+                };
+                logoImg.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function renderPreview(logoImg) {
+            // Set canvas size
+            const size = 400;
+            canvas.width = size;
+            canvas.height = size;
+
+            // Draw cookie base
+            ctx.drawImage(cookieImage, 0, 0, size, size);
+
+            // Calculate logo size and position (centered, with padding)
+            const padding = size * 0.2; // 20% padding from edges
+            const maxLogoSize = size - (padding * 2);
+
+            let logoWidth, logoHeight;
+            const aspectRatio = logoImg.width / logoImg.height;
+
+            if (aspectRatio > 1) {
+                logoWidth = maxLogoSize;
+                logoHeight = maxLogoSize / aspectRatio;
+            } else {
+                logoHeight = maxLogoSize;
+                logoWidth = maxLogoSize * aspectRatio;
+            }
+
+            const logoX = (size - logoWidth) / 2;
+            const logoY = (size - logoHeight) / 2;
+
+            // Draw logo on cookie
+            ctx.drawImage(logoImg, logoX, logoY, logoWidth, logoHeight);
+
+            // Show result, hide upload area
+            uploadArea.style.display = 'none';
+            previewResult.style.display = 'block';
+        }
+
+        // Download button
+        downloadBtn.addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.download = 'my-logo-cookie-preview.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        });
+
+        // Reset button
+        resetBtn.addEventListener('click', () => {
+            previewResult.style.display = 'none';
+            uploadArea.style.display = 'flex';
+            logoUpload.value = '';
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        });
+    })();
     </script>
 
     <script>
