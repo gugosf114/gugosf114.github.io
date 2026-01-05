@@ -2879,38 +2879,62 @@ footer {
 }
 
 /* ===========================================
-   SEARCH BAR STYLES
+   SEARCH BAR STYLES - COMPREHENSIVE FIX
    =========================================== */
 .search-container {
     position: relative;
     margin-left: 1rem;
     overflow: visible;
     flex-shrink: 0;
-}
-
-/* Ensure header nav search icon stays small */
-header nav .search-container svg,
-header .search-wrapper svg,
-header .search-icon {
-    width: 16px !important;
-    height: 16px !important;
-    max-width: 16px !important;
-    max-height: 16px !important;
+    display: flex;
+    align-items: center;
 }
 
 .search-wrapper {
     position: relative;
     display: flex;
     align-items: center;
-    overflow: hidden;
+    overflow: visible;
 }
 
-.search-wrapper svg {
+/* BULLETPROOF: Search icon size constraints */
+.search-icon,
+.search-wrapper .search-icon,
+.search-container .search-icon,
+header .search-icon,
+header nav .search-icon,
+header nav .search-container .search-icon,
+header nav .search-wrapper .search-icon,
+svg.search-icon {
+    position: absolute !important;
+    left: 12px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
     width: 16px !important;
     height: 16px !important;
+    min-width: 16px !important;
     max-width: 16px !important;
+    min-height: 16px !important;
     max-height: 16px !important;
-    flex-shrink: 0;
+    fill: var(--brown) !important;
+    pointer-events: none !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
+    z-index: 2 !important;
+}
+
+/* Also target any SVG inside search wrapper */
+.search-wrapper svg,
+.search-container svg,
+header nav .search-wrapper svg,
+header nav .search-container svg {
+    width: 16px !important;
+    height: 16px !important;
+    min-width: 16px !important;
+    max-width: 16px !important;
+    min-height: 16px !important;
+    max-height: 16px !important;
+    flex-shrink: 0 !important;
 }
 
 .search-input {
@@ -2925,6 +2949,8 @@ header .search-icon {
     background: var(--white);
     transition: all 0.3s ease;
     outline: none;
+    position: relative;
+    z-index: 1;
 }
 
 .search-input:focus {
@@ -2938,49 +2964,38 @@ header .search-icon {
     opacity: 0.7;
 }
 
-.search-icon {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 16px !important;
-    height: 16px !important;
-    min-width: 16px !important;
-    max-width: 16px !important;
-    min-height: 16px !important;
-    max-height: 16px !important;
-    fill: var(--brown);
-    pointer-events: none;
-    overflow: hidden;
-}
-
 /* Typewriter placeholder styles */
 .search-input.typewriter-active::placeholder {
     color: transparent;
 }
 
-.typewriter-placeholder {
-    position: absolute;
-    left: 2.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--brown);
-    opacity: 0.7;
-    font-size: 0.9rem;
-    font-weight: 600;
-    pointer-events: none;
-    white-space: nowrap;
-    overflow: hidden;
+.typewriter-placeholder,
+#search-typewriter {
+    position: absolute !important;
+    left: 2.5rem !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    color: var(--brown) !important;
+    opacity: 0.7 !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    font-family: 'Nunito', sans-serif !important;
+    pointer-events: none !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    z-index: 3 !important;
+    display: block !important;
 }
 
-.typewriter-placeholder .cursor {
-    display: inline-block;
-    width: 2px;
-    height: 1em;
-    background: var(--pink);
-    margin-left: 1px;
-    vertical-align: text-bottom;
-    animation: search-cursor-blink 0.6s step-end infinite;
+.typewriter-placeholder .cursor,
+#search-typewriter .cursor {
+    display: inline-block !important;
+    width: 2px !important;
+    height: 1em !important;
+    background: var(--pink) !important;
+    margin-left: 1px !important;
+    vertical-align: text-bottom !important;
+    animation: search-cursor-blink 0.6s step-end infinite !important;
 }
 
 @keyframes search-cursor-blink {
@@ -3121,5 +3136,23 @@ header .search-icon {
         top: auto;
         width: auto;
         max-height: 60vh;
+    }
+
+    /* Mobile: ensure search icon stays small */
+    .search-container.mobile-search .search-icon,
+    .search-container.mobile-search svg {
+        width: 16px !important;
+        height: 16px !important;
+        min-width: 16px !important;
+        max-width: 16px !important;
+        min-height: 16px !important;
+        max-height: 16px !important;
+    }
+
+    /* Mobile: typewriter placeholder */
+    .search-container.mobile-search .typewriter-placeholder,
+    .search-container.mobile-search #search-typewriter {
+        left: 2.5rem !important;
+        font-size: 0.9rem !important;
     }
 }
