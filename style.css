@@ -1500,7 +1500,7 @@ footer {
     height: 10px;
     border-radius: 50%;
     border: 2px solid white;
-    background: transparent;
+    background: white;
     cursor: pointer;
     transition: all 0.3s ease;
     padding: 0;
