@@ -218,7 +218,7 @@
             <div class="section-header">
                 <span class="new-feature-badge">NEW FEATURE</span>
                 <h2>Preview Your <span class="highlight">Logo</span> on a Cookie</h2>
-                <p style="font-size: 1.1rem; color: var(--brown); margin-top: 0.5rem;">Upload your company logo and see how it looks on our signature round cookie!</p>
+                <p style="font-size: 1.1rem; color: var(--brown); margin-top: 0.5rem;">Upload your company logo and see how it looks on our signature cookies!</p>
             </div>
             <div class="logo-preview-container">
                 <div class="logo-preview-upload-area" id="uploadArea">
@@ -232,9 +232,19 @@
                     <input type="file" id="logoUpload" accept="image/*" style="display: none;">
                 </div>
                 <div class="logo-preview-result" id="previewResult" style="display: none;">
-                    <canvas id="cookieCanvas" width="400" height="400"></canvas>
+                    <div class="cookie-previews-grid">
+                        <div class="cookie-preview-item">
+                            <h4>Round Cookie</h4>
+                            <canvas id="cookieCanvasRound" width="400" height="400"></canvas>
+                        </div>
+                        <div class="cookie-preview-item">
+                            <h4>Square Cookie</h4>
+                            <canvas id="cookieCanvasSquare" width="400" height="400"></canvas>
+                        </div>
+                    </div>
                     <div class="preview-actions">
-                        <button class="btn btn-preview-download" id="downloadBtn">Download Preview</button>
+                        <button class="btn btn-preview-download" id="downloadBtnRound">Download Round</button>
+                        <button class="btn btn-preview-download" id="downloadBtnSquare">Download Square</button>
                         <button class="btn btn-preview-reset" id="resetBtn">Try Another Logo</button>
                     </div>
                 </div>
@@ -488,7 +498,7 @@
 
     /* Logo Preview Tool Styles */
     .logo-preview-container {
-        max-width: 450px;
+        max-width: 800px;
         margin: 2rem auto 0;
     }
     .logo-preview-upload-area {
@@ -502,6 +512,8 @@
         background: linear-gradient(135deg, #fff9fa 0%, #fff 100%);
         cursor: pointer;
         transition: all 0.3s ease;
+        max-width: 450px;
+        margin: 0 auto;
     }
     .logo-preview-upload-area:hover,
     .logo-preview-upload-area.dragover {
@@ -526,10 +538,31 @@
     .logo-preview-result {
         text-align: center;
     }
-    #cookieCanvas {
+    .cookie-previews-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        margin-bottom: 1.5rem;
+    }
+    .cookie-preview-item {
+        text-align: center;
+    }
+    .cookie-preview-item h4 {
+        font-family: 'Fredoka One', cursive;
+        font-size: 1.2rem;
+        color: var(--dark-brown);
+        margin-bottom: 1rem;
+    }
+    #cookieCanvasRound {
         max-width: 100%;
         height: auto;
         border-radius: 50%;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    }
+    #cookieCanvasSquare {
+        max-width: 100%;
+        height: auto;
+        border-radius: 15px;
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
     }
     .preview-actions {
@@ -568,6 +601,15 @@
     .btn-preview-reset:hover {
         background: var(--pink);
         color: white;
+    }
+    @media (max-width: 600px) {
+        .cookie-previews-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        .cookie-preview-item canvas {
+            max-width: 280px;
+        }
     }
     @media (max-width: 500px) {
         .logo-preview-upload-area {
@@ -636,18 +678,33 @@
     <!-- Logo Preview Tool Script -->
     <script>
     (function() {
-        const cookieImageSrc = 'images/gallery/yana/blank Round cookie with white icing.png';
+        const roundCookieImageSrc = 'images/gallery/yana/blank Round cookie with white icing.png';
+        const squareCookieImageSrc = 'images/gallery/yana/blank Square cookie with white icing.png';
+
         const uploadArea = document.getElementById('uploadArea');
         const logoUpload = document.getElementById('logoUpload');
         const previewResult = document.getElementById('previewResult');
-        const canvas = document.getElementById('cookieCanvas');
-        const ctx = canvas.getContext('2d');
-        const downloadBtn = document.getElementById('downloadBtn');
+
+        // Round cookie canvas
+        const canvasRound = document.getElementById('cookieCanvasRound');
+        const ctxRound = canvasRound.getContext('2d');
+
+        // Square cookie canvas
+        const canvasSquare = document.getElementById('cookieCanvasSquare');
+        const ctxSquare = canvasSquare.getContext('2d');
+
+        const downloadBtnRound = document.getElementById('downloadBtnRound');
+        const downloadBtnSquare = document.getElementById('downloadBtnSquare');
         const resetBtn = document.getElementById('resetBtn');
 
-        let cookieImage = new Image();
-        cookieImage.crossOrigin = 'anonymous';
-        cookieImage.src = cookieImageSrc;
+        // Load cookie base images
+        let roundCookieImage = new Image();
+        roundCookieImage.crossOrigin = 'anonymous';
+        roundCookieImage.src = roundCookieImageSrc;
+
+        let squareCookieImage = new Image();
+        squareCookieImage.crossOrigin = 'anonymous';
+        squareCookieImage.src = squareCookieImageSrc;
 
         // Click to upload
         uploadArea.addEventListener('click', () => logoUpload.click());
@@ -688,16 +745,27 @@
         }
 
         function renderPreview(logoImg) {
-            // Set canvas size
             const size = 400;
-            canvas.width = size;
-            canvas.height = size;
 
-            // Draw cookie base
-            ctx.drawImage(cookieImage, 0, 0, size, size);
+            // Render on round cookie
+            canvasRound.width = size;
+            canvasRound.height = size;
+            ctxRound.drawImage(roundCookieImage, 0, 0, size, size);
+            drawLogoOnCanvas(ctxRound, logoImg, size, 0.2);
 
-            // Calculate logo size and position (centered, with padding)
-            const padding = size * 0.2; // 20% padding from edges
+            // Render on square cookie
+            canvasSquare.width = size;
+            canvasSquare.height = size;
+            ctxSquare.drawImage(squareCookieImage, 0, 0, size, size);
+            drawLogoOnCanvas(ctxSquare, logoImg, size, 0.18);
+
+            // Show result, hide upload area
+            uploadArea.style.display = 'none';
+            previewResult.style.display = 'block';
+        }
+
+        function drawLogoOnCanvas(ctx, logoImg, size, paddingPercent) {
+            const padding = size * paddingPercent;
             const maxLogoSize = size - (padding * 2);
 
             let logoWidth, logoHeight;
@@ -714,19 +782,21 @@
             const logoX = (size - logoWidth) / 2;
             const logoY = (size - logoHeight) / 2;
 
-            // Draw logo on cookie
             ctx.drawImage(logoImg, logoX, logoY, logoWidth, logoHeight);
-
-            // Show result, hide upload area
-            uploadArea.style.display = 'none';
-            previewResult.style.display = 'block';
         }
 
-        // Download button
-        downloadBtn.addEventListener('click', () => {
+        // Download buttons
+        downloadBtnRound.addEventListener('click', () => {
             const link = document.createElement('a');
-            link.download = 'my-logo-cookie-preview.png';
-            link.href = canvas.toDataURL('image/png');
+            link.download = 'my-logo-round-cookie-preview.png';
+            link.href = canvasRound.toDataURL('image/png');
+            link.click();
+        });
+
+        downloadBtnSquare.addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.download = 'my-logo-square-cookie-preview.png';
+            link.href = canvasSquare.toDataURL('image/png');
             link.click();
         });
 
@@ -735,7 +805,8 @@
             previewResult.style.display = 'none';
             uploadArea.style.display = 'flex';
             logoUpload.value = '';
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctxRound.clearRect(0, 0, canvasRound.width, canvasRound.height);
+            ctxSquare.clearRect(0, 0, canvasSquare.width, canvasSquare.height);
         });
     })();
     </script>
