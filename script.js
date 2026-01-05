@@ -1,11 +1,27 @@
 // Mobile Menu Toggle
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const navLinks = document.querySelector('.nav-links');
+const searchContainer = document.querySelector('.search-container');
 
 if (mobileMenuBtn) {
     mobileMenuBtn.addEventListener('click', () => {
         navLinks.classList.toggle('active');
         mobileMenuBtn.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+
+        // Move search bar into mobile menu when opened
+        if (searchContainer && window.innerWidth <= 968) {
+            if (navLinks.classList.contains('active')) {
+                searchContainer.classList.add('mobile-search');
+                navLinks.appendChild(searchContainer);
+            } else {
+                searchContainer.classList.remove('mobile-search');
+                // Move back to original position (after nav-links, before mobile-menu-btn)
+                const nav = document.querySelector('nav');
+                if (nav && mobileMenuBtn) {
+                    nav.insertBefore(searchContainer, mobileMenuBtn);
+                }
+            }
+        }
     });
 }
 
