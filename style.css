@@ -508,8 +508,8 @@ nav {
 /* Scroll Down Indicator Arrow */
 .scroll-indicator {
     position: fixed;
-    bottom: 25px;
-    right: 30px;
+    bottom: 15px;
+    right: 50px;
     left: auto;
     transform: none;
     z-index: 999;
@@ -583,8 +583,8 @@ nav {
 
 @media (max-width: 768px) {
     .scroll-indicator {
-        bottom: 20px;
-        right: 20px;
+        bottom: 12px;
+        right: 15px;
     }
     .scroll-indicator-text {
         font-size: 0.7rem;
