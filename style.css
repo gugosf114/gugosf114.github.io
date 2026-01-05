@@ -1603,8 +1603,9 @@ footer {
     }
 
     .hero-subpage {
-        min-height: 450px;
+        min-height: auto;
         padding: 5rem 1rem 2.5rem;
+        margin-top: 70px;
     }
 
     .hero-text-box {
@@ -1617,6 +1618,7 @@ footer {
         font-size: 1.5rem !important;
         line-height: 1.3;
         margin-bottom: 0.5rem;
+        min-height: auto !important;
     }
 
     .hero-carousel .hero-description {
@@ -1657,6 +1659,25 @@ footer {
     .hero-dot {
         width: 7px;
         height: 7px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-subpage {
+        padding: 4.5rem 0.75rem 2rem;
+    }
+
+    .hero-text-box {
+        padding: 1rem 0.75rem;
+        margin: 0 0.25rem;
+    }
+
+    .hero-text-box h1 {
+        font-size: 1.3rem !important;
+    }
+
+    .hero-carousel .hero-description {
+        font-size: 0.85rem !important;
     }
 }
 
@@ -2035,16 +2056,17 @@ footer {
 
     /* 6. SERVICE CARDS - Full width, less padding */
     .service-card {
-        padding: 1.5rem 1.25rem;
-        border-radius: 20px;
+        padding: 1.5rem 1.25rem !important;
+        border-radius: 20px !important;
     }
 
     .service-card h3 {
-        font-size: 1.25rem;
+        font-size: 1.1rem !important;
     }
 
     .service-card p {
-        font-size: 0.95rem;
+        font-size: 0.9rem !important;
+        line-height: 1.5 !important;
     }
 
     .service-card .price {
@@ -2054,8 +2076,72 @@ footer {
 
     /* Service card images on mobile */
     .service-card img {
+        height: 100px !important;
+        max-width: 180px !important;
+        margin-bottom: 0.75rem !important;
+    }
+
+    /* Corporate cookies grid - single column on mobile */
+    .corporate-cookies-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+
+    /* Corporate logos grid mobile */
+    .corporate-logos-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        padding: 0.75rem !important;
+        gap: 0 !important;
+        border-radius: 15px !important;
+    }
+
+    .corporate-logos-grid img {
+        height: 50px !important;
+        padding: 0.5rem !important;
+    }
+
+    /* Logo tagline mobile */
+    .logo-tagline {
+        font-size: 1rem !important;
+        padding: 0.5rem 1rem !important;
+    }
+
+    /* Corporate tile links - override inline styles */
+    .corporate-tile-link .service-card p,
+    .section-wrapper .service-card p {
+        font-size: 0.9rem !important;
+        line-height: 1.5 !important;
+    }
+
+    .corporate-tile-link span,
+    .service-card span {
+        font-size: 0.9rem !important;
+        margin-top: 0.75rem !important;
+    }
+
+    /* Section header h2 smaller on mobile */
+    .section-header h2 {
+        font-size: 1.4rem !important;
+        line-height: 1.3 !important;
+    }
+
+    /* Gallery category tiles - scale down images */
+    .tile-grid-2 .service-card img,
+    .tile-grid-3 .service-card img,
+    .tile-grid-4 .service-card img {
         height: 120px !important;
         margin-bottom: 0.75rem !important;
+    }
+
+    /* Hero subtitle mobile */
+    .hero-subtitle {
+        font-size: 0.9rem !important;
+        line-height: 1.4 !important;
+    }
+
+    /* Override any inline font-size on paragraphs */
+    .page-content p[style*="font-size"] {
+        font-size: 0.95rem !important;
     }
 
     /* 7. BUTTONS - Touch-friendly sizing */
