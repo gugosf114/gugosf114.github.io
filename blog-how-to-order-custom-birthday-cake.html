@@ -248,19 +248,27 @@
 
                     <h2>Frequently Asked Questions</h2>
 
-                    <div class="faq-item">
-                        <h3>How far in advance should I order a custom birthday cake?</h3>
-                        <p>We prefer orders as far in advance as possible. Ideally, 1 to 2 weeks advance notice works best. Quicker turnaround times depend on specific availability, but we try to accommodate every order.</p>
-                    </div>
+                    <div class="faq-accordion">
+                        <div class="faq-item">
+                            <button class="faq-question">How far in advance should I order a custom birthday cake?</button>
+                            <div class="faq-answer">
+                                <p>We prefer orders as far in advance as possible. Ideally, 1 to 2 weeks advance notice works best. Quicker turnaround times depend on specific availability, but we try to accommodate every order.</p>
+                            </div>
+                        </div>
 
-                    <div class="faq-item">
-                        <h3>Can you recreate a cake design I found online?</h3>
-                        <p>Yes! Bring us reference photos and I'll work with you to recreate or customize the design. I always make several sketches so you have options to choose from.</p>
-                    </div>
+                        <div class="faq-item">
+                            <button class="faq-question">Can you recreate a cake design I found online?</button>
+                            <div class="faq-answer">
+                                <p>Yes! Bring us reference photos and I'll work with you to recreate or customize the design. I always make several sketches so you have options to choose from.</p>
+                            </div>
+                        </div>
 
-                    <div class="faq-item">
-                        <h3>Are your cakes very sweet?</h3>
-                        <p>My cakes are not excessively sweet. I try to stay away from super sweet cakes unless specifically asked for by the client.</p>
+                        <div class="faq-item">
+                            <button class="faq-question">Are your cakes very sweet?</button>
+                            <div class="faq-answer">
+                                <p>My cakes are not excessively sweet. I try to stay away from super sweet cakes unless specifically asked for by the client.</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="blog-cta">
@@ -385,6 +393,13 @@
         color: var(--pink);
         text-decoration: underline;
     }
+    .blog-content .btn {
+        color: var(--white);
+        text-decoration: none;
+    }
+    .blog-content .btn-secondary {
+        color: var(--pink);
+    }
     .blog-content h4 {
         color: var(--dark-brown);
         margin-top: 1rem;
@@ -425,18 +440,58 @@
     .blog-cta .btn {
         margin: 0.5rem;
     }
+    /* FAQ Accordion */
+    .faq-accordion {
+        margin-bottom: 2rem;
+    }
     .faq-item {
         background: var(--beige);
-        padding: 1.5rem;
         border-radius: 15px;
-        margin-bottom: 1rem;
+        margin-bottom: 0.75rem;
+        overflow: hidden;
     }
-    .faq-item h3 {
-        margin-top: 0;
+    .faq-question {
+        width: 100%;
+        background: none;
+        border: none;
+        padding: 1.25rem 1.5rem;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: 'Nunito', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
         color: var(--dark-brown);
+        transition: background 0.2s ease;
     }
-    .faq-item p {
-        margin-bottom: 0;
+    .faq-question:hover {
+        background: rgba(0,0,0,0.03);
+    }
+    .faq-question::after {
+        content: '+';
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: var(--pink);
+        transition: transform 0.3s ease;
+    }
+    .faq-item.active .faq-question::after {
+        content: '-';
+    }
+    .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+    .faq-item.active .faq-answer {
+        max-height: 300px;
+    }
+    .faq-answer p {
+        padding: 0 1.5rem 1.25rem;
+        margin: 0;
+        color: var(--text-gray);
+        line-height: 1.7;
     }
     .hero-breadcrumb {
         font-size: 0.9rem;
@@ -521,6 +576,14 @@
             script.src = 'script.js';
             document.body.appendChild(script);
         });
+
+    // FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(button => {
+        button.addEventListener('click', () => {
+            const item = button.parentElement;
+            item.classList.toggle('active');
+        });
+    });
     </script>
 </body>
 </html>
