@@ -1703,11 +1703,11 @@ footer {
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 12px;
+    gap: 8px;
     z-index: 4;
     background: #FFC107;
-    padding: 12px 20px;
-    border-radius: 24px;
+    padding: 10px 16px;
+    border-radius: 20px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
@@ -1793,16 +1793,14 @@ footer {
 
     .hero-dots {
         bottom: 10px;
-        gap: 8px;
-        padding: 8px 14px;
-        border-radius: 18px;
+        gap: 5px;
+        padding: 6px 10px;
+        border-radius: 14px;
     }
 
     .hero-dot {
-        width: 20px;
-        height: 20px;
-        min-width: 20px;
-        min-height: 20px;
+        width: 7px;
+        height: 7px;
     }
 }
 
