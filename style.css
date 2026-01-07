@@ -233,7 +233,8 @@ nav {
 
 .logo-icon {
     height: 60px;
-    width: auto;
+    width: auto !important;
+    object-fit: contain;
 }
 
 .logo-text {
@@ -1477,8 +1478,9 @@ footer {
     
     .logo-icon {
         height: 50px;
+        width: auto !important;
     }
-    
+
     .logo-text {
         font-size: 1.63rem;
     }
