@@ -132,6 +132,7 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- display=swap ensures text is visible immediately with fallback font -->
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
     <!-- Preload CSS to reduce render-blocking time -->
@@ -1025,16 +1026,24 @@
     </script>
 
     <script>
-    // Load order form modal HTML first
-    fetch('order-form-modal.html')
-        .then(r => r.text())
-        .then(h => {
-            document.body.insertAdjacentHTML('beforeend', h);
-            // Then load the script.js which has the event listeners
-            const script = document.createElement('script');
-            script.src = 'script.js';
-            document.body.appendChild(script);
-        });
+    // Defer loading order form modal until after page is interactive
+    // This removes it from the critical request chain
+    function loadOrderModal() {
+        fetch('order-form-modal.html')
+            .then(r => r.text())
+            .then(h => {
+                document.body.insertAdjacentHTML('beforeend', h);
+                const script = document.createElement('script');
+                script.src = 'script.js';
+                document.body.appendChild(script);
+            });
+    }
+    // Load after page is fully loaded, or on first user interaction
+    if (document.readyState === 'complete') {
+        setTimeout(loadOrderModal, 100);
+    } else {
+        window.addEventListener('load', () => setTimeout(loadOrderModal, 100));
+    }
     </script>
 </body>
 </html>

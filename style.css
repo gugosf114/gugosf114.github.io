@@ -12,6 +12,25 @@
     --section-border: #622D2B;
 }
 
+/* Fallback fonts with adjusted metrics to reduce CLS during font swap */
+@font-face {
+    font-family: 'Nunito Fallback';
+    src: local('Arial');
+    size-adjust: 100%;
+    ascent-override: 100%;
+    descent-override: 20%;
+    line-gap-override: 0%;
+}
+
+@font-face {
+    font-family: 'Fredoka Fallback';
+    src: local('Arial Black'), local('Arial Bold');
+    size-adjust: 95%;
+    ascent-override: 105%;
+    descent-override: 25%;
+    line-gap-override: 0%;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -36,7 +55,7 @@ html {
 }
 
 body {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Nunito', 'Nunito Fallback', sans-serif;
     background-color: #FFFFFF;
     color: var(--dark-brown);
     line-height: 1.7;
@@ -218,7 +237,7 @@ nav {
 }
 
 .logo-text {
-    font-family: 'Fredoka One', cursive;
+    font-family: 'Fredoka One', 'Fredoka Fallback', cursive;
     font-size: 1.9rem;
 }
 
@@ -453,7 +472,7 @@ nav {
 }
 
 .hero h1 {
-    font-family: 'Fredoka One', cursive;
+    font-family: 'Fredoka One', 'Fredoka Fallback', cursive;
     font-size: clamp(2rem, 5vw, 3.5rem);
     color: var(--dark-brown);
     margin-bottom: 1rem;
@@ -734,7 +753,7 @@ nav {
 }
 
 .section-header h2 {
-    font-family: 'Fredoka One', cursive;
+    font-family: 'Fredoka One', 'Fredoka Fallback', cursive;
     font-size: clamp(2rem, 4vw, 3rem);
     color: var(--dark-brown);
     margin-bottom: 1rem;
@@ -827,7 +846,7 @@ nav {
 }
 
 .service-card h3 {
-    font-family: 'Fredoka One', cursive;
+    font-family: 'Fredoka One', 'Fredoka Fallback', cursive;
     font-size: 1.5rem;
     color: var(--dark-brown);
     margin-bottom: 1rem;
@@ -913,7 +932,7 @@ a.service-card h3 {
 }
 
 .gallery-item-overlay h3 {
-    font-family: 'Fredoka One', cursive;
+    font-family: 'Fredoka One', 'Fredoka Fallback', cursive;
     font-size: 1.2rem;
     margin-bottom: 0.3rem;
 }
@@ -949,7 +968,7 @@ footer {
 }
 
 .footer-logo {
-    font-family: 'Fredoka One', cursive;
+    font-family: 'Fredoka One', 'Fredoka Fallback', cursive;
     font-size: 1.8rem;
     margin-bottom: 0.5rem;
 }
@@ -1130,7 +1149,7 @@ footer {
 }
 
 .modal-header h2 {
-    font-family: 'Fredoka One', cursive;
+    font-family: 'Fredoka One', 'Fredoka Fallback', cursive;
     font-size: 2rem;
     margin: 0 0 10px;
 }
@@ -1979,7 +1998,7 @@ footer {
 }
 
 .gallery-cta h3 {
-    font-family: 'Fredoka One', cursive;
+    font-family: 'Fredoka One', 'Fredoka Fallback', cursive;
     font-size: 2rem;
     color: var(--dark-brown);
     margin-bottom: 1rem;
@@ -2568,7 +2587,7 @@ footer {
 }
 
 .testimonial-name {
-    font-family: 'Fredoka One', cursive;
+    font-family: 'Fredoka One', 'Fredoka Fallback', cursive;
     font-size: 1rem;
     color: var(--dark-brown);
     margin: 0;
