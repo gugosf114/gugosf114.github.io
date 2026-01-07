@@ -57,68 +57,68 @@
             "reviewCount": "150",
             "bestRating": "5"
         },
-        "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "Custom Baked Goods",
-            "itemListElement": [
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Product",
-                        "name": "Custom Cakes",
-                        "description": "Sculpted, tiered, and ultra-realistic cake designs",
-                        "offers": {
-                            "@type": "AggregateOffer",
-                            "priceCurrency": "USD",
-                            "lowPrice": "250",
-                            "highPrice": "650"
-                        }
-                    }
+        "makesOffer": [
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Product",
+                    "name": "Custom Cakes",
+                    "description": "Sculpted, tiered, and ultra-realistic cake designs"
                 },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Product",
-                        "name": "Custom Cookies",
-                        "description": "Logo cookies and decorated sugar cookies",
-                        "offers": {
-                            "@type": "AggregateOffer",
-                            "priceCurrency": "USD",
-                            "lowPrice": "5",
-                            "highPrice": "8"
-                        }
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Product",
-                        "name": "Cake Pops",
-                        "description": "Hand-decorated cake pops in any theme",
-                        "offers": {
-                            "@type": "AggregateOffer",
-                            "priceCurrency": "USD",
-                            "lowPrice": "5",
-                            "highPrice": "10"
-                        }
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Product",
-                        "name": "Cupcakes",
-                        "description": "Elegantly decorated cupcakes for celebrations and events",
-                        "offers": {
-                            "@type": "AggregateOffer",
-                            "priceCurrency": "USD",
-                            "lowPrice": "5",
-                            "highPrice": "8"
-                        }
-                    }
+                "priceCurrency": "USD",
+                "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": "250",
+                    "maxPrice": "650",
+                    "priceCurrency": "USD"
                 }
-            ]
-        },
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Product",
+                    "name": "Custom Cookies",
+                    "description": "Logo cookies and decorated sugar cookies"
+                },
+                "priceCurrency": "USD",
+                "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": "5",
+                    "maxPrice": "8",
+                    "priceCurrency": "USD"
+                }
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Product",
+                    "name": "Cake Pops",
+                    "description": "Hand-decorated cake pops in any theme"
+                },
+                "priceCurrency": "USD",
+                "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": "5",
+                    "maxPrice": "10",
+                    "priceCurrency": "USD"
+                }
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Product",
+                    "name": "Cupcakes",
+                    "description": "Elegantly decorated cupcakes for celebrations and events"
+                },
+                "priceCurrency": "USD",
+                "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": "5",
+                    "maxPrice": "8",
+                    "priceCurrency": "USD"
+                }
+            }
+        ],
         "sameAs": [
             "https://www.instagram.com/mybakingcreationscompany/",
             "https://www.facebook.com/MyBakingCreationsCompany",
