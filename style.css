@@ -247,7 +247,7 @@ nav {
 }
 
 .logo-text .baking {
-    color: #D4A520; /* Golden yellow - brand color */
+    color: var(--yellow); /* Brand yellow #FFC532 */
 }
 
 .logo-text .creations {
