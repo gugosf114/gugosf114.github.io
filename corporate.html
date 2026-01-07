@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Content Security Policy - XSS protection -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com; frame-ancestors 'self';">
     <link rel="icon" type="image/png" href="logo_icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Corporate Logo Cookies & Branded Treats | Bay Area Corporate Catering | My Baking Creations</title>
@@ -340,7 +342,7 @@
                 <h2>Why Companies <span class="highlight">Choose Us</span></h2>
             </div>
             <p style="font-size: 1.1rem; color: var(--brown); font-weight: 600; line-height: 1.8; text-align: center; max-width: 800px; margin: 0 auto;">
-                Looking for corporate logo cookies in San Francisco? My Baking Creations is the Bay Area's trusted bakery for employee appreciation gifts, client thank-you packages, product launch celebrations, and company milestone events. Since 2012, we've partnered with Google, Meta, Salesforce, Microsoft, PayPal, and hundreds of Silicon Valley companies to create custom branded treats that make every occasion memorable.
+                Looking for corporate logo cookies in San Francisco? My Baking Creations is the Bay Area's trusted bakery for employee appreciation gifts, client thank-you packages, product launch celebrations, and company milestone events. Since 2012, we've partnered with Google, Meta, Salesforce, Microsoft, PayPal, and hundreds of Silicon Valley companies to create custom branded treats that make every occasion memorable. Learn more about <a href="blog-corporate-event-dessert-ideas.html" style="color: var(--pink);">corporate event dessert ideas</a> that impress clients and employees.
             </p>
         </div>
 
@@ -669,7 +671,9 @@
     const dots = document.querySelectorAll('.hero-dot');
     const totalSlides = 9;
     let autoRotate;
-    let isMobile = window.innerWidth <= 768;
+    // Use matchMedia instead of innerWidth to avoid forced reflow
+    const mobileQuery = window.matchMedia('(max-width: 768px)');
+    let isMobile = mobileQuery.matches;
     function getSlideWidth() { return isMobile ? 100 : 33.333; }
     function goToSlide(index) {
         dots[currentSlide].classList.remove('active');
@@ -682,7 +686,8 @@
     }
     function nextSlide() { goToSlide(currentSlide + 1); }
     function resetAutoRotate() { clearInterval(autoRotate); autoRotate = setInterval(nextSlide, 4000); }
-    window.addEventListener('resize', () => { isMobile = window.innerWidth <= 768; goToSlide(currentSlide); });
+    // Handle resize using matchMedia (avoids forced reflow)
+    mobileQuery.addEventListener('change', (e) => { isMobile = e.matches; goToSlide(currentSlide); });
     autoRotate = setInterval(nextSlide, 4000);
     </script>
 

@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Content Security Policy - XSS protection -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com; frame-ancestors 'self';">
     <link rel="icon" type="image/png" href="logo_icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Custom Cake & Cookie Gallery | Bay Area Bakery Portfolio | My Baking Creations</title>
@@ -50,7 +52,7 @@
         "url": "https://mybakingcreations.com",
         "telephone": "(415) 568-8060",
         "email": "info@mybakingcreations.com",
-        "priceRange": "$",
+        "priceRange": "$$",
         "servesCuisine": "Bakery",
         "areaServed": "San Francisco Bay Area",
         "sameAs": [
@@ -298,7 +300,9 @@
     const dots = document.querySelectorAll('.hero-dot');
     const totalSlides = 9;
     let autoRotate;
-    let isMobile = window.innerWidth <= 768;
+    // Use matchMedia instead of innerWidth to avoid forced reflow
+    const mobileQuery = window.matchMedia('(max-width: 768px)');
+    let isMobile = mobileQuery.matches;
     function getSlideWidth() { return isMobile ? 100 : 33.333; }
     function goToSlide(index) {
         dots[currentSlide].classList.remove('active');
@@ -311,7 +315,8 @@
     }
     function nextSlide() { goToSlide(currentSlide + 1); }
     function resetAutoRotate() { clearInterval(autoRotate); autoRotate = setInterval(nextSlide, 4000); }
-    window.addEventListener('resize', () => { isMobile = window.innerWidth <= 768; goToSlide(currentSlide); });
+    // Handle resize using matchMedia (avoids forced reflow)
+    mobileQuery.addEventListener('change', (e) => { isMobile = e.matches; goToSlide(currentSlide); });
     autoRotate = setInterval(nextSlide, 4000);
     </script>
 
