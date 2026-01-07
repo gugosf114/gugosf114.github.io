@@ -1714,18 +1714,15 @@ footer {
 }
 
 .hero-dot {
-    width: 24px;
-    height: 24px;
-    min-width: 24px;
-    min-height: 24px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     border: 2px solid white;
-    background: white;
+    background: transparent;
     cursor: pointer;
-    /* Only animate compositable properties (transform, opacity) to avoid jank */
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: all 0.3s ease;
     padding: 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 .hero-dot:hover {
@@ -1801,8 +1798,8 @@ footer {
     }
 
     .hero-dot {
-        width: 7px;
-        height: 7px;
+        width: 8px;
+        height: 8px;
     }
 }
 
