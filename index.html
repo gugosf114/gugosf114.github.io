@@ -134,6 +134,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
+    <!-- Preload CSS to reduce render-blocking time -->
+    <link rel="preload" href="style.css" as="style">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -891,7 +893,8 @@
         border: 2px solid white;
         background: white;
         cursor: pointer;
-        transition: all 0.3s ease;
+        /* Only animate compositable properties (transform, opacity) to avoid jank */
+        transition: transform 0.3s ease, opacity 0.3s ease;
         padding: 0;
         box-shadow: 0 2px 4px rgba(0,0,0,0.15);
     }
@@ -983,7 +986,9 @@
     const dots = document.querySelectorAll('.hero-dot');
     const totalSlides = 9;
     let autoRotate;
-    let isMobile = window.innerWidth <= 768;
+    // Use matchMedia instead of innerWidth to avoid forced reflow
+    const mobileQuery = window.matchMedia('(max-width: 768px)');
+    let isMobile = mobileQuery.matches;
 
     function getSlideWidth() {
         return isMobile ? 100 : 33.333;
@@ -1009,9 +1014,9 @@
         autoRotate = setInterval(nextSlide, 4000);
     }
 
-    // Handle resize
-    window.addEventListener('resize', () => {
-        isMobile = window.innerWidth <= 768;
+    // Handle resize using matchMedia (avoids forced reflow)
+    mobileQuery.addEventListener('change', (e) => {
+        isMobile = e.matches;
         goToSlide(currentSlide);
     });
 

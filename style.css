@@ -1701,7 +1701,8 @@ footer {
     border: 2px solid white;
     background: white;
     cursor: pointer;
-    transition: all 0.3s ease;
+    /* Only animate compositable properties (transform, opacity) to avoid jank */
+    transition: transform 0.3s ease, opacity 0.3s ease;
     padding: 0;
     box-shadow: 0 2px 4px rgba(0,0,0,0.15);
 }
@@ -2351,13 +2352,12 @@ footer {
    =========================================== */
 .reveal {
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    /* Use opacity-only animation to prevent layout shifts (CLS) */
+    transition: opacity 0.6s ease-out;
 }
 
 .reveal.visible {
     opacity: 1;
-    transform: translateY(0);
 }
 
 /* Staggered delays for items in a row */
@@ -2371,13 +2371,11 @@ footer {
 @media (prefers-reduced-motion: reduce) {
     .reveal {
         opacity: 1;
-        transform: none;
         transition: none;
     }
 
     .reveal.visible {
         opacity: 1;
-        transform: none;
     }
 }
 
