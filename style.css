@@ -246,7 +246,7 @@ nav {
 }
 
 .logo-text .baking {
-    color: #D4A520; /* Darker yellow for better contrast */
+    color: #996B00; /* Darker golden for 4.5:1 contrast on white */
 }
 
 .logo-text .creations {
@@ -254,7 +254,7 @@ nav {
     font-family: 'Nunito', sans-serif;
     font-size: 0.9rem;
     letter-spacing: 3px;
-    color: #E05A7A; /* Darker pink for better contrast */
+    color: #B8305A; /* Darker pink for 4.5:1 contrast on white */
     text-transform: uppercase;
     margin-top: -3px;
     font-weight: 800;
@@ -760,11 +760,11 @@ nav {
 }
 
 .section-header h2 .highlight {
-    color: #D14D6E; /* Darker pink for better contrast on beige sections */
+    color: #A31545; /* Darker pink for 4.5:1 contrast on beige sections */
 }
 
 .section-header p {
-    color: var(--brown);
+    color: #5A3020; /* Darker brown for 4.5:1 contrast on beige */
     font-size: 1.1rem;
     max-width: 600px;
     margin: 0 auto;
@@ -854,7 +854,7 @@ nav {
 }
 
 .service-card p {
-    color: var(--brown);
+    color: #5A3020; /* Darker brown for 4.5:1 contrast on beige */
     margin-bottom: 1.5rem;
     font-weight: 600;
     text-decoration: none;
@@ -868,7 +868,7 @@ a.service-card {
 }
 
 a.service-card p {
-    color: var(--brown);
+    color: #5A3020; /* Darker brown for 4.5:1 contrast on beige */
     text-decoration: none;
 }
 
@@ -889,7 +889,7 @@ a.service-card h3 {
     padding: 0.6rem 1.2rem;
     border-radius: 20px;
     font-weight: 800;
-    color: #D14D6E; /* Darker pink for better contrast on beige */
+    color: #A31545; /* Darker pink for 4.5:1 contrast on white background */
     margin-top: auto;
     margin-bottom: 1.5rem;
     border: 2px solid var(--border-beige);
