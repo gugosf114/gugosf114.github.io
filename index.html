@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Baking Creations | Custom Cakes & Cookies | Bay Area</title>
     <meta name="description" content="Family-owned Bay Area bakery since 2012. Custom cakes, cookies, and cake pops for birthdays, weddings, corporate events. Trusted by Google, Meta, Salesforce.">
+    <!-- Security Headers -->
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <link rel="canonical" href="https://mybakingcreations.com/">
     <!-- Open Graph -->
     <meta property="og:title" content="My Baking Creations | Custom Cakes, Cookies & Cake Pops | Bay Area">
@@ -129,7 +133,8 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -147,7 +152,7 @@
             <svg viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.372-12 12 0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146 1.124.347 2.317.535 3.554.535 6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/></svg>
         </a>
         <a href="https://www.yelp.com/biz/my-baking-creations-san-francisco" target="_blank" rel="noopener" class="social-yelp" aria-label="Yelp">
-            <img src="images/gallery/companylogos/yelp white black png.webp" alt="Yelp">
+            <img src="images/gallery/companylogos/yelp white black png.webp" alt="Yelp" width="20" height="20">
         </a>
     </div>
 
@@ -155,7 +160,7 @@
     <header>
         <nav>
             <a href="index.html" class="logo">
-                <img src="logo_icon.png" alt="My Baking Creations logo" class="logo-icon">
+                <img src="logo_icon.png" alt="My Baking Creations logo" class="logo-icon" width="60" height="55">
                 <div class="logo-text">
                     <span class="my">my</span><span class="baking">baking</span>
                     <span class="creations">CREATIONS</span>
@@ -197,25 +202,26 @@
     </header>
 
     <!-- HERO -->
+    <main>
     <section class="hero hero-carousel hero-home">
         <!-- 3-Image Carousel Track -->
         <div class="carousel-track-container">
             <div class="carousel-track">
-                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 1.jpg" alt="Custom sculpted birthday cake with fondant decorations"></div>
-                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 2.jpg" alt="Decorated sugar cookies with royal icing designs"></div>
-                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 3.jpg" alt="Elegant tiered wedding cake with floral accents"></div>
-                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 4.jpg" alt="Custom themed cake pops for special events"></div>
-                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 5.jpg" alt="Corporate logo cookies for business events"></div>
-                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 10.jpg" alt="Realistic sculpted cake design by My Baking Creations"></div>
-                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 7.jpg" alt="Hand-piped decorated cookies for celebrations"></div>
-                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 8.jpg" alt="Custom cupcakes with elegant frosting designs"></div>
-                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 9.jpg" alt="Artisan baked goods from Bay Area bakery"></div>
-                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 6.jpg" alt="Custom celebration cake by My Baking Creations"></div>
+                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 1.jpg" alt="Custom sculpted birthday cake with fondant decorations" width="707" height="393" fetchpriority="high"></div>
+                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 2.jpg" alt="Decorated sugar cookies with royal icing designs" width="707" height="429" fetchpriority="high"></div>
+                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 3.jpg" alt="Elegant tiered wedding cake with floral accents" width="707" height="391" fetchpriority="high"></div>
+                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 4.jpg" alt="Custom themed cake pops for special events" width="707" height="321" loading="lazy"></div>
+                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 5.jpg" alt="Corporate logo cookies for business events" width="707" height="388" loading="lazy"></div>
+                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 10.jpg" alt="Realistic sculpted cake design by My Baking Creations" width="707" height="365" loading="lazy"></div>
+                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 7.jpg" alt="Hand-piped decorated cookies for celebrations" width="707" height="509" loading="lazy"></div>
+                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 8.jpg" alt="Custom cupcakes with elegant frosting designs" width="707" height="292" loading="lazy"></div>
+                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 9.jpg" alt="Artisan baked goods from Bay Area bakery" width="707" height="437" loading="lazy"></div>
+                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 6.jpg" alt="Custom celebration cake by My Baking Creations" width="707" height="342" loading="lazy"></div>
             </div>
         </div>
         <div class="hero-content">
             <div class="hero-text-box">
-                <img src="logo_icon.png" alt="My Baking Creations cake logo" class="hero-logo">
+                <img src="logo_icon.png" alt="My Baking Creations cake logo" class="hero-logo" width="120" height="110">
                 <div class="hero-badge">Family-Owned Since 2012</div>
                 <h1 class="typewriter-headline"><span class="highlight">Custom Cakes, Cookies</span> <span class="highlight-yellow">&</span> <span class="highlight">Cake Pops</span></h1>
                                 <p class="hero-description">Family-owned Bay Area bakery crafting custom cakes, logo cookies, and cake pops for birthdays, weddings, corporate gifts, and employee appreciation. Trusted by Google, Meta, Salesforce, and Fortune 500 companies since 2012.</p>
@@ -256,28 +262,28 @@
             </div>
             <div class="tile-grid-4">
                 <a href="gallery-cakes.html" class="service-card reveal reveal-delay-1">
-                    <img src="images/gallery/categoryplaceholder/cakes.png" alt="Custom cakes by My Baking Creations" style="width: 100%; height: 150px; object-fit: contain; background-color: #FFF8F0; border-radius: 15px; margin-bottom: 1rem;">
+                    <img src="images/gallery/categoryplaceholder/cakes.png" alt="Custom cakes by My Baking Creations" width="280" height="150" loading="lazy" style="width: 100%; height: 150px; object-fit: contain; background-color: #FFF8F0; border-radius: 15px; margin-bottom: 1rem;">
                     <h3>Cakes</h3>
                     <p>Custom birthday cakes, milestone celebration cakes, wedding cakes, and anniversary cakes. Sculpted 3D designs and ultra-realistic creations that become the centerpiece of your event.</p>
                     <span class="price">$250 – $650+</span>
                     <span class="btn btn-secondary">View Cakes</span>
                 </a>
                 <a href="gallery-cookies.html" class="service-card reveal reveal-delay-2">
-                    <img src="images/gallery/categoryplaceholder/cookies.PNG" alt="Custom cookies by My Baking Creations" style="width: 100%; height: 150px; object-fit: contain; background-color: #FFF8F0; border-radius: 15px; margin-bottom: 1rem;">
+                    <img src="images/gallery/categoryplaceholder/cookies.PNG" alt="Custom cookies by My Baking Creations" width="280" height="150" loading="lazy" style="width: 100%; height: 150px; object-fit: contain; background-color: #FFF8F0; border-radius: 15px; margin-bottom: 1rem;">
                     <h3>Cookies</h3>
                     <p>Corporate logo cookies for client gifts and employee appreciation. Hand-piped royal icing cookies for baby showers, birthdays, and holiday gifting. Individually wrapped for freshness.</p>
                     <span class="price">$5 – $8</span>
                     <span class="btn btn-secondary">View Cookies</span>
                 </a>
                 <a href="gallery-cakepops.html" class="service-card reveal reveal-delay-3">
-                    <img src="images/gallery/categoryplaceholder/cakepops.jpg" alt="Custom cake pops by My Baking Creations" style="width: 100%; height: 150px; object-fit: contain; background-color: #FFFFFF; border-radius: 15px; margin-bottom: 1rem;">
+                    <img src="images/gallery/categoryplaceholder/cakepops.jpg" alt="Custom cake pops by My Baking Creations" width="280" height="150" loading="lazy" style="width: 100%; height: 150px; object-fit: contain; background-color: #FFFFFF; border-radius: 15px; margin-bottom: 1rem;">
                     <h3>Cake Pops</h3>
                     <p>Branded cake pops for corporate events, trade shows, product launches, and conference giveaways. Custom colors to match your brand.</p>
                     <span class="price">$5 – $10</span>
                     <span class="btn btn-secondary">View Cake Pops</span>
                 </a>
                 <a href="gallery-cupcakes.html" class="service-card reveal reveal-delay-4">
-                    <img src="images/gallery/categoryplaceholder/Bumble bee themed cupcakes.png" alt="Custom cupcakes by My Baking Creations" style="width: 100%; height: 150px; object-fit: contain; background-color: #FFF8F0; border-radius: 15px; margin-bottom: 1rem;">
+                    <img src="images/gallery/categoryplaceholder/Bumble bee themed cupcakes.png" alt="Custom cupcakes by My Baking Creations" width="280" height="150" loading="lazy" style="width: 100%; height: 150px; object-fit: contain; background-color: #FFF8F0; border-radius: 15px; margin-bottom: 1rem;">
                     <h3>Cupcakes</h3>
                     <p>Custom cupcakes for office parties, employee recognition programs, team milestones, and birthday celebrations. Easy to serve, no cutting required.</p>
                     <span class="price">$5 – $8</span>
@@ -295,22 +301,22 @@
                 <p>Silicon Valley's trusted bakery for employee appreciation gifts, client thank-you packages, product launches, and company milestone&nbsp;celebrations.</p>
             </div>
             <div class="corporate-logos-grid">
-                <img src="company logos/google-logo.png" alt="Google">
-                <img src="company logos/meta-logo.png" alt="Meta">
-                <img src="images/gallery/companylogos/microsoft logo.jpg" alt="Microsoft">
-                <img src="company logos/salesforce-logo.png" alt="Salesforce">
-                <img src="company logos/docusign-logo.png" alt="DocuSign">
-                <img src="company logos/OpenAI Logo.png" alt="OpenAI">
-                <img src="company logos/instagram-logo.png" alt="Instagram">
-                <img src="company logos/paypal-logo.png" alt="PayPal">
-                <img src="company logos/gap-logo.png" alt="Gap">
-                <img src="company logos/alaska-airlines-logo.png" alt="Alaska Airlines">
-                <img src="company logos/warriors-logo.png" alt="Golden State Warriors">
-                <img src="company logos/twitch-logo.webp" alt="Twitch">
-                <img src="images/gallery/companylogos/cooley logo.png" alt="Cooley">
-                <img src="company logos/Stripe Logo.png" alt="Stripe">
-                <img src="images/gallery/companylogos/Levi's logo.png" alt="Levi's">
-                <img src="company logos/Kaiser Logo.png" alt="Kaiser Permanente">
+                <img src="company logos/google-logo.png" alt="Google" width="176" height="59" loading="lazy">
+                <img src="company logos/meta-logo.png" alt="Meta" width="106" height="59" loading="lazy">
+                <img src="images/gallery/companylogos/microsoft logo.jpg" alt="Microsoft" width="162" height="59" loading="lazy">
+                <img src="company logos/salesforce-logo.png" alt="Salesforce" width="85" height="59" loading="lazy">
+                <img src="company logos/docusign-logo.png" alt="DocuSign" width="250" height="50" loading="lazy">
+                <img src="company logos/OpenAI Logo.png" alt="OpenAI" width="106" height="59" loading="lazy">
+                <img src="company logos/instagram-logo.png" alt="Instagram" width="60" height="60" loading="lazy">
+                <img src="company logos/paypal-logo.png" alt="PayPal" width="60" height="59" loading="lazy">
+                <img src="company logos/gap-logo.png" alt="Gap" width="60" height="60" loading="lazy">
+                <img src="company logos/alaska-airlines-logo.png" alt="Alaska Airlines" width="106" height="59" loading="lazy">
+                <img src="company logos/warriors-logo.png" alt="Golden State Warriors" width="49" height="59" loading="lazy">
+                <img src="company logos/twitch-logo.webp" alt="Twitch" width="60" height="60" loading="lazy">
+                <img src="images/gallery/companylogos/cooley logo.png" alt="Cooley" width="183" height="59" loading="lazy">
+                <img src="company logos/Stripe Logo.png" alt="Stripe" width="106" height="59" loading="lazy">
+                <img src="images/gallery/companylogos/Levi's logo.png" alt="Levi's" width="143" height="59" loading="lazy">
+                <img src="company logos/Kaiser Logo.png" alt="Kaiser Permanente" width="69" height="59" loading="lazy">
             </div>
             <div style="text-align: center;">
                 <a href="corporate.html" class="btn btn-primary" style="margin-top: 1.5rem;">Learn About Corporate Orders</a>
@@ -329,7 +335,7 @@
             <!-- Rating Badges -->
             <div class="testimonial-rating-badge">
                 <a href="https://www.yelp.com/biz/my-baking-creations-san-francisco" target="_blank" rel="noopener" class="rating-source yelp">
-                    <img src="images/gallery/companylogos/yelp white black png.webp" alt="Yelp" style="width: 32px; height: 32px;">
+                    <img src="images/gallery/companylogos/yelp white black png.webp" alt="Yelp" width="32" height="32" loading="lazy">
                     <div class="rating-info">
                         <div class="rating-stars">★★★★★</div>
                         <span class="rating-count">5.0 on Yelp</span>
@@ -354,7 +360,7 @@
                                 <div class="testimonial-header">
                                     <div class="testimonial-avatar">M</div>
                                     <div class="testimonial-meta">
-                                        <h4 class="testimonial-name">Michelle T.</h4>
+                                        <p class="testimonial-name">Michelle T.</p>
                                         <span class="testimonial-source yelp">
                                             <img src="images/gallery/companylogos/yelp white black png.webp" alt="Yelp" style="width: 16px; height: 16px;">
                                             Yelp Review
@@ -380,7 +386,7 @@
                                 <div class="testimonial-header">
                                     <div class="testimonial-avatar">J</div>
                                     <div class="testimonial-meta">
-                                        <h4 class="testimonial-name">Jennifer L.</h4>
+                                        <p class="testimonial-name">Jennifer L.</p>
                                         <span class="testimonial-source google">
                                             <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
                                             Google Review
@@ -406,7 +412,7 @@
                                 <div class="testimonial-header">
                                     <div class="testimonial-avatar">S</div>
                                     <div class="testimonial-meta">
-                                        <h4 class="testimonial-name">Sarah K.</h4>
+                                        <p class="testimonial-name">Sarah K.</p>
                                         <span class="testimonial-source yelp">
                                             <img src="images/gallery/companylogos/yelp white black png.webp" alt="Yelp" style="width: 16px; height: 16px;">
                                             Yelp Review
@@ -432,7 +438,7 @@
                                 <div class="testimonial-header">
                                     <div class="testimonial-avatar">D</div>
                                     <div class="testimonial-meta">
-                                        <h4 class="testimonial-name">David R.</h4>
+                                        <p class="testimonial-name">David R.</p>
                                         <span class="testimonial-source google">
                                             <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
                                             Google Review
@@ -458,7 +464,7 @@
                                 <div class="testimonial-header">
                                     <div class="testimonial-avatar">A</div>
                                     <div class="testimonial-meta">
-                                        <h4 class="testimonial-name">Amanda P.</h4>
+                                        <p class="testimonial-name">Amanda P.</p>
                                         <span class="testimonial-source yelp">
                                             <img src="images/gallery/companylogos/yelp white black png.webp" alt="Yelp" style="width: 16px; height: 16px;">
                                             Yelp Review
@@ -484,7 +490,7 @@
                                 <div class="testimonial-header">
                                     <div class="testimonial-avatar">R</div>
                                     <div class="testimonial-meta">
-                                        <h4 class="testimonial-name">Robert M.</h4>
+                                        <p class="testimonial-name">Robert M.</p>
                                         <span class="testimonial-source google">
                                             <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
                                             Google Review
@@ -510,7 +516,7 @@
                                 <div class="testimonial-header">
                                     <div class="testimonial-avatar">L</div>
                                     <div class="testimonial-meta">
-                                        <h4 class="testimonial-name">Lisa W.</h4>
+                                        <p class="testimonial-name">Lisa W.</p>
                                         <span class="testimonial-source yelp">
                                             <img src="images/gallery/companylogos/yelp white black png.webp" alt="Yelp" style="width: 16px; height: 16px;">
                                             Yelp Review
@@ -536,7 +542,7 @@
                                 <div class="testimonial-header">
                                     <div class="testimonial-avatar">M</div>
                                     <div class="testimonial-meta">
-                                        <h4 class="testimonial-name">Michael C.</h4>
+                                        <p class="testimonial-name">Michael C.</p>
                                         <span class="testimonial-source google">
                                             <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
                                             Google Review
@@ -562,7 +568,7 @@
                                 <div class="testimonial-header">
                                     <div class="testimonial-avatar">E</div>
                                     <div class="testimonial-meta">
-                                        <h4 class="testimonial-name">Emily S.</h4>
+                                        <p class="testimonial-name">Emily S.</p>
                                         <span class="testimonial-source yelp">
                                             <img src="images/gallery/companylogos/yelp white black png.webp" alt="Yelp" style="width: 16px; height: 16px;">
                                             Yelp Review
@@ -671,6 +677,7 @@
             </div>
         </div>
     </section>
+    </main>
 
     <!-- FOOTER -->
     <footer>
@@ -697,7 +704,7 @@
                     <svg viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.372-12 12 0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146 1.124.347 2.317.535 3.554.535 6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/></svg>
                 </a>
                 <a href="https://www.yelp.com/biz/my-baking-creations-san-francisco" target="_blank" rel="noopener" aria-label="Yelp">
-                    <img src="images/gallery/companylogos/yelp white black png.webp" alt="Yelp">
+                    <img src="images/gallery/companylogos/yelp white black png.webp" alt="Yelp" width="24" height="24" loading="lazy">
                 </a>
             </div>
             <div class="footer-contact">
