@@ -1,4 +1,4 @@
-:root {
+﻿:root {
     --pink: #EC268F;
     --pink-dark: #D11F7E;
     --yellow: #FFC532;
@@ -434,6 +434,7 @@ nav {
 .hero-logo {
     display: block;
     width: 120px;
+    height: auto;
     margin: 0 auto 1.5rem auto;
     animation: bounce 2s ease infinite;
 }
@@ -1433,7 +1434,7 @@ footer {
 
     /* Dropdown arrow indicator */
     .dropdown > a::after {
-        content: ' ▼';
+        content: ' â–¼';
         font-size: 0.7rem;
         transition: transform 0.3s ease;
         display: inline-block;
@@ -1451,6 +1452,7 @@ footer {
 
     .hero-logo {
         width: 100px;
+        height: auto;
         animation: none;
     }
 
@@ -1491,6 +1493,7 @@ footer {
     
     .hero-logo {
         width: 90px;
+        height: auto;
         margin-bottom: 1rem;
         animation: none;
     }
@@ -1557,6 +1560,7 @@ footer {
 
     .hero-logo {
         width: 80px;
+        height: auto;
         animation: none;
     }
     
@@ -1707,7 +1711,7 @@ footer {
     display: flex;
     gap: 8px;
     z-index: 4;
-    background: #FFC107;
+    background: var(--yellow); /* Brand yellow #FFC532 */
     padding: 10px 16px;
     border-radius: 20px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
@@ -1776,6 +1780,7 @@ footer {
 
     .hero-carousel .hero-logo {
         width: 60px;
+        height: auto;
         margin-bottom: 0.75rem;
     }
 
@@ -3204,3 +3209,5 @@ header nav .search-container svg {
         font-size: 1rem !important;
     }
 }
+
+
