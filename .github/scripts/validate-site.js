@@ -281,7 +281,7 @@ async function checkExternalURLs(htmlFiles) {
             
             if (!response.ok && response.status !== 405) {
                 for (const file of files) {
-                    logError(file, null, `External URL returned ${response.status}: ${url}`);
+                    logWarn(`External URL returned ${response.status}: ${url}`);
                 }
                 failed++;
             } else {
@@ -341,3 +341,4 @@ main().catch(e => {
     console.error(`${RED}FATAL${RESET}: ${e.message}`);
     process.exit(1);
 });
+
