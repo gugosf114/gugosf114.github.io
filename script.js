@@ -828,7 +828,7 @@ function initBlurUpLazyLoad() {
                 const fullImage = container.querySelector('.blur-up-full');
 
                 if (fullImage && fullImage.dataset.src) {
-                    // Create a new image to preload
+                    // Lazy load: image has data-src, need to swap it to src
                     const img = new Image();
 
                     img.onload = function() {
@@ -848,6 +848,19 @@ function initBlurUpLazyLoad() {
 
                     // Start loading the full image
                     img.src = fullImage.dataset.src;
+                } else if (fullImage && fullImage.src) {
+                    // Image already has src, just wait for it to load
+                    if (fullImage.complete) {
+                        // Already loaded
+                        container.classList.add('loaded');
+                    } else {
+                        fullImage.onload = function() {
+                            container.classList.add('loaded');
+                        };
+                        fullImage.onerror = function() {
+                            container.classList.add('loaded');
+                        };
+                    }
                 }
 
                 // Stop observing this container
