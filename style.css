@@ -1432,16 +1432,28 @@ footer {
         font-size: 0.95rem;
     }
 
-    /* Dropdown arrow indicator */
+    /* Mobile dropdown indicator - +/− style */
     .dropdown > a::after {
-        content: ' â–¼';
-        font-size: 0.7rem;
-        transition: transform 0.3s ease;
-        display: inline-block;
+        content: '+';
+        margin-left: 0.5rem;
+        font-weight: bold;
+        font-size: 1.2rem;
     }
 
     .dropdown.expanded > a::after {
-        transform: rotate(180deg);
+        content: '−';
+    }
+
+    /* Highlight parent when expanded */
+    .dropdown.expanded > a {
+        background: var(--cream);
+        color: var(--pink);
+    }
+
+    /* Accent border on expanded submenu */
+    .dropdown.expanded .dropdown-menu {
+        border-left: 3px solid var(--pink);
+        margin-left: 1rem;
     }
 
     /* HERO MOBILE FIX */
