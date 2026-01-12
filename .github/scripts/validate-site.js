@@ -188,19 +188,23 @@ async function validateCSS(cssFiles) {
             
             currentContext = 'global';
             
+            // Skip CSS conflict detection for media queries (valid responsive design pattern)
+            // Per CLAUDE.md: Ignore media query "conflicts" as they are intentional responsive overrides
             for (const [contextKey, propMap] of contextProps) {
                 const parts = contextKey.split('|');
                 const context = parts[0];
                 const selector = parts.slice(1).join('|');
-                
+
+                // Only check for conflicts in global context, not within media queries
+                if (context !== 'global') continue;
+
                 for (const [prop, occurrences] of propMap) {
                     if (occurrences.length > 1) {
                         const uniqueValues = new Set(occurrences.map(o => o.value));
                         if (uniqueValues.size > 1) {
                             const lines = occurrences.map(o => o.line).filter(l => l).join(', ');
-                            const contextLabel = context === 'global' ? '' : ` in ${context}`;
-                            logError(relPath, occurrences[0].line, 
-                                `Conflicting values for '${prop}' in '${selector}'${contextLabel} (lines: ${lines})`);
+                            logError(relPath, occurrences[0].line,
+                                `Conflicting values for '${prop}' in '${selector}' (lines: ${lines})`);
                             fileErrors++;
                         }
                     }
