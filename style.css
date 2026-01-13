@@ -255,7 +255,7 @@ nav {
     font-family: 'Nunito', sans-serif;
     font-size: 0.9rem;
     letter-spacing: 3px;
-    color: #B8305A; /* Darker pink for 4.5:1 contrast on white */
+    color: var(--pink); /* Brand pink */
     text-transform: uppercase;
     margin-top: -3px;
     font-weight: 800;
@@ -762,7 +762,7 @@ nav {
 }
 
 .section-header h2 .highlight {
-    color: #A31545; /* Darker pink for 4.5:1 contrast on beige sections */
+    color: var(--pink); /* Brand pink */
 }
 
 .section-header p {
@@ -891,7 +891,7 @@ a.service-card h3 {
     padding: 0.6rem 1.2rem;
     border-radius: 20px;
     font-weight: 800;
-    color: #A31545; /* Darker pink for 4.5:1 contrast on white background */
+    color: var(--pink); /* Brand pink */
     margin-top: auto;
     margin-bottom: 1.5rem;
     border: 2px solid var(--border-beige);
