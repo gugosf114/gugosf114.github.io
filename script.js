@@ -1278,3 +1278,43 @@ if (document.readyState === 'loading') {
         }
     });
 })();
+
+// ===========================================
+// GALLERY IMAGE PARALLAX HOVER EFFECT
+// Desktop only - subtle image shift on mouse move
+// ===========================================
+(function() {
+    // Only run on devices with hover and fine pointer (desktop)
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    // Respect reduced motion preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const galleryItems = document.querySelectorAll('.cake-thumb, .gallery-item');
+    if (galleryItems.length === 0) return;
+
+    galleryItems.forEach(item => {
+        const img = item.querySelector('img');
+        if (!img) return;
+
+        item.addEventListener('mousemove', function(e) {
+            const rect = item.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            // Calculate position as percentage from center (-1 to 1)
+            const xPercent = (x / rect.width - 0.5) * 2;
+            const yPercent = (y / rect.height - 0.5) * 2;
+
+            // Subtle shift (max 8px) in opposite direction of mouse
+            const shiftX = -xPercent * 8;
+            const shiftY = -yPercent * 8;
+
+            img.style.transform = `scale(1.08) translate(${shiftX}px, ${shiftY}px)`;
+        });
+
+        item.addEventListener('mouseleave', function() {
+            img.style.transform = 'scale(1)';
+        });
+    });
+})();

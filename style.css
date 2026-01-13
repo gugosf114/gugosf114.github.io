@@ -309,16 +309,70 @@ nav {
     font-weight: 800;
     font-size: 0.95rem;
     white-space: nowrap;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.nav-cta::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(90deg, var(--yellow), var(--pink), var(--yellow), var(--pink));
+    background-size: 300% 100%;
+    border-radius: 32px;
+    z-index: -2;
+    animation: cta-gradient-shift 3s ease infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .nav-cta::after {
-    display: none;
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    background: var(--yellow);
+    border-radius: 28px;
+    z-index: -1;
+    transition: background 0.3s ease;
+}
+
+.nav-cta:hover::before {
+    opacity: 1;
+}
+
+.nav-cta:hover::after {
+    background: var(--yellow-dark);
 }
 
 .nav-cta:hover {
-    background: var(--yellow-dark);
     transform: translateY(-2px);
     color: var(--dark-brown) !important;
+}
+
+@keyframes cta-gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Disable CTA animation on mobile and reduced motion */
+@media (max-width: 968px), (prefers-reduced-motion: reduce) {
+    .nav-cta::before {
+        display: none;
+    }
+    .nav-cta::after {
+        display: none;
+    }
+    .nav-cta:hover {
+        background: var(--yellow-dark);
+    }
 }
 
 /* DROPDOWN */
@@ -767,7 +821,11 @@ nav {
 }
 
 .section-header h2 .highlight {
-    color: var(--pink); /* Brand pink */
+    /* Gradient text effect - pink to darker pink */
+    background: linear-gradient(135deg, var(--pink) 0%, #C4206E 50%, var(--pink) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .section-header p {
@@ -840,7 +898,8 @@ nav {
 .service-card:hover {
     transform: translateY(-10px);
     border-color: var(--pink);
-    box-shadow: 0 20px 60px rgba(236, 38, 143, 0.15);
+    box-shadow: 0 20px 60px rgba(236, 38, 143, 0.25), 0 0 30px rgba(236, 38, 143, 0.15);
+    background: linear-gradient(135deg, #fff 0%, #fff9f9 100%);
 }
 
 .service-card:hover h3 {
@@ -1966,6 +2025,25 @@ footer {
 .gallery-item:hover img {
     transform: scale(1.08);
     filter: brightness(1.05);
+}
+
+/* Gallery image parallax hover effect - desktop only */
+@media (hover: hover) and (pointer: fine) {
+    .cake-thumb,
+    .gallery-item {
+        perspective: 1000px;
+    }
+
+    .cake-thumb img,
+    .gallery-item img {
+        transition: transform 0.15s ease-out, filter 0.3s ease;
+    }
+
+    .cake-thumb:hover img,
+    .gallery-item:hover img {
+        /* Base transform, JS will add parallax via inline style */
+        transform: scale(1.08);
+    }
 }
 
 /* ===========================================
