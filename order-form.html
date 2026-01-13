@@ -212,6 +212,47 @@
                     <small>Include: theme, colors, serving size, and any special requests</small>
                 </div>
 
+                <!-- AI CAKE PREVIEW SECTION - Only shows when Cake is selected -->
+                <div id="aiPreviewSection" class="form-group" style="display: none;">
+                    <div style="background: linear-gradient(135deg, #fff5f8 0%, #fff 100%); border: 2px dashed var(--pink); border-radius: 20px; padding: 1.5rem; margin: 1rem 0;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                            <span style="font-size: 1.3rem;">✨</span>
+                            <strong style="font-family: 'Fredoka One', cursive; color: var(--pink); font-size: 1.1rem;">AI Cake Preview</strong>
+                            <span style="background: var(--pink); color: white; font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; font-weight: 600;">NEW</span>
+                        </div>
+                        <p style="color: var(--brown); font-size: 0.9rem; margin-bottom: 1rem;">
+                            Want to see your idea come to life? Describe your cake above, then click below to generate an AI preview!
+                        </p>
+                        <button type="button" id="generatePreviewBtn" style="background: var(--pink); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 25px; font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.95rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: transform 0.2s, box-shadow 0.2s;">
+                            <span>🎨</span> Generate Preview
+                        </button>
+
+                        <!-- Loading state -->
+                        <div id="previewLoading" style="display: none; margin-top: 1rem; text-align: center;">
+                            <div style="display: inline-block; width: 30px; height: 30px; border: 3px solid var(--light-pink); border-top-color: var(--pink); border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                            <p style="color: var(--brown); margin-top: 0.5rem; font-size: 0.9rem;">Creating your cake preview...</p>
+                        </div>
+
+                        <!-- Result area -->
+                        <div id="previewResult" style="display: none; margin-top: 1rem;">
+                            <img id="previewImage" src="" alt="AI generated cake preview" style="max-width: 100%; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                            <div style="margin-top: 1rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                                <a id="downloadPreviewBtn" download="my-cake-preview.png" style="background: var(--brown); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;">
+                                    <span>⬇️</span> Download
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Error state -->
+                        <div id="previewError" style="display: none; margin-top: 1rem; padding: 0.75rem; background: #fff3f3; border-radius: 10px; color: #c44;">
+                        </div>
+
+                        <p style="color: #999; font-size: 0.75rem; margin-top: 1rem; font-style: italic;">
+                            Powered by Google Gemini • For inspiration only • Final design may vary based on artistic interpretation
+                        </p>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label for="reference_photo">Reference Photo (Optional)</label>
                     <input type="file" id="reference_photo" name="attachment" accept="image/*,.pdf">
@@ -287,6 +328,94 @@
 
     pickupOption.addEventListener('change', toggleDeliverySection);
     deliveryOption.addEventListener('change', toggleDeliverySection);
+
+    // ===========================================
+    // AI CAKE PREVIEW
+    // ===========================================
+    const PREVIEW_WORKER_URL = 'YOUR_CLOUDFLARE_WORKER_URL_HERE'; // UPDATE THIS after deploying worker
+
+    const aiPreviewSection = document.getElementById('aiPreviewSection');
+    const generatePreviewBtn = document.getElementById('generatePreviewBtn');
+    const previewLoading = document.getElementById('previewLoading');
+    const previewResult = document.getElementById('previewResult');
+    const previewImage = document.getElementById('previewImage');
+    const previewError = document.getElementById('previewError');
+    const downloadPreviewBtn = document.getElementById('downloadPreviewBtn');
+    const orderDetailsTextarea = document.getElementById('order_details');
+
+    // Show/hide AI preview section based on product type
+    const productRadios = document.querySelectorAll('input[name="product_type"]');
+    productRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            if (this.value === 'Cake') {
+                aiPreviewSection.style.display = 'block';
+            } else {
+                aiPreviewSection.style.display = 'none';
+                // Reset preview state when switching away from cake
+                previewResult.style.display = 'none';
+                previewError.style.display = 'none';
+            }
+        });
+    });
+
+    // Generate preview button click
+    generatePreviewBtn.addEventListener('click', async function() {
+        const description = orderDetailsTextarea.value.trim();
+
+        if (description.length < 10) {
+            previewError.textContent = 'Please describe your cake idea above first (at least a few words about theme, colors, etc.)';
+            previewError.style.display = 'block';
+            previewResult.style.display = 'none';
+            orderDetailsTextarea.focus();
+            return;
+        }
+
+        // Check if worker is configured
+        if (PREVIEW_WORKER_URL === 'YOUR_CLOUDFLARE_WORKER_URL_HERE') {
+            previewError.textContent = 'AI Preview is being set up. Please describe your cake and we\'ll help you design it!';
+            previewError.style.display = 'block';
+            return;
+        }
+
+        // Show loading, hide others
+        previewLoading.style.display = 'block';
+        previewResult.style.display = 'none';
+        previewError.style.display = 'none';
+        generatePreviewBtn.disabled = true;
+        generatePreviewBtn.style.opacity = '0.6';
+
+        try {
+            const response = await fetch(PREVIEW_WORKER_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ description: description })
+            });
+
+            const data = await response.json();
+
+            if (data.error) {
+                previewError.textContent = data.error;
+                previewError.style.display = 'block';
+            } else if (data.image) {
+                previewImage.src = data.image;
+                downloadPreviewBtn.href = data.image;
+                previewResult.style.display = 'block';
+            }
+        } catch (error) {
+            console.error('Preview error:', error);
+            previewError.textContent = 'Could not generate preview. Please try again or just describe your cake!';
+            previewError.style.display = 'block';
+        } finally {
+            previewLoading.style.display = 'none';
+            generatePreviewBtn.disabled = false;
+            generatePreviewBtn.style.opacity = '1';
+        }
+    });
+
+    // Add CSS animation for spinner
+    const style = document.createElement('style');
+    style.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
+    document.head.appendChild(style);
 
     // Form submission
     document.getElementById('orderForm').addEventListener('submit', async function(e) {
