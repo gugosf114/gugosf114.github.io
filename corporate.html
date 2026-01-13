@@ -356,6 +356,57 @@
             </p>
         </div>
 
+        <!-- Lead Time Calculator -->
+        <div class="section-wrapper section-beige reveal" style="margin-bottom: 3rem;" id="lead-time-calculator">
+            <div class="section-header">
+                <h2>Corporate <span class="highlight">Lead Time Calculator</span></h2>
+                <p style="font-size: 1.1rem; color: var(--brown); margin-top: 0.5rem;">Plan ahead for your event - see when you need to order</p>
+            </div>
+            <div class="calculator-container">
+                <div class="calculator-form">
+                    <div class="calc-field">
+                        <label for="calc-event-date">Event Date</label>
+                        <input type="date" id="calc-event-date" required>
+                    </div>
+                    <div class="calc-field">
+                        <label for="calc-product">Product Type</label>
+                        <select id="calc-product" required>
+                            <option value="">Select a product...</option>
+                            <option value="cookies-printed">Printed Logo Cookies</option>
+                            <option value="cookies-handpiped">Hand-Piped Cookies</option>
+                            <option value="cakepops">Cake Pops</option>
+                            <option value="cupcakes">Cupcakes</option>
+                            <option value="cake">Custom Cake</option>
+                        </select>
+                    </div>
+                    <div class="calc-field">
+                        <label for="calc-quantity">Quantity</label>
+                        <select id="calc-quantity" required>
+                            <option value="">Select quantity...</option>
+                            <option value="small">Under 50 pieces</option>
+                            <option value="medium">50-150 pieces</option>
+                            <option value="large">150-300 pieces</option>
+                            <option value="xlarge">300+ pieces</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn calc-btn" id="calc-submit">Calculate Lead Time</button>
+                </div>
+                <div class="calculator-result" id="calc-result" style="display: none;">
+                    <div class="result-icon">
+                        <svg viewBox="0 0 24 24" width="48" height="48" fill="var(--pink)"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zM9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm-8 4H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>
+                    </div>
+                    <div class="result-content">
+                        <p class="result-label">Order by:</p>
+                        <p class="result-date" id="result-order-date"></p>
+                        <p class="result-lead" id="result-lead-time"></p>
+                    </div>
+                    <div class="result-tips" id="result-tips"></div>
+                    <a href="order-form.html" class="btn calc-cta">Start Your Order</a>
+                    <button type="button" class="calc-reset" id="calc-reset">Calculate Again</button>
+                </div>
+            </div>
+        </div>
+
         <!-- CTA -->
         <div class="section-wrapper reveal" style="background: linear-gradient(135deg, var(--pink), var(--pink-dark)); text-align: center; color: var(--white);">
             <h3 style="font-family: 'Fredoka One', cursive; font-size: 2rem; margin-bottom: 1.5rem;">Ready to Order?</h3>
@@ -418,6 +469,146 @@
     </footer>
 
     <style>
+    /* Lead Time Calculator Styles */
+    .calculator-container {
+        max-width: 500px;
+        margin: 2rem auto 0;
+    }
+    .calculator-form {
+        background: white;
+        padding: 2rem;
+        border-radius: 20px;
+        border: 2px solid var(--section-border);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+    .calc-field {
+        margin-bottom: 1.5rem;
+    }
+    .calc-field label {
+        display: block;
+        font-weight: 700;
+        color: var(--dark-brown);
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+    }
+    .calc-field input,
+    .calc-field select {
+        width: 100%;
+        padding: 0.9rem 1rem;
+        border: 2px solid var(--cream);
+        border-radius: 12px;
+        font-size: 1rem;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 600;
+        color: var(--dark-brown);
+        background: white;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .calc-field input:focus,
+    .calc-field select:focus {
+        outline: none;
+        border-color: var(--pink);
+        box-shadow: 0 0 0 3px rgba(236, 38, 143, 0.1);
+    }
+    .calc-btn {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1.1rem;
+        background: linear-gradient(135deg, var(--yellow), var(--yellow-dark));
+        color: var(--dark-brown);
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: 800;
+        transition: all 0.3s ease;
+    }
+    .calc-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(255, 197, 50, 0.4);
+    }
+    .calculator-result {
+        background: white;
+        padding: 2rem;
+        border-radius: 20px;
+        border: 3px solid var(--pink);
+        text-align: center;
+        animation: fadeInUp 0.4s ease;
+    }
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .result-icon {
+        margin-bottom: 1rem;
+    }
+    .result-label {
+        font-size: 1rem;
+        color: var(--brown);
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+    }
+    .result-date {
+        font-family: 'Fredoka One', cursive;
+        font-size: 2rem;
+        color: var(--pink);
+        margin-bottom: 0.5rem;
+    }
+    .result-lead {
+        font-size: 1.1rem;
+        color: var(--dark-brown);
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+    }
+    .result-tips {
+        background: var(--cream);
+        padding: 1rem;
+        border-radius: 12px;
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+        color: var(--dark-brown);
+        line-height: 1.6;
+    }
+    .result-tips strong {
+        color: var(--pink);
+    }
+    .calc-cta {
+        display: inline-block;
+        background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+        color: white !important;
+        padding: 1rem 2rem;
+        border-radius: 30px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    .calc-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(236, 38, 143, 0.4);
+    }
+    .calc-reset {
+        display: block;
+        margin: 1rem auto 0;
+        background: none;
+        border: none;
+        color: var(--brown);
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+    .calc-reset:hover {
+        color: var(--pink);
+    }
+    @media (max-width: 500px) {
+        .calculator-form,
+        .calculator-result {
+            padding: 1.5rem;
+        }
+        .result-date {
+            font-size: 1.6rem;
+        }
+    }
+
     /* Corporate Tile Link Hover Effect */
     .corporate-tile-link:hover .section-wrapper {
         transform: translateY(-3px);
@@ -833,6 +1024,102 @@
             logoUpload.value = '';
             ctxRound.clearRect(0, 0, canvasRound.width, canvasRound.height);
             ctxSquare.clearRect(0, 0, canvasSquare.width, canvasSquare.height);
+        });
+    })();
+    </script>
+
+    <!-- Lead Time Calculator Script -->
+    <script>
+    (function() {
+        // Lead time rules (in days)
+        const leadTimes = {
+            'cookies-printed': { small: 14, medium: 18, large: 21, xlarge: 28 },
+            'cookies-handpiped': { small: 14, medium: 21, large: 25, xlarge: 30 },
+            'cakepops': { small: 14, medium: 18, large: 21, xlarge: 25 },
+            'cupcakes': { small: 10, medium: 14, large: 18, xlarge: 21 },
+            'cake': { small: 14, medium: 21, large: 28, xlarge: 35 }
+        };
+
+        const productNames = {
+            'cookies-printed': 'Printed Logo Cookies',
+            'cookies-handpiped': 'Hand-Piped Cookies',
+            'cakepops': 'Cake Pops',
+            'cupcakes': 'Cupcakes',
+            'cake': 'Custom Cake'
+        };
+
+        const tips = {
+            'cookies-printed': '<strong>Tip:</strong> Have your logo file ready in high resolution (PNG or vector). We\'ll send a digital proof before printing.',
+            'cookies-handpiped': '<strong>Tip:</strong> Hand-piped designs take longer but offer a premium artisan look. Great for executive gifts!',
+            'cakepops': '<strong>Tip:</strong> Cake pops are individually wrapped and perfect for grab-and-go events.',
+            'cupcakes': '<strong>Tip:</strong> We can add logo toppers to cupcakes for extra brand visibility.',
+            'cake': '<strong>Tip:</strong> For complex sculpted or realistic cakes, add an extra week to the timeline.'
+        };
+
+        const eventDateInput = document.getElementById('calc-event-date');
+        const productSelect = document.getElementById('calc-product');
+        const quantitySelect = document.getElementById('calc-quantity');
+        const submitBtn = document.getElementById('calc-submit');
+        const calcForm = document.querySelector('.calculator-form');
+        const calcResult = document.getElementById('calc-result');
+        const resultOrderDate = document.getElementById('result-order-date');
+        const resultLeadTime = document.getElementById('result-lead-time');
+        const resultTips = document.getElementById('result-tips');
+        const resetBtn = document.getElementById('calc-reset');
+
+        // Set min date to today
+        const today = new Date();
+        const minDate = today.toISOString().split('T')[0];
+        eventDateInput.setAttribute('min', minDate);
+
+        submitBtn.addEventListener('click', calculate);
+
+        function calculate() {
+            const eventDate = eventDateInput.value;
+            const product = productSelect.value;
+            const quantity = quantitySelect.value;
+
+            if (!eventDate || !product || !quantity) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            const eventDateObj = new Date(eventDate);
+            const leadDays = leadTimes[product][quantity];
+            const orderByDate = new Date(eventDateObj);
+            orderByDate.setDate(orderByDate.getDate() - leadDays);
+
+            // Check if order date is in the past
+            const now = new Date();
+            now.setHours(0, 0, 0, 0);
+
+            const formattedDate = orderByDate.toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            resultOrderDate.textContent = formattedDate;
+            resultLeadTime.textContent = `${leadDays}-day lead time for ${productNames[product]}`;
+            resultTips.innerHTML = tips[product];
+
+            // Add rush warning if needed
+            if (orderByDate < now) {
+                resultTips.innerHTML += '<br><br><strong style="color: var(--pink);">Rush Order:</strong> Your event is coming up soon! Call us at (415) 568-8060 to discuss rush options.';
+            }
+
+            // Show result, hide form
+            calcForm.style.display = 'none';
+            calcResult.style.display = 'block';
+        }
+
+        resetBtn.addEventListener('click', () => {
+            calcResult.style.display = 'none';
+            calcForm.style.display = 'block';
+            eventDateInput.value = '';
+            productSelect.value = '';
+            quantitySelect.value = '';
         });
     })();
     </script>
