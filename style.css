@@ -1440,8 +1440,9 @@ footer {
     /* Mobile dropdown toggle - parent link with +/- indicator */
     .dropdown > a {
         display: flex !important;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
+        gap: 0.5rem;
     }
 
     /* Plus/minus indicator on right side - override desktop hide */
@@ -1459,7 +1460,6 @@ footer {
         font-weight: 700;
         line-height: 1;
         flex-shrink: 0;
-        margin-left: 0.75rem;
     }
 
     /* Highlight parent when expanded */
@@ -1472,10 +1472,43 @@ footer {
         background: var(--dark-brown);
     }
 
-    /* Accent border on expanded submenu */
+    /* Expanded submenu styling with separators */
     .dropdown.expanded .dropdown-menu {
-        border-left: 3px solid var(--pink);
-        margin-left: 1rem;
+        background: var(--white);
+        margin: 0.5rem 1rem;
+        border-radius: 12px;
+        box-shadow: inset 0 2px 8px rgba(98, 45, 43, 0.08);
+    }
+
+    /* Dropdown menu items with separators */
+    .dropdown-menu li {
+        border-bottom: 1px solid rgba(98, 45, 43, 0.1);
+    }
+
+    .dropdown-menu li:last-child {
+        border-bottom: none;
+    }
+
+    .dropdown-menu a {
+        padding: 0.75rem 1.25rem;
+        color: var(--dark-brown);
+    }
+
+    .dropdown-menu a:hover,
+    .dropdown-menu a:active {
+        background: var(--light-pink);
+        color: var(--pink);
+    }
+
+    /* Subcategory items - slightly indented */
+    .dropdown-subcategory {
+        background: rgba(98, 45, 43, 0.03);
+    }
+
+    .dropdown-subcategory a {
+        padding-left: 2rem;
+        font-size: 0.95rem;
+        color: var(--brown);
     }
 
     /* HERO MOBILE FIX */
