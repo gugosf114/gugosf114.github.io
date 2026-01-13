@@ -11,19 +11,20 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Form | My Baking Creations | Bay Area Custom Cakes & Cookies</title>
-    <meta name="description" content="Request a custom order from My Baking Creations. Custom cakes, cookies, cake pops, and cupcakes for your special occasion.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://api.web3forms.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://api.web3forms.com https://cakeplugin.summer-lake-b6ea.workers.dev; frame-src https://www.google.com;">
+    <title>Order Custom Cakes & Cookies | My Baking Creations | Bay Area</title>
+    <meta name="description" content="Request a custom order from My Baking Creations. Custom cakes, cookies, cake pops, and cupcakes for your special occasion. Bay Area delivery or Daly City pickup.">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="logo_icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <meta property="og:title" content="Order Form | My Baking Creations">
+    <meta property="og:title" content="Order Custom Cakes & Cookies | My Baking Creations">
     <meta property="og:description" content="Request a custom order for cakes, cookies, cake pops, and cupcakes for your special occasion.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mybakingcreations.com/order-form.html">
     <meta property="og:image" content="https://mybakingcreations.com/logo_icon.png">
     <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Order Form | My Baking Creations">
+    <meta name="twitter:title" content="Order Custom Cakes & Cookies | My Baking Creations">
     <meta name="twitter:description" content="Request a custom order for cakes, cookies, cake pops, and cupcakes.">
     <meta name="twitter:image" content="https://mybakingcreations.com/logo_icon.png">
     <script type="application/ld+json">
@@ -88,183 +89,226 @@
                 <li><a href="corporate.html">Corporate Orders</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
-                <li><a href="#orderForm" class="nav-cta">Order Now</a></li>
+                <li><a href="order-form.html" class="nav-cta">Order Now</a></li>
             </ul>
-            <button class="mobile-menu-btn">☰</button>
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <label for="site-search" class="visually-hidden">Search gallery and blog</label>
+                    <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" style="width:16px;height:16px;max-width:16px;max-height:16px;" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                    <input type="text" class="search-input typewriter-active" id="site-search" placeholder="Search..." autocomplete="off">
+                    <span class="typewriter-placeholder" id="search-typewriter"><span class="cursor"></span></span>
+                </div>
+                <div class="search-results" id="search-results"></div>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Open menu">☰</button>
         </nav>
     </header>
 
-    <section class="hero" style="padding-top: 10rem; min-height: 60vh;">
-        <div class="hero-content">
-            <h1>Request Your <span class="highlight">Custom Order</span></h1>
-            <p class="hero-subtitle">Tell us about your celebration and we'll create something amazing!</p>
+    <section class="hero hero-carousel hero-subpage">
+        <div class="carousel-track-container">
+            <div class="carousel-track">
+                <div class="carousel-slide"><img width="1200" height="658" src="images/gallery/carousel/carousel 5.jpg" alt="Corporate logo cookies for business events"></div>
+                <div class="carousel-slide"><img width="2355" height="1216" src="images/gallery/carousel/carousel 10.jpg" alt="Realistic sculpted cake design by My Baking Creations"></div>
+                <div class="carousel-slide"><img width="1920" height="1383" src="images/gallery/carousel/carousel 7.jpg" alt="Hand-piped decorated cookies for celebrations"></div>
+                <div class="carousel-slide"><img width="1920" height="792" src="images/gallery/carousel/carousel 8.jpg" alt="Custom cupcakes with elegant frosting designs"></div>
+                <div class="carousel-slide"><img width="1920" height="1186" src="images/gallery/carousel/carousel 9.jpg" alt="Artisan baked goods from Bay Area bakery"></div>
+                <div class="carousel-slide"><img width="1920" height="1066" src="images/gallery/carousel/carousel 1.jpg" alt="Custom sculpted birthday cake with fondant decorations"></div>
+                <div class="carousel-slide"><img width="1920" height="1166" src="images/gallery/carousel/carousel 2.jpg" alt="Decorated sugar cookies with royal icing designs"></div>
+                <div class="carousel-slide"><img width="1680" height="929" src="images/gallery/carousel/carousel 3.jpg" alt="Elegant tiered wedding cake with floral accents"></div>
+                <div class="carousel-slide"><img width="1920" height="873" src="images/gallery/carousel/carousel 4.jpg" alt="Custom themed cake pops for special events"></div>
+                <div class="carousel-slide"><img width="1920" height="930" src="images/gallery/carousel/carousel 6.jpg" alt="Custom celebration cake by My Baking Creations"></div>
+            </div>
         </div>
+        <div class="hero-content">
+            <div class="hero-text-box">
+                <p class="hero-breadcrumb"><a href="index.html">Home</a> / Order</p>
+                <h1 class="typewriter-headline"><span class="highlight-yellow">Request</span> <span class="highlight-yellow">Your</span> <span class="highlight">Custom Order</span></h1>
+                <p class="hero-subtitle">Tell us about your celebration and we'll create something amazing!</p>
+            </div>
+        </div>
+        <div class="hero-dots">
+            <button class="hero-dot active" onclick="goToSlide(0)" aria-label="Slide 1"></button>
+            <button class="hero-dot" onclick="goToSlide(1)" aria-label="Slide 2"></button>
+            <button class="hero-dot" onclick="goToSlide(2)" aria-label="Slide 3"></button>
+            <button class="hero-dot" onclick="goToSlide(3)" aria-label="Slide 4"></button>
+            <button class="hero-dot" onclick="goToSlide(4)" aria-label="Slide 5"></button>
+            <button class="hero-dot" onclick="goToSlide(5)" aria-label="Slide 6"></button>
+            <button class="hero-dot" onclick="goToSlide(6)" aria-label="Slide 7"></button>
+            <button class="hero-dot" onclick="goToSlide(7)" aria-label="Slide 8"></button>
+            <button class="hero-dot" onclick="goToSlide(8)" aria-label="Slide 9"></button>
+            <button class="hero-dot" onclick="goToSlide(9)" aria-label="Slide 10"></button>
+        </div>
+        <a href="#order-content" class="scroll-indicator" aria-label="Scroll down">
+            <span class="scroll-indicator-text">Scroll</span>
+            <div class="scroll-indicator-arrow">
+                <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+            </div>
+        </a>
     </section>
 
-    <section class="services-preview">
-        <div class="container" style="max-width: 800px;">
-            <form id="orderForm" style="background: var(--white); padding: 3rem; border-radius: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
-                <p class="order-disclaimer">No commitment yet! This just gets the conversation started. We'll work out all the details together — design, quantity, flavors, pickup date — and send a separate invoice once everything's finalized. For a quick message, <a href="contact.html" style="color: var(--pink); font-weight: 700;">visit our contact page</a>.</p>
+    <section id="order-content" class="page-content">
+        <div class="section-wrapper section-beige reveal" style="margin-bottom: 3rem;">
+            <div style="max-width: 700px; margin: 0 auto;">
+                <h2 style="font-family: 'Fredoka One', cursive; font-size: 2rem; color: var(--dark-brown); margin-bottom: 1.5rem; text-align: center;">Start Your Order</h2>
 
-                <!-- Web3Forms Access Key -->
-                <input type="hidden" name="access_key" value="bb1321a2-591e-405f-afb6-d93a8e4f721d">
-                <input type="hidden" name="subject" value="New Order Inquiry - My Baking Creations">
-                <input type="hidden" name="from_name" value="My Baking Creations Website">
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="name">Your Name *</label>
-                        <input type="text" id="name" name="name" required placeholder="Jane Smith">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email *</label>
-                        <input type="email" id="email" name="email" required placeholder="jane@example.com">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">Phone Number *</label>
-                    <input type="tel" id="phone" name="phone" required placeholder="(415) 555-1234">
-                </div>
-
-                <div class="form-group">
-                    <label>What are you ordering? *</label>
-                    <div class="radio-group">
-                        <label class="radio-option">
-                            <input type="radio" name="product_type" value="Cake" required>
-                            <span>Cake</span>
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="product_type" value="Cookies">
-                            <span>Cookies</span>
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="product_type" value="Cake Pops">
-                            <span>Cake Pops</span>
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="product_type" value="Cupcakes">
-                            <span>Cupcakes</span>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- FLAVOR SECTION - Hidden by default, shows after product selection -->
-                <div id="flavorSection" class="form-group" style="display: none;">
-                    <label for="flavor">Flavor</label>
-                    <select id="flavor" name="flavor">
-                        <option value="">Select flavor (optional)</option>
-                        <option value="Vanilla">Vanilla</option>
-                        <option value="Chocolate">Chocolate</option>
-                    </select>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="event_date">Event Date *</label>
-                        <input type="date" id="event_date" name="event_date" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Pickup or Delivery? *</label>
-                        <div class="radio-group">
-                            <label class="radio-option">
-                                <input type="radio" name="delivery_method" value="Pickup" id="pickup_option" required>
-                                <span>Pickup</span>
-                            </label>
-                            <label class="radio-option">
-                                <input type="radio" name="delivery_method" value="Delivery" id="delivery_option">
-                                <span>Delivery</span>
-                            </label>
-                        </div>
-                        <small style="display: block; margin-top: 8px; color: var(--brown); font-size: 0.9rem; font-weight: 600;">
-                            Delivery available within 60 miles of San Francisco, CA
-                        </small>
-                    </div>
-                </div>
-
-                <!-- DELIVERY DETAILS SECTION - Hidden by default -->
-                <div id="deliveryDetailsSection" style="display: none;">
-                    <div class="section-divider">
-                        <h3 style="font-family: 'Fredoka One', cursive; color: var(--pink); font-size: 1.3rem; margin: 1.5rem 0 1rem;">Delivery Details</h3>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="delivery_address">Delivery Address *</label>
-                        <textarea id="delivery_address" name="delivery_address" rows="3" placeholder="Street, unit number, gate code, or any instructions..."></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="delivery_city">City / Area *</label>
-                        <input type="text" id="delivery_city" name="delivery_city" placeholder="San Francisco">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="delivery_notes">Delivery Instructions (Optional)</label>
-                        <textarea id="delivery_notes" name="delivery_notes" rows="2" placeholder="Any special delivery instructions..."></textarea>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="order_details">Tell us about your order *</label>
-                    <textarea id="order_details" name="order_details" rows="5" required placeholder="Tell us about your theme, colors, size, and any special requests..."></textarea>
-                    <small>Include: theme, colors, serving size, and any special requests</small>
-                </div>
-
-                <!-- AI CAKE PREVIEW SECTION - Only shows when Cake is selected -->
-                <div id="aiPreviewSection" class="form-group" style="display: none;">
-                    <div style="background: linear-gradient(135deg, #fff5f8 0%, #fff 100%); border: 2px dashed var(--pink); border-radius: 20px; padding: 1.5rem; margin: 1rem 0;">
-                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
-                            <span style="font-size: 1.3rem;">✨</span>
-                            <strong style="font-family: 'Fredoka One', cursive; color: var(--pink); font-size: 1.1rem;">AI Cake Preview</strong>
-                            <span style="background: var(--pink); color: white; font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; font-weight: 600;">NEW</span>
-                        </div>
-                        <p style="color: var(--brown); font-size: 0.9rem; margin-bottom: 1rem;">
-                            Want to see your idea come to life? Describe your cake above, then click below to generate an AI preview!
+                <div style="background: var(--white); padding: 2rem; border-radius: 20px;">
+                    <form id="orderForm">
+                        <p class="order-disclaimer" style="background: #fff9e6; padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--brown); border-left: 4px solid var(--yellow);">
+                            <strong>No commitment yet!</strong> This just gets the conversation started. We'll work out all the details together — design, quantity, flavors, pickup date — and send a separate invoice once everything's finalized.
                         </p>
-                        <button type="button" id="generatePreviewBtn" style="background: var(--pink); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 25px; font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.95rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: transform 0.2s, box-shadow 0.2s;">
-                            <span>🎨</span> Generate Preview
-                        </button>
 
-                        <!-- Loading state -->
-                        <div id="previewLoading" style="display: none; margin-top: 1rem; text-align: center;">
-                            <div style="display: inline-block; width: 30px; height: 30px; border: 3px solid var(--light-pink); border-top-color: var(--pink); border-radius: 50%; animation: spin 1s linear infinite;"></div>
-                            <p style="color: var(--brown); margin-top: 0.5rem; font-size: 0.9rem;">Creating your cake preview...</p>
-                        </div>
+                        <input type="hidden" name="access_key" value="bb1321a2-591e-405f-afb6-d93a8e4f721d">
+                        <input type="hidden" name="subject" value="New Order Inquiry - My Baking Creations">
+                        <input type="hidden" name="from_name" value="My Baking Creations Website">
 
-                        <!-- Result area -->
-                        <div id="previewResult" style="display: none; margin-top: 1rem;">
-                            <img id="previewImage" src="" alt="AI generated cake preview" style="max-width: 100%; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                            <div style="margin-top: 1rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
-                                <a id="downloadPreviewBtn" download="my-cake-preview.png" style="background: var(--brown); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;">
-                                    <span>⬇️</span> Download
-                                </a>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Your Name *</label>
+                                <input type="text" id="name" name="name" required placeholder="Jane Smith">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required placeholder="jane@example.com">
                             </div>
                         </div>
 
-                        <!-- Error state -->
-                        <div id="previewError" style="display: none; margin-top: 1rem; padding: 0.75rem; background: #fff3f3; border-radius: 10px; color: #c44;">
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="(415) 555-1234">
                         </div>
 
-                        <p style="color: #999; font-size: 0.75rem; margin-top: 1rem; font-style: italic;">
-                            Powered by Google Gemini • For inspiration only • Final design may vary based on artistic interpretation
+                        <div class="form-group">
+                            <label>What are you ordering? *</label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="product_type" value="Cake" required>
+                                    <span>Cake</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="product_type" value="Cookies">
+                                    <span>Cookies</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="product_type" value="Cake Pops">
+                                    <span>Cake Pops</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="product_type" value="Cupcakes">
+                                    <span>Cupcakes</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div id="flavorSection" class="form-group" style="display: none;">
+                            <label for="flavor">Flavor</label>
+                            <select id="flavor" name="flavor">
+                                <option value="">Select flavor (optional)</option>
+                                <option value="Vanilla">Vanilla</option>
+                                <option value="Chocolate">Chocolate</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="event_date">Event Date *</label>
+                                <input type="date" id="event_date" name="event_date" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Pickup or Delivery? *</label>
+                                <div class="radio-group">
+                                    <label class="radio-option">
+                                        <input type="radio" name="delivery_method" value="Pickup" id="pickup_option" required>
+                                        <span>Pickup</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="delivery_method" value="Delivery" id="delivery_option">
+                                        <span>Delivery</span>
+                                    </label>
+                                </div>
+                                <small style="display: block; margin-top: 8px; color: var(--brown); font-size: 0.85rem;">
+                                    Delivery available within 60 miles of SF
+                                </small>
+                            </div>
+                        </div>
+
+                        <div id="deliveryDetailsSection" style="display: none;">
+                            <div style="border-top: 2px dashed var(--light-pink); margin: 1.5rem 0; padding-top: 1.5rem;">
+                                <h3 style="font-family: 'Fredoka One', cursive; color: var(--pink); font-size: 1.2rem; margin-bottom: 1rem;">Delivery Details</h3>
+                                <div class="form-group">
+                                    <label for="delivery_address">Delivery Address *</label>
+                                    <textarea id="delivery_address" name="delivery_address" rows="2" placeholder="Street, unit number, gate code..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="delivery_city">City / Area *</label>
+                                    <input type="text" id="delivery_city" name="delivery_city" placeholder="San Francisco">
+                                </div>
+                                <div class="form-group">
+                                    <label for="delivery_notes">Delivery Instructions (Optional)</label>
+                                    <textarea id="delivery_notes" name="delivery_notes" rows="2" placeholder="Any special instructions..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="order_details">Tell us about your order *</label>
+                            <textarea id="order_details" name="order_details" rows="5" required placeholder="Tell us about your theme, colors, size, and any special requests..."></textarea>
+                            <small>Include: theme, colors, serving size, and any special requests</small>
+                        </div>
+
+                        <!-- AI CAKE PREVIEW SECTION -->
+                        <div id="aiPreviewSection" class="form-group" style="display: none;">
+                            <div style="background: linear-gradient(135deg, #fff5f8 0%, #fff 100%); border: 2px dashed var(--pink); border-radius: 15px; padding: 1.25rem;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                                    <span style="font-size: 1.2rem;">✨</span>
+                                    <strong style="font-family: 'Fredoka One', cursive; color: var(--pink); font-size: 1rem;">AI Cake Preview</strong>
+                                    <span style="background: var(--pink); color: white; font-size: 0.65rem; padding: 2px 6px; border-radius: 8px; font-weight: 600;">NEW</span>
+                                </div>
+                                <p style="color: var(--brown); font-size: 0.85rem; margin-bottom: 1rem;">
+                                    Want to see your idea come to life? Describe your cake above, then click below!
+                                </p>
+                                <button type="button" id="generatePreviewBtn" style="background: var(--pink); color: white; border: none; padding: 0.6rem 1.25rem; border-radius: 20px; font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.9rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; transition: transform 0.2s, box-shadow 0.2s;">
+                                    <span>🎨</span> Generate Preview
+                                </button>
+
+                                <div id="previewLoading" style="display: none; margin-top: 1rem; text-align: center;">
+                                    <div style="display: inline-block; width: 25px; height: 25px; border: 3px solid var(--light-pink); border-top-color: var(--pink); border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                                    <p style="color: var(--brown); margin-top: 0.5rem; font-size: 0.85rem;">Creating your preview...</p>
+                                </div>
+
+                                <div id="previewResult" style="display: none; margin-top: 1rem;">
+                                    <img id="previewImage" src="" alt="AI generated cake preview" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                                    <div style="margin-top: 0.75rem;">
+                                        <a id="downloadPreviewBtn" download="my-cake-preview.png" style="background: var(--brown); color: white; padding: 0.4rem 0.8rem; border-radius: 15px; font-size: 0.8rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;">
+                                            <span>⬇️</span> Download
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div id="previewError" style="display: none; margin-top: 1rem; padding: 0.6rem; background: #fff3f3; border-radius: 8px; color: #c44; font-size: 0.85rem;"></div>
+
+                                <p style="color: #999; font-size: 0.7rem; margin-top: 0.75rem; font-style: italic;">
+                                    Powered by Google Gemini • For inspiration only
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reference_photo">Reference Photo (Optional)</label>
+                            <input type="file" id="reference_photo" name="attachment" accept="image/*,.pdf">
+                            <small>Upload a photo or sketch (Max 5MB)</small>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem 2rem; font-size: 1.1rem;">Send Order Inquiry</button>
+                        </div>
+
+                        <p style="text-align: center; color: var(--brown); font-weight: 600; margin-top: 1rem; font-size: 0.95rem;">
+                            We'll respond within 24 hours.<br>
+                            Urgent? Call <a href="tel:4155688060" style="color: var(--pink); text-decoration: none; font-weight: 700;">(415) 568-8060</a>
                         </p>
-                    </div>
+                    </form>
                 </div>
-
-                <div class="form-group">
-                    <label for="reference_photo">Reference Photo (Optional)</label>
-                    <input type="file" id="reference_photo" name="attachment" accept="image/*,.pdf">
-                    <small>Upload a photo or sketch of what you'd like (Max 5MB)</small>
-                </div>
-
-                <div class="form-group">
-                    <button type="submit" class="btn" style="width: 100%; padding: 1rem 2rem; font-size: 1.1rem;">Send Order Inquiry</button>
-                </div>
-
-                <p style="text-align: center; color: var(--brown); font-weight: 600; margin-top: 1.5rem;">We'll respond within 24 hours. For urgent requests, call <strong><a href="tel:4155688060" style="color: var(--pink); text-decoration: none;">(415) 568-8060</a></strong></p>
-            </form>
+            </div>
         </div>
     </section>
 
@@ -279,7 +323,17 @@
                 <a href="about.html">About Us</a>
                 <a href="gallery.html">Gallery</a>
                 <a href="corporate.html">Corporate Orders</a>
+                <a href="blog.html">Blog</a>
                 <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-locations" style="margin-top: 1rem; font-size: 0.9rem;">
+                <span style="color: var(--yellow); font-weight: 600;">Serving:</span>
+                <a href="custom-cakes-san-francisco.html">San Francisco</a> ·
+                <a href="custom-cakes-san-jose.html">San Jose</a> ·
+                <a href="custom-cakes-palo-alto.html">Palo Alto</a> ·
+                <a href="custom-cakes-mountain-view.html">Mountain View</a> ·
+                <a href="custom-cakes-daly-city.html">Daly City</a> ·
+                <a href="custom-cakes-san-rafael.html">San Rafael</a>
             </div>
             <div class="social-links">
                 <a href="https://www.instagram.com/mybakingcreationscompany/" target="_blank" rel="noopener" aria-label="Instagram">
@@ -292,7 +346,7 @@
                     <svg viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.372-12 12 0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146 1.124.347 2.317.535 3.554.535 6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/></svg>
                 </a>
                 <a href="https://www.yelp.com/biz/my-baking-creations-san-francisco" target="_blank" rel="noopener" aria-label="Yelp">
-                    <svg viewBox="0 0 24 24"><path d="M21.111 18.226c-.141.969-2.119 3.483-3.029 3.847-.311.124-.611.094-.85-.09-.154-.12-.314-.396-2.529-3.994a.726.726 0 0 1 .086-.89.937.937 0 0 1 .889-.179c.139.048 2.665.921 3.457 1.203.601.214.912.478.976.903zm-7.467-3.937a.902.902 0 0 1 .222.883c-.063.211-.104.347-.104.347-.089.291-1.034 3.375-1.248 4.037-.163.504-.399.741-.811.741-.96 0-3.18-2.083-3.371-2.995-.054-.258-.021-.515.101-.744.078-.147 2.076-3.146 2.726-4.091.178-.259.414-.4.701-.4.325 0 .605.166.875.451.188.198.619.611.909.771zM10.747 9.02c.256.159.474.391.6.697.183.443-.009.943-.193 1.396-.076.188-1.637 3.807-1.637 3.807a.906.906 0 0 1-.761.535.876.876 0 0 1-.749-.323c-.113-.143-.204-.381-.204-.381-.591-1.404-3.158-7.502-3.421-8.337-.139-.441-.086-.835.162-1.201.541-.8 2.664-1.665 3.578-1.665.403 0 .717.187.935.556.083.141 1.162 4.163 1.69 4.916zm.553-3.428a.812.812 0 0 1 .074.053c-.025-.018-.05-.036-.074-.053zm.244-.167c.074-.041.149-.076.229-.106-.08.03-.155.065-.229.106zm6.12 3.578c.025.748-1.889 3.24-2.586 3.51a.906.906 0 0 1-.342.069c-.312-.001-.561-.149-.766-.458-.128-.193-1.28-3.049-1.55-3.745a.934.934 0 0 1 .076-.887.878.878 0 0 1 .781-.4c.184.005.368.037.541.092.643.204 3.622.949 3.714 1.07.088.116.132.457.132.749zm-5.037-4.47c.012.039.022.078.031.117-.009-.039-.019-.078-.031-.117zm-.044-.156l.027.08c-.009-.027-.018-.053-.027-.08zm5.136 4.267l.008.017-.008-.017z"/></svg>
+                    <img width="980" height="980" src="images/gallery/companylogos/yelp white black png.webp" alt="Yelp">
                 </a>
             </div>
             <div class="footer-contact">
@@ -300,14 +354,14 @@
                 <p>1096 Wildwood Ave, Daly City, CA 94015</p>
             </div>
             <div class="footer-bottom">
-                <p>© 2024 My Baking Creations. All rights reserved.</p>
+                <p>&copy; 2024 My Baking Creations. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script src="script.js"></script>
     <script>
-    // Show/hide delivery details section based on radio selection
+    // Show/hide delivery details section
     const pickupOption = document.getElementById('pickup_option');
     const deliveryOption = document.getElementById('delivery_option');
     const deliveryDetailsSection = document.getElementById('deliveryDetailsSection');
@@ -351,7 +405,6 @@
                 aiPreviewSection.style.display = 'block';
             } else {
                 aiPreviewSection.style.display = 'none';
-                // Reset preview state when switching away from cake
                 previewResult.style.display = 'none';
                 previewError.style.display = 'none';
             }
@@ -370,14 +423,6 @@
             return;
         }
 
-        // Check if worker is configured
-        if (PREVIEW_WORKER_URL === 'YOUR_CLOUDFLARE_WORKER_URL_HERE') {
-            previewError.textContent = 'AI Preview is being set up. Please describe your cake and we\'ll help you design it!';
-            previewError.style.display = 'block';
-            return;
-        }
-
-        // Show loading, hide others
         previewLoading.style.display = 'block';
         previewResult.style.display = 'none';
         previewError.style.display = 'none';
@@ -412,7 +457,7 @@
         }
     });
 
-    // Add CSS animation for spinner
+    // CSS animation for spinner
     const style = document.createElement('style');
     style.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
     document.head.appendChild(style);
@@ -439,6 +484,7 @@
                 alert('Thank you! Your order inquiry has been sent. We\'ll respond within 24 hours.');
                 this.reset();
                 deliveryDetailsSection.style.display = 'none';
+                aiPreviewSection.style.display = 'none';
             } else {
                 alert('Something went wrong. Please call us at (415) 568-8060 or email directly.');
             }
