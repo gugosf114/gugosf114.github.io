@@ -1432,16 +1432,24 @@ footer {
         font-size: 0.95rem;
     }
 
-    /* Mobile dropdown indicator - +/− style */
+    /* Mobile dropdown indicator - chevron with rotation */
     .dropdown > a::after {
-        content: '+';
-        margin-left: 0.5rem;
-        font-weight: bold;
-        font-size: 1.2rem;
+        content: '';
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-right: 2.5px solid var(--dark-brown);
+        border-bottom: 2.5px solid var(--dark-brown);
+        margin-left: 0.6rem;
+        transform: rotate(45deg);
+        transition: transform 0.3s ease;
+        vertical-align: middle;
+        margin-bottom: 3px;
     }
 
     .dropdown.expanded > a::after {
-        content: '−';
+        transform: rotate(-135deg);
+        border-color: var(--pink);
     }
 
     /* Highlight parent when expanded */
