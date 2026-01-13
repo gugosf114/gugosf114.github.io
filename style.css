@@ -1489,7 +1489,7 @@ footer {
     header {
         padding: 0.8rem 1.5rem;
     }
-    
+
     .logo-icon {
         height: 50px;
         width: auto !important;
@@ -1498,39 +1498,46 @@ footer {
     .logo-text {
         font-size: 1.63rem;
     }
-    
+
     .hero {
         padding: 6.5rem 1.5rem 2.5rem;
     }
-    
+
     .hero-logo {
         width: 90px;
         height: auto;
         margin-bottom: 1rem;
         animation: none;
     }
-    
+
     .hero-badge {
         font-size: 0.85rem;
         padding: 0.4rem 1rem;
         margin-bottom: 1rem;
     }
-    
+
     .hero h1 {
         font-size: 1.8rem;
         margin-bottom: 0.8rem;
     }
 
-    /* Prevent background shift during typewriter animation */
+    /* CRITICAL FIX: Fixed height container for typewriter to prevent layout shift */
     .hero h1.typewriter-headline {
-        min-height: 4.5rem; /* Reserve space for 2 lines */
+        height: 3.9rem;
+        min-height: 3.9rem;
+        max-height: 3.9rem;
+        overflow: hidden;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        justify-content: center;
     }
 
     .hero-subtitle {
         font-size: 1.3rem;
         margin-bottom: 1.5rem;
     }
-    
+
     .hero-subtitle br {
         display: none;
     }
@@ -1580,14 +1587,16 @@ footer {
         height: auto;
         animation: none;
     }
-    
+
     .hero h1 {
         font-size: 1.6rem;
     }
 
-    /* Prevent background shift during typewriter animation */
+    /* CRITICAL FIX: Fixed height for smaller screens to prevent layout shift */
     .hero h1.typewriter-headline {
-        min-height: 4rem; /* Reserve space for 2 lines */
+        height: 3.4rem;
+        min-height: 3.4rem;
+        max-height: 3.4rem;
     }
 
     .hero-buttons {
