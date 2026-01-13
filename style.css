@@ -371,6 +371,11 @@ nav {
     font-weight: 500;
 }
 
+/* Hide mobile dropdown indicator on desktop */
+.mobile-dropdown-indicator {
+    display: none !important;
+}
+
 .mobile-menu-btn {
     display: none;
     background: var(--pink);
@@ -1432,30 +1437,39 @@ footer {
         font-size: 0.95rem;
     }
 
-    /* Mobile dropdown indicator - chevron with rotation */
-    .dropdown > a::after {
-        content: '';
-        display: inline-block;
-        width: 8px;
-        height: 8px;
-        border-right: 2.5px solid var(--dark-brown);
-        border-bottom: 2.5px solid var(--dark-brown);
-        margin-left: 0.6rem;
-        transform: rotate(45deg);
-        transition: transform 0.3s ease;
-        vertical-align: middle;
-        margin-bottom: 3px;
+    /* Mobile dropdown toggle - parent link with +/- indicator */
+    .dropdown > a {
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
     }
 
-    .dropdown.expanded > a::after {
-        transform: rotate(-135deg);
-        border-color: var(--pink);
+    /* Plus/minus indicator on right side - override desktop hide */
+    .dropdown > a .mobile-dropdown-indicator,
+    .mobile-dropdown-indicator {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: var(--pink);
+        color: white;
+        font-size: 1.1rem;
+        font-weight: 700;
+        line-height: 1;
+        flex-shrink: 0;
+        margin-left: 0.75rem;
     }
 
     /* Highlight parent when expanded */
     .dropdown.expanded > a {
         background: var(--cream);
         color: var(--pink);
+    }
+
+    .dropdown.expanded > a .mobile-dropdown-indicator {
+        background: var(--dark-brown);
     }
 
     /* Accent border on expanded submenu */

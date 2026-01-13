@@ -45,21 +45,50 @@ if (navLinks) {
 }
 
 // Mobile dropdown toggle - make gallery dropdown expandable on mobile
+// Add +/- indicators to dropdown toggles on mobile
+function initMobileDropdownIndicators() {
+    document.querySelectorAll('.dropdown > a').forEach(dropdownToggle => {
+        // Check if indicator already exists
+        if (!dropdownToggle.querySelector('.mobile-dropdown-indicator')) {
+            const indicator = document.createElement('span');
+            indicator.className = 'mobile-dropdown-indicator';
+            indicator.textContent = '+';
+            indicator.setAttribute('aria-hidden', 'true');
+            dropdownToggle.appendChild(indicator);
+        }
+    });
+}
+
+// Initialize indicators on page load if mobile
+if (window.innerWidth <= 968) {
+    initMobileDropdownIndicators();
+}
+
+// Also init on resize to mobile
+window.addEventListener('resize', () => {
+    if (window.innerWidth <= 968) {
+        initMobileDropdownIndicators();
+    }
+});
+
 document.querySelectorAll('.dropdown > a').forEach(dropdownToggle => {
     dropdownToggle.addEventListener('click', (e) => {
         if (window.innerWidth <= 968) {
             const dropdown = dropdownToggle.closest('.dropdown');
             const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+            const indicator = dropdownToggle.querySelector('.mobile-dropdown-indicator');
 
             if (dropdownMenu) {
                 e.preventDefault(); // Always prevent navigation on the toggle
 
                 if (dropdown.classList.contains('expanded')) {
-                    // Second tap - collapse the dropdown
+                    // Collapse the dropdown
                     dropdown.classList.remove('expanded');
+                    if (indicator) indicator.textContent = '+';
                 } else {
-                    // First tap - expand the dropdown
+                    // Expand the dropdown
                     dropdown.classList.add('expanded');
+                    if (indicator) indicator.textContent = '−'; // Using minus sign character
                 }
             }
         }
