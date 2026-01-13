@@ -88,21 +88,20 @@ The cake should look realistic and achievable by a skilled baker.
 Style: elegant presentation, clean white background, soft studio lighting, realistic buttercream or fondant textures, appetizing and celebratory.
 Do NOT include any text, letters, words, or writing on the cake.`;
 
-      // Call Gemini Imagen API
+      // Call Gemini Image Generation API (new endpoint as of 2025)
       const geminiResponse = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${env.GEMINI_API_KEY}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp-image-generation:generateContent?key=${env.GEMINI_API_KEY}`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            instances: [{ prompt: imagePrompt }],
-            parameters: {
-              sampleCount: 1,
-              aspectRatio: "1:1",
-              safetyFilterLevel: "block_medium_and_above",
-              personGeneration: "dont_allow"
+            contents: [{
+              parts: [{ text: imagePrompt }]
+            }],
+            generationConfig: {
+              responseModalities: ["IMAGE", "TEXT"]
             }
           }),
         }
@@ -121,8 +120,10 @@ Do NOT include any text, letters, words, or writing on the cake.`;
 
       const geminiData = await geminiResponse.json();
 
-      // Extract the base64 image from response
-      const imageData = geminiData.predictions?.[0]?.bytesBase64Encoded;
+      // Extract the base64 image from the new response format
+      const parts = geminiData.candidates?.[0]?.content?.parts || [];
+      const imagePart = parts.find(p => p.inlineData?.mimeType?.startsWith('image/'));
+      const imageData = imagePart?.inlineData?.data;
 
       if (!imageData) {
         console.error('No image in Gemini response:', geminiData);
