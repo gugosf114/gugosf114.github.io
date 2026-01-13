@@ -1520,7 +1520,12 @@ footer {
         font-size: 1.8rem;
         margin-bottom: 0.8rem;
     }
-    
+
+    /* Prevent background shift during typewriter animation */
+    .hero h1.typewriter-headline {
+        min-height: 4.5rem; /* Reserve space for 2 lines */
+    }
+
     .hero-subtitle {
         font-size: 1.3rem;
         margin-bottom: 1.5rem;
@@ -1579,7 +1584,12 @@ footer {
     .hero h1 {
         font-size: 1.6rem;
     }
-    
+
+    /* Prevent background shift during typewriter animation */
+    .hero h1.typewriter-headline {
+        min-height: 4rem; /* Reserve space for 2 lines */
+    }
+
     .hero-buttons {
         flex-direction: column;
         gap: 0.8rem;
