@@ -23,9 +23,9 @@
    ============================================ */
 #chatbot-toggle {
   position: fixed;
-  bottom: 50%;
-  right: 70px;
-  transform: translateY(50%);
+  bottom: 100px;
+  right: 30px;
+  transform: none;
   width: 66px;
   height: 66px;
   border-radius: 50%;
@@ -48,7 +48,7 @@
 
 #chatbot-toggle:hover {
   background: var(--chatbot-pink-dark);
-  transform: translateY(50%) scale(1.1);
+  transform: scale(1.1);
   box-shadow: var(--chatbot-shadow-hover);
   animation: none;
 }
@@ -100,8 +100,8 @@
    ============================================ */
 #chatbot-window {
   position: fixed;
-  bottom: 50%;
-  right: 70px;
+  bottom: 180px;
+  right: 30px;
   width: 380px;
   height: 500px;
   background: var(--chatbot-cream);
@@ -121,7 +121,7 @@
 #chatbot-window.open {
   opacity: 1;
   visibility: visible;
-  transform: translateY(50%) scale(1);
+  transform: scale(1);
 }
 
 /* ============================================
