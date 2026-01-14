@@ -152,7 +152,9 @@
                 <h2 style="font-family: 'Fredoka One', cursive; font-size: 2rem; color: var(--dark-brown); margin-bottom: 1.5rem; text-align: center;">Start Your Order</h2>
 
                 <div style="background: var(--white); padding: 2rem; border-radius: 20px;">
-                    <form id="orderForm" enctype="multipart/form-data">
+                    <form id="orderForm" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="access_key" value="bb1321a2-591e-405f-afb6-d93a8e4f721d">
+                        <input type="hidden" name="from_name" value="My Baking Creations Website">
                         <p class="order-disclaimer" style="background: #fff9e6; padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--brown); border-left: 4px solid var(--yellow);">
                             <strong>No commitment yet!</strong> This just gets the conversation started. We'll work out all the details together — design, quantity, flavors, pickup date — and send a separate invoice once everything's finalized. For a quick message, <a href="contact.html" style="color: var(--pink); font-weight: 700;">visit our contact page</a>.
                         </p>
@@ -359,30 +361,8 @@
 
     <script src="script.js"></script>
     <script>
-    // Show/hide delivery details section
-    const pickupOption = document.getElementById('pickup_option');
-    const deliveryOption = document.getElementById('delivery_option');
-    const deliveryDetailsSection = document.getElementById('deliveryDetailsSection');
-    const deliveryAddress = document.getElementById('delivery_address');
-    const deliveryCity = document.getElementById('delivery_city');
-
-    function toggleDeliverySection() {
-        if (deliveryOption.checked) {
-            deliveryDetailsSection.style.display = 'block';
-            deliveryAddress.required = true;
-            deliveryCity.required = true;
-        } else {
-            deliveryDetailsSection.style.display = 'none';
-            deliveryAddress.required = false;
-            deliveryCity.required = false;
-        }
-    }
-
-    pickupOption.addEventListener('change', toggleDeliverySection);
-    deliveryOption.addEventListener('change', toggleDeliverySection);
-
     // ===========================================
-    // AI CAKE PREVIEW
+    // AI CAKE PREVIEW (page-specific functionality)
     // ===========================================
     const PREVIEW_WORKER_URL = 'https://cakeplugin.summer-lake-b6ea.workers.dev/';
 
@@ -459,44 +439,6 @@
     const style = document.createElement('style');
     style.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
     document.head.appendChild(style);
-
-    // Form submission via Web3Forms
-    document.getElementById('orderForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-
-        const formData = new FormData(this);
-        // Add Web3Forms access key
-        formData.append('access_key', 'bb1321a2-591e-405f-afb6-d93a8e4f721d');
-        formData.append('from_name', 'My Baking Creations Website');
-
-        const submitBtn = this.querySelector('.btn');
-
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending...';
-
-        try {
-            const response = await fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                body: formData
-            });
-
-            const data = await response.json();
-
-            if (data.success) {
-                alert('Thank you! Your order inquiry has been sent. We\'ll respond within 24 hours.');
-                this.reset();
-                deliveryDetailsSection.style.display = 'none';
-                aiPreviewSection.style.display = 'none';
-            } else {
-                alert('Something went wrong. Please call us at (415) 568-8060 or email directly.');
-            }
-        } catch (error) {
-            alert('Something went wrong. Please call us at (415) 568-8060 or email directly.');
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Send Order Inquiry';
-        }
-    });
     </script>
 
     <!-- AI Chatbot Widget -->
