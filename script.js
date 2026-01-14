@@ -1318,3 +1318,58 @@ if (document.readyState === 'loading') {
         });
     });
 })();
+
+// ===========================================
+// SCROLL-TRIGGERED RATING COUNTER ANIMATION
+// Animates "5.0" ratings when they come into view
+// ===========================================
+(function() {
+    // Respect reduced motion preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const ratingCounts = document.querySelectorAll('.rating-count');
+    if (ratingCounts.length === 0) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const element = entry.target;
+                const text = element.textContent;
+                const match = text.match(/(\d+\.?\d*)/);
+
+                if (match) {
+                    const targetValue = parseFloat(match[1]);
+                    const suffix = text.replace(match[1], '');
+
+                    animateCounter(element, targetValue, suffix);
+                }
+                observer.unobserve(element);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    ratingCounts.forEach(el => observer.observe(el));
+
+    function animateCounter(element, target, suffix) {
+        const duration = 1500;
+        const startTime = performance.now();
+        const startValue = 0;
+
+        function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+
+            // Ease-out curve for smooth deceleration
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            const currentValue = startValue + (target - startValue) * easeOut;
+
+            element.textContent = currentValue.toFixed(1) + suffix;
+
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            }
+        }
+
+        requestAnimationFrame(update);
+    }
+})();
