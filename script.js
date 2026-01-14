@@ -119,16 +119,20 @@ const orderForm = document.getElementById('orderForm');
 document.addEventListener('click', (e) => {
     if (e.target.id === 'floatingOrderBtn' || e.target.classList.contains('open-order-form')) {
         e.preventDefault();
-        orderModal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
+        if (orderModal) {
+            orderModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
     }
 });
 
 // Close modal
 if (closeModal) {
     closeModal.addEventListener('click', () => {
-        orderModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
+        if (orderModal) {
+            orderModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
     });
 }
 
@@ -285,8 +289,16 @@ if (orderForm) {
             if (data.success) {
                 alert('Thank you! Your order inquiry has been sent. We\'ll get back to you within 24 hours.');
                 orderForm.reset();
-                orderModal.style.display = 'none';
-                document.body.style.overflow = 'auto';
+                // Only close modal if it exists (not on dedicated order page)
+                if (orderModal) {
+                    orderModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+                // Reset any conditional sections
+                const deliveryDetailsSection = document.getElementById('deliveryDetailsSection');
+                const aiPreviewSection = document.getElementById('aiPreviewSection');
+                if (deliveryDetailsSection) deliveryDetailsSection.style.display = 'none';
+                if (aiPreviewSection) aiPreviewSection.style.display = 'none';
             } else {
                 alert('Oops! Something went wrong. Please call us at (415) 568-8060 or email info@mybakingcreations.com');
             }
