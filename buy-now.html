@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Cookies | My Baking Creations</title>
+    <meta name="description" content="Order Valentine's Day cookie bouquets and decorated cookies. Perfect gifts for your sweetheart. Bay Area delivery available.">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="canonical" href="https://mybakingcreations.com/buy-now.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+    .valentine-hero {
+        background: linear-gradient(135deg, #fdf6f0 0%, #ffe4ec 100%);
+        padding: 7rem 2rem 3rem;
+        text-align: center;
+    }
+    .valentine-hero h1 {
+        font-family: 'Fredoka One', cursive;
+        font-size: 2.8rem;
+        color: var(--dark-brown);
+        margin-bottom: 0.5rem;
+    }
+    .valentine-hero h1 span { color: #e8426f; }
+    .valentine-hero p {
+        font-size: 1.2rem;
+        color: #5A3020;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+    @media (max-width: 700px) {
+        .products-grid { grid-template-columns: 1fr; max-width: 400px; }
+        .valentine-hero h1 { font-size: 2rem; }
+    }
+    .product-card {
+        background: #fff;
+        border-radius: 20px;
+        border: 3px solid #f8d7e0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+    .product-card:hover {
+        transform: translateY(-5px);
+        border-color: #e8426f;
+        box-shadow: 0 15px 40px rgba(232, 66, 111, 0.2);
+    }
+    .product-image {
+        aspect-ratio: 1;
+        overflow: hidden;
+        background: #fff8fa;
+    }
+    .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .product-info {
+        padding: 1.5rem;
+        text-align: center;
+    }
+    .product-name {
+        font-family: 'Fredoka One', cursive;
+        font-size: 1.4rem;
+        color: var(--dark-brown);
+        margin-bottom: 0.5rem;
+    }
+    .product-desc {
+        font-size: 0.95rem;
+        color: #5A3020;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+    }
+    .product-price {
+        font-family: 'Fredoka One', cursive;
+        font-size: 1.5rem;
+        color: #e8426f;
+        display: block;
+        margin-bottom: 1rem;
+    }
+    .btn-order {
+        background: #e8426f;
+        color: #fff;
+        padding: 0.75rem 2rem;
+        border-radius: 30px;
+        font-weight: 700;
+        font-size: 1rem;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s ease;
+    }
+    .btn-order:hover {
+        background: #d13a63;
+        transform: translateY(-2px);
+    }
+    .order-note {
+        text-align: center;
+        padding: 2rem;
+        max-width: 600px;
+        margin: 0 auto;
+        font-size: 1rem;
+        color: #5A3020;
+    }
+    .order-note strong { color: #e8426f; }
+    </style>
+</head>
+<body>
+    <div class="header-drip"></div>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="logo_icon.png" alt="My Baking Creations" class="logo-icon">
+                <div class="logo-text"><span class="my">my</span><span class="baking">baking</span><span class="creations">CREATIONS</span></div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="corporate.html">Corporate</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="buy-now.html" class="nav-cta" style="background:#e8426f;color:#fff;">💝 Valentine's</a></li>
+            </ul>
+            <button class="mobile-menu-btn" aria-label="Menu">☰</button>
+        </nav>
+    </header>
+
+    <main>
+    <section class="valentine-hero">
+        <h1>💝 <span>Valentine's Day</span> Treats</h1>
+        <p>Sweeten their day with handcrafted cookie bouquets and decorated cookies. Order now for February 14th!</p>
+    </section>
+
+    <section class="page-content">
+        <div class="products-grid">
+            <!-- Product 1: Cookie Bouquet -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/gallery/printed/Bouquet_1.png" alt="Valentine Cookie Bouquet" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h2 class="product-name">Cookie Bouquet</h2>
+                    <p class="product-desc">Beautiful arrangement of decorated Valentine cookies on sticks. A stunning edible bouquet your sweetheart will love!</p>
+                    <span class="product-price">$65</span>
+                    <a href="order-form.html" class="btn-order">Order Now</a>
+                </div>
+            </div>
+
+            <!-- Product 2: Dozen Cookies -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/gallery/handpiped/hand piped 1.jpg" alt="Valentine Dozen Cookies" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h2 class="product-name">Dozen Valentine Cookies</h2>
+                    <p class="product-desc">12 beautifully decorated heart and love-themed cookies. Hand-piped royal icing, individually wrapped.</p>
+                    <span class="product-price">$72</span>
+                    <a href="order-form.html" class="btn-order">Order Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="order-note">
+            <p><strong>🗓 Order by February 10th</strong> for Valentine's Day delivery.<br>
+            Bay Area pickup & delivery available.</p>
+            <p style="margin-top:1rem;"><a href="tel:4155688060" style="color:#e8426f;font-weight:700;">(415) 568-8060</a> · <a href="mailto:info@mybakingcreations.com" style="color:#e8426f;">info@mybakingcreations.com</a></p>
+        </div>
+    </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo"><span class="my">my</span><span class="baking">baking</span> Creations</div>
+            <p class="footer-tagline">Family-owned Bay Area bakery since 2012</p>
+            <div class="footer-contact">
+                <p><a href="tel:4155688060">(415) 568-8060</a> | <a href="mailto:info@mybakingcreations.com">info@mybakingcreations.com</a></p>
+            </div>
+            <div class="footer-bottom"><p>© 2026 My Baking Creations</p></div>
+        </div>
+    </footer>
+    <script>document.querySelector('.mobile-menu-btn')?.addEventListener('click',()=>document.querySelector('.nav-links')?.classList.toggle('active'));</script>
+</body>
+</html>
