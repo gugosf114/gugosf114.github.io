@@ -1,483 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KB96GDJ011"></script>
-    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-KB96GDJ011');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buy Now - Ready to Ship Treats | My Baking Creations</title>
-    <meta name="description" content="Shop ready-to-ship cookies, cake pops, and cupcakes from My Baking Creations. Perfect gifts and party treats available for immediate purchase.">
+    <title>Valentine's Day Cookies | My Baking Creations</title>
+    <meta name="description" content="Order Valentine's Day cookie bouquets and decorated cookies. Perfect gifts for your sweetheart. Bay Area delivery available.">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="logo_icon.png">
     <link rel="canonical" href="https://mybakingcreations.com/buy-now.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-    .shop-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1.5rem;
-        max-width: 1300px;
+    .valentine-hero {
+        background: linear-gradient(135deg, #fdf6f0 0%, #ffe4ec 100%);
+        padding: 7rem 2rem 3rem;
+        text-align: center;
+    }
+    .valentine-hero h1 {
+        font-family: 'Fredoka One', cursive;
+        font-size: 2.8rem;
+        color: var(--dark-brown);
+        margin-bottom: 0.5rem;
+    }
+    .valentine-hero h1 span { color: #e8426f; }
+    .valentine-hero p {
+        font-size: 1.2rem;
+        color: #5A3020;
+        max-width: 600px;
         margin: 0 auto;
     }
-    @media (max-width: 1100px) { .shop-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 800px) { .shop-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; } }
-    @media (max-width: 500px) { .shop-grid { grid-template-columns: 1fr; } }
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+    @media (max-width: 700px) {
+        .products-grid { grid-template-columns: 1fr; max-width: 400px; }
+        .valentine-hero h1 { font-size: 2rem; }
+    }
     .product-card {
         background: #fff;
         border-radius: 20px;
-        border: 3px solid var(--border-beige);
+        border: 3px solid #f8d7e0;
         overflow: hidden;
         transition: all 0.3s ease;
-        display: flex;
-        flex-direction: column;
     }
     .product-card:hover {
         transform: translateY(-5px);
-        border-color: var(--pink);
-        box-shadow: 0 15px 40px rgba(236, 38, 143, 0.2);
+        border-color: #e8426f;
+        box-shadow: 0 15px 40px rgba(232, 66, 111, 0.2);
     }
     .product-image {
         aspect-ratio: 1;
         overflow: hidden;
-        background: #faf8f5;
+        background: #fff8fa;
     }
     .product-image img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.3s ease;
     }
-    .product-card:hover .product-image img { transform: scale(1.05); }
     .product-info {
-        padding: 1rem 1.25rem 1.25rem;
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-    }
-    .product-category {
-        font-size: 0.75rem;
-        font-weight: 700;
-        color: var(--pink);
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 0.25rem;
+        padding: 1.5rem;
+        text-align: center;
     }
     .product-name {
         font-family: 'Fredoka One', cursive;
-        font-size: 1.1rem;
+        font-size: 1.4rem;
         color: var(--dark-brown);
         margin-bottom: 0.5rem;
-        line-height: 1.3;
     }
     .product-desc {
-        font-size: 0.85rem;
+        font-size: 0.95rem;
         color: #5A3020;
         line-height: 1.5;
-        margin-bottom: 0.75rem;
-        flex-grow: 1;
-    }
-    .product-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: auto;
+        margin-bottom: 1rem;
     }
     .product-price {
         font-family: 'Fredoka One', cursive;
-        font-size: 1.25rem;
-        color: var(--pink);
+        font-size: 1.5rem;
+        color: #e8426f;
+        display: block;
+        margin-bottom: 1rem;
     }
-    .product-price span {
-        font-family: 'Nunito', sans-serif;
-        font-size: 0.8rem;
-        font-weight: 600;
-        color: #8B5A2B;
-    }
-    .btn-buy {
-        background: var(--yellow);
-        color: var(--dark-brown);
-        padding: 0.5rem 1rem;
-        border-radius: 25px;
+    .btn-order {
+        background: #e8426f;
+        color: #fff;
+        padding: 0.75rem 2rem;
+        border-radius: 30px;
         font-weight: 700;
-        font-size: 0.85rem;
+        font-size: 1rem;
         text-decoration: none;
+        display: inline-block;
         transition: all 0.3s ease;
-        white-space: nowrap;
     }
-    .btn-buy:hover {
-        background: var(--yellow-dark);
+    .btn-order:hover {
+        background: #d13a63;
         transform: translateY(-2px);
     }
-    .shop-header {
+    .order-note {
         text-align: center;
-        margin-bottom: 2rem;
+        padding: 2rem;
+        max-width: 600px;
+        margin: 0 auto;
+        font-size: 1rem;
+        color: #5A3020;
     }
-    .shop-filters {
-        display: flex;
-        justify-content: center;
-        gap: 0.75rem;
-        flex-wrap: wrap;
-        margin-bottom: 2rem;
-    }
-    .filter-btn {
-        padding: 0.5rem 1.25rem;
-        border-radius: 25px;
-        border: 2px solid var(--border-beige);
-        background: #fff;
-        font-weight: 700;
-        font-size: 0.9rem;
-        color: var(--dark-brown);
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-    .filter-btn:hover, .filter-btn.active {
-        background: var(--pink);
-        border-color: var(--pink);
-        color: #fff;
-    }
-    .badge-new {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        background: var(--pink);
-        color: #fff;
-        padding: 0.25rem 0.75rem;
-        border-radius: 15px;
-        font-size: 0.7rem;
-        font-weight: 700;
-        text-transform: uppercase;
-    }
-    .badge-popular {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        background: var(--yellow);
-        color: var(--dark-brown);
-        padding: 0.25rem 0.75rem;
-        border-radius: 15px;
-        font-size: 0.7rem;
-        font-weight: 700;
-        text-transform: uppercase;
-    }
-    .product-image { position: relative; }
+    .order-note strong { color: #e8426f; }
     </style>
 </head>
 <body>
     <div class="header-drip"></div>
-    <div class="social-sidebar">
-        <a href="https://www.instagram.com/mybakingcreationscompany/" target="_blank" rel="noopener" class="social-instagram" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
-        <a href="https://www.facebook.com/MyBakingCreationsCompany" target="_blank" rel="noopener" class="social-facebook" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-        <a href="https://www.pinterest.com/MyBakingCreations/" target="_blank" rel="noopener" class="social-pinterest" aria-label="Pinterest"><svg viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.372-12 12 0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146 1.124.347 2.317.535 3.554.535 6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/></svg></a>
-        <a href="https://www.yelp.com/biz/my-baking-creations-san-francisco" target="_blank" rel="noopener" class="social-yelp" aria-label="Yelp"><img src="images/gallery/companylogos/yelp white black png.webp" alt="Yelp" width="20" height="20"></a>
-    </div>
     <header>
         <nav>
             <a href="index.html" class="logo">
-                <img width="1330" height="1222" src="logo_icon.png" alt="My Baking Creations logo" class="logo-icon">
+                <img src="logo_icon.png" alt="My Baking Creations" class="logo-icon">
                 <div class="logo-text"><span class="my">my</span><span class="baking">baking</span><span class="creations">CREATIONS</span></div>
             </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li class="dropdown"><a href="gallery.html">Gallery</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="gallery-cakes.html">Cakes</a></li>
-                        <li class="dropdown-subcategory"><a href="gallery-cakes-sculpted.html">Sculpted Cakes</a></li>
-                        <li class="dropdown-subcategory"><a href="gallery-cakes-realistic.html">Realistic Cakes</a></li>
-                        <li class="dropdown-subcategory"><a href="gallery-cakes-wedding.html">Wedding Cakes</a></li>
-                        <li><a href="gallery-cookies.html">Cookies</a></li>
-                        <li class="dropdown-subcategory"><a href="gallery-cookies-hand-piped.html">Hand Piped</a></li>
-                        <li class="dropdown-subcategory"><a href="gallery-cookies-printed.html">Printed Image</a></li>
-                        <li><a href="gallery-cakepops.html">Cake Pops</a></li>
-                        <li><a href="gallery-cupcakes.html">Cupcakes</a></li>
-                    </ul>
-                </li>
-                <li><a href="corporate.html">Corporate Orders</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-                <li><a href="buy-now.html" class="nav-cta" style="background: var(--pink); color: #fff;">🛒 Buy Now</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="corporate.html">Corporate</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="buy-now.html" class="nav-cta" style="background:#e8426f;color:#fff;">💝 Valentine's</a></li>
             </ul>
-            <button class="mobile-menu-btn" aria-label="Open menu">☰</button>
+            <button class="mobile-menu-btn" aria-label="Menu">☰</button>
         </nav>
     </header>
 
     <main>
-    <section class="hero" style="min-height: auto; padding: 7rem 2rem 2rem; background: linear-gradient(135deg, #fdf6f0 0%, var(--cream) 100%);">
-        <div class="hero-content" style="max-width: 700px;">
-            <h1 style="font-family: 'Fredoka One', cursive; font-size: 2.5rem; color: var(--dark-brown); margin-bottom: 0.5rem;">🛒 <span style="color: var(--pink);">Shop</span> Our Treats</h1>
-            <p style="font-size: 1.15rem; color: #5A3020; font-weight: 600;">Ready-to-order cookies, cake pops & cupcakes. Perfect for gifts, parties, and celebrations!</p>
-        </div>
+    <section class="valentine-hero">
+        <h1>💝 <span>Valentine's Day</span> Treats</h1>
+        <p>Sweeten their day with handcrafted cookie bouquets and decorated cookies. Order now for February 14th!</p>
     </section>
 
-    <section class="page-content" style="padding-top: 2rem;">
-        <div class="section-wrapper section-beige">
-            <div class="shop-filters">
-                <button class="filter-btn active" data-filter="all">All Products</button>
-                <button class="filter-btn" data-filter="cookies">Cookies</button>
-                <button class="filter-btn" data-filter="cakepops">Cake Pops</button>
-                <button class="filter-btn" data-filter="cupcakes">Cupcakes</button>
-            </div>
-
-            <div class="shop-grid">
-                <!-- COOKIES -->
-                <div class="product-card" data-category="cookies">
-                    <div class="product-image"><span class="badge-popular">Popular</span><img src="images/01 Printed Image Superhero Photo Cookies.jpg" alt="Superhero Photo Cookies" loading="lazy"></div>
-                    <div class="product-info">
-                        <span class="product-category">Printed Image Cookies</span>
-                        <h3 class="product-name">Superhero Photo Cookies</h3>
-                        <p class="product-desc">Custom printed image cookies featuring superhero themes. Perfect for kids' birthdays!</p>
-                        <div class="product-footer">
-                            <span class="product-price">$6 <span>/each</span></span>
-                            <a href="order-form.html" class="btn-buy">Order Now</a>
-                        </div>
-                    </div>
+    <section class="page-content">
+        <div class="products-grid">
+            <!-- Product 1: Cookie Bouquet -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/gallery/printed/Bouquet_1.png" alt="Valentine Cookie Bouquet" loading="lazy">
                 </div>
-
-                <div class="product-card" data-category="cookies">
-                    <div class="product-image"><img src="images/02 Printed Image Lion King Themed Cookies.jpg" alt="Lion King Cookies" loading="lazy"></div>
-                    <div class="product-info">
-                        <span class="product-category">Printed Image Cookies</span>
-                        <h3 class="product-name">Lion King Themed Cookies</h3>
-                        <p class="product-desc">Adorable Lion King character cookies with edible printed images.</p>
-                        <div class="product-footer">
-                            <span class="product-price">$6 <span>/each</span></span>
-                            <a href="order-form.html" class="btn-buy">Order Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="cookies">
-                    <div class="product-image"><span class="badge-new">New</span><img src="images/03 Printed Image Unicorn Themed Cookies.jpg" alt="Unicorn Cookies" loading="lazy"></div>
-                    <div class="product-info">
-                        <span class="product-category">Printed Image Cookies</span>
-                        <h3 class="product-name">Unicorn Themed Cookies</h3>
-                        <p class="product-desc">Magical unicorn cookies with sparkle accents. A party favorite!</p>
-                        <div class="product-footer">
-                            <span class="product-price">$6 <span>/each</span></span>
-                            <a href="order-form.html" class="btn-buy">Order Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="cookies">
-                    <div class="product-image"><img src="images/Printed Image_Mario Themed Cookies.png" alt="Mario Cookies" loading="lazy"></div>
-                    <div class="product-info">
-                        <span class="product-category">Printed Image Cookies</span>
-                        <h3 class="product-name">Super Mario Cookies</h3>
-                        <p class="product-desc">Nintendo Mario themed cookies for gaming fans of all ages.</p>
-                        <div class="product-footer">
-                            <span class="product-price">$6 <span>/each</span></span>
-                            <a href="order-form.html" class="btn-buy">Order Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="cookies">
-                    <div class="product-image"><img src="images/PRINTED IMAGE_Owl Themed Cookies.jpg" alt="Owl Cookies" loading="lazy"></div>
-                    <div class="product-info">
-                        <span class="product-category">Printed Image Cookies</span>
-                        <h3 class="product-name">Woodland Owl Cookies</h3>
-                        <p class="product-desc">Cute owl design cookies perfect for baby showers and woodland themes.</p>
-                        <div class="product-footer">
-                            <span class="product-price">$6 <span>/each</span></span>
-                            <a href="order-form.html" class="btn-buy">Order Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="cookies">
-                    <div class="product-image"><img src="images/Hand Piped baby shower cookies.jpg" alt="Baby Shower Cookies" loading="lazy"></div>
-                    <div class="product-info">
-                        <span class="product-category">Hand Piped Cookies</span>
-                        <h3 class="product-name">Baby Shower Cookies</h3>
-                        <p class="product-desc">Delicately hand-piped royal icing cookies for baby celebrations.</p>
-                        <div class="product-footer">
-                            <span class="product-price">$7 <span>/each</span></span>
-                            <a href="order-form.html" class="btn-buy">Order Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="cookies">
-                    <div class="product-image"><span class="badge-popular">Best Seller</span><img src="images/HAND PIPED_Happy Smiley Face Cookie.jpg" alt="Smiley Face Cookies" loading="lazy"></div>
-                    <div class="product-info">
-                        <span class="product-category">Hand Piped Cookies</span>
-                        <h3 class="product-name">Happy Smiley Cookies</h3>
-                        <p class="product-desc">Bright and cheerful smiley face cookies to spread joy!</p>
-                        <div class="product-footer">
-                            <span class="product-price">$7 <span>/each</span></span>
-                            <a href="order-form.html" class="btn-buy">Order Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="cookies">
-                    <div class="product-image"><img src="images/Hand Piped Football Cookies.jpg" alt="Football Cookies" loading="lazy"></div>
-                    <div class="product-info">
-                        <span class="product-category">Hand Piped Cookies</span>
-                        <h3 class="product-name">Football Game Day Cookies</h3>
-                        <p class="product-desc">Score big with these football themed cookies for game day parties!</p>
-                        <div class="product-footer">
-                            <span class="product-price">$7 <span>/each</span></span>
-                            <a href="order-form.html" class="btn-buy">Order Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CAKE POPS -->
-                <div class="product-card" data-category="cakepops">
-                    <div class="product-image"><span class="badge-popular">Popular</span><img src="images/02 Unicorn Themed Cake Pops.jpg" alt="Unicorn Cake Pops" loading="lazy"></div>
-                    <div class="product-info">
-                        <span class="product-category">Cake Pops</span>
-                        <h3 class="product-name">Unicorn Cake Pops</h3>
-                        <p class="product-desc">Magical unicorn cake pops with golden horns and pastel colors. Dozen pack.</p>
-                        <div class="product-footer">
-                            <span class="product-price">$72 <span>/dozen</span></span>
-                            <a href="order-form.html" class="btn-buy">Order Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="cakepops">
-                    <div class="product-image"><img src="images/01 Giraffe Cake Pops.jpg" alt="Giraffe Cake Pops" loading="lazy"></div>
-                    <div class="product-info">
-                        <span class="product-category">Cake Pops</span>
-                        <h3 class="product-name">Safari Giraffe Cake Pops</h3>
-                        <p class="product-desc">Adorable giraffe cake pops perfect for safari themed parties.</p>
-                        <div class="product-footer">
-                            <span class="product-price">$72 <span>/dozen</span></span>
-                            <a href="order-form.html" class="btn-buy">Order Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="cakepops">
-                    <div class="product-image"><img src="images/03 Shark Themed Cake Pops.jpg" alt="Shark Cake Pops" loading="lazy"></div>
-                    <div class="product-info">
-                        <span class="product-category">Cake Pops</span>
-                        <h3 class="product-name">Baby Shark Cake Pops</h3>
-                        <p class="product-desc">Doo doo doo! Baby Shark themed cake pops kids love.</p>
-                        <div class="product-footer">
-                            <span class="product-price">$72 <span>/dozen</span></span>
-                            <a href="order-form.html" class="btn-buy">Order Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="cakepops">
-                    <div class="product-image"><span class="badge-new">New</span><img src="images/Hello Kitty Cake Pops.jpeg" alt="Hello Kitty Cake Pops" loading="lazy"></div>
-                    <div class="product-info">
-                        <span class="product-category">Cake Pops</span>
-                        <h3 class="product-name">Hello Kitty Cake Pops</h3>
-                        <p class="product-desc">Sweet Hello Kitty themed cake pops with signature bow.</p>
-                        <div class="product-footer">
-                            <span class="product-price">$84 <span>/dozen</span></span>
-                            <a href="order-form.html" class="btn-buy">Order Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="cakepops">
-                    <div class="product-image"><img src="images/Bluey Themed Cake Pops.jpg" alt="Bluey Cake Pops" loading="lazy"></div>
-                    <div class="product-info">
-                        <span class="product-category">Cake Pops</span>
-                        <h3 class="product-name">Bluey & Bingo Cake Pops</h3>
-                        <p class="product-desc">For real life! Bluey themed cake pops for little fans.</p>
-                        <div class="product-footer">
-                            <span class="product-price">$84 <span>/dozen</span></span>
-                            <a href="order-form.html" class="btn-buy">Order Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="cakepops">
-                    <div class="product-image"><img src="images/Pokemon Themed Custom Cake Pops.jpeg" alt="Pokemon Cake Pops" loading="lazy"></div>
-                    <div class="product-info">
-                        <span class="product-category">Cake Pops</span>
-                        <h3 class="product-name">Pokemon Cake Pops</h3>
-                        <p class="product-desc">Gotta catch em all! Pikachu and Pokeball cake pops.</p>
-                        <div class="product-footer">
-                            <span class="product-price">$84 <span>/dozen</span></span>
-                            <a href="order-form.html" class="btn-buy">Order Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="cakepops">
-                    <div class="product-image"><img src="images/Roses Themed Cake Pops.jpg" alt="Rose Cake Pops" loading="lazy"></div>
-                    <div class="product-info">
-                        <span class="product-category">Cake Pops</span>
-                        <h3 class="product-name">Rose Bouquet Cake Pops</h3>
-                        <p class="product-desc">Elegant rose-shaped cake pops for weddings and showers.</p>
-                        <div class="product-footer">
-                            <span class="product-price">$96 <span>/dozen</span></span>
-                            <a href="order-form.html" class="btn-buy">Order Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="cakepops">
-                    <div class="product-image"><img src="images/spiderman cakepops.jpeg" alt="Spiderman Cake Pops" loading="lazy"></div>
-                    <div class="product-info">
-                        <span class="product-category">Cake Pops</span>
-                        <h3 class="product-name">Spider-Man Cake Pops</h3>
-                        <p class="product-desc">Web-slinging Spider-Man themed cake pops for superhero fans.</p>
-                        <div class="product-footer">
-                            <span class="product-price">$84 <span>/dozen</span></span>
-                            <a href="order-form.html" class="btn-buy">Order Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CUPCAKES -->
-                <div class="product-card" data-category="cupcakes">
-                    <div class="product-image"><span class="badge-popular">Popular</span><img src="images/gallery/categoryplaceholder/Bumble bee themed cupcakes.jpg" alt="Bumble Bee Cupcakes" loading="lazy"></div>
-                    <div class="product-info">
-                        <span class="product-category">Cupcakes</span>
-                        <h3 class="product-name">Bumble Bee Cupcakes</h3>
-                        <p class="product-desc">Sweet as honey! Adorable bee themed cupcakes for any celebration.</p>
-                        <div class="product-footer">
-                            <span class="product-price">$48 <span>/dozen</span></span>
-                            <a href="order-form.html" class="btn-buy">Order Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="cupcakes">
-                    <div class="product-image"><img src="images/gallery/cupcakes/cupcake 1.jpg" alt="Classic Cupcakes" loading="lazy"></div>
-                    <div class="product-info">
-                        <span class="product-category">Cupcakes</span>
-                        <h3 class="product-name">Classic Swirl Cupcakes</h3>
-                        <p class="product-desc">Elegant buttercream swirl cupcakes in your choice of colors.</p>
-                        <div class="product-footer">
-                            <span class="product-price">$42 <span>/dozen</span></span>
-                            <a href="order-form.html" class="btn-buy">Order Now</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card" data-category="cupcakes">
-                    <div class="product-image"><span class="badge-new">New</span><img src="images/gallery/cupcakes/cupcake 3.jpg" alt="Floral Cupcakes" loading="lazy"></div>
-                    <div class="product-info">
-                        <span class="product-category">Cupcakes</span>
-                        <h3 class="product-name">Garden Floral Cupcakes</h3>
-                        <p class="product-desc">Beautiful buttercream flower topped cupcakes for spring celebrations.</p>
-                        <div class="product-footer">
-                            <span class="product-price">$54 <span>/dozen</span></span>
-                            <a href="order-form.html" class="btn-buy">Order Now</a>
-                        </div>
-                    </div>
+                <div class="product-info">
+                    <h2 class="product-name">Cookie Bouquet</h2>
+                    <p class="product-desc">Beautiful arrangement of decorated Valentine cookies on sticks. A stunning edible bouquet your sweetheart will love!</p>
+                    <span class="product-price">$65</span>
+                    <a href="order-form.html" class="btn-order">Order Now</a>
                 </div>
             </div>
 
-            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: #fff; border-radius: 20px; border: 3px solid var(--border-beige);">
-                <h3 style="font-family: 'Fredoka One', cursive; font-size: 1.5rem; color: var(--dark-brown); margin-bottom: 0.5rem;">Need Something Custom?</h3>
-                <p style="color: #5A3020; margin-bottom: 1rem;">We create custom designs for any theme, event, or celebration!</p>
-                <a href="order-form.html" class="btn btn-primary">Request Custom Order</a>
+            <!-- Product 2: Dozen Cookies -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="images/gallery/handpiped/hand piped 1.jpg" alt="Valentine Dozen Cookies" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h2 class="product-name">Dozen Valentine Cookies</h2>
+                    <p class="product-desc">12 beautifully decorated heart and love-themed cookies. Hand-piped royal icing, individually wrapped.</p>
+                    <span class="product-price">$72</span>
+                    <a href="order-form.html" class="btn-order">Order Now</a>
+                </div>
             </div>
+        </div>
+
+        <div class="order-note">
+            <p><strong>🗓 Order by February 10th</strong> for Valentine's Day delivery.<br>
+            Bay Area pickup & delivery available.</p>
+            <p style="margin-top:1rem;"><a href="tel:4155688060" style="color:#e8426f;font-weight:700;">(415) 568-8060</a> · <a href="mailto:info@mybakingcreations.com" style="color:#e8426f;">info@mybakingcreations.com</a></p>
         </div>
     </section>
     </main>
@@ -486,52 +179,12 @@
         <div class="footer-content">
             <div class="footer-logo"><span class="my">my</span><span class="baking">baking</span> Creations</div>
             <p class="footer-tagline">Family-owned Bay Area bakery since 2012</p>
-            <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="about.html">About Us</a>
-                <a href="gallery.html">Gallery</a>
-                <a href="buy-now.html">Shop</a>
-                <a href="corporate.html">Corporate</a>
-                <a href="contact.html">Contact</a>
-            </div>
-            <div class="social-links">
-                <a href="https://www.instagram.com/mybakingcreationscompany/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
-                <a href="https://www.facebook.com/MyBakingCreationsCompany" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-                <a href="https://www.pinterest.com/MyBakingCreations" target="_blank" rel="noopener" aria-label="Pinterest"><svg viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.372-12 12 0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146 1.124.347 2.317.535 3.554.535 6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/></svg></a>
-                <a href="https://www.yelp.com/biz/my-baking-creations-san-francisco" target="_blank" rel="noopener" aria-label="Yelp"><img src="images/gallery/companylogos/yelp white black png.webp" alt="Yelp" width="24" height="24" loading="lazy"></a>
-            </div>
             <div class="footer-contact">
                 <p><a href="tel:4155688060">(415) 568-8060</a> | <a href="mailto:info@mybakingcreations.com">info@mybakingcreations.com</a></p>
-                <p>1096 Wildwood Ave, Daly City, CA 94015</p>
             </div>
-            <div class="footer-bottom"><p>© 2026 My Baking Creations. All rights reserved.</p></div>
+            <div class="footer-bottom"><p>© 2026 My Baking Creations</p></div>
         </div>
     </footer>
-
-    <script>
-    // Filter functionality
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const products = document.querySelectorAll('.product-card');
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const filter = btn.dataset.filter;
-            products.forEach(product => {
-                if (filter === 'all' || product.dataset.category === filter) {
-                    product.style.display = 'flex';
-                } else {
-                    product.style.display = 'none';
-                }
-            });
-        });
-    });
-    // Mobile menu
-    document.querySelector('.mobile-menu-btn')?.addEventListener('click', function() {
-        document.querySelector('.nav-links')?.classList.toggle('active');
-    });
-    </script>
-    <link rel="stylesheet" href="chatbot.css">
-    <script src="chatbot.js" defer></script>
+    <script>document.querySelector('.mobile-menu-btn')?.addEventListener('click',()=>document.querySelector('.nav-links')?.classList.toggle('active'));</script>
 </body>
 </html>
