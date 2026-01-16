@@ -3,129 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Now - Quick Ship Cookies | My Baking Creations</title>
-    <meta name="description" content="Need cookies fast? Order our ready-to-ship cookie bouquets and printed photo cookies. Perfect for last-minute birthdays and gifts. Bay Area delivery or nationwide shipping.">
+    <title>Printed Image Cookies | My Baking Creations</title>
+    <meta name="description" content="Custom printed image cookies - send us your photo and we print it on delicious cookies. Faces, logos, pets - if you can picture it, we can cookie it!">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="canonical" href="https://mybakingcreations.com/buy-now.html">
+    <link rel="canonical" href="https://mybakingcreations.com/order-printed.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-    .quickship-hero {
+    .product-hero {
         background: linear-gradient(135deg, #fdf6f0 0%, #fff5e6 100%);
         padding: 7rem 2rem 3rem;
         text-align: center;
     }
-    .quickship-hero h1 {
+    .product-hero h1 {
         font-family: 'Fredoka One', cursive;
         font-size: 2.8rem;
         color: var(--dark-brown);
         margin-bottom: 0.5rem;
     }
-    .quickship-hero h1 span { color: #e8426f; }
-    .quickship-hero p {
+    .product-hero h1 span { color: #e8426f; }
+    .product-hero p {
         font-size: 1.2rem;
         color: #5A3020;
         max-width: 600px;
         margin: 0 auto;
     }
-    .products-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 2rem;
-    }
-    @media (max-width: 700px) {
-        .products-grid { grid-template-columns: 1fr; max-width: 400px; }
-        .quickship-hero h1 { font-size: 2rem; }
-    }
-    .product-card {
-        background: #fff;
-        border-radius: 20px;
-        border: 3px solid var(--yellow);
-        overflow: hidden;
-        transition: all 0.3s ease;
-    }
-    .product-card:hover {
-        transform: translateY(-5px);
-        border-color: #e8426f;
-        box-shadow: 0 15px 40px rgba(232, 66, 111, 0.2);
-    }
-    .product-image {
-        aspect-ratio: 1;
-        overflow: hidden;
-        background: #fffaf5;
-    }
-    .product-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    .product-info {
-        padding: 1.5rem;
-        text-align: center;
-    }
-    .product-name {
-        font-family: 'Fredoka One', cursive;
-        font-size: 1.4rem;
-        color: var(--dark-brown);
-        margin-bottom: 0.5rem;
-    }
-    .product-desc {
-        font-size: 0.95rem;
-        color: #5A3020;
-        line-height: 1.5;
-        margin-bottom: 1rem;
-    }
-    .product-price {
-        font-family: 'Fredoka One', cursive;
-        font-size: 1.5rem;
-        color: #e8426f;
-        display: block;
-        margin-bottom: 1rem;
-    }
-    .btn-order {
-        background: #e8426f;
-        color: #fff;
-        padding: 0.75rem 2rem;
-        border-radius: 30px;
-        font-weight: 700;
-        font-size: 1rem;
-        text-decoration: none;
-        display: inline-block;
-        transition: all 0.3s ease;
-    }
-    .btn-order:hover {
-        background: #d13a63;
-        transform: translateY(-2px);
-    }
-    .order-note {
-        text-align: center;
-        padding: 2rem;
-        max-width: 600px;
-        margin: 0 auto;
-        font-size: 1rem;
-        color: #5A3020;
-    }
-    .order-note strong { color: #e8426f; }
-
-    /* Product Detail Sections */
-    .product-detail {
-        max-width: 1000px;
-        margin: 0 auto 3rem;
-        padding: 2rem;
-    }
-    .product-detail h2 {
+    .product-hero .price {
         font-family: 'Fredoka One', cursive;
         font-size: 2rem;
-        color: var(--dark-brown);
-        text-align: center;
-        margin-bottom: 1.5rem;
+        color: #e8426f;
+        margin-top: 1rem;
     }
-    .product-detail h2 span { color: #e8426f; }
+    .product-detail {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
     .product-gallery {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -133,6 +48,7 @@
     }
     @media (max-width: 800px) {
         .product-gallery { grid-template-columns: repeat(2, 1fr); }
+        .product-hero h1 { font-size: 2rem; }
     }
     @media (max-width: 500px) {
         .product-gallery { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; }
@@ -149,12 +65,42 @@
         border-color: #e8426f;
         transform: scale(1.03);
     }
-    .section-divider {
-        width: 100px;
-        height: 4px;
-        background: var(--yellow);
-        margin: 3rem auto;
-        border-radius: 2px;
+    .btn-order {
+        background: #e8426f;
+        color: #fff;
+        padding: 0.75rem 2rem;
+        border-radius: 30px;
+        font-weight: 700;
+        font-size: 1rem;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s ease;
+    }
+    .btn-order:hover {
+        background: #d13a63;
+        transform: translateY(-2px);
+    }
+    .btn-back {
+        background: transparent;
+        color: #5A3020;
+        border: 2px solid var(--border-beige);
+        padding: 0.75rem 2rem;
+        border-radius: 30px;
+        font-weight: 700;
+        font-size: 1rem;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s ease;
+        margin-right: 1rem;
+    }
+    .btn-back:hover {
+        border-color: #e8426f;
+        color: #e8426f;
+    }
+    .action-buttons {
+        text-align: center;
+        margin-top: 2rem;
+        padding-bottom: 2rem;
     }
     </style>
 </head>
@@ -192,7 +138,6 @@
                 <li><a href="contact.html">Contact Us</a></li>
                 <li><a href="order-form.html" class="nav-cta">Get a Quote</a></li>
             </ul>
-            <!-- Search Bar -->
             <div class="search-container">
                 <div class="search-wrapper">
                     <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" style="width:16px;height:16px;max-width:16px;max-height:16px;"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
@@ -206,45 +151,28 @@
     </header>
 
     <main>
-    <section class="quickship-hero">
-        <h1>Need Cookies <span>Fast?</span></h1>
-        <p>Forgot a birthday? Last-minute gift? These ready-to-ship treats can be delivered anywhere nationwide or picked up locally - no custom design wait time.</p>
-        <p style="margin-top:1rem; font-weight:700;">Click a tile below to view the gallery, then order!</p>
+    <section class="product-hero">
+        <h1>Printed Image <span>Cookies</span></h1>
+        <p>Send us your photo and we print it on delicious cookies. Faces, logos, pets - if you can picture it, we can cookie it!</p>
+        <div class="price">$72 / dozen</div>
     </section>
 
     <section class="page-content">
-        <div class="products-grid">
-            <!-- Product 1: Cookie Bouquet -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/ordernow/bouquet/bouquetplaceholder.png" alt="Cookie Bouquet" loading="lazy">
-                </div>
-                <div class="product-info">
-                    <h2 class="product-name">Cookie Bouquet</h2>
-                    <p class="product-desc">Beautiful arrangement of decorated cookies on sticks. A stunning edible bouquet - perfect for birthdays, thank yous, or just because!</p>
-                    <span class="product-price">$65</span>
-                    <a href="order-bouquets.html" class="btn-order">View Gallery</a>
-                </div>
+        <div class="product-detail">
+            <div class="product-gallery">
+                <img src="images/ordernow/printedimage/Printed Image Dragon Ball Z Themed Cookies.png" alt="Dragon Ball Z themed printed cookies" loading="lazy">
+                <img src="images/ordernow/printedimage/Printed Image Lion King Themed Cookies.png" alt="Lion King themed printed cookies" loading="lazy">
+                <img src="images/ordernow/printedimage/Printed Image Superhero Photo Cookies.png" alt="Superhero themed printed cookies" loading="lazy">
+                <img src="images/ordernow/printedimage/Printed Image Unicorn Themed Cookies.png" alt="Unicorn themed printed cookies" loading="lazy">
+                <img src="images/ordernow/printedimage/Printed Image_Hot Air Balloon_Photo Cookies 2.jpg" alt="Hot Air Balloon themed printed cookies" loading="lazy">
+                <img src="images/ordernow/printedimage/Printed Image_Mario Themed Cookies.png" alt="Mario themed printed cookies" loading="lazy">
+                <img src="images/ordernow/printedimage/PRINTED IMAGE_Octonauts Themed Custom Cookies.jpg" alt="Octonauts themed printed cookies" loading="lazy">
+                <img src="images/ordernow/printedimage/PRINTED IMAGE_Owl Themed Cookies.png" alt="Owl themed printed cookies" loading="lazy">
             </div>
-
-            <!-- Product 2: Printed Image Cookies -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/gallery/printed/Printed Image Photo Cookies_Happy Birthday Design.jpg" alt="Printed Image Cookies" loading="lazy">
-                </div>
-                <div class="product-info">
-                    <h2 class="product-name">Printed Image Cookies</h2>
-                    <p class="product-desc">Send us your photo and we print it on delicious cookies. Faces, logos, pets - if you can picture it, we can cookie it!</p>
-                    <span class="product-price">$72 / dozen</span>
-                    <a href="order-printed.html" class="btn-order">View Gallery</a>
-                </div>
+            <div class="action-buttons">
+                <a href="buy-now.html" class="btn-back">&larr; Back</a>
+                <a href="order-form.html" class="btn-order">Order Now</a>
             </div>
-        </div>
-
-        <div class="order-note">
-            <p><strong>Ships within 3-5 business days</strong><br>
-            Bay Area pickup available. Nationwide shipping.</p>
-            <p style="margin-top:1rem;"><a href="tel:4155688060" style="color:#e8426f;font-weight:700;">(415) 568-8060</a> &middot; <a href="mailto:info@mybakingcreations.com" style="color:#e8426f;">info@mybakingcreations.com</a></p>
         </div>
     </section>
     </main>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Bouquets | My Baking Creations</title>
+    <meta name="description" content="Beautiful cookie bouquet arrangements - decorated cookies on sticks perfect for birthdays, thank yous, or any occasion. Order online for delivery or local pickup.">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="canonical" href="https://mybakingcreations.com/order-bouquets.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+    .product-hero {
+        background: linear-gradient(135deg, #fdf6f0 0%, #fff5e6 100%);
+        padding: 7rem 2rem 3rem;
+        text-align: center;
+    }
+    .product-hero h1 {
+        font-family: 'Fredoka One', cursive;
+        font-size: 2.8rem;
+        color: var(--dark-brown);
+        margin-bottom: 0.5rem;
+    }
+    .product-hero h1 span { color: #e8426f; }
+    .product-hero p {
+        font-size: 1.2rem;
+        color: #5A3020;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    .product-hero .price {
+        font-family: 'Fredoka One', cursive;
+        font-size: 2rem;
+        color: #e8426f;
+        margin-top: 1rem;
+    }
+    .product-detail {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+    .product-gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+    @media (max-width: 800px) {
+        .product-gallery { grid-template-columns: repeat(2, 1fr); }
+        .product-hero h1 { font-size: 2rem; }
+    }
+    @media (max-width: 500px) {
+        .product-gallery { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; }
+    }
+    .product-gallery img {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        border-radius: 15px;
+        border: 3px solid var(--border-beige);
+        transition: all 0.3s ease;
+    }
+    .product-gallery img:hover {
+        border-color: #e8426f;
+        transform: scale(1.03);
+    }
+    .btn-order {
+        background: #e8426f;
+        color: #fff;
+        padding: 0.75rem 2rem;
+        border-radius: 30px;
+        font-weight: 700;
+        font-size: 1rem;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s ease;
+    }
+    .btn-order:hover {
+        background: #d13a63;
+        transform: translateY(-2px);
+    }
+    .btn-back {
+        background: transparent;
+        color: #5A3020;
+        border: 2px solid var(--border-beige);
+        padding: 0.75rem 2rem;
+        border-radius: 30px;
+        font-weight: 700;
+        font-size: 1rem;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s ease;
+        margin-right: 1rem;
+    }
+    .btn-back:hover {
+        border-color: #e8426f;
+        color: #e8426f;
+    }
+    .action-buttons {
+        text-align: center;
+        margin-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    </style>
+</head>
+<body>
+    <div class="header-drip"></div>
+    <header>
+        <nav>
+            <a href="buy-now.html" class="order-now-btn">Order Now</a>
+            <a href="index.html" class="logo">
+                <img width="1330" height="1222" src="logo_icon.png" alt="My Baking Creations logo" class="logo-icon">
+                <div class="logo-text">
+                    <span class="my">my</span><span class="baking">baking</span>
+                    <span class="creations">CREATIONS</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li class="dropdown">
+                    <a href="gallery.html">Gallery</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="gallery-cakes.html">Cakes</a></li>
+                        <li class="dropdown-subcategory"><a href="gallery-cakes-sculpted.html">Sculpted Cakes</a></li>
+                        <li class="dropdown-subcategory"><a href="gallery-cakes-realistic.html">Realistic Cakes</a></li>
+                        <li class="dropdown-subcategory"><a href="gallery-cakes-wedding.html">Wedding Cakes</a></li>
+                        <li><a href="gallery-cookies.html">Cookies</a></li>
+                        <li class="dropdown-subcategory"><a href="gallery-cookies-hand-piped.html">Hand Piped</a></li>
+                        <li class="dropdown-subcategory"><a href="gallery-cookies-printed.html">Printed Image</a></li>
+                        <li><a href="gallery-cakepops.html">Cake Pops</a></li>
+                        <li><a href="gallery-cupcakes.html">Cupcakes</a></li>
+                    </ul>
+                </li>
+                <li><a href="corporate.html">Corporate Orders</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="order-form.html" class="nav-cta">Get a Quote</a></li>
+            </ul>
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" style="width:16px;height:16px;max-width:16px;max-height:16px;"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                    <input type="text" class="search-input typewriter-active" id="site-search" placeholder="" autocomplete="off">
+                    <span class="typewriter-placeholder" id="search-typewriter"><span class="cursor"></span></span>
+                </div>
+                <div class="search-results" id="search-results"></div>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Menu">&#9776;</button>
+        </nav>
+    </header>
+
+    <main>
+    <section class="product-hero">
+        <h1>Cookie <span>Bouquets</span></h1>
+        <p>Beautiful arrangement of decorated cookies on sticks. A stunning edible bouquet - perfect for birthdays, thank yous, or just because!</p>
+        <div class="price">$65</div>
+    </section>
+
+    <section class="page-content">
+        <div class="product-detail">
+            <div class="product-gallery">
+                <img src="images/ordernow/bouquet/Bouquet 2.png" alt="Cookie Bouquet arrangement" loading="lazy">
+                <img src="images/ordernow/bouquet/Bouquet 3.png" alt="Cookie Bouquet arrangement" loading="lazy">
+                <img src="images/ordernow/bouquet/Bouquet 5.png" alt="Cookie Bouquet arrangement" loading="lazy">
+                <img src="images/ordernow/bouquet/Bouquet 6.png" alt="Cookie Bouquet arrangement" loading="lazy">
+                <img src="images/ordernow/bouquet/Bouquet 12.png" alt="Cookie Bouquet arrangement" loading="lazy">
+                <img src="images/ordernow/bouquet/Bouquet 13.png" alt="Cookie Bouquet arrangement" loading="lazy">
+            </div>
+            <div class="action-buttons">
+                <a href="buy-now.html" class="btn-back">&larr; Back</a>
+                <a href="order-form.html" class="btn-order">Order Now</a>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo"><span class="my">my</span><span class="baking">baking</span> Creations</div>
+            <p class="footer-tagline">Family-owned Bay Area bakery since 2012</p>
+            <div class="footer-contact">
+                <p><a href="tel:4155688060">(415) 568-8060</a> | <a href="mailto:info@mybakingcreations.com">info@mybakingcreations.com</a></p>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 My Baking Creations</p></div>
+        </div>
+    </footer>
+    <script>document.querySelector('.mobile-menu-btn')?.addEventListener('click',()=>document.querySelector('.nav-links')?.classList.toggle('active'));</script>
+</body>
+</html>
