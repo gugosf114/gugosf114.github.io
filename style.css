@@ -222,7 +222,7 @@ nav {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 2rem;
+    gap: 1.25rem;
 }
 
 .logo {
@@ -333,7 +333,6 @@ nav {
     font-size: 0.9rem;
     text-decoration: none;
     white-space: nowrap;
-    margin-right: 1rem;
     transition: all 0.3s ease;
 }
 
