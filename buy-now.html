@@ -48,6 +48,10 @@
         border: 3px solid var(--yellow);
         overflow: hidden;
         transition: all 0.3s ease;
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
     }
     .product-card:hover {
         transform: translateY(-5px);
@@ -217,7 +221,7 @@
     <section class="page-content">
         <div class="products-grid">
             <!-- Product 1: Cookie Bouquet -->
-            <div class="product-card">
+            <a href="order-bouquets.html" class="product-card">
                 <div class="product-image">
                     <img src="images/ordernow/bouquet/bouquetplaceholder.png" alt="Cookie Bouquet" loading="lazy">
                 </div>
@@ -225,12 +229,12 @@
                     <h2 class="product-name">Cookie Bouquet</h2>
                     <p class="product-desc">Beautiful arrangement of decorated cookies on sticks. A stunning edible bouquet - perfect for birthdays, thank yous, or just because!</p>
                     <span class="product-price">$65</span>
-                    <a href="order-bouquets.html" class="btn-order">View Gallery</a>
+                    <span class="btn-order">View Gallery</span>
                 </div>
-            </div>
+            </a>
 
             <!-- Product 2: Printed Image Cookies -->
-            <div class="product-card">
+            <a href="order-printed.html" class="product-card">
                 <div class="product-image">
                     <img src="images/gallery/printed/Printed Image Photo Cookies_Happy Birthday Design.jpg" alt="Printed Image Cookies" loading="lazy">
                 </div>
@@ -238,9 +242,9 @@
                     <h2 class="product-name">Printed Image Cookies</h2>
                     <p class="product-desc">Send us your photo and we print it on delicious cookies. Faces, logos, pets - if you can picture it, we can cookie it!</p>
                     <span class="product-price">$72 / dozen</span>
-                    <a href="order-printed.html" class="btn-order">View Gallery</a>
+                    <span class="btn-order">View Gallery</span>
                 </div>
-            </div>
+            </a>
         </div>
 
         <div class="order-note">
