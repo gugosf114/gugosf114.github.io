@@ -111,6 +111,51 @@
         color: #5A3020;
     }
     .order-note strong { color: #e8426f; }
+
+    /* Product Detail Sections */
+    .product-detail {
+        max-width: 1000px;
+        margin: 0 auto 3rem;
+        padding: 2rem;
+    }
+    .product-detail h2 {
+        font-family: 'Fredoka One', cursive;
+        font-size: 2rem;
+        color: var(--dark-brown);
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+    .product-detail h2 span { color: #e8426f; }
+    .product-gallery {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+    }
+    @media (max-width: 800px) {
+        .product-gallery { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 500px) {
+        .product-gallery { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; }
+    }
+    .product-gallery img {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        border-radius: 15px;
+        border: 3px solid var(--border-beige);
+        transition: all 0.3s ease;
+    }
+    .product-gallery img:hover {
+        border-color: #e8426f;
+        transform: scale(1.03);
+    }
+    .section-divider {
+        width: 100px;
+        height: 4px;
+        background: var(--yellow);
+        margin: 3rem auto;
+        border-radius: 2px;
+    }
     </style>
 </head>
 <body>
@@ -199,6 +244,23 @@
             <p><strong>Ships within 3-5 business days</strong><br>
             Bay Area pickup available. Nationwide shipping.</p>
             <p style="margin-top:1rem;"><a href="tel:4155688060" style="color:#e8426f;font-weight:700;">(415) 568-8060</a> &middot; <a href="mailto:info@mybakingcreations.com" style="color:#e8426f;">info@mybakingcreations.com</a></p>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- Printed Image Cookies Gallery -->
+        <div class="product-detail" id="printed">
+            <h2>Printed Image <span>Cookies</span></h2>
+            <div class="product-gallery">
+                <img src="images/ordernow/printedimage/Printed Image Dragon Ball Z Themed Cookies.png" alt="Dragon Ball Z themed printed cookies" loading="lazy">
+                <img src="images/ordernow/printedimage/Printed Image Lion King Themed Cookies.png" alt="Lion King themed printed cookies" loading="lazy">
+                <img src="images/ordernow/printedimage/Printed Image Superhero Photo Cookies.png" alt="Superhero themed printed cookies" loading="lazy">
+                <img src="images/ordernow/printedimage/Printed Image Unicorn Themed Cookies.png" alt="Unicorn themed printed cookies" loading="lazy">
+                <img src="images/ordernow/printedimage/Printed Image_Hot Air Balloon_Photo Cookies 2.jpg" alt="Hot Air Balloon themed printed cookies" loading="lazy">
+                <img src="images/ordernow/printedimage/Printed Image_Mario Themed Cookies.png" alt="Mario themed printed cookies" loading="lazy">
+                <img src="images/ordernow/printedimage/PRINTED IMAGE_Octonauts Themed Custom Cookies.jpg" alt="Octonauts themed printed cookies" loading="lazy">
+                <img src="images/ordernow/printedimage/PRINTED IMAGE_Owl Themed Cookies.png" alt="Owl themed printed cookies" loading="lazy">
+            </div>
         </div>
     </section>
     </main>
