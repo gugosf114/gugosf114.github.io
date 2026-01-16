@@ -102,6 +102,54 @@
         margin-top: 2rem;
         padding-bottom: 2rem;
     }
+    .how-it-works {
+        background: #fff;
+        border: 3px solid var(--yellow);
+        border-radius: 20px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .how-it-works h2 {
+        font-family: 'Fredoka One', cursive;
+        font-size: 1.5rem;
+        color: var(--dark-brown);
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    .how-it-works h2 span { color: #e8426f; }
+    .how-it-works p {
+        color: #5A3020;
+        line-height: 1.7;
+        margin-bottom: 1rem;
+    }
+    .how-it-works ul {
+        list-style: none;
+        padding: 0;
+    }
+    .how-it-works li {
+        color: #5A3020;
+        padding: 0.5rem 0;
+        padding-left: 1.5rem;
+        position: relative;
+    }
+    .how-it-works li::before {
+        content: "✓";
+        color: #e8426f;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+    }
+    .note-box {
+        background: #fff5e6;
+        border-left: 4px solid #e8426f;
+        padding: 1rem;
+        margin-top: 1rem;
+        border-radius: 0 10px 10px 0;
+    }
+    .note-box strong { color: #e8426f; }
     </style>
 </head>
 <body>
@@ -159,6 +207,20 @@
 
     <section class="page-content">
         <div class="product-detail">
+            <div class="how-it-works">
+                <h2>Here's What <span>You Get</span></h2>
+                <p>This is a ready-to-order product - not customizable. You get exactly what you see below:</p>
+                <ul>
+                    <li>One dozen (12) delicious butter cookies</li>
+                    <li>Your image printed on white royal icing</li>
+                    <li>Beautifully packaged and ready to gift</li>
+                </ul>
+                <p><strong>How it works:</strong> Send us your image - whether it's a birthday photo, a pet, a logo, or anything else you want on cookies. We print it on our signature butter cookies with smooth white icing.</p>
+                <div class="note-box">
+                    <strong>Pickup or Ship:</strong> Pick up from our Bay Area location or we'll ship them anywhere in the US. After you order, we'll reach out to confirm your image and delivery details.
+                </div>
+            </div>
+
             <div class="product-gallery">
                 <img src="images/ordernow/printedimage/Printed Image Dragon Ball Z Themed Cookies.png" alt="Dragon Ball Z themed printed cookies" loading="lazy">
                 <img src="images/ordernow/printedimage/Printed Image Lion King Themed Cookies.png" alt="Lion King themed printed cookies" loading="lazy">
