@@ -41,29 +41,8 @@
         margin: 0 auto;
         padding: 1rem 2rem 2rem;
     }
-    .product-gallery {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1rem;
-    }
     @media (max-width: 800px) {
-        .product-gallery { grid-template-columns: repeat(2, 1fr); }
         .product-hero h1 { font-size: 2rem; }
-    }
-    @media (max-width: 500px) {
-        .product-gallery { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; }
-    }
-    .product-gallery img {
-        width: 100%;
-        aspect-ratio: 1;
-        object-fit: cover;
-        border-radius: 15px;
-        border: 3px solid var(--border-beige);
-        transition: all 0.3s ease;
-    }
-    .product-gallery img:hover {
-        border-color: #e8426f;
-        transform: scale(1.03);
     }
     .btn-order {
         background: #e8426f;
@@ -221,15 +200,31 @@
                 </div>
             </div>
 
-            <div class="product-gallery">
-                <img src="images/ordernow/printedimage/Printed Image Dragon Ball Z Themed Cookies.jpg" alt="Dragon Ball Z themed printed cookies" loading="lazy">
-                <img src="images/ordernow/printedimage/Printed Image Lion King Themed Cookies.jpg" alt="Lion King themed printed cookies" loading="lazy">
-                <img src="images/ordernow/printedimage/Printed Image Superhero Photo Cookies.jpg" alt="Superhero themed printed cookies" loading="lazy">
-                <img src="images/ordernow/printedimage/Printed Image Unicorn Themed Cookies.jpg" alt="Unicorn themed printed cookies" loading="lazy">
-                <img src="images/ordernow/printedimage/Printed Image_Hot Air Balloon_Photo Cookies 2.jpg" alt="Hot Air Balloon themed printed cookies" loading="lazy">
-                <img src="images/ordernow/printedimage/Printed Image_Mario Themed Cookies.jpg" alt="Mario themed printed cookies" loading="lazy">
-                <img src="images/ordernow/printedimage/PRINTED IMAGE_Octonauts Themed Custom Cookies.jpg" alt="Octonauts themed printed cookies" loading="lazy">
-                <img src="images/ordernow/printedimage/PRINTED IMAGE_Owl Themed Cookies.jpg" alt="Owl themed printed cookies" loading="lazy">
+            <div class="cake-gallery-grid" style="max-width: 1000px;">
+                <div class="cake-thumb" onclick="openLightbox(0)">
+                    <img src="images/ordernow/printedimage/Printed Image Dragon Ball Z Themed Cookies.jpg" alt="Dragon Ball Z themed printed cookies" loading="lazy">
+                </div>
+                <div class="cake-thumb" onclick="openLightbox(1)">
+                    <img src="images/ordernow/printedimage/Printed Image Lion King Themed Cookies.jpg" alt="Lion King themed printed cookies" loading="lazy">
+                </div>
+                <div class="cake-thumb" onclick="openLightbox(2)">
+                    <img src="images/ordernow/printedimage/Printed Image Superhero Photo Cookies.jpg" alt="Superhero themed printed cookies" loading="lazy">
+                </div>
+                <div class="cake-thumb" onclick="openLightbox(3)">
+                    <img src="images/ordernow/printedimage/Printed Image Unicorn Themed Cookies.jpg" alt="Unicorn themed printed cookies" loading="lazy">
+                </div>
+                <div class="cake-thumb" onclick="openLightbox(4)">
+                    <img src="images/ordernow/printedimage/Printed Image_Hot Air Balloon_Photo Cookies 2.jpg" alt="Hot Air Balloon themed printed cookies" loading="lazy">
+                </div>
+                <div class="cake-thumb" onclick="openLightbox(5)">
+                    <img src="images/ordernow/printedimage/Printed Image_Mario Themed Cookies.jpg" alt="Mario themed printed cookies" loading="lazy">
+                </div>
+                <div class="cake-thumb" onclick="openLightbox(6)">
+                    <img src="images/ordernow/printedimage/PRINTED IMAGE_Octonauts Themed Custom Cookies.jpg" alt="Octonauts themed printed cookies" loading="lazy">
+                </div>
+                <div class="cake-thumb" onclick="openLightbox(7)">
+                    <img src="images/ordernow/printedimage/PRINTED IMAGE_Owl Themed Cookies.jpg" alt="Owl themed printed cookies" loading="lazy">
+                </div>
             </div>
             <div class="action-buttons">
                 <a href="buy-now.html" class="btn-back">&larr; Back</a>
@@ -238,6 +233,14 @@
         </div>
     </section>
     </main>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+        <button type="button" class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
+        <button type="button" class="lightbox-prev" onclick="changeSlide(-1, event)">&#10094;</button>
+        <img id="lightbox-img" src="" alt="Enlarged photo">
+        <button type="button" class="lightbox-next" onclick="changeSlide(1, event)">&#10095;</button>
+    </div>
 
     <footer>
         <div class="footer-content">
@@ -250,5 +253,42 @@
         </div>
     </footer>
     <script>document.querySelector('.mobile-menu-btn')?.addEventListener('click',()=>document.querySelector('.nav-links')?.classList.toggle('active'));</script>
+    <script>
+    const galleryImages = [
+        'images/ordernow/printedimage/Printed Image Dragon Ball Z Themed Cookies.jpg',
+        'images/ordernow/printedimage/Printed Image Lion King Themed Cookies.jpg',
+        'images/ordernow/printedimage/Printed Image Superhero Photo Cookies.jpg',
+        'images/ordernow/printedimage/Printed Image Unicorn Themed Cookies.jpg',
+        'images/ordernow/printedimage/Printed Image_Hot Air Balloon_Photo Cookies 2.jpg',
+        'images/ordernow/printedimage/Printed Image_Mario Themed Cookies.jpg',
+        'images/ordernow/printedimage/PRINTED IMAGE_Octonauts Themed Custom Cookies.jpg',
+        'images/ordernow/printedimage/PRINTED IMAGE_Owl Themed Cookies.jpg'
+    ];
+    let currentIndex = 0;
+    function openLightbox(index) {
+        currentIndex = index;
+        document.getElementById('lightbox-img').src = galleryImages[index];
+        document.getElementById('lightbox').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(e) {
+        if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+    function changeSlide(direction, e) {
+        e.stopPropagation();
+        currentIndex = (currentIndex + direction + galleryImages.length) % galleryImages.length;
+        document.getElementById('lightbox-img').src = galleryImages[currentIndex];
+    }
+    document.addEventListener('keydown', (e) => {
+        const lightbox = document.getElementById('lightbox');
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'Escape') { lightbox.classList.remove('active'); document.body.style.overflow = ''; }
+        if (e.key === 'ArrowLeft') changeSlide(-1, e);
+        if (e.key === 'ArrowRight') changeSlide(1, e);
+    });
+    </script>
 </body>
 </html>
