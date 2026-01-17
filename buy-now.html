@@ -31,15 +31,19 @@
         margin: 0 auto;
     }
     .products-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        display: flex;
+        justify-content: center;
         gap: 2rem;
         max-width: 900px;
         margin: 0 auto;
         padding: 2rem;
     }
+    .products-grid .product-card {
+        max-width: 380px;
+        width: 100%;
+    }
     @media (max-width: 700px) {
-        .products-grid { grid-template-columns: 1fr; max-width: 400px; }
+        .products-grid { max-width: 400px; }
         .quickship-hero h1 { font-size: 2rem; }
     }
     .product-card {
@@ -213,9 +217,9 @@
     <main>
     <section class="quickship-hero">
         <h1>Need Cookies <span>Fast?</span></h1>
-        <p>Forgot a birthday? Last-minute gift? These ready-to-ship treats can be delivered anywhere nationwide or picked up locally from our Daly City location.</p>
-        <p style="margin-top:1rem; font-weight:700;">Click a tile below to view the gallery, then order!</p>
+        <p>Forgot a birthday? Last-minute gift? Pick up locally from our Daly City location or ship nationwide.</p>
         <p style="margin-top:1.5rem; font-size:1rem; color:#5A3020;">For custom cakes, cookies, or cake pops: <a href="order-form.html" style="color:#e8426f; font-weight:700;">Get a Quote</a>, <a href="contact.html" style="color:#e8426f; font-weight:700;">Contact Us</a>, or call <a href="tel:4155688060" style="color:#e8426f; font-weight:700;">(415) 568-8060</a>.</p>
+        <p style="margin-top:1rem; font-weight:700;">Click the tile below to view the gallery, then order!</p>
     </section>
 
     <section class="page-content">
