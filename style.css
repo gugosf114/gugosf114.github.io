@@ -3726,3 +3726,217 @@ header nav .search-container svg {
     0% { opacity: 1; transform: scale(1); }
     100% { opacity: 0; transform: scale(0) translate(var(--tx), var(--ty)); }
 }
+
+/* ===========================================
+   HOVER HINT BUBBLES - Reusable Component
+   Usage: Add class="has-hint" and data-hint="Your message"
+   Optional: data-hint-pos="top|bottom|left|right" (default: top)
+   =========================================== */
+.has-hint {
+    position: relative;
+}
+
+/* The bubble itself */
+.has-hint::before {
+    content: attr(data-hint);
+    position: absolute;
+    background: linear-gradient(135deg, #fff5f8 0%, #fffbf5 100%);
+    border: 2px solid var(--pink);
+    border-radius: 16px;
+    padding: 0.6rem 1rem;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--pink);
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(236, 38, 143, 0.2);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
+}
+
+/* The tail/arrow */
+.has-hint::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
+}
+
+/* Show on hover */
+.has-hint:hover::before,
+.has-hint:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ===== TOP POSITION (Default) ===== */
+.has-hint::before,
+.has-hint[data-hint-pos="top"]::before {
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%) translateY(5px);
+}
+
+.has-hint:hover::before,
+.has-hint[data-hint-pos="top"]:hover::before {
+    transform: translateX(-50%) translateY(0);
+}
+
+.has-hint::after,
+.has-hint[data-hint-pos="top"]::after {
+    bottom: calc(100% + 2px);
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 10px solid var(--pink);
+}
+
+/* ===== BOTTOM POSITION ===== */
+.has-hint[data-hint-pos="bottom"]::before {
+    top: calc(100% + 12px);
+    bottom: auto;
+    left: 50%;
+    transform: translateX(-50%) translateY(-5px);
+}
+
+.has-hint[data-hint-pos="bottom"]:hover::before {
+    transform: translateX(-50%) translateY(0);
+}
+
+.has-hint[data-hint-pos="bottom"]::after {
+    top: calc(100% + 2px);
+    bottom: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: none;
+    border-bottom: 10px solid var(--pink);
+}
+
+/* ===== LEFT POSITION ===== */
+.has-hint[data-hint-pos="left"]::before {
+    right: calc(100% + 12px);
+    left: auto;
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%) translateX(5px);
+}
+
+.has-hint[data-hint-pos="left"]:hover::before {
+    transform: translateY(-50%) translateX(0);
+}
+
+.has-hint[data-hint-pos="left"]::after {
+    right: calc(100% + 2px);
+    left: auto;
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 10px solid var(--pink);
+    border-right: none;
+}
+
+/* ===== RIGHT POSITION ===== */
+.has-hint[data-hint-pos="right"]::before {
+    left: calc(100% + 12px);
+    right: auto;
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%) translateX(-5px);
+}
+
+.has-hint[data-hint-pos="right"]:hover::before {
+    transform: translateY(-50%) translateX(0);
+}
+
+.has-hint[data-hint-pos="right"]::after {
+    left: calc(100% + 2px);
+    right: auto;
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 10px solid var(--pink);
+    border-left: none;
+}
+
+/* ===== MOBILE: JS-controlled on touch devices ===== */
+@media (hover: none) {
+    /* Disable CSS hover - let JS handle tap */
+    .has-hint:hover::before,
+    .has-hint:hover::after {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* ===== JS-controlled active state ===== */
+.has-hint.hint-active::before,
+.has-hint.hint-active::after {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Position override when JS detects edge collision */
+.has-hint.hint-flip-bottom::before {
+    bottom: auto !important;
+    top: calc(100% + 12px) !important;
+    transform: translateX(-50%) translateY(0) !important;
+}
+.has-hint.hint-flip-bottom::after {
+    bottom: auto !important;
+    top: calc(100% + 2px) !important;
+    border-top: none !important;
+    border-bottom: 10px solid var(--pink) !important;
+}
+
+.has-hint.hint-flip-top::before {
+    top: auto !important;
+    bottom: calc(100% + 12px) !important;
+    transform: translateX(-50%) translateY(0) !important;
+}
+.has-hint.hint-flip-top::after {
+    top: auto !important;
+    bottom: calc(100% + 2px) !important;
+    border-bottom: none !important;
+    border-top: 10px solid var(--pink) !important;
+}
+
+/* ===== OPTIONAL: Larger hint variant ===== */
+.has-hint.hint-lg::before {
+    padding: 0.8rem 1.3rem;
+    font-size: 0.95rem;
+    border-radius: 20px;
+    white-space: normal;
+    max-width: 250px;
+    text-align: center;
+}
+
+/* ===== OPTIONAL: Delay hint (JS adds show class after timeout) ===== */
+.has-hint.hint-delay::before,
+.has-hint.hint-delay::after {
+    transition-delay: 0s;
+}
+.has-hint.hint-delay:hover::before,
+.has-hint.hint-delay:hover::after {
+    opacity: 0;
+    visibility: hidden;
+}
+.has-hint.hint-delay.hint-active::before,
+.has-hint.hint-delay.hint-active::after {
+    opacity: 1;
+    visibility: visible;
+}

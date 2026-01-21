@@ -1385,3 +1385,93 @@ if (document.readyState === 'loading') {
         requestAnimationFrame(update);
     }
 })();
+
+// ===========================================
+// HOVER HINT BUBBLES - JavaScript Enhancements
+// ===========================================
+(function() {
+    const hints = document.querySelectorAll('.has-hint');
+    if (!hints.length) return;
+
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    let activeHint = null;
+    let hoverTimeout = null;
+
+    hints.forEach(el => {
+        const hasDelay = el.classList.contains('hint-delay');
+        const delay = hasDelay ? 300 : 0; // 300ms delay if hint-delay class
+
+        // Desktop: hover with optional delay
+        el.addEventListener('mouseenter', () => {
+            if (isTouchDevice) return;
+
+            if (delay > 0) {
+                hoverTimeout = setTimeout(() => {
+                    checkEdgeCollision(el);
+                    el.classList.add('hint-active');
+                }, delay);
+            } else {
+                checkEdgeCollision(el);
+            }
+        });
+
+        el.addEventListener('mouseleave', () => {
+            if (isTouchDevice) return;
+
+            clearTimeout(hoverTimeout);
+            el.classList.remove('hint-active', 'hint-flip-bottom', 'hint-flip-top');
+        });
+
+        // Touch: tap to toggle
+        el.addEventListener('click', (e) => {
+            if (!isTouchDevice) return;
+
+            // Don't interfere with actual links/buttons
+            if (el.tagName === 'A' || el.tagName === 'BUTTON') return;
+
+            e.preventDefault();
+
+            // Close any other open hint
+            if (activeHint && activeHint !== el) {
+                activeHint.classList.remove('hint-active', 'hint-flip-bottom', 'hint-flip-top');
+            }
+
+            // Toggle this hint
+            if (el.classList.contains('hint-active')) {
+                el.classList.remove('hint-active', 'hint-flip-bottom', 'hint-flip-top');
+                activeHint = null;
+            } else {
+                checkEdgeCollision(el);
+                el.classList.add('hint-active');
+                activeHint = el;
+            }
+        });
+    });
+
+    // Close hint when tapping outside
+    if (isTouchDevice) {
+        document.addEventListener('click', (e) => {
+            if (activeHint && !activeHint.contains(e.target)) {
+                activeHint.classList.remove('hint-active', 'hint-flip-bottom', 'hint-flip-top');
+                activeHint = null;
+            }
+        });
+    }
+
+    // Check if hint would go off screen and flip it
+    function checkEdgeCollision(el) {
+        const rect = el.getBoundingClientRect();
+        const pos = el.dataset.hintPos || 'top';
+
+        // Remove previous flip classes
+        el.classList.remove('hint-flip-bottom', 'hint-flip-top');
+
+        if (pos === 'top' && rect.top < 80) {
+            // Too close to top, flip to bottom
+            el.classList.add('hint-flip-bottom');
+        } else if (pos === 'bottom' && (window.innerHeight - rect.bottom) < 80) {
+            // Too close to bottom, flip to top
+            el.classList.add('hint-flip-top');
+        }
+    }
+})();
