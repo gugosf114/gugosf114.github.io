@@ -1179,97 +1179,53 @@
     })();
     </script>
 
-    <!-- Service Card Floating Bubbles -->
+    <!-- Service Card 3D Tilt with Light Effect -->
     <script>
     (function() {
         const cards = document.querySelectorAll('.tile-grid-4 .service-card');
-        const colors = ['rgba(236, 38, 143, 0.6)', 'rgba(255, 197, 50, 0.65)', 'rgba(255, 182, 193, 0.7)', 'rgba(255, 218, 185, 0.65)'];
 
         cards.forEach(card => {
-            let canvas, ctx, particles, animationId;
-            let isHovering = false;
+            // Create light reflection overlay
+            const shine = document.createElement('div');
+            shine.style.cssText = `
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 5;
+                border-radius: 30px;
+                background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 100%);
+                transition: background 0.1s ease;
+            `;
+            card.style.position = 'relative';
+            card.style.transformStyle = 'preserve-3d';
+            card.style.transition = 'transform 0.15s ease-out, box-shadow 0.3s ease';
+            card.appendChild(shine);
 
-            card.addEventListener('mouseenter', function() {
-                if (canvas) return;
-                isHovering = true;
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
 
-                canvas = document.createElement('canvas');
-                canvas.style.cssText = 'position:absolute;top:-20px;left:-20px;width:calc(100% + 40px);height:calc(100% + 40px);pointer-events:none;z-index:10;';
-                canvas.width = card.offsetWidth + 40;
-                canvas.height = card.offsetHeight + 40;
-                card.style.position = 'relative';
-                card.style.overflow = 'visible';
-                card.appendChild(canvas);
-                ctx = canvas.getContext('2d');
+                const rotateX = (y - centerY) / 12;
+                const rotateY = (centerX - x) / 12;
 
-                particles = [];
-                const particleCount = 25;
+                // 3D tilt
+                card.style.transform = `perspective(800px) rotateX(${-rotateX}deg) rotateY(${-rotateY}deg) scale(1.02)`;
 
-                for (let i = 0; i < particleCount; i++) {
-                    particles.push({
-                        x: Math.random() * canvas.width,
-                        y: Math.random() * canvas.height,
-                        radius: Math.random() * 7 + 4,
-                        color: colors[Math.floor(Math.random() * colors.length)],
-                        vx: (Math.random() - 0.5) * 2,
-                        vy: (Math.random() - 0.5) * 2
-                    });
-                }
-
-                function animate() {
-                    if (!isHovering) return;
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                    particles.forEach(p => {
-                        p.x += p.vx;
-                        p.y += p.vy;
-
-                        // Bounce off edges
-                        if (p.x < p.radius || p.x > canvas.width - p.radius) p.vx *= -1;
-                        if (p.y < p.radius || p.y > canvas.height - p.radius) p.vy *= -1;
-
-                        // Keep in bounds
-                        p.x = Math.max(p.radius, Math.min(canvas.width - p.radius, p.x));
-                        p.y = Math.max(p.radius, Math.min(canvas.height - p.radius, p.y));
-
-                        ctx.beginPath();
-                        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                        ctx.fillStyle = p.color;
-                        ctx.fill();
-                    });
-
-                    // Simple collision - bubbles push each other
-                    for (let i = 0; i < particles.length; i++) {
-                        for (let j = i + 1; j < particles.length; j++) {
-                            const dx = particles[j].x - particles[i].x;
-                            const dy = particles[j].y - particles[i].y;
-                            const dist = Math.sqrt(dx * dx + dy * dy);
-                            const minDist = particles[i].radius + particles[j].radius;
-
-                            if (dist < minDist) {
-                                const angle = Math.atan2(dy, dx);
-                                const pushX = Math.cos(angle) * 0.5;
-                                const pushY = Math.sin(angle) * 0.5;
-                                particles[i].vx -= pushX;
-                                particles[i].vy -= pushY;
-                                particles[j].vx += pushX;
-                                particles[j].vy += pushY;
-                            }
-                        }
-                    }
-
-                    animationId = requestAnimationFrame(animate);
-                }
-                animate();
+                // Light follows cursor
+                const percentX = (x / rect.width) * 100;
+                const percentY = (y / rect.height) * 100;
+                shine.style.background = `radial-gradient(circle at ${percentX}% ${percentY}%, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 60%)`;
             });
 
-            card.addEventListener('mouseleave', function() {
-                isHovering = false;
-                if (animationId) cancelAnimationFrame(animationId);
-                if (canvas) {
-                    canvas.remove();
-                    canvas = null;
-                }
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale(1)';
+                shine.style.background = 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 100%)';
             });
         });
     })();
