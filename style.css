@@ -4123,13 +4123,13 @@ header nav .search-container svg {
     border-top: 10px solid var(--pink) !important;
 }
 
-/* ===== OPTIONAL: Larger hint variant ===== */
+/* ===== OPTIONAL: Larger hint variant - kept small, single line ===== */
 .has-hint.hint-lg::before {
-    padding: 0.8rem 1.3rem;
-    font-size: 0.95rem;
-    border-radius: 20px;
-    white-space: normal;
-    max-width: 250px;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.55rem;
+    border-radius: 10px;
+    white-space: nowrap;
+    max-width: none;
     text-align: center;
 }
 
