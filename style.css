@@ -1315,6 +1315,16 @@ footer {
     font-family: 'Nunito', sans-serif;
     transition: all 0.3s ease;
     background: var(--white);
+    animation: input-subtle-glow 3s ease-in-out infinite;
+}
+
+@keyframes input-subtle-glow {
+    0%, 100% {
+        box-shadow: 0 2px 8px rgba(139, 90, 43, 0.08);
+    }
+    50% {
+        box-shadow: 0 3px 12px rgba(236, 38, 143, 0.12), 0 0 8px rgba(255, 197, 50, 0.1);
+    }
 }
 
 .form-group input:focus,
@@ -1351,6 +1361,23 @@ footer {
     cursor: pointer;
     transition: all 0.3s ease;
     background: var(--white);
+    animation: option-idle-pulse 2.5s ease-in-out infinite;
+}
+
+/* Stagger animation for each option */
+.radio-option:nth-child(2) { animation-delay: 0.3s; }
+.radio-option:nth-child(3) { animation-delay: 0.6s; }
+.radio-option:nth-child(4) { animation-delay: 0.9s; }
+
+@keyframes option-idle-pulse {
+    0%, 100% {
+        box-shadow: 0 2px 6px rgba(139, 90, 43, 0.1);
+        border-color: var(--border-beige);
+    }
+    50% {
+        box-shadow: 0 4px 12px rgba(236, 38, 143, 0.15), 0 0 6px rgba(255, 197, 50, 0.12);
+        border-color: rgba(236, 38, 143, 0.25);
+    }
 }
 
 .radio-option:hover {
@@ -1358,6 +1385,7 @@ footer {
     background: rgba(236, 38, 143, 0.05);
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(236, 38, 143, 0.25), 0 0 20px rgba(236, 38, 143, 0.1);
+    animation: none;
 }
 
 /* Featured Cake option with AI Sketch - PREMIUM */
