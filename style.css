@@ -1333,18 +1333,72 @@ footer {
     box-shadow: 0 4px 15px rgba(236, 38, 143, 0.25), 0 0 20px rgba(236, 38, 143, 0.1);
 }
 
-/* Featured Cake option with AI Sketch */
+/* Featured Cake option with AI Sketch - PREMIUM */
 .radio-option.featured {
-    padding: 16px 20px;
-    border: 3px solid var(--pink);
-    background: linear-gradient(135deg, rgba(255, 197, 50, 0.12) 0%, rgba(236, 38, 143, 0.12) 100%);
-    animation: pulse-glow 2.5s ease-in-out infinite;
+    position: relative;
+    padding: 18px 24px;
+    border: none;
+    background: linear-gradient(135deg, #fff9f0 0%, #fff0f5 50%, #fffbf0 100%);
+    border-radius: 16px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Animated gradient border */
+.radio-option.featured::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 16px;
+    padding: 3px;
+    background: linear-gradient(90deg, var(--pink), var(--yellow), var(--pink), var(--yellow), var(--pink));
+    background-size: 300% 100%;
+    animation: gradient-shift 3s linear infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    z-index: -1;
+}
+
+/* Shimmer effect */
+.radio-option.featured::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: shimmer 2.5s ease-in-out infinite;
+    z-index: 2;
+    pointer-events: none;
+}
+
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+}
+
+@keyframes shimmer {
+    0%, 100% { left: -100%; }
+    50%, 60% { left: 100%; }
 }
 
 .radio-option.featured:hover {
-    transform: translateY(-4px);
-    animation: none;
-    box-shadow: 0 8px 30px rgba(236, 38, 143, 0.5), 0 0 40px rgba(255, 197, 50, 0.3);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(236, 38, 143, 0.4), 0 0 60px rgba(255, 197, 50, 0.25);
+}
+
+.radio-option.featured:hover::before {
+    animation: gradient-shift 1.5s linear infinite;
+}
+
+.radio-option.featured:hover::after {
+    animation: shimmer 1s ease-in-out infinite;
 }
 
 .radio-option input[type="radio"] {
@@ -3441,16 +3495,19 @@ header nav .search-container svg {
 
 .bouncy-text {
     display: inline-flex;
-    font-size: 0.95rem;
+    align-items: baseline;
+    font-size: 1.1rem;
     font-weight: 800;
     color: var(--pink);
     margin-left: 0.75rem;
     letter-spacing: 0.03em;
+    text-shadow: 0 1px 2px rgba(236, 38, 143, 0.2);
 }
 
 .bouncy-text span {
     display: inline-block;
     animation: bounce-letter 3.6s ease-in-out infinite;
+    line-height: 1;
 }
 
 .bouncy-text span:nth-child(1) { animation-delay: 0s; }
@@ -3490,16 +3547,37 @@ header nav .search-container svg {
 .bouncy-text span:nth-child(35) { animation-delay: 3.4s; }
 .bouncy-text span:nth-child(36) { animation-delay: 3.5s; }
 
-/* AI highlight for description field */
+/* AI highlight for description field - PREMIUM */
 .ai-description-hint {
     display: none;
-    background: linear-gradient(135deg, #fff5f8 0%, #fff 100%);
-    border: 2px dashed var(--pink);
-    border-radius: 10px;
-    padding: 0.6rem 1rem;
+    position: relative;
+    background: linear-gradient(135deg, #fffbf5 0%, #fff5f8 50%, #fffbf0 100%);
+    border: none;
+    border-radius: 12px;
+    padding: 0.8rem 1.2rem;
     margin-bottom: 0.75rem;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
+    overflow: hidden;
+}
+
+.ai-description-hint::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    padding: 2px;
+    background: linear-gradient(90deg, var(--yellow), var(--pink), var(--yellow));
+    background-size: 200% 100%;
+    animation: gradient-shift 4s linear infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    z-index: -1;
 }
 
 .ai-description-hint.visible {
@@ -3507,6 +3585,6 @@ header nav .search-container svg {
 }
 
 .ai-description-hint .bouncy-text {
-    font-size: 0.8rem;
+    font-size: 0.95rem;
     margin-left: 0;
 }
