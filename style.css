@@ -391,23 +391,55 @@ a.nav-cta:active {
     box-shadow: 0 0 6px #fff, 0 0 10px #ffc532;
 }
 
-/* ORDER NOW BUTTON (next to logo) */
+/* ORDER NOW BUTTON (next to logo) - Electric Pink */
 .order-now-btn {
-    background: #e8426f;
+    position: relative;
+    background: linear-gradient(135deg, #ec268f 0%, #ff6b9d 50%, #ec268f 100%);
+    background-size: 200% 200%;
     color: #fff !important;
-    padding: 0.5rem 1.2rem;
-    border-radius: 30px;
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
+    font-family: 'Nunito', sans-serif;
     font-weight: 800;
     font-size: 0.9rem;
     text-decoration: none;
     white-space: nowrap;
-    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    animation: order-now-gradient 3s ease infinite;
+    box-shadow: 0 4px 15px rgba(236, 38, 143, 0.5), 0 0 20px rgba(236, 38, 143, 0.3);
+}
+
+@keyframes order-now-gradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Glossy light sweep */
+.order-now-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+.order-now-btn:hover::before {
+    left: 100%;
 }
 
 .order-now-btn:hover {
-    background: #d13a63;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(232, 66, 111, 0.3);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 25px rgba(236, 38, 143, 0.6), 0 0 40px rgba(236, 38, 143, 0.4), 0 0 60px rgba(255, 107, 157, 0.25);
+}
+
+.order-now-btn:active {
+    transform: translateY(-1px) scale(1.01);
 }
 
 /* DROPDOWN */
