@@ -3697,3 +3697,69 @@ header nav .search-container svg {
     pointer-events: none;
     z-index: 0;
 }
+
+/* ===========================================
+   ELECTRIC BUTTON
+   =========================================== */
+.electric-btn {
+    position: relative;
+    background: linear-gradient(135deg, #ec268f 0%, #ff6b9d 50%, #ec268f 100%);
+    background-size: 200% 200%;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.95rem;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    animation: electric-gradient 3s ease infinite;
+    box-shadow: 0 4px 15px rgba(236, 38, 143, 0.4), 0 0 20px rgba(236, 38, 143, 0.2);
+}
+
+@keyframes electric-gradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.electric-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+.electric-btn:hover::before {
+    left: 100%;
+}
+
+.electric-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 25px rgba(236, 38, 143, 0.5), 0 0 40px rgba(236, 38, 143, 0.3), 0 0 60px rgba(255, 107, 157, 0.2);
+}
+
+.electric-btn:active {
+    transform: translateY(-1px) scale(1.01);
+}
+
+/* Electric sparks container */
+.electric-btn .spark {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: spark-fly 0.6s ease-out forwards;
+}
+
+@keyframes spark-fly {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0) translate(var(--tx), var(--ty)); }
+}

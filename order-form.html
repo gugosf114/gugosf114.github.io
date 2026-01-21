@@ -664,6 +664,80 @@
     window.addEventListener('resize', resizeTextareaCanvas);
     </script>
 
+    <!-- Electric Button Sparks -->
+    <script>
+    (function() {
+        const btn = document.getElementById('generatePreviewBtn');
+        if (!btn) return;
+
+        // Continuous subtle sparks around the button
+        let sparkInterval;
+
+        function createSpark(x, y) {
+            const spark = document.createElement('div');
+            spark.className = 'spark';
+            const angle = Math.random() * Math.PI * 2;
+            const distance = 30 + Math.random() * 40;
+            const tx = Math.cos(angle) * distance;
+            const ty = Math.sin(angle) * distance;
+            spark.style.cssText = `
+                position: absolute;
+                left: ${x}px;
+                top: ${y}px;
+                width: ${3 + Math.random() * 3}px;
+                height: ${3 + Math.random() * 3}px;
+                background: white;
+                border-radius: 50%;
+                pointer-events: none;
+                box-shadow: 0 0 6px #fff, 0 0 10px #ff6b9d;
+            `;
+            btn.appendChild(spark);
+
+            spark.animate([
+                { opacity: 1, transform: 'scale(1) translate(0, 0)' },
+                { opacity: 0, transform: `scale(0.3) translate(${tx}px, ${ty}px)` }
+            ], {
+                duration: 500 + Math.random() * 300,
+                easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+            }).onfinish = () => spark.remove();
+        }
+
+        // Sparks on hover
+        btn.addEventListener('mouseenter', () => {
+            // Burst of sparks
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    const x = Math.random() * btn.offsetWidth;
+                    const y = Math.random() * btn.offsetHeight;
+                    createSpark(x, y);
+                }, i * 50);
+            }
+
+            // Continuous sparks while hovering
+            sparkInterval = setInterval(() => {
+                const x = Math.random() * btn.offsetWidth;
+                const y = Math.random() * btn.offsetHeight;
+                createSpark(x, y);
+            }, 150);
+        });
+
+        btn.addEventListener('mouseleave', () => {
+            clearInterval(sparkInterval);
+        });
+
+        // Big burst on click
+        btn.addEventListener('click', () => {
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const x = btn.offsetWidth / 2 + (Math.random() - 0.5) * 40;
+                    const y = btn.offsetHeight / 2 + (Math.random() - 0.5) * 20;
+                    createSpark(x, y);
+                }, i * 30);
+            }
+        });
+    })();
+    </script>
+
     <!-- AI Chatbot Widget -->
     <link rel="stylesheet" href="chatbot.css">
     <script src="chatbot.js" defer></script>
