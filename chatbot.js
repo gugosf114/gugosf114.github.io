@@ -63,7 +63,7 @@
         <!-- Header -->
         <div id="chatbot-header">
           <div id="chatbot-header-info">
-            <div id="chatbot-avatar">🧁</div>
+            <div id="chatbot-avatar"><img src="logo_icon.png" alt="My Baking Creations" style="width:100%;height:100%;object-fit:contain;border-radius:50%;"></div>
             <div id="chatbot-header-text">
               <h4>My Baking Creations</h4>
               <span>Ask me anything!</span>
