@@ -188,15 +188,15 @@
                                     <span class="bouncy-text"><span>🪄</span><span>&nbsp;</span><span>A</span><span>I</span><span>&nbsp;</span><span>S</span><span>k</span><span>e</span><span>t</span><span>c</span><span>h</span><span>!</span></span>
                                     <canvas id="particleCanvas"></canvas>
                                 </label>
-                                <label class="radio-option">
+                                <label class="radio-option has-hint" data-hint="Hand-piped or printed image - from $48/dozen" data-hint-pos="top">
                                     <input type="radio" name="product_type" value="Cookies">
                                     <span>Cookies</span>
                                 </label>
-                                <label class="radio-option">
+                                <label class="radio-option has-hint" data-hint="Custom designs on a stick - great for parties!" data-hint-pos="top">
                                     <input type="radio" name="product_type" value="Cake Pops">
                                     <span>Cake Pops</span>
                                 </label>
-                                <label class="radio-option">
+                                <label class="radio-option has-hint" data-hint="Decorated cupcakes for any occasion" data-hint-pos="top">
                                     <input type="radio" name="product_type" value="Cupcakes">
                                     <span>Cupcakes</span>
                                 </label>
@@ -214,17 +214,17 @@
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="event_date">Event Date *</label>
+                                <label for="event_date">Event Date * <span class="has-hint" data-hint="Need it soon? Call us - rush orders possible!" data-hint-pos="top" style="cursor: help; color: var(--pink); font-weight: 800;">?</span></label>
                                 <input type="date" id="event_date" name="event_date" required>
                             </div>
                             <div class="form-group">
                                 <label>Pickup or Delivery? *</label>
                                 <div class="radio-group">
-                                    <label class="radio-option">
+                                    <label class="radio-option has-hint" data-hint="Free! Daly City location" data-hint-pos="top">
                                         <input type="radio" name="delivery_method" value="Pickup" id="pickup_option" required>
                                         <span>Pickup</span>
                                     </label>
-                                    <label class="radio-option">
+                                    <label class="radio-option has-hint" data-hint="Fee varies by distance" data-hint-pos="top">
                                         <input type="radio" name="delivery_method" value="Delivery" id="delivery_option">
                                         <span>Delivery</span>
                                     </label>
@@ -254,7 +254,7 @@
                         </div>
 
                         <div class="form-group" id="orderDetailsGroup">
-                            <label for="order_details">Tell us about your order *</label>
+                            <label for="order_details">Tell us about your order * <span class="has-hint hint-lg" data-hint="Theme, colors, size, quantity - the more detail, the better!" data-hint-pos="top" style="cursor: help; color: var(--pink); font-weight: 800;">?</span></label>
                             <div id="aiDescriptionHint" class="ai-description-hint speech-bubble">
                                 <span class="hint-text" id="bubbleTypewriter"></span><span class="bubble-cursor">|</span>
                             </div>
