@@ -1288,6 +1288,8 @@ footer {
 .radio-option:hover {
     border-color: var(--pink);
     background: rgba(236, 38, 143, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(236, 38, 143, 0.25), 0 0 20px rgba(236, 38, 143, 0.1);
 }
 
 .radio-option input[type="radio"] {
