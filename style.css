@@ -3636,6 +3636,33 @@ header nav .search-container svg {
     margin-left: 0;
 }
 
+/* Textarea wrapper for particle canvas */
+.textarea-wrapper {
+    position: relative;
+}
+
+.textarea-wrapper textarea {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+#textareaParticleCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    display: none;
+    border-radius: 12px;
+}
+
+.form-group.ai-active #textareaParticleCanvas {
+    display: block;
+}
+
 /* Textarea with animated border when AI mode active */
 .form-group.ai-active textarea {
     position: relative;

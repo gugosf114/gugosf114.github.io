@@ -253,13 +253,16 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" id="orderDetailsGroup">
                             <label for="order_details">Tell us about your order *</label>
                             <div id="aiDescriptionHint" class="ai-description-hint">
                                 <span style="font-size: 1.1rem;">✏️</span>
                                 <span class="bouncy-text"><span>D</span><span>e</span><span>s</span><span>c</span><span>r</span><span>i</span><span>b</span><span>e</span><span>&nbsp;</span><span>y</span><span>o</span><span>u</span><span>r</span><span>&nbsp;</span><span>c</span><span>a</span><span>k</span><span>e</span><span>&nbsp;</span><span>—</span><span>&nbsp;</span><span>w</span><span>e</span><span>'</span><span>l</span><span>l</span><span>&nbsp;</span><span>s</span><span>k</span><span>e</span><span>t</span><span>c</span><span>h</span><span>&nbsp;</span><span>i</span><span>t</span><span>!</span></span>
                             </div>
-                            <textarea id="order_details" name="order_details" rows="5" required placeholder="Tell us about your theme, colors, size, and any special requests..."></textarea>
+                            <div class="textarea-wrapper">
+                                <textarea id="order_details" name="order_details" rows="5" required placeholder="Tell us about your theme, colors, size, and any special requests..."></textarea>
+                                <canvas id="textareaParticleCanvas"></canvas>
+                            </div>
                             <small>Include: theme, colors, serving size, and any special requests</small>
                         </div>
 
@@ -534,6 +537,113 @@
     cakeOption.addEventListener('mouseleave', () => {
         isHovering = false;
     });
+
+    // Textarea particle effect - only when Cake is selected
+    const textareaCanvas = document.getElementById('textareaParticleCanvas');
+    const textareaCtx = textareaCanvas.getContext('2d');
+    const textareaWrapper = textareaCanvas.parentElement;
+    let textareaParticles = [];
+    let textareaAnimationId = null;
+    let cakeSelected = false;
+
+    function resizeTextareaCanvas() {
+        textareaCanvas.width = textareaWrapper.offsetWidth;
+        textareaCanvas.height = textareaWrapper.offsetHeight;
+    }
+
+    class TextareaParticle {
+        constructor() {
+            this.reset();
+        }
+        reset() {
+            // Spawn from edges
+            const edge = Math.floor(Math.random() * 4);
+            if (edge === 0) { // top
+                this.x = Math.random() * textareaCanvas.width;
+                this.y = 0;
+                this.speedY = Math.random() * 0.5 + 0.2;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+            } else if (edge === 1) { // bottom
+                this.x = Math.random() * textareaCanvas.width;
+                this.y = textareaCanvas.height;
+                this.speedY = -(Math.random() * 0.5 + 0.2);
+                this.speedX = (Math.random() - 0.5) * 0.5;
+            } else if (edge === 2) { // left
+                this.x = 0;
+                this.y = Math.random() * textareaCanvas.height;
+                this.speedX = Math.random() * 0.5 + 0.2;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+            } else { // right
+                this.x = textareaCanvas.width;
+                this.y = Math.random() * textareaCanvas.height;
+                this.speedX = -(Math.random() * 0.5 + 0.2);
+                this.speedY = (Math.random() - 0.5) * 0.5;
+            }
+            this.size = Math.random() * 3 + 1.5;
+            this.opacity = Math.random() * 0.5 + 0.3;
+            this.color = Math.random() > 0.5 ? 'rgba(236, 38, 143,' : 'rgba(255, 197, 50,';
+            this.life = 0;
+            this.maxLife = 150 + Math.random() * 100;
+        }
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            this.life++;
+            if (this.life > this.maxLife * 0.7) {
+                this.opacity -= 0.01;
+            }
+            if (this.life > this.maxLife || this.opacity <= 0) {
+                if (cakeSelected) this.reset();
+                else this.opacity = 0;
+            }
+        }
+        draw() {
+            textareaCtx.beginPath();
+            textareaCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            textareaCtx.fillStyle = this.color + this.opacity + ')';
+            textareaCtx.fill();
+        }
+    }
+
+    function initTextareaParticles() {
+        textareaParticles = [];
+        for (let i = 0; i < 15; i++) {
+            const p = new TextareaParticle();
+            p.life = Math.random() * 100; // stagger start
+            textareaParticles.push(p);
+        }
+    }
+
+    function animateTextareaParticles() {
+        textareaCtx.clearRect(0, 0, textareaCanvas.width, textareaCanvas.height);
+        textareaParticles.forEach(p => {
+            p.update();
+            p.draw();
+        });
+        if (cakeSelected || textareaParticles.some(p => p.opacity > 0)) {
+            textareaAnimationId = requestAnimationFrame(animateTextareaParticles);
+        } else {
+            textareaAnimationId = null;
+        }
+    }
+
+    // Listen for Cake selection
+    productRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            if (this.value === 'Cake') {
+                cakeSelected = true;
+                resizeTextareaCanvas();
+                if (!textareaAnimationId) {
+                    initTextareaParticles();
+                    animateTextareaParticles();
+                }
+            } else {
+                cakeSelected = false;
+            }
+        });
+    });
+
+    window.addEventListener('resize', resizeTextareaCanvas);
     </script>
 
     <!-- AI Chatbot Widget -->
