@@ -3534,22 +3534,24 @@ header nav .search-container svg {
 /* Folder Tab - NEW FEATURE badge on upper left */
 .folder-tab {
     position: absolute;
-    left: -4px;
-    top: -8px;
+    left: 8px;
+    top: -10px;
+    transform: none !important;
+    writing-mode: horizontal-tb !important;
     background: linear-gradient(90deg, var(--pink), var(--yellow), var(--pink), var(--yellow), var(--pink));
     background-size: 300% 100%;
     animation: folder-tab-gradient 4s linear infinite;
     color: white;
     font-family: 'Nunito', sans-serif;
-    font-size: 0.5rem;
+    font-size: 0.55rem;
     font-weight: 800;
     letter-spacing: 0.5px;
     text-transform: uppercase;
-    padding: 0.15rem 0.4rem;
+    padding: 0.2rem 0.5rem;
     border-radius: 4px;
     white-space: nowrap;
     box-shadow: 0 2px 6px rgba(236, 38, 143, 0.3);
-    z-index: 10;
+    z-index: 20;
 }
 
 @keyframes folder-tab-gradient {
