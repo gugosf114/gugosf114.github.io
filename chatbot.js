@@ -338,9 +338,17 @@
         conversationHistory.push({ role: 'assistant', content: data.reply });
 
         // Check if response mentions phone/contact for showing phone card
-        const shouldShowPhone = data.reply.toLowerCase().includes('call us') ||
-                               data.reply.toLowerCase().includes('phone') ||
-                               data.reply.toLowerCase().includes('immediate assistance');
+        const replyLower = data.reply.toLowerCase();
+        const userMsgLower = userMessage.toLowerCase();
+        const shouldShowPhone = replyLower.includes('call us') ||
+                               replyLower.includes('phone') ||
+                               replyLower.includes('immediate assistance') ||
+                               replyLower.includes('415') ||
+                               replyLower.includes('whatsapp') ||
+                               userMsgLower.includes('call') ||
+                               userMsgLower.includes('phone') ||
+                               userMsgLower.includes('contact') ||
+                               userMsgLower.includes('whatsapp');
 
         addBotMessage(data.reply, shouldShowPhone);
       }
