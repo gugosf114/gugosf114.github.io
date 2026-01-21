@@ -3659,6 +3659,43 @@ header nav .search-container svg {
     100% { box-shadow: 0 8px 35px rgba(236, 38, 143, 0.35), 0 0 50px rgba(255, 197, 50, 0.25); }
 }
 
+/* Mobile responsive for form intro bubble */
+@media (max-width: 768px) {
+    .form-intro-bubble {
+        white-space: normal;
+        text-align: center;
+        max-width: 90%;
+        padding: 0.6rem 1rem;
+    }
+
+    .form-intro-bubble #formIntroTypewriter {
+        font-size: 0.8rem;
+        display: block;
+        text-align: center;
+        min-width: 0 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-intro-bubble {
+        max-width: 95%;
+        padding: 0.5rem 0.8rem;
+        border-radius: 18px;
+    }
+
+    .form-intro-bubble #formIntroTypewriter {
+        font-size: 0.7rem;
+    }
+
+    .form-intro-bubble .bubble-cursor {
+        font-size: 0.7rem;
+    }
+
+    .form-intro-bubble::before {
+        border-radius: 18px;
+    }
+}
+
 /* AI highlight for description field - SPEECH BUBBLE */
 .ai-description-hint.speech-bubble {
     display: none;
