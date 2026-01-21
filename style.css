@@ -1292,6 +1292,19 @@ footer {
     box-shadow: 0 4px 15px rgba(236, 38, 143, 0.25), 0 0 20px rgba(236, 38, 143, 0.1);
 }
 
+/* Featured Cake option with AI Sketch */
+.radio-option.featured {
+    padding: 14px 18px;
+    border: 2px solid var(--pink);
+    background: linear-gradient(135deg, rgba(255, 197, 50, 0.08) 0%, rgba(236, 38, 143, 0.08) 100%);
+    box-shadow: 0 2px 12px rgba(236, 38, 143, 0.15);
+}
+
+.radio-option.featured:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(236, 38, 143, 0.35), 0 0 25px rgba(255, 197, 50, 0.2);
+}
+
 .radio-option input[type="radio"] {
     margin-right: 10px;
     width: 18px;
