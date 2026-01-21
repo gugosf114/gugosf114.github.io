@@ -265,7 +265,8 @@ nav {
 .nav-links {
     display: flex;
     flex: 1;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 2rem;
     list-style: none;
     align-items: center;
 }
