@@ -2197,7 +2197,7 @@ footer {
 }
 
 .back-link:hover {
-    text-decoration: underline;
+    color: var(--yellow-dark);
 }
 
 /* Section Description Text */
