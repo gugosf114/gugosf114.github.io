@@ -3836,6 +3836,49 @@ header nav .search-container svg {
     position: relative;
 }
 
+/* Hint Icon - Pulsing yellow badge with ? */
+.hint-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg, var(--yellow) 0%, #ffe066 50%, var(--yellow) 100%);
+    background-size: 200% 200%;
+    border-radius: 50%;
+    color: var(--dark-brown);
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 800;
+    cursor: help;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+    box-shadow: 0 2px 8px rgba(255, 197, 50, 0.4);
+    animation: hint-icon-pulse 2s ease-in-out infinite, hint-icon-gradient 3s ease infinite;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hint-icon:hover {
+    transform: scale(1.15);
+    box-shadow: 0 4px 15px rgba(255, 197, 50, 0.6);
+}
+
+@keyframes hint-icon-pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 2px 8px rgba(255, 197, 50, 0.4);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 4px 15px rgba(255, 197, 50, 0.6), 0 0 20px rgba(255, 197, 50, 0.3);
+    }
+}
+
+@keyframes hint-icon-gradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
 /* The bubble itself */
 .has-hint::before {
     content: attr(data-hint);
