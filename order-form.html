@@ -256,7 +256,7 @@
                         <div class="form-group" id="orderDetailsGroup">
                             <label for="order_details">Tell us about your order *</label>
                             <div id="aiDescriptionHint" class="ai-description-hint speech-bubble">
-                                <span class="hint-text">Describe your cake — we'll sketch it!</span>
+                                <span class="hint-text" id="bubbleTypewriter"></span><span class="bubble-cursor">|</span>
                             </div>
                             <div class="textarea-wrapper">
                                 <textarea id="order_details" name="order_details" rows="5" required placeholder="Tell us about your theme, colors, size, and any special requests..."></textarea>
@@ -734,6 +734,79 @@
                 }, i * 30);
             }
         });
+    })();
+    </script>
+
+    <!-- Speech Bubble Typewriter Effect -->
+    <script>
+    (function() {
+        const typewriterEl = document.getElementById('bubbleTypewriter');
+        if (!typewriterEl) return;
+
+        const messages = [
+            "Describe your cake. We'll sketch it!",
+            "Don't like it? Try again - you get a few attempts!",
+            "More detail = better results!"
+        ];
+
+        let messageIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let isPaused = false;
+
+        function type() {
+            const currentMessage = messages[messageIndex];
+
+            if (isPaused) {
+                setTimeout(type, 100);
+                return;
+            }
+
+            if (!isDeleting) {
+                // Typing
+                typewriterEl.textContent = currentMessage.substring(0, charIndex + 1);
+                charIndex++;
+
+                if (charIndex === currentMessage.length) {
+                    // Pause at end of message
+                    isPaused = true;
+                    setTimeout(() => {
+                        isPaused = false;
+                        isDeleting = true;
+                    }, 2500);
+                }
+                setTimeout(type, 50);
+            } else {
+                // Deleting
+                typewriterEl.textContent = currentMessage.substring(0, charIndex - 1);
+                charIndex--;
+
+                if (charIndex === 0) {
+                    isDeleting = false;
+                    messageIndex = (messageIndex + 1) % messages.length;
+                }
+                setTimeout(type, 30);
+            }
+        }
+
+        // Start typewriter when bubble becomes visible
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.target.classList.contains('visible')) {
+                    // Reset and start
+                    messageIndex = 0;
+                    charIndex = 0;
+                    isDeleting = false;
+                    isPaused = false;
+                    type();
+                }
+            });
+        });
+
+        const hint = document.getElementById('aiDescriptionHint');
+        if (hint) {
+            observer.observe(hint, { attributes: true, attributeFilter: ['class'] });
+        }
     })();
     </script>
 
