@@ -1231,6 +1231,34 @@
     })();
     </script>
 
+    <!-- Hero Text Box Subtle Tilt -->
+    <script>
+    (function() {
+        const heroBox = document.querySelector('.hero-text-box');
+        if (!heroBox) return;
+
+        heroBox.style.transformStyle = 'preserve-3d';
+        heroBox.style.transition = 'transform 0.4s ease-out';
+
+        heroBox.addEventListener('mousemove', (e) => {
+            const rect = heroBox.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = (y - centerY) / 50;
+            const rotateY = (centerX - x) / 50;
+
+            heroBox.style.transform = `perspective(1000px) rotateX(${-rotateX}deg) rotateY(${-rotateY}deg)`;
+        });
+
+        heroBox.addEventListener('mouseleave', () => {
+            heroBox.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+        });
+    })();
+    </script>
+
     <!-- AI Chatbot Widget -->
     <link rel="stylesheet" href="chatbot.css">
     <script src="chatbot.js" defer></script>
