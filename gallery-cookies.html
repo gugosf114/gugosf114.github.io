@@ -867,7 +867,7 @@ goToSlide(6);
         initParticles();
         animate();
 
-        // Typewriter effect for hint bubble
+        // Typewriter effect for hint bubble - fixed width to prevent layout shift
         const typewriterEl = document.getElementById('cookieHintTypewriter');
         if (!typewriterEl) return;
 
@@ -876,6 +876,23 @@ goToSlide(6);
             "See it on round or square cookies!",
             "Download and share your preview!"
         ];
+
+        // Pre-calculate width of longest message to prevent layout shift
+        const bubble = typewriterEl.closest('.speech-bubble');
+        if (bubble) {
+            const temp = document.createElement('span');
+            temp.style.cssText = 'visibility:hidden;position:absolute;white-space:nowrap;font:inherit;';
+            bubble.appendChild(temp);
+            let maxWidth = 0;
+            messages.forEach(m => {
+                temp.textContent = m;
+                if (temp.offsetWidth > maxWidth) maxWidth = temp.offsetWidth;
+            });
+            temp.remove();
+            typewriterEl.style.display = 'inline-block';
+            typewriterEl.style.minWidth = maxWidth + 'px';
+            typewriterEl.style.textAlign = 'center';
+        }
 
         let messageIndex = 0;
         let charIndex = 0;

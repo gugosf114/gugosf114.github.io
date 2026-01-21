@@ -737,6 +737,23 @@
             "More detail = better results!"
         ];
 
+        // Pre-calculate width of longest message to prevent layout shift
+        const bubble = typewriterEl.closest('.speech-bubble');
+        if (bubble) {
+            const temp = document.createElement('span');
+            temp.style.cssText = 'visibility:hidden;position:absolute;white-space:nowrap;font:inherit;';
+            bubble.appendChild(temp);
+            let maxWidth = 0;
+            messages.forEach(m => {
+                temp.textContent = m;
+                if (temp.offsetWidth > maxWidth) maxWidth = temp.offsetWidth;
+            });
+            temp.remove();
+            typewriterEl.style.display = 'inline-block';
+            typewriterEl.style.minWidth = maxWidth + 'px';
+            typewriterEl.style.textAlign = 'center';
+        }
+
         let messageIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
@@ -751,12 +768,10 @@
             }
 
             if (!isDeleting) {
-                // Typing
                 typewriterEl.textContent = currentMessage.substring(0, charIndex + 1);
                 charIndex++;
 
                 if (charIndex === currentMessage.length) {
-                    // Pause at end of message
                     isPaused = true;
                     setTimeout(() => {
                         isPaused = false;
@@ -765,7 +780,6 @@
                 }
                 setTimeout(type, 50);
             } else {
-                // Deleting
                 typewriterEl.textContent = currentMessage.substring(0, charIndex - 1);
                 charIndex--;
 
@@ -781,7 +795,6 @@
         const observer = new MutationObserver((mutations) => {
             mutations.forEach((mutation) => {
                 if (mutation.target.classList.contains('visible')) {
-                    // Reset and start
                     messageIndex = 0;
                     charIndex = 0;
                     isDeleting = false;
@@ -797,7 +810,7 @@
         }
     })();
 
-    // Form intro typewriter - always visible
+    // Form intro typewriter - always visible, fixed width to prevent layout shift
     (function() {
         const el = document.getElementById('formIntroTypewriter');
         if (!el) return;
@@ -807,6 +820,23 @@
             "We'll finalize details together",
             "Invoice sent after design is approved"
         ];
+
+        // Pre-calculate width of longest message to prevent layout shift
+        const bubble = el.closest('.form-intro-bubble');
+        if (bubble) {
+            const temp = document.createElement('span');
+            temp.style.cssText = 'visibility:hidden;position:absolute;white-space:nowrap;font:inherit;';
+            bubble.appendChild(temp);
+            let maxWidth = 0;
+            messages.forEach(m => {
+                temp.textContent = m;
+                if (temp.offsetWidth > maxWidth) maxWidth = temp.offsetWidth;
+            });
+            temp.remove();
+            el.style.display = 'inline-block';
+            el.style.minWidth = maxWidth + 'px';
+            el.style.textAlign = 'center';
+        }
 
         let msgIdx = 0, charIdx = 0, deleting = false, paused = false;
 
