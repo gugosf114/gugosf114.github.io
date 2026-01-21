@@ -1179,76 +1179,96 @@
     })();
     </script>
 
-    <!-- Service Card Particle Burst -->
+    <!-- Service Card Floating Bubbles -->
     <script>
     (function() {
         const cards = document.querySelectorAll('.tile-grid-4 .service-card');
-        const colors = ['#ec268f', '#ffc532', '#ffb6c1', '#ffdab9'];
+        const colors = ['rgba(236, 38, 143, 0.6)', 'rgba(255, 197, 50, 0.65)', 'rgba(255, 182, 193, 0.7)', 'rgba(255, 218, 185, 0.65)'];
 
         cards.forEach(card => {
-            card.style.position = 'relative';
-            card.style.overflow = 'visible';
+            let canvas, ctx, particles, animationId;
+            let isHovering = false;
 
-            card.addEventListener('mouseenter', function(e) {
-                const rect = card.getBoundingClientRect();
-                const particleCount = 20;
+            card.addEventListener('mouseenter', function() {
+                if (canvas) return;
+                isHovering = true;
+
+                canvas = document.createElement('canvas');
+                canvas.style.cssText = 'position:absolute;top:-20px;left:-20px;width:calc(100% + 40px);height:calc(100% + 40px);pointer-events:none;z-index:10;';
+                canvas.width = card.offsetWidth + 40;
+                canvas.height = card.offsetHeight + 40;
+                card.style.position = 'relative';
+                card.style.overflow = 'visible';
+                card.appendChild(canvas);
+                ctx = canvas.getContext('2d');
+
+                particles = [];
+                const particleCount = 25;
 
                 for (let i = 0; i < particleCount; i++) {
-                    const particle = document.createElement('div');
-                    particle.className = 'card-particle';
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        radius: Math.random() * 7 + 4,
+                        color: colors[Math.floor(Math.random() * colors.length)],
+                        vx: (Math.random() - 0.5) * 2,
+                        vy: (Math.random() - 0.5) * 2
+                    });
+                }
 
-                    // Random edge: 0=top, 1=right, 2=bottom, 3=left
-                    const edge = Math.floor(Math.random() * 4);
-                    let startX, startY, endX, endY;
+                function animate() {
+                    if (!isHovering) return;
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-                    if (edge === 0) { // top
-                        startX = Math.random() * rect.width;
-                        startY = 0;
-                        endX = startX + (Math.random() - 0.5) * 80;
-                        endY = -40 - Math.random() * 40;
-                    } else if (edge === 1) { // right
-                        startX = rect.width;
-                        startY = Math.random() * rect.height;
-                        endX = rect.width + 40 + Math.random() * 40;
-                        endY = startY + (Math.random() - 0.5) * 80;
-                    } else if (edge === 2) { // bottom
-                        startX = Math.random() * rect.width;
-                        startY = rect.height;
-                        endX = startX + (Math.random() - 0.5) * 80;
-                        endY = rect.height + 40 + Math.random() * 40;
-                    } else { // left
-                        startX = 0;
-                        startY = Math.random() * rect.height;
-                        endX = -40 - Math.random() * 40;
-                        endY = startY + (Math.random() - 0.5) * 80;
+                    particles.forEach(p => {
+                        p.x += p.vx;
+                        p.y += p.vy;
+
+                        // Bounce off edges
+                        if (p.x < p.radius || p.x > canvas.width - p.radius) p.vx *= -1;
+                        if (p.y < p.radius || p.y > canvas.height - p.radius) p.vy *= -1;
+
+                        // Keep in bounds
+                        p.x = Math.max(p.radius, Math.min(canvas.width - p.radius, p.x));
+                        p.y = Math.max(p.radius, Math.min(canvas.height - p.radius, p.y));
+
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                        ctx.fillStyle = p.color;
+                        ctx.fill();
+                    });
+
+                    // Simple collision - bubbles push each other
+                    for (let i = 0; i < particles.length; i++) {
+                        for (let j = i + 1; j < particles.length; j++) {
+                            const dx = particles[j].x - particles[i].x;
+                            const dy = particles[j].y - particles[i].y;
+                            const dist = Math.sqrt(dx * dx + dy * dy);
+                            const minDist = particles[i].radius + particles[j].radius;
+
+                            if (dist < minDist) {
+                                const angle = Math.atan2(dy, dx);
+                                const pushX = Math.cos(angle) * 0.5;
+                                const pushY = Math.sin(angle) * 0.5;
+                                particles[i].vx -= pushX;
+                                particles[i].vy -= pushY;
+                                particles[j].vx += pushX;
+                                particles[j].vy += pushY;
+                            }
+                        }
                     }
 
-                    const size = Math.random() * 8 + 4;
-                    const color = colors[Math.floor(Math.random() * colors.length)];
-                    const duration = 0.6 + Math.random() * 0.4;
+                    animationId = requestAnimationFrame(animate);
+                }
+                animate();
+            });
 
-                    particle.style.cssText = `
-                        position: absolute;
-                        left: ${startX}px;
-                        top: ${startY}px;
-                        width: ${size}px;
-                        height: ${size}px;
-                        background: ${color};
-                        border-radius: 50%;
-                        pointer-events: none;
-                        z-index: 10;
-                        opacity: 0.8;
-                    `;
-
-                    card.appendChild(particle);
-
-                    particle.animate([
-                        { transform: 'translate(0, 0) scale(1)', opacity: 0.8 },
-                        { transform: `translate(${endX - startX}px, ${endY - startY}px) scale(0)`, opacity: 0 }
-                    ], {
-                        duration: duration * 1000,
-                        easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-                    }).onfinish = () => particle.remove();
+            card.addEventListener('mouseleave', function() {
+                isHovering = false;
+                if (animationId) cancelAnimationFrame(animationId);
+                if (canvas) {
+                    canvas.remove();
+                    canvas = null;
                 }
             });
         });
