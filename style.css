@@ -311,23 +311,27 @@ nav {
     text-shadow: 0 4px 8px rgba(196, 32, 110, 0.15);
 }
 
-/* GET A QUOTE BUTTON - Electric Yellow */
-.nav-cta {
+/* GET A QUOTE BUTTON - Electric Yellow (exact copy of .electric-btn) */
+.nav-links a.nav-cta,
+a.nav-cta {
     position: relative;
-    background: linear-gradient(135deg, #ffc532 0%, #ffe066 50%, #ffc532 100%);
-    background-size: 200% 200%;
+    background: linear-gradient(135deg, #ffc532 0%, #ffe680 50%, #ffc532 100%) !important;
+    background-size: 200% 200% !important;
     color: var(--dark-brown) !important;
-    padding: 0.6rem 1.2rem;
-    border-radius: 30px;
-    font-weight: 800;
-    font-size: 0.95rem;
+    padding: 0.6rem 1.2rem !important;
+    padding-bottom: 0.6rem !important;
+    border-radius: 25px !important;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800 !important;
+    font-size: 0.95rem !important;
     white-space: nowrap;
-    border: none;
+    border: none !important;
+    cursor: pointer;
     overflow: hidden;
-    transform-style: preserve-3d;
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
-    animation: nav-cta-gradient 3s ease infinite;
-    box-shadow: 0 4px 15px rgba(255, 197, 50, 0.5), 0 0 20px rgba(255, 197, 50, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.3s ease !important;
+    animation: nav-cta-gradient 3s ease infinite !important;
+    box-shadow: 0 4px 15px rgba(255, 197, 50, 0.5), 0 0 20px rgba(255, 197, 50, 0.3) !important;
+    text-shadow: none !important;
 }
 
 @keyframes nav-cta-gradient {
@@ -335,35 +339,47 @@ nav {
     50% { background-position: 100% 50%; }
 }
 
-/* Glossy light sweep */
-.nav-cta::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
-    transition: left 0.5s ease;
-    z-index: 1;
+/* Glossy light sweep - must override nav-links a::after */
+.nav-links a.nav-cta::before,
+a.nav-cta::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    bottom: auto !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent) !important;
+    transition: left 0.5s ease !important;
+    border-radius: 0 !important;
 }
 
-.nav-cta:hover::before {
-    left: 100%;
+.nav-links a.nav-cta:hover::before,
+a.nav-cta:hover::before {
+    left: 100% !important;
+    width: 100% !important;
 }
 
-.nav-cta::after {
-    display: none;
+/* Kill the underline from nav-links a::after */
+.nav-links a.nav-cta::after,
+a.nav-cta::after {
+    display: none !important;
+    content: none !important;
+    width: 0 !important;
+    height: 0 !important;
 }
 
-.nav-cta:hover {
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 10px 30px rgba(255, 197, 50, 0.6), 0 0 50px rgba(255, 197, 50, 0.4), 0 0 70px rgba(255, 219, 112, 0.3);
+.nav-links a.nav-cta:hover,
+a.nav-cta:hover {
+    transform: translateY(-3px) scale(1.03) !important;
+    box-shadow: 0 8px 25px rgba(255, 197, 50, 0.6), 0 0 40px rgba(255, 197, 50, 0.4), 0 0 60px rgba(255, 219, 112, 0.25) !important;
     color: var(--dark-brown) !important;
+    text-shadow: none !important;
 }
 
-.nav-cta:active {
-    transform: translateY(-1px) scale(1.01);
+.nav-links a.nav-cta:active,
+a.nav-cta:active {
+    transform: translateY(-1px) scale(1.01) !important;
 }
 
 /* Electric spark styling for nav-cta */
@@ -373,7 +389,6 @@ nav {
     border-radius: 50%;
     pointer-events: none;
     box-shadow: 0 0 6px #fff, 0 0 10px #ffc532;
-    z-index: 2;
 }
 
 /* ORDER NOW BUTTON (next to logo) */
