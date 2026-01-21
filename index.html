@@ -1089,31 +1089,66 @@
         window.addEventListener('load', () => setTimeout(loadOrderModal, 100));
     }
 
-    // 3D Tilt effect for Get a Quote button
+    // Electric sparks effect for Get a Quote button
     const navCta = document.querySelector('.nav-cta');
     if (navCta) {
+        let sparkInterval;
+
+        function createNavSpark(x, y) {
+            const spark = document.createElement('div');
+            spark.className = 'spark';
+            const angle = Math.random() * Math.PI * 2;
+            const distance = 25 + Math.random() * 35;
+            const tx = Math.cos(angle) * distance;
+            const ty = Math.sin(angle) * distance;
+            spark.style.cssText = `
+                left: ${x}px;
+                top: ${y}px;
+                width: ${2 + Math.random() * 3}px;
+                height: ${2 + Math.random() * 3}px;
+            `;
+            navCta.appendChild(spark);
+
+            spark.animate([
+                { opacity: 1, transform: 'scale(1) translate(0, 0)' },
+                { opacity: 0, transform: `scale(0.3) translate(${tx}px, ${ty}px)` }
+            ], {
+                duration: 400 + Math.random() * 200,
+                easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+            }).onfinish = () => spark.remove();
+        }
+
         navCta.addEventListener('mouseenter', () => {
-            navCta.style.animation = 'none';
-        });
+            // Burst of sparks on enter
+            for (let i = 0; i < 6; i++) {
+                setTimeout(() => {
+                    const x = Math.random() * navCta.offsetWidth;
+                    const y = Math.random() * navCta.offsetHeight;
+                    createNavSpark(x, y);
+                }, i * 40);
+            }
 
-        navCta.addEventListener('mousemove', (e) => {
-            const rect = navCta.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            const rotateX = (y - centerY) / 5;
-            const rotateY = (centerX - x) / 5;
-
-            navCta.style.transform = `perspective(400px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px) scale(1.08)`;
-            navCta.style.boxShadow = '0 20px 50px rgba(236, 38, 143, 0.35), 0 0 60px rgba(255, 197, 50, 0.5), 0 0 40px rgba(236, 38, 143, 0.2)';
+            // Continuous sparks while hovering
+            sparkInterval = setInterval(() => {
+                const x = Math.random() * navCta.offsetWidth;
+                const y = Math.random() * navCta.offsetHeight;
+                createNavSpark(x, y);
+            }, 120);
         });
 
         navCta.addEventListener('mouseleave', () => {
-            navCta.style.transform = 'perspective(400px) rotateX(0) rotateY(0) translateY(0) scale(1)';
-            navCta.style.boxShadow = '';
-            navCta.style.animation = '';
+            clearInterval(sparkInterval);
+        });
+
+        navCta.addEventListener('click', () => {
+            // Big burst on click
+            for (let i = 0; i < 12; i++) {
+                setTimeout(() => {
+                    const x = navCta.offsetWidth / 2 + (Math.random() - 0.5) * 30;
+                    const y = navCta.offsetHeight / 2 + (Math.random() - 0.5) * 15;
+                    createNavSpark(x, y);
+                }, i * 25);
+            }
         });
     }
     </script>
