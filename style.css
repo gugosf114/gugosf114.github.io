@@ -1294,15 +1294,16 @@ footer {
 
 /* Featured Cake option with AI Sketch */
 .radio-option.featured {
-    padding: 14px 18px;
-    border: 2px solid var(--pink);
-    background: linear-gradient(135deg, rgba(255, 197, 50, 0.08) 0%, rgba(236, 38, 143, 0.08) 100%);
-    box-shadow: 0 2px 12px rgba(236, 38, 143, 0.15);
+    padding: 16px 20px;
+    border: 3px solid var(--pink);
+    background: linear-gradient(135deg, rgba(255, 197, 50, 0.12) 0%, rgba(236, 38, 143, 0.12) 100%);
+    animation: pulse-glow 2.5s ease-in-out infinite;
 }
 
 .radio-option.featured:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(236, 38, 143, 0.35), 0 0 25px rgba(255, 197, 50, 0.2);
+    transform: translateY(-4px);
+    animation: none;
+    box-shadow: 0 8px 30px rgba(236, 38, 143, 0.5), 0 0 40px rgba(255, 197, 50, 0.3);
 }
 
 .radio-option input[type="radio"] {
@@ -3388,16 +3389,22 @@ header nav .search-container svg {
 /* AI Feature Bouncy Text Animation - single letter bounce traveling through */
 @keyframes bounce-letter {
     0%, 10%, 100% { transform: translateY(0); }
-    5% { transform: translateY(-4px); }
+    5% { transform: translateY(-8px); }
+}
+
+/* Pulsing glow for featured option */
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 2px 15px rgba(236, 38, 143, 0.25); }
+    50% { box-shadow: 0 4px 25px rgba(236, 38, 143, 0.45), 0 0 30px rgba(255, 197, 50, 0.2); }
 }
 
 .bouncy-text {
     display: inline-flex;
-    font-size: 0.7rem;
+    font-size: 0.95rem;
     font-weight: 800;
     color: var(--pink);
-    margin-left: 0.5rem;
-    letter-spacing: 0.02em;
+    margin-left: 0.75rem;
+    letter-spacing: 0.03em;
 }
 
 .bouncy-text span {
