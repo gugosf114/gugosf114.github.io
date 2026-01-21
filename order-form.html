@@ -182,10 +182,11 @@
                         <div class="form-group">
                             <label>What are you ordering? *</label>
                             <div class="radio-group">
-                                <label class="radio-option featured">
+                                <label class="radio-option featured" id="cakeOption">
                                     <input type="radio" name="product_type" value="Cake" required>
                                     <span>Cake</span>
                                     <span class="bouncy-text"><span>🪄</span><span>&nbsp;</span><span>A</span><span>I</span><span>&nbsp;</span><span>S</span><span>k</span><span>e</span><span>t</span><span>c</span><span>h</span><span>!</span></span>
+                                    <canvas id="particleCanvas"></canvas>
                                 </label>
                                 <label class="radio-option">
                                     <input type="radio" name="product_type" value="Cookies">
@@ -452,6 +453,87 @@
     const style = document.createElement('style');
     style.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
     document.head.appendChild(style);
+
+    // Particle effect for Cake option
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    const cakeOption = document.getElementById('cakeOption');
+    let particles = [];
+    let animationId = null;
+    let isHovering = false;
+
+    function resizeCanvas() {
+        canvas.width = cakeOption.offsetWidth;
+        canvas.height = cakeOption.offsetHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    class Particle {
+        constructor() {
+            this.reset();
+        }
+        reset() {
+            this.x = Math.random() * canvas.width;
+            this.y = canvas.height + 5;
+            this.size = Math.random() * 4 + 2;
+            this.speedY = Math.random() * 1.5 + 0.5;
+            this.speedX = (Math.random() - 0.5) * 0.5;
+            this.opacity = Math.random() * 0.7 + 0.3;
+            // Brand colors: pink and yellow
+            this.color = Math.random() > 0.5 ? 'rgba(236, 38, 143,' : 'rgba(255, 197, 50,';
+        }
+        update() {
+            this.y -= this.speedY;
+            this.x += this.speedX;
+            this.opacity -= 0.008;
+            if (this.y < -10 || this.opacity <= 0) {
+                if (isHovering) this.reset();
+                else this.opacity = 0;
+            }
+        }
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = this.color + this.opacity + ')';
+            ctx.fill();
+        }
+    }
+
+    function initParticles() {
+        particles = [];
+        for (let i = 0; i < 20; i++) {
+            const p = new Particle();
+            p.y = Math.random() * canvas.height;
+            particles.push(p);
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+            p.update();
+            p.draw();
+        });
+        if (isHovering || particles.some(p => p.opacity > 0)) {
+            animationId = requestAnimationFrame(animate);
+        } else {
+            animationId = null;
+        }
+    }
+
+    cakeOption.addEventListener('mouseenter', () => {
+        isHovering = true;
+        resizeCanvas();
+        if (!animationId) {
+            initParticles();
+            animate();
+        }
+    });
+
+    cakeOption.addEventListener('mouseleave', () => {
+        isHovering = false;
+    });
     </script>
 
     <!-- AI Chatbot Widget -->
