@@ -266,9 +266,13 @@ nav {
     display: flex;
     flex: 1;
     justify-content: center;
-    gap: 2rem;
+    gap: 1.5rem;
     list-style: none;
     align-items: center;
+}
+
+.nav-links li {
+    white-space: nowrap;
 }
 
 .nav-links a {
