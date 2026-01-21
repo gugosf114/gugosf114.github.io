@@ -3559,6 +3559,78 @@ header nav .search-container svg {
     100% { background-position: 300% 50%; }
 }
 
+/* Form Intro Speech Bubble - with pizzazz */
+.form-intro-wrapper {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.form-intro-bubble {
+    display: inline-block;
+    position: relative;
+    background: linear-gradient(135deg, #fff5f8 0%, #fffbf5 100%);
+    border: 3px solid transparent;
+    border-radius: 25px;
+    padding: 0.8rem 1.5rem;
+    white-space: nowrap;
+    box-shadow: 0 6px 25px rgba(236, 38, 143, 0.25), 0 0 40px rgba(255, 197, 50, 0.15);
+    animation: bubble-float 3s ease-in-out infinite, intro-bubble-glow 2s ease-in-out infinite alternate;
+    background-clip: padding-box;
+}
+
+/* Animated gradient border */
+.form-intro-bubble::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 25px;
+    padding: 3px;
+    background: linear-gradient(90deg, var(--pink), var(--yellow), var(--pink), var(--yellow), var(--pink));
+    background-size: 300% 100%;
+    animation: gradient-border-shift 4s linear infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    z-index: -1;
+}
+
+/* Speech bubble tail pointing down */
+.form-intro-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 14px solid var(--pink);
+    filter: drop-shadow(0 2px 4px rgba(236, 38, 143, 0.3));
+}
+
+.form-intro-bubble #formIntroTypewriter {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--pink);
+}
+
+.form-intro-bubble .bubble-cursor {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--pink);
+    animation: blink-cursor 0.7s step-end infinite;
+}
+
+@keyframes intro-bubble-glow {
+    0% { box-shadow: 0 6px 25px rgba(236, 38, 143, 0.25), 0 0 40px rgba(255, 197, 50, 0.15); }
+    100% { box-shadow: 0 8px 35px rgba(236, 38, 143, 0.35), 0 0 50px rgba(255, 197, 50, 0.25); }
+}
+
 /* AI highlight for description field - SPEECH BUBBLE */
 .ai-description-hint.speech-bubble {
     display: none;
