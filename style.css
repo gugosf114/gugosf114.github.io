@@ -394,6 +394,7 @@ a.nav-cta:active {
 /* ORDER NOW BUTTON (next to logo) - Electric Pink */
 .order-now-btn {
     position: relative;
+    display: inline-block;
     background: linear-gradient(135deg, #ec268f 0%, #ff6b9d 50%, #ec268f 100%);
     background-size: 200% 200%;
     color: #fff !important;
@@ -410,6 +411,7 @@ a.nav-cta:active {
     transition: transform 0.2s ease, box-shadow 0.3s ease;
     animation: order-now-gradient 3s ease infinite;
     box-shadow: 0 4px 15px rgba(236, 38, 143, 0.5), 0 0 20px rgba(236, 38, 143, 0.3);
+    z-index: 1;
 }
 
 @keyframes order-now-gradient {
@@ -427,6 +429,8 @@ a.nav-cta:active {
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
     transition: left 0.5s ease;
+    z-index: -1;
+    border-radius: 25px;
 }
 
 .order-now-btn:hover::before {
