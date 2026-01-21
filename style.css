@@ -3866,11 +3866,11 @@ header nav .search-container svg {
 @keyframes hint-icon-pulse {
     0%, 100% {
         transform: scale(1);
-        box-shadow: 0 2px 8px rgba(255, 197, 50, 0.4);
+        box-shadow: 0 2px 8px rgba(255, 197, 50, 0.5);
     }
     50% {
-        transform: scale(1.1);
-        box-shadow: 0 4px 15px rgba(255, 197, 50, 0.6), 0 0 20px rgba(255, 197, 50, 0.3);
+        transform: scale(1.25);
+        box-shadow: 0 6px 20px rgba(255, 197, 50, 0.8), 0 0 30px rgba(236, 38, 143, 0.4);
     }
 }
 
@@ -3885,11 +3885,11 @@ header nav .search-container svg {
     position: absolute;
     background: linear-gradient(135deg, #fff5f8 0%, #fffbf5 100%);
     border: 2px solid var(--pink);
-    border-radius: 16px;
-    padding: 0.6rem 1rem;
+    border-radius: 12px;
+    padding: 0.35rem 0.7rem;
     font-family: 'Nunito', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 700;
+    font-size: 0.65rem;
+    font-weight: 600;
     color: var(--pink);
     white-space: nowrap;
     box-shadow: 0 4px 15px rgba(236, 38, 143, 0.2);
