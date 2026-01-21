@@ -275,13 +275,17 @@
             </div>
         </div>
 
-        <!-- NEW FEATURE: Logo Preview Tool -->
-        <div class="section-wrapper section-beige reveal" style="margin-bottom: 3rem;">
-            <div class="section-header">
+        <!-- Logo Preview Tool - PREMIUM FEATURED -->
+        <div class="logo-preview-section featured-ai-section" id="cookiePreviewSection" style="margin-bottom: 3rem;">
+            <canvas id="cookiePreviewParticles" class="feature-particles-canvas"></canvas>
+            <div class="featured-ai-header">
                 <span class="new-feature-badge">NEW FEATURE</span>
-                <h2>Preview Your <span class="highlight">Logo</span> on a Cookie</h2>
-                <p style="font-size: 1.1rem; color: var(--brown); margin-top: 0.5rem;">Upload your company logo and see how it looks on our signature cookies!</p>
-                <p style="font-size: 0.9rem; color: var(--brown); opacity: 0.8; margin-top: 0.5rem;">*Works best with images that have transparent or no backgrounds</p>
+                <h3 class="featured-ai-title">Preview Your <span>Logo</span> on a Cookie</h3>
+                <div class="featured-ai-hint speech-bubble" id="cookiePreviewHint">
+                    <span class="hint-text" id="cookieHintTypewriter"></span><span class="bubble-cursor">|</span>
+                </div>
+                <p class="featured-ai-subtitle">Upload your company logo and see how it looks on our signature cookies!</p>
+                <p class="featured-ai-note">*Works best with images that have transparent or no backgrounds</p>
             </div>
             <div class="logo-preview-container">
                 <div class="logo-preview-upload-area" id="uploadArea">
@@ -760,10 +764,149 @@
         50% { transform: scale(1.05); box-shadow: 0 4px 20px rgba(255, 107, 139, 0.5); }
     }
 
+    /* FEATURED AI SECTION - Premium Container */
+    .featured-ai-section {
+        position: relative;
+        padding: 2rem;
+        background: linear-gradient(135deg, #fffbf5 0%, #fff5f8 50%, #fffbf0 100%);
+        border-radius: 25px;
+        overflow: hidden;
+        border: 3px solid transparent;
+        background-clip: padding-box;
+    }
+
+    .featured-ai-section::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        border-radius: 25px;
+        padding: 3px;
+        background: linear-gradient(90deg, var(--pink), var(--yellow), var(--pink), var(--yellow), var(--pink));
+        background-size: 300% 100%;
+        animation: gradient-border-shift 4s linear infinite;
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    @keyframes gradient-border-shift {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 300% 50%; }
+    }
+
+    .feature-particles-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .featured-ai-header {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+    }
+
+    .featured-ai-title {
+        font-family: 'Fredoka One', cursive;
+        font-size: 1.6rem;
+        color: var(--dark-brown);
+        margin-bottom: 0.5rem;
+    }
+
+    .featured-ai-title span {
+        color: var(--pink);
+    }
+
+    .featured-ai-hint.speech-bubble {
+        display: inline-block;
+        position: relative;
+        background: linear-gradient(135deg, #fff5f8 0%, #fffbf5 100%);
+        border: 2px solid var(--pink);
+        border-radius: 20px;
+        padding: 0.6rem 1rem;
+        margin-bottom: 1rem;
+        white-space: nowrap;
+        box-shadow: 0 4px 15px rgba(236, 38, 143, 0.15);
+        animation: bubble-float 3s ease-in-out infinite;
+    }
+
+    .featured-ai-hint.speech-bubble::before {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 10px solid var(--pink);
+    }
+
+    .featured-ai-hint.speech-bubble::after {
+        content: '';
+        position: absolute;
+        bottom: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 8px solid #fff5f8;
+    }
+
+    .featured-ai-hint .hint-text {
+        font-family: 'Nunito', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--pink);
+    }
+
+    .featured-ai-hint .bubble-cursor {
+        font-family: 'Nunito', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--pink);
+        animation: blink-cursor 0.7s step-end infinite;
+    }
+
+    @keyframes blink-cursor {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+    }
+
+    @keyframes bubble-float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-3px); }
+    }
+
+    .featured-ai-subtitle {
+        font-size: 1rem;
+        color: var(--brown);
+        margin-bottom: 0.5rem;
+    }
+
+    .featured-ai-note {
+        font-size: 0.85rem;
+        color: var(--brown);
+        opacity: 0.8;
+        margin-bottom: 1.5rem;
+    }
+
     /* Logo Preview Tool Styles */
     .logo-preview-container {
+        position: relative;
+        z-index: 2;
         max-width: 800px;
-        margin: 2rem auto 0;
+        margin: 0 auto;
     }
     .logo-preview-upload-area {
         display: flex;
@@ -1184,6 +1327,135 @@
             script.src = 'script.js';
             document.body.appendChild(script);
         });
+    </script>
+
+    <!-- Featured Section Particles & Typewriter -->
+    <script>
+    (function() {
+        // Floating particles for cookie preview section
+        const section = document.getElementById('cookiePreviewSection');
+        const canvas = document.getElementById('cookiePreviewParticles');
+        if (!canvas || !section) return;
+
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = section.offsetWidth;
+            canvas.height = section.offsetHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + 5;
+                this.size = Math.random() * 4 + 2;
+                this.speedY = Math.random() * 1.2 + 0.4;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.opacity = Math.random() * 0.6 + 0.3;
+                this.color = Math.random() > 0.5 ? 'rgba(236, 38, 143,' : 'rgba(255, 197, 50,';
+            }
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX;
+                this.opacity -= 0.006;
+                if (this.y < -10 || this.opacity <= 0) this.reset();
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color + this.opacity + ')';
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < 15; i++) {
+                const p = new Particle();
+                p.y = Math.random() * canvas.height;
+                particles.push(p);
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+
+        initParticles();
+        animate();
+
+        // Typewriter effect for hint bubble
+        const typewriterEl = document.getElementById('cookieHintTypewriter');
+        if (!typewriterEl) return;
+
+        const messages = [
+            "Upload your company logo!",
+            "See it on round or square cookies!",
+            "Download and share your preview!"
+        ];
+
+        // Pre-calculate width of longest message to prevent layout shift
+        const bubble = typewriterEl.closest('.speech-bubble');
+        if (bubble) {
+            const temp = document.createElement('span');
+            temp.style.cssText = 'visibility:hidden;position:absolute;white-space:nowrap;font:inherit;';
+            bubble.appendChild(temp);
+            let maxWidth = 0;
+            messages.forEach(m => {
+                temp.textContent = m;
+                if (temp.offsetWidth > maxWidth) maxWidth = temp.offsetWidth;
+            });
+            temp.remove();
+            typewriterEl.style.display = 'inline-block';
+            typewriterEl.style.minWidth = maxWidth + 'px';
+            typewriterEl.style.textAlign = 'center';
+        }
+
+        let messageIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let isPaused = false;
+
+        function type() {
+            const currentMessage = messages[messageIndex];
+
+            if (isPaused) {
+                setTimeout(type, 100);
+                return;
+            }
+
+            if (!isDeleting) {
+                typewriterEl.textContent = currentMessage.substring(0, charIndex + 1);
+                charIndex++;
+
+                if (charIndex === currentMessage.length) {
+                    isPaused = true;
+                    setTimeout(() => {
+                        isPaused = false;
+                        isDeleting = true;
+                    }, 2500);
+                }
+                setTimeout(type, 50);
+            } else {
+                typewriterEl.textContent = currentMessage.substring(0, charIndex - 1);
+                charIndex--;
+
+                if (charIndex === 0) {
+                    isDeleting = false;
+                    messageIndex = (messageIndex + 1) % messages.length;
+                }
+                setTimeout(type, 30);
+            }
+        }
+
+        type();
+    })();
     </script>
 
     <!-- AI Chatbot Widget -->
