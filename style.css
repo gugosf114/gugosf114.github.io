@@ -2190,7 +2190,7 @@ footer {
 
 /* Back to Gallery Link */
 .back-link {
-    color: var(--dark-brown);
+    color: var(--yellow);
     font-weight: 700;
     text-decoration: none;
     font-size: 1rem;
