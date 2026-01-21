@@ -3531,6 +3531,34 @@ header nav .search-container svg {
     50% { box-shadow: 0 4px 25px rgba(236, 38, 143, 0.45), 0 0 30px rgba(255, 197, 50, 0.2); }
 }
 
+/* Folder Tab - NEW FEATURE badge on left edge */
+.folder-tab {
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    transform-origin: center center;
+    background: linear-gradient(90deg, var(--pink), var(--yellow), var(--pink), var(--yellow), var(--pink));
+    background-size: 300% 100%;
+    animation: folder-tab-gradient 4s linear infinite;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px 6px 0 0;
+    white-space: nowrap;
+    box-shadow: -2px 0 8px rgba(236, 38, 143, 0.3);
+    z-index: 10;
+}
+
+@keyframes folder-tab-gradient {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+}
+
 /* AI highlight for description field - SPEECH BUBBLE */
 .ai-description-hint.speech-bubble {
     display: none;
