@@ -660,6 +660,32 @@
     .preview-actions { flex-direction: column; align-items: center; }
     .btn-preview-download, .btn-preview-reset { width: 100%; max-width: 250px; }
 }
+
+/* Fix speech bubble typewriter on mobile - prevent layout shift */
+@media (max-width: 768px) {
+    .featured-ai-hint.speech-bubble {
+        white-space: normal;
+        max-width: 280px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .featured-ai-hint .hint-text {
+        font-size: 0.75rem;
+    }
+    .featured-ai-title {
+        font-size: 1.3rem;
+    }
+    .featured-ai-subtitle,
+    .featured-ai-note {
+        font-size: 0.85rem;
+        padding: 0 1rem;
+    }
+}
 </style>
 
     <script>

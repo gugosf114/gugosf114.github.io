@@ -3759,6 +3759,57 @@ header nav .search-container svg {
     50% { transform: translateY(-3px); }
 }
 
+/* Mobile responsive for AI description hint speech bubble */
+@media (max-width: 768px) {
+    .ai-description-hint.speech-bubble {
+        white-space: normal;
+        max-width: 90%;
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-left: 0;
+        padding: 0.6rem 1rem;
+    }
+
+    .ai-description-hint.speech-bubble .hint-text {
+        font-size: 0.75rem;
+        display: block;
+        text-align: center;
+        min-width: 0 !important;
+    }
+
+    .ai-description-hint.speech-bubble .bubble-cursor {
+        font-size: 0.75rem;
+    }
+
+    .ai-description-hint.speech-bubble::before {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .ai-description-hint.speech-bubble::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 480px) {
+    .ai-description-hint.speech-bubble {
+        max-width: 95%;
+        padding: 0.5rem 0.8rem;
+    }
+
+    .ai-description-hint.speech-bubble .hint-text {
+        font-size: 0.7rem;
+    }
+
+    .ai-description-hint.speech-bubble .bubble-cursor {
+        font-size: 0.7rem;
+    }
+}
+
 /* Textarea wrapper for particle canvas */
 .textarea-wrapper {
     position: relative;
