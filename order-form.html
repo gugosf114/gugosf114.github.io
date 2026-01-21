@@ -185,6 +185,7 @@
                                 <label class="radio-option">
                                     <input type="radio" name="product_type" value="Cake" required>
                                     <span>Cake</span>
+                                    <span class="bouncy-text"><span>✨</span><span>&nbsp;</span><span>A</span><span>I</span><span>&nbsp;</span><span>S</span><span>k</span><span>e</span><span>t</span><span>c</span><span>h</span><span>!</span></span>
                                 </label>
                                 <label class="radio-option">
                                     <input type="radio" name="product_type" value="Cookies">
@@ -253,6 +254,10 @@
 
                         <div class="form-group">
                             <label for="order_details">Tell us about your order *</label>
+                            <div id="aiDescriptionHint" class="ai-description-hint">
+                                <span style="font-size: 1.1rem;">🎨</span>
+                                <span class="bouncy-text"><span>D</span><span>e</span><span>s</span><span>c</span><span>r</span><span>i</span><span>b</span><span>e</span><span>&nbsp;</span><span>y</span><span>o</span><span>u</span><span>r</span><span>&nbsp;</span><span>c</span><span>a</span><span>k</span><span>e</span><span>&nbsp;</span><span>—</span><span>&nbsp;</span><span>w</span><span>e</span><span>'</span><span>l</span><span>l</span><span>&nbsp;</span><span>s</span><span>k</span><span>e</span><span>t</span><span>c</span><span>h</span><span>&nbsp;</span><span>i</span><span>t</span><span>!</span></span>
+                            </div>
                             <textarea id="order_details" name="order_details" rows="5" required placeholder="Tell us about your theme, colors, size, and any special requests..."></textarea>
                             <small>Include: theme, colors, serving size, and any special requests</small>
                         </div>
@@ -376,15 +381,18 @@
     const previewError = document.getElementById('previewError');
     const downloadPreviewBtn = document.getElementById('downloadPreviewBtn');
     const orderDetailsTextarea = document.getElementById('order_details');
+    const aiDescriptionHint = document.getElementById('aiDescriptionHint');
 
-    // Show/hide AI preview section based on product type
+    // Show/hide AI preview section and description hint based on product type
     const productRadios = document.querySelectorAll('input[name="product_type"]');
     productRadios.forEach(radio => {
         radio.addEventListener('change', function() {
             if (this.value === 'Cake') {
                 aiPreviewSection.style.display = 'block';
+                aiDescriptionHint.classList.add('visible');
             } else {
                 aiPreviewSection.style.display = 'none';
+                aiDescriptionHint.classList.remove('visible');
                 previewResult.style.display = 'none';
                 previewError.style.display = 'none';
             }
