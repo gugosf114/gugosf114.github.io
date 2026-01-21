@@ -311,19 +311,24 @@ nav {
 }
 
 .nav-cta {
-    background: var(--yellow);
+    background: linear-gradient(135deg, var(--yellow) 0%, #ffdb70 100%);
     color: var(--dark-brown) !important;
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.2rem;
     border-radius: 30px;
     font-weight: 800;
     font-size: 0.95rem;
     white-space: nowrap;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.15s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
     animation: nav-cta-glow 3s ease-in-out infinite;
 }
 
 @keyframes nav-cta-glow {
-    0%, 100% { box-shadow: 0 2px 8px rgba(255, 197, 50, 0.3); }
-    50% { box-shadow: 0 4px 20px rgba(255, 197, 50, 0.6), 0 0 25px rgba(236, 38, 143, 0.15); }
+    0%, 100% { box-shadow: 0 4px 15px rgba(255, 197, 50, 0.4), 0 0 20px rgba(236, 38, 143, 0.1); }
+    50% { box-shadow: 0 6px 25px rgba(255, 197, 50, 0.6), 0 0 35px rgba(236, 38, 143, 0.2); }
 }
 
 .nav-cta::after {
@@ -331,11 +336,11 @@ nav {
 }
 
 .nav-cta:hover {
-    background: var(--yellow-dark);
-    transform: translateY(-4px) scale(1.05);
+    background: linear-gradient(135deg, #ffe066 0%, var(--yellow) 100%);
+    border-color: var(--pink);
     color: var(--dark-brown) !important;
     animation: none;
-    box-shadow: 0 8px 30px rgba(255, 197, 50, 0.6), 0 0 40px rgba(236, 38, 143, 0.15);
+    box-shadow: 0 15px 40px rgba(236, 38, 143, 0.3), 0 0 50px rgba(255, 197, 50, 0.4), 0 0 30px rgba(236, 38, 143, 0.15);
 }
 
 /* AI hint under nav CTA */
