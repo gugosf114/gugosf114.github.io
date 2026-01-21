@@ -172,6 +172,7 @@
 
     <!-- HEADER -->
     <header>
+        <canvas id="nav-particles"></canvas>
         <nav>
             <a href="buy-now.html" class="order-now-btn">Order Now</a>
             <a href="index.html" class="logo">
@@ -1110,6 +1111,62 @@
             navCta.style.transform = 'perspective(500px) rotateX(0) rotateY(0) translateY(0) scale(1)';
         });
     }
+    </script>
+
+    <!-- Nav Particles -->
+    <script>
+    (function() {
+        const canvas = document.getElementById('nav-particles');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const header = canvas.parentElement;
+
+        function resize() {
+            canvas.width = header.offsetWidth;
+            canvas.height = header.offsetHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        const particles = [];
+        const particleCount = 25;
+        const colors = ['rgba(255, 182, 193, 0.4)', 'rgba(255, 218, 185, 0.4)', 'rgba(255, 239, 213, 0.35)'];
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 3 + 1.5,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                speedY: -(Math.random() * 0.3 + 0.1),
+                speedX: (Math.random() - 0.5) * 0.2
+            });
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+                p.y += p.speedY;
+                p.x += p.speedX;
+
+                if (p.y < -10) {
+                    p.y = canvas.height + 10;
+                    p.x = Math.random() * canvas.width;
+                }
+                if (p.x < -10) p.x = canvas.width + 10;
+                if (p.x > canvas.width + 10) p.x = -10;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.fill();
+            });
+
+            requestAnimationFrame(animate);
+        }
+        animate();
+    })();
     </script>
 
     <!-- AI Chatbot Widget -->
