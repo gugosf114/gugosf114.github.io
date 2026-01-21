@@ -385,14 +385,17 @@
 
     // Show/hide AI preview section and description hint based on product type
     const productRadios = document.querySelectorAll('input[name="product_type"]');
+    const orderDetailsFormGroup = orderDetailsTextarea.closest('.form-group');
     productRadios.forEach(radio => {
         radio.addEventListener('change', function() {
             if (this.value === 'Cake') {
                 aiPreviewSection.style.display = 'block';
                 aiDescriptionHint.classList.add('visible');
+                orderDetailsFormGroup.classList.add('ai-active');
             } else {
                 aiPreviewSection.style.display = 'none';
                 aiDescriptionHint.classList.remove('visible');
+                orderDetailsFormGroup.classList.remove('ai-active');
                 previewResult.style.display = 'none';
                 previewError.style.display = 'none';
             }

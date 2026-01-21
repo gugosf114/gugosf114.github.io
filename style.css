@@ -3552,32 +3552,27 @@ header nav .search-container svg {
     display: none;
     position: relative;
     background: linear-gradient(135deg, #fffbf5 0%, #fff5f8 50%, #fffbf0 100%);
-    border: none;
+    border: 2px solid var(--pink);
     border-radius: 12px;
     padding: 0.8rem 1.2rem;
     margin-bottom: 0.75rem;
     align-items: center;
     gap: 0.6rem;
     overflow: hidden;
+    z-index: 1;
 }
 
-.ai-description-hint::before {
+/* Shimmer effect on hint */
+.ai-description-hint::after {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 12px;
-    padding: 2px;
-    background: linear-gradient(90deg, var(--yellow), var(--pink), var(--yellow));
-    background-size: 200% 100%;
-    animation: gradient-shift 4s linear infinite;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    z-index: -1;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+    animation: shimmer 3s ease-in-out infinite;
+    pointer-events: none;
 }
 
 .ai-description-hint.visible {
@@ -3587,4 +3582,20 @@ header nav .search-container svg {
 .ai-description-hint .bouncy-text {
     font-size: 0.95rem;
     margin-left: 0;
+}
+
+/* Textarea with animated border when AI mode active */
+.form-group.ai-active textarea {
+    position: relative;
+    border: 2px solid transparent;
+    background:
+        linear-gradient(#fff, #fff) padding-box,
+        linear-gradient(90deg, var(--pink), var(--yellow), var(--pink)) border-box;
+    background-size: 100% 100%, 200% 100%;
+    animation: textarea-border-shift 3s linear infinite;
+}
+
+@keyframes textarea-border-shift {
+    0% { background-position: 0 0, 0% 50%; }
+    100% { background-position: 0 0, 200% 50%; }
 }
