@@ -870,7 +870,8 @@ a.nav-cta:active {
 }
 
 .section-beige {
-    background: transparent;
+    background: var(--cream);
+    box-shadow: var(--shadow-section);
 }
 
 .section-white {
