@@ -1179,7 +1179,8 @@
         window.addEventListener('resize', resize);
 
         const particles = [];
-        const particleCount = 40;
+        const isMobile = window.innerWidth <= 768;
+        const particleCount = isMobile ? 26 : 40;
         const colors = [
             'rgba(236, 38, 143, 0.7)',
             'rgba(255, 197, 50, 0.75)',
