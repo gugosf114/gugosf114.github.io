@@ -1202,10 +1202,30 @@
                 if (p.x < -15) p.x = canvas.width + 15;
                 if (p.x > canvas.width + 15) p.x = -15;
 
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                // Draw balloon
+                const r = p.radius;
                 ctx.fillStyle = p.color;
+
+                // Balloon body (oval)
+                ctx.beginPath();
+                ctx.ellipse(p.x, p.y, r * 0.8, r, 0, 0, Math.PI * 2);
                 ctx.fill();
+
+                // Knot (small triangle at bottom)
+                ctx.beginPath();
+                ctx.moveTo(p.x - r * 0.2, p.y + r);
+                ctx.lineTo(p.x + r * 0.2, p.y + r);
+                ctx.lineTo(p.x, p.y + r * 1.3);
+                ctx.closePath();
+                ctx.fill();
+
+                // String
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y + r * 1.3);
+                ctx.quadraticCurveTo(p.x + r * 0.3, p.y + r * 2, p.x - r * 0.2, p.y + r * 2.5);
+                ctx.strokeStyle = p.color;
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
             });
 
             requestAnimationFrame(animate);
