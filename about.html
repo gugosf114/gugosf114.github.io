@@ -719,7 +719,7 @@
         min-height: 80px;
     }
     .hero-carousel h1.typewriter-headline {
-        min-height: 80px;
+        min-height: 140px; /* Fixed height for 2 lines - prevents layout shift during typewriter */
     }
     .hero-carousel h1 .highlight {
         color: var(--pink);
@@ -783,6 +783,9 @@
         .hero-dot {
             width: 8px;
             height: 8px;
+        }
+        .hero-carousel h1.typewriter-headline {
+            min-height: 120px; /* Fixed height for 2 lines on mobile */
         }
     }
 

@@ -614,6 +614,11 @@ function initSingleTypewriter(headline) {
                 charMap.push({ char: char, className: className });
             }
         } else if (node.nodeType === Node.ELEMENT_NODE) {
+            // Handle <br> tags as explicit line breaks
+            if (node.tagName === 'BR') {
+                charMap.push({ char: '\n', className: className, isBr: true });
+                return;
+            }
             const newClass = node.className || className;
             for (const child of node.childNodes) {
                 extractChars(child, newClass);
@@ -649,7 +654,18 @@ function initSingleTypewriter(headline) {
 
         function typeNextChar() {
             if (charIndex < charMap.length) {
-                const { char, className } = charMap[charIndex];
+                const { char, className, isBr } = charMap[charIndex];
+
+                // Handle line break
+                if (isBr) {
+                    const br = document.createElement('br');
+                    headline.insertBefore(br, cursor);
+                    currentSpan = null; // Reset span after br
+                    currentClass = null;
+                    charIndex++;
+                    setTimeout(typeNextChar, typeSpeed);
+                    return;
+                }
 
                 // If class changed or no current span, create new span
                 if (className !== currentClass) {
