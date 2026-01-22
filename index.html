@@ -1213,35 +1213,54 @@
                 if (p.x < -15) p.x = canvas.width + 15;
                 if (p.x > canvas.width + 15) p.x = -15;
 
-                // Draw balloon
+                // Draw balloon with tilt based on string angle
                 const r = p.radius;
+                const angle = p.stringAngle;
+                const tilt = angle * 0.4; // Balloon tilts in direction of string
+
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(tilt);
+
                 ctx.fillStyle = p.color;
 
                 // Balloon body (oval)
                 ctx.beginPath();
-                ctx.ellipse(p.x, p.y, r * 0.8, r, 0, 0, Math.PI * 2);
+                ctx.ellipse(0, 0, r * 0.8, r, 0, 0, Math.PI * 2);
                 ctx.fill();
 
-                // Knot (small triangle at bottom)
+                // Cartoon knot - pinched nub with two little bumps
                 ctx.beginPath();
-                ctx.moveTo(p.x - r * 0.2, p.y + r);
-                ctx.lineTo(p.x + r * 0.2, p.y + r);
-                ctx.lineTo(p.x, p.y + r * 1.3);
+                // Left bump of knot
+                ctx.ellipse(-r * 0.15, r * 1.1, r * 0.12, r * 0.15, -0.3, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                // Right bump of knot
+                ctx.ellipse(r * 0.15, r * 1.1, r * 0.12, r * 0.15, 0.3, 0, Math.PI * 2);
+                ctx.fill();
+                // Pinch point connecting to string
+                ctx.beginPath();
+                ctx.moveTo(-r * 0.08, r * 1.2);
+                ctx.lineTo(r * 0.08, r * 1.2);
+                ctx.lineTo(0, r * 1.35);
                 ctx.closePath();
                 ctx.fill();
 
-                // String (with random angle)
-                const angle = p.stringAngle;
+                ctx.restore();
+
+                // String (with random angle, starts from tilted knot position)
+                const knotX = p.x + Math.sin(tilt) * r * 1.35;
+                const knotY = p.y + Math.cos(tilt) * r * 1.35;
                 ctx.beginPath();
-                ctx.moveTo(p.x, p.y + r * 1.3);
+                ctx.moveTo(knotX, knotY);
                 ctx.quadraticCurveTo(
-                    p.x + r * angle * 2,
-                    p.y + r * 1.8,
-                    p.x + r * angle * 3,
-                    p.y + r * 2.5
+                    knotX + r * angle * 1.5,
+                    knotY + r * 0.6,
+                    knotX + r * angle * 2.5,
+                    knotY + r * 1.2
                 );
                 ctx.strokeStyle = p.color;
-                ctx.lineWidth = 0.5;
+                ctx.lineWidth = 0.6;
                 ctx.stroke();
             });
 
