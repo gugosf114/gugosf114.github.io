@@ -427,7 +427,7 @@
             const response = await fetch(PREVIEW_WORKER_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ description: description })
+                body: JSON.stringify({ description: description, productType: document.querySelector('input[name="product_type"]:checked')?.value || 'cake' })
             });
 
             const data = await response.json();
