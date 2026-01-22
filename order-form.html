@@ -272,11 +272,11 @@
                         <div id="aiPreviewSection" class="form-group" style="display: none;">
                             <div style="background: linear-gradient(135deg, #fff5f8 0%, #fff 100%); border: 2px dashed var(--pink); border-radius: 15px; padding: 1.25rem;">
                                 <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
-                                    <strong style="font-family: 'Fredoka One', cursive; color: var(--pink); font-size: 1rem;">AI Cake Preview</strong>
+                                    <strong style="font-family: 'Fredoka One', cursive; color: var(--pink); font-size: 1rem;">AI Preview</strong>
                                     <span style="background: var(--pink); color: white; font-size: 0.65rem; padding: 2px 6px; border-radius: 8px; font-weight: 600;">NEW</span>
                                 </div>
                                 <p style="color: var(--brown); font-size: 0.85rem; margin-bottom: 1rem;">
-                                    Want to see your idea come to life? Describe your cake above, then click below!
+                                    Want to see your idea come to life? Describe your design above, then click below!
                                 </p>
                                 <button type="button" id="generatePreviewBtn" class="electric-btn">Generate Preview</button>
 
@@ -286,9 +286,9 @@
                                 </div>
 
                                 <div id="previewResult" style="display: none; margin-top: 1rem;">
-                                    <img id="previewImage" src="" alt="AI generated cake preview" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                                    <img id="previewImage" src="" alt="AI generated preview" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                                     <div style="margin-top: 0.75rem;">
-                                        <a id="downloadPreviewBtn" download="my-cake-preview.png" style="background: var(--brown); color: white; padding: 0.4rem 0.8rem; border-radius: 15px; font-size: 0.8rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;">
+                                        <a id="downloadPreviewBtn" download="my-preview.png" style="background: var(--brown); color: white; padding: 0.4rem 0.8rem; border-radius: 15px; font-size: 0.8rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;">
                                             <span>⬇️</span> Download
                                         </a>
                                     </div>
@@ -391,7 +391,7 @@
     const orderDetailsFormGroup = orderDetailsTextarea.closest('.form-group');
     productRadios.forEach(radio => {
         radio.addEventListener('change', function() {
-            if (this.value === 'Cake') {
+            if (this.value === 'Cake' || this.value === 'Cookies') {
                 aiPreviewSection.style.display = 'block';
                 aiDescriptionHint.classList.add('visible');
                 orderDetailsFormGroup.classList.add('ai-active');
@@ -410,7 +410,7 @@
         const description = orderDetailsTextarea.value.trim();
 
         if (description.length < 10) {
-            previewError.textContent = 'Please describe your cake idea above first (at least a few words about theme, colors, etc.)';
+            previewError.textContent = 'Please describe your design above first (at least a few words about theme, colors, etc.)';
             previewError.style.display = 'block';
             previewResult.style.display = 'none';
             orderDetailsTextarea.focus();
