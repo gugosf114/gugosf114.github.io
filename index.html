@@ -1205,9 +1205,52 @@
 
         let time = 0;
 
+        // Collision detection - soft bounce when balloons touch
+        function handleCollisions() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const p1 = particles[i];
+                    const p2 = particles[j];
+
+                    const dx = p2.x - p1.x;
+                    const dy = p2.y - p1.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    const minDist = (p1.radius + p2.radius) * 1.1;
+
+                    if (dist < minDist && dist > 0) {
+                        // Normalize direction
+                        const nx = dx / dist;
+                        const ny = dy / dist;
+
+                        // Soft push apart (gentle, like real balloons)
+                        const pushStrength = 0.15;
+                        const overlap = (minDist - dist) * 0.5;
+
+                        p1.x -= nx * overlap * pushStrength;
+                        p1.y -= ny * overlap * pushStrength;
+                        p2.x += nx * overlap * pushStrength;
+                        p2.y += ny * overlap * pushStrength;
+
+                        // Exchange a bit of velocity (soft bounce)
+                        const dvx = p2.speedX - p1.speedX;
+                        const dvy = p2.speedY - p1.speedY;
+                        const dotProduct = dvx * nx + dvy * ny;
+
+                        if (dotProduct > 0) {
+                            const bounce = 0.3;
+                            p1.speedX += nx * dotProduct * bounce;
+                            p2.speedX -= nx * dotProduct * bounce;
+                        }
+                    }
+                }
+            }
+        }
+
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             time += 1;
+
+            handleCollisions();
 
             particles.forEach(p => {
                 const sway = Math.sin(time * p.swaySpeed + p.swayOffset) * p.swayAmount;
