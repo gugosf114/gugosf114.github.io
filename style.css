@@ -61,7 +61,7 @@ html {
 
 body {
     font-family: 'Nunito', 'Nunito Fallback', sans-serif;
-    background-color: #E8E8E6;
+    background-color: #9A9590;
     color: var(--dark-brown);
     line-height: 1.7;
     overflow-x: hidden;
@@ -881,7 +881,7 @@ a.nav-cta:active {
 /* Alternating sections container */
 .page-content {
     padding: 3rem 2rem;
-    background: #9A9590;
+    /* background inherited from body - single source of truth */
 }
 
 .page-content .section-wrapper {
