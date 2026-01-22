@@ -61,8 +61,11 @@ html {
 
 body {
     font-family: 'Nunito', 'Nunito Fallback', sans-serif;
-    background: linear-gradient(180deg, #D4D2CF 0%, #C8C6C3 50%, #D0CECB 100%);
-    background-attachment: fixed;
+    background:
+        radial-gradient(circle at 2px 2px, rgba(0,0,0,0.03) 1px, transparent 1px),
+        linear-gradient(135deg, #E8E4E0 0%, #D8D4D0 35%, #C8C4C0 65%, #D5D1CD 100%);
+    background-size: 20px 20px, 100% 100%;
+    background-attachment: fixed, fixed;
     color: var(--dark-brown);
     line-height: 1.7;
     overflow-x: hidden;
@@ -71,7 +74,7 @@ body {
 /* Disable fixed background on mobile - causes scroll jank on iOS */
 @media (max-width: 768px) {
     body {
-        background-attachment: scroll;
+        background-attachment: scroll, scroll;
     }
 }
 

@@ -1491,3 +1491,84 @@ if (document.readyState === 'loading') {
         }
     }
 })();
+
+// ==========================================
+// FLOATING PARTICLES - Bakery dust/sugar effect
+// ==========================================
+(function() {
+    // Respect reduced motion preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    // Skip on mobile for performance
+    if (window.innerWidth < 768) return;
+
+    const canvas = document.createElement('canvas');
+    canvas.id = 'particles-canvas';
+    canvas.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+    `;
+    document.body.insertBefore(canvas, document.body.firstChild);
+
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const particleCount = 35;
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    function createParticle() {
+        return {
+            x: Math.random() * canvas.width,
+            y: canvas.height + 10,
+            size: Math.random() * 3 + 1,
+            speedY: Math.random() * 0.5 + 0.2,
+            speedX: (Math.random() - 0.5) * 0.3,
+            opacity: Math.random() * 0.4 + 0.1,
+            wobble: Math.random() * Math.PI * 2,
+            wobbleSpeed: Math.random() * 0.02 + 0.01
+        };
+    }
+
+    // Initialize particles
+    for (let i = 0; i < particleCount; i++) {
+        const p = createParticle();
+        p.y = Math.random() * canvas.height;
+        particles.push(p);
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        particles.forEach((p, index) => {
+            // Gentle wobble
+            p.wobble += p.wobbleSpeed;
+            p.x += Math.sin(p.wobble) * 0.3 + p.speedX;
+            p.y -= p.speedY;
+
+            // Reset when off screen
+            if (p.y < -10) {
+                particles[index] = createParticle();
+            }
+
+            // Draw particle
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
+            ctx.fill();
+        });
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+})();
