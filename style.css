@@ -870,13 +870,11 @@ a.nav-cta:active {
 }
 
 .section-beige {
-    background: var(--cream);
-    box-shadow: var(--shadow-section);
+    background: transparent;
 }
 
 .section-white {
-    background: var(--white);
-    box-shadow: var(--shadow-section);
+    background: transparent;
 }
 
 /* Alternating sections container */
