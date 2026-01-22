@@ -5,7 +5,7 @@
     --yellow-dark: #E5AF2D;
     --brown: #C36239;
     --dark-brown: #622D2B;
-    --cream: #D5D0CA;
+    --cream: #B8B3AD;
     --white: #FDFBF8;
     --border-beige: transparent;
     --beige: #fad6a5;
@@ -881,7 +881,7 @@ a.nav-cta:active {
 /* Alternating sections container */
 .page-content {
     padding: 3rem 2rem;
-    background: #E8E8E6;
+    background: #9A9590;
 }
 
 .page-content .section-wrapper {
