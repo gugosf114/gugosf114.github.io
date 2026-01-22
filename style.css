@@ -3875,7 +3875,8 @@ header nav .search-container svg {
 /* ===========================================
    NAV PARTICLES
    =========================================== */
-#nav-particles {
+#nav-particles,
+#brandedItemsCanvas {
     position: absolute;
     top: 0;
     left: 0;
