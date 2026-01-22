@@ -396,7 +396,9 @@ a.nav-cta:active {
 /* ORDER NOW BUTTON (next to logo) - Electric Pink */
 .order-now-btn {
     position: relative;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     background: linear-gradient(135deg, #ec268f 0%, #ff6b9d 50%, #ec268f 100%);
     background-size: 200% 200%;
     color: #fff !important;
@@ -409,11 +411,10 @@ a.nav-cta:active {
     white-space: nowrap;
     border: none;
     cursor: pointer;
-    overflow: hidden;
+    overflow: visible;
     transition: transform 0.2s ease, box-shadow 0.3s ease;
     animation: order-now-gradient 3s ease infinite;
     box-shadow: 0 4px 15px rgba(236, 38, 143, 0.5), 0 0 20px rgba(236, 38, 143, 0.3);
-    z-index: 1;
 }
 
 @keyframes order-now-gradient {
@@ -421,24 +422,12 @@ a.nav-cta:active {
     50% { background-position: 100% 50%; }
 }
 
-/* Glossy light sweep */
+/* Glossy light sweep - DISABLED to fix text visibility */
 .order-now-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-    transition: left 0.5s ease;
-    z-index: 2;
-    border-radius: 25px;
-    pointer-events: none;
+    display: none;
 }
 
-.order-now-btn:hover::before {
-    left: 100%;
-}
+/* Hover sweep disabled */
 
 .order-now-btn:hover {
     transform: translateY(-3px) scale(1.03);
