@@ -258,7 +258,7 @@
                 <img width="1280" height="896" src="company logos/salesforce-logo.png" alt="Salesforce">
                 <img width="2560" height="515" src="company logos/docusign-logo.png" alt="DocuSign">
                 <img width="3840" height="2160" src="company logos/OpenAI Logo.png" alt="OpenAI">
-                <img width="5001" height="5001" src="company logos/instagram-logo.jpg" alt="Instagram">
+                <img width="132" height="132" src="company logos/instagram-logo.png" alt="Instagram">
                 <img width="593" height="585" src="company logos/paypal-logo.png" alt="PayPal">
                 <img width="2048" height="2048" src="company logos/gap-logo.png" alt="Gap">
                 <img width="3840" height="2160" src="company logos/alaska-airlines-logo.png" alt="Alaska Airlines">
@@ -661,16 +661,26 @@
         background: var(--white);
         max-width: 1000px;
         margin: 0 auto;
+        perspective: 1000px;
     }
     .corporate-logos-grid img {
-        height: 100px;
+        height: 110px;
         width: auto;
         max-width: 100%;
         object-fit: contain;
         margin: 0 auto;
-        padding: 1.25rem;
+        padding: 1rem;
         display: block;
         background-color: #ffffff;
+        border-radius: 12px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+    }
+    .corporate-logos-grid img:hover {
+        transform: translateY(-8px) scale(1.05);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        z-index: 10;
+        position: relative;
     }
     @media (max-width: 800px) {
         .corporate-logos-grid {
@@ -1558,6 +1568,32 @@
         }
 
         type();
+    })();
+    </script>
+
+    <!-- Corporate Logo 3D Tilt Effect -->
+    <script>
+    (function() {
+        const logos = document.querySelectorAll('.corporate-logos-grid img');
+
+        logos.forEach(logo => {
+            logo.addEventListener('mousemove', (e) => {
+                const rect = logo.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = (y - centerY) / 8;
+                const rotateY = (centerX - x) / 8;
+
+                logo.style.transform = `perspective(500px) rotateX(${-rotateX}deg) rotateY(${-rotateY}deg) translateY(-8px) scale(1.08)`;
+            });
+
+            logo.addEventListener('mouseleave', () => {
+                logo.style.transform = 'perspective(500px) rotateX(0) rotateY(0) translateY(0) scale(1)';
+            });
+        });
     })();
     </script>
 
