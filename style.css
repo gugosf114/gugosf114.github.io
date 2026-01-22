@@ -68,6 +68,13 @@ body {
     overflow-x: hidden;
 }
 
+/* Disable fixed background on mobile - causes scroll jank on iOS */
+@media (max-width: 768px) {
+    body {
+        background-attachment: scroll;
+    }
+}
+
 /* BREADCRUMBS */
 .hero-breadcrumb {
     font-size: 1.35rem;
