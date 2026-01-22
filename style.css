@@ -7,9 +7,14 @@
     --dark-brown: #622D2B;
     --cream: #e6d5c3;
     --white: #FFFFFF;
-    --border-beige: #622D2B;
+    --border-beige: transparent;
     --beige: #fad6a5;
-    --section-border: #622D2B;
+    --section-border: transparent;
+    /* Modern soft shadows - replaces hard brown borders */
+    --shadow-soft: 0 4px 20px rgba(98, 45, 43, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-section: 0 8px 30px rgba(98, 45, 43, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1);
+    --shadow-card: 0 2px 12px rgba(98, 45, 43, 0.1), 0 1px 4px rgba(0, 0, 0, 0.06);
+    --shadow-hover: 0 8px 25px rgba(236, 38, 143, 0.2), 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Fallback fonts with adjusted metrics to reduce CLS during font swap */
@@ -212,8 +217,7 @@ header {
     z-index: 1000;
     background: var(--white);
     padding: 0.75rem 1.5rem;
-    box-shadow: 0 2px 20px rgba(98, 45, 43, 0.1);
-    border-bottom: 5px solid var(--border-beige);
+    box-shadow: var(--shadow-section);
     overflow: visible;
 }
 
@@ -515,7 +519,7 @@ a.nav-cta:active {
     background: linear-gradient(180deg, #f5f5dc 0%, var(--cream) 100%);
     position: relative;
     overflow: hidden;
-    border-bottom: 5px solid var(--border-beige);
+    box-shadow: var(--shadow-section);
 }
 
 /* Floating beige geometric shapes */
@@ -867,12 +871,12 @@ a.nav-cta:active {
 
 .section-beige {
     background: var(--cream);
-    border: 5px solid var(--section-border);
+    box-shadow: var(--shadow-section);
 }
 
 .section-white {
     background: var(--white);
-    border: 5px solid var(--section-border);
+    box-shadow: var(--shadow-section);
 }
 
 /* Alternating sections container */
@@ -972,15 +976,14 @@ a.nav-cta:active {
     border-radius: 30px;
     text-align: center;
     transition: all 0.3s ease;
-    border: 5px solid var(--section-border);
+    box-shadow: var(--shadow-card);
     display: flex;
     flex-direction: column;
 }
 
 .service-card:hover {
     transform: translateY(-10px);
-    border-color: var(--pink);
-    box-shadow: 0 20px 60px rgba(236, 38, 143, 0.25), 0 0 30px rgba(236, 38, 143, 0.15);
+    box-shadow: var(--shadow-hover);
     background: linear-gradient(135deg, #fff 0%, #fff9f9 100%);
 }
 
@@ -1040,7 +1043,7 @@ a.service-card h3 {
     color: var(--pink); /* Brand pink */
     margin-top: auto;
     margin-bottom: 1.5rem;
-    border: 2px solid var(--border-beige);
+    box-shadow: 0 2px 8px rgba(98, 45, 43, 0.1);
 }
 
 .service-card .btn {
@@ -1097,7 +1100,7 @@ a.service-card h3 {
     gap: 3rem;
     flex-wrap: wrap;
     padding: 2rem;
-    border: 2px solid var(--border-beige);
+    box-shadow: var(--shadow-card);
     border-radius: 30px;
     background: var(--white);
 }
@@ -1256,9 +1259,8 @@ footer {
     max-height: 90vh;
     overflow-y: auto;
     position: relative;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(98, 45, 43, 0.1);
     animation: modalSlideIn 0.3s ease;
-    border: 3px solid var(--border-beige);
 }
 
 @keyframes modalSlideIn {
@@ -1337,29 +1339,20 @@ footer {
 .form-group textarea {
     width: 100%;
     padding: 14px 18px;
-    border: 2px solid var(--border-beige);
+    border: 1px solid rgba(98, 45, 43, 0.15);
     border-radius: 15px;
     font-size: 1rem;
     font-family: 'Nunito', sans-serif;
     transition: all 0.3s ease;
     background: var(--white);
-    animation: form-element-glow 2.5s ease-in-out infinite;
-}
-
-@keyframes form-element-glow {
-    0%, 100% {
-        box-shadow: 0 2px 8px rgba(236, 38, 143, 0.1);
-    }
-    50% {
-        box-shadow: 0 4px 16px rgba(236, 38, 143, 0.25), 0 0 12px rgba(255, 197, 50, 0.2);
-    }
+    box-shadow: 0 2px 8px rgba(98, 45, 43, 0.08);
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: var(--pink);
-    box-shadow: 0 0 0 3px rgba(236, 38, 143, 0.1);
+    box-shadow: 0 0 0 3px rgba(236, 38, 143, 0.15), 0 4px 12px rgba(236, 38, 143, 0.1);
 }
 
 .form-group textarea {
@@ -1384,18 +1377,13 @@ footer {
     display: flex;
     align-items: center;
     padding: 12px 16px;
-    border: 2px solid var(--border-beige);
+    border: 1px solid rgba(98, 45, 43, 0.15);
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
     background: var(--white);
-    animation: form-element-glow 2.5s ease-in-out infinite;
+    box-shadow: 0 2px 8px rgba(98, 45, 43, 0.08);
 }
-
-/* Stagger animation for each option */
-.radio-option:nth-child(2) { animation-delay: 0.4s; }
-.radio-option:nth-child(3) { animation-delay: 0.8s; }
-.radio-option:nth-child(4) { animation-delay: 1.2s; }
 
 .radio-option:hover {
     border-color: var(--pink);
@@ -1503,12 +1491,13 @@ footer {
 
 .form-group input[type="file"] {
     padding: 10px;
-    border: 2px dashed var(--border-beige);
+    border: 2px dashed rgba(98, 45, 43, 0.25);
     border-radius: 12px;
     width: 100%;
     cursor: pointer;
     background: var(--white);
     font-family: 'Nunito', sans-serif;
+    box-shadow: 0 2px 8px rgba(98, 45, 43, 0.06);
 }
 
 .submit-btn {
@@ -3331,7 +3320,7 @@ header nav .search-container svg {
 .search-input {
     width: 160px;
     padding: 0.4rem 0.75rem 0.4rem 2.25rem;
-    border: 2px solid var(--border-beige);
+    border: 1px solid rgba(98, 45, 43, 0.2);
     border-radius: 25px;
     font-family: 'Nunito', sans-serif;
     font-size: 0.85rem;
@@ -3342,11 +3331,12 @@ header nav .search-container svg {
     outline: none;
     position: relative;
     z-index: 1;
+    box-shadow: 0 2px 8px rgba(98, 45, 43, 0.08);
 }
 
 .search-input:focus {
     border-color: var(--pink);
-    box-shadow: 0 0 0 3px rgba(236, 38, 143, 0.1);
+    box-shadow: 0 0 0 3px rgba(236, 38, 143, 0.1), 0 4px 12px rgba(236, 38, 143, 0.1);
     width: 200px;
 }
 
@@ -3403,8 +3393,7 @@ header nav .search-container svg {
     margin-top: 8px;
     background: var(--white);
     border-radius: 15px;
-    box-shadow: 0 10px 40px rgba(98, 45, 43, 0.2);
-    border: 2px solid var(--border-beige);
+    box-shadow: 0 10px 40px rgba(98, 45, 43, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1);
     max-height: 400px;
     overflow-y: auto;
     z-index: 1000;
@@ -3523,13 +3512,15 @@ header nav .search-container svg {
         font-size: 1rem;
         border-radius: 30px;
         background: var(--cream);
-        border: 2px solid var(--border-beige);
+        border: 1px solid rgba(98, 45, 43, 0.15);
+        box-shadow: 0 2px 8px rgba(98, 45, 43, 0.08);
     }
 
     .search-container.mobile-search .search-input:focus {
         width: 100%;
         background: var(--white);
         border-color: var(--pink);
+        box-shadow: 0 0 0 3px rgba(236, 38, 143, 0.1);
     }
 
     .search-container.mobile-search .search-results {
