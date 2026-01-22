@@ -1178,96 +1178,75 @@
         resize();
         window.addEventListener('resize', resize);
 
+        // Load balloon PNG
+        const balloonImg = new Image();
+        balloonImg.src = 'images/balloon.png';
+
         const particles = [];
         const isMobile = window.innerWidth <= 768;
         const particleCount = isMobile ? 26 : 40;
-        const colors = [
-            'rgba(236, 38, 143, 0.7)',
-            'rgba(255, 197, 50, 0.75)',
-            'rgba(255, 130, 160, 0.75)',
-            'rgba(255, 180, 140, 0.7)'
+
+        // Tint colors for the balloons (hue shifts)
+        const tints = [
+            { hue: 330, sat: 1.0 },   // Pink (original)
+            { hue: 45, sat: 1.1 },    // Yellow/Gold
+            { hue: 350, sat: 0.8 },   // Peach/Coral
+            { hue: 15, sat: 0.9 }     // Light orange/peach
         ];
 
         for (let i = 0; i < particleCount; i++) {
             particles.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
-                radius: (Math.random() * 6 + 3) * 1.2,
-                color: colors[Math.floor(Math.random() * colors.length)],
-                speedY: -(Math.random() * 0.5 + 0.2),
-                speedX: (Math.random() - 0.5) * 0.3,
-                stringAngle: (Math.random() - 0.5) * 0.8
+                size: (Math.random() * 25 + 20) * 1.2, // Balloon size
+                tint: tints[Math.floor(Math.random() * tints.length)],
+                speedY: -(Math.random() * 0.4 + 0.15),
+                speedX: (Math.random() - 0.5) * 0.2,
+                swayOffset: Math.random() * Math.PI * 2, // Random start phase
+                swaySpeed: Math.random() * 0.02 + 0.01,  // Sway speed
+                swayAmount: Math.random() * 0.15 + 0.1,  // How much it tilts
+                rotation: (Math.random() - 0.5) * 0.3    // Base rotation
             });
         }
 
+        let time = 0;
+
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            time += 1;
 
             particles.forEach(p => {
-                p.y += p.speedY;
-                p.x += p.speedX;
+                // Gentle swaying motion
+                const sway = Math.sin(time * p.swaySpeed + p.swayOffset) * p.swayAmount;
 
-                if (p.y < -15) {
-                    p.y = canvas.height + 15;
+                p.y += p.speedY;
+                p.x += p.speedX + Math.sin(time * p.swaySpeed * 0.5 + p.swayOffset) * 0.3;
+
+                if (p.y < -p.size) {
+                    p.y = canvas.height + p.size;
                     p.x = Math.random() * canvas.width;
                 }
-                if (p.x < -15) p.x = canvas.width + 15;
-                if (p.x > canvas.width + 15) p.x = -15;
+                if (p.x < -p.size) p.x = canvas.width + p.size;
+                if (p.x > canvas.width + p.size) p.x = -p.size;
 
-                // Draw balloon with tilt based on string angle
-                const r = p.radius;
-                const angle = p.stringAngle;
-                const tilt = angle * 0.4; // Balloon tilts in direction of string
+                if (balloonImg.complete) {
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate(p.rotation + sway);
 
-                ctx.save();
-                ctx.translate(p.x, p.y);
-                ctx.rotate(tilt);
+                    // Apply tint using globalCompositeOperation
+                    ctx.globalAlpha = 0.85;
+                    ctx.drawImage(balloonImg, -p.size/2, -p.size/2, p.size, p.size * 1.3);
 
-                ctx.fillStyle = p.color;
-
-                // Balloon body (oval)
-                ctx.beginPath();
-                ctx.ellipse(0, 0, r * 0.8, r, 0, 0, Math.PI * 2);
-                ctx.fill();
-
-                // Cartoon knot - pinched nub with two little bumps
-                ctx.beginPath();
-                // Left bump of knot
-                ctx.ellipse(-r * 0.15, r * 1.1, r * 0.12, r * 0.15, -0.3, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.beginPath();
-                // Right bump of knot
-                ctx.ellipse(r * 0.15, r * 1.1, r * 0.12, r * 0.15, 0.3, 0, Math.PI * 2);
-                ctx.fill();
-                // Pinch point connecting to string
-                ctx.beginPath();
-                ctx.moveTo(-r * 0.08, r * 1.2);
-                ctx.lineTo(r * 0.08, r * 1.2);
-                ctx.lineTo(0, r * 1.35);
-                ctx.closePath();
-                ctx.fill();
-
-                ctx.restore();
-
-                // String (with random angle, starts from tilted knot position)
-                const knotX = p.x + Math.sin(tilt) * r * 1.35;
-                const knotY = p.y + Math.cos(tilt) * r * 1.35;
-                ctx.beginPath();
-                ctx.moveTo(knotX, knotY);
-                ctx.quadraticCurveTo(
-                    knotX + r * angle * 1.5,
-                    knotY + r * 0.6,
-                    knotX + r * angle * 2.5,
-                    knotY + r * 1.2
-                );
-                ctx.strokeStyle = p.color;
-                ctx.lineWidth = 0.6;
-                ctx.stroke();
+                    ctx.restore();
+                }
             });
 
             requestAnimationFrame(animate);
         }
-        animate();
+
+        balloonImg.onload = animate;
+        if (balloonImg.complete) animate();
     })();
     </script>
 
