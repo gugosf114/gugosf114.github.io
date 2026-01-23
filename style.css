@@ -983,7 +983,7 @@ a.nav-cta:active {
 }
 
 .service-card {
-    background: var(--white);
+    background: #722F37; /* Rich Maroon */
     padding: 2.5rem;
     border-radius: 30px;
     text-align: center;
@@ -991,16 +991,18 @@ a.nav-cta:active {
     box-shadow: var(--shadow-card);
     display: flex;
     flex-direction: column;
+    border: 2px solid var(--yellow); /* Thin yellow border */
 }
 
 .service-card:hover {
     transform: translateY(-10px);
     box-shadow: var(--shadow-hover);
-    background: linear-gradient(135deg, #fff 0%, #fff9f9 100%);
+    background: #5C252B; /* Slightly darker maroon on hover */
+    border-color: #FFD966; /* Brighter yellow on hover */
 }
 
 .service-card:hover h3 {
-    color: var(--pink);
+    color: #FFD966; /* Brighter yellow on hover */
 }
 
 .service-icon {
@@ -1011,13 +1013,13 @@ a.nav-cta:active {
 .service-card h3 {
     font-family: 'Fredoka One', 'Fredoka Fallback', cursive;
     font-size: 1.5rem;
-    color: var(--dark-brown);
+    color: var(--yellow); /* Yellow on maroon background */
     margin-bottom: 1rem;
     transition: color 0.3s ease;
 }
 
 .service-card p {
-    color: #5A3020; /* Darker brown for 4.5:1 contrast on beige */
+    color: #FFF8F0; /* Cream white on maroon background */
     margin-bottom: 1.5rem;
     font-weight: 600;
     text-decoration: none;
@@ -1031,12 +1033,12 @@ a.service-card {
 }
 
 a.service-card p {
-    color: #5A3020; /* Darker brown for 4.5:1 contrast on beige */
+    color: #FFF8F0; /* Cream white on maroon background */
     text-decoration: none;
 }
 
 a.service-card h3 {
-    color: var(--dark-brown);
+    color: var(--yellow); /* Yellow on maroon background */
 }
 
 /* Center images inside service cards */
@@ -1048,14 +1050,14 @@ a.service-card h3 {
 
 .service-card .price {
     display: inline-block;
-    background: var(--white);
+    background: var(--yellow); /* Yellow badge */
     padding: 0.6rem 1.2rem;
     border-radius: 20px;
     font-weight: 800;
-    color: var(--pink); /* Brand pink */
+    color: #722F37; /* Maroon text on yellow */
     margin-top: auto;
     margin-bottom: 1.5rem;
-    box-shadow: 0 2px 8px rgba(98, 45, 43, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .service-card .btn {

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Options Preview - What We Create Section</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .instructions {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .option-label {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 30px 0 10px;
+            color: #333;
+            font-family: 'Playfair Display', serif;
+        }
+        .color-code {
+            text-align: center;
+            font-family: monospace;
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        /* Section styling */
+        .section-wrapper {
+            border-radius: 30px;
+            padding: 60px 40px;
+            margin: 0 auto 40px;
+            max-width: 1200px;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: white;
+        }
+        .section-header h2 .highlight {
+            color: #D4A84B;
+        }
+        .section-header p {
+            color: rgba(255,255,255,0.9);
+            margin-top: 15px;
+            font-size: 1.1rem;
+        }
+
+        /* Card grid */
+        .tile-grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .service-card {
+            border-radius: 20px;
+            padding: 25px 20px;
+            text-align: center;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        .service-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: contain;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            color: #722F37;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        .service-card p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Card backgrounds */
+        .card-white { background: #FFFFFF; }
+        .card-white img { background: #FFF8F0; }
+
+        .card-cream { background: #FFF8F0; }
+        .card-cream img { background: #FFFFFF; }
+
+        .card-warm { background: #F5EDE4; }
+        .card-warm img { background: #FFFFFF; }
+
+        @media (max-width: 900px) {
+            .tile-grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>What We Create - Color Options</h1>
+    <p class="instructions">Compare section backgrounds + card backgrounds. Scroll to see all options.</p>
+
+    <!-- OPTION 1: Deep Burgundy + White Cards -->
+    <p class="option-label">OPTION 1: Deep Burgundy + White Cards</p>
+    <p class="color-code">Section: #4A1728 (Deep Burgundy) | Cards: #FFFFFF (White) | Image BG: #FFF8F0 (Cream)</p>
+    <div class="section-wrapper" style="background: #4A1728;">
+        <div class="section-header">
+            <h2>What We <span class="highlight">Create</span></h2>
+            <p>From elegant wedding cakes to playful birthday treats, every creation is custom-designed for your celebration.</p>
+        </div>
+        <div class="tile-grid-4">
+            <div class="service-card card-white">
+                <img src="images/gallery/categoryplaceholder/cakes.jpg" alt="Cakes">
+                <h3>Cakes</h3>
+                <p>Custom birthday cakes, milestone celebration cakes, wedding cakes, and anniversary cakes.</p>
+            </div>
+            <div class="service-card card-white">
+                <img src="images/gallery/categoryplaceholder/cookies.PNG" alt="Cookies">
+                <h3>Cookies</h3>
+                <p>Corporate logo cookies for client gifts and employee appreciation.</p>
+            </div>
+            <div class="service-card card-white">
+                <img src="images/gallery/categoryplaceholder/cakepops.jpg" alt="Cake Pops">
+                <h3>Cake Pops</h3>
+                <p>Branded cake pops for corporate events, trade shows, and conferences.</p>
+            </div>
+            <div class="service-card card-white">
+                <img src="images/gallery/categoryplaceholder/Bumble bee themed cupcakes.jpg" alt="Cupcakes">
+                <h3>Cupcakes</h3>
+                <p>Custom cupcakes for office parties and employee recognition.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- OPTION 2: Deep Burgundy + Cream Cards -->
+    <p class="option-label">OPTION 2: Deep Burgundy + Cream Cards</p>
+    <p class="color-code">Section: #4A1728 (Deep Burgundy) | Cards: #FFF8F0 (Cream) | Image BG: #FFFFFF (White)</p>
+    <div class="section-wrapper" style="background: #4A1728;">
+        <div class="section-header">
+            <h2>What We <span class="highlight">Create</span></h2>
+            <p>From elegant wedding cakes to playful birthday treats, every creation is custom-designed for your celebration.</p>
+        </div>
+        <div class="tile-grid-4">
+            <div class="service-card card-cream">
+                <img src="images/gallery/categoryplaceholder/cakes.jpg" alt="Cakes">
+                <h3>Cakes</h3>
+                <p>Custom birthday cakes, milestone celebration cakes, wedding cakes, and anniversary cakes.</p>
+            </div>
+            <div class="service-card card-cream">
+                <img src="images/gallery/categoryplaceholder/cookies.PNG" alt="Cookies">
+                <h3>Cookies</h3>
+                <p>Corporate logo cookies for client gifts and employee appreciation.</p>
+            </div>
+            <div class="service-card card-cream">
+                <img src="images/gallery/categoryplaceholder/cakepops.jpg" alt="Cake Pops">
+                <h3>Cake Pops</h3>
+                <p>Branded cake pops for corporate events, trade shows, and conferences.</p>
+            </div>
+            <div class="service-card card-cream">
+                <img src="images/gallery/categoryplaceholder/Bumble bee themed cupcakes.jpg" alt="Cupcakes">
+                <h3>Cupcakes</h3>
+                <p>Custom cupcakes for office parties and employee recognition.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- OPTION 3: Dark Chocolate + White Cards -->
+    <p class="option-label">OPTION 3: Dark Chocolate + White Cards</p>
+    <p class="color-code">Section: #3D2314 (Dark Chocolate) | Cards: #FFFFFF (White) | Image BG: #FFF8F0 (Cream)</p>
+    <div class="section-wrapper" style="background: #3D2314;">
+        <div class="section-header">
+            <h2>What We <span class="highlight">Create</span></h2>
+            <p>From elegant wedding cakes to playful birthday treats, every creation is custom-designed for your celebration.</p>
+        </div>
+        <div class="tile-grid-4">
+            <div class="service-card card-white">
+                <img src="images/gallery/categoryplaceholder/cakes.jpg" alt="Cakes">
+                <h3>Cakes</h3>
+                <p>Custom birthday cakes, milestone celebration cakes, wedding cakes, and anniversary cakes.</p>
+            </div>
+            <div class="service-card card-white">
+                <img src="images/gallery/categoryplaceholder/cookies.PNG" alt="Cookies">
+                <h3>Cookies</h3>
+                <p>Corporate logo cookies for client gifts and employee appreciation.</p>
+            </div>
+            <div class="service-card card-white">
+                <img src="images/gallery/categoryplaceholder/cakepops.jpg" alt="Cake Pops">
+                <h3>Cake Pops</h3>
+                <p>Branded cake pops for corporate events, trade shows, and conferences.</p>
+            </div>
+            <div class="service-card card-white">
+                <img src="images/gallery/categoryplaceholder/Bumble bee themed cupcakes.jpg" alt="Cupcakes">
+                <h3>Cupcakes</h3>
+                <p>Custom cupcakes for office parties and employee recognition.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- OPTION 4: Dark Chocolate + Warm Linen Cards -->
+    <p class="option-label">OPTION 4: Dark Chocolate + Warm Linen Cards</p>
+    <p class="color-code">Section: #3D2314 (Dark Chocolate) | Cards: #F5EDE4 (Warm Linen) | Image BG: #FFFFFF (White)</p>
+    <div class="section-wrapper" style="background: #3D2314;">
+        <div class="section-header">
+            <h2>What We <span class="highlight">Create</span></h2>
+            <p>From elegant wedding cakes to playful birthday treats, every creation is custom-designed for your celebration.</p>
+        </div>
+        <div class="tile-grid-4">
+            <div class="service-card card-warm">
+                <img src="images/gallery/categoryplaceholder/cakes.jpg" alt="Cakes">
+                <h3>Cakes</h3>
+                <p>Custom birthday cakes, milestone celebration cakes, wedding cakes, and anniversary cakes.</p>
+            </div>
+            <div class="service-card card-warm">
+                <img src="images/gallery/categoryplaceholder/cookies.PNG" alt="Cookies">
+                <h3>Cookies</h3>
+                <p>Corporate logo cookies for client gifts and employee appreciation.</p>
+            </div>
+            <div class="service-card card-warm">
+                <img src="images/gallery/categoryplaceholder/cakepops.jpg" alt="Cake Pops">
+                <h3>Cake Pops</h3>
+                <p>Branded cake pops for corporate events, trade shows, and conferences.</p>
+            </div>
+            <div class="service-card card-warm">
+                <img src="images/gallery/categoryplaceholder/Bumble bee themed cupcakes.jpg" alt="Cupcakes">
+                <h3>Cupcakes</h3>
+                <p>Custom cupcakes for office parties and employee recognition.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- OPTION 5: Espresso + White Cards -->
+    <p class="option-label">OPTION 5: Espresso + White Cards</p>
+    <p class="color-code">Section: #2C1810 (Espresso) | Cards: #FFFFFF (White) | Image BG: #FFF8F0 (Cream)</p>
+    <div class="section-wrapper" style="background: #2C1810;">
+        <div class="section-header">
+            <h2>What We <span class="highlight">Create</span></h2>
+            <p>From elegant wedding cakes to playful birthday treats, every creation is custom-designed for your celebration.</p>
+        </div>
+        <div class="tile-grid-4">
+            <div class="service-card card-white">
+                <img src="images/gallery/categoryplaceholder/cakes.jpg" alt="Cakes">
+                <h3>Cakes</h3>
+                <p>Custom birthday cakes, milestone celebration cakes, wedding cakes, and anniversary cakes.</p>
+            </div>
+            <div class="service-card card-white">
+                <img src="images/gallery/categoryplaceholder/cookies.PNG" alt="Cookies">
+                <h3>Cookies</h3>
+                <p>Corporate logo cookies for client gifts and employee appreciation.</p>
+            </div>
+            <div class="service-card card-white">
+                <img src="images/gallery/categoryplaceholder/cakepops.jpg" alt="Cake Pops">
+                <h3>Cake Pops</h3>
+                <p>Branded cake pops for corporate events, trade shows, and conferences.</p>
+            </div>
+            <div class="service-card card-white">
+                <img src="images/gallery/categoryplaceholder/Bumble bee themed cupcakes.jpg" alt="Cupcakes">
+                <h3>Cupcakes</h3>
+                <p>Custom cupcakes for office parties and employee recognition.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- OPTION 6: Espresso + Cream Cards -->
+    <p class="option-label">OPTION 6: Espresso + Cream Cards</p>
+    <p class="color-code">Section: #2C1810 (Espresso) | Cards: #FFF8F0 (Cream) | Image BG: #FFFFFF (White)</p>
+    <div class="section-wrapper" style="background: #2C1810;">
+        <div class="section-header">
+            <h2>What We <span class="highlight">Create</span></h2>
+            <p>From elegant wedding cakes to playful birthday treats, every creation is custom-designed for your celebration.</p>
+        </div>
+        <div class="tile-grid-4">
+            <div class="service-card card-cream">
+                <img src="images/gallery/categoryplaceholder/cakes.jpg" alt="Cakes">
+                <h3>Cakes</h3>
+                <p>Custom birthday cakes, milestone celebration cakes, wedding cakes, and anniversary cakes.</p>
+            </div>
+            <div class="service-card card-cream">
+                <img src="images/gallery/categoryplaceholder/cookies.PNG" alt="Cookies">
+                <h3>Cookies</h3>
+                <p>Corporate logo cookies for client gifts and employee appreciation.</p>
+            </div>
+            <div class="service-card card-cream">
+                <img src="images/gallery/categoryplaceholder/cakepops.jpg" alt="Cake Pops">
+                <h3>Cake Pops</h3>
+                <p>Branded cake pops for corporate events, trade shows, and conferences.</p>
+            </div>
+            <div class="service-card card-cream">
+                <img src="images/gallery/categoryplaceholder/Bumble bee themed cupcakes.jpg" alt="Cupcakes">
+                <h3>Cupcakes</h3>
+                <p>Custom cupcakes for office parties and employee recognition.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- OPTION 7: Rich Maroon + White Cards -->
+    <p class="option-label">OPTION 7: Rich Maroon (Your Brand) + White Cards</p>
+    <p class="color-code">Section: #722F37 (Your Maroon) | Cards: #FFFFFF (White) | Image BG: #FFF8F0 (Cream)</p>
+    <div class="section-wrapper" style="background: #722F37;">
+        <div class="section-header">
+            <h2>What We <span class="highlight">Create</span></h2>
+            <p>From elegant wedding cakes to playful birthday treats, every creation is custom-designed for your celebration.</p>
+        </div>
+        <div class="tile-grid-4">
+            <div class="service-card card-white">
+                <img src="images/gallery/categoryplaceholder/cakes.jpg" alt="Cakes">
+                <h3>Cakes</h3>
+                <p>Custom birthday cakes, milestone celebration cakes, wedding cakes, and anniversary cakes.</p>
+            </div>
+            <div class="service-card card-white">
+                <img src="images/gallery/categoryplaceholder/cookies.PNG" alt="Cookies">
+                <h3>Cookies</h3>
+                <p>Corporate logo cookies for client gifts and employee appreciation.</p>
+            </div>
+            <div class="service-card card-white">
+                <img src="images/gallery/categoryplaceholder/cakepops.jpg" alt="Cake Pops">
+                <h3>Cake Pops</h3>
+                <p>Branded cake pops for corporate events, trade shows, and conferences.</p>
+            </div>
+            <div class="service-card card-white">
+                <img src="images/gallery/categoryplaceholder/Bumble bee themed cupcakes.jpg" alt="Cupcakes">
+                <h3>Cupcakes</h3>
+                <p>Custom cupcakes for office parties and employee recognition.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- OPTION 8: Rich Maroon + Cream Cards -->
+    <p class="option-label">OPTION 8: Rich Maroon (Your Brand) + Cream Cards</p>
+    <p class="color-code">Section: #722F37 (Your Maroon) | Cards: #FFF8F0 (Cream) | Image BG: #FFFFFF (White)</p>
+    <div class="section-wrapper" style="background: #722F37;">
+        <div class="section-header">
+            <h2>What We <span class="highlight">Create</span></h2>
+            <p>From elegant wedding cakes to playful birthday treats, every creation is custom-designed for your celebration.</p>
+        </div>
+        <div class="tile-grid-4">
+            <div class="service-card card-cream">
+                <img src="images/gallery/categoryplaceholder/cakes.jpg" alt="Cakes">
+                <h3>Cakes</h3>
+                <p>Custom birthday cakes, milestone celebration cakes, wedding cakes, and anniversary cakes.</p>
+            </div>
+            <div class="service-card card-cream">
+                <img src="images/gallery/categoryplaceholder/cookies.PNG" alt="Cookies">
+                <h3>Cookies</h3>
+                <p>Corporate logo cookies for client gifts and employee appreciation.</p>
+            </div>
+            <div class="service-card card-cream">
+                <img src="images/gallery/categoryplaceholder/cakepops.jpg" alt="Cake Pops">
+                <h3>Cake Pops</h3>
+                <p>Branded cake pops for corporate events, trade shows, and conferences.</p>
+            </div>
+            <div class="service-card card-cream">
+                <img src="images/gallery/categoryplaceholder/Bumble bee themed cupcakes.jpg" alt="Cupcakes">
+                <h3>Cupcakes</h3>
+                <p>Custom cupcakes for office parties and employee recognition.</p>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center; padding: 40px; color: #666;">
+        <p><strong>To apply:</strong> Tell me which option number you prefer and I'll update the site.</p>
+        <p style="margin-top: 10px; font-size: 0.9rem;">Delete this file when done: color-preview.html</p>
+    </div>
+</body>
+</html>
