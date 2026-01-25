@@ -983,7 +983,7 @@ a.nav-cta:active {
 }
 
 .service-card {
-    background: #a8a8a8; /* Light gray for contrast */
+    background: #C8C4C0; /* Lighter warm gray (same tone as --cream #9A9590) */
     padding: 2.5rem;
     border-radius: 30px;
     text-align: center;
@@ -997,7 +997,7 @@ a.nav-cta:active {
 .service-card:hover {
     transform: translateY(-10px);
     box-shadow: var(--shadow-hover);
-    background: #909090; /* Slightly darker gray on hover */
+    background: #B5B1AD; /* Slightly darker warm gray on hover */
     border-color: #000000; /* Black border on hover */
 }
 
