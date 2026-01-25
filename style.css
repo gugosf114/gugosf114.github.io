@@ -983,7 +983,7 @@ a.nav-cta:active {
 }
 
 .service-card {
-    background: #722F37; /* Rich Maroon */
+    background: #a8a8a8; /* Light gray for contrast */
     padding: 2.5rem;
     border-radius: 30px;
     text-align: center;
@@ -991,18 +991,18 @@ a.nav-cta:active {
     box-shadow: var(--shadow-card);
     display: flex;
     flex-direction: column;
-    border: 2px solid var(--yellow); /* Thin yellow border */
+    border: 2px solid #000000; /* Black border */
 }
 
 .service-card:hover {
     transform: translateY(-10px);
     box-shadow: var(--shadow-hover);
-    background: #5C252B; /* Slightly darker maroon on hover */
-    border-color: #FFD966; /* Brighter yellow on hover */
+    background: #909090; /* Slightly darker gray on hover */
+    border-color: #000000; /* Black border on hover */
 }
 
 .service-card:hover h3 {
-    color: #FFD966; /* Brighter yellow on hover */
+    color: #111111; /* Darker on hover */
 }
 
 .service-icon {
@@ -1013,13 +1013,13 @@ a.nav-cta:active {
 .service-card h3 {
     font-family: 'Fredoka One', 'Fredoka Fallback', cursive;
     font-size: 1.5rem;
-    color: var(--yellow); /* Yellow on maroon background */
+    color: #333333; /* Dark text on light gray background */
     margin-bottom: 1rem;
     transition: color 0.3s ease;
 }
 
 .service-card p {
-    color: #FFF8F0; /* Cream white on maroon background */
+    color: #222222; /* Dark text on light gray background */
     margin-bottom: 1.5rem;
     font-weight: 600;
     text-decoration: none;
@@ -1033,12 +1033,12 @@ a.service-card {
 }
 
 a.service-card p {
-    color: #FFF8F0; /* Cream white on maroon background */
+    color: #222222; /* Dark text on light gray background */
     text-decoration: none;
 }
 
 a.service-card h3 {
-    color: var(--yellow); /* Yellow on maroon background */
+    color: #333333; /* Dark text on light gray background */
 }
 
 /* Center images inside service cards */
@@ -1054,7 +1054,7 @@ a.service-card h3 {
     padding: 0.6rem 1.2rem;
     border-radius: 20px;
     font-weight: 800;
-    color: #722F37; /* Maroon text on yellow */
+    color: #333333; /* Dark text on yellow */
     margin-top: auto;
     margin-bottom: 1.5rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
