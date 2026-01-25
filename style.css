@@ -883,7 +883,7 @@ a.nav-cta:active {
 .section-beige {
     background: var(--cream);
     box-shadow: var(--shadow-section);
-    border: 2px solid #000000; /* Black border */
+    border: none; /* No border on gray section */
 }
 
 .section-white {
