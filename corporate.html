@@ -275,6 +275,21 @@
             </div>
         </div>
 
+        <!-- RECENT ORDERS TICKER -->
+        <div class="section-wrapper section-beige reveal" style="margin-bottom: 3rem; padding: 1.5rem 2rem;">
+            <div class="recent-orders-ticker">
+                <div class="ticker-header">
+                    <span class="ticker-live-dot"></span>
+                    <span class="ticker-title">Recent Orders</span>
+                </div>
+                <div class="ticker-container">
+                    <div class="ticker-track" id="orderTickerTrack">
+                        <!-- Orders loaded dynamically from recent-orders.json -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Logo Preview Tool - PREMIUM FEATURED -->
         <div class="section-wrapper section-beige reveal" style="margin-bottom: 3rem;">
         <div class="logo-preview-section featured-ai-section" id="cookiePreviewSection">
@@ -449,9 +464,19 @@
             <p style="font-size: 1.2rem; margin-bottom: 2rem; font-weight: 700;">or email <a href="mailto:info@mybakingcreations.com" style="color: var(--yellow); text-decoration: none;">info@mybakingcreations.com</a></p>
             <p style="font-size: 1rem; opacity: 0.9; font-weight: 600;">Standard pickup: 9AM–6PM* | 1096 Wildwood Ave, Daly City</p>
             <p style="font-size: 0.85rem; opacity: 0.8; font-style: italic; margin-top: 0.5rem;">*Earlier or later hours can be accommodated upon request</p>
-            <div style="margin-top: 2rem;">
+            <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                 <a href="corporate-order.html" class="btn" style="background: var(--white); color: var(--pink); font-size: 1.1rem;">Request a Corporate Quote</a>
+                <a href="partners.html" class="btn" style="background: transparent; color: var(--white); border: 2px solid var(--white); font-size: 1.1rem;">Partner With Us</a>
             </div>
+        </div>
+
+        <!-- PARTNER CTA -->
+        <div class="section-wrapper section-beige reveal" style="text-align: center;">
+            <div class="section-header">
+                <h2>Are You an <span class="highlight">Event Planner?</span></h2>
+                <p style="font-size: 1.1rem; color: var(--brown); max-width: 600px; margin: 1rem auto;">Join our partner program and earn 15% commission on every referral. Wedding coordinators, corporate caterers, and venues welcome.</p>
+            </div>
+            <a href="partners.html" class="btn btn-primary">Learn About Our Partner Program</a>
         </div>
 
     </section>
@@ -467,6 +492,7 @@
                 <a href="about.html">About Us</a>
                 <a href="gallery.html">Gallery</a>
                 <a href="corporate.html">Corporate Orders</a>
+                <a href="partners.html">Partner With Us</a>
                 <a href="blog.html">Blog</a>
                 <a href="contact.html">Contact</a>
             </div>
@@ -1594,6 +1620,127 @@
                 logo.style.transform = 'perspective(500px) rotateX(0) rotateY(0) translateY(0) scale(1)';
             });
         });
+    })();
+    </script>
+
+    <!-- Recent Orders Ticker Styles & Script -->
+    <style>
+    .recent-orders-ticker {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        overflow: hidden;
+    }
+    .ticker-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-shrink: 0;
+        padding-right: 1rem;
+        border-right: 2px solid var(--cream);
+    }
+    .ticker-live-dot {
+        width: 10px;
+        height: 10px;
+        background: #22c55e;
+        border-radius: 50%;
+        animation: pulse-live 2s ease-in-out infinite;
+    }
+    @keyframes pulse-live {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.6; transform: scale(1.2); }
+    }
+    .ticker-title {
+        font-family: 'Fredoka One', cursive;
+        font-size: 1rem;
+        color: var(--dark-brown);
+        white-space: nowrap;
+    }
+    .ticker-container {
+        flex: 1;
+        overflow: hidden;
+        mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    }
+    .ticker-track {
+        display: flex;
+        gap: 3rem;
+        animation: ticker-scroll 30s linear infinite;
+        width: max-content;
+    }
+    .ticker-track:hover {
+        animation-play-state: paused;
+    }
+    @keyframes ticker-scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+    .ticker-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        white-space: nowrap;
+        font-size: 0.95rem;
+        color: var(--dark-brown);
+        font-weight: 600;
+    }
+    .ticker-check {
+        color: #22c55e;
+        font-weight: 700;
+    }
+    .ticker-company {
+        color: var(--pink);
+        font-weight: 700;
+    }
+    .ticker-time {
+        color: var(--cream);
+        font-size: 0.85rem;
+    }
+    @media (max-width: 768px) {
+        .recent-orders-ticker {
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .ticker-header {
+            border-right: none;
+            border-bottom: 2px solid var(--cream);
+            padding-right: 0;
+            padding-bottom: 0.5rem;
+            width: 100%;
+            justify-content: center;
+        }
+        .ticker-item {
+            font-size: 0.85rem;
+        }
+    }
+    </style>
+    <script>
+    // Recent Orders Ticker
+    (function() {
+        const track = document.getElementById('orderTickerTrack');
+        if (!track) return;
+
+        fetch('recent-orders.json')
+            .then(r => r.json())
+            .then(data => {
+                const items = data.orders.map(order => {
+                    const timeText = order.daysAgo === 1 ? 'yesterday' :
+                                     order.daysAgo <= 7 ? `${order.daysAgo} days ago` :
+                                     'last week';
+                    const qtyText = order.quantity === 1 ? '' : `${order.quantity} `;
+                    return `<div class="ticker-item">
+                        <span class="ticker-check">✓</span>
+                        <span><span class="ticker-company">${order.company}</span> ordered ${qtyText}${order.product}</span>
+                        <span class="ticker-time">· ${timeText}</span>
+                    </div>`;
+                }).join('');
+
+                // Duplicate for seamless loop
+                track.innerHTML = items + items;
+            })
+            .catch(() => {
+                track.innerHTML = '<div class="ticker-item">Orders loading...</div>';
+            });
     })();
     </script>
 
