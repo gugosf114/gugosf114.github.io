@@ -270,15 +270,31 @@
 
                         <!-- AI CAKE PREVIEW SECTION -->
                         <div id="aiPreviewSection" class="form-group" style="display: none;">
-                            <div style="background: linear-gradient(135deg, #fff5f8 0%, #fff 100%); border: 2px dashed var(--pink); border-radius: 15px; padding: 1.25rem;">
-                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
-                                    <strong style="font-family: 'Fredoka One', cursive; color: var(--pink); font-size: 1rem;">AI Preview</strong>
-                                    <span style="background: var(--pink); color: white; font-size: 0.65rem; padding: 2px 6px; border-radius: 8px; font-weight: 600;">NEW</span>
-                                </div>
-                                <p style="color: var(--brown); font-size: 0.85rem; margin-bottom: 1rem;">
-                                    Want to see your idea come to life? Describe your design above, then click below!
-                                </p>
-                                <button type="button" id="generatePreviewBtn" class="electric-btn">Generate Preview</button>
+
+                            <!-- MODE TOGGLE -->
+                            <div class="ai-mode-toggle">
+                                <button type="button" class="mode-btn active" data-mode="quick" id="quickSketchMode">
+                                    <span class="mode-icon">⚡</span>
+                                    <span class="mode-label">Quick Sketch</span>
+                                </button>
+                                <button type="button" class="mode-btn" data-mode="builder" id="cakeBuilderMode">
+                                    <span class="mode-icon">🏗️</span>
+                                    <span class="mode-label">Cake Builder</span>
+                                    <span class="mode-badge">PRO</span>
+                                </button>
+                            </div>
+
+                            <!-- QUICK SKETCH MODE (existing functionality) -->
+                            <div id="quickSketchSection" class="ai-mode-content active">
+                                <div style="background: linear-gradient(135deg, #fff5f8 0%, #fff 100%); border: 2px dashed var(--pink); border-radius: 15px; padding: 1.25rem;">
+                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                                        <strong style="font-family: 'Fredoka One', cursive; color: var(--pink); font-size: 1rem;">AI Preview</strong>
+                                        <span style="background: var(--pink); color: white; font-size: 0.65rem; padding: 2px 6px; border-radius: 8px; font-weight: 600;">NEW</span>
+                                    </div>
+                                    <p style="color: var(--brown); font-size: 0.85rem; margin-bottom: 1rem;">
+                                        Want to see your idea come to life? Describe your design above, then click below!
+                                    </p>
+                                    <button type="button" id="generatePreviewBtn" class="electric-btn">Generate Preview</button>
 
                                 <div id="previewLoading" style="display: none; margin-top: 1rem; text-align: center;">
                                     <div style="display: inline-block; width: 25px; height: 25px; border: 3px solid var(--light-pink); border-top-color: var(--pink); border-radius: 50%; animation: spin 1s linear infinite;"></div>
@@ -341,8 +357,252 @@
                                 <p style="color: #999; font-size: 0.7rem; margin-top: 0.75rem; font-style: italic;">
                                     Powered by Google Gemini • For inspiration only
                                 </p>
-                            </div>
-                        </div>
+                                </div>
+                            </div><!-- end quickSketchSection -->
+
+                            <!-- CAKE BUILDER MODE (new modular builder) -->
+                            <div id="cakeBuilderSection" class="ai-mode-content">
+                                <div class="cake-builder-container">
+                                    <!-- Animated Background -->
+                                    <div class="builder-bg">
+                                        <canvas id="builderParticles"></canvas>
+                                        <div class="builder-orb orb-1"></div>
+                                        <div class="builder-orb orb-2"></div>
+                                    </div>
+
+                                    <!-- Builder Header -->
+                                    <div class="builder-header">
+                                        <div class="builder-badge">
+                                            <span class="badge-icon">🎂</span>
+                                            Modular Cake Builder
+                                        </div>
+                                        <h3 class="builder-title">Build Your <span class="gradient-text">Dream Cake</span></h3>
+                                        <p class="builder-subtitle">Design layer by layer. Each element generated to match Yana's signature style.</p>
+                                    </div>
+
+                                    <!-- PHASE 1: Configuration -->
+                                    <div id="builderConfig" class="builder-phase active">
+                                        <div class="config-card">
+                                            <div class="card-glow"></div>
+                                            <h4 class="config-title">Configure Your Cake</h4>
+                                            <p class="config-description">Select the components you want, then we'll guide you through designing each one.</p>
+
+                                            <div class="config-grid">
+                                                <!-- Cakeboard -->
+                                                <div class="config-group">
+                                                    <label class="config-label">
+                                                        <span class="label-icon">🟫</span>
+                                                        Cakeboard
+                                                    </label>
+                                                    <select id="builderCakeboard" class="config-select">
+                                                        <option value="no">No cakeboard</option>
+                                                        <option value="yes" selected>Yes, with fondant covering</option>
+                                                    </select>
+                                                </div>
+
+                                                <!-- Number of Tiers -->
+                                                <div class="config-group">
+                                                    <label class="config-label">
+                                                        <span class="label-icon">🎚️</span>
+                                                        Number of Tiers
+                                                    </label>
+                                                    <select id="builderTiers" class="config-select">
+                                                        <option value="1">1 Tier</option>
+                                                        <option value="2" selected>2 Tiers</option>
+                                                        <option value="3">3 Tiers</option>
+                                                    </select>
+                                                </div>
+
+                                                <!-- Topper -->
+                                                <div class="config-group">
+                                                    <label class="config-label">
+                                                        <span class="label-icon">👑</span>
+                                                        Cake Topper
+                                                    </label>
+                                                    <select id="builderTopper" class="config-select">
+                                                        <option value="none">No topper</option>
+                                                        <option value="fondant">Fondant figure</option>
+                                                        <option value="decorative">Decorative piece</option>
+                                                    </select>
+                                                </div>
+
+                                                <!-- Writing -->
+                                                <div class="config-group">
+                                                    <label class="config-label">
+                                                        <span class="label-icon">✍️</span>
+                                                        Writing / Text
+                                                    </label>
+                                                    <select id="builderWriting" class="config-select">
+                                                        <option value="none">No writing</option>
+                                                        <option value="board">On the cakeboard</option>
+                                                        <option value="tier1">On Tier 1 (bottom)</option>
+                                                        <option value="tier2">On Tier 2</option>
+                                                        <option value="tier3">On Tier 3 (top)</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <!-- Dynamic Steps Preview -->
+                                            <div class="steps-preview">
+                                                <div class="steps-preview-header">
+                                                    <span class="preview-icon">📋</span>
+                                                    <strong>Your Design Steps:</strong>
+                                                </div>
+                                                <div id="stepsPreviewList" class="steps-preview-list">
+                                                    <!-- Dynamically populated -->
+                                                </div>
+                                            </div>
+
+                                            <button type="button" id="startBuildingBtn" class="btn-start-building">
+                                                <span class="btn-text">Start Building</span>
+                                                <span class="btn-arrow">
+                                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                                                </span>
+                                                <div class="btn-shine"></div>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- PHASE 2: Step-by-Step Building -->
+                                    <div id="builderSteps" class="builder-phase">
+                                        <div class="steps-card">
+                                            <div class="card-glow"></div>
+
+                                            <!-- Progress Indicator -->
+                                            <div class="builder-progress">
+                                                <div id="progressSteps" class="progress-steps">
+                                                    <!-- Dynamically generated step dots -->
+                                                </div>
+                                                <div class="progress-bar">
+                                                    <div id="progressFill" class="progress-fill"></div>
+                                                </div>
+                                                <div id="progressLabel" class="progress-label">Step 1 of 4</div>
+                                            </div>
+
+                                            <!-- Current Step Content -->
+                                            <div id="currentStepContent" class="step-content">
+                                                <div class="step-header">
+                                                    <span id="stepIcon" class="step-icon">🟫</span>
+                                                    <h4 id="stepTitle" class="step-title">Design Your Cakeboard</h4>
+                                                </div>
+                                                <p id="stepDescription" class="step-description">Describe the color and style of your cakeboard covering.</p>
+
+                                                <div class="step-input-wrapper">
+                                                    <textarea id="stepPrompt" class="step-prompt" rows="3" placeholder="e.g., Elegant white fondant with silver pearl border..."></textarea>
+                                                    <div class="input-glow"></div>
+                                                </div>
+
+                                                <div class="step-actions">
+                                                    <button type="button" id="stepBackBtn" class="btn-step-back" style="display: none;">
+                                                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                                                        Back
+                                                    </button>
+                                                    <button type="button" id="stepGenerateBtn" class="btn-step-generate">
+                                                        <span class="btn-text">Generate</span>
+                                                        <span class="btn-icon">✨</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <!-- Step Loading -->
+                                            <div id="stepLoading" class="step-loading" style="display: none;">
+                                                <div class="loading-spinner"></div>
+                                                <p id="loadingText" class="loading-text">Creating your cakeboard...</p>
+                                            </div>
+
+                                            <!-- Step Result Preview -->
+                                            <div id="stepResult" class="step-result" style="display: none;">
+                                                <div class="result-image-wrapper">
+                                                    <img id="stepResultImage" src="" alt="Generated step preview">
+                                                    <div class="result-watermark">
+                                                        <img src="logo_icon.png" alt="My Baking Creations">
+                                                        <span>mybakingcreations.com</span>
+                                                    </div>
+                                                </div>
+                                                <div class="result-actions">
+                                                    <button type="button" id="stepRetryBtn" class="btn-retry">
+                                                        <span>🔄</span> Try Again
+                                                    </button>
+                                                    <button type="button" id="stepApproveBtn" class="btn-approve">
+                                                        <span>✓</span> Approve & Continue
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <!-- Step Error -->
+                                            <div id="stepError" class="step-error" style="display: none;"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- PHASE 3: Final Result -->
+                                    <div id="builderResult" class="builder-phase">
+                                        <div class="result-card">
+                                            <div class="card-glow"></div>
+
+                                            <div class="result-header">
+                                                <div class="success-icon">
+                                                    <svg viewBox="0 0 24 24" width="40" height="40" fill="white"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                                </div>
+                                                <h3 class="result-title">Your Cake Design is Ready!</h3>
+                                                <p class="result-subtitle">Here's your complete custom cake concept.</p>
+                                            </div>
+
+                                            <!-- Final Image -->
+                                            <div class="final-image-wrapper">
+                                                <img id="finalCakeImage" src="" alt="Your custom cake design">
+                                                <div class="final-watermark">
+                                                    <img src="logo_icon.png" alt="My Baking Creations">
+                                                    <span>mybakingcreations.com</span>
+                                                </div>
+                                            </div>
+
+                                            <!-- Color Palette -->
+                                            <div class="final-palette">
+                                                <div class="palette-header">
+                                                    <span>🎨</span>
+                                                    <strong>Color Palette</strong>
+                                                    <span class="palette-hint">Click to copy</span>
+                                                </div>
+                                                <div id="finalColorSwatches" class="color-swatches"></div>
+                                            </div>
+
+                                            <!-- Spec Breakdown -->
+                                            <div class="spec-breakdown">
+                                                <div class="spec-header">
+                                                    <span>📋</span>
+                                                    <strong>Design Specifications</strong>
+                                                </div>
+                                                <div id="specList" class="spec-list">
+                                                    <!-- Dynamically populated -->
+                                                </div>
+                                            </div>
+
+                                            <!-- Download Actions -->
+                                            <div class="final-actions">
+                                                <a id="builderDownloadImg" download="my-custom-cake.png" class="btn-download-img">
+                                                    <span>⬇️</span> Download Image
+                                                </a>
+                                                <button type="button" id="builderDownloadPdf" class="btn-download-pdf">
+                                                    <span>📄</span> Download PDF
+                                                </button>
+                                                <button type="button" id="builderStartOver" class="btn-start-over">
+                                                    <span>🔄</span> Start Over
+                                                </button>
+                                            </div>
+
+                                            <!-- Attribution -->
+                                            <div class="builder-attribution">
+                                                <span>Design generated with help of</span>
+                                                <img src="images/anthropic-logo.svg" alt="Anthropic">
+                                                <span class="claude-text">Claude</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div><!-- end cake-builder-container -->
+                            </div><!-- end cakeBuilderSection -->
+
+                        </div><!-- end aiPreviewSection -->
 
                         <div class="form-group">
                             <label for="reference_photo">Reference Photo (Optional) <span class="hint-icon has-hint hint-lg" data-hint="Have an exact photo of the cake you want? Upload it here - no AI sketch needed!" data-hint-pos="top">?</span></label>
@@ -1247,5 +1507,1587 @@
     <!-- AI Chatbot Widget -->
     <link rel="stylesheet" href="chatbot.css">
     <script src="chatbot.js" defer></script>
+
+    <!-- Cake Builder Styles -->
+    <style>
+    /* ===========================================
+       CAKE BUILDER - PREMIUM DARK THEME
+       =========================================== */
+
+    /* Mode Toggle */
+    .ai-mode-toggle {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        padding: 4px;
+        background: #f5f5f5;
+        border-radius: 12px;
+    }
+
+    .mode-btn {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+        background: transparent;
+        border: none;
+        border-radius: 10px;
+        font-family: 'Nunito', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--brown);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .mode-btn:hover {
+        background: rgba(236, 38, 143, 0.1);
+    }
+
+    .mode-btn.active {
+        background: white;
+        color: var(--pink);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .mode-icon {
+        font-size: 1.1rem;
+    }
+
+    .mode-badge {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        background: linear-gradient(135deg, #8b5cf6, #6366f1);
+        color: white;
+        font-size: 0.55rem;
+        padding: 2px 5px;
+        border-radius: 6px;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+    }
+
+    /* Mode Content */
+    .ai-mode-content {
+        display: none;
+    }
+
+    .ai-mode-content.active {
+        display: block;
+    }
+
+    /* Cake Builder Container */
+    .cake-builder-container {
+        position: relative;
+        background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+        border-radius: 20px;
+        padding: 1.5rem;
+        overflow: hidden;
+        min-height: 400px;
+    }
+
+    /* Animated Background */
+    .builder-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    #builderParticles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .builder-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0.3;
+        animation: float-orb 15s ease-in-out infinite;
+    }
+
+    .builder-orb.orb-1 {
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, var(--pink) 0%, transparent 70%);
+        top: -50px;
+        right: -50px;
+    }
+
+    .builder-orb.orb-2 {
+        width: 150px;
+        height: 150px;
+        background: radial-gradient(circle, var(--yellow) 0%, transparent 70%);
+        bottom: -30px;
+        left: -30px;
+        animation-delay: -7s;
+    }
+
+    @keyframes float-orb {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        50% { transform: translate(20px, -20px) scale(1.1); }
+    }
+
+    /* Builder Header */
+    .builder-header {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .builder-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: linear-gradient(135deg, rgba(236, 38, 143, 0.2), rgba(255, 197, 50, 0.2));
+        border: 1px solid rgba(236, 38, 143, 0.4);
+        color: var(--pink);
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 6px 12px;
+        border-radius: 20px;
+        margin-bottom: 1rem;
+    }
+
+    .badge-icon {
+        font-size: 1rem;
+    }
+
+    .builder-title {
+        font-family: 'Fredoka One', cursive;
+        font-size: 1.5rem;
+        color: white;
+        margin: 0 0 0.5rem;
+    }
+
+    .builder-title .gradient-text {
+        background: linear-gradient(135deg, var(--pink), var(--yellow), var(--pink));
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradient-shift 3s ease-in-out infinite;
+    }
+
+    @keyframes gradient-shift {
+        0%, 100% { background-position: 0% center; }
+        50% { background-position: 200% center; }
+    }
+
+    .builder-subtitle {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.85rem;
+        margin: 0;
+    }
+
+    /* Builder Phases */
+    .builder-phase {
+        display: none;
+        position: relative;
+        z-index: 1;
+    }
+
+    .builder-phase.active {
+        display: block;
+        animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Config Card (Glassmorphism) */
+    .config-card,
+    .steps-card,
+    .result-card {
+        position: relative;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1.5rem;
+        overflow: hidden;
+    }
+
+    .config-card::before,
+    .steps-card::before,
+    .result-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 20px;
+        padding: 1px;
+        background: linear-gradient(135deg, var(--pink), var(--yellow), var(--pink));
+        background-size: 300% 300%;
+        animation: gradient-border 6s ease infinite;
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+    }
+
+    @keyframes gradient-border {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+
+    .card-glow {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(236, 38, 143, 0.08) 0%, transparent 50%);
+        animation: rotate-glow 12s linear infinite;
+        pointer-events: none;
+    }
+
+    @keyframes rotate-glow {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Config Title */
+    .config-title {
+        font-family: 'Fredoka One', cursive;
+        font-size: 1.1rem;
+        color: white;
+        margin: 0 0 0.25rem;
+        text-align: center;
+    }
+
+    .config-description {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.8rem;
+        text-align: center;
+        margin: 0 0 1.25rem;
+    }
+
+    /* Config Grid */
+    .config-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 1.25rem;
+    }
+
+    @media (max-width: 500px) {
+        .config-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .config-group {
+        position: relative;
+    }
+
+    .config-label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.8rem;
+        font-weight: 700;
+        margin-bottom: 0.4rem;
+    }
+
+    .label-icon {
+        font-size: 1rem;
+    }
+
+    .config-select {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        color: white;
+        font-size: 0.85rem;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='rgba(255,255,255,0.5)'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+    }
+
+    .config-select:focus {
+        outline: none;
+        border-color: var(--pink);
+        box-shadow: 0 0 15px rgba(236, 38, 143, 0.2);
+    }
+
+    .config-select option {
+        background: #1a1a2e;
+        color: white;
+    }
+
+    /* Steps Preview */
+    .steps-preview {
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 12px;
+        padding: 1rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .steps-preview-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.8rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .preview-icon {
+        font-size: 1rem;
+    }
+
+    .steps-preview-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .preview-step {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: rgba(236, 38, 143, 0.15);
+        border: 1px solid rgba(236, 38, 143, 0.3);
+        color: var(--pink);
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 4px 10px;
+        border-radius: 15px;
+    }
+
+    .preview-step-num {
+        background: var(--pink);
+        color: white;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.6rem;
+        font-weight: 800;
+    }
+
+    /* Start Building Button */
+    .btn-start-building {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        padding: 1rem 2rem;
+        background: linear-gradient(135deg, var(--pink), #d41f7e);
+        border: none;
+        border-radius: 14px;
+        color: white;
+        font-family: 'Nunito', sans-serif;
+        font-size: 1rem;
+        font-weight: 800;
+        cursor: pointer;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .btn-start-building:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(236, 38, 143, 0.4);
+    }
+
+    .btn-start-building:hover .btn-arrow {
+        transform: translateX(5px);
+    }
+
+    .btn-arrow {
+        display: flex;
+        transition: transform 0.3s ease;
+    }
+
+    .btn-shine {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+        animation: btn-shine 3s ease-in-out infinite;
+    }
+
+    @keyframes btn-shine {
+        0%, 100% { left: -100%; }
+        50% { left: 100%; }
+    }
+
+    /* ===== PHASE 2: STEP-BY-STEP BUILDING ===== */
+
+    /* Progress Indicator */
+    .builder-progress {
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    .progress-steps {
+        display: flex;
+        justify-content: center;
+        gap: 0;
+        margin-bottom: 0.75rem;
+    }
+
+    .progress-dot {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 0.7rem;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.4s ease;
+    }
+
+    .progress-dot.active {
+        background: linear-gradient(135deg, var(--pink), #d41f7e);
+        border-color: var(--pink);
+        color: white;
+        box-shadow: 0 0 15px rgba(236, 38, 143, 0.5);
+        transform: scale(1.1);
+    }
+
+    .progress-dot.completed {
+        background: linear-gradient(135deg, #22c55e, #16a34a);
+        border-color: #22c55e;
+        color: white;
+    }
+
+    .progress-line {
+        width: 30px;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.15);
+        align-self: center;
+    }
+
+    .progress-line.completed {
+        background: linear-gradient(90deg, #22c55e, var(--pink));
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 2px;
+        overflow: hidden;
+        margin-bottom: 0.5rem;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--pink), var(--yellow));
+        width: 0%;
+        transition: width 0.5s ease;
+        border-radius: 2px;
+    }
+
+    .progress-label {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    /* Step Content */
+    .step-content {
+        text-align: center;
+    }
+
+    .step-header {
+        margin-bottom: 0.75rem;
+    }
+
+    .step-icon {
+        font-size: 2rem;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .step-title {
+        font-family: 'Fredoka One', cursive;
+        font-size: 1.1rem;
+        color: white;
+        margin: 0;
+    }
+
+    .step-description {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.8rem;
+        margin: 0 0 1rem;
+    }
+
+    .step-input-wrapper {
+        position: relative;
+        margin-bottom: 1rem;
+    }
+
+    .step-prompt {
+        width: 100%;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        color: white;
+        font-size: 0.9rem;
+        font-family: 'Nunito', sans-serif;
+        resize: vertical;
+        min-height: 80px;
+        transition: all 0.3s ease;
+    }
+
+    .step-prompt::placeholder {
+        color: rgba(255, 255, 255, 0.3);
+    }
+
+    .step-prompt:focus {
+        outline: none;
+        border-color: var(--pink);
+        box-shadow: 0 0 20px rgba(236, 38, 143, 0.2);
+    }
+
+    .step-input-wrapper .input-glow {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--pink), var(--yellow), var(--pink), transparent);
+        transition: width 0.3s ease;
+        pointer-events: none;
+    }
+
+    .step-prompt:focus ~ .input-glow {
+        width: 100%;
+    }
+
+    /* Step Actions */
+    .step-actions {
+        display: flex;
+        gap: 0.75rem;
+        justify-content: center;
+    }
+
+    .btn-step-back {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 0.75rem 1.25rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        color: rgba(255, 255, 255, 0.8);
+        font-family: 'Nunito', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-step-back:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+    }
+
+    .btn-step-generate {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0.75rem 1.5rem;
+        background: linear-gradient(135deg, var(--pink), #d41f7e);
+        border: none;
+        border-radius: 12px;
+        color: white;
+        font-family: 'Nunito', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-step-generate:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 25px rgba(236, 38, 143, 0.4);
+    }
+
+    .btn-step-generate .btn-icon {
+        font-size: 1rem;
+    }
+
+    /* Step Loading */
+    .step-loading {
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .loading-spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid rgba(255, 255, 255, 0.1);
+        border-top-color: var(--pink);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 1rem;
+    }
+
+    .loading-text {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+    }
+
+    /* Step Result */
+    .step-result {
+        text-align: center;
+    }
+
+    .result-image-wrapper {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 1rem;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .result-image-wrapper img {
+        max-width: 100%;
+        max-height: 300px;
+        display: block;
+    }
+
+    .result-watermark,
+    .final-watermark {
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 5px 8px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.6rem;
+        color: var(--dark-brown);
+    }
+
+    .result-watermark img,
+    .final-watermark img {
+        height: 16px;
+        width: auto;
+    }
+
+    .result-actions {
+        display: flex;
+        gap: 0.75rem;
+        justify-content: center;
+    }
+
+    .btn-retry {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 0.6rem 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        color: rgba(255, 255, 255, 0.8);
+        font-family: 'Nunito', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-retry:hover {
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-approve {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 0.6rem 1.25rem;
+        background: linear-gradient(135deg, #22c55e, #16a34a);
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-family: 'Nunito', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-approve:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+    }
+
+    /* Step Error */
+    .step-error {
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        color: #fca5a5;
+        padding: 0.75rem 1rem;
+        border-radius: 10px;
+        font-size: 0.85rem;
+        margin-top: 1rem;
+    }
+
+    /* ===== PHASE 3: FINAL RESULT ===== */
+
+    .result-header {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .success-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #22c55e, #16a34a);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem;
+        animation: pop-in 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @keyframes pop-in {
+        0% { transform: scale(0); }
+        100% { transform: scale(1); }
+    }
+
+    .result-title {
+        font-family: 'Fredoka One', cursive;
+        font-size: 1.25rem;
+        color: white;
+        margin: 0 0 0.25rem;
+    }
+
+    .result-subtitle {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.85rem;
+        margin: 0;
+    }
+
+    .final-image-wrapper {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 1.25rem;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .final-image-wrapper img {
+        max-width: 100%;
+        display: block;
+    }
+
+    /* Final Palette */
+    .final-palette {
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 12px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .palette-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+        color: white;
+        font-size: 0.85rem;
+    }
+
+    .palette-hint {
+        margin-left: auto;
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 0.7rem;
+        font-weight: normal;
+    }
+
+    .color-swatches {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .color-swatch {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        cursor: pointer;
+        position: relative;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s ease;
+    }
+
+    .color-swatch:hover {
+        transform: scale(1.1);
+    }
+
+    .color-swatch .swatch-label {
+        position: absolute;
+        bottom: -16px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.6rem;
+        font-family: monospace;
+        color: rgba(255, 255, 255, 0.6);
+        white-space: nowrap;
+    }
+
+    /* Spec Breakdown */
+    .spec-breakdown {
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 12px;
+        padding: 1rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .spec-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+        color: white;
+        font-size: 0.85rem;
+    }
+
+    .spec-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .spec-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        padding: 0.6rem 0.75rem;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 8px;
+        border-left: 3px solid var(--pink);
+    }
+
+    .spec-item-icon {
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+
+    .spec-item-content {
+        flex: 1;
+    }
+
+    .spec-item-label {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .spec-item-value {
+        color: white;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    /* Final Actions */
+    .final-actions {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+
+    .btn-download-img {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 0.6rem 1rem;
+        background: var(--brown);
+        color: white;
+        border-radius: 10px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-download-img:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(93, 78, 55, 0.4);
+    }
+
+    .btn-download-pdf {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 0.6rem 1rem;
+        background: linear-gradient(135deg, #1a1a2e, #16213e);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        border-radius: 10px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-download-pdf:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-start-over {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 0.6rem 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-start-over:hover {
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Attribution */
+    .builder-attribution {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.65rem;
+        color: rgba(255, 255, 255, 0.4);
+    }
+
+    .builder-attribution img {
+        height: 12px;
+        opacity: 0.6;
+    }
+
+    .builder-attribution .claude-text {
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 500px) {
+        .cake-builder-container {
+            padding: 1rem;
+        }
+
+        .builder-title {
+            font-size: 1.25rem;
+        }
+
+        .config-card,
+        .steps-card,
+        .result-card {
+            padding: 1rem;
+        }
+
+        .step-actions {
+            flex-direction: column;
+        }
+
+        .btn-step-back,
+        .btn-step-generate {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .final-actions {
+            flex-direction: column;
+        }
+
+        .final-actions > * {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+    </style>
+
+    <!-- Cake Builder JavaScript -->
+    <script>
+    (function() {
+        'use strict';
+
+        // ===========================================
+        // CAKE BUILDER - MODULAR DESIGN SYSTEM
+        // ===========================================
+
+        // Elements
+        const quickSketchMode = document.getElementById('quickSketchMode');
+        const cakeBuilderMode = document.getElementById('cakeBuilderMode');
+        const quickSketchSection = document.getElementById('quickSketchSection');
+        const cakeBuilderSection = document.getElementById('cakeBuilderSection');
+
+        // Config elements
+        const builderCakeboard = document.getElementById('builderCakeboard');
+        const builderTiers = document.getElementById('builderTiers');
+        const builderTopper = document.getElementById('builderTopper');
+        const builderWriting = document.getElementById('builderWriting');
+        const stepsPreviewList = document.getElementById('stepsPreviewList');
+        const startBuildingBtn = document.getElementById('startBuildingBtn');
+
+        // Phase elements
+        const builderConfig = document.getElementById('builderConfig');
+        const builderSteps = document.getElementById('builderSteps');
+        const builderResult = document.getElementById('builderResult');
+
+        // Step elements
+        const progressSteps = document.getElementById('progressSteps');
+        const progressFill = document.getElementById('progressFill');
+        const progressLabel = document.getElementById('progressLabel');
+        const stepIcon = document.getElementById('stepIcon');
+        const stepTitle = document.getElementById('stepTitle');
+        const stepDescription = document.getElementById('stepDescription');
+        const stepPrompt = document.getElementById('stepPrompt');
+        const stepBackBtn = document.getElementById('stepBackBtn');
+        const stepGenerateBtn = document.getElementById('stepGenerateBtn');
+        const stepLoading = document.getElementById('stepLoading');
+        const loadingText = document.getElementById('loadingText');
+        const stepResult = document.getElementById('stepResult');
+        const stepResultImage = document.getElementById('stepResultImage');
+        const stepRetryBtn = document.getElementById('stepRetryBtn');
+        const stepApproveBtn = document.getElementById('stepApproveBtn');
+        const stepError = document.getElementById('stepError');
+        const currentStepContent = document.getElementById('currentStepContent');
+
+        // Result elements
+        const finalCakeImage = document.getElementById('finalCakeImage');
+        const finalColorSwatches = document.getElementById('finalColorSwatches');
+        const specList = document.getElementById('specList');
+        const builderDownloadImg = document.getElementById('builderDownloadImg');
+        const builderDownloadPdf = document.getElementById('builderDownloadPdf');
+        const builderStartOver = document.getElementById('builderStartOver');
+
+        // State
+        let currentSteps = [];
+        let currentStepIndex = 0;
+        let stepData = {};
+        let generatedImages = [];
+
+        // Step definitions
+        const stepDefinitions = {
+            cakeboard: {
+                icon: '🟫',
+                title: 'Design Your Cakeboard',
+                description: 'Describe the color and style of your cakeboard covering.',
+                placeholder: 'e.g., Elegant white fondant with silver pearl border...',
+                loadingText: 'Creating your cakeboard...'
+            },
+            tier1: {
+                icon: '🎂',
+                title: 'Design Tier 1 (Bottom)',
+                description: 'Describe the bottom tier - the largest layer of your cake.',
+                placeholder: 'e.g., Light blue fondant with white lace pattern and edible pearls...',
+                loadingText: 'Building tier 1...'
+            },
+            tier2: {
+                icon: '🎂',
+                title: 'Design Tier 2 (Middle)',
+                description: 'Describe the middle tier of your cake.',
+                placeholder: 'e.g., Soft pink with cascading sugar flowers...',
+                loadingText: 'Adding tier 2...'
+            },
+            tier3: {
+                icon: '🎂',
+                title: 'Design Tier 3 (Top)',
+                description: 'Describe the top tier - the smallest layer.',
+                placeholder: 'e.g., Gold-brushed white with delicate piping...',
+                loadingText: 'Completing tier 3...'
+            },
+            topper: {
+                icon: '👑',
+                title: 'Design Your Cake Topper',
+                description: 'Describe the topper that will crown your cake.',
+                placeholder: 'e.g., A fondant T-Rex fighting a velociraptor for a dinosaur-themed party...',
+                loadingText: 'Crafting your topper...'
+            },
+            writing: {
+                icon: '✍️',
+                title: 'Add Your Message',
+                description: 'What text should appear on the cake, and how should it look?',
+                placeholder: 'e.g., "Happy 5th Birthday Alex!" in gold cursive lettering...',
+                loadingText: 'Adding your message...'
+            }
+        };
+
+        // Initialize if elements exist
+        if (!quickSketchMode || !cakeBuilderMode) return;
+
+        // Mode Toggle
+        quickSketchMode.addEventListener('click', () => {
+            quickSketchMode.classList.add('active');
+            cakeBuilderMode.classList.remove('active');
+            quickSketchSection.classList.add('active');
+            cakeBuilderSection.classList.remove('active');
+        });
+
+        cakeBuilderMode.addEventListener('click', () => {
+            cakeBuilderMode.classList.add('active');
+            quickSketchMode.classList.remove('active');
+            cakeBuilderSection.classList.add('active');
+            quickSketchSection.classList.remove('active');
+            updateStepsPreview();
+        });
+
+        // Update steps preview when config changes
+        [builderCakeboard, builderTiers, builderTopper, builderWriting].forEach(el => {
+            if (el) el.addEventListener('change', updateStepsPreview);
+        });
+
+        function updateStepsPreview() {
+            currentSteps = buildStepSequence();
+            stepsPreviewList.innerHTML = currentSteps.map((step, i) => `
+                <div class="preview-step">
+                    <span class="preview-step-num">${i + 1}</span>
+                    ${stepDefinitions[step].icon} ${stepDefinitions[step].title.replace('Design ', '').replace('Your ', '').replace('Add ', '')}
+                </div>
+            `).join('');
+        }
+
+        function buildStepSequence() {
+            const steps = [];
+
+            // Cakeboard
+            if (builderCakeboard.value === 'yes') {
+                steps.push('cakeboard');
+            }
+
+            // Tiers
+            const tierCount = parseInt(builderTiers.value);
+            for (let i = 1; i <= tierCount; i++) {
+                steps.push('tier' + i);
+            }
+
+            // Topper
+            if (builderTopper.value !== 'none') {
+                steps.push('topper');
+            }
+
+            // Writing
+            if (builderWriting.value !== 'none') {
+                steps.push('writing');
+            }
+
+            return steps;
+        }
+
+        // Start Building
+        startBuildingBtn.addEventListener('click', () => {
+            currentSteps = buildStepSequence();
+            currentStepIndex = 0;
+            stepData = {};
+            generatedImages = [];
+
+            builderConfig.classList.remove('active');
+            builderSteps.classList.add('active');
+
+            renderProgressDots();
+            renderCurrentStep();
+        });
+
+        function renderProgressDots() {
+            progressSteps.innerHTML = currentSteps.map((step, i) => {
+                const connector = i < currentSteps.length - 1 ? '<div class="progress-line"></div>' : '';
+                return `<div class="progress-dot" data-index="${i}">${i + 1}</div>${connector}`;
+            }).join('');
+        }
+
+        function updateProgress() {
+            const dots = progressSteps.querySelectorAll('.progress-dot');
+            const lines = progressSteps.querySelectorAll('.progress-line');
+
+            dots.forEach((dot, i) => {
+                dot.classList.remove('active', 'completed');
+                if (i < currentStepIndex) {
+                    dot.classList.add('completed');
+                    dot.innerHTML = '✓';
+                } else if (i === currentStepIndex) {
+                    dot.classList.add('active');
+                    dot.innerHTML = i + 1;
+                } else {
+                    dot.innerHTML = i + 1;
+                }
+            });
+
+            lines.forEach((line, i) => {
+                line.classList.toggle('completed', i < currentStepIndex);
+            });
+
+            const percent = (currentStepIndex / currentSteps.length) * 100;
+            progressFill.style.width = percent + '%';
+            progressLabel.textContent = `Step ${currentStepIndex + 1} of ${currentSteps.length}`;
+        }
+
+        function renderCurrentStep() {
+            const stepKey = currentSteps[currentStepIndex];
+            const def = stepDefinitions[stepKey];
+
+            stepIcon.textContent = def.icon;
+            stepTitle.textContent = def.title;
+            stepDescription.textContent = def.description;
+            stepPrompt.placeholder = def.placeholder;
+            stepPrompt.value = stepData[stepKey] || '';
+
+            stepBackBtn.style.display = currentStepIndex > 0 ? 'flex' : 'none';
+
+            currentStepContent.style.display = 'block';
+            stepLoading.style.display = 'none';
+            stepResult.style.display = 'none';
+            stepError.style.display = 'none';
+
+            updateProgress();
+        }
+
+        // Generate step
+        stepGenerateBtn.addEventListener('click', async () => {
+            const prompt = stepPrompt.value.trim();
+            if (prompt.length < 5) {
+                stepError.textContent = 'Please describe this element in a bit more detail.';
+                stepError.style.display = 'block';
+                return;
+            }
+
+            const stepKey = currentSteps[currentStepIndex];
+            stepData[stepKey] = prompt;
+
+            currentStepContent.style.display = 'none';
+            stepError.style.display = 'none';
+            stepLoading.style.display = 'block';
+            loadingText.textContent = stepDefinitions[stepKey].loadingText;
+
+            // MOCK RESPONSE - Replace with actual API call later
+            await mockGenerateImage(stepKey, prompt);
+        });
+
+        async function mockGenerateImage(stepKey, prompt) {
+            // Simulate API delay
+            await new Promise(resolve => setTimeout(resolve, 1500 + Math.random() * 1000));
+
+            // For now, use a placeholder image
+            // In production, this would call the Cloudflare Worker
+            const mockImages = {
+                cakeboard: 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect fill="#1a1a2e" width="400" height="300"/><ellipse cx="200" cy="200" rx="150" ry="40" fill="#f5f5f5" stroke="#ddd" stroke-width="2"/><text x="200" y="205" text-anchor="middle" fill="#888" font-family="sans-serif" font-size="14">Cakeboard Preview</text><text x="200" y="130" text-anchor="middle" fill="#EC268F" font-family="sans-serif" font-size="12">${prompt.substring(0, 30)}...</text></svg>`),
+                tier1: 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect fill="#1a1a2e" width="400" height="300"/><ellipse cx="200" cy="220" rx="120" ry="30" fill="#f0f0f0"/><rect x="80" y="140" width="240" height="80" rx="10" fill="#ffb6c1"/><ellipse cx="200" cy="140" rx="120" ry="25" fill="#ffc0cb"/><text x="200" y="185" text-anchor="middle" fill="#fff" font-family="sans-serif" font-size="14">Tier 1</text></svg>`),
+                tier2: 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect fill="#1a1a2e" width="400" height="300"/><ellipse cx="200" cy="240" rx="120" ry="30" fill="#f0f0f0"/><rect x="80" y="170" width="240" height="70" rx="10" fill="#ffb6c1"/><ellipse cx="200" cy="170" rx="120" ry="25" fill="#ffc0cb"/><rect x="110" y="110" width="180" height="60" rx="10" fill="#dda0dd"/><ellipse cx="200" cy="110" rx="90" ry="20" fill="#e6b0e6"/><text x="200" y="145" text-anchor="middle" fill="#fff" font-family="sans-serif" font-size="12">Tier 2</text></svg>`),
+                tier3: 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect fill="#1a1a2e" width="400" height="300"/><ellipse cx="200" cy="250" rx="120" ry="30" fill="#f0f0f0"/><rect x="80" y="185" width="240" height="65" rx="10" fill="#ffb6c1"/><rect x="110" y="130" width="180" height="55" rx="10" fill="#dda0dd"/><rect x="140" y="85" width="120" height="45" rx="10" fill="#87ceeb"/><ellipse cx="200" cy="85" rx="60" ry="15" fill="#a0d8ef"/><text x="200" y="110" text-anchor="middle" fill="#fff" font-family="sans-serif" font-size="11">Tier 3</text></svg>`),
+                topper: 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect fill="#1a1a2e" width="400" height="300"/><ellipse cx="200" cy="260" rx="100" ry="25" fill="#f0f0f0"/><rect x="100" y="200" width="200" height="60" rx="10" fill="#ffb6c1"/><polygon points="200,80 160,160 240,160" fill="#ffd700"/><circle cx="200" cy="60" r="25" fill="#ffd700"/><text x="200" y="65" text-anchor="middle" fill="#1a1a2e" font-family="sans-serif" font-size="10">Topper</text></svg>`),
+                writing: 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect fill="#1a1a2e" width="400" height="300"/><ellipse cx="200" cy="250" rx="120" ry="30" fill="#f0f0f0"/><rect x="80" y="150" width="240" height="100" rx="10" fill="#ffb6c1"/><ellipse cx="200" cy="150" rx="120" ry="25" fill="#ffc0cb"/><text x="200" y="210" text-anchor="middle" fill="#8b4513" font-family="cursive" font-size="18" font-weight="bold">${prompt.substring(0, 20)}</text></svg>`)
+            };
+
+            const imgSrc = mockImages[stepKey] || mockImages.tier1;
+
+            stepLoading.style.display = 'none';
+            stepResult.style.display = 'block';
+            stepResultImage.src = imgSrc;
+
+            generatedImages[currentStepIndex] = {
+                stepKey,
+                prompt,
+                image: imgSrc
+            };
+        }
+
+        // Retry current step
+        stepRetryBtn.addEventListener('click', () => {
+            stepResult.style.display = 'none';
+            currentStepContent.style.display = 'block';
+        });
+
+        // Approve and continue
+        stepApproveBtn.addEventListener('click', () => {
+            currentStepIndex++;
+
+            if (currentStepIndex >= currentSteps.length) {
+                // All steps complete - show final result
+                showFinalResult();
+            } else {
+                // Move to next step
+                renderCurrentStep();
+            }
+        });
+
+        // Back button
+        stepBackBtn.addEventListener('click', () => {
+            if (currentStepIndex > 0) {
+                currentStepIndex--;
+                renderCurrentStep();
+            }
+        });
+
+        function showFinalResult() {
+            builderSteps.classList.remove('active');
+            builderResult.classList.add('active');
+
+            // Use the last generated image as the final
+            const lastImage = generatedImages[generatedImages.length - 1];
+            if (lastImage) {
+                finalCakeImage.src = lastImage.image;
+                builderDownloadImg.href = lastImage.image;
+            }
+
+            // Generate color palette (mock)
+            displayFinalPalette();
+
+            // Generate spec list
+            displaySpecList();
+        }
+
+        function displayFinalPalette() {
+            const mockColors = ['#EC268F', '#FFC532', '#FFB6C1', '#DDA0DD', '#87CEEB'];
+            finalColorSwatches.innerHTML = mockColors.map(color => `
+                <div class="color-swatch" style="background: ${color}" title="Click to copy: ${color}" data-color="${color}">
+                    <span class="swatch-label">${color}</span>
+                </div>
+            `).join('');
+
+            // Add click handlers
+            finalColorSwatches.querySelectorAll('.color-swatch').forEach(swatch => {
+                swatch.addEventListener('click', () => {
+                    const color = swatch.dataset.color;
+                    navigator.clipboard.writeText(color).then(() => {
+                        const label = swatch.querySelector('.swatch-label');
+                        const original = label.textContent;
+                        label.textContent = 'Copied!';
+                        setTimeout(() => label.textContent = original, 1500);
+                    });
+                });
+            });
+        }
+
+        function displaySpecList() {
+            specList.innerHTML = generatedImages.map(item => {
+                const def = stepDefinitions[item.stepKey];
+                return `
+                    <div class="spec-item">
+                        <span class="spec-item-icon">${def.icon}</span>
+                        <div class="spec-item-content">
+                            <div class="spec-item-label">${def.title.replace('Design ', '').replace('Your ', '').replace('Add ', '')}</div>
+                            <div class="spec-item-value">${item.prompt}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Start Over
+        builderStartOver.addEventListener('click', () => {
+            builderResult.classList.remove('active');
+            builderConfig.classList.add('active');
+            currentStepIndex = 0;
+            stepData = {};
+            generatedImages = [];
+        });
+
+        // Download PDF (reuse similar logic from quick sketch)
+        builderDownloadPdf.addEventListener('click', async () => {
+            const { jsPDF } = window.jspdf || {};
+            if (!jsPDF) {
+                const script = document.createElement('script');
+                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+                script.onload = () => generateBuilderPDF();
+                document.head.appendChild(script);
+            } else {
+                generateBuilderPDF();
+            }
+        });
+
+        function generateBuilderPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const margin = 20;
+
+            // Header
+            doc.setFillColor(26, 26, 46);
+            doc.rect(0, 0, pageWidth, 35, 'F');
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(22);
+            doc.setFont('helvetica', 'bold');
+            doc.text('My Baking Creations', margin, 22);
+            doc.setFontSize(10);
+            doc.setFont('helvetica', 'normal');
+            doc.text('Custom Cake Design - Built with Cake Builder', margin, 30);
+
+            doc.setTextColor(0, 0, 0);
+            let yPos = 50;
+
+            // Specs
+            doc.setFontSize(14);
+            doc.setFont('helvetica', 'bold');
+            doc.text('Design Specifications', margin, yPos);
+            yPos += 10;
+
+            doc.setFontSize(10);
+            doc.setFont('helvetica', 'normal');
+            generatedImages.forEach(item => {
+                const def = stepDefinitions[item.stepKey];
+                const label = def.title.replace('Design ', '').replace('Your ', '').replace('Add ', '');
+                doc.setFont('helvetica', 'bold');
+                doc.text(`${def.icon} ${label}:`, margin, yPos);
+                doc.setFont('helvetica', 'normal');
+                const splitText = doc.splitTextToSize(item.prompt, pageWidth - 2 * margin - 10);
+                doc.text(splitText, margin + 5, yPos + 5);
+                yPos += 10 + (splitText.length * 5);
+            });
+
+            // Footer
+            doc.setFontSize(9);
+            doc.setTextColor(150, 150, 150);
+            doc.text('Design generated with Cake Builder by My Baking Creations', margin, 280);
+            doc.text('mybakingcreations.com | (415) 568-8060', margin, 286);
+
+            doc.save('my-custom-cake-design.pdf');
+        }
+
+        // Initialize particles for builder background
+        function initBuilderParticles() {
+            const canvas = document.getElementById('builderParticles');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            const container = canvas.parentElement;
+
+            function resize() {
+                canvas.width = container.offsetWidth;
+                canvas.height = container.offsetHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            const particles = [];
+            const particleCount = 30;
+
+            class Particle {
+                constructor() {
+                    this.reset();
+                }
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speedX = (Math.random() - 0.5) * 0.3;
+                    this.speedY = (Math.random() - 0.5) * 0.3;
+                    this.opacity = Math.random() * 0.4 + 0.1;
+                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+
+                // Draw connections
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < 100) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${0.05 * (1 - distance / 100)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // Initialize particles when builder is shown
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach(mutation => {
+                if (mutation.target.classList.contains('active') && mutation.target.id === 'cakeBuilderSection') {
+                    initBuilderParticles();
+                    observer.disconnect();
+                }
+            });
+        });
+
+        if (cakeBuilderSection) {
+            observer.observe(cakeBuilderSection, { attributes: true, attributeFilter: ['class'] });
+        }
+
+        // Initial steps preview
+        updateStepsPreview();
+
+    })();
+    </script>
 </body>
 </html>
