@@ -427,18 +427,33 @@
                                                 </div>
 
                                                 <!-- Writing -->
-                                                <div class="config-group">
+                                                <div class="config-group config-group-full">
                                                     <label class="config-label">
                                                         <span class="label-icon">✍️</span>
-                                                        Writing / Text
+                                                        Writing / Text <span class="config-hint">(select all that apply)</span>
                                                     </label>
-                                                    <select id="builderWriting" class="config-select">
-                                                        <option value="none">No writing</option>
-                                                        <option value="board">On the cakeboard</option>
-                                                        <option value="tier1">On Tier 1 (bottom)</option>
-                                                        <option value="tier2">On Tier 2</option>
-                                                        <option value="tier3">On Tier 3 (top)</option>
-                                                    </select>
+                                                    <div class="config-checkboxes" id="builderWritingOptions">
+                                                        <label class="config-checkbox">
+                                                            <input type="checkbox" name="builderWriting" value="board">
+                                                            <span class="checkbox-mark"></span>
+                                                            <span class="checkbox-label">On the cakeboard</span>
+                                                        </label>
+                                                        <label class="config-checkbox">
+                                                            <input type="checkbox" name="builderWriting" value="tier1">
+                                                            <span class="checkbox-mark"></span>
+                                                            <span class="checkbox-label">On Tier 1 (bottom)</span>
+                                                        </label>
+                                                        <label class="config-checkbox">
+                                                            <input type="checkbox" name="builderWriting" value="tier2">
+                                                            <span class="checkbox-mark"></span>
+                                                            <span class="checkbox-label">On Tier 2</span>
+                                                        </label>
+                                                        <label class="config-checkbox">
+                                                            <input type="checkbox" name="builderWriting" value="tier3">
+                                                            <span class="checkbox-mark"></span>
+                                                            <span class="checkbox-label">On Tier 3 (top)</span>
+                                                        </label>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -1799,6 +1814,10 @@
         position: relative;
     }
 
+    .config-group-full {
+        grid-column: 1 / -1;
+    }
+
     .config-label {
         display: flex;
         align-items: center;
@@ -1809,8 +1828,92 @@
         margin-bottom: 0.4rem;
     }
 
+    .config-hint {
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.7rem;
+    }
+
     .label-icon {
         font-size: 1rem;
+    }
+
+    /* Checkbox Styles */
+    .config-checkboxes {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .config-checkbox {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0.6rem 1rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .config-checkbox:hover {
+        border-color: rgba(255, 255, 255, 0.25);
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    .config-checkbox:has(input:checked) {
+        border-color: var(--pink);
+        background: rgba(236, 38, 143, 0.15);
+    }
+
+    .config-checkbox input {
+        display: none;
+    }
+
+    .checkbox-mark {
+        width: 18px;
+        height: 18px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+    }
+
+    .config-checkbox:has(input:checked) .checkbox-mark {
+        background: var(--pink);
+        border-color: var(--pink);
+    }
+
+    .config-checkbox:has(input:checked) .checkbox-mark::after {
+        content: '✓';
+        color: white;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .checkbox-label {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.8rem;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .config-checkbox:has(input:checked) .checkbox-label {
+        color: white;
+    }
+
+    @media (max-width: 500px) {
+        .config-checkboxes {
+            flex-direction: column;
+        }
+
+        .config-checkbox {
+            width: 100%;
+        }
     }
 
     .config-select {
@@ -2576,7 +2679,8 @@
         const builderCakeboard = document.getElementById('builderCakeboard');
         const builderTiers = document.getElementById('builderTiers');
         const builderTopper = document.getElementById('builderTopper');
-        const builderWriting = document.getElementById('builderWriting');
+        const builderWritingOptions = document.getElementById('builderWritingOptions');
+        const builderWritingCheckboxes = builderWritingOptions ? builderWritingOptions.querySelectorAll('input[type="checkbox"]') : [];
         const stepsPreviewList = document.getElementById('stepsPreviewList');
         const startBuildingBtn = document.getElementById('startBuildingBtn');
 
@@ -2655,12 +2759,33 @@
                 placeholder: 'e.g., A fondant T-Rex fighting a velociraptor for a dinosaur-themed party...',
                 loadingText: 'Crafting your topper...'
             },
-            writing: {
+            writing_board: {
                 icon: '✍️',
-                title: 'Add Your Message',
-                description: 'What text should appear on the cake, and how should it look?',
-                placeholder: 'e.g., "Happy 5th Birthday Alex!" in gold cursive lettering...',
-                loadingText: 'Adding your message...'
+                title: 'Writing on Cakeboard',
+                description: 'What text should appear on the cakeboard?',
+                placeholder: 'e.g., "Happy Birthday!" in pink cursive lettering on the board edge...',
+                loadingText: 'Adding cakeboard text...'
+            },
+            writing_tier1: {
+                icon: '✍️',
+                title: 'Writing on Tier 1',
+                description: 'What text should appear on the bottom tier?',
+                placeholder: 'e.g., "Alex" in bold blue fondant letters...',
+                loadingText: 'Adding tier 1 text...'
+            },
+            writing_tier2: {
+                icon: '✍️',
+                title: 'Writing on Tier 2',
+                description: 'What text should appear on the middle tier?',
+                placeholder: 'e.g., "Happy 5th Birthday" in elegant gold script...',
+                loadingText: 'Adding tier 2 text...'
+            },
+            writing_tier3: {
+                icon: '✍️',
+                title: 'Writing on Tier 3',
+                description: 'What text should appear on the top tier?',
+                placeholder: 'e.g., A number "5" in sparkly fondant...',
+                loadingText: 'Adding tier 3 text...'
             }
         };
 
@@ -2684,8 +2809,13 @@
         });
 
         // Update steps preview when config changes
-        [builderCakeboard, builderTiers, builderTopper, builderWriting].forEach(el => {
+        [builderCakeboard, builderTiers, builderTopper].forEach(el => {
             if (el) el.addEventListener('change', updateStepsPreview);
+        });
+
+        // Also listen to writing checkboxes
+        builderWritingCheckboxes.forEach(cb => {
+            cb.addEventListener('change', updateStepsPreview);
         });
 
         function updateStepsPreview() {
@@ -2717,10 +2847,12 @@
                 steps.push('topper');
             }
 
-            // Writing
-            if (builderWriting.value !== 'none') {
-                steps.push('writing');
-            }
+            // Writing (multiple checkboxes)
+            builderWritingCheckboxes.forEach(cb => {
+                if (cb.checked) {
+                    steps.push('writing_' + cb.value);
+                }
+            });
 
             return steps;
         }
@@ -2828,7 +2960,13 @@
                 writing: 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect fill="#1a1a2e" width="400" height="300"/><ellipse cx="200" cy="250" rx="120" ry="30" fill="#f0f0f0"/><rect x="80" y="150" width="240" height="100" rx="10" fill="#ffb6c1"/><ellipse cx="200" cy="150" rx="120" ry="25" fill="#ffc0cb"/><text x="200" y="210" text-anchor="middle" fill="#8b4513" font-family="cursive" font-size="18" font-weight="bold">${prompt.substring(0, 20)}</text></svg>`)
             };
 
-            const imgSrc = mockImages[stepKey] || mockImages.tier1;
+            // Handle writing_ prefixed keys
+            let imgSrc;
+            if (stepKey.startsWith('writing_')) {
+                imgSrc = mockImages.writing;
+            } else {
+                imgSrc = mockImages[stepKey] || mockImages.tier1;
+            }
 
             stepLoading.style.display = 'none';
             stepResult.style.display = 'block';
