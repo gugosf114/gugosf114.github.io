@@ -2,60 +2,28 @@
   "lastUpdated": "2026-01-26",
   "orders": [
     {
-      "company": "Salesforce",
-      "product": "logo cookies",
-      "quantity": 500,
-      "occasion": "Q1 kickoff event",
-      "daysAgo": 2
-    },
-    {
-      "company": "DocuSign",
+      "company": "Venmo",
       "product": "cake pops",
-      "quantity": 200,
-      "occasion": "product launch celebration",
-      "daysAgo": 3
-    },
-    {
-      "company": "Stripe",
-      "product": "logo cookies",
-      "quantity": 300,
-      "occasion": "employee appreciation",
-      "daysAgo": 5
-    },
-    {
-      "company": "Google",
-      "product": "cupcakes",
-      "quantity": 150,
-      "occasion": "team milestone celebration",
-      "daysAgo": 6
+      "quantity": 175,
+      "occasion": "corporate event",
+      "daysAgo": 2,
+      "image": "images/gallery/corporatecakepops/PayPal-Logo-Corporate-Cake-Pops-San-Francisco.jpeg"
     },
     {
       "company": "Meta",
-      "product": "logo cookies",
-      "quantity": 400,
-      "occasion": "client thank-you gifts",
-      "daysAgo": 7
+      "product": "hand-piped cookies",
+      "quantity": 75,
+      "occasion": "team celebration",
+      "daysAgo": 3,
+      "image": "images/gallery/corporatehandpiped/Meta-Branded-Corporate-Cookies-San-Francisco.jpg"
     },
     {
-      "company": "PayPal",
-      "product": "custom cake",
-      "quantity": 1,
-      "occasion": "executive birthday",
-      "daysAgo": 8
-    },
-    {
-      "company": "OpenAI",
-      "product": "logo cookies",
-      "quantity": 250,
-      "occasion": "holiday party",
-      "daysAgo": 10
-    },
-    {
-      "company": "Alaska Airlines",
-      "product": "cake pops",
-      "quantity": 350,
+      "company": "DocuSign",
+      "product": "hand-piped cookies",
+      "quantity": 100,
       "occasion": "corporate event",
-      "daysAgo": 12
+      "daysAgo": 7,
+      "image": "images/gallery/corporatehandpiped/DocuSign-Hand-Piped-Corporate-Cookies-San-Francisco.jpg"
     }
   ]
 }
