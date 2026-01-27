@@ -324,7 +324,6 @@ nav {
 .nav-links a.active {
     color: #C4206E; /* Darker pink for better contrast */
     transform: translateY(-2px);
-    text-shadow: 0 4px 8px rgba(196, 32, 110, 0.15);
 }
 
 /* GET A QUOTE BUTTON - Electric Yellow (exact copy of .electric-btn) */
