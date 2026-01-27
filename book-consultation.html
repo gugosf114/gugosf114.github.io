@@ -611,6 +611,14 @@
         box-shadow: 0 0 20px rgba(236, 38, 143, 0.2);
     }
 
+    /* Keep filled inputs visible after typing */
+    .form-group input.filled,
+    .form-group select.filled,
+    .form-group textarea.filled {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
     .form-group select {
         cursor: pointer;
         appearance: none;
@@ -1121,6 +1129,29 @@
     </style>
 
     <script>
+    // Add 'filled' class to inputs when they have content
+    (function() {
+        const inputs = document.querySelectorAll('.form-group input, .form-group select, .form-group textarea');
+
+        function checkFilled(el) {
+            if (el.value && el.value.trim() !== '') {
+                el.classList.add('filled');
+            } else {
+                el.classList.remove('filled');
+            }
+        }
+
+        inputs.forEach(input => {
+            // Check on input/change
+            input.addEventListener('input', () => checkFilled(input));
+            input.addEventListener('change', () => checkFilled(input));
+            // Check on blur (when leaving field)
+            input.addEventListener('blur', () => checkFilled(input));
+            // Initial check
+            checkFilled(input);
+        });
+    })();
+
     // Particle Animation
     (function() {
         const canvas = document.getElementById('consultationParticles');
