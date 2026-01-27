@@ -299,6 +299,7 @@
     let isDragging = false;
     let hasMoved = false;
     let startX, startY, startLeft, startBottom;
+    let touchStartTime = 0;
 
     function getPosition() {
         const rect = widget.getBoundingClientRect();
@@ -308,20 +309,30 @@
         };
     }
 
-    function onStart(e) {
-        const touch = e.touches ? e.touches[0] : e;
-        startX = touch.clientX;
-        startY = touch.clientY;
-
-        const pos = getPosition();
+    // Mouse start
+    function onMouseStart(e) {
+        startX = e.clientX;
+        startY = e.clientY;
         startLeft = widget.offsetLeft || (window.innerWidth - widget.offsetWidth - 20);
         startBottom = parseInt(getComputedStyle(widget).bottom) || 100;
-
         isDragging = true;
         hasMoved = false;
         widget.classList.add('dragging');
-
         e.preventDefault();
+    }
+
+    // Touch start - don't prevent default so tap can work
+    function onTouchStart(e) {
+        const touch = e.touches[0];
+        startX = touch.clientX;
+        startY = touch.clientY;
+        startLeft = widget.offsetLeft || (window.innerWidth - widget.offsetWidth - 20);
+        startBottom = parseInt(getComputedStyle(widget).bottom) || 100;
+        isDragging = true;
+        hasMoved = false;
+        touchStartTime = Date.now();
+        widget.classList.add('dragging');
+        // Don't prevent default here - allow tap to work
     }
 
     function onMove(e) {
@@ -331,10 +342,14 @@
         const deltaX = touch.clientX - startX;
         const deltaY = touch.clientY - startY;
 
-        // Only count as moved if dragged more than 5px
-        if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+        // Only count as moved if dragged more than 10px (increased threshold for mobile)
+        if (Math.abs(deltaX) > 10 || Math.abs(deltaY) > 10) {
             hasMoved = true;
+            // Only prevent default when actually dragging
+            e.preventDefault();
         }
+
+        if (!hasMoved) return;
 
         // Calculate new position
         let newRight = window.innerWidth - (startLeft + widget.offsetWidth) - deltaX;
@@ -350,8 +365,6 @@
         widget.style.right = newRight + 'px';
         widget.style.bottom = newBottom + 'px';
         widget.style.left = 'auto';
-
-        e.preventDefault();
     }
 
     function onEnd(e) {
@@ -360,11 +373,19 @@
         isDragging = false;
         widget.classList.remove('dragging');
 
-        // If just clicked (not dragged), let the link work
-        // The click will naturally propagate to the anchor
+        // For touch: if it was a quick tap (not drag), navigate manually
+        if (e.type === 'touchend' && !hasMoved) {
+            const touchDuration = Date.now() - touchStartTime;
+            if (touchDuration < 300) {
+                // Quick tap - navigate to consultation page
+                window.location.href = 'book-consultation.html';
+            }
+        }
+
+        hasMoved = false;
     }
 
-    // Prevent click if dragged
+    // Prevent click if dragged (for mouse)
     btn.addEventListener('click', (e) => {
         if (hasMoved) {
             e.preventDefault();
@@ -373,12 +394,12 @@
     });
 
     // Mouse events
-    widget.addEventListener('mousedown', onStart);
+    widget.addEventListener('mousedown', onMouseStart);
     document.addEventListener('mousemove', onMove);
     document.addEventListener('mouseup', onEnd);
 
     // Touch events
-    widget.addEventListener('touchstart', onStart, { passive: false });
+    widget.addEventListener('touchstart', onTouchStart, { passive: true });
     document.addEventListener('touchmove', onMove, { passive: false });
     document.addEventListener('touchend', onEnd);
 
