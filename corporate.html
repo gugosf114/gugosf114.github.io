@@ -1616,225 +1616,142 @@
         position: fixed;
         bottom: 20px;
         left: 20px;
-        width: 320px;
-        max-height: 380px;
-        background: #0d0d0d;
-        border: 1px solid #2a2a2a;
-        border-radius: 12px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace;
+        width: 280px;
+        height: 90px;
+        background: transparent;
+        font-family: 'Nunito', sans-serif;
         z-index: 9997;
         overflow: hidden;
-        transition: all 0.3s ease;
-    }
-    .live-activity-feed.minimized {
-        max-height: 44px;
-    }
-    .live-activity-feed.minimized .activity-feed-body {
-        display: none;
-    }
-    .activity-feed-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 12px 14px;
-        background: #151515;
-        border-bottom: 1px solid #2a2a2a;
-    }
-    .feed-status {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-    .status-dot {
-        width: 8px;
-        height: 8px;
-        background: #22c55e;
-        border-radius: 50%;
-        animation: status-pulse 2s ease-in-out infinite;
-        box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
-    }
-    @keyframes status-pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.5; }
-    }
-    .status-text {
-        font-size: 11px;
-        font-weight: 600;
-        color: #888;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-    .feed-minimize {
-        width: 24px;
-        height: 24px;
-        background: #252525;
-        border: none;
-        border-radius: 6px;
-        color: #666;
-        font-size: 16px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.2s ease;
-    }
-    .feed-minimize:hover {
-        background: #333;
-        color: #999;
+        pointer-events: none;
     }
     .activity-feed-body {
-        max-height: 320px;
-        overflow-y: auto;
-        padding: 8px 0;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
     }
-    .activity-feed-body::-webkit-scrollbar {
-        width: 4px;
+    .activity-slider {
+        display: flex;
+        flex-direction: column;
+        animation: activity-scroll 12s ease-in-out infinite;
     }
-    .activity-feed-body::-webkit-scrollbar-track {
-        background: transparent;
-    }
-    .activity-feed-body::-webkit-scrollbar-thumb {
-        background: #333;
-        border-radius: 2px;
+    @keyframes activity-scroll {
+        0%, 20% { transform: translateY(0); }
+        33%, 53% { transform: translateY(-33.33%); }
+        66%, 86% { transform: translateY(-66.66%); }
+        100% { transform: translateY(0); }
     }
     .activity-item {
         display: flex;
-        align-items: flex-start;
-        gap: 10px;
-        padding: 10px 14px;
-        border-bottom: 1px solid #1a1a1a;
-        animation: item-fade-in 0.4s ease;
-    }
-    .activity-item:last-child {
-        border-bottom: none;
-    }
-    @keyframes item-fade-in {
-        from { opacity: 0; transform: translateY(-8px); }
-        to { opacity: 1; transform: translateY(0); }
+        align-items: center;
+        gap: 12px;
+        padding: 8px 0;
+        min-height: 90px;
+        box-sizing: border-box;
     }
     .activity-icon {
-        width: 48px;
-        height: 48px;
-        background: #1a1a1a;
-        border: 1px solid #333;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        width: 56px;
+        height: 56px;
+        border-radius: 10px;
         flex-shrink: 0;
         overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     }
     .activity-icon img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 6px;
-    }
-    .activity-icon svg {
-        width: 16px;
-        height: 16px;
-        fill: #4ade80;
     }
     .activity-content {
         flex: 1;
         min-width: 0;
     }
     .activity-text {
-        font-size: 13px;
-        color: #e5e5e5;
-        line-height: 1.4;
+        font-size: 0.9rem;
+        color: #5D4E37;
+        line-height: 1.3;
         margin-bottom: 4px;
     }
     .activity-company {
-        color: #fff;
-        font-weight: 600;
+        color: #3D2E1F;
+        font-weight: 700;
     }
     .activity-product {
-        color: #a3a3a3;
+        color: #5D4E37;
+        font-weight: 600;
     }
     .activity-meta {
         display: flex;
         align-items: center;
         gap: 8px;
-        font-size: 11px;
-        color: #666;
+        font-size: 0.75rem;
+        color: #8B7355;
     }
     .activity-qty {
-        background: #1f1f1f;
-        padding: 2px 6px;
+        background: rgba(93, 78, 55, 0.1);
+        padding: 2px 8px;
         border-radius: 4px;
-        color: #888;
+        color: #5D4E37;
+        font-weight: 600;
     }
     .activity-time {
-        color: #555;
+        color: #A89070;
     }
     @media (max-width: 768px) {
         .live-activity-feed {
-            width: 280px;
+            width: 240px;
             left: 10px;
             bottom: 80px;
+            height: 80px;
+        }
+        .activity-item {
+            min-height: 80px;
+        }
+        .activity-icon {
+            width: 48px;
+            height: 48px;
+        }
+        .activity-text {
+            font-size: 0.85rem;
         }
     }
-    @media (max-width: 400px) {
+    @media (max-width: 480px) {
         .live-activity-feed {
-            width: calc(100% - 20px);
-            left: 10px;
-            right: 10px;
+            display: none;
         }
     }
     </style>
     <script>
-    // Live Activity Feed - Injected into page
+    // Live Activity Feed - Auto-scrolling, injected into page
     (function() {
         // Create feed HTML
         const feedHTML = `
         <div class="live-activity-feed" id="liveActivityFeed">
-            <div class="activity-feed-header">
-                <div class="feed-status">
-                    <span class="status-dot"></span>
-                    <span class="status-text">Live Activity</span>
-                </div>
-                <button class="feed-minimize" id="feedMinimize" aria-label="Minimize feed">−</button>
-            </div>
             <div class="activity-feed-body" id="activityFeedBody"></div>
         </div>`;
         document.body.insertAdjacentHTML('beforeend', feedHTML);
 
-        const feed = document.getElementById('liveActivityFeed');
         const body = document.getElementById('activityFeedBody');
-        const minimizeBtn = document.getElementById('feedMinimize');
+        if (!body) return;
 
-        // Minimize toggle
-        minimizeBtn.addEventListener('click', () => {
-            feed.classList.toggle('minimized');
-            minimizeBtn.textContent = feed.classList.contains('minimized') ? '+' : '−';
-        });
-
-        // Format date
+        // Format relative time
         function formatTime(daysAgo) {
-            const date = new Date();
-            date.setDate(date.getDate() - daysAgo);
-            const month = date.toLocaleDateString('en-US', { month: 'short' });
-            const day = date.getDate();
-            const hours = date.getHours();
-            const mins = String(Math.floor(Math.random() * 60)).padStart(2, '0');
-            const ampm = hours >= 12 ? 'PM' : 'AM';
-            const hour12 = hours % 12 || 12;
-            return `${month} ${day}, ${hour12}:${mins} ${ampm}`;
+            if (daysAgo === 0) return 'Today';
+            if (daysAgo === 1) return 'Yesterday';
+            if (daysAgo < 7) return `${daysAgo} days ago`;
+            if (daysAgo === 7) return '1 week ago';
+            return `${Math.floor(daysAgo / 7)} weeks ago`;
         }
 
         fetch('recent-orders.json')
             .then(r => r.json())
             .then(data => {
-                const items = data.orders.slice(0, 6).map(order => {
+                const orders = data.orders.slice(0, 3);
+                const items = orders.map(order => {
                     const timeStr = formatTime(order.daysAgo);
-                    const iconContent = order.image
-                        ? `<img src="${order.image}" alt="${order.company} order" loading="lazy">`
-                        : `<svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>`;
+                    const imgSrc = order.image || '';
                     return `<div class="activity-item">
                         <div class="activity-icon">
-                            ${iconContent}
+                            ${imgSrc ? `<img src="${imgSrc}" alt="${order.company}" loading="lazy">` : ''}
                         </div>
                         <div class="activity-content">
                             <div class="activity-text">
@@ -1848,11 +1765,9 @@
                         </div>
                     </div>`;
                 }).join('');
-                body.innerHTML = items;
+                body.innerHTML = `<div class="activity-slider">${items}</div>`;
             })
-            .catch(() => {
-                body.innerHTML = '<div class="activity-item"><div class="activity-content"><div class="activity-text" style="color:#666;">Loading...</div></div></div>';
-            });
+            .catch(() => {});
     })();
     </script>
 
