@@ -395,8 +395,8 @@
                                                         Cakeboard
                                                     </label>
                                                     <select id="builderCakeboard" class="config-select">
-                                                        <option value="no">No cakeboard</option>
-                                                        <option value="yes" selected>Yes, with fondant covering</option>
+                                                        <option value="standard" selected>Standard board (free)</option>
+                                                        <option value="premium">Premium board with fondant covering</option>
                                                     </select>
                                                 </div>
 
@@ -2701,8 +2701,8 @@
         function buildStepSequence() {
             const steps = [];
 
-            // Cakeboard
-            if (builderCakeboard.value === 'yes') {
+            // Cakeboard (only premium gets a design step)
+            if (builderCakeboard.value === 'premium') {
                 steps.push('cakeboard');
             }
 
