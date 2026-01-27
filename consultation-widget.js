@@ -38,7 +38,7 @@
     styles.textContent = `
         #consultationWidget {
             position: fixed;
-            bottom: 100px;
+            bottom: 45%;
             right: 20px;
             z-index: 9998;
             touch-action: none;
@@ -232,7 +232,7 @@
         /* Mobile styles */
         @media (max-width: 600px) {
             #consultationWidget {
-                bottom: 80px;
+                bottom: 40%;
                 right: 10px;
             }
 
@@ -276,9 +276,9 @@
             }
         }
 
-        /* When chatbot is also present, stack above it */
+        /* When chatbot is also present, keep at same height */
         #consultationWidget.with-chatbot {
-            bottom: 180px;
+            bottom: 45%;
         }
     `;
 
