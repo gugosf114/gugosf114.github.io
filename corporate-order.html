@@ -608,6 +608,14 @@
         box-shadow: 0 0 20px rgba(236, 38, 143, 0.2);
     }
 
+    /* Keep filled inputs visible after typing */
+    .form-group input.filled,
+    .form-group select.filled,
+    .form-group textarea.filled {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
     .form-group input[type="file"] {
         padding: 0.75rem 1rem;
         cursor: pointer;
@@ -957,6 +965,26 @@
     </style>
 
     <script>
+    // Add 'filled' class to inputs when they have content
+    (function() {
+        const inputs = document.querySelectorAll('.form-group input, .form-group select, .form-group textarea');
+
+        function checkFilled(el) {
+            if (el.value && el.value.trim() !== '') {
+                el.classList.add('filled');
+            } else {
+                el.classList.remove('filled');
+            }
+        }
+
+        inputs.forEach(input => {
+            input.addEventListener('input', () => checkFilled(input));
+            input.addEventListener('change', () => checkFilled(input));
+            input.addEventListener('blur', () => checkFilled(input));
+            checkFilled(input);
+        });
+    })();
+
     // Particle Animation - Connected dots network
     (function() {
         const canvas = document.getElementById('corporateParticles');
@@ -1057,7 +1085,7 @@
             card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
         });
 
-        card.style.transition = 'transform 0.1s ease-out';
+        card.style.transition = 'transform 0.33s ease-out';  // Slowed by 70%
     })();
 
     // Show/hide delivery address based on selection
