@@ -1517,7 +1517,7 @@ if (document.readyState === 'loading') {
 
     const ctx = canvas.getContext('2d');
     let particles = [];
-    const particleCount = 44; // 25% more particles
+    const particleCount = 88; // Doubled for more visible effect
 
     function resize() {
         canvas.width = window.innerWidth;
