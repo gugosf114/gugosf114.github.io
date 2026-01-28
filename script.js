@@ -1572,3 +1572,124 @@ if (document.readyState === 'loading') {
 
     animate();
 })();
+
+// ============================================
+// FIZZ EFFECT ON TILE HOVER
+// ============================================
+(function() {
+    // Skip if reduced motion preferred
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    // Skip on mobile for performance
+    if (window.innerWidth < 768) return;
+
+    // Create a canvas for fizz effects
+    const fizzCanvas = document.createElement('canvas');
+    fizzCanvas.id = 'fizz-canvas';
+    fizzCanvas.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9999;
+    `;
+    document.body.appendChild(fizzCanvas);
+
+    const ctx = fizzCanvas.getContext('2d');
+    let fizzParticles = [];
+
+    function resizeFizz() {
+        fizzCanvas.width = window.innerWidth;
+        fizzCanvas.height = window.innerHeight;
+    }
+    resizeFizz();
+    window.addEventListener('resize', resizeFizz);
+
+    // Create a burst of fizz particles from a point
+    function createFizzBurst(x, y, count = 25) {
+        for (let i = 0; i < count; i++) {
+            const angle = (Math.random() * Math.PI * 2); // Random direction
+            const speed = Math.random() * 4 + 2; // Fast initial speed
+            const size = Math.random() * 3 + 1.5;
+
+            fizzParticles.push({
+                x: x + (Math.random() - 0.5) * 40, // Spread around cursor
+                y: y + (Math.random() - 0.5) * 40,
+                vx: Math.cos(angle) * speed * 0.3, // Slight horizontal movement
+                vy: -Math.abs(Math.sin(angle) * speed) - Math.random() * 3, // Mostly upward
+                size: size,
+                opacity: Math.random() * 0.6 + 0.4,
+                decay: Math.random() * 0.015 + 0.01, // How fast it fades
+                gravity: 0.05, // Slight deceleration
+                wobble: Math.random() * Math.PI * 2,
+                wobbleSpeed: Math.random() * 0.2 + 0.1
+            });
+        }
+    }
+
+    // Animate fizz particles
+    function animateFizz() {
+        ctx.clearRect(0, 0, fizzCanvas.width, fizzCanvas.height);
+
+        fizzParticles = fizzParticles.filter(p => {
+            // Update position
+            p.wobble += p.wobbleSpeed;
+            p.x += p.vx + Math.sin(p.wobble) * 0.5;
+            p.vy += p.gravity; // Decelerate upward movement
+            p.y += p.vy;
+
+            // Fade out
+            p.opacity -= p.decay;
+            p.size *= 0.995; // Shrink slightly
+
+            // Remove if faded or off screen
+            if (p.opacity <= 0 || p.y < -20) return false;
+
+            // Draw particle
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
+            ctx.fill();
+
+            // Add a subtle glow
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size * 1.5, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity * 0.3})`;
+            ctx.fill();
+
+            return true;
+        });
+
+        requestAnimationFrame(animateFizz);
+    }
+    animateFizz();
+
+    // Attach hover listeners to service cards and gallery items
+    function attachFizzListeners() {
+        const fizzTargets = document.querySelectorAll('.service-card, .gallery-item, .cake-thumb, .corporate-tile-link');
+
+        fizzTargets.forEach(el => {
+            if (el.dataset.fizzAttached) return; // Don't double-attach
+            el.dataset.fizzAttached = 'true';
+
+            el.addEventListener('mouseenter', (e) => {
+                const rect = el.getBoundingClientRect();
+                // Burst from the center-top of the element
+                const x = rect.left + rect.width / 2;
+                const y = rect.top + rect.height * 0.3;
+                createFizzBurst(x, y, 20);
+            });
+        });
+    }
+
+    // Initial attachment
+    attachFizzListeners();
+
+    // Re-attach on DOM changes (for dynamically loaded content)
+    const observer = new MutationObserver(() => {
+        attachFizzListeners();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+})();
