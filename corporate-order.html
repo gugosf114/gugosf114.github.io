@@ -48,359 +48,1034 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <header>
-        <nav>
-            <a href="buy-now.html" class="order-now-btn">Order Now</a>
-            <a href="index.html" class="logo">
-                <img width="1330" height="1222" src="logo_icon.png" alt="My Baking Creations" class="logo-icon">
-                <div class="logo-text">
-                    <span class="my">my</span><span class="baking">baking</span>
-                    <span class="creations">CREATIONS</span>
+<body class="corporate-quote-page">
+
+    <!-- Animated Background -->
+    <div class="corporate-bg">
+        <canvas id="corporateParticles"></canvas>
+        <div class="bg-gradient-orb corp-orb-1"></div>
+        <div class="bg-gradient-orb corp-orb-2"></div>
+    </div>
+
+    <!-- Floating Logo Link -->
+    <a href="index.html" class="floating-logo">
+        <img src="logo_icon.png" alt="My Baking Creations" width="60" height="55">
+    </a>
+
+    <!-- Main Content -->
+    <main class="corporate-main">
+        <div class="corporate-container">
+
+            <!-- Header -->
+            <div class="corporate-header">
+                <div class="premium-badge">
+                    <span class="badge-icon">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2L14.09 8.26L21 9.27L16 14.14L17.18 21.02L12 17.77L6.82 21.02L8 14.14L3 9.27L9.91 8.26L12 2Z"/></svg>
+                    </span>
+                    Quote Within 24 Hours
                 </div>
-            </a>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li class="dropdown">
-                    <a href="gallery.html">Gallery</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="gallery-cakes.html">Cakes</a></li>
-                        <li class="dropdown-subcategory"><a href="gallery-cakes-sculpted.html">Sculpted Cakes</a></li>
-                        <li class="dropdown-subcategory"><a href="gallery-cakes-realistic.html">Realistic Cakes</a></li>
-                        <li class="dropdown-subcategory"><a href="gallery-cakes-wedding.html">Wedding Cakes</a></li>
-                        <li><a href="gallery-cookies.html">Cookies</a></li>
-                        <li class="dropdown-subcategory"><a href="gallery-cookies-hand-piped.html">Hand Piped</a></li>
-                        <li class="dropdown-subcategory"><a href="gallery-cookies-printed.html">Printed Image</a></li>
-                        <li><a href="gallery-cakepops.html">Cake Pops</a></li>
-                        <li><a href="gallery-cupcakes.html">Cupcakes</a></li>
-                    </ul>
-                </li>
-                <li><a href="corporate.html" class="active">Corporate Orders</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-                <li><a href="order-form.html" class="nav-cta">Get a Quote</a></li>
-            </ul>
-            <div class="search-container">
-                <div class="search-wrapper">
-                    <label for="site-search" class="visually-hidden">Search gallery and blog</label>
-                    <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" style="width:16px;height:16px;max-width:16px;max-height:16px;" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-                    <input type="text" class="search-input typewriter-active" id="site-search" placeholder="Search..." autocomplete="off">
-                    <span class="typewriter-placeholder" id="search-typewriter"><span class="cursor"></span></span>
+                <h1>Request Your <span class="gradient-text">Corporate Quote</span></h1>
+                <p class="corporate-subtitle">Logo cookies, branded cake pops, and custom treats for your business events. Volume discounts available.</p>
+            </div>
+
+            <!-- Trust Indicators -->
+            <div class="trust-strip">
+                <div class="trust-item">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="var(--pink)"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <span>Invoice & PO Accepted</span>
                 </div>
-                <div class="search-results" id="search-results"></div>
-            </div>
-            <button class="mobile-menu-btn" aria-label="Open menu">&#9776;</button>
-        </nav>
-    </header>
-
-    <section class="hero hero-carousel hero-subpage">
-        <div class="carousel-track-container">
-            <div class="carousel-track">
-                <div class="carousel-slide"><img width="1200" height="658" src="images/gallery/carousel/carousel 5.jpg" alt="Corporate logo cookies for business events"></div>
-                <div class="carousel-slide"><img width="2355" height="1216" src="images/gallery/carousel/carousel 10.jpg" alt="Custom corporate treats"></div>
-                <div class="carousel-slide"><img width="1920" height="1383" src="images/gallery/carousel/carousel 7.jpg" alt="Hand-piped corporate cookies"></div>
-            </div>
-        </div>
-        <div class="hero-content">
-            <div class="hero-text-box">
-                <p class="hero-breadcrumb"><a href="index.html">Home</a> / <a href="corporate.html">Corporate</a> / Order</p>
-                <h1><span class="highlight-yellow">Corporate</span> <span class="highlight">Order Request</span></h1>
-                <p class="hero-subtitle">Logo cookies, branded cake pops, and custom treats for your business</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="corporate-order-content" class="page-content">
-        <div class="section-wrapper section-beige reveal" style="margin-bottom: 2rem;">
-            <!-- Pricing Reference -->
-            <div style="max-width: 800px; margin: 0 auto 2rem;">
-                <h2 style="font-family: 'Fredoka One', cursive; font-size: 1.8rem; color: var(--dark-brown); margin-bottom: 1rem; text-align: center;">Corporate Pricing Guide</h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-                    <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; border: 2px solid var(--cream);">
-                        <div style="font-family: 'Fredoka One', cursive; color: var(--pink); font-size: 1.1rem;">Logo Cookies</div>
-                        <div style="font-size: 1.5rem; font-weight: 800; color: var(--dark-brown);">$6-8</div>
-                        <div style="font-size: 0.85rem; color: var(--brown);">per cookie</div>
-                    </div>
-                    <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; border: 2px solid var(--cream);">
-                        <div style="font-family: 'Fredoka One', cursive; color: var(--pink); font-size: 1.1rem;">Cake Pops</div>
-                        <div style="font-size: 1.5rem; font-weight: 800; color: var(--dark-brown);">$5-8</div>
-                        <div style="font-size: 0.85rem; color: var(--brown);">per pop</div>
-                    </div>
-                    <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; border: 2px solid var(--cream);">
-                        <div style="font-family: 'Fredoka One', cursive; color: var(--pink); font-size: 1.1rem;">Cupcakes</div>
-                        <div style="font-size: 1.5rem; font-weight: 800; color: var(--dark-brown);">$5-8</div>
-                        <div style="font-size: 0.85rem; color: var(--brown);">per cupcake</div>
-                    </div>
-                    <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; border: 2px solid var(--cream);">
-                        <div style="font-family: 'Fredoka One', cursive; color: var(--pink); font-size: 1.1rem;">Custom Cakes</div>
-                        <div style="font-size: 1.5rem; font-weight: 800; color: var(--dark-brown);">$250+</div>
-                        <div style="font-size: 0.85rem; color: var(--brown);">starting price</div>
-                    </div>
+                <div class="trust-item">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="var(--pink)"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                    <span>24hr Response</span>
                 </div>
-                <p style="text-align: center; font-size: 0.9rem; color: var(--brown);"><strong>Volume discounts available for 100+ pieces.</strong> Final pricing depends on design complexity.</p>
+                <div class="trust-item">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="var(--pink)"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                    <span>NET 30 Available</span>
+                </div>
             </div>
-        </div>
 
-        <div class="section-wrapper section-beige reveal">
-            <div style="max-width: 700px; margin: 0 auto;">
-                <h2 style="font-family: 'Fredoka One', cursive; font-size: 2rem; color: var(--dark-brown); margin-bottom: 1.5rem; text-align: center;">Request Your Corporate Quote</h2>
+            <!-- Form Card - Glassmorphism -->
+            <div class="corporate-card">
+                <div class="card-glow"></div>
 
-                <div style="background: var(--white); padding: 2rem; border-radius: 20px;">
-                    <form id="corporateOrderForm">
-                        <p style="background: linear-gradient(135deg, #e8f5e9, #fff); padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem; font-size: 0.95rem; color: var(--dark-brown); border-left: 4px solid #4CAF50;">
-                            <strong>For Business Clients:</strong> We provide invoices, accept PO numbers, and offer NET 30 terms for established accounts.
-                        </p>
+                <form id="corporateOrderForm" class="corporate-form">
+                    <input type="hidden" name="access_key" value="bb1321a2-591e-405f-afb6-d93a8e4f721d">
+                    <input type="hidden" name="subject" value="Corporate Order Inquiry - My Baking Creations">
+                    <input type="hidden" name="from_name" value="MBC Corporate Order Form">
 
-                        <input type="hidden" name="access_key" value="bb1321a2-591e-405f-afb6-d93a8e4f721d">
-                        <input type="hidden" name="subject" value="Corporate Order Inquiry - My Baking Creations">
-                        <input type="hidden" name="from_name" value="MBC Corporate Order Form">
+                    <!-- Company Information -->
+                    <div class="form-section">
+                        <h3 class="section-title">Company Information</h3>
 
-                        <!-- Company Information -->
-                        <div style="border-bottom: 2px dashed var(--light-pink); padding-bottom: 1.5rem; margin-bottom: 1.5rem;">
-                            <h3 style="font-family: 'Fredoka One', cursive; color: var(--pink); font-size: 1.2rem; margin-bottom: 1rem;">Company Information</h3>
+                        <div class="form-group full-width">
+                            <label for="company_name">Company Name <span class="required">*</span></label>
+                            <input type="text" id="company_name" name="company_name" required placeholder="Acme Corp">
+                            <div class="input-glow"></div>
+                        </div>
 
+                        <div class="form-row">
                             <div class="form-group">
-                                <label for="company_name">Company Name *</label>
-                                <input type="text" id="company_name" name="company_name" required placeholder="Acme Corp">
+                                <label for="contact_name">Your Name <span class="required">*</span></label>
+                                <input type="text" id="contact_name" name="contact_name" required placeholder="Jane Smith">
+                                <div class="input-glow"></div>
                             </div>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="contact_name">Your Name *</label>
-                                    <input type="text" id="contact_name" name="contact_name" required placeholder="Jane Smith">
-                                </div>
-                                <div class="form-group">
-                                    <label for="contact_title">Title/Role</label>
-                                    <input type="text" id="contact_title" name="contact_title" placeholder="Event Coordinator">
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="email">Email *</label>
-                                    <input type="email" id="email" name="email" required placeholder="jane@company.com">
-                                </div>
-                                <div class="form-group">
-                                    <label for="phone">Phone *</label>
-                                    <input type="tel" id="phone" name="phone" required placeholder="(415) 555-1234">
-                                </div>
+                            <div class="form-group">
+                                <label for="contact_title">Title/Role</label>
+                                <input type="text" id="contact_title" name="contact_title" placeholder="Event Coordinator">
+                                <div class="input-glow"></div>
                             </div>
                         </div>
 
-                        <!-- Order Details -->
-                        <div style="border-bottom: 2px dashed var(--light-pink); padding-bottom: 1.5rem; margin-bottom: 1.5rem;">
-                            <h3 style="font-family: 'Fredoka One', cursive; color: var(--pink); font-size: 1.2rem; margin-bottom: 1rem;">Order Details</h3>
-
+                        <div class="form-row">
                             <div class="form-group">
-                                <label for="product_type">Product Type *</label>
-                                <select id="product_type" name="product_type" required>
-                                    <option value="">Select product...</option>
-                                    <option value="Logo Cookies (Printed)">Logo Cookies (Printed Image)</option>
-                                    <option value="Logo Cookies (Hand-Piped)">Logo Cookies (Hand-Piped)</option>
-                                    <option value="Branded Cake Pops">Branded Cake Pops</option>
-                                    <option value="Custom Cupcakes">Custom Cupcakes</option>
-                                    <option value="Corporate Cake">Corporate Celebration Cake</option>
-                                    <option value="Mixed Order">Mixed Order (Multiple Products)</option>
-                                </select>
+                                <label for="email">Email <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" required placeholder="jane@company.com">
+                                <div class="input-glow"></div>
                             </div>
-
                             <div class="form-group">
-                                <label for="quantity">Quantity *</label>
+                                <label for="phone">Phone <span class="required">*</span></label>
+                                <input type="tel" id="phone" name="phone" required placeholder="(415) 555-1234">
+                                <div class="input-glow"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Details -->
+                    <div class="form-section">
+                        <h3 class="section-title">Order Details</h3>
+
+                        <div class="form-group full-width">
+                            <label for="product_type">Product Type <span class="required">*</span></label>
+                            <select id="product_type" name="product_type" required>
+                                <option value="">Select product...</option>
+                                <option value="Logo Cookies (Printed)">Logo Cookies (Printed Image)</option>
+                                <option value="Logo Cookies (Hand-Piped)">Logo Cookies (Hand-Piped)</option>
+                                <option value="Branded Cake Pops">Branded Cake Pops</option>
+                                <option value="Custom Cupcakes">Custom Cupcakes</option>
+                                <option value="Corporate Cake">Corporate Celebration Cake</option>
+                                <option value="Mixed Order">Mixed Order (Multiple Products)</option>
+                            </select>
+                            <div class="input-glow"></div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="quantity">Quantity <span class="required">*</span></label>
                                 <select id="quantity" name="quantity" required>
-                                    <option value="">Select quantity range...</option>
+                                    <option value="">Select quantity...</option>
                                     <option value="24-50">24-50 pieces</option>
                                     <option value="50-100">50-100 pieces</option>
-                                    <option value="100-200">100-200 pieces (volume discount)</option>
-                                    <option value="200-500">200-500 pieces (volume discount)</option>
-                                    <option value="500+">500+ pieces (best pricing)</option>
+                                    <option value="100-200">100-200 pieces</option>
+                                    <option value="200-500">200-500 pieces</option>
+                                    <option value="500+">500+ pieces</option>
                                 </select>
+                                <div class="input-glow"></div>
                             </div>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="event_date">Event Date *</label>
-                                    <input type="date" id="event_date" name="event_date" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="event_type">Event Type</label>
-                                    <select id="event_type" name="event_type">
-                                        <option value="">Select event type...</option>
-                                        <option value="Employee Appreciation">Employee Appreciation</option>
-                                        <option value="Client Gift">Client Gifts</option>
-                                        <option value="Product Launch">Product Launch</option>
-                                        <option value="Company Milestone">Company Milestone</option>
-                                        <option value="Holiday Party">Holiday Party</option>
-                                        <option value="Conference/Trade Show">Conference/Trade Show</option>
-                                        <option value="Team Building">Team Building Event</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                </div>
+                            <div class="form-group">
+                                <label for="event_date">Event Date <span class="required">*</span></label>
+                                <input type="date" id="event_date" name="event_date" required>
+                                <div class="input-glow"></div>
                             </div>
                         </div>
 
-                        <!-- Logo & Design -->
-                        <div style="border-bottom: 2px dashed var(--light-pink); padding-bottom: 1.5rem; margin-bottom: 1.5rem;">
-                            <h3 style="font-family: 'Fredoka One', cursive; color: var(--pink); font-size: 1.2rem; margin-bottom: 1rem;">Logo & Design</h3>
+                        <div class="form-group full-width">
+                            <label for="event_type">Event Type</label>
+                            <select id="event_type" name="event_type">
+                                <option value="">Select event type...</option>
+                                <option value="Employee Appreciation">Employee Appreciation</option>
+                                <option value="Client Gift">Client Gifts</option>
+                                <option value="Product Launch">Product Launch</option>
+                                <option value="Company Milestone">Company Milestone</option>
+                                <option value="Holiday Party">Holiday Party</option>
+                                <option value="Conference/Trade Show">Conference/Trade Show</option>
+                                <option value="Team Building">Team Building Event</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <div class="input-glow"></div>
+                        </div>
+                    </div>
 
-                            <div class="form-group">
-                                <label for="logo_file">Upload Company Logo</label>
-                                <input type="file" id="logo_file" name="attachment" accept="image/*,.pdf,.ai,.eps,.svg">
-                                <small>PNG, JPG, PDF, AI, EPS, or SVG (vector preferred for best quality)</small>
-                            </div>
+                    <!-- Logo & Design -->
+                    <div class="form-section">
+                        <h3 class="section-title">Logo & Design</h3>
 
-                            <div class="form-group">
-                                <label for="design_notes">Design Notes / Brand Colors</label>
-                                <textarea id="design_notes" name="design_notes" rows="3" placeholder="Brand colors (hex codes if available), any specific design requests, text to include..."></textarea>
-                            </div>
+                        <div class="form-group full-width">
+                            <label for="logo_file">Upload Company Logo</label>
+                            <input type="file" id="logo_file" name="attachment" accept="image/*,.pdf,.ai,.eps,.svg">
+                            <small class="file-hint">PNG, JPG, PDF, AI, EPS, or SVG (vector preferred)</small>
+                            <div class="input-glow"></div>
                         </div>
 
-                        <!-- Delivery & Billing -->
-                        <div style="border-bottom: 2px dashed var(--light-pink); padding-bottom: 1.5rem; margin-bottom: 1.5rem;">
-                            <h3 style="font-family: 'Fredoka One', cursive; color: var(--pink); font-size: 1.2rem; margin-bottom: 1rem;">Delivery & Billing</h3>
+                        <div class="form-group full-width">
+                            <label for="design_notes">Design Notes / Brand Colors</label>
+                            <textarea id="design_notes" name="design_notes" rows="3" placeholder="Brand colors (hex codes if available), any specific design requests, text to include..."></textarea>
+                            <div class="input-glow"></div>
+                        </div>
+                    </div>
 
-                            <div class="form-group">
-                                <label>Delivery Method *</label>
-                                <div class="radio-group">
-                                    <label class="radio-option">
-                                        <input type="radio" name="delivery_method" value="Pickup (Daly City)" required>
-                                        <span>Pickup (Daly City)</span>
-                                    </label>
-                                    <label class="radio-option">
-                                        <input type="radio" name="delivery_method" value="Delivery (Bay Area)">
-                                        <span>Delivery (Bay Area)</span>
-                                    </label>
-                                    <label class="radio-option">
-                                        <input type="radio" name="delivery_method" value="Shipping (Outside Bay Area)">
-                                        <span>Shipping (Outside Bay Area)</span>
-                                    </label>
-                                </div>
-                            </div>
+                    <!-- Delivery & Billing -->
+                    <div class="form-section">
+                        <h3 class="section-title">Delivery & Billing</h3>
 
-                            <div class="form-group" id="delivery_address_group" style="display: none;">
-                                <label for="delivery_address">Delivery Address</label>
-                                <textarea id="delivery_address" name="delivery_address" rows="2" placeholder="Full address including suite/floor number"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label>
-                                    <input type="checkbox" name="need_invoice" value="Yes" style="width: auto; margin-right: 0.5rem;">
-                                    I need an invoice / have a PO number
+                        <div class="form-group full-width">
+                            <label>Delivery Method <span class="required">*</span></label>
+                            <div class="radio-group-corporate">
+                                <label class="radio-option-corporate">
+                                    <input type="radio" name="delivery_method" value="Pickup (Daly City)" required>
+                                    <span class="radio-label">Pickup (Daly City)</span>
+                                </label>
+                                <label class="radio-option-corporate">
+                                    <input type="radio" name="delivery_method" value="Delivery (Bay Area)">
+                                    <span class="radio-label">Delivery (Bay Area)</span>
+                                </label>
+                                <label class="radio-option-corporate">
+                                    <input type="radio" name="delivery_method" value="Shipping (Outside Bay Area)">
+                                    <span class="radio-label">Shipping (Outside Bay Area)</span>
                                 </label>
                             </div>
-
-                            <div class="form-group" id="po_number_group" style="display: none;">
-                                <label for="po_number">PO Number (if available)</label>
-                                <input type="text" id="po_number" name="po_number" placeholder="PO-12345">
-                            </div>
                         </div>
 
-                        <!-- Additional Notes -->
-                        <div class="form-group">
-                            <label for="additional_notes">Additional Notes</label>
-                            <textarea id="additional_notes" name="additional_notes" rows="3" placeholder="Any other details we should know about your order..."></textarea>
+                        <div class="form-group full-width" id="delivery_address_group" style="display: none;">
+                            <label for="delivery_address">Delivery Address</label>
+                            <textarea id="delivery_address" name="delivery_address" rows="2" placeholder="Full address including suite/floor number"></textarea>
+                            <div class="input-glow"></div>
                         </div>
 
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem 2rem; font-size: 1.1rem;">Request Corporate Quote</button>
+                        <div class="form-group full-width checkbox-group">
+                            <label class="checkbox-option-corporate">
+                                <input type="checkbox" name="need_invoice" value="Yes">
+                                <span class="checkbox-label">I need an invoice / have a PO number</span>
+                            </label>
                         </div>
 
-                        <p style="text-align: center; color: var(--brown); font-weight: 600; margin-top: 1rem; font-size: 0.95rem;">
-                            We respond to corporate inquiries within 24 hours.<br>
-                            Urgent? Call <a href="tel:4155688060" style="color: var(--pink); text-decoration: none; font-weight: 700;">(415) 568-8060</a>
-                        </p>
-                    </form>
+                        <div class="form-group full-width" id="po_number_group" style="display: none;">
+                            <label for="po_number">PO Number (if available)</label>
+                            <input type="text" id="po_number" name="po_number" placeholder="PO-12345">
+                            <div class="input-glow"></div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Notes -->
+                    <div class="form-group full-width">
+                        <label for="additional_notes">Additional Notes</label>
+                        <textarea id="additional_notes" name="additional_notes" rows="3" placeholder="Any other details we should know about your order..."></textarea>
+                        <div class="input-glow"></div>
+                    </div>
+
+                    <button type="submit" class="btn-submit-corporate">
+                        <span class="btn-text">Request Corporate Quote</span>
+                        <span class="btn-arrow">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                        </span>
+                        <div class="btn-shine"></div>
+                    </button>
+
+                    <p class="form-footer-text">
+                        We respond to corporate inquiries within 24 hours.<br>
+                        Urgent? Call <a href="tel:4155688060">(415) 568-8060</a>
+                    </p>
+                </form>
+            </div>
+
+            <!-- Bottom Trust Section -->
+            <div class="bottom-trust">
+                <p class="trusted-by-text">Trusted by teams at</p>
+                <div class="logo-scroll">
+                    <div class="logo-track">
+                        <img src="company logos/google-logo.png" alt="Google" height="30">
+                        <img src="company logos/meta-logo.png" alt="Meta" height="30">
+                        <img src="company logos/salesforce-logo.png" alt="Salesforce" height="30">
+                        <img src="company logos/docusign-logo.png" alt="DocuSign" height="24">
+                        <img src="company logos/paypal-logo.png" alt="PayPal" height="30">
+                        <img src="company logos/Stripe Logo.png" alt="Stripe" height="30">
+                        <img src="company logos/google-logo.png" alt="Google" height="30">
+                        <img src="company logos/meta-logo.png" alt="Meta" height="30">
+                        <img src="company logos/salesforce-logo.png" alt="Salesforce" height="30">
+                        <img src="company logos/docusign-logo.png" alt="DocuSign" height="24">
+                        <img src="company logos/paypal-logo.png" alt="PayPal" height="30">
+                        <img src="company logos/Stripe Logo.png" alt="Stripe" height="30">
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Trust Badges -->
-        <div class="section-wrapper section-beige reveal" style="margin-top: 2rem;">
-            <div class="section-header">
-                <h3 style="font-family: 'Fredoka One', cursive; font-size: 1.5rem; color: var(--dark-brown);">Trusted by Industry Leaders</h3>
+            <!-- Contact Alternative -->
+            <div class="contact-alternative">
+                <p>Prefer to reach out directly? <a href="tel:4155688060">(415) 568-8060</a> or <a href="mailto:info@mybakingcreations.com">info@mybakingcreations.com</a></p>
             </div>
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; align-items: center; max-width: 800px; margin: 0 auto;">
-                <img src="company logos/google-logo.png" alt="Google" style="height: 40px; width: auto; opacity: 0.8;">
-                <img src="company logos/meta-logo.png" alt="Meta" style="height: 40px; width: auto; opacity: 0.8;">
-                <img src="company logos/salesforce-logo.png" alt="Salesforce" style="height: 40px; width: auto; opacity: 0.8;">
-                <img src="images/gallery/companylogos/microsoft logo.jpg" alt="Microsoft" style="height: 40px; width: auto; opacity: 0.8;">
-                <img src="company logos/docusign-logo.png" alt="DocuSign" style="height: 30px; width: auto; opacity: 0.8;">
-                <img src="company logos/Stripe Logo.png" alt="Stripe" style="height: 40px; width: auto; opacity: 0.8;">
-            </div>
-        </div>
-    </section>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">
-                <span class="my">my</span><span class="baking">baking</span> Creations
-            </div>
-            <p class="footer-tagline">Family-owned Bay Area bakery since 2012</p>
-            <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="about.html">About Us</a>
-                <a href="gallery.html">Gallery</a>
-                <a href="corporate.html">Corporate Orders</a>
-                <a href="blog.html">Blog</a>
-                <a href="contact.html">Contact</a>
-            </div>
-            <div class="footer-locations" style="margin-top: 1rem; font-size: 0.9rem;">
-                <span style="color: var(--yellow); font-weight: 600;">Serving:</span>
-                <a href="custom-cakes-san-francisco.html">San Francisco</a> ·
-                <a href="custom-cakes-san-jose.html">San Jose</a> ·
-                <a href="custom-cakes-palo-alto.html">Palo Alto</a> ·
-                <a href="custom-cakes-mountain-view.html">Mountain View</a> ·
-                <a href="custom-cakes-daly-city.html">Daly City</a> ·
-                <a href="custom-cakes-san-rafael.html">San Rafael</a>
-            </div>
-            <div class="social-links">
-                <a href="https://www.instagram.com/mybakingcreationscompany/" target="_blank" rel="noopener" aria-label="Instagram">
-                    <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                </a>
-                <a href="https://www.facebook.com/MyBakingCreationsCompany" target="_blank" rel="noopener" aria-label="Facebook">
-                    <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                </a>
-                <a href="https://www.pinterest.com/MyBakingCreations" target="_blank" rel="noopener" aria-label="Pinterest">
-                    <svg viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.372-12 12 0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146 1.124.347 2.317.535 3.554.535 6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/></svg>
-                </a>
-                <a href="https://www.yelp.com/biz/my-baking-creations-san-francisco" target="_blank" rel="noopener" aria-label="Yelp">
-                    <img width="980" height="980" src="images/gallery/companylogos/yelp white black png.webp" alt="Yelp">
-                </a>
-            </div>
-            <div class="footer-contact">
-                <p><a href="tel:4155688060">(415) 568-8060</a> | <a href="mailto:info@mybakingcreations.com">info@mybakingcreations.com</a></p>
-                <p>1096 Wildwood Ave, Daly City, CA 94015</p>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 My Baking Creations. All rights reserved.</p>
-            </div>
         </div>
-    </footer>
+    </main>
 
     <style>
-    /* Hero Carousel Styles */
-    .hero-carousel { position: relative; overflow: hidden; background: #ffffff; }
-    .hero-subpage { min-height: 400px; padding: 6rem 2rem 3rem; }
-    .carousel-track-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; }
-    .carousel-track { display: flex; height: 100%; transition: transform 0.6s ease-in-out; }
-    .carousel-slide { flex: 0 0 33.333%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 0 4px; box-sizing: border-box; }
-    .carousel-slide img { width: 100%; height: 100%; object-fit: contain; background: #ffffff; }
-    .hero-carousel .hero-content { position: relative; z-index: 2; }
-    .hero-text-box { background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.45) 100%); padding: 2rem 2.5rem; border-radius: 20px; max-width: 850px; margin: 0 auto; }
-    .hero-carousel h1 { color: white; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); font-family: 'Fredoka One', cursive; font-size: 2.5rem; margin-bottom: 0.5rem; }
-    .hero-carousel h1 .highlight { color: var(--pink); }
-    .hero-carousel h1 .highlight-yellow { color: var(--yellow); }
-    .hero-carousel .hero-subtitle { font-size: 1.2rem; color: white; text-shadow: 1px 1px 4px rgba(0,0,0,0.7); }
+    /* ============================================
+       CORPORATE QUOTE PAGE - PREMIUM STYLES
+       ============================================ */
+
+    .corporate-quote-page {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+        overflow-x: hidden;
+        position: relative;
+    }
+
+    /* Animated Background */
+    .corporate-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        overflow: hidden;
+    }
+
+    #corporateParticles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .bg-gradient-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.4;
+        animation: float-orb 20s ease-in-out infinite;
+    }
+
+    .corp-orb-1 {
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, var(--pink) 0%, transparent 70%);
+        top: -100px;
+        right: -100px;
+        animation-delay: 0s;
+    }
+
+    .corp-orb-2 {
+        width: 350px;
+        height: 350px;
+        background: radial-gradient(circle, var(--yellow) 0%, transparent 70%);
+        bottom: -80px;
+        left: -80px;
+        animation-delay: -10s;
+    }
+
+    @keyframes float-orb {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        25% { transform: translate(30px, -30px) scale(1.1); }
+        50% { transform: translate(-20px, 20px) scale(0.95); }
+        75% { transform: translate(20px, 10px) scale(1.05); }
+    }
+
+    /* Floating Logo */
+    .floating-logo {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .floating-logo:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.05);
+    }
+
+    .floating-logo img {
+        display: block;
+        height: 50px;
+        width: auto;
+    }
+
+    /* Main Container */
+    .corporate-main {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 100px 20px 40px;
+    }
+
+    .corporate-container {
+        width: 100%;
+        max-width: 750px;
+    }
+
+    /* Header */
+    .corporate-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .premium-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, rgba(236, 38, 143, 0.2), rgba(255, 197, 50, 0.2));
+        border: 1px solid rgba(236, 38, 143, 0.4);
+        color: var(--pink);
+        font-size: 0.85rem;
+        font-weight: 700;
+        padding: 8px 16px;
+        border-radius: 30px;
+        margin-bottom: 1.5rem;
+        animation: pulse-badge 3s ease-in-out infinite;
+    }
+
+    .badge-icon {
+        display: flex;
+        animation: spin-star 4s linear infinite;
+    }
+
+    @keyframes spin-star {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse-badge {
+        0%, 100% { box-shadow: 0 0 20px rgba(236, 38, 143, 0.3); }
+        50% { box-shadow: 0 0 30px rgba(236, 38, 143, 0.5); }
+    }
+
+    .corporate-header h1 {
+        font-family: 'Fredoka One', cursive;
+        font-size: 2.5rem;
+        color: white;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+    }
+
+    .gradient-text {
+        background: linear-gradient(135deg, var(--pink), var(--yellow), var(--pink));
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradient-shift 3s ease-in-out infinite;
+    }
+
+    @keyframes gradient-shift {
+        0%, 100% { background-position: 0% center; }
+        50% { background-position: 200% center; }
+    }
+
+    .corporate-subtitle {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.6;
+        max-width: 550px;
+        margin: 0 auto;
+    }
+
+    /* Trust Strip */
+    .trust-strip {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .trust-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    /* Form Card - Glassmorphism */
+    .corporate-card {
+        position: relative;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 2.5rem;
+        overflow: hidden;
+    }
+
+    .corporate-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 30px;
+        padding: 2px;
+        background: linear-gradient(135deg, var(--pink), var(--yellow), var(--pink), var(--yellow));
+        background-size: 300% 300%;
+        animation: gradient-border 6s ease infinite;
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+    }
+
+    @keyframes gradient-border {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+
+    .card-glow {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(236, 38, 143, 0.1) 0%, transparent 50%);
+        animation: rotate-glow 10s linear infinite;
+        pointer-events: none;
+    }
+
+    @keyframes rotate-glow {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Form Sections */
+    .form-section {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+        font-family: 'Fredoka One', cursive;
+        color: var(--pink);
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+
+    /* Form Styles */
+    .corporate-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .form-group {
+        position: relative;
+    }
+
+    .form-group.full-width {
+        grid-column: 1 / -1;
+    }
+
+    .form-group label {
+        display: block;
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 700;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-group .required {
+        color: var(--pink);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 1rem 1.25rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        color: white;
+        font-size: 1rem;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+        color: rgba(255, 255, 255, 0.3);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: var(--pink);
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 20px rgba(236, 38, 143, 0.2);
+    }
+
+    .form-group input[type="file"] {
+        padding: 0.75rem 1rem;
+        cursor: pointer;
+    }
+
+    .form-group input[type="file"]::file-selector-button {
+        background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-weight: 700;
+        cursor: pointer;
+        margin-right: 1rem;
+    }
+
+    .file-hint {
+        display: block;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.8rem;
+        margin-top: 0.5rem;
+    }
+
+    .form-group select {
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='rgba(255,255,255,0.5)'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+    }
+
+    .form-group select option {
+        background: #1a1a2e;
+        color: white;
+    }
+
+    .form-group textarea {
+        resize: vertical;
+        min-height: 80px;
+    }
+
+    .input-glow {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--pink), var(--yellow), var(--pink), transparent);
+        transition: width 0.3s ease;
+        pointer-events: none;
+    }
+
+    .form-group input:focus ~ .input-glow,
+    .form-group select:focus ~ .input-glow,
+    .form-group textarea:focus ~ .input-glow {
+        width: 100%;
+    }
+
+    /* Radio Buttons */
+    .radio-group-corporate {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .radio-option-corporate {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 0.75rem 1rem;
+        border-radius: 10px;
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .radio-option-corporate:hover {
+        border-color: rgba(236, 38, 143, 0.3);
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    .radio-option-corporate input[type="radio"] {
+        width: auto;
+        padding: 0;
+        accent-color: var(--pink);
+    }
+
+    .radio-option-corporate input[type="radio"]:checked + .radio-label {
+        color: var(--pink);
+    }
+
+    .radio-label {
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    /* Checkbox */
+    .checkbox-group {
+        margin-top: 0.5rem;
+    }
+
+    .checkbox-option-corporate {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        cursor: pointer;
+    }
+
+    .checkbox-option-corporate input[type="checkbox"] {
+        width: auto;
+        padding: 0;
+        accent-color: var(--pink);
+    }
+
+    .checkbox-label {
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    /* Submit Button */
+    .btn-submit-corporate {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        padding: 1.25rem 2rem;
+        margin-top: 1rem;
+        background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+        border: none;
+        border-radius: 16px;
+        color: white;
+        font-family: 'Nunito', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 800;
+        cursor: pointer;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .btn-submit-corporate:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 40px rgba(236, 38, 143, 0.4);
+    }
+
+    .btn-submit-corporate:hover .btn-arrow {
+        transform: translateX(5px);
+    }
+
+    .btn-arrow {
+        display: flex;
+        transition: transform 0.3s ease;
+    }
+
+    .btn-shine {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        animation: btn-shine 3s ease-in-out infinite;
+    }
+
+    @keyframes btn-shine {
+        0%, 100% { left: -100%; }
+        50% { left: 100%; }
+    }
+
+    .form-footer-text {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.9rem;
+        margin-top: 1.25rem;
+        line-height: 1.6;
+    }
+
+    .form-footer-text a {
+        color: var(--pink);
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .form-footer-text a:hover {
+        color: var(--yellow);
+    }
+
+    /* Bottom Trust Section */
+    .bottom-trust {
+        margin-top: 3rem;
+        text-align: center;
+    }
+
+    .trusted-by-text {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+    }
+
+    .logo-scroll {
+        overflow: hidden;
+        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+
+    .logo-track {
+        display: flex;
+        gap: 3rem;
+        animation: scroll-logos 20s linear infinite;
+        width: max-content;
+    }
+
+    .logo-track img {
+        height: 28px;
+        width: auto;
+        opacity: 0.6;
+        filter: brightness(0) invert(1);
+        transition: opacity 0.3s ease;
+    }
+
+    .logo-track img:hover {
+        opacity: 1;
+    }
+
+    @keyframes scroll-logos {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+
+    /* Contact Alternative */
+    .contact-alternative {
+        text-align: center;
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .contact-alternative p {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.9rem;
+    }
+
+    .contact-alternative a {
+        color: var(--pink);
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .contact-alternative a:hover {
+        color: var(--yellow);
+    }
+
+    /* Responsive - Tablet */
     @media (max-width: 768px) {
-        .carousel-slide { flex: 0 0 100%; }
-        .hero-subpage { min-height: 350px; padding: 5rem 1rem 2rem; }
-        .hero-text-box { padding: 1.5rem; margin: 0 0.5rem; }
-        .hero-carousel h1 { font-size: 1.8rem; }
+        .corporate-main {
+            padding: 90px 20px 30px;
+        }
+
+        .corporate-card {
+            padding: 1.75rem;
+        }
+
+        .trust-strip {
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .logo-track img {
+            height: 24px;
+        }
+
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* Responsive - Mobile */
+    @media (max-width: 600px) {
+        .corporate-main {
+            padding: 80px 12px 20px;
+        }
+
+        .corporate-header h1 {
+            font-size: 1.8rem;
+        }
+
+        .corporate-subtitle {
+            font-size: 0.95rem;
+        }
+
+        .corporate-card {
+            padding: 1.25rem;
+            border-radius: 20px;
+        }
+
+        .trust-item {
+            font-size: 0.75rem;
+        }
+
+        .trust-item svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.85rem 1rem;
+            font-size: 16px;
+        }
+
+        .radio-group-corporate {
+            flex-direction: column;
+        }
+
+        .btn-submit-corporate {
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+        }
+
+        .floating-logo {
+            top: 10px;
+            left: 10px;
+            padding: 6px;
+        }
+
+        .floating-logo img {
+            height: 36px;
+        }
+    }
+
+    /* Very small screens */
+    @media (max-width: 380px) {
+        .corporate-header h1 {
+            font-size: 1.5rem;
+        }
+
+        .corporate-card {
+            padding: 1rem;
+        }
     }
     </style>
 
-    <script src="script.js"></script>
     <script>
+    // Particle Animation - Connected dots network
+    (function() {
+        const canvas = document.getElementById('corporateParticles');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        const particles = [];
+        const particleCount = 50;
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        // Draw connections between nearby particles
+        function drawConnections() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * (1 - distance / 150)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            drawConnections();
+            requestAnimationFrame(animate);
+        }
+        animate();
+    })();
+
+    // 3D Tilt effect on form card
+    (function() {
+        const card = document.querySelector('.corporate-card');
+        if (!card || window.innerWidth < 768) return;
+
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = (y - centerY) / 80;
+            const rotateY = (centerX - x) / 80;
+
+            card.style.transform = `perspective(1000px) rotateX(${-rotateX}deg) rotateY(${-rotateY}deg)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+        });
+
+        card.style.transition = 'transform 0.1s ease-out';
+    })();
+
     // Show/hide delivery address based on selection
     document.querySelectorAll('input[name="delivery_method"]').forEach(radio => {
         radio.addEventListener('change', function() {
@@ -430,9 +1105,10 @@
 
         const formData = new FormData(this);
         const submitBtn = this.querySelector('button[type="submit"]');
+        const btnText = submitBtn.querySelector('.btn-text');
 
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending...';
+        btnText.textContent = 'Sending...';
 
         try {
             const response = await fetch('https://api.web3forms.com/submit', {
@@ -454,13 +1130,10 @@
             alert('Something went wrong. Please call us at (415) 568-8060 or email info@mybakingcreations.com');
         } finally {
             submitBtn.disabled = false;
-            submitBtn.textContent = 'Request Corporate Quote';
+            btnText.textContent = 'Request Corporate Quote';
         }
     });
     </script>
 
-    <!-- AI Chatbot Widget -->
-    <link rel="stylesheet" href="chatbot.css">
-    <script src="chatbot.js" defer></script>
 </body>
 </html>
