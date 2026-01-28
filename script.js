@@ -1517,7 +1517,7 @@ if (document.readyState === 'loading') {
 
     const ctx = canvas.getContext('2d');
     let particles = [];
-    const particleCount = 35;
+    const particleCount = 44; // 25% more particles
 
     function resize() {
         canvas.width = window.innerWidth;
@@ -1530,10 +1530,10 @@ if (document.readyState === 'loading') {
         return {
             x: Math.random() * canvas.width,
             y: canvas.height + 10,
-            size: Math.random() * 3 + 1,
+            size: Math.random() * 3.6 + 1.2, // 20% larger
             speedY: Math.random() * 0.5 + 0.2,
             speedX: (Math.random() - 0.5) * 0.3,
-            opacity: Math.random() * 0.4 + 0.1,
+            opacity: Math.random() * 0.48 + 0.12, // 20% more visible
             wobble: Math.random() * Math.PI * 2,
             wobbleSpeed: Math.random() * 0.02 + 0.01
         };
