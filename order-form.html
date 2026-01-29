@@ -2618,19 +2618,25 @@
     }
 
     /* Mobile Responsive */
-    @media (max-width: 500px) {
-        .cake-builder-container {
-            padding: 1rem;
+    @media (max-width: 768px) {
+        #aiPreviewSection {
+            margin-left: -1.5rem;
+            margin-right: -1.5rem;
         }
 
-        .builder-title {
-            font-size: 1.25rem;
+        .cake-builder-container {
+            border-radius: 12px;
+            padding: 1rem 0.75rem;
         }
 
         .config-card,
         .steps-card,
         .result-card {
-            padding: 1rem;
+            padding: 0.75rem;
+        }
+
+        .builder-title {
+            font-size: 1.25rem;
         }
 
         .step-actions {
@@ -2650,6 +2656,24 @@
         .final-actions > * {
             width: 100%;
             justify-content: center;
+        }
+    }
+
+    @media (max-width: 480px) {
+        #aiPreviewSection {
+            margin-left: -1.25rem;
+            margin-right: -1.25rem;
+        }
+
+        .cake-builder-container {
+            border-radius: 8px;
+            padding: 0.75rem 0.5rem;
+        }
+
+        .config-card,
+        .steps-card,
+        .result-card {
+            padding: 0.6rem;
         }
     }
     </style>
