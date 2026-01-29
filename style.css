@@ -240,6 +240,9 @@ nav {
     align-items: center;
     gap: 0.75rem;
     text-decoration: none;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
 }
 
 .logo-icon {
@@ -407,6 +410,7 @@ a.nav-cta:active {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
     background: linear-gradient(135deg, #ec268f 0%, #ff6b9d 50%, #ec268f 100%);
     background-size: 200% 200%;
     color: #fff !important;
