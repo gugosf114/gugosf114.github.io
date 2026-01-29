@@ -2,5 +2,24 @@
 User-agent: *
 Allow: /
 
+# Explicitly allow AI search crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
 # Sitemap location
 Sitemap: https://mybakingcreations.com/sitemap.xml
