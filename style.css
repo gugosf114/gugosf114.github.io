@@ -42,6 +42,12 @@
     box-sizing: border-box;
 }
 
+/* Global image safety net - prevent overflow on mobile */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -170,8 +176,8 @@ body {
     }
 
     .social-sidebar a {
-        width: 40px;
-        height: 40px;
+        width: 44px;
+        height: 44px;
         border-radius: 50% !important;
         margin-bottom: 6px;
         box-shadow: 0 2px 10px rgba(0,0,0,0.25);
@@ -780,8 +786,8 @@ a.nav-cta:active {
         font-size: 0.7rem;
     }
     .scroll-indicator-arrow {
-        width: 36px;
-        height: 36px;
+        width: 44px;
+        height: 44px;
     }
     .scroll-indicator-arrow svg {
         width: 18px;
@@ -925,7 +931,7 @@ a.nav-cta:active {
 /* SERVICES */
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
 }
 
@@ -1034,6 +1040,8 @@ a.service-card h3 {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    max-width: 100%;
+    height: auto;
 }
 
 .service-card .price {
@@ -1609,9 +1617,10 @@ footer {
 
     .nav-links a {
         display: block;
-        padding: 0.75rem 1rem;
+        padding: 1rem 1rem;
         font-size: 1.1rem;
         width: 100%;
+        min-height: 44px;
         border-radius: 10px;
         transition: background 0.2s ease, color 0.2s ease;
     }
@@ -3179,7 +3188,7 @@ footer {
 }
 
 /* Mobile adjustments */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .testimonial-content {
         padding: 1.25rem;
         height: auto;
@@ -3694,11 +3703,11 @@ header nav .search-container svg {
     }
 
     .form-intro-bubble #formIntroTypewriter {
-        font-size: 0.7rem;
+        font-size: 0.8rem;
     }
 
     .form-intro-bubble .bubble-cursor {
-        font-size: 0.7rem;
+        font-size: 0.8rem;
     }
 
     .form-intro-bubble::before {
@@ -3897,7 +3906,8 @@ header nav .search-container svg {
     background-size: 200% 200%;
     color: white;
     border: none;
-    padding: 0.75rem 1.5rem;
+    padding: 0.85rem 1.5rem;
+    min-height: 44px;
     border-radius: 25px;
     font-family: 'Nunito', sans-serif;
     font-weight: 800;
@@ -4261,5 +4271,31 @@ header nav .search-container svg {
     .has-hint.hint-lg::before {
         max-width: 160px;
         font-size: 0.6rem;
+    }
+}
+
+/* ===========================================
+   ULTRA-SMALL MOBILE (375px and below)
+   iPhone SE, older Android devices
+   =========================================== */
+@media (max-width: 375px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .hero h1 {
+        font-size: 1.4rem;
     }
 }
