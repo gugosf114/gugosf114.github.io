@@ -115,24 +115,7 @@
     }
     @media (max-width: 480px) {
         .live-activity-feed {
-            width: 200px;
-            left: 8px;
-            bottom: 75px;
-            height: 70px;
-        }
-        .activity-item {
-            min-height: 70px;
-            gap: 8px;
-        }
-        .activity-icon {
-            width: 40px;
-            height: 40px;
-        }
-        .activity-text {
-            font-size: 0.78rem;
-        }
-        .activity-meta {
-            font-size: 0.68rem;
+            display: none;
         }
     }
     `;
