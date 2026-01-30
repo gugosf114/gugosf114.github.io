@@ -317,6 +317,10 @@ nav {
     left: 0;
 }
 
+.nav-links a:focus {
+    outline: none;
+}
+
 .nav-links a:hover,
 .nav-links a.active {
     color: #C4206E; /* Darker pink for better contrast */
