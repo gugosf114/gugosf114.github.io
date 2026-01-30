@@ -1576,6 +1576,209 @@ footer {
     gap: 2rem;
 }
 
+/* ==================== PROCESS TIMELINE ==================== */
+.process-timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-left: 3rem;
+}
+
+.process-timeline::before {
+    content: '';
+    position: absolute;
+    left: 1.75rem;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--pink), var(--yellow), var(--brown), var(--dark-brown), var(--pink), var(--yellow));
+    border-radius: 3px;
+}
+
+.process-step {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.process-step:last-child {
+    margin-bottom: 0;
+}
+
+.process-step-number {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.5rem;
+    font-weight: 800;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 2;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.process-step:hover .process-step-number {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.process-step-content {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    flex: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.process-step:hover .process-step-content {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.process-step-content h4 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.25rem;
+    color: var(--dark-brown);
+    margin-bottom: 0.5rem;
+}
+
+.process-step-content p {
+    font-weight: 600;
+    color: var(--brown);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.process-step-content p a {
+    color: var(--pink);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: rgba(236, 38, 143, 0.3);
+    text-underline-offset: 2px;
+    transition: text-decoration-color 0.3s ease;
+}
+
+.process-step-content p a:hover {
+    text-decoration-color: var(--pink);
+}
+
+/* Process CTA Links under Step 1 */
+.process-cta-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+}
+
+.process-cta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1.25rem;
+    border-radius: 15px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    color: var(--white);
+}
+
+.process-cta:hover {
+    transform: translateX(5px);
+}
+
+.process-cta small {
+    display: block;
+    font-weight: 600;
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+.process-cta-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+.process-cta-pink {
+    background: linear-gradient(135deg, var(--pink), #C4206E);
+    box-shadow: 0 4px 12px rgba(236, 38, 143, 0.3);
+}
+
+.process-cta-pink:hover {
+    box-shadow: 0 6px 20px rgba(236, 38, 143, 0.4);
+}
+
+.process-cta-yellow {
+    background: linear-gradient(135deg, var(--yellow), #e6a800);
+    color: var(--dark-brown);
+    box-shadow: 0 4px 12px rgba(255, 197, 50, 0.3);
+}
+
+.process-cta-yellow:hover {
+    box-shadow: 0 6px 20px rgba(255, 197, 50, 0.4);
+}
+
+.process-cta-yellow small {
+    color: var(--dark-brown);
+    opacity: 0.8;
+}
+
+.process-cta-brown {
+    background: linear-gradient(135deg, var(--brown), var(--dark-brown));
+    box-shadow: 0 4px 12px rgba(98, 45, 43, 0.3);
+}
+
+.process-cta-brown:hover {
+    box-shadow: 0 6px 20px rgba(98, 45, 43, 0.4);
+}
+
+/* Process Timeline Mobile */
+@media (max-width: 768px) {
+    .process-timeline {
+        padding-left: 2rem;
+    }
+
+    .process-timeline::before {
+        left: 1.25rem;
+    }
+
+    .process-step {
+        gap: 1rem;
+    }
+
+    .process-step-number {
+        width: 44px;
+        height: 44px;
+        font-size: 1.2rem;
+    }
+
+    .process-step-content {
+        padding: 1.25rem 1.25rem;
+    }
+
+    .process-step-content h4 {
+        font-size: 1.1rem;
+    }
+
+    .process-cta-links {
+        gap: 0.5rem;
+    }
+
+    .process-cta {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
 /* ==================== RESPONSIVE - MOBILE FIXES ==================== */
 @media (max-width: 968px) {
     .order-now-btn {
