@@ -1597,7 +1597,8 @@ footer {
 
 .process-step {
     position: relative;
-    display: flex;
+    display: flex !important;
+    flex-direction: row !important;
     align-items: flex-start;
     gap: 1.5rem;
     margin-bottom: 2rem;
@@ -1608,11 +1609,13 @@ footer {
 }
 
 .process-step-number {
-    flex-shrink: 0;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    display: flex;
+    flex-shrink: 0 !important;
+    width: 56px !important;
+    height: 56px !important;
+    min-width: 56px !important;
+    max-width: 56px !important;
+    border-radius: 50% !important;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     font-family: 'Fredoka One', cursive;
@@ -1630,8 +1633,8 @@ footer {
 }
 
 .process-step-content {
-    background: var(--white);
-    border-radius: 20px;
+    background: var(--white) !important;
+    border-radius: 20px !important;
     padding: 1.5rem 2rem;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     flex: 1;
@@ -1756,8 +1759,10 @@ footer {
     }
 
     .process-step-number {
-        width: 44px;
-        height: 44px;
+        width: 44px !important;
+        height: 44px !important;
+        min-width: 44px !important;
+        max-width: 44px !important;
         font-size: 1.2rem;
     }
 
