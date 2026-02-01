@@ -68,12 +68,14 @@
         .password-gate .logo-big {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, #ff642e 0%, #ffcb00 100%);
             border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
+            overflow: hidden;
+        }
+
+        .password-gate .logo-big img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .password-gate h1 {
@@ -232,31 +234,15 @@
         .logo-icon {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, #ff642e 0%, #ffcb00 100%);
             border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            position: relative;
             overflow: hidden;
+            flex-shrink: 0;
         }
 
-        .logo-icon::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
-            transform: rotate(30deg);
-            animation: logoShine 3s ease-in-out infinite;
-        }
-
-        @keyframes logoShine {
-            0%, 100% { transform: rotate(30deg) translateX(-100%); }
-            50% { transform: rotate(30deg) translateX(100%); }
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .logo-text {
@@ -1143,12 +1129,22 @@
         }
 
         .sidebar-overlay.active { display: block; }
+
+        #three-bg {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
+    <canvas id="three-bg"></canvas>
     <!-- Password Gate -->
     <div class="password-gate" id="passwordGate">
-        <div class="logo-big">📅</div>
+        <div class="logo-big"><img src="/logo_icon.png" alt="MBC"></div>
         <h1>Thursday</h1>
         <div class="password-form">
             <input type="password" id="passwordInput" placeholder="Enter password" autofocus>
@@ -1173,7 +1169,7 @@
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    <div class="logo-icon">📅</div>
+                    <div class="logo-icon"><img src="/logo_icon.png" alt="MBC"></div>
                     <span class="logo-text">Thursday</span>
                 </div>
             </div>
@@ -2117,6 +2113,93 @@
                 regs.forEach(r => r.unregister());
             });
         }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.167.1/build/three.min.js"></script>
+    <script>
+        // Subtle interactive 3D particle background
+        const canvas = document.getElementById('three-bg');
+        const scene = new THREE.Scene();
+
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+        camera.position.z = 30;
+
+        const renderer = new THREE.WebGLRenderer({
+            canvas: canvas,
+            alpha: true,
+            antialias: true
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // Particles in brand colors
+        const count = 4000;
+        const positions = new Float32Array(count * 3);
+        const colors = new Float32Array(count * 3);
+
+        const brandColors = [
+            new THREE.Color('#ff642e'),
+            new THREE.Color('#ffcb00'),
+            new THREE.Color('#00c875'),
+            new THREE.Color('#0073ea')
+        ];
+
+        for (let i = 0; i < count; i++) {
+            positions[i * 3]     = (Math.random() - 0.5) * 60;
+            positions[i * 3 + 1] = (Math.random() - 0.5) * 60;
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 40;
+
+            const color = brandColors[Math.floor(Math.random() * brandColors.length)];
+            colors[i * 3]     = color.r;
+            colors[i * 3 + 1] = color.g;
+            colors[i * 3 + 2] = color.b;
+        }
+
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        const material = new THREE.PointsMaterial({
+            size: 0.4,
+            vertexColors: true,
+            blending: THREE.AdditiveBlending,
+            transparent: true,
+            depthWrite: false,
+            sizeAttenuation: true
+        });
+
+        const particles = new THREE.Points(geometry, material);
+        scene.add(particles);
+
+        // Mouse parallax (very subtle)
+        let mouseX = 0;
+        let mouseY = 0;
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+        });
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Slow auto-rotation
+            particles.rotation.y += 0.0004;
+            particles.rotation.x += 0.0002;
+
+            // Gentle mouse follow
+            particles.rotation.y += mouseX * 0.00005;
+            particles.rotation.x += mouseY * 0.00005;
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Handle resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
     </script>
 </body>
 </html>
