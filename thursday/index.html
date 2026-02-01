@@ -1203,6 +1203,13 @@
                     </svg>
                     Archive
                 </div>
+                <div class="nav-item" onclick="openEmailParseModal()">
+                    <svg viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                    </svg>
+                    New from Email
+                </div>
             </nav>
             <div class="sidebar-footer">
                 <button class="fun-btn emotional" onclick="showHaiku()">
@@ -1320,6 +1327,45 @@
     <!-- Just World Modal -->
     <div class="modal-overlay" id="justWorldModal" onclick="closeJustWorldModal()">
         <div class="just-world-text">just world</div>
+    </div>
+
+    <!-- Email Parse Modal -->
+    <div class="modal-overlay" id="emailParseModal">
+        <div class="modal" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2 class="modal-title">New Order from Email</h2>
+                <button class="modal-close" onclick="closeEmailParseModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Paste the full email body here</label>
+                    <textarea class="form-textarea" id="emailPasteTextarea" placeholder="Copy everything from the order email (including headers if visible)" rows="10"></textarea>
+                </div>
+                <button class="btn btn-primary" onclick="extractEmailInfo()">Extract Info</button>
+
+                <div id="extractedSection" style="display: none; margin-top: 24px;">
+                    <p style="color: var(--text-secondary); margin-bottom: 16px;">Review and edit if needed:</p>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Customer Name</label>
+                            <input type="text" class="form-input" id="extractedName">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input" id="extractedEmail">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone (if found)</label>
+                        <input type="tel" class="form-input" id="extractedPhone">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeEmailParseModal()">Cancel</button>
+                <button class="btn btn-primary" id="populateOrderBtn" style="display: none;" onclick="populateOrderFromEmail()">Populate New Order</button>
+            </div>
+        </div>
     </div>
 
     <!-- Contact Edit Modal -->
@@ -1599,6 +1645,113 @@
                 renderView();
                 closeContactModal();
             }
+        }
+
+        // ========== EMAIL PARSE ==========
+        function openEmailParseModal() {
+            document.getElementById('emailPasteTextarea').value = '';
+            document.getElementById('extractedSection').style.display = 'none';
+            document.getElementById('populateOrderBtn').style.display = 'none';
+            document.getElementById('emailParseModal').classList.add('active');
+        }
+
+        function closeEmailParseModal() {
+            document.getElementById('emailParseModal').classList.remove('active');
+        }
+
+        function extractEmailInfo() {
+            const text = document.getElementById('emailPasteTextarea').value;
+            if (!text.trim()) { showToast('Paste the email first'); return; }
+
+            const extracted = parseOrderFromEmail(text);
+
+            document.getElementById('extractedName').value = [extracted.firstName, extracted.lastName].filter(Boolean).join(' ');
+            document.getElementById('extractedEmail').value = extracted.email || '';
+            document.getElementById('extractedPhone').value = extracted.phone || '';
+
+            document.getElementById('extractedSection').style.display = 'block';
+            document.getElementById('populateOrderBtn').style.display = 'inline-flex';
+        }
+
+        function populateOrderFromEmail() {
+            const name = document.getElementById('extractedName').value.trim();
+            const email = document.getElementById('extractedEmail').value.trim();
+            const phone = document.getElementById('extractedPhone').value.trim();
+
+            closeEmailParseModal();
+            openAddModal();
+
+            document.getElementById('formCustomerName').value = name;
+            document.getElementById('formEmail').value = email;
+            document.getElementById('formPhone').value = phone;
+        }
+
+        function parseOrderFromEmail(text) {
+            let firstName = '';
+            let lastName = '';
+            let email = '';
+            let phone = '';
+
+            const lines = text.split(/\r?\n/);
+
+            for (let line of lines) {
+                if (line.includes(':')) {
+                    const colonIdx = line.indexOf(':');
+                    const key = line.substring(0, colonIdx).trim().toLowerCase();
+                    const value = line.substring(colonIdx + 1).trim();
+
+                    if (/email|e-mail|email address/.test(key)) {
+                        email = value || extractEmailFromLine(line);
+                    } else if (/phone|telephone|mobile|cell/.test(key)) {
+                        phone = value;
+                    } else if (/first.*name|given name/.test(key)) {
+                        firstName = value;
+                    } else if (/last.*name|surname|family name/.test(key)) {
+                        lastName = value;
+                    } else if (/^(name|full name|customer|billing name)$/.test(key) && !firstName && !lastName) {
+                        const parts = value.split(/\s+/);
+                        if (parts.length >= 2) {
+                            firstName = parts[0];
+                            lastName = parts.slice(1).join(' ');
+                        } else if (parts.length === 1) {
+                            firstName = value;
+                        }
+                    }
+                }
+            }
+
+            // From: header fallback
+            const fromMatch = text.match(/From:\s*([^<]+?)\s*<([^>]+)>/i);
+            if (fromMatch && !email) {
+                const namePart = fromMatch[1].trim();
+                email = fromMatch[2].trim();
+                if (!firstName && !lastName) {
+                    const parts = namePart.split(/\s+/);
+                    if (parts.length >= 2) {
+                        firstName = parts[0];
+                        lastName = parts.slice(1).join(' ');
+                    } else {
+                        firstName = namePart;
+                    }
+                }
+            }
+
+            // Regex fallbacks
+            if (!email) {
+                const emailMatch = text.match(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/i);
+                if (emailMatch) email = emailMatch[0];
+            }
+            if (!phone) {
+                const phoneMatch = text.match(/(\+?\d{1,3}[-.\s]?)?(\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4})/);
+                if (phoneMatch) phone = phoneMatch[0];
+            }
+
+            return { firstName, lastName, email, phone };
+        }
+
+        function extractEmailFromLine(line) {
+            const match = line.match(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/i);
+            return match ? match[0] : '';
         }
 
         // ========== FUN BUTTONS ==========
