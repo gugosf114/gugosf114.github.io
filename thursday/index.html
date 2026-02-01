@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#181b34">
@@ -88,6 +88,7 @@
             flex-direction: column;
             gap: 16px;
             width: 280px;
+            max-width: 90vw;
         }
 
         .password-form input {
@@ -1078,6 +1079,22 @@
 
         .empty-state h3 { font-size: 20px; color: var(--text-primary); margin-bottom: 8px; }
 
+        /* Touch devices: disable hover transforms */
+        @media (hover: none) {
+            .stat-card:hover,
+            .upcoming-section:hover,
+            .mini-calendar:hover,
+            .quick-actions:hover,
+            .table-container:hover {
+                transform: none;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            }
+            tr:hover { transform: none; box-shadow: none; }
+            .nav-item:hover { transform: none; }
+            .status-pill:hover { transform: none; }
+            .btn-primary:hover { transform: none; }
+        }
+
         @media (max-width: 768px) {
             .sidebar {
                 position: fixed;
@@ -1093,6 +1110,8 @@
             .mobile-header {
                 display: flex;
                 padding: 16px;
+                padding-left: max(16px, env(safe-area-inset-left));
+                padding-right: max(16px, env(safe-area-inset-right));
                 background: var(--bg-sidebar);
                 align-items: center;
                 gap: 12px;
@@ -1104,18 +1123,98 @@
                 color: var(--text-primary);
                 font-size: 24px;
                 cursor: pointer;
+                min-height: 48px;
+                min-width: 48px;
             }
 
-            .board-header, .toolbar, .board-content { padding-left: 16px; padding-right: 16px; }
+            .board-header, .toolbar, .board-content {
+                padding-left: max(16px, env(safe-area-inset-left));
+                padding-right: max(16px, env(safe-area-inset-right));
+            }
+            .board-header { padding-top: 20px; padding-bottom: 12px; }
+            .board-title { font-size: 24px; }
             .search-box { display: none; }
             .form-row { grid-template-columns: 1fr; }
-            .install-banner { flex-direction: column; text-align: center; }
+            .install-banner {
+                flex-direction: column;
+                text-align: center;
+                padding-bottom: max(16px, env(safe-area-inset-bottom));
+            }
             .dashboard { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .stat-value { font-size: 28px; }
+            .stat-card { padding: 16px; }
+
+            /* Buttons: 48px min touch target */
+            .btn, .nav-item, .fun-btn, .quick-btn { min-height: 48px; }
+
+            /* Table → card view on mobile */
+            .table-container table { display: none; }
+            .table-cards { display: block !important; }
+
+            /* Modal full-width on mobile */
+            .modal {
+                width: 100%;
+                max-width: 100vw;
+                max-height: 100vh;
+                border-radius: 16px 16px 0 0;
+                margin-top: auto;
+            }
+            .modal-overlay.active { align-items: flex-end; }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .board-title { font-size: 22px; }
+            .toolbar { gap: 8px; }
+            .toolbar .btn { padding: 10px 14px; font-size: 13px; }
+            .password-gate h1 { font-size: 28px; }
+            .password-gate .logo-big { width: 64px; height: 64px; }
         }
 
         @media (min-width: 769px) {
             .mobile-header { display: none; }
+            .table-cards { display: none !important; }
         }
+
+        /* Mobile order cards */
+        .table-cards { display: none; }
+        .table-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border: 1px solid var(--border);
+        }
+        .table-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        .table-card-name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .table-card-field {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--col-border);
+            font-size: 14px;
+        }
+        .table-card-field:last-child { border-bottom: none; }
+        .table-card-label { color: var(--text-secondary); font-size: 12px; }
+        .table-card-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+        .table-card-actions .status-pill { flex: 1; text-align: center; }
+        .table-card-actions .archive-btn { flex: 1; text-align: center; padding: 10px; }
 
         .sidebar-overlay {
             display: none;
@@ -1133,8 +1232,8 @@
         #three-bg {
             position: fixed;
             inset: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             z-index: -1;
             pointer-events: none;
         }
@@ -2106,6 +2205,17 @@
                         </div>
                     ` : ''}
                 </div>
+                <div class="table-cards">
+                    ${data.map(order => renderCard(order)).join('')}
+                    ${currentView !== 'archive' ? `
+                        <div class="add-row" onclick="openAddModal()" style="background: var(--bg-card); border-radius: 12px; border: 1px dashed var(--border);">
+                            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"/>
+                            </svg>
+                            Add Order
+                        </div>
+                    ` : ''}
+                </div>
             `;
         }
 
@@ -2186,6 +2296,48 @@
             return `<tr>${columnOrder.map(col => cells[col]).join('')}</tr>`;
         }
 
+        // ========== MOBILE CARD VIEW ==========
+        function renderCard(order) {
+            const isArchive = currentView === 'archive';
+            return `
+                <div class="table-card">
+                    <div class="table-card-header">
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <div class="avatar ${order.person}">${order.person === 'yana' ? '🐒' : '🤖'}</div>
+                            <div class="table-card-name">${escapeHtml(order.customerName)}</div>
+                        </div>
+                        <span class="status-pill status-${order.sketch}" onclick="updateField('${order.id}', 'sketch', '${order.sketch === 'working' ? 'done' : 'working'}')" style="font-size:11px;padding:4px 10px;min-width:auto;">
+                            ${order.sketch === 'working' ? 'Working' : 'Done'}
+                        </span>
+                    </div>
+                    <div class="table-card-field">
+                        <span class="table-card-label">Item</span>
+                        <span>${order.item.charAt(0).toUpperCase() + order.item.slice(1)} · ${order.flavor}</span>
+                    </div>
+                    <div class="table-card-field">
+                        <span class="table-card-label">Contact</span>
+                        <span onclick="openContactModal('${order.id}')" style="cursor:pointer;color:var(--accent-blue);">${escapeHtml(order.email)}</span>
+                    </div>
+                    ${order.dueDate ? `<div class="table-card-field">
+                        <span class="table-card-label">Due</span>
+                        <span>${formatDate(order.dueDate)}</span>
+                    </div>` : ''}
+                    <div class="table-card-field">
+                        <span class="table-card-label">Delivery</span>
+                        <span>${order.delivery === 'pickup' ? 'Pickup' : 'Delivery'}</span>
+                    </div>
+                    <div class="table-card-actions">
+                        <span class="status-pill status-${order.invoice}" onclick="updateField('${order.id}', 'invoice', '${order.invoice === 'sent' ? 'paid' : 'sent'}')" style="font-size:11px;">
+                            ${order.invoice === 'sent' ? 'Unpaid' : 'Paid'}
+                        </span>
+                        <button class="archive-btn" onclick="${isArchive ? `restoreOrder('${order.id}')` : `archiveOrder('${order.id}')`}">
+                            ${isArchive ? '↩ Restore' : '✓ Complete'}
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
         // ========== SORT ==========
         function sortOrders() {
             const [field, dir] = document.getElementById('sortSelect').value.split('-');
@@ -2256,6 +2408,28 @@
             }
         });
 
+        // ========== SWIPE GESTURE (MOBILE SIDEBAR) ==========
+        let touchStartX = 0;
+        let touchStartY = 0;
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+        document.addEventListener('touchend', (e) => {
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
+            if (dy > 80) return; // ignore vertical swipes
+            const sidebarEl = document.getElementById('sidebar');
+            const overlayEl = document.getElementById('sidebarOverlay');
+            if (!sidebarEl.classList.contains('open') && touchStartX < 30 && dx > 60) {
+                sidebarEl.classList.add('open');
+                overlayEl.classList.add('active');
+            } else if (sidebarEl.classList.contains('open') && dx < -60) {
+                sidebarEl.classList.remove('open');
+                overlayEl.classList.remove('active');
+            }
+        }, { passive: true });
+
         // ========== INIT ==========
         updateFlavorOptions();
         renderView();
@@ -2269,90 +2443,89 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.167.1/build/three.min.js"></script>
     <script>
-        // Subtle interactive 3D particle background
+        // Subtle interactive 3D particle background (mobile-optimized)
         const canvas = document.getElementById('three-bg');
-        const scene = new THREE.Scene();
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
-        camera.position.z = 30;
+        if (!prefersReducedMotion) {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+            camera.position.z = 30;
 
-        const renderer = new THREE.WebGLRenderer({
-            canvas: canvas,
-            alpha: true,
-            antialias: true
-        });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-        // Particles in brand colors
-        const count = 4000;
-        const positions = new Float32Array(count * 3);
-        const colors = new Float32Array(count * 3);
-
-        const brandColors = [
-            new THREE.Color('#ff642e'),
-            new THREE.Color('#ffcb00'),
-            new THREE.Color('#00c875'),
-            new THREE.Color('#0073ea')
-        ];
-
-        for (let i = 0; i < count; i++) {
-            positions[i * 3]     = (Math.random() - 0.5) * 60;
-            positions[i * 3 + 1] = (Math.random() - 0.5) * 60;
-            positions[i * 3 + 2] = (Math.random() - 0.5) * 40;
-
-            const color = brandColors[Math.floor(Math.random() * brandColors.length)];
-            colors[i * 3]     = color.r;
-            colors[i * 3 + 1] = color.g;
-            colors[i * 3 + 2] = color.b;
-        }
-
-        const geometry = new THREE.BufferGeometry();
-        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-        const material = new THREE.PointsMaterial({
-            size: 0.4,
-            vertexColors: true,
-            blending: THREE.AdditiveBlending,
-            transparent: true,
-            depthWrite: false,
-            sizeAttenuation: true
-        });
-
-        const particles = new THREE.Points(geometry, material);
-        scene.add(particles);
-
-        // Mouse parallax (very subtle)
-        let mouseX = 0;
-        let mouseY = 0;
-        document.addEventListener('mousemove', (e) => {
-            mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-            mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-        });
-
-        // Animation loop
-        function animate() {
-            requestAnimationFrame(animate);
-
-            // Slow auto-rotation
-            particles.rotation.y += 0.0004;
-            particles.rotation.x += 0.0002;
-
-            // Gentle mouse follow
-            particles.rotation.y += mouseX * 0.00005;
-            particles.rotation.x += mouseY * 0.00005;
-
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        // Handle resize
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
+            const renderer = new THREE.WebGLRenderer({
+                canvas: canvas,
+                alpha: true,
+                antialias: !isMobile
+            });
             renderer.setSize(window.innerWidth, window.innerHeight);
-        });
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1 : 2));
+
+            const count = isMobile ? 800 : 4000;
+            const particleSize = isMobile ? 0.25 : 0.4;
+            const positions = new Float32Array(count * 3);
+            const colors = new Float32Array(count * 3);
+
+            const brandColors = [
+                new THREE.Color('#ff642e'),
+                new THREE.Color('#ffcb00'),
+                new THREE.Color('#00c875'),
+                new THREE.Color('#0073ea')
+            ];
+
+            for (let i = 0; i < count; i++) {
+                positions[i * 3]     = (Math.random() - 0.5) * 60;
+                positions[i * 3 + 1] = (Math.random() - 0.5) * 60;
+                positions[i * 3 + 2] = (Math.random() - 0.5) * 40;
+                const color = brandColors[Math.floor(Math.random() * brandColors.length)];
+                colors[i * 3]     = color.r;
+                colors[i * 3 + 1] = color.g;
+                colors[i * 3 + 2] = color.b;
+            }
+
+            const geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+            const material = new THREE.PointsMaterial({
+                size: particleSize,
+                vertexColors: true,
+                blending: THREE.AdditiveBlending,
+                transparent: true,
+                depthWrite: false,
+                sizeAttenuation: true
+            });
+
+            const particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+
+            // Mouse parallax (desktop only)
+            let mouseX = 0, mouseY = 0;
+            if (!isMobile) {
+                document.addEventListener('mousemove', (e) => {
+                    mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+                    mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+                });
+            }
+
+            function animate() {
+                requestAnimationFrame(animate);
+                particles.rotation.y += isMobile ? 0.0002 : 0.0004;
+                particles.rotation.x += isMobile ? 0.0001 : 0.0002;
+                if (!isMobile) {
+                    particles.rotation.y += mouseX * 0.00005;
+                    particles.rotation.x += mouseY * 0.00005;
+                }
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
     </script>
 </body>
 </html>
