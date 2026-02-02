@@ -544,8 +544,29 @@
                     <div class="process-step-number" style="background: var(--pink); color: var(--white);">1</div>
                     <div class="process-step-content">
                         <div class="process-scene process-scene-1">
-                            <div class="scene-phone"></div>
-                            <div class="scene-bubble">I want a 3-tier cake!</div>
+                            <svg viewBox="0 0 280 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Phone body -->
+                                <rect class="draw" x="30" y="15" width="40" height="70" rx="8" stroke="#EC268F" stroke-width="3" style="--path-len:220"/>
+                                <!-- Phone screen -->
+                                <rect class="fade-in d2" x="36" y="25" width="28" height="42" rx="3" fill="#fef0f5"/>
+                                <!-- Phone home button -->
+                                <circle class="fade-in d2" cx="50" cy="76" r="4" fill="#EC268F"/>
+                                <!-- Signal waves from phone -->
+                                <path class="draw d2" d="M75 35 Q82 32 82 40" stroke="#EC268F" stroke-width="2" stroke-linecap="round" style="--path-len:20"/>
+                                <path class="draw d3" d="M80 28 Q92 24 92 42" stroke="#EC268F" stroke-width="2" stroke-linecap="round" style="--path-len:30"/>
+                                <!-- Speech bubble outline -->
+                                <path class="draw d3" d="M105 22 h100 a12 12 0 0 1 12 12 v30 a12 12 0 0 1-12 12 h-70 l-15 15 v-15 h-15 a12 12 0 0 1-12-12 v-30 a12 12 0 0 1 12-12z" stroke="#3A1A19" stroke-width="2.5" style="--path-len:360"/>
+                                <!-- Bubble fill -->
+                                <path class="fade-in d4" d="M105 22 h100 a12 12 0 0 1 12 12 v30 a12 12 0 0 1-12 12 h-70 l-15 15 v-15 h-15 a12 12 0 0 1-12-12 v-30 a12 12 0 0 1 12-12z" fill="white" opacity="0.9"/>
+                                <!-- Heart inside bubble -->
+                                <path class="draw d4" d="M145 38 c0-6 8-10 14-5 l1 1 1-1 c6-5 14-1 14 5 0 8-15 18-15 18 s-15-10-15-18z" stroke="#EC268F" stroke-width="2" fill="none" style="--path-len:80"/>
+                                <!-- Cake icon inside bubble (3-tier) -->
+                                <path class="draw d4" d="M175 60 h-30 v-8 h4 v-7 h6 v-7 h10 v7 h6 v7 h4 z" stroke="#622D2B" stroke-width="1.5" style="--path-len:120"/>
+                                <!-- Small hearts floating -->
+                                <circle class="fade-in d5" cx="230" cy="30" r="3" fill="#EC268F" opacity="0.4"/>
+                                <circle class="fade-in d5" cx="245" cy="50" r="2" fill="#FFC532" opacity="0.5"/>
+                                <circle class="fade-in d5" cx="255" cy="25" r="2.5" fill="#EC268F" opacity="0.3"/>
+                            </svg>
                         </div>
                         <h4>Tell Us Your Vision</h4>
                         <p>Reach out by phone, email, or our website. Share your event date, guest count, theme ideas, and any inspiration photos. Want to get started right away? Try our <a href="order-form.html#ai-sketch">Sketch Your Cake AI</a> to visualize your dream cake, or <a href="corporate.html#cookiePreviewSection">see how your logo looks on a cookie</a> — before you even contact us.</p>
@@ -571,8 +592,34 @@
                     <div class="process-step-number" style="background: var(--yellow); color: var(--dark-brown);">2</div>
                     <div class="process-step-content">
                         <div class="process-scene process-scene-2">
-                            <div class="scene-pencil">&#9998;</div>
-                            <div class="scene-line"></div>
+                            <svg viewBox="0 0 280 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Pencil -->
+                                <g class="fade-in">
+                                    <rect x="15" y="52" width="50" height="12" rx="2" fill="#FFC532" transform="rotate(-8 15 58)"/>
+                                    <polygon points="15,55 5,60 15,65" fill="#3A1A19" transform="rotate(-8 15 58)"/>
+                                    <rect x="58" y="52" width="8" height="12" rx="1" fill="#EC268F" transform="rotate(-8 58 58)"/>
+                                </g>
+                                <!-- 3-tier cake outline being drawn -->
+                                <!-- Bottom tier -->
+                                <path class="draw d2" d="M100 100 h80 v-18 a4 4 0 0 0-4-4 h-72 a4 4 0 0 0-4 4 z" stroke="#622D2B" stroke-width="2.5" style="--path-len:200"/>
+                                <!-- Middle tier -->
+                                <path class="draw d3" d="M112 78 h56 v-16 a4 4 0 0 0-4-4 h-48 a4 4 0 0 0-4 4 z" stroke="#622D2B" stroke-width="2.5" style="--path-len:160"/>
+                                <!-- Top tier -->
+                                <path class="draw d3" d="M124 58 h32 v-14 a4 4 0 0 0-4-4 h-24 a4 4 0 0 0-4 4 z" stroke="#622D2B" stroke-width="2.5" style="--path-len:120"/>
+                                <!-- Cherry on top -->
+                                <circle class="fade-in d4" cx="140" cy="36" r="5" fill="#EC268F"/>
+                                <line class="draw d4" x1="140" y1="41" x2="140" y2="44" stroke="#3A1A19" stroke-width="1.5" style="--path-len:5"/>
+                                <!-- Decorative dots on tiers -->
+                                <circle class="fade-in d4" cx="115" cy="90" r="2" fill="#FFC532"/>
+                                <circle class="fade-in d4" cx="125" cy="90" r="2" fill="#EC268F"/>
+                                <circle class="fade-in d4" cx="135" cy="90" r="2" fill="#FFC532"/>
+                                <circle class="fade-in d4" cx="145" cy="90" r="2" fill="#EC268F"/>
+                                <circle class="fade-in d4" cx="155" cy="90" r="2" fill="#FFC532"/>
+                                <circle class="fade-in d4" cx="165" cy="90" r="2" fill="#EC268F"/>
+                                <!-- Price tag -->
+                                <rect class="draw d4" x="200" y="35" width="55" height="35" rx="6" stroke="#3A1A19" stroke-width="2" style="--path-len:180"/>
+                                <text class="fade-in d5" x="227" y="58" text-anchor="middle" fill="#3A1A19" font-family="Fredoka One, cursive" font-size="14" font-weight="800">$</text>
+                            </svg>
                         </div>
                         <h4>Custom Sketches & Pricing</h4>
                         <p>Yana creates multiple design options with pricing — typically within 24–48 hours. No commitment required. This is how every project starts.</p>
@@ -584,8 +631,30 @@
                     <div class="process-step-number" style="background: var(--brown); color: var(--white);">3</div>
                     <div class="process-step-content">
                         <div class="process-scene process-scene-3">
-                            <div class="scene-bubble-left">How about pink?</div>
-                            <div class="scene-bubble-right">Love it!</div>
+                            <svg viewBox="0 0 280 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Left person silhouette -->
+                                <circle class="fade-in" cx="35" cy="50" r="12" fill="#622D2B" opacity="0.2"/>
+                                <rect class="fade-in" x="25" y="65" width="20" height="30" rx="8" fill="#622D2B" opacity="0.2"/>
+                                <!-- Left speech bubble -->
+                                <path class="draw" d="M60 20 h70 a8 8 0 0 1 8 8 v24 a8 8 0 0 1-8 8 h-50 l-10 12 v-12 h-10 a8 8 0 0 1-8-8 v-24 a8 8 0 0 1 8-8z" stroke="#622D2B" stroke-width="2.5" style="--path-len:280"/>
+                                <path class="fade-in d2" d="M60 20 h70 a8 8 0 0 1 8 8 v24 a8 8 0 0 1-8 8 h-50 l-10 12 v-12 h-10 a8 8 0 0 1-8-8 v-24 a8 8 0 0 1 8-8z" fill="white" opacity="0.85"/>
+                                <!-- Sketch icon in left bubble -->
+                                <rect class="draw d2" x="72" y="30" width="20" height="22" rx="2" stroke="#622D2B" stroke-width="1.5" style="--path-len:84"/>
+                                <line class="draw d2" x1="76" y1="36" x2="88" y2="36" stroke="#622D2B" stroke-width="1" style="--path-len:12"/>
+                                <line class="draw d2" x1="76" y1="41" x2="85" y2="41" stroke="#622D2B" stroke-width="1" style="--path-len:9"/>
+                                <!-- Pencil edit icon -->
+                                <path class="draw d3" d="M100 30 l8-8 5 5-8 8z M98 42 l2-8 5 5z" stroke="#EC268F" stroke-width="1.5" style="--path-len:60"/>
+                                <!-- Right person silhouette -->
+                                <circle class="fade-in d2" cx="245" cy="50" r="12" fill="#EC268F" opacity="0.2"/>
+                                <rect class="fade-in d2" x="235" y="65" width="20" height="30" rx="8" fill="#EC268F" opacity="0.2"/>
+                                <!-- Right speech bubble -->
+                                <path class="draw d3" d="M150 55 h70 a8 8 0 0 1 8 8 v24 a8 8 0 0 1-8 8 h-10 v12 l-10-12 h-50 a8 8 0 0 1-8-8 v-24 a8 8 0 0 1 8-8z" stroke="#EC268F" stroke-width="2.5" style="--path-len:280"/>
+                                <path class="fade-in d4" d="M150 55 h70 a8 8 0 0 1 8 8 v24 a8 8 0 0 1-8 8 h-10 v12 l-10-12 h-50 a8 8 0 0 1-8-8 v-24 a8 8 0 0 1 8-8z" fill="white" opacity="0.85"/>
+                                <!-- Thumbs up in right bubble -->
+                                <path class="draw d4" d="M180 72 v-10 a4 4 0 0 1 8 0 v6 h8 a4 4 0 0 1 4 4.5 l-2 8 a4 4 0 0 1-4 3.5 h-10 a4 4 0 0 1-4-4 v-8z" stroke="#EC268F" stroke-width="2" style="--path-len:120"/>
+                                <!-- Checkmark -->
+                                <path class="draw d4" d="M172 77 l5 5 10-10" stroke="#EC268F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="--path-len:25"/>
+                            </svg>
                         </div>
                         <h4>Revisions & Approval</h4>
                         <p>Review the sketches, pick your favorites, request changes. We go back and forth until the design is exactly what you want.</p>
@@ -597,8 +666,47 @@
                     <div class="process-step-number" style="background: var(--dark-brown); color: var(--white);">4</div>
                     <div class="process-step-content">
                         <div class="process-scene process-scene-4">
-                            <div class="scene-invoice"></div>
-                            <div class="scene-check">&#10003;</div>
+                            <svg viewBox="0 0 280 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Invoice/receipt -->
+                                <rect class="draw" x="25" y="10" width="70" height="95" rx="4" stroke="#3A1A19" stroke-width="2.5" style="--path-len:330"/>
+                                <rect class="fade-in d2" x="25" y="10" width="70" height="95" rx="4" fill="white" opacity="0.8"/>
+                                <!-- Invoice header line -->
+                                <line class="draw d2" x1="35" y1="25" x2="85" y2="25" stroke="#3A1A19" stroke-width="2" style="--path-len:50"/>
+                                <!-- Invoice text lines -->
+                                <line class="draw d2" x1="35" y1="38" x2="80" y2="38" stroke="#622D2B" stroke-width="1.5" opacity="0.5" style="--path-len:45"/>
+                                <line class="draw d3" x1="35" y1="48" x2="75" y2="48" stroke="#622D2B" stroke-width="1.5" opacity="0.5" style="--path-len:40"/>
+                                <line class="draw d3" x1="35" y1="58" x2="70" y2="58" stroke="#622D2B" stroke-width="1.5" opacity="0.5" style="--path-len:35"/>
+                                <!-- Total line -->
+                                <line class="draw d3" x1="35" y1="72" x2="85" y2="72" stroke="#3A1A19" stroke-width="2" style="--path-len:50"/>
+                                <!-- Dollar amount -->
+                                <text class="fade-in d3" x="60" y="90" text-anchor="middle" fill="#3A1A19" font-family="Fredoka One, cursive" font-size="16" font-weight="800">$250</text>
+                                <!-- Arrow between invoice and calendar -->
+                                <path class="draw d3" d="M105 58 h25 l-6-5 m6 5 l-6 5" stroke="#EC268F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="--path-len:50"/>
+                                <!-- Calendar -->
+                                <rect class="draw d3" x="140" y="20" width="75" height="70" rx="6" stroke="#3A1A19" stroke-width="2.5" style="--path-len:290"/>
+                                <rect class="fade-in d3" x="140" y="20" width="75" height="70" rx="6" fill="white" opacity="0.8"/>
+                                <!-- Calendar header -->
+                                <rect class="fade-in d3" x="140" y="20" width="75" height="20" rx="6" fill="#EC268F" opacity="0.15"/>
+                                <line class="draw d3" x1="140" y1="40" x2="215" y2="40" stroke="#3A1A19" stroke-width="1.5" style="--path-len:75"/>
+                                <!-- Calendar hooks -->
+                                <line class="draw d3" x1="158" y1="15" x2="158" y2="26" stroke="#3A1A19" stroke-width="2.5" stroke-linecap="round" style="--path-len:11"/>
+                                <line class="draw d3" x1="197" y1="15" x2="197" y2="26" stroke="#3A1A19" stroke-width="2.5" stroke-linecap="round" style="--path-len:11"/>
+                                <!-- Calendar grid dots -->
+                                <circle class="fade-in d4" cx="155" cy="50" r="3" fill="#622D2B" opacity="0.3"/>
+                                <circle class="fade-in d4" cx="170" cy="50" r="3" fill="#622D2B" opacity="0.3"/>
+                                <circle class="fade-in d4" cx="185" cy="50" r="3" fill="#622D2B" opacity="0.3"/>
+                                <circle class="fade-in d4" cx="200" cy="50" r="3" fill="#622D2B" opacity="0.3"/>
+                                <circle class="fade-in d4" cx="155" cy="65" r="3" fill="#622D2B" opacity="0.3"/>
+                                <circle class="fade-in d4" cx="170" cy="65" r="3" fill="#622D2B" opacity="0.3"/>
+                                <!-- Highlighted date -->
+                                <circle class="fade-in d4" cx="185" cy="65" r="7" fill="#EC268F" opacity="0.2"/>
+                                <!-- Big checkmark over calendar -->
+                                <path class="draw d4" d="M165 58 l10 12 22-25" stroke="#EC268F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="--path-len:55"/>
+                                <!-- Lock icon -->
+                                <path class="draw d4" d="M235 55 v-6 a8 8 0 0 1 16 0 v6" stroke="#FFC532" stroke-width="2.5" stroke-linecap="round" style="--path-len:40"/>
+                                <rect class="draw d4" x="232" y="55" width="22" height="18" rx="4" stroke="#FFC532" stroke-width="2.5" style="--path-len:80"/>
+                                <circle class="fade-in d5" cx="243" cy="64" r="2.5" fill="#FFC532"/>
+                            </svg>
                         </div>
                         <h4>Payment & Scheduling</h4>
                         <p>Once you approve, we send a simple invoice. Pay by credit/debit card, PayPal, or Venmo. Your spot on our calendar is locked in.</p>
@@ -610,8 +718,42 @@
                     <div class="process-step-number" style="background: var(--pink); color: var(--white);">5</div>
                     <div class="process-step-content">
                         <div class="process-scene process-scene-5">
-                            <div class="scene-whisk">&#127860;</div>
-                            <div class="scene-bowl"></div>
+                            <svg viewBox="0 0 280 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Mixing bowl -->
+                                <path class="draw" d="M60 50 Q55 95 100 100 Q140 105 145 100 Q190 95 185 50" stroke="#622D2B" stroke-width="3" stroke-linecap="round" style="--path-len:250"/>
+                                <!-- Bowl rim -->
+                                <ellipse class="draw" cx="122" cy="50" rx="65" ry="8" stroke="#622D2B" stroke-width="2.5" style="--path-len:220"/>
+                                <!-- Bowl fill -->
+                                <path class="fade-in d2" d="M60 50 Q55 95 100 100 Q140 105 145 100 Q190 95 185 50 z" fill="#FFC532" opacity="0.15"/>
+                                <!-- Batter/dough in bowl -->
+                                <ellipse class="fade-in d2" cx="122" cy="55" rx="55" ry="12" fill="#FFC532" opacity="0.3"/>
+                                <!-- Whisk handle -->
+                                <line class="draw d2" x1="155" y1="15" x2="135" y2="48" stroke="#3A1A19" stroke-width="3" stroke-linecap="round" style="--path-len:45"/>
+                                <!-- Whisk wires -->
+                                <g class="stir">
+                                    <path class="draw d2" d="M135 48 Q125 70 135 55" stroke="#3A1A19" stroke-width="1.5" style="--path-len:30"/>
+                                    <path class="draw d3" d="M135 48 Q140 70 135 55" stroke="#3A1A19" stroke-width="1.5" style="--path-len:30"/>
+                                    <path class="draw d3" d="M135 48 Q130 65 135 55" stroke="#3A1A19" stroke-width="1.5" style="--path-len:25"/>
+                                </g>
+                                <!-- Floating ingredients -->
+                                <circle class="fade-in d3" cx="85" cy="30" r="5" fill="#FFC532" opacity="0.6"/>
+                                <circle class="fade-in d3" cx="100" cy="22" r="3" fill="#EC268F" opacity="0.5"/>
+                                <circle class="fade-in d4" cx="70" cy="20" r="4" fill="#622D2B" opacity="0.3"/>
+                                <!-- Splash drops -->
+                                <circle class="fade-in d4" cx="108" cy="38" r="2.5" fill="#FFC532" opacity="0.5"/>
+                                <circle class="fade-in d4" cx="145" cy="35" r="2" fill="#FFC532" opacity="0.4"/>
+                                <!-- Egg -->
+                                <ellipse class="draw d3" cx="210" cy="55" rx="14" ry="18" stroke="#622D2B" stroke-width="2" style="--path-len:100"/>
+                                <ellipse class="fade-in d3" cx="210" cy="55" rx="14" ry="18" fill="#FFF8E7" opacity="0.6"/>
+                                <!-- Butter -->
+                                <rect class="draw d3" x="235" y="65" width="24" height="16" rx="3" stroke="#FFC532" stroke-width="2" style="--path-len:80"/>
+                                <rect class="fade-in d4" x="235" y="65" width="24" height="16" rx="3" fill="#FFC532" opacity="0.3"/>
+                                <!-- Flour bag -->
+                                <path class="draw d4" d="M205 80 h30 v25 h-30 z M205 80 Q220 73 235 80" stroke="#622D2B" stroke-width="2" style="--path-len:140"/>
+                                <!-- Stars/sparkles -->
+                                <path class="fade-in d5" d="M168 25 l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#EC268F" opacity="0.5"/>
+                                <path class="fade-in d5" d="M195 18 l1.5 3.5 3.5 1.5-3.5 1.5-1.5 3.5-1.5-3.5-3.5-1.5 3.5-1.5z" fill="#FFC532" opacity="0.6"/>
+                            </svg>
                         </div>
                         <h4>Handcrafted Creation</h4>
                         <p>Every item is made from scratch by hand using the freshest ingredients. No shortcuts, no templates — just Yana's artistry and attention to detail.</p>
@@ -623,8 +765,51 @@
                     <div class="process-step-number" style="background: var(--yellow); color: var(--dark-brown);">6</div>
                     <div class="process-step-content">
                         <div class="process-scene process-scene-6">
-                            <div class="scene-road"></div>
-                            <div class="scene-van">&#128666;</div>
+                            <svg viewBox="0 0 280 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Road -->
+                                <line x1="0" y1="95" x2="280" y2="95" stroke="#3A1A19" stroke-width="2"/>
+                                <line x1="20" y1="90" x2="40" y2="90" stroke="#3A1A19" stroke-width="1" opacity="0.3"/>
+                                <line x1="60" y1="90" x2="80" y2="90" stroke="#3A1A19" stroke-width="1" opacity="0.3"/>
+                                <line x1="100" y1="90" x2="120" y2="90" stroke="#3A1A19" stroke-width="1" opacity="0.3"/>
+                                <line x1="140" y1="90" x2="160" y2="90" stroke="#3A1A19" stroke-width="1" opacity="0.3"/>
+                                <line x1="180" y1="90" x2="200" y2="90" stroke="#3A1A19" stroke-width="1" opacity="0.3"/>
+                                <!-- Van group (animates together) -->
+                                <g class="van-group">
+                                    <!-- Van body -->
+                                    <rect class="draw" x="30" y="50" width="85" height="40" rx="5" stroke="#EC268F" stroke-width="2.5" style="--path-len:250"/>
+                                    <rect class="fade-in d2" x="30" y="50" width="85" height="40" rx="5" fill="#EC268F" opacity="0.15"/>
+                                    <!-- Van cabin -->
+                                    <path class="draw d2" d="M115 55 h25 l15 20 v15 h-40 v-35z" stroke="#EC268F" stroke-width="2.5" style="--path-len:140"/>
+                                    <rect class="fade-in d2" x="125" y="60" width="22" height="16" rx="3" fill="#87CEEB" opacity="0.4"/>
+                                    <!-- Windshield -->
+                                    <path class="draw d2" d="M126 60 h18 l10 14 h-28z" stroke="#3A1A19" stroke-width="1.5" style="--path-len:70"/>
+                                    <!-- MBC text on van -->
+                                    <text class="fade-in d3" x="72" y="75" text-anchor="middle" fill="#EC268F" font-family="Fredoka One, cursive" font-size="13" font-weight="800">MBC</text>
+                                    <!-- Cake box on van -->
+                                    <rect class="draw d3" x="45" y="40" width="22" height="14" rx="2" stroke="#FFC532" stroke-width="2" style="--path-len:72"/>
+                                    <path class="draw d3" d="M49 40 l7-6 7 6" stroke="#FFC532" stroke-width="1.5" style="--path-len:20"/>
+                                    <!-- Back wheel -->
+                                    <circle class="draw d2" cx="55" cy="93" r="9" stroke="#3A1A19" stroke-width="2.5" style="--path-len:57"/>
+                                    <circle class="fade-in d2" cx="55" cy="93" r="9" fill="white" opacity="0.8"/>
+                                    <circle class="spin" cx="55" cy="93" r="3" fill="#3A1A19" opacity="0.4"/>
+                                    <!-- Front wheel -->
+                                    <circle class="draw d2" cx="135" cy="93" r="9" stroke="#3A1A19" stroke-width="2.5" style="--path-len:57"/>
+                                    <circle class="fade-in d2" cx="135" cy="93" r="9" fill="white" opacity="0.8"/>
+                                    <circle class="spin" cx="135" cy="93" r="3" fill="#3A1A19" opacity="0.4"/>
+                                </g>
+                                <!-- House at destination -->
+                                <rect class="draw d3" x="210" y="55" width="40" height="40" rx="2" stroke="#622D2B" stroke-width="2" style="--path-len:160"/>
+                                <path class="draw d3" d="M205 58 l25-25 25 25" stroke="#622D2B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="--path-len:75"/>
+                                <rect class="fade-in d4" x="210" y="55" width="40" height="40" rx="2" fill="#622D2B" opacity="0.08"/>
+                                <!-- Door -->
+                                <rect class="draw d4" x="223" y="70" width="14" height="25" rx="2" stroke="#622D2B" stroke-width="1.5" style="--path-len:78"/>
+                                <!-- Door knob -->
+                                <circle class="fade-in d4" cx="234" cy="83" r="2" fill="#FFC532"/>
+                                <!-- Window -->
+                                <rect class="draw d4" x="215" y="60" width="10" height="8" rx="1" stroke="#622D2B" stroke-width="1.5" style="--path-len:36"/>
+                                <!-- Smoke/steam from chimney -->
+                                <path class="fade-in d5" d="M242 30 Q245 22 248 28 Q251 20 254 26" stroke="#622D2B" stroke-width="1.5" fill="none" opacity="0.3"/>
+                            </svg>
                         </div>
                         <h4>Pickup or Delivery</h4>
                         <p>Pick up at our Daly City kitchen (9 AM–6 PM), or we deliver anywhere in the San Francisco Bay Area.</p>
@@ -690,11 +875,12 @@
                 // Clear any running timers
                 timers.forEach(function(t) { clearTimeout(t); });
                 timers = [];
-                // Reset all steps
+                // Reset all steps and force reflow for SVG animations
                 steps.forEach(function(s) {
                     s.classList.remove('active', 'done');
                     s.classList.add('waiting');
                 });
+                void timeline.offsetHeight;
                 timeline.style.setProperty('--timeline-progress', '0');
                 progressFill.style.width = '0%';
                 progressLabel.textContent = 'Step 1 of ' + totalSteps;

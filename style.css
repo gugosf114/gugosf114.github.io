@@ -1723,9 +1723,9 @@ footer {
     text-decoration-color: var(--pink);
 }
 
-/* ---- Process Scenes (animated micro-scenes) ---- */
+/* ---- Process Scenes (SVG illustrated micro-scenes) ---- */
 .process-scene {
-    height: 80px;
+    height: 120px;
     position: relative;
     overflow: hidden;
     margin-bottom: 0.75rem;
@@ -1734,6 +1734,9 @@ footer {
     opacity: 0;
     transform: scale(0.9);
     transition: opacity 0.4s ease, transform 0.4s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .process-step.active .process-scene,
@@ -1742,296 +1745,146 @@ footer {
     transform: scale(1);
 }
 
-/* Scene 1: Phone + chat bubble */
-.process-scene-1 .scene-phone {
-    position: absolute;
-    left: 15%;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 28px;
-    height: 44px;
-    border: 3px solid var(--pink);
-    border-radius: 6px;
-    background: var(--white);
+.process-scene svg {
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 
-.process-scene-1 .scene-phone::after {
-    content: '';
-    position: absolute;
-    bottom: 4px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--pink);
+/* SVG draw animation: all paths start hidden */
+.process-scene .draw {
+    fill: none;
+    stroke-dashoffset: var(--path-len);
+    stroke-dasharray: var(--path-len);
+    transition: none;
 }
 
-.process-scene-1 .scene-bubble {
-    position: absolute;
-    left: 35%;
-    top: 18px;
-    background: var(--pink);
-    color: var(--white);
-    padding: 6px 12px;
-    border-radius: 12px 12px 12px 4px;
-    font-size: 11px;
-    font-weight: 700;
-    white-space: nowrap;
+/* When active, draw the paths with staggered delays */
+.process-step.active .process-scene .draw {
+    animation: svgDraw 1.8s ease forwards;
+}
+
+.process-step.active .process-scene .draw.d2 {
+    animation-delay: 0.4s;
+}
+
+.process-step.active .process-scene .draw.d3 {
+    animation-delay: 0.8s;
+}
+
+.process-step.active .process-scene .draw.d4 {
+    animation-delay: 1.2s;
+}
+
+/* When done, paths fully visible */
+.process-step.done .process-scene .draw {
+    stroke-dashoffset: 0;
+}
+
+/* SVG fills that fade in */
+.process-scene .fade-in {
     opacity: 0;
+    transition: none;
 }
 
-.process-step.active .process-scene-1 .scene-bubble {
-    animation: bubbleFloat 2s ease 0.3s forwards;
+.process-step.active .process-scene .fade-in {
+    animation: svgFadeIn 0.6s ease forwards;
 }
 
-.process-step.done .process-scene-1 .scene-bubble {
-    opacity: 1;
-    transform: translateY(0);
+.process-step.active .process-scene .fade-in.d2 {
+    animation-delay: 0.6s;
 }
 
-@keyframes bubbleFloat {
-    0% { opacity: 0; transform: translateY(10px); }
-    30% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 1; transform: translateY(0); }
+.process-step.active .process-scene .fade-in.d3 {
+    animation-delay: 1.0s;
 }
 
-/* Scene 2: Pencil drawing a line */
-.process-scene-2 .scene-line {
-    position: absolute;
-    top: 50%;
-    left: 10%;
-    height: 3px;
-    background: var(--dark-brown);
-    border-radius: 3px;
-    width: 0;
+.process-step.active .process-scene .fade-in.d4 {
+    animation-delay: 1.4s;
 }
 
-.process-scene-2 .scene-pencil {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%) rotate(-30deg);
-    left: 10%;
-    font-size: 28px;
-    transition: left 2s ease;
+.process-step.active .process-scene .fade-in.d5 {
+    animation-delay: 1.8s;
 }
 
-.process-step.active .process-scene-2 .scene-line {
-    animation: drawLine 2s ease 0.2s forwards;
-}
-
-.process-step.active .process-scene-2 .scene-pencil {
-    animation: movePencil 2s ease 0.2s forwards;
-}
-
-.process-step.done .process-scene-2 .scene-line {
-    width: 65%;
-}
-
-.process-step.done .process-scene-2 .scene-pencil {
-    left: 72%;
-}
-
-@keyframes drawLine {
-    0% { width: 0; }
-    100% { width: 65%; }
-}
-
-@keyframes movePencil {
-    0% { left: 10%; }
-    100% { left: 72%; }
-}
-
-/* Scene 3: Chat bubbles back and forth */
-.process-scene-3 .scene-bubble-left,
-.process-scene-3 .scene-bubble-right {
-    position: absolute;
-    padding: 6px 14px;
-    border-radius: 12px;
-    font-size: 11px;
-    font-weight: 700;
-    white-space: nowrap;
-    opacity: 0;
-}
-
-.process-scene-3 .scene-bubble-left {
-    left: 8%;
-    top: 15px;
-    background: var(--brown);
-    color: var(--white);
-    border-radius: 12px 12px 12px 4px;
-}
-
-.process-scene-3 .scene-bubble-right {
-    right: 8%;
-    top: 40px;
-    background: var(--pink);
-    color: var(--white);
-    border-radius: 12px 12px 4px 12px;
-}
-
-.process-step.active .process-scene-3 .scene-bubble-left {
-    animation: chatLeft 2.5s ease 0.2s forwards;
-}
-
-.process-step.active .process-scene-3 .scene-bubble-right {
-    animation: chatRight 2.5s ease 0.8s forwards;
-}
-
-.process-step.done .process-scene-3 .scene-bubble-left,
-.process-step.done .process-scene-3 .scene-bubble-right {
+.process-step.done .process-scene .fade-in {
     opacity: 1;
 }
 
-@keyframes chatLeft {
-    0% { opacity: 0; transform: translateX(-20px); }
-    30% { opacity: 1; transform: translateX(0); }
-    100% { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes chatRight {
-    0% { opacity: 0; transform: translateX(20px); }
-    40% { opacity: 1; transform: translateX(0); }
-    100% { opacity: 1; transform: translateX(0); }
-}
-
-/* Scene 4: Invoice + calendar check */
-.process-scene-4 .scene-invoice {
-    position: absolute;
-    left: 15%;
-    top: 50%;
-    transform: translateY(-50%) translateX(-30px);
-    width: 36px;
-    height: 46px;
-    background: var(--white);
-    border: 2px solid var(--dark-brown);
-    border-radius: 4px;
+/* SVG elements that slide in */
+.process-scene .slide-in {
     opacity: 0;
+    transform: translateX(-15px);
+    transition: none;
 }
 
-.process-scene-4 .scene-invoice::before {
-    content: '';
-    position: absolute;
-    top: 8px;
-    left: 5px;
-    right: 5px;
-    height: 2px;
-    background: var(--dark-brown);
-    box-shadow: 0 6px 0 var(--dark-brown), 0 12px 0 var(--dark-brown);
+.process-step.active .process-scene .slide-in {
+    animation: svgSlideIn 0.8s ease forwards;
 }
 
-.process-scene-4 .scene-check {
-    position: absolute;
-    right: 20%;
-    top: 50%;
-    transform: translateY(-50%) scale(0);
-    font-size: 32px;
-    color: var(--pink);
+.process-step.active .process-scene .slide-in.d2 {
+    animation-delay: 0.5s;
 }
 
-.process-step.active .process-scene-4 .scene-invoice {
-    animation: slideInvoice 1.2s ease 0.2s forwards;
+.process-step.active .process-scene .slide-in.d3 {
+    animation-delay: 1.0s;
 }
 
-.process-step.active .process-scene-4 .scene-check {
-    animation: popCheck 0.6s ease 1.4s forwards;
-}
-
-.process-step.done .process-scene-4 .scene-invoice {
+.process-step.done .process-scene .slide-in {
     opacity: 1;
-    transform: translateY(-50%) translateX(0);
+    transform: translateX(0);
 }
 
-.process-step.done .process-scene-4 .scene-check {
-    transform: translateY(-50%) scale(1);
+/* Scene 5: whisk stir */
+.process-step.active .process-scene .stir {
+    animation: svgStir 1.2s ease-in-out 0.8s infinite;
+    transform-origin: center;
 }
 
-@keyframes slideInvoice {
-    0% { opacity: 0; transform: translateY(-50%) translateX(-30px); }
-    100% { opacity: 1; transform: translateY(-50%) translateX(0); }
+/* Scene 6: wheel spin */
+.process-step.active .process-scene .spin {
+    animation: svgSpin 1s linear 0.3s infinite;
+    transform-origin: center;
 }
 
-@keyframes popCheck {
-    0% { transform: translateY(-50%) scale(0); }
-    60% { transform: translateY(-50%) scale(1.2); }
-    100% { transform: translateY(-50%) scale(1); }
+/* Scene 6: van drive */
+.process-scene .van-group {
+    transition: none;
 }
 
-/* Scene 5: Mixing bowl + whisk */
-.process-scene-5 .scene-bowl {
-    position: absolute;
-    left: 50%;
-    bottom: 8px;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 32px;
-    background: var(--brown);
-    border-radius: 0 0 30px 30px;
+.process-step.active .process-scene .van-group {
+    animation: svgDrive 2.2s ease forwards;
 }
 
-.process-scene-5 .scene-whisk {
-    position: absolute;
-    left: 50%;
-    top: 8px;
-    transform: translateX(-50%) rotate(0deg);
-    font-size: 28px;
-    transform-origin: bottom center;
+.process-step.done .process-scene .van-group {
+    transform: translateX(0);
 }
 
-.process-step.active .process-scene-5 .scene-whisk {
-    animation: whiskStir 1.5s ease-in-out 0.2s infinite;
+@keyframes svgDraw {
+    to { stroke-dashoffset: 0; }
 }
 
-.process-step.done .process-scene-5 .scene-whisk {
-    transform: translateX(-50%) rotate(0deg);
+@keyframes svgFadeIn {
+    to { opacity: 1; }
 }
 
-@keyframes whiskStir {
-    0%, 100% { transform: translateX(-50%) rotate(-15deg); }
-    50% { transform: translateX(-50%) rotate(15deg); }
+@keyframes svgSlideIn {
+    to { opacity: 1; transform: translateX(0); }
 }
 
-/* Scene 6: Delivery van driving */
-.process-scene-6 .scene-van {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: -40px;
-    font-size: 32px;
+@keyframes svgStir {
+    0%, 100% { transform: rotate(-12deg); }
+    50% { transform: rotate(12deg); }
 }
 
-.process-scene-6 .scene-road {
-    position: absolute;
-    bottom: 12px;
-    left: 5%;
-    right: 5%;
-    height: 2px;
-    background: var(--dark-brown);
-    border-radius: 2px;
+@keyframes svgSpin {
+    to { transform: rotate(360deg); }
 }
 
-.process-scene-6 .scene-road::before {
-    content: '';
-    position: absolute;
-    top: -1px;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: repeating-linear-gradient(90deg, var(--dark-brown) 0, var(--dark-brown) 12px, transparent 12px, transparent 24px);
-    opacity: 0.3;
-}
-
-.process-step.active .process-scene-6 .scene-van {
-    animation: driveVan 2.5s ease 0.2s forwards;
-}
-
-.process-step.done .process-scene-6 .scene-van {
-    left: 75%;
-}
-
-@keyframes driveVan {
-    0% { left: -40px; }
-    100% { left: 75%; }
+@keyframes svgDrive {
+    0% { transform: translateX(-120px); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateX(0); opacity: 1; }
 }
 
 /* ---- Progress Bar ---- */
@@ -2199,7 +2052,7 @@ footer {
     }
 
     .process-scene {
-        height: 60px;
+        height: 90px;
     }
 
     .process-cta-links {
