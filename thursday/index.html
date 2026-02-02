@@ -567,6 +567,10 @@
         .table-card-actions .status-pill { flex: 1; text-align: center; }
         .table-card-actions .archive-btn { flex: 1; text-align: center; padding: 10px; }
 
+        .sidebar-email-box {
+            padding: 16px; border-top: 1px solid var(--border);
+        }
+
         .sidebar-overlay {
             display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.5); z-index: 99;
@@ -634,11 +638,12 @@
                     <svg viewBox="0 0 20 20" fill="currentColor"><path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"/><path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"/></svg>
                     Archive
                 </div>
-                <div class="nav-item" onclick="openEmailParseModal()">
-                    <svg viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
-                    New from Email
-                </div>
             </nav>
+            <div class="sidebar-email-box">
+                <div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">New from Email</div>
+                <textarea id="sidebarEmailPaste" placeholder="Paste customer email here..." style="width:100%;min-height:80px;max-height:140px;background:var(--bg-dark);border:1px solid var(--border);border-radius:8px;color:var(--text-primary);font-family:inherit;font-size:13px;padding:10px;resize:vertical;"></textarea>
+                <button class="btn btn-primary" onclick="sidebarExtractEmail()" style="width:100%;margin-top:8px;padding:10px;font-size:13px;">Extract & New Order</button>
+            </div>
             <div class="sidebar-footer">
                 <button class="fun-btn emotional" onclick="showHaiku()">🌸 Emotional Support</button>
                 <button class="fun-btn just-world" onclick="showJustWorld()">Press for Just World</button>
@@ -1144,6 +1149,24 @@
             document.getElementById('formCustomerName').value = name;
             document.getElementById('formEmail').value = email;
             document.getElementById('formPhone').value = phone;
+        }
+
+        function sidebarExtractEmail() {
+            const text = document.getElementById('sidebarEmailPaste').value;
+            if (!text.trim()) { showToast('Paste the email first'); return; }
+
+            const extracted = parseOrderFromEmail(text);
+            const name = [extracted.firstName, extracted.lastName].filter(Boolean).join(' ');
+
+            openAddModal();
+
+            document.getElementById('formCustomerName').value = name;
+            document.getElementById('formEmail').value = extracted.email || '';
+            document.getElementById('formPhone').value = extracted.phone || '';
+
+            document.getElementById('sidebarEmailPaste').value = '';
+            if (window.innerWidth < 769) toggleSidebar();
+            showToast('Email parsed — review and save');
         }
 
         function parseOrderFromEmail(text) {
