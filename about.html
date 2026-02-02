@@ -524,18 +524,29 @@
 
         </div>
 
-        <!-- Our Process -->
+        <!-- Our Process (Animated) -->
         <div class="section-wrapper section-beige reveal" style="margin-bottom: 3rem;">
             <div class="section-header">
                 <h2>Our <span class="highlight">Process</span></h2>
                 <p>From your idea to your table — here's how it works</p>
             </div>
 
-            <div class="process-timeline">
+            <div class="process-progress" id="processProgress">
+                <span class="process-progress-label" id="processProgressLabel">Step 1 of 6</span>
+                <div class="process-progress-track">
+                    <div class="process-progress-fill" id="processProgressFill"></div>
+                </div>
+            </div>
+
+            <div class="process-timeline" id="processTimeline">
                 <!-- Step 1 -->
-                <div class="process-step">
+                <div class="process-step waiting" data-step="1">
                     <div class="process-step-number" style="background: var(--pink); color: var(--white);">1</div>
                     <div class="process-step-content">
+                        <div class="process-scene process-scene-1">
+                            <div class="scene-phone"></div>
+                            <div class="scene-bubble">I want a 3-tier cake!</div>
+                        </div>
                         <h4>Tell Us Your Vision</h4>
                         <p>Reach out by phone, email, or our website. Share your event date, guest count, theme ideas, and any inspiration photos. Want to get started right away? Try our <a href="order-form.html#ai-sketch">Sketch Your Cake AI</a> to visualize your dream cake, or <a href="corporate.html#cookiePreviewSection">see how your logo looks on a cookie</a> — before you even contact us.</p>
                         <div class="process-cta-links">
@@ -556,53 +567,170 @@
                 </div>
 
                 <!-- Step 2 -->
-                <div class="process-step">
+                <div class="process-step waiting" data-step="2">
                     <div class="process-step-number" style="background: var(--yellow); color: var(--dark-brown);">2</div>
                     <div class="process-step-content">
+                        <div class="process-scene process-scene-2">
+                            <div class="scene-pencil">&#9998;</div>
+                            <div class="scene-line"></div>
+                        </div>
                         <h4>Custom Sketches & Pricing</h4>
                         <p>Yana creates multiple design options with pricing — typically within 24–48 hours. No commitment required. This is how every project starts.</p>
                     </div>
                 </div>
 
                 <!-- Step 3 -->
-                <div class="process-step">
+                <div class="process-step waiting" data-step="3">
                     <div class="process-step-number" style="background: var(--brown); color: var(--white);">3</div>
                     <div class="process-step-content">
+                        <div class="process-scene process-scene-3">
+                            <div class="scene-bubble-left">How about pink?</div>
+                            <div class="scene-bubble-right">Love it!</div>
+                        </div>
                         <h4>Revisions & Approval</h4>
                         <p>Review the sketches, pick your favorites, request changes. We go back and forth until the design is exactly what you want.</p>
                     </div>
                 </div>
 
                 <!-- Step 4 -->
-                <div class="process-step">
+                <div class="process-step waiting" data-step="4">
                     <div class="process-step-number" style="background: var(--dark-brown); color: var(--white);">4</div>
                     <div class="process-step-content">
+                        <div class="process-scene process-scene-4">
+                            <div class="scene-invoice"></div>
+                            <div class="scene-check">&#10003;</div>
+                        </div>
                         <h4>Payment & Scheduling</h4>
                         <p>Once you approve, we send a simple invoice. Pay by credit/debit card, PayPal, or Venmo. Your spot on our calendar is locked in.</p>
                     </div>
                 </div>
 
                 <!-- Step 5 -->
-                <div class="process-step">
+                <div class="process-step waiting" data-step="5">
                     <div class="process-step-number" style="background: var(--pink); color: var(--white);">5</div>
                     <div class="process-step-content">
+                        <div class="process-scene process-scene-5">
+                            <div class="scene-whisk">&#127860;</div>
+                            <div class="scene-bowl"></div>
+                        </div>
                         <h4>Handcrafted Creation</h4>
                         <p>Every item is made from scratch by hand using the freshest ingredients. No shortcuts, no templates — just Yana's artistry and attention to detail.</p>
                     </div>
                 </div>
 
                 <!-- Step 6 -->
-                <div class="process-step">
+                <div class="process-step waiting" data-step="6">
                     <div class="process-step-number" style="background: var(--yellow); color: var(--dark-brown);">6</div>
                     <div class="process-step-content">
+                        <div class="process-scene process-scene-6">
+                            <div class="scene-road"></div>
+                            <div class="scene-van">&#128666;</div>
+                        </div>
                         <h4>Pickup or Delivery</h4>
                         <p>Pick up at our Daly City kitchen (9 AM–6 PM), or we deliver anywhere in the San Francisco Bay Area.</p>
                     </div>
                 </div>
             </div>
 
+            <button class="process-replay" id="processReplay" onclick="replayProcess()">Replay</button>
+
             <p style="text-align: center; margin-top: 2rem; font-weight: 600; color: var(--dark-brown); font-size: 1.05rem;">We take pride in accommodating budgetary concerns — flexible solutions for every budget. Learn more about <a href="blog-how-to-order-custom-birthday-cake.html" style="color: var(--pink);">how to order a custom cake</a>.</p>
         </div>
+
+        <script>
+        (function() {
+            var timeline = document.getElementById('processTimeline');
+            var steps = timeline.querySelectorAll('.process-step');
+            var progress = document.getElementById('processProgress');
+            var progressLabel = document.getElementById('processProgressLabel');
+            var progressFill = document.getElementById('processProgressFill');
+            var replayBtn = document.getElementById('processReplay');
+            var totalSteps = steps.length;
+            var played = false;
+            var timers = [];
+
+            // Reduced motion check
+            var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (prefersReduced) {
+                steps.forEach(function(s) {
+                    s.classList.remove('waiting');
+                    s.classList.add('done');
+                });
+                timeline.style.setProperty('--timeline-progress', '1');
+                progressFill.style.width = '100%';
+                progressLabel.textContent = 'Step 6 of 6';
+                progress.classList.add('visible');
+                played = true;
+                return;
+            }
+
+            function playStep(n) {
+                // Mark previous as done
+                if (n > 1) {
+                    steps[n - 2].classList.remove('active');
+                    steps[n - 2].classList.add('done');
+                }
+                // Mark current as active
+                steps[n - 1].classList.remove('waiting');
+                steps[n - 1].classList.add('active');
+                // Update timeline progress
+                timeline.style.setProperty('--timeline-progress', String(n / totalSteps));
+                // Update progress bar
+                progressLabel.textContent = 'Step ' + n + ' of ' + totalSteps;
+                progressFill.style.width = ((n / totalSteps) * 100) + '%';
+            }
+
+            function finishSequence() {
+                steps[totalSteps - 1].classList.remove('active');
+                steps[totalSteps - 1].classList.add('done');
+                replayBtn.classList.add('visible');
+            }
+
+            function startSequence() {
+                // Clear any running timers
+                timers.forEach(function(t) { clearTimeout(t); });
+                timers = [];
+                // Reset all steps
+                steps.forEach(function(s) {
+                    s.classList.remove('active', 'done');
+                    s.classList.add('waiting');
+                });
+                timeline.style.setProperty('--timeline-progress', '0');
+                progressFill.style.width = '0%';
+                progressLabel.textContent = 'Step 1 of ' + totalSteps;
+                progress.classList.add('visible');
+                replayBtn.classList.remove('visible');
+
+                // Play each step with 3.5s intervals
+                for (var i = 0; i < totalSteps; i++) {
+                    (function(idx) {
+                        timers.push(setTimeout(function() {
+                            playStep(idx + 1);
+                        }, idx * 3500));
+                    })(i);
+                }
+                // Finish after last step plays
+                timers.push(setTimeout(finishSequence, totalSteps * 3500));
+            }
+
+            // Expose replay
+            window.replayProcess = function() {
+                startSequence();
+            };
+
+            // IntersectionObserver trigger
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting && !played) {
+                        played = true;
+                        startSequence();
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            observer.observe(timeline);
+        })();
+        </script>
 
         <!-- CTA -->
         <div class="section-wrapper reveal" style="background: linear-gradient(135deg, var(--pink), var(--pink-dark)); text-align: center; color: var(--white);">

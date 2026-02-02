@@ -1576,14 +1576,28 @@ footer {
     gap: 2rem;
 }
 
-/* ==================== PROCESS TIMELINE ==================== */
+/* ==================== PROCESS TIMELINE (Animated) ==================== */
 .process-timeline {
     position: relative;
     max-width: 800px;
     margin: 0 auto;
     padding-left: 3rem;
+    --timeline-progress: 0;
 }
 
+/* Timeline track (grey background) */
+.process-timeline::after {
+    content: '';
+    position: absolute;
+    left: 1.75rem;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: #e0d6d0;
+    border-radius: 3px;
+}
+
+/* Timeline fill (draws progressively) */
 .process-timeline::before {
     content: '';
     position: absolute;
@@ -1593,6 +1607,10 @@ footer {
     width: 3px;
     background: linear-gradient(180deg, var(--pink), var(--yellow), var(--brown), var(--dark-brown), var(--pink), var(--yellow));
     border-radius: 3px;
+    z-index: 1;
+    transform: scaleY(var(--timeline-progress));
+    transform-origin: top;
+    transition: transform 0.6s ease;
 }
 
 .process-step {
@@ -1602,6 +1620,22 @@ footer {
     align-items: flex-start;
     gap: 1.5rem;
     margin-bottom: 2rem;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.process-step.waiting {
+    opacity: 0.35;
+    transform: translateX(0);
+}
+
+.process-step.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.process-step.done {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .process-step:last-child {
@@ -1624,12 +1658,26 @@ footer {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     position: relative;
     z-index: 2;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.process-step:hover .process-step-number {
-    transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+.process-step.waiting .process-step-number {
+    filter: grayscale(0.6);
+}
+
+.process-step.active .process-step-number {
+    animation: numberPulse 1s ease infinite;
+    filter: grayscale(0);
+}
+
+.process-step.done .process-step-number {
+    filter: grayscale(0);
+    box-shadow: 0 4px 18px rgba(236, 38, 143, 0.25);
+}
+
+@keyframes numberPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
 }
 
 .process-step-content {
@@ -1638,10 +1686,11 @@ footer {
     padding: 1.5rem 2rem;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     flex: 1;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    overflow: hidden;
 }
 
-.process-step:hover .process-step-content {
+.process-step.active .process-step-content {
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
 }
@@ -1672,6 +1721,380 @@ footer {
 
 .process-step-content p a:hover {
     text-decoration-color: var(--pink);
+}
+
+/* ---- Process Scenes (animated micro-scenes) ---- */
+.process-scene {
+    height: 80px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #fdf6f0, #fef0f5);
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.process-step.active .process-scene,
+.process-step.done .process-scene {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Scene 1: Phone + chat bubble */
+.process-scene-1 .scene-phone {
+    position: absolute;
+    left: 15%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 44px;
+    border: 3px solid var(--pink);
+    border-radius: 6px;
+    background: var(--white);
+}
+
+.process-scene-1 .scene-phone::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--pink);
+}
+
+.process-scene-1 .scene-bubble {
+    position: absolute;
+    left: 35%;
+    top: 18px;
+    background: var(--pink);
+    color: var(--white);
+    padding: 6px 12px;
+    border-radius: 12px 12px 12px 4px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+    opacity: 0;
+}
+
+.process-step.active .process-scene-1 .scene-bubble {
+    animation: bubbleFloat 2s ease 0.3s forwards;
+}
+
+.process-step.done .process-scene-1 .scene-bubble {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes bubbleFloat {
+    0% { opacity: 0; transform: translateY(10px); }
+    30% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Scene 2: Pencil drawing a line */
+.process-scene-2 .scene-line {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    height: 3px;
+    background: var(--dark-brown);
+    border-radius: 3px;
+    width: 0;
+}
+
+.process-scene-2 .scene-pencil {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) rotate(-30deg);
+    left: 10%;
+    font-size: 28px;
+    transition: left 2s ease;
+}
+
+.process-step.active .process-scene-2 .scene-line {
+    animation: drawLine 2s ease 0.2s forwards;
+}
+
+.process-step.active .process-scene-2 .scene-pencil {
+    animation: movePencil 2s ease 0.2s forwards;
+}
+
+.process-step.done .process-scene-2 .scene-line {
+    width: 65%;
+}
+
+.process-step.done .process-scene-2 .scene-pencil {
+    left: 72%;
+}
+
+@keyframes drawLine {
+    0% { width: 0; }
+    100% { width: 65%; }
+}
+
+@keyframes movePencil {
+    0% { left: 10%; }
+    100% { left: 72%; }
+}
+
+/* Scene 3: Chat bubbles back and forth */
+.process-scene-3 .scene-bubble-left,
+.process-scene-3 .scene-bubble-right {
+    position: absolute;
+    padding: 6px 14px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+    opacity: 0;
+}
+
+.process-scene-3 .scene-bubble-left {
+    left: 8%;
+    top: 15px;
+    background: var(--brown);
+    color: var(--white);
+    border-radius: 12px 12px 12px 4px;
+}
+
+.process-scene-3 .scene-bubble-right {
+    right: 8%;
+    top: 40px;
+    background: var(--pink);
+    color: var(--white);
+    border-radius: 12px 12px 4px 12px;
+}
+
+.process-step.active .process-scene-3 .scene-bubble-left {
+    animation: chatLeft 2.5s ease 0.2s forwards;
+}
+
+.process-step.active .process-scene-3 .scene-bubble-right {
+    animation: chatRight 2.5s ease 0.8s forwards;
+}
+
+.process-step.done .process-scene-3 .scene-bubble-left,
+.process-step.done .process-scene-3 .scene-bubble-right {
+    opacity: 1;
+}
+
+@keyframes chatLeft {
+    0% { opacity: 0; transform: translateX(-20px); }
+    30% { opacity: 1; transform: translateX(0); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes chatRight {
+    0% { opacity: 0; transform: translateX(20px); }
+    40% { opacity: 1; transform: translateX(0); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+/* Scene 4: Invoice + calendar check */
+.process-scene-4 .scene-invoice {
+    position: absolute;
+    left: 15%;
+    top: 50%;
+    transform: translateY(-50%) translateX(-30px);
+    width: 36px;
+    height: 46px;
+    background: var(--white);
+    border: 2px solid var(--dark-brown);
+    border-radius: 4px;
+    opacity: 0;
+}
+
+.process-scene-4 .scene-invoice::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 5px;
+    right: 5px;
+    height: 2px;
+    background: var(--dark-brown);
+    box-shadow: 0 6px 0 var(--dark-brown), 0 12px 0 var(--dark-brown);
+}
+
+.process-scene-4 .scene-check {
+    position: absolute;
+    right: 20%;
+    top: 50%;
+    transform: translateY(-50%) scale(0);
+    font-size: 32px;
+    color: var(--pink);
+}
+
+.process-step.active .process-scene-4 .scene-invoice {
+    animation: slideInvoice 1.2s ease 0.2s forwards;
+}
+
+.process-step.active .process-scene-4 .scene-check {
+    animation: popCheck 0.6s ease 1.4s forwards;
+}
+
+.process-step.done .process-scene-4 .scene-invoice {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+.process-step.done .process-scene-4 .scene-check {
+    transform: translateY(-50%) scale(1);
+}
+
+@keyframes slideInvoice {
+    0% { opacity: 0; transform: translateY(-50%) translateX(-30px); }
+    100% { opacity: 1; transform: translateY(-50%) translateX(0); }
+}
+
+@keyframes popCheck {
+    0% { transform: translateY(-50%) scale(0); }
+    60% { transform: translateY(-50%) scale(1.2); }
+    100% { transform: translateY(-50%) scale(1); }
+}
+
+/* Scene 5: Mixing bowl + whisk */
+.process-scene-5 .scene-bowl {
+    position: absolute;
+    left: 50%;
+    bottom: 8px;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 32px;
+    background: var(--brown);
+    border-radius: 0 0 30px 30px;
+}
+
+.process-scene-5 .scene-whisk {
+    position: absolute;
+    left: 50%;
+    top: 8px;
+    transform: translateX(-50%) rotate(0deg);
+    font-size: 28px;
+    transform-origin: bottom center;
+}
+
+.process-step.active .process-scene-5 .scene-whisk {
+    animation: whiskStir 1.5s ease-in-out 0.2s infinite;
+}
+
+.process-step.done .process-scene-5 .scene-whisk {
+    transform: translateX(-50%) rotate(0deg);
+}
+
+@keyframes whiskStir {
+    0%, 100% { transform: translateX(-50%) rotate(-15deg); }
+    50% { transform: translateX(-50%) rotate(15deg); }
+}
+
+/* Scene 6: Delivery van driving */
+.process-scene-6 .scene-van {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -40px;
+    font-size: 32px;
+}
+
+.process-scene-6 .scene-road {
+    position: absolute;
+    bottom: 12px;
+    left: 5%;
+    right: 5%;
+    height: 2px;
+    background: var(--dark-brown);
+    border-radius: 2px;
+}
+
+.process-scene-6 .scene-road::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: repeating-linear-gradient(90deg, var(--dark-brown) 0, var(--dark-brown) 12px, transparent 12px, transparent 24px);
+    opacity: 0.3;
+}
+
+.process-step.active .process-scene-6 .scene-van {
+    animation: driveVan 2.5s ease 0.2s forwards;
+}
+
+.process-step.done .process-scene-6 .scene-van {
+    left: 75%;
+}
+
+@keyframes driveVan {
+    0% { left: -40px; }
+    100% { left: 75%; }
+}
+
+/* ---- Progress Bar ---- */
+.process-progress {
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.process-progress.visible {
+    opacity: 1;
+}
+
+.process-progress-label {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--dark-brown);
+    white-space: nowrap;
+    min-width: 85px;
+}
+
+.process-progress-track {
+    flex: 1;
+    height: 6px;
+    background: #e0d6d0;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.process-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--pink), var(--yellow));
+    border-radius: 6px;
+    transition: width 0.6s ease;
+}
+
+/* ---- Replay Button ---- */
+.process-replay {
+    display: none;
+    margin: 1.5rem auto 0;
+    padding: 0.7rem 1.5rem;
+    border: 2px solid var(--pink);
+    background: transparent;
+    color: var(--pink);
+    border-radius: 25px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.process-replay:hover {
+    background: var(--pink);
+    color: var(--white);
+}
+
+.process-replay.visible {
+    display: block;
 }
 
 /* Process CTA Links under Step 1 */
@@ -1750,7 +2173,8 @@ footer {
         padding-left: 2rem;
     }
 
-    .process-timeline::before {
+    .process-timeline::before,
+    .process-timeline::after {
         left: 1.25rem;
     }
 
@@ -1774,6 +2198,10 @@ footer {
         font-size: 1.1rem;
     }
 
+    .process-scene {
+        height: 60px;
+    }
+
     .process-cta-links {
         gap: 0.5rem;
     }
@@ -1781,6 +2209,27 @@ footer {
     .process-cta {
         padding: 0.75rem 1rem;
         font-size: 0.9rem;
+    }
+}
+
+/* Reduced motion: skip all animation, show everything */
+@media (prefers-reduced-motion: reduce) {
+    .process-step,
+    .process-step-number,
+    .process-step-content,
+    .process-scene,
+    .process-timeline::before {
+        transition: none !important;
+        animation: none !important;
+    }
+
+    .process-step.waiting {
+        opacity: 1;
+    }
+
+    .process-scene {
+        opacity: 1 !important;
+        transform: scale(1) !important;
     }
 }
 
