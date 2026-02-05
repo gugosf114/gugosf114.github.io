@@ -266,6 +266,61 @@
         .stat-card.blue .stat-value { color: var(--accent-blue); }
         .stat-card.red .stat-value { color: var(--accent-red); }
 
+        /* Calendar View */
+        .calendar-view {
+            background: rgba(37,42,74,0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3); overflow: hidden;
+        }
+        .calendar-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 16px 20px; border-bottom: 1px solid var(--border);
+        }
+        .calendar-header h3 { font-size: 18px; font-weight: 600; }
+        .calendar-nav { display: flex; gap: 8px; }
+        .calendar-nav button {
+            background: var(--bg-hover); border: 1px solid var(--border); border-radius: 6px;
+            color: var(--text-primary); padding: 6px 12px; cursor: pointer; font-size: 14px;
+        }
+        .calendar-nav button:hover { background: var(--bg-card); }
+        .calendar-grid {
+            display: grid; grid-template-columns: repeat(7, 1fr);
+        }
+        .calendar-day-header {
+            padding: 12px 8px; text-align: center; font-size: 12px; font-weight: 600;
+            color: var(--text-secondary); border-bottom: 1px solid var(--border);
+        }
+        .calendar-day {
+            min-height: 100px; padding: 8px; border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border); position: relative;
+        }
+        .calendar-day:nth-child(7n) { border-right: none; }
+        .calendar-day.other-month { background: rgba(0,0,0,0.15); }
+        .calendar-day.today { background: rgba(99,102,241,0.15); }
+        .calendar-day-number {
+            font-size: 13px; font-weight: 600; margin-bottom: 6px;
+            color: var(--text-secondary);
+        }
+        .calendar-day.today .calendar-day-number { color: var(--accent-blue); }
+        .calendar-order {
+            font-size: 11px; padding: 4px 6px; margin-bottom: 4px; border-radius: 4px;
+            cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            transition: transform 0.2s;
+        }
+        .calendar-order:hover { transform: scale(1.02); }
+        .calendar-order.cake { background: var(--accent-pink); color: #fff; }
+        .calendar-order.cookies { background: var(--accent-orange); color: #fff; }
+        .calendar-order.cupcakes { background: var(--accent-blue); color: #fff; }
+        .calendar-order.cakepops { background: var(--accent-green); color: #fff; }
+        .calendar-order.macarons { background: #a855f7; color: #fff; }
+        .view-toggle { display: flex; gap: 4px; background: var(--bg-hover); border-radius: 8px; padding: 4px; }
+        .view-toggle button {
+            padding: 6px 12px; border: none; background: transparent; color: var(--text-secondary);
+            border-radius: 6px; cursor: pointer; font-size: 13px; transition: all 0.2s;
+        }
+        .view-toggle button.active { background: var(--accent-blue); color: #fff; }
+        .view-toggle button:hover:not(.active) { color: var(--text-primary); }
+
         .upcoming-section {
             background: rgba(37,42,74,0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
             border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);
@@ -1522,6 +1577,9 @@
 
         // ========== DASHBOARD FILTERS ==========
         let activeFilter = null;
+        let ordersViewMode = 'table'; // 'table' or 'calendar'
+        let calendarMonth = new Date().getMonth();
+        let calendarYear = new Date().getFullYear();
 
         function filterByInvoice(status) {
             activeFilter = { type: 'invoice', value: status };
@@ -1536,6 +1594,29 @@
         function clearFilter() {
             activeFilter = null;
             renderView();
+        }
+
+        function setOrdersViewMode(mode) {
+            ordersViewMode = mode;
+            renderOrdersTable();
+        }
+
+        function prevMonth() {
+            calendarMonth--;
+            if (calendarMonth < 0) { calendarMonth = 11; calendarYear--; }
+            renderOrdersTable();
+        }
+
+        function nextMonth() {
+            calendarMonth++;
+            if (calendarMonth > 11) { calendarMonth = 0; calendarYear++; }
+            renderOrdersTable();
+        }
+
+        function goToToday() {
+            calendarMonth = new Date().getMonth();
+            calendarYear = new Date().getFullYear();
+            renderOrdersTable();
         }
 
         // ========== FUN BUTTONS ==========
@@ -1561,6 +1642,80 @@
         function closeHaikuModal() { document.getElementById('haikuModal').classList.remove('active'); }
         function showJustWorld() { document.getElementById('justWorldModal').classList.add('active'); }
         function closeJustWorldModal() { document.getElementById('justWorldModal').classList.remove('active'); }
+
+        // ========== CALENDAR VIEW ==========
+        function renderCalendarView(data) {
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+            const firstDay = new Date(calendarYear, calendarMonth, 1);
+            const lastDay = new Date(calendarYear, calendarMonth + 1, 0);
+            const startDay = firstDay.getDay();
+            const daysInMonth = lastDay.getDate();
+
+            const today = new Date();
+            const todayStr = today.toISOString().split('T')[0];
+
+            // Build order map by date
+            const ordersByDate = {};
+            data.forEach(order => {
+                const dueDate = order.dueDateTime ? order.dueDateTime.split('T')[0] : order.dueDate;
+                if (dueDate) {
+                    if (!ordersByDate[dueDate]) ordersByDate[dueDate] = [];
+                    ordersByDate[dueDate].push(order);
+                }
+            });
+
+            let calendarHTML = `
+                <div class="calendar-view">
+                    <div class="calendar-header">
+                        <h3>${monthNames[calendarMonth]} ${calendarYear}</h3>
+                        <div class="calendar-nav">
+                            <button onclick="prevMonth()">← Prev</button>
+                            <button onclick="goToToday()">Today</button>
+                            <button onclick="nextMonth()">Next →</button>
+                        </div>
+                    </div>
+                    <div class="calendar-grid">
+                        ${dayNames.map(d => `<div class="calendar-day-header">${d}</div>`).join('')}
+            `;
+
+            // Previous month days
+            const prevMonthLastDay = new Date(calendarYear, calendarMonth, 0).getDate();
+            for (let i = startDay - 1; i >= 0; i--) {
+                const day = prevMonthLastDay - i;
+                calendarHTML += `<div class="calendar-day other-month"><div class="calendar-day-number">${day}</div></div>`;
+            }
+
+            // Current month days
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateStr = `${calendarYear}-${String(calendarMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const isToday = dateStr === todayStr;
+                const dayOrders = ordersByDate[dateStr] || [];
+
+                calendarHTML += `
+                    <div class="calendar-day ${isToday ? 'today' : ''}">
+                        <div class="calendar-day-number">${day}</div>
+                        ${dayOrders.slice(0, 3).map(o => `
+                            <div class="calendar-order ${o.item || ''}" onclick="editOrder('${o.id}')" title="${o.customerName} - ${o.item} - ${o.flavor}">
+                                ${o.customerName.split(' ')[0]} · ${o.item || 'Order'}
+                            </div>
+                        `).join('')}
+                        ${dayOrders.length > 3 ? `<div style="font-size:10px;color:var(--text-secondary);padding:2px 6px;">+${dayOrders.length - 3} more</div>` : ''}
+                    </div>
+                `;
+            }
+
+            // Next month days
+            const totalCells = startDay + daysInMonth;
+            const remainingCells = (7 - (totalCells % 7)) % 7;
+            for (let day = 1; day <= remainingCells; day++) {
+                calendarHTML += `<div class="calendar-day other-month"><div class="calendar-day-number">${day}</div></div>`;
+            }
+
+            calendarHTML += `</div></div>`;
+            return calendarHTML;
+        }
 
         // ========== EXPORT ==========
         function exportCSV() {
@@ -1794,7 +1949,11 @@
                         Export
                     </button>
                     ${activeFilter ? `<button class="btn btn-secondary" onclick="clearFilter()" style="background:var(--accent-red);border-color:var(--accent-red);">✕ Clear Filter: ${activeFilter.type === 'invoice' ? 'Unpaid' : 'Sketch Pending'}</button>` : ''}
-                    <select class="sort-dropdown" id="sortSelect" onchange="sortOrders()">
+                    <div class="view-toggle">
+                        <button class="${ordersViewMode === 'table' ? 'active' : ''}" onclick="setOrdersViewMode('table')">☰ List</button>
+                        <button class="${ordersViewMode === 'calendar' ? 'active' : ''}" onclick="setOrdersViewMode('calendar')">📅 Calendar</button>
+                    </div>
+                    <select class="sort-dropdown" id="sortSelect" onchange="sortOrders()" ${ordersViewMode === 'calendar' ? 'style="display:none;"' : ''}>
                         <option value="dueDateTime-asc">Due Date (Soonest)</option>
                         <option value="dueDateTime-desc">Due Date (Latest)</option>
                         <option value="orderDate-desc">Order Date (Newest)</option>
@@ -1839,13 +1998,19 @@
                 );
             }
 
-            if (data.length === 0) {
+            if (data.length === 0 && ordersViewMode === 'table') {
                 container.innerHTML = `
                     <div class="empty-state">
                         <h3>${currentView === 'archive' ? 'Archive is empty' : 'No active orders'}</h3>
                         <p>${currentView === 'archive' ? 'Completed orders will appear here' : 'Click "New Order" to get started'}</p>
                     </div>
                 `;
+                return;
+            }
+
+            // Calendar View
+            if (ordersViewMode === 'calendar' && currentView !== 'archive') {
+                container.innerHTML = renderCalendarView(data);
                 return;
             }
 
