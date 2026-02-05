@@ -14,6 +14,7 @@
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -320,6 +321,19 @@
         }
         .view-toggle button.active { background: var(--accent-blue); color: #fff; }
         .view-toggle button:hover:not(.active) { color: var(--text-primary); }
+
+        /* Attachment styles */
+        .attachment-item {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px; background: var(--bg-hover); border-radius: 8px; margin-bottom: 8px;
+        }
+        .attachment-info { flex: 1; min-width: 0; }
+        .attachment-name { display: block; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .attachment-size { font-size: 12px; color: var(--text-secondary); }
+        .attachment-actions { display: flex; gap: 6px; margin-left: 12px; }
+        .file-indicator { cursor: pointer; padding: 4px 8px; border-radius: 6px; transition: background 0.2s; }
+        .file-indicator:hover { background: var(--bg-hover); }
+        .file-indicator.has-file { color: var(--accent-blue); font-weight: 600; }
 
         .upcoming-section {
             background: rgba(37,42,74,0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
@@ -865,6 +879,24 @@
         <div class="just-world-text">just world</div>
     </div>
 
+    <!-- Attachments Modal -->
+    <div class="modal-overlay" id="attachmentsModal">
+        <div class="modal" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2 class="modal-title">Attachments</h2>
+                <button class="modal-close" onclick="closeAttachmentsModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="attachmentsList"></div>
+                <button class="btn btn-primary" onclick="uploadAttachment()" style="margin-top:16px;width:100%;">
+                    <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" style="margin-right:8px;"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z"/></svg>
+                    Upload File
+                </button>
+                <p style="font-size:11px;color:var(--text-secondary);margin-top:8px;text-align:center;">Images, PDF, Word docs · Max 10MB</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Email Parse Modal -->
     <div class="modal-overlay" id="emailParseModal">
         <div class="modal" style="max-width: 600px;">
@@ -948,6 +980,7 @@
         // Firebase state
         let firebaseApp = null;
         let firebaseDb = null;
+        let firebaseStorage = null;
         let firebaseConnected = false;
         let syncListenersAttached = false;
 
@@ -971,6 +1004,7 @@
                 // Initialize Firebase app
                 firebaseApp = firebase.initializeApp(firebaseConfig);
                 firebaseDb = firebase.database();
+                firebaseStorage = firebase.storage();
 
                 // Monitor connection state
                 const connectedRef = firebaseDb.ref('.info/connected');
@@ -1643,6 +1677,126 @@
         function showJustWorld() { document.getElementById('justWorldModal').classList.add('active'); }
         function closeJustWorldModal() { document.getElementById('justWorldModal').classList.remove('active'); }
 
+        // ========== FILE ATTACHMENTS ==========
+        let currentAttachmentOrderId = null;
+
+        function openAttachmentsModal(orderId) {
+            currentAttachmentOrderId = orderId;
+            const order = orders.find(o => o.id === orderId) || archive.find(o => o.id === orderId);
+            if (!order) return;
+
+            const attachments = order.attachments || [];
+            document.getElementById('attachmentsList').innerHTML = attachments.length === 0
+                ? '<p style="color:var(--text-secondary);text-align:center;padding:20px;">No attachments yet</p>'
+                : attachments.map((att, idx) => `
+                    <div class="attachment-item">
+                        <div class="attachment-info">
+                            <span class="attachment-name">${escapeHtml(att.name)}</span>
+                            <span class="attachment-size">${formatFileSize(att.size)}</span>
+                        </div>
+                        <div class="attachment-actions">
+                            <a href="${att.url}" target="_blank" class="btn btn-secondary" style="padding:4px 8px;font-size:12px;">View</a>
+                            <button onclick="deleteAttachment(${idx})" class="btn btn-secondary" style="padding:4px 8px;font-size:12px;background:var(--accent-red);border-color:var(--accent-red);">Delete</button>
+                        </div>
+                    </div>
+                `).join('');
+
+            document.getElementById('attachmentsModal').classList.add('active');
+        }
+
+        function closeAttachmentsModal() {
+            document.getElementById('attachmentsModal').classList.remove('active');
+            currentAttachmentOrderId = null;
+        }
+
+        async function uploadAttachment() {
+            if (!currentAttachmentOrderId) return;
+            if (!firebaseStorage) {
+                showToast('Storage not available');
+                return;
+            }
+
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*,.pdf,.doc,.docx';
+            input.onchange = async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                // Max 10MB
+                if (file.size > 10 * 1024 * 1024) {
+                    showToast('File too large (max 10MB)');
+                    return;
+                }
+
+                showToast('Uploading...');
+
+                try {
+                    const order = orders.find(o => o.id === currentAttachmentOrderId);
+                    if (!order) return;
+
+                    // Create path: orders/customerName/filename
+                    const safeName = order.customerName.replace(/[^a-zA-Z0-9]/g, '_');
+                    const timestamp = Date.now();
+                    const path = `orders/${safeName}/${timestamp}_${file.name}`;
+
+                    const ref = firebaseStorage.ref(path);
+                    const snapshot = await ref.put(file);
+                    const url = await snapshot.ref.getDownloadURL();
+
+                    // Add to order attachments
+                    if (!order.attachments) order.attachments = [];
+                    order.attachments.push({
+                        name: file.name,
+                        size: file.size,
+                        url: url,
+                        path: path,
+                        uploadedAt: new Date().toISOString()
+                    });
+
+                    order.updatedAt = new Date().toISOString();
+                    saveData();
+                    openAttachmentsModal(currentAttachmentOrderId); // Refresh modal
+                    showToast('File uploaded!');
+                } catch (error) {
+                    console.error('Upload error:', error);
+                    showToast('Upload failed');
+                }
+            };
+            input.click();
+        }
+
+        async function deleteAttachment(index) {
+            if (!currentAttachmentOrderId) return;
+
+            const order = orders.find(o => o.id === currentAttachmentOrderId);
+            if (!order || !order.attachments || !order.attachments[index]) return;
+
+            const att = order.attachments[index];
+
+            try {
+                // Delete from storage
+                if (firebaseStorage && att.path) {
+                    await firebaseStorage.ref(att.path).delete();
+                }
+            } catch (error) {
+                console.warn('Could not delete from storage:', error);
+            }
+
+            // Remove from order
+            order.attachments.splice(index, 1);
+            order.updatedAt = new Date().toISOString();
+            saveData();
+            openAttachmentsModal(currentAttachmentOrderId); // Refresh modal
+            showToast('Attachment deleted');
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+        }
+
         // ========== CALENDAR VIEW ==========
         function renderCalendarView(data) {
             const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -2131,7 +2285,7 @@
                         onchange="updateField('${order.id}', 'dueDate', this.value)">
                 </td>`,
 
-                attachments: `<td><span class="file-indicator ${order.attachments?.length ? 'has-file' : ''}">📎 ${order.attachments?.length || 0}</span></td>`,
+                attachments: `<td><span class="file-indicator ${order.attachments?.length ? 'has-file' : ''}" onclick="openAttachmentsModal('${order.id}')">📎 ${order.attachments?.length || 0}</span></td>`,
 
                 description: `<td>
                     <input type="text" class="cell-input" value="${escapeHtml(order.description || '')}"
