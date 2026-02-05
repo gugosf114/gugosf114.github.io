@@ -10,6 +10,11 @@
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icon-192.png">
     <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -72,6 +77,31 @@
         .password-form button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,115,234,0.4); }
         .password-error { color: var(--accent-red); font-size: 14px; text-align: center; display: none; }
         .password-error.show { display: block; }
+
+        /* ========== SYNC STATUS INDICATOR ========== */
+        .sync-status {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 11px; color: var(--text-muted);
+            padding: 4px 8px; border-radius: 6px;
+            background: rgba(0,0,0,0.2); margin-top: 8px;
+            transition: all 0.3s ease;
+        }
+        .sync-status .sync-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--text-muted);
+            transition: background 0.3s ease;
+        }
+        .sync-status.synced .sync-dot { background: var(--accent-green); }
+        .sync-status.syncing .sync-dot {
+            background: var(--accent-orange);
+            animation: syncPulse 1s ease-in-out infinite;
+        }
+        .sync-status.offline .sync-dot { background: var(--accent-red); }
+        .sync-status.error .sync-dot { background: var(--accent-red); }
+        @keyframes syncPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
 
         /* ========== PWA INSTALL BANNER ========== */
         .install-banner {
@@ -615,6 +645,10 @@
                     <div class="logo-icon"><img src="/logo_icon.png" alt="MBC"></div>
                     <span class="logo-text">Thursday</span>
                 </div>
+                <div class="sync-status" id="syncStatus">
+                    <span class="sync-dot"></span>
+                    <span class="sync-text">Connecting...</span>
+                </div>
             </div>
 
             <div class="profile-section">
@@ -836,6 +870,198 @@
         // ========== CONFIG ==========
         const APP_PASSWORD = 'mbc2012';
 
+        // ========== FIREBASE CONFIG ==========
+        const firebaseConfig = {
+            apiKey: "AIzaSyAM5ORQKqQ_cpqD5mIXcb7VsmFPJBVWNbg",
+            authDomain: "mbc-thursday.firebaseapp.com",
+            databaseURL: "https://mbc-thursday-default-rtdb.firebaseio.com",
+            projectId: "mbc-thursday",
+            storageBucket: "mbc-thursday.firebasestorage.app",
+            messagingSenderId: "58110322016",
+            appId: "1:58110322016:web:b67982808939ce4e6fea05"
+        };
+
+        // Firebase state
+        let firebaseApp = null;
+        let firebaseDb = null;
+        let firebaseConnected = false;
+        let syncListenersAttached = false;
+
+        // Initialize Firebase
+        function initFirebase() {
+            try {
+                // Check if Firebase SDK loaded
+                if (typeof firebase === 'undefined') {
+                    console.warn('Firebase SDK not loaded - running in offline mode');
+                    updateSyncStatus('offline', 'Offline mode');
+                    return false;
+                }
+
+                // Check if config has placeholder values
+                if (firebaseConfig.apiKey === 'YOUR_API_KEY_HERE') {
+                    console.warn('Firebase config not set - running in offline mode');
+                    updateSyncStatus('offline', 'Not configured');
+                    return false;
+                }
+
+                // Initialize Firebase app
+                firebaseApp = firebase.initializeApp(firebaseConfig);
+                firebaseDb = firebase.database();
+
+                // Monitor connection state
+                const connectedRef = firebaseDb.ref('.info/connected');
+                connectedRef.on('value', (snap) => {
+                    firebaseConnected = snap.val() === true;
+                    if (firebaseConnected) {
+                        updateSyncStatus('synced', 'Synced');
+                        // Attach real-time listeners on first connect
+                        if (!syncListenersAttached) {
+                            attachFirebaseListeners();
+                            syncListenersAttached = true;
+                        }
+                    } else {
+                        updateSyncStatus('offline', 'Offline');
+                    }
+                });
+
+                return true;
+            } catch (error) {
+                console.error('Firebase init error:', error);
+                updateSyncStatus('error', 'Error');
+                return false;
+            }
+        }
+
+        // Update sync status indicator
+        function updateSyncStatus(status, text) {
+            const el = document.getElementById('syncStatus');
+            if (!el) return;
+            el.className = 'sync-status ' + status;
+            el.querySelector('.sync-text').textContent = text;
+        }
+
+        // Attach real-time listeners for Firebase data changes
+        function attachFirebaseListeners() {
+            if (!firebaseDb) return;
+
+            // Listen for orders changes
+            firebaseDb.ref('orders').on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (data && Array.isArray(data)) {
+                    orders = data;
+                    // Update localStorage cache
+                    localStorage.setItem('thursdayOrders', JSON.stringify(orders));
+                    renderView();
+                }
+            }, (error) => {
+                console.error('Firebase orders listener error:', error);
+            });
+
+            // Listen for archive changes
+            firebaseDb.ref('archive').on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (data && Array.isArray(data)) {
+                    archive = data;
+                    // Update localStorage cache
+                    localStorage.setItem('thursdayArchive', JSON.stringify(archive));
+                    renderView();
+                }
+            }, (error) => {
+                console.error('Firebase archive listener error:', error);
+            });
+
+            // Listen for column order changes
+            firebaseDb.ref('columnOrder').on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (data && Array.isArray(data)) {
+                    columnOrder = data;
+                    // Update localStorage cache
+                    localStorage.setItem('thursdayColumns', JSON.stringify(columnOrder));
+                    renderView();
+                }
+            }, (error) => {
+                console.error('Firebase columnOrder listener error:', error);
+            });
+        }
+
+        // Load data from Firebase (called on init)
+        async function loadFromFirebase() {
+            if (!firebaseDb) return false;
+
+            try {
+                updateSyncStatus('syncing', 'Loading...');
+
+                const [ordersSnap, archiveSnap, columnsSnap] = await Promise.all([
+                    firebaseDb.ref('orders').once('value'),
+                    firebaseDb.ref('archive').once('value'),
+                    firebaseDb.ref('columnOrder').once('value')
+                ]);
+
+                const firebaseOrders = ordersSnap.val();
+                const firebaseArchive = archiveSnap.val();
+                const firebaseColumns = columnsSnap.val();
+
+                // If Firebase has data, use it and update localStorage
+                if (firebaseOrders && Array.isArray(firebaseOrders)) {
+                    orders = firebaseOrders;
+                    localStorage.setItem('thursdayOrders', JSON.stringify(orders));
+                }
+                if (firebaseArchive && Array.isArray(firebaseArchive)) {
+                    archive = firebaseArchive;
+                    localStorage.setItem('thursdayArchive', JSON.stringify(archive));
+                }
+                if (firebaseColumns && Array.isArray(firebaseColumns)) {
+                    columnOrder = firebaseColumns;
+                    localStorage.setItem('thursdayColumns', JSON.stringify(columnOrder));
+                }
+
+                // If Firebase is empty but localStorage has data, push to Firebase
+                if (!firebaseOrders && orders.length > 0) {
+                    await firebaseDb.ref('orders').set(orders);
+                }
+                if (!firebaseArchive && archive.length > 0) {
+                    await firebaseDb.ref('archive').set(archive);
+                }
+                if (!firebaseColumns && columnOrder.length > 0) {
+                    await firebaseDb.ref('columnOrder').set(columnOrder);
+                }
+
+                updateSyncStatus('synced', 'Synced');
+                return true;
+            } catch (error) {
+                console.error('Firebase load error:', error);
+                updateSyncStatus('error', 'Load error');
+                return false;
+            }
+        }
+
+        // Save data to both localStorage and Firebase
+        async function saveToFirebase() {
+            // Always save to localStorage first (offline cache)
+            localStorage.setItem('thursdayOrders', JSON.stringify(orders));
+            localStorage.setItem('thursdayArchive', JSON.stringify(archive));
+            localStorage.setItem('thursdayColumns', JSON.stringify(columnOrder));
+
+            // If Firebase is not configured or not connected, we're done
+            if (!firebaseDb) return;
+
+            try {
+                updateSyncStatus('syncing', 'Saving...');
+
+                await Promise.all([
+                    firebaseDb.ref('orders').set(orders),
+                    firebaseDb.ref('archive').set(archive),
+                    firebaseDb.ref('columnOrder').set(columnOrder)
+                ]);
+
+                updateSyncStatus('synced', 'Synced');
+            } catch (error) {
+                console.error('Firebase save error:', error);
+                updateSyncStatus('error', 'Save error');
+                // Data is still in localStorage, so not lost
+            }
+        }
+
         // ========== FLAVOR OPTIONS ==========
         const flavorsByItem = {
             cake: ['Strawberry Vanilla Cream', 'Chocolate Mousse', 'Lemon Orange Cream', 'Blueberry Lavender Cream'],
@@ -880,9 +1106,13 @@
         const generateId = () => 'order_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 
         function saveData() {
+            // Save to localStorage immediately (always works offline)
             localStorage.setItem('thursdayOrders', JSON.stringify(orders));
             localStorage.setItem('thursdayArchive', JSON.stringify(archive));
             localStorage.setItem('thursdayColumns', JSON.stringify(columnOrder));
+
+            // Also sync to Firebase (async, won't block)
+            saveToFirebase();
         }
 
         // Migrate old orders that have dueDate but not dueDateTime
@@ -895,9 +1125,7 @@
                 if (o.components === undefined) o.components = '';
             });
         }
-        migrateOrders(orders);
-        migrateOrders(archive);
-        saveData();
+        // Note: Migration is now called in the async initApp() at the bottom of the script
 
         // ========== PASSWORD ==========
         function checkPassword() {
@@ -1810,7 +2038,29 @@
 
         // ========== INIT ==========
         updateFlavorOptions();
+
+        // Run migrations on localStorage data immediately
+        migrateOrders(orders);
+        migrateOrders(archive);
+
+        // Render immediately from localStorage (fast startup)
         renderView();
+
+        // Initialize Firebase in background and sync data
+        (async function initFirebaseAndSync() {
+            // Initialize Firebase (but don't block the app)
+            const firebaseReady = initFirebase();
+
+            if (firebaseReady) {
+                // Try to load from Firebase (will update and re-render if data differs)
+                await loadFromFirebase();
+                // Run migrations on any new data from Firebase
+                migrateOrders(orders);
+                migrateOrders(archive);
+                // Re-render with Firebase data
+                renderView();
+            }
+        })();
 
         // Unregister any old service workers to prevent stale cache
         if ('serviceWorker' in navigator) {
