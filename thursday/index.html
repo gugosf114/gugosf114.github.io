@@ -1486,6 +1486,24 @@
             return match ? match[0] : '';
         }
 
+        // ========== DASHBOARD FILTERS ==========
+        let activeFilter = null;
+
+        function filterByInvoice(status) {
+            activeFilter = { type: 'invoice', value: status };
+            renderView();
+        }
+
+        function filterBySketch(status) {
+            activeFilter = { type: 'sketch', value: status };
+            renderView();
+        }
+
+        function clearFilter() {
+            activeFilter = null;
+            renderView();
+        }
+
         // ========== FUN BUTTONS ==========
         const haikus = [
             "Frosting swirls with care\nSweetness rises in the warmth\nJoy in every bite",
@@ -1597,7 +1615,7 @@
                     <div class="dashboard">
                         <div class="dashboard-main">
                             <div class="stats-grid">
-                                <div class="stat-card blue">
+                                <div class="stat-card blue" onclick="showView('orders')" style="cursor:pointer;">
                                     <div class="stat-value">${activeCount}</div>
                                     <div class="stat-label">Active Orders</div>
                                 </div>
@@ -1605,11 +1623,11 @@
                                     <div class="stat-value">${dueThisWeek}</div>
                                     <div class="stat-label">Due This Week</div>
                                 </div>
-                                <div class="stat-card red">
+                                <div class="stat-card red" onclick="showView('orders'); setTimeout(() => filterByInvoice('unpaid'), 100);" style="cursor:pointer;">
                                     <div class="stat-value">${unpaidCount}</div>
                                     <div class="stat-label">Unpaid Invoices</div>
                                 </div>
-                                <div class="stat-card green">
+                                <div class="stat-card green" onclick="showView('orders'); setTimeout(() => filterBySketch('working'), 100);" style="cursor:pointer;">
                                     <div class="stat-value">${sketchPending}</div>
                                     <div class="stat-label">Sketches Pending</div>
                                 </div>
@@ -1741,6 +1759,7 @@
                         <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"/></svg>
                         Export
                     </button>
+                    ${activeFilter ? `<button class="btn btn-secondary" onclick="clearFilter()" style="background:var(--accent-red);border-color:var(--accent-red);">✕ Clear Filter: ${activeFilter.type === 'invoice' ? 'Unpaid' : 'Sketch Pending'}</button>` : ''}
                     <select class="sort-dropdown" id="sortSelect" onchange="sortOrders()">
                         <option value="dueDateTime-asc">Due Date (Soonest)</option>
                         <option value="dueDateTime-desc">Due Date (Latest)</option>
@@ -1765,6 +1784,15 @@
 
             const search = document.getElementById('searchInput')?.value.toLowerCase() || '';
             let data = currentView === 'archive' ? archive : orders;
+
+            // Apply dashboard filter if active
+            if (activeFilter && !currentView.includes('archive')) {
+                if (activeFilter.type === 'invoice') {
+                    data = data.filter(o => o.invoice !== 'paid');
+                } else if (activeFilter.type === 'sketch') {
+                    data = data.filter(o => o.sketch === 'working' || !o.sketch);
+                }
+            }
 
             if (search) {
                 data = data.filter(o =>
