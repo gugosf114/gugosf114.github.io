@@ -241,14 +241,24 @@
         .stat-value { font-size: 32px; font-weight: 700; margin-bottom: 4px; }
         .stat-label { font-size: 13px; color: var(--text-secondary); }
 
-        .stat-card, .upcoming-section, .mini-calendar, .quick-actions, .table-container {
+        .upcoming-section, .mini-calendar, .quick-actions {
             transition: transform 1.6s ease, box-shadow 1.6s ease;
             transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0);
         }
-        .stat-card:hover, .upcoming-section:hover, .mini-calendar:hover,
-        .quick-actions:hover, .table-container:hover {
+        .upcoming-section:hover, .mini-calendar:hover, .quick-actions:hover {
             transform: perspective(1000px) rotateX(1.5deg) rotateY(1.5deg) translateZ(5px);
             box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+        }
+
+        /* 3D effect on order rows */
+        .table-container tbody tr {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .table-container tbody tr:hover {
+            transform: perspective(800px) rotateX(1deg) rotateY(1deg) translateZ(3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
         }
 
         .stat-card.orange .stat-value { color: var(--accent-orange); }
@@ -506,11 +516,10 @@
 
         /* ========== TOUCH DEVICES ========== */
         @media (hover: none) {
-            .stat-card:hover, .upcoming-section:hover, .mini-calendar:hover,
-            .quick-actions:hover, .table-container:hover {
+            .upcoming-section:hover, .mini-calendar:hover, .quick-actions:hover {
                 transform: none; box-shadow: 0 8px 32px rgba(0,0,0,0.3);
             }
-            tr:hover { transform: none; box-shadow: none; }
+            tr:hover, .table-container tbody tr:hover { transform: none; box-shadow: none; }
             .nav-item:hover { transform: none; }
             .status-pill:hover { transform: none; }
             .btn-primary:hover { transform: none; }
