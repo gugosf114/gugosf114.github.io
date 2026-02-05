@@ -1432,18 +1432,43 @@
                 }
             }
 
-            // Handle "From:" header format
+            // Handle "To:" header format (customer email in reply threads)
+            // Prioritize To: over From: since we're usually parsing Yana's reply which has customer in To:
+            const toMatch = text.match(/To:\s*([^<]+?)\s*<([^>]+)>/i);
+            if (toMatch) {
+                const namePart = toMatch[1].trim();
+                const emailPart = toMatch[2].trim();
+                // Only use if it's not our own email
+                if (!emailPart.includes('mybakingcreations') && !emailPart.includes('info@')) {
+                    if (!email) email = emailPart;
+                    if (!firstName && !lastName) {
+                        const parts = namePart.split(/\s+/);
+                        if (parts.length >= 2) {
+                            firstName = parts[0];
+                            lastName = parts.slice(1).join(' ');
+                        } else {
+                            firstName = namePart;
+                        }
+                    }
+                }
+            }
+
+            // Handle "From:" header format (fallback)
             const fromMatch = text.match(/From:\s*([^<]+?)\s*<([^>]+)>/i);
             if (fromMatch && !email) {
                 const namePart = fromMatch[1].trim();
-                email = fromMatch[2].trim();
-                if (!firstName && !lastName) {
-                    const parts = namePart.split(/\s+/);
-                    if (parts.length >= 2) {
-                        firstName = parts[0];
-                        lastName = parts.slice(1).join(' ');
-                    } else {
-                        firstName = namePart;
+                const emailPart = fromMatch[2].trim();
+                // Only use if it's not our own email
+                if (!emailPart.includes('mybakingcreations') && !emailPart.includes('info@')) {
+                    email = emailPart;
+                    if (!firstName && !lastName) {
+                        const parts = namePart.split(/\s+/);
+                        if (parts.length >= 2) {
+                            firstName = parts[0];
+                            lastName = parts.slice(1).join(' ');
+                        } else {
+                            firstName = namePart;
+                        }
                     }
                 }
             }
