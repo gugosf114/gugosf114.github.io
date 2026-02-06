@@ -2618,6 +2618,7 @@ footer {
     position: relative;
     overflow: hidden;
     background: linear-gradient(135deg, #E8E6E3 0%, #D8D6D3 30%, #E0DEDA 70%, #EBE9E6 100%);
+    box-shadow: 0 0 18px 4px rgba(30, 58, 138, 0.65);
 }
 
 .hero-carousel::before,
