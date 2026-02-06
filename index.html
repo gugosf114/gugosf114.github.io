@@ -32,7 +32,7 @@
     <meta property="og:image:width" content="1920">
     <meta property="og:image:height" content="1066">
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="My Baking Creations | Trusted by Google, Meta, Salesforce">
     <meta name="twitter:description" content="Custom cakes, logo cookies, cake pops. Family-owned since 2012.">
     <meta name="twitter:image" content="https://mybakingcreations.com/logo_icon.png">
@@ -177,6 +177,8 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <!-- display=swap ensures text is visible immediately with fallback font -->
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
@@ -216,7 +218,7 @@
                 </div>
             </a>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="index.html" class="active" aria-current="page">Home</a></li>
                 <li><a href="about.html">About Us</a></li>
                 <li class="dropdown">
                     <a href="gallery.html">Gallery</a>
@@ -257,16 +259,16 @@
         <!-- 3-Image Carousel Track -->
         <div class="carousel-track-container">
             <div class="carousel-track">
-                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 1.jpg" alt="Custom sculpted birthday cake with fondant decorations" width="707" height="393" fetchpriority="high"></div>
-                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 2.jpg" alt="Decorated sugar cookies with royal icing designs" width="707" height="429" fetchpriority="high"></div>
-                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 3.jpg" alt="Elegant tiered wedding cake with floral accents" width="707" height="391" fetchpriority="high"></div>
-                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 4.jpg" alt="Custom themed cake pops for special events" width="707" height="321" loading="lazy"></div>
-                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 5.jpg" alt="Corporate logo cookies for business events" width="707" height="388" loading="lazy"></div>
-                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 10.jpg" alt="Realistic sculpted cake design by My Baking Creations" width="707" height="365" loading="lazy"></div>
-                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 7.jpg" alt="Hand-piped decorated cookies for celebrations" width="707" height="509" loading="lazy"></div>
-                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 8.jpg" alt="Custom cupcakes with elegant frosting designs" width="707" height="292" loading="lazy"></div>
-                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 9.jpg" alt="Artisan baked goods from Bay Area bakery" width="707" height="437" loading="lazy"></div>
-                <div class="carousel-slide"><img src="images/gallery/carousel/carousel 6.jpg" alt="Custom celebration cake by My Baking Creations" width="707" height="342" loading="lazy"></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 1.webp" type="image/webp"><img src="images/gallery/carousel/carousel 1.jpg" alt="Custom sculpted birthday cake with fondant decorations" width="707" height="393" fetchpriority="high"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 2.webp" type="image/webp"><img src="images/gallery/carousel/carousel 2.jpg" alt="Decorated sugar cookies with royal icing designs" width="707" height="429" fetchpriority="high"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 3.webp" type="image/webp"><img src="images/gallery/carousel/carousel 3.jpg" alt="Elegant tiered wedding cake with floral accents" width="707" height="391" fetchpriority="high"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 4.webp" type="image/webp"><img src="images/gallery/carousel/carousel 4.jpg" alt="Custom themed cake pops for special events" width="707" height="321" loading="lazy"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 5.webp" type="image/webp"><img src="images/gallery/carousel/carousel 5.jpg" alt="Corporate logo cookies for business events" width="707" height="388" loading="lazy"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 10.webp" type="image/webp"><img src="images/gallery/carousel/carousel 10.jpg" alt="Realistic sculpted cake design by My Baking Creations" width="707" height="365" loading="lazy"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 7.webp" type="image/webp"><img src="images/gallery/carousel/carousel 7.jpg" alt="Hand-piped decorated cookies for celebrations" width="707" height="509" loading="lazy"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 8.webp" type="image/webp"><img src="images/gallery/carousel/carousel 8.jpg" alt="Custom cupcakes with elegant frosting designs" width="707" height="292" loading="lazy"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 9.webp" type="image/webp"><img src="images/gallery/carousel/carousel 9.jpg" alt="Artisan baked goods from Bay Area bakery" width="707" height="437" loading="lazy"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 6.webp" type="image/webp"><img src="images/gallery/carousel/carousel 6.jpg" alt="Custom celebration cake by My Baking Creations" width="707" height="342" loading="lazy"></picture></div>
             </div>
         </div>
         <div class="hero-content">
@@ -312,28 +314,28 @@
             </div>
             <div class="tile-grid-4">
                 <a href="gallery-cakes.html" class="service-card reveal reveal-delay-1">
-                    <img src="images/gallery/categoryplaceholder/cakes.jpg" alt="Custom cakes by My Baking Creations" width="280" height="150" loading="lazy" style="width: 100%; height: 150px; object-fit: contain; background-color: #FFF8F0; border-radius: 15px; margin-bottom: 1rem;">
+                    <picture><source srcset="images/gallery/categoryplaceholder/cakes.webp" type="image/webp"><img src="images/gallery/categoryplaceholder/cakes.jpg" alt="Custom cakes by My Baking Creations" width="280" height="150" loading="lazy" style="width: 100%; height: 150px; object-fit: contain; background-color: #FFF8F0; border-radius: 15px; margin-bottom: 1rem;"></picture>
                     <h3>Cakes</h3>
                     <p>Custom birthday cakes, milestone celebration cakes, wedding cakes, and anniversary cakes. Sculpted 3D designs and ultra-realistic creations that become the centerpiece of your event.</p>
                     <span class="price">$250 – $650+</span>
                     <span class="btn btn-secondary">View Cakes</span>
                 </a>
                 <a href="gallery-cookies.html" class="service-card reveal reveal-delay-2">
-                    <img src="images/gallery/categoryplaceholder/cookies.PNG" alt="Custom cookies by My Baking Creations" width="280" height="150" loading="lazy" style="width: 100%; height: 150px; object-fit: contain; background-color: #FFF8F0; border-radius: 15px; margin-bottom: 1rem;">
+                    <picture><source srcset="images/gallery/categoryplaceholder/cookies.webp" type="image/webp"><img src="images/gallery/categoryplaceholder/cookies.PNG" alt="Custom cookies by My Baking Creations" width="280" height="150" loading="lazy" style="width: 100%; height: 150px; object-fit: contain; background-color: #FFF8F0; border-radius: 15px; margin-bottom: 1rem;"></picture>
                     <h3>Cookies</h3>
                     <p>Corporate logo cookies for client gifts and employee appreciation. Hand-piped royal icing cookies for baby showers, birthdays, and holiday gifting. Individually wrapped for freshness.</p>
                     <span class="price">$5 – $8</span>
                     <span class="btn btn-secondary">View Cookies</span>
                 </a>
                 <a href="gallery-cakepops.html" class="service-card reveal reveal-delay-3">
-                    <img src="images/gallery/categoryplaceholder/cakepops.jpg" alt="Custom cake pops by My Baking Creations" width="280" height="150" loading="lazy" style="width: 100%; height: 150px; object-fit: cover; background-color: #FFFFFF; border-radius: 15px; margin-bottom: 1rem;">
+                    <picture><source srcset="images/gallery/categoryplaceholder/cakepops.webp" type="image/webp"><img src="images/gallery/categoryplaceholder/cakepops.jpg" alt="Custom cake pops by My Baking Creations" width="280" height="150" loading="lazy" style="width: 100%; height: 150px; object-fit: cover; background-color: #FFFFFF; border-radius: 15px; margin-bottom: 1rem;"></picture>
                     <h3>Cake Pops</h3>
                     <p>Branded cake pops for corporate events, trade shows, product launches, and conference giveaways. Custom colors to match your brand.</p>
                     <span class="price">$5 – $10</span>
                     <span class="btn btn-secondary">View Cake Pops</span>
                 </a>
                 <a href="gallery-cupcakes.html" class="service-card reveal reveal-delay-4">
-                    <img src="images/gallery/categoryplaceholder/Bumble bee themed cupcakes.jpg" alt="Custom cupcakes by My Baking Creations" width="280" height="150" loading="lazy" style="width: 100%; height: 150px; object-fit: cover; background-color: #FFF8F0; border-radius: 15px; margin-bottom: 1rem;">
+                    <picture><source srcset="images/gallery/categoryplaceholder/Bumble bee themed cupcakes.webp" type="image/webp"><img src="images/gallery/categoryplaceholder/Bumble bee themed cupcakes.jpg" alt="Custom cupcakes by My Baking Creations" width="280" height="150" loading="lazy" style="width: 100%; height: 150px; object-fit: cover; background-color: #FFF8F0; border-radius: 15px; margin-bottom: 1rem;"></picture>
                     <h3>Cupcakes</h3>
                     <p>Custom cupcakes for office parties, employee recognition programs, team milestones, and birthday celebrations. Easy to serve, no cutting required.</p>
                     <span class="price">$5 – $8</span>
@@ -1138,450 +1140,9 @@
     }
     </style>
 
-    <script>
-    // 3-Image Sliding Carousel
-    let currentSlide = 0;
-    const track = document.querySelector('.carousel-track');
-    const slides = document.querySelectorAll('.carousel-slide');
-    const dots = document.querySelectorAll('.hero-dot');
-    const totalSlides = 9;
-    let autoRotate;
-    // Use matchMedia instead of innerWidth to avoid forced reflow
-    const mobileQuery = window.matchMedia('(max-width: 768px)');
-    let isMobile = mobileQuery.matches;
-
-    function getSlideWidth() {
-        return isMobile ? 100 : 33.333;
-    }
-
-    function goToSlide(index) {
-        dots[currentSlide].classList.remove('active');
-        currentSlide = index;
-        if (currentSlide >= totalSlides) currentSlide = 0;
-        if (currentSlide < 0) currentSlide = totalSlides - 1;
-        const offset = currentSlide * getSlideWidth();
-        track.style.transform = `translateX(-${offset}%)`;
-        dots[currentSlide].classList.add('active');
-        resetAutoRotate();
-    }
-
-    function nextSlide() {
-        goToSlide(currentSlide + 1);
-    }
-
-    function resetAutoRotate() {
-        clearInterval(autoRotate);
-        autoRotate = setInterval(nextSlide, 4000);
-    }
-
-    // Handle resize using matchMedia (avoids forced reflow)
-    mobileQuery.addEventListener('change', (e) => {
-        isMobile = e.matches;
-        goToSlide(currentSlide);
-    });
-
-    // Start auto-rotation
-    autoRotate = setInterval(nextSlide, 4000);
-    </script>
-
-    <script>
-    // Defer loading order form modal until after page is interactive
-    // This removes it from the critical request chain
-    function loadOrderModal() {
-        fetch('order-form-modal.html')
-            .then(r => r.text())
-            .then(h => {
-                document.body.insertAdjacentHTML('beforeend', h);
-                const script = document.createElement('script');
-                script.src = 'script.js';
-                document.body.appendChild(script);
-            });
-    }
-    // Load after page is fully loaded, or on first user interaction
-    if (document.readyState === 'complete') {
-        setTimeout(loadOrderModal, 100);
-    } else {
-        window.addEventListener('load', () => setTimeout(loadOrderModal, 100));
-    }
-
-    // Electric sparks effect for Get a Quote button
-    const navCta = document.querySelector('.nav-cta');
-    if (navCta) {
-        let sparkInterval;
-
-        function createNavSpark(x, y) {
-            const spark = document.createElement('div');
-            spark.className = 'spark';
-            const angle = Math.random() * Math.PI * 2;
-            const distance = 25 + Math.random() * 35;
-            const tx = Math.cos(angle) * distance;
-            const ty = Math.sin(angle) * distance;
-            spark.style.cssText = `
-                left: ${x}px;
-                top: ${y}px;
-                width: ${2 + Math.random() * 3}px;
-                height: ${2 + Math.random() * 3}px;
-            `;
-            navCta.appendChild(spark);
-
-            spark.animate([
-                { opacity: 1, transform: 'scale(1) translate(0, 0)' },
-                { opacity: 0, transform: `scale(0.3) translate(${tx}px, ${ty}px)` }
-            ], {
-                duration: 400 + Math.random() * 200,
-                easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-            }).onfinish = () => spark.remove();
-        }
-
-        navCta.addEventListener('mouseenter', () => {
-            // Burst of sparks on enter
-            for (let i = 0; i < 6; i++) {
-                setTimeout(() => {
-                    const x = Math.random() * navCta.offsetWidth;
-                    const y = Math.random() * navCta.offsetHeight;
-                    createNavSpark(x, y);
-                }, i * 40);
-            }
-
-            // Continuous sparks while hovering
-            sparkInterval = setInterval(() => {
-                const x = Math.random() * navCta.offsetWidth;
-                const y = Math.random() * navCta.offsetHeight;
-                createNavSpark(x, y);
-            }, 120);
-        });
-
-        navCta.addEventListener('mouseleave', () => {
-            clearInterval(sparkInterval);
-        });
-
-        navCta.addEventListener('click', () => {
-            // Big burst on click
-            for (let i = 0; i < 12; i++) {
-                setTimeout(() => {
-                    const x = navCta.offsetWidth / 2 + (Math.random() - 0.5) * 30;
-                    const y = navCta.offsetHeight / 2 + (Math.random() - 0.5) * 15;
-                    createNavSpark(x, y);
-                }, i * 25);
-            }
-        });
-    }
-    </script>
-
-    <!-- Nav Particles -->
-    <script>
-    (function() {
-        const canvas = document.getElementById('nav-particles');
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-        const header = canvas.parentElement;
-
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = header.offsetHeight;
-        }
-        resize();
-        window.addEventListener('resize', resize);
-
-        const particles = [];
-        const isMobile = window.innerWidth <= 768;
-        const particleCount = isMobile ? 26 : 40;
-        const colors = [
-            'rgba(236, 38, 143, 0.75)',   // Pink
-            'rgba(255, 197, 50, 0.8)',    // Yellow/Gold
-            'rgba(255, 130, 160, 0.75)',  // Light pink
-            'rgba(255, 180, 140, 0.75)',  // Peach
-            'rgba(154, 149, 144, 0.75)',  // Gray (cream)
-            'rgba(195, 98, 57, 0.75)'     // Brown (corporate)
-        ];
-
-        for (let i = 0; i < particleCount; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                radius: (Math.random() * 8 + 6) * 1.2,
-                color: colors[Math.floor(Math.random() * colors.length)],
-                speedY: -(Math.random() * 0.4 + 0.15),
-                speedX: (Math.random() - 0.5) * 0.2,
-                swayOffset: Math.random() * Math.PI * 2,
-                swaySpeed: Math.random() * 0.02 + 0.01,
-                swayAmount: Math.random() * 0.15 + 0.1,
-                stringAngle: (Math.random() - 0.5) * 0.8
-            });
-        }
-
-        let time = 0;
-
-        // Collision detection - soft bounce when balloons touch
-        function handleCollisions() {
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const p1 = particles[i];
-                    const p2 = particles[j];
-
-                    const dx = p2.x - p1.x;
-                    const dy = p2.y - p1.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    const minDist = (p1.radius + p2.radius) * 1.1;
-
-                    if (dist < minDist && dist > 0) {
-                        // Normalize direction
-                        const nx = dx / dist;
-                        const ny = dy / dist;
-
-                        // Soft push apart (gentle, like real balloons)
-                        const pushStrength = 0.15;
-                        const overlap = (minDist - dist) * 0.5;
-
-                        p1.x -= nx * overlap * pushStrength;
-                        p1.y -= ny * overlap * pushStrength;
-                        p2.x += nx * overlap * pushStrength;
-                        p2.y += ny * overlap * pushStrength;
-
-                        // Exchange a bit of velocity (soft bounce)
-                        const dvx = p2.speedX - p1.speedX;
-                        const dvy = p2.speedY - p1.speedY;
-                        const dotProduct = dvx * nx + dvy * ny;
-
-                        if (dotProduct > 0) {
-                            const bounce = 0.3;
-                            p1.speedX += nx * dotProduct * bounce;
-                            p2.speedX -= nx * dotProduct * bounce;
-                        }
-                    }
-                }
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            time += 1;
-
-            handleCollisions();
-
-            particles.forEach(p => {
-                const sway = Math.sin(time * p.swaySpeed + p.swayOffset) * p.swayAmount;
-
-                p.y += p.speedY;
-                p.x += p.speedX + Math.sin(time * p.swaySpeed * 0.5 + p.swayOffset) * 0.3;
-
-                if (p.y < -p.radius * 3) {
-                    p.y = canvas.height + p.radius * 3;
-                    p.x = Math.random() * canvas.width;
-                }
-                if (p.x < -p.radius * 3) p.x = canvas.width + p.radius * 3;
-                if (p.x > canvas.width + p.radius * 3) p.x = -p.radius * 3;
-
-                const r = p.radius;
-                const tilt = p.stringAngle * 0.4 + sway;
-
-                ctx.save();
-                ctx.translate(p.x, p.y);
-                ctx.rotate(tilt);
-
-                ctx.fillStyle = p.color;
-
-                // Balloon body (oval)
-                ctx.beginPath();
-                ctx.ellipse(0, 0, r * 0.85, r * 1.1, 0, 0, Math.PI * 2);
-                ctx.fill();
-
-                // Highlight/shine
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
-                ctx.beginPath();
-                ctx.ellipse(-r * 0.3, -r * 0.4, r * 0.25, r * 0.35, -0.3, 0, Math.PI * 2);
-                ctx.fill();
-
-                // Knot
-                ctx.fillStyle = p.color;
-                ctx.beginPath();
-                ctx.moveTo(-r * 0.15, r * 1.1);
-                ctx.lineTo(r * 0.15, r * 1.1);
-                ctx.lineTo(0, r * 1.35);
-                ctx.closePath();
-                ctx.fill();
-
-                ctx.restore();
-
-                // String
-                const knotX = p.x + Math.sin(tilt) * r * 1.35;
-                const knotY = p.y + Math.cos(tilt) * r * 1.35;
-                ctx.beginPath();
-                ctx.moveTo(knotX, knotY);
-                ctx.quadraticCurveTo(
-                    knotX + r * p.stringAngle * 1.5,
-                    knotY + r * 0.8,
-                    knotX + r * p.stringAngle * 2,
-                    knotY + r * 1.5
-                );
-                ctx.strokeStyle = 'rgba(150, 150, 150, 0.6)';
-                ctx.lineWidth = 0.8;
-                ctx.stroke();
-            });
-
-            requestAnimationFrame(animate);
-        }
-        animate();
-    })();
-    </script>
-
-    <!-- Service Card 3D Tilt with Light Effect -->
-    <script>
-    (function() {
-        const cards = document.querySelectorAll('.tile-grid-4 .service-card');
-
-        cards.forEach(card => {
-            // Create light reflection overlay
-            const shine = document.createElement('div');
-            shine.style.cssText = `
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                pointer-events: none;
-                z-index: 5;
-                border-radius: 30px;
-                background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 100%);
-                transition: background 0.1s ease;
-            `;
-            card.style.position = 'relative';
-            card.style.transformStyle = 'preserve-3d';
-            card.style.transition = 'transform 0.15s ease-out, box-shadow 0.3s ease';
-            card.appendChild(shine);
-
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-
-                const rotateX = (y - centerY) / 50;
-                const rotateY = (centerX - x) / 50;
-
-                // 3D tilt
-                card.style.transform = `perspective(800px) rotateX(${-rotateX}deg) rotateY(${-rotateY}deg) scale(1.02)`;
-
-                // Light follows cursor
-                const percentX = (x / rect.width) * 100;
-                const percentY = (y / rect.height) * 100;
-                shine.style.background = `radial-gradient(circle at ${percentX}% ${percentY}%, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 60%)`;
-            });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale(1)';
-                shine.style.background = 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 100%)';
-            });
-        });
-    })();
-    </script>
-
-    <!-- Instagram Post 3D Tilt with Light Effect -->
-    <script>
-    (function() {
-        const posts = document.querySelectorAll('.ig-post');
-
-        posts.forEach(post => {
-            // Create light reflection overlay
-            const shine = document.createElement('div');
-            shine.style.cssText = `
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                pointer-events: none;
-                z-index: 5;
-                border-radius: 8px;
-                background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 100%);
-                transition: background 0.1s ease;
-            `;
-            post.style.position = 'relative';
-            post.style.transformStyle = 'preserve-3d';
-            post.style.transition = 'transform 0.15s ease-out, box-shadow 0.3s ease';
-            post.appendChild(shine);
-
-            post.addEventListener('mousemove', (e) => {
-                const rect = post.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-
-                const rotateX = (y - centerY) / 50;
-                const rotateY = (centerX - x) / 50;
-
-                // 3D tilt
-                post.style.transform = `perspective(800px) rotateX(${-rotateX}deg) rotateY(${-rotateY}deg) scale(1.02)`;
-
-                // Light follows cursor
-                const percentX = (x / rect.width) * 100;
-                const percentY = (y / rect.height) * 100;
-                shine.style.background = `radial-gradient(circle at ${percentX}% ${percentY}%, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 60%)`;
-            });
-
-            post.addEventListener('mouseleave', () => {
-                post.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale(1)';
-                shine.style.background = 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 100%)';
-            });
-        });
-    })();
-    </script>
-
-    <!-- Hero Text Box Subtle Tilt -->
-    <script>
-    (function() {
-        const heroBox = document.querySelector('.hero-text-box');
-        if (!heroBox) return;
-
-        heroBox.style.transformStyle = 'preserve-3d';
-        heroBox.style.transition = 'transform 0.4s ease-out';
-
-        heroBox.addEventListener('mousemove', (e) => {
-            const rect = heroBox.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            const rotateX = (y - centerY) / 150;
-            const rotateY = (centerX - x) / 150;
-
-            heroBox.style.transform = `perspective(1000px) rotateX(${-rotateX}deg) rotateY(${-rotateY}deg)`;
-        });
-
-        heroBox.addEventListener('mouseleave', () => {
-            heroBox.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-        });
-    })();
-    </script>
-
-    <!-- Corporate Logo 3D Tilt Effect -->
-    <script>
-    (function() {
-        const logos = document.querySelectorAll('.corporate-logos-grid img');
-
-        logos.forEach(logo => {
-            logo.addEventListener('mousemove', (e) => {
-                const rect = logo.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-
-                const rotateX = (y - centerY) / 8;
-                const rotateY = (centerX - x) / 8;
-
-                logo.style.transform = `perspective(500px) rotateX(${-rotateX}deg) rotateY(${-rotateY}deg) translateY(-8px) scale(1.08)`;
-            });
-
-            logo.addEventListener('mouseleave', () => {
-                logo.style.transform = 'perspective(500px) rotateX(0) rotateY(0) translateY(0) scale(1)';
-            });
-        });
-    })();
-    </script>
+    <script src="carousel.js" defer></script>
+    <script src="tilt-effects.js" defer></script>
+    <script src="nav-particles.js" defer></script>
 
     <!-- Live Activity Feed Styles & Script -->
     <style>
@@ -1693,49 +1254,7 @@
         }
     }
     </style>
-    <script>
-    // Live Activity Feed - Auto-scrolling
-    (function() {
-        const body = document.getElementById('activityFeedBody');
-        if (!body) return;
-
-        // Format relative time
-        function formatTime(daysAgo) {
-            if (daysAgo === 0) return 'Today';
-            if (daysAgo === 1) return 'Yesterday';
-            if (daysAgo < 7) return `${daysAgo} days ago`;
-            if (daysAgo === 7) return '1 week ago';
-            return `${Math.floor(daysAgo / 7)} weeks ago`;
-        }
-
-        fetch('recent-orders.json')
-            .then(r => r.json())
-            .then(data => {
-                const orders = data.orders.slice(0, 3);
-                const items = orders.map(order => {
-                    const timeStr = formatTime(order.daysAgo);
-                    const imgSrc = order.image || '';
-                    return `<div class="activity-item">
-                        <div class="activity-icon">
-                            ${imgSrc ? `<img src="${imgSrc}" alt="${order.company}" loading="lazy">` : ''}
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-text">
-                                <span class="activity-company">${order.company}</span>
-                                <span class="activity-product"> ordered ${order.product}</span>
-                            </div>
-                            <div class="activity-meta">
-                                <span class="activity-qty">${order.quantity} pcs</span>
-                                <span class="activity-time">${timeStr}</span>
-                            </div>
-                        </div>
-                    </div>`;
-                }).join('');
-                body.innerHTML = `<div class="activity-slider">${items}</div>`;
-            })
-            .catch(() => {});
-    })();
-    </script>
+    <script src="activity-feed-widget.js" defer></script>
 
     <!-- AI Chatbot Widget -->
     <!-- Floating Consultation Widget -->
