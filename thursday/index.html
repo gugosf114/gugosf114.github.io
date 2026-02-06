@@ -1457,6 +1457,7 @@
             if (!text.trim()) { showToast('Paste the email first'); return; }
 
             const extracted = parseOrderFromEmail(text);
+            window._lastParsedEmail = extracted;
 
             document.getElementById('extractedName').value = [extracted.firstName, extracted.lastName].filter(Boolean).join(' ');
             document.getElementById('extractedEmail').value = extracted.email || '';
@@ -1477,6 +1478,21 @@
             document.getElementById('formCustomerName').value = name;
             document.getElementById('formEmail').value = email;
             document.getElementById('formPhone').value = phone;
+
+            // Populate order details from last parsed email
+            if (window._lastParsedEmail) {
+                const e = window._lastParsedEmail;
+                if (e.item) {
+                    document.getElementById('formItem').value = e.item;
+                    updateFlavorOptions();
+                }
+                if (e.flavor) document.getElementById('formFlavor').value = e.flavor;
+                if (e.quantity) document.getElementById('formQuantity').value = e.quantity;
+                if (e.components) document.getElementById('formComponents').value = e.components;
+                if (e.delivery) document.getElementById('formDelivery').value = e.delivery;
+                if (e.dueDate) document.getElementById('formDueDateTime').value = e.dueDate + 'T12:00';
+                if (e.description) document.getElementById('formDescription').value = e.description;
+            }
         }
 
         function sidebarExtractEmail() {
@@ -1492,9 +1508,25 @@
             document.getElementById('formEmail').value = extracted.email || '';
             document.getElementById('formPhone').value = extracted.phone || '';
 
+            // Populate order details
+            if (extracted.item) {
+                document.getElementById('formItem').value = extracted.item;
+                updateFlavorOptions();
+            }
+            if (extracted.flavor) document.getElementById('formFlavor').value = extracted.flavor;
+            if (extracted.quantity) document.getElementById('formQuantity').value = extracted.quantity;
+            if (extracted.components) document.getElementById('formComponents').value = extracted.components;
+            if (extracted.delivery) document.getElementById('formDelivery').value = extracted.delivery;
+            if (extracted.dueDate) document.getElementById('formDueDateTime').value = extracted.dueDate + 'T12:00';
+            if (extracted.description) document.getElementById('formDescription').value = extracted.description;
+
             document.getElementById('sidebarEmailPaste').value = '';
             if (window.innerWidth < 769) toggleSidebar();
-            showToast('Email parsed — review and save');
+            const parts = [];
+            if (extracted.item) parts.push(extracted.item);
+            if (extracted.flavor) parts.push(extracted.flavor);
+            if (extracted.dueDate) parts.push('due ' + extracted.dueDate);
+            showToast(parts.length ? 'Parsed: ' + parts.join(', ') : 'Email parsed — review and save');
         }
 
         function parseOrderFromEmail(text) {
@@ -1502,8 +1534,16 @@
             let lastName = '';
             let email = '';
             let phone = '';
+            let item = '';
+            let flavor = '';
+            let quantity = '';
+            let components = '';
+            let delivery = '';
+            let dueDate = '';
+            let description = '';
 
             const lines = text.split(/\r?\n/).filter(l => l.trim());
+            const lower = text.toLowerCase();
 
             // First pass: look for labeled fields (Name:, Email:, Phone:)
             for (let line of lines) {
@@ -1528,17 +1568,27 @@
                         } else if (parts.length === 1) {
                             firstName = value;
                         }
+                    } else if (/^(item|type|product|order type)$/.test(key) && !item) {
+                        item = value;
+                    } else if (/^(flavor|flavour)$/.test(key) && !flavor) {
+                        flavor = value;
+                    } else if (/^(quantity|qty|count|amount|how many|number)$/.test(key) && !quantity) {
+                        quantity = value;
+                    } else if (/^(pickup|delivery|pick up|pick-up|method)$/.test(key) && !delivery) {
+                        delivery = value;
+                    } else if (/^(date|due|due date|needed by|event date|when|for when)$/.test(key) && !dueDate) {
+                        dueDate = value;
+                    } else if (/^(description|details|notes|theme|design|special|request)$/.test(key) && !description) {
+                        description = value;
                     }
                 }
             }
 
             // Handle "To:" header format (customer email in reply threads)
-            // Prioritize To: over From: since we're usually parsing Yana's reply which has customer in To:
             const toMatch = text.match(/To:\s*([^<]+?)\s*<([^>]+)>/i);
             if (toMatch) {
                 const namePart = toMatch[1].trim();
                 const emailPart = toMatch[2].trim();
-                // Only use if it's not our own email
                 if (!emailPart.includes('mybakingcreations') && !emailPart.includes('info@')) {
                     if (!email) email = emailPart;
                     if (!firstName && !lastName) {
@@ -1558,7 +1608,6 @@
             if (fromMatch && !email) {
                 const namePart = fromMatch[1].trim();
                 const emailPart = fromMatch[2].trim();
-                // Only use if it's not our own email
                 if (!emailPart.includes('mybakingcreations') && !emailPart.includes('info@')) {
                     email = emailPart;
                     if (!firstName && !lastName) {
@@ -1573,13 +1622,11 @@
                 }
             }
 
-            // Signature block detection: "Name | Title" or "Name | Company" on first line
+            // Signature block detection
             if (!firstName && !lastName && lines.length > 0) {
                 const firstLine = lines[0].trim();
-                // Check if first line has pipe separator (signature format)
                 if (firstLine.includes('|')) {
                     const namePart = firstLine.split('|')[0].trim();
-                    // Make sure it looks like a name (2-4 words, no numbers, no @)
                     if (namePart && !namePart.includes('@') && !/\d/.test(namePart)) {
                         const words = namePart.split(/\s+/).filter(w => w.length > 0);
                         if (words.length >= 1 && words.length <= 4) {
@@ -1596,14 +1643,98 @@
                 if (emailMatch) email = emailMatch[0];
             }
 
-            // Fallback: grab any phone number in the text (various formats)
+            // Fallback: grab any phone number
             if (!phone) {
-                // Match formats: 415.297.9334, 415-297-9334, (415) 297-9334, 4152979334, +1 415 297 9334
                 const phoneMatch = text.match(/(\+?\d{1,3}[-.\s]?)?(\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4})/);
                 if (phoneMatch) phone = phoneMatch[0];
             }
 
-            return { firstName, lastName, email, phone };
+            // --- ORDER DETAIL EXTRACTION (natural language) ---
+
+            // Item type detection
+            if (!item) {
+                if (/\bcupcakes?\b/i.test(text)) item = 'cupcakes';
+                else if (/\bcake\s*pops?\b/i.test(text)) item = 'cakepops';
+                else if (/\bmacarons?\b/i.test(text)) item = 'macarons';
+                else if (/\bcookies?\b/i.test(text)) item = 'cookies';
+                else if (/\bcakes?\b/i.test(text)) item = 'cake';
+            }
+
+            // Flavor detection
+            if (!flavor) {
+                const flavorPatterns = [
+                    [/strawberry\s*vanilla\s*cream/i, 'Strawberry Vanilla Cream'],
+                    [/chocolate\s*mousse/i, 'Chocolate Mousse'],
+                    [/lemon\s*orange\s*cream/i, 'Lemon Orange Cream'],
+                    [/blueberry\s*lavender\s*cream/i, 'Blueberry Lavender Cream'],
+                    [/vanilla\s*shortbread/i, 'Vanilla Shortbread'],
+                    [/chocolate\s*shortbread/i, 'Chocolate Shortbread'],
+                    [/orange\s*shortbread/i, 'Orange Shortbread'],
+                    [/gingerbread/i, 'Gingerbread'],
+                    [/pistachio/i, 'Pistachio'],
+                    [/strawberry/i, 'Strawberry'],
+                    [/lavender/i, 'Lavender'],
+                    [/lemon/i, 'Lemon'],
+                    [/chocolate/i, 'Chocolate'],
+                    [/vanilla/i, 'Vanilla']
+                ];
+                for (const [pattern, name] of flavorPatterns) {
+                    if (pattern.test(text)) { flavor = name; break; }
+                }
+            }
+
+            // Quantity detection
+            if (!quantity) {
+                const qtyMatch = text.match(/(\d+)\s*(?:dozen|doz)\b/i);
+                if (qtyMatch) {
+                    quantity = String(parseInt(qtyMatch[1]) * 12);
+                } else {
+                    const qtyMatch2 = text.match(/(?:need|want|order|like|get|make|for)\s+(\d+)\s/i);
+                    if (qtyMatch2) quantity = qtyMatch2[1];
+                }
+            }
+
+            // Pickup vs delivery
+            if (!delivery) {
+                if (/\bdeliver(?:y|ed)?\b/i.test(text)) delivery = 'delivery';
+                else if (/\bpick\s*-?\s*up\b/i.test(text)) delivery = 'pickup';
+            }
+
+            // Date detection (various formats)
+            if (!dueDate) {
+                // "March 15" / "March 15th" / "March 15, 2026"
+                const monthNames = 'january|february|march|april|may|june|july|august|september|october|november|december';
+                const dateMatch = text.match(new RegExp(`(${monthNames})\\s+(\\d{1,2})(?:st|nd|rd|th)?(?:[,\\s]+(\\d{4}))?`, 'i'));
+                if (dateMatch) {
+                    const months = {january:1,february:2,march:3,april:4,may:5,june:6,july:7,august:8,september:9,october:10,november:11,december:12};
+                    const m = months[dateMatch[1].toLowerCase()];
+                    const d = parseInt(dateMatch[2]);
+                    const y = dateMatch[3] ? parseInt(dateMatch[3]) : new Date().getFullYear();
+                    dueDate = `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+                }
+                // "2/28/2026" or "02/28/2026"
+                if (!dueDate) {
+                    const slashDate = text.match(/(\d{1,2})\/(\d{1,2})\/(\d{2,4})/);
+                    if (slashDate) {
+                        const y = slashDate[3].length === 2 ? '20' + slashDate[3] : slashDate[3];
+                        dueDate = `${y}-${slashDate[1].padStart(2,'0')}-${slashDate[2].padStart(2,'0')}`;
+                    }
+                }
+            }
+
+            // Description / theme — grab anything after "theme", "design", "want it to be", "should look like"
+            if (!description) {
+                const themeMatch = text.match(/(?:theme|design|want\s+it\s+to\s+(?:be|look)|should\s+(?:be|look|have)|inspired\s+by|based\s+on|style|for\s+(?:a|my|her|his|our))\s*[:.]?\s*(.{5,80})/i);
+                if (themeMatch) description = themeMatch[1].replace(/[.\n].*/, '').trim();
+            }
+
+            // Components — look for multi-item descriptions like "2 tier", "3 layer", descriptive cake details
+            if (!components) {
+                const compMatch = text.match(/(\d+\s*(?:tier|layer|inch|round|sheet|square)[\w\s,]*)/i);
+                if (compMatch) components = compMatch[1].trim();
+            }
+
+            return { firstName, lastName, email, phone, item, flavor, quantity, components, delivery, dueDate, description };
         }
 
         function extractEmailFromLine(line) {
@@ -1657,16 +1788,16 @@
 
         // ========== FUN BUTTONS ==========
         const haikus = [
-            "Frosting swirls with care\nSweetness rises in the warmth\nJoy in every bite",
-            "Flour dusts the air\nHands create what hearts desire\nLove baked into form",
-            "Timer softly chimes\nGolden edges, perfect rise\nPatience finds reward",
-            "Sugar, butter, dreams\nMixed together, oven-bound\nMagic starts to form",
-            "Dawn breaks, ovens warm\nThe baker's quiet ritual\nPeace before the rush",
-            "Crumbs tell the story\nOf moments shared and savored\nEmpty plates speak joy",
-            "Chocolate melts slow\nRich and dark, a river flows\nTempered with such care",
-            "Sprinkles catch the light\nChildhood wonder never fades\nCelebrate today",
-            "Dough rises in time\nNo rushing nature's slow dance\nGood things come to those...",
-            "One order complete\nAnother life made sweeter\nThis is why we bake"
+            "Flour on your nose,\nbutter melting, sugar glows —\nthat's how sweetness grows.",
+            "Oven's warm embrace,\nvanilla fills the whole place —\nsmile upon your face.",
+            "Sprinkles hit the cream,\ncolors brighter than a dream —\nnothing's what it seemed.",
+            "Whisk it, fold it right,\nbatter rising, golden light —\nevery crumb's delight.",
+            "Dawn breaks, dough is set,\nthis will be the best one yet —\nhow could you forget?",
+            "Chocolate river flows,\ntempered dark from head to toes —\nsweeter than a rose.",
+            "One more cake to ice,\none more chance to make it nice —\nlove don't need advice.",
+            "Layers stacked with care,\nstrawberry cream beyond compare —\njoy is everywhere.",
+            "Cookies on the sheet,\ngolden edges, warm and sweet —\nmake the day complete.",
+            "Hands that shape and mold,\nevery story cakes have told —\nworth their weight in gold."
         ];
 
         function showHaiku() {
