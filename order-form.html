@@ -166,9 +166,9 @@
     <section id="order-content" class="page-content">
         <div class="section-wrapper section-beige reveal" style="margin-bottom: 3rem;">
             <div style="max-width: 700px; margin: 0 auto;">
-                <h2 style="font-family: 'Fredoka One', cursive; font-size: 2rem; color: var(--dark-brown); margin-bottom: 1.5rem; text-align: center;">Start Your Order</h2>
+                <h2 class="order-heading">Start Your Order</h2>
 
-                <div style="background: var(--white); padding: 2rem; border-radius: 20px;">
+                <div class="order-form-card">
                     <form id="orderForm" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="access_key" value="bb1321a2-591e-405f-afb6-d93a8e4f721d">
                         <input type="hidden" name="from_name" value="My Baking Creations Website">
@@ -1737,6 +1737,116 @@
 
     .ai-mode-content.active {
         display: block;
+    }
+
+    /* ============================================
+       ORDER FORM DARK CARD THEME
+       ============================================ */
+    .order-heading {
+        font-family: 'Fredoka One', cursive;
+        font-size: 2rem;
+        color: var(--dark-brown);
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    .order-form-card {
+        background: var(--dark-brown);
+        padding: 2rem;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Form labels on dark bg */
+    .order-form-card .form-group label {
+        color: var(--yellow);
+        text-shadow: 0 0 15px rgba(255, 197, 50, 0.2);
+    }
+
+    /* Text inputs, email, tel, date, textarea on dark bg */
+    .order-form-card .form-group input[type="text"],
+    .order-form-card .form-group input[type="email"],
+    .order-form-card .form-group input[type="tel"],
+    .order-form-card .form-group input[type="date"],
+    .order-form-card .form-group textarea {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: white;
+        box-shadow: none;
+    }
+
+    .order-form-card .form-group input::placeholder,
+    .order-form-card .form-group textarea::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+    }
+
+    .order-form-card .form-group input:focus,
+    .order-form-card .form-group textarea:focus {
+        border-color: var(--pink);
+        box-shadow: 0 0 0 3px rgba(236, 38, 143, 0.2), 0 4px 12px rgba(236, 38, 143, 0.15);
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* Small helper text */
+    .order-form-card .form-group small {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Radio options on dark bg */
+    .order-form-card .radio-option {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: none;
+    }
+
+    .order-form-card .radio-option span {
+        color: rgba(255, 255, 255, 0.85);
+    }
+
+    .order-form-card .radio-option:hover {
+        background: rgba(236, 38, 143, 0.1);
+        border-color: var(--pink);
+    }
+
+    .order-form-card .radio-option input[type="radio"]:checked + span {
+        color: var(--pink);
+    }
+
+    /* Featured Cake option — keep gradient but darken base */
+    .order-form-card .radio-option.featured {
+        background: linear-gradient(135deg, rgba(255, 249, 240, 0.08) 0%, rgba(255, 240, 245, 0.08) 50%, rgba(255, 251, 240, 0.08) 100%);
+    }
+
+    /* File upload on dark bg */
+    .order-form-card .form-group input[type="file"] {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Intro bubble on dark — keep the pink gradient border, darken the fill */
+    .order-form-card .form-intro-bubble {
+        background: rgba(255, 255, 255, 0.06);
+        background-clip: padding-box;
+    }
+
+    .order-form-card .form-intro-bubble #formIntroTypewriter,
+    .order-form-card .form-intro-bubble .bubble-cursor {
+        color: var(--yellow);
+    }
+
+    /* Submit button — already pink, just ensure it pops on dark */
+    .order-form-card .btn-primary {
+        box-shadow: 0 4px 20px rgba(236, 38, 143, 0.4);
+    }
+
+    /* Response time text below submit */
+    .order-form-card p {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    .order-form-card a {
+        color: var(--yellow);
     }
 
     /* Cake Builder Container */
