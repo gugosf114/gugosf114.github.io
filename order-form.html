@@ -472,27 +472,47 @@
                                                         <span class="label-icon">✍️</span>
                                                         Writing / Text <span class="config-hint">(select all that apply)</span>
                                                     </label>
-                                                    <div class="config-checkboxes" id="builderWritingOptions">
-                                                        <label class="config-checkbox">
-                                                            <input type="checkbox" name="builderWriting" value="board">
-                                                            <span class="checkbox-mark"></span>
-                                                            <span class="checkbox-label">On the cakeboard</span>
-                                                        </label>
-                                                        <label class="config-checkbox">
-                                                            <input type="checkbox" name="builderWriting" value="tier1">
-                                                            <span class="checkbox-mark"></span>
-                                                            <span class="checkbox-label">On Tier 1 (bottom)</span>
-                                                        </label>
-                                                        <label class="config-checkbox">
-                                                            <input type="checkbox" name="builderWriting" value="tier2">
-                                                            <span class="checkbox-mark"></span>
-                                                            <span class="checkbox-label">On Tier 2</span>
-                                                        </label>
-                                                        <label class="config-checkbox">
-                                                            <input type="checkbox" name="builderWriting" value="tier3">
-                                                            <span class="checkbox-mark"></span>
-                                                            <span class="checkbox-label">On Tier 3 (top)</span>
-                                                        </label>
+                                                    <div class="config-checkboxes config-writing-checkboxes" id="builderWritingOptions">
+                                                        <div class="writing-option">
+                                                            <label class="config-checkbox">
+                                                                <input type="checkbox" name="builderWriting" value="board">
+                                                                <span class="checkbox-mark"></span>
+                                                                <span class="checkbox-label">On the cakeboard</span>
+                                                            </label>
+                                                            <div class="writing-text-wrapper">
+                                                                <input type="text" class="writing-text-input" data-writing="board" placeholder='e.g., "Happy Birthday!" in pink cursive' disabled>
+                                                            </div>
+                                                        </div>
+                                                        <div class="writing-option">
+                                                            <label class="config-checkbox">
+                                                                <input type="checkbox" name="builderWriting" value="tier1">
+                                                                <span class="checkbox-mark"></span>
+                                                                <span class="checkbox-label">On Tier 1 (bottom)</span>
+                                                            </label>
+                                                            <div class="writing-text-wrapper">
+                                                                <input type="text" class="writing-text-input" data-writing="tier1" placeholder='e.g., "Alex" in bold blue fondant letters' disabled>
+                                                            </div>
+                                                        </div>
+                                                        <div class="writing-option">
+                                                            <label class="config-checkbox">
+                                                                <input type="checkbox" name="builderWriting" value="tier2">
+                                                                <span class="checkbox-mark"></span>
+                                                                <span class="checkbox-label">On Tier 2</span>
+                                                            </label>
+                                                            <div class="writing-text-wrapper">
+                                                                <input type="text" class="writing-text-input" data-writing="tier2" placeholder='e.g., "Happy 5th Birthday" in gold script' disabled>
+                                                            </div>
+                                                        </div>
+                                                        <div class="writing-option">
+                                                            <label class="config-checkbox">
+                                                                <input type="checkbox" name="builderWriting" value="tier3">
+                                                                <span class="checkbox-mark"></span>
+                                                                <span class="checkbox-label">On Tier 3 (top)</span>
+                                                            </label>
+                                                            <div class="writing-text-wrapper">
+                                                                <input type="text" class="writing-text-input" data-writing="tier3" placeholder='e.g., Number "5" in sparkly fondant' disabled>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1909,9 +1929,10 @@
     .config-title {
         font-family: 'Fredoka One', cursive;
         font-size: 1.1rem;
-        color: white;
+        color: var(--yellow);
         margin: 0 0 0.25rem;
         text-align: center;
+        text-shadow: 0 0 20px rgba(255, 197, 50, 0.3);
     }
 
     .config-description {
@@ -1947,10 +1968,11 @@
         display: flex;
         align-items: center;
         gap: 6px;
-        color: rgba(255, 255, 255, 0.9);
+        color: var(--yellow);
         font-size: 0.8rem;
         font-weight: 700;
         margin-bottom: 0.4rem;
+        text-shadow: 0 0 20px rgba(255, 197, 50, 0.3);
     }
 
     .config-hint {
@@ -2029,6 +2051,73 @@
 
     .config-checkbox:has(input:checked) .checkbox-label {
         color: white;
+    }
+
+    /* Writing option — checkbox + expandable text input */
+    .config-writing-checkboxes {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .writing-option {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .writing-option .config-checkbox {
+        border-radius: 10px 10px 10px 10px;
+        transition: all 0.3s ease;
+    }
+
+    .writing-option.active .config-checkbox {
+        border-radius: 10px 10px 0 0;
+        border-bottom-color: transparent;
+    }
+
+    .writing-text-wrapper {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, opacity 0.3s ease;
+        opacity: 0;
+    }
+
+    .writing-option.active .writing-text-wrapper {
+        max-height: 70px;
+        opacity: 1;
+    }
+
+    .writing-text-input {
+        width: 100%;
+        padding: 0.6rem 1rem;
+        background: rgba(255, 197, 50, 0.08);
+        border: 2px solid rgba(255, 197, 50, 0.25);
+        border-top: none;
+        border-radius: 0 0 10px 10px;
+        color: white;
+        font-size: 0.82rem;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 500;
+        font-style: italic;
+        outline: none;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+    }
+
+    .writing-text-input::placeholder {
+        color: rgba(255, 255, 255, 0.35);
+        font-style: italic;
+    }
+
+    .writing-text-input:focus {
+        background: rgba(255, 197, 50, 0.12);
+        border-color: var(--yellow);
+        box-shadow: 0 4px 15px rgba(255, 197, 50, 0.15);
+    }
+
+    .writing-text-input:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
     }
 
     @media (max-width: 500px) {
@@ -3474,9 +3563,27 @@
             if (el) el.addEventListener('change', updateStepsPreview);
         });
 
-        // Also listen to writing checkboxes
+        // Also listen to writing checkboxes — toggle text input + update steps
         builderWritingCheckboxes.forEach(cb => {
-            cb.addEventListener('change', updateStepsPreview);
+            cb.addEventListener('change', () => {
+                const writingOption = cb.closest('.writing-option');
+                const textInput = writingOption ? writingOption.querySelector('.writing-text-input') : null;
+
+                if (cb.checked) {
+                    if (writingOption) writingOption.classList.add('active');
+                    if (textInput) {
+                        textInput.disabled = false;
+                        textInput.focus();
+                    }
+                } else {
+                    if (writingOption) writingOption.classList.remove('active');
+                    if (textInput) {
+                        textInput.disabled = true;
+                        textInput.value = '';
+                    }
+                }
+                updateStepsPreview();
+            });
         });
 
         function updateStepsPreview() {
@@ -3524,6 +3631,14 @@
             currentStepIndex = 0;
             stepData = {};
             generatedImages = [];
+
+            // Pre-populate writing steps with text from config inputs
+            document.querySelectorAll('.writing-text-input').forEach(input => {
+                if (input.value.trim()) {
+                    const writingKey = 'writing_' + input.dataset.writing;
+                    stepData[writingKey] = input.value.trim();
+                }
+            });
 
             builderConfig.classList.remove('active');
             builderSteps.classList.add('active');
