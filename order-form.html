@@ -375,6 +375,29 @@
 
                             <!-- CAKE BUILDER MODE (new modular builder) -->
                             <div id="cakeBuilderSection" class="ai-mode-content">
+
+                            <!-- Full-Screen Overlay (opens like consultation page) -->
+                            <div id="builderFullscreenOverlay" class="builder-fullscreen-overlay">
+                                <!-- Animated Background Orbs -->
+                                <div class="builder-overlay-bg">
+                                    <div class="overlay-orb overlay-orb-1"></div>
+                                    <div class="overlay-orb overlay-orb-2"></div>
+                                    <div class="overlay-orb overlay-orb-3"></div>
+                                </div>
+
+                                <!-- Close Button -->
+                                <button type="button" id="builderCloseBtn" class="builder-close-btn" aria-label="Close Cake Builder">
+                                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                                </button>
+
+                                <!-- Back to form link -->
+                                <a href="#" id="builderBackLink" class="builder-back-link">
+                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                                    Back to Order Form
+                                </a>
+
+                                <!-- Centered Content Container -->
+                                <div class="builder-overlay-content">
                                 <div class="cake-builder-container">
                                     <!-- Animated Background -->
                                     <div class="builder-bg">
@@ -626,6 +649,9 @@
                                     </div>
 
                                 </div><!-- end cake-builder-container -->
+                                </div><!-- end builder-overlay-content -->
+                            </div><!-- end builderFullscreenOverlay -->
+
                             </div><!-- end cakeBuilderSection -->
 
                         </div><!-- end aiPreviewSection -->
@@ -2691,6 +2717,214 @@
             padding: 0.6rem;
         }
     }
+
+    /* ===========================================
+       CAKE BUILDER - FULLSCREEN OVERLAY
+       (Consultation-page style immersive view)
+       =========================================== */
+
+    .builder-fullscreen-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+        overflow-y: auto;
+        overflow-x: hidden;
+        opacity: 0;
+        transition: opacity 0.35s ease;
+    }
+
+    .builder-fullscreen-overlay.open {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        opacity: 1;
+    }
+
+    /* Animated background orbs (matching consultation page) */
+    .builder-overlay-bg {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    .overlay-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.25;
+    }
+
+    .overlay-orb-1 {
+        width: 350px;
+        height: 350px;
+        background: radial-gradient(circle, var(--pink) 0%, transparent 70%);
+        top: -100px;
+        right: -80px;
+        animation: float-orb 15s ease-in-out infinite;
+    }
+
+    .overlay-orb-2 {
+        width: 250px;
+        height: 250px;
+        background: radial-gradient(circle, var(--yellow) 0%, transparent 70%);
+        bottom: -60px;
+        left: -60px;
+        animation: float-orb 15s ease-in-out infinite;
+        animation-delay: -7s;
+    }
+
+    .overlay-orb-3 {
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+        top: 40%;
+        left: 50%;
+        animation: float-orb 18s ease-in-out infinite;
+        animation-delay: -3s;
+    }
+
+    /* Close button */
+    .builder-close-btn {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 10001;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: rgba(255, 255, 255, 0.8);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .builder-close-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        transform: rotate(90deg);
+    }
+
+    /* Back link */
+    .builder-back-link {
+        position: fixed;
+        top: 24px;
+        left: 20px;
+        z-index: 10001;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: rgba(255, 255, 255, 0.6);
+        font-family: 'Nunito', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .builder-back-link:hover {
+        color: white;
+    }
+
+    /* Centered content container */
+    .builder-overlay-content {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 800px;
+        padding: 90px 24px 40px;
+        margin: 0 auto;
+    }
+
+    /* Override builder container inside overlay — remove its own background since overlay provides it */
+    .builder-fullscreen-overlay .cake-builder-container {
+        background: transparent;
+        border-radius: 0;
+        padding: 0;
+        min-height: auto;
+        overflow: visible;
+    }
+
+    /* Make cards inside overlay bigger and more spacious */
+    .builder-fullscreen-overlay .config-card,
+    .builder-fullscreen-overlay .steps-card,
+    .builder-fullscreen-overlay .result-card {
+        padding: 2rem;
+        border-radius: 24px;
+    }
+
+    .builder-fullscreen-overlay .builder-title {
+        font-size: 2rem;
+    }
+
+    .builder-fullscreen-overlay .builder-subtitle {
+        font-size: 1rem;
+    }
+
+    /* Body scroll lock */
+    body.builder-overlay-open {
+        overflow: hidden;
+    }
+
+    /* Overlay responsive */
+    @media (max-width: 768px) {
+        .builder-overlay-content {
+            padding: 80px 16px 30px;
+            max-width: 100%;
+        }
+
+        .builder-fullscreen-overlay .config-card,
+        .builder-fullscreen-overlay .steps-card,
+        .builder-fullscreen-overlay .result-card {
+            padding: 1.25rem;
+            border-radius: 16px;
+        }
+
+        .builder-fullscreen-overlay .builder-title {
+            font-size: 1.5rem;
+        }
+
+        .builder-back-link {
+            top: 16px;
+            left: 12px;
+            font-size: 0.8rem;
+        }
+
+        .builder-close-btn {
+            top: 12px;
+            right: 12px;
+            width: 38px;
+            height: 38px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .builder-overlay-content {
+            padding: 70px 10px 20px;
+        }
+
+        .builder-fullscreen-overlay .config-card,
+        .builder-fullscreen-overlay .steps-card,
+        .builder-fullscreen-overlay .result-card {
+            padding: 1rem;
+            border-radius: 12px;
+        }
+
+        .builder-back-link span {
+            display: none;
+        }
+    }
+
     </style>
 
     <!-- Cake Builder JavaScript -->
@@ -2707,6 +2941,9 @@
         const cakeBuilderMode = document.getElementById('cakeBuilderMode');
         const quickSketchSection = document.getElementById('quickSketchSection');
         const cakeBuilderSection = document.getElementById('cakeBuilderSection');
+        const builderOverlay = document.getElementById('builderFullscreenOverlay');
+        const builderCloseBtn = document.getElementById('builderCloseBtn');
+        const builderBackLink = document.getElementById('builderBackLink');
 
         // Config elements
         const builderCakeboard = document.getElementById('builderCakeboard');
@@ -2826,19 +3063,63 @@
         if (!quickSketchMode || !cakeBuilderMode) return;
 
         // Mode Toggle
-        quickSketchMode.addEventListener('click', () => {
-            quickSketchMode.classList.add('active');
-            cakeBuilderMode.classList.remove('active');
-            quickSketchSection.classList.add('active');
-            cakeBuilderSection.classList.remove('active');
-        });
-
-        cakeBuilderMode.addEventListener('click', () => {
+        // Open fullscreen overlay
+        function openBuilderOverlay() {
+            if (!builderOverlay) return;
+            builderOverlay.style.display = 'flex';
+            // Force reflow so the transition fires
+            builderOverlay.offsetHeight;
+            builderOverlay.classList.add('open');
+            document.body.classList.add('builder-overlay-open');
             cakeBuilderMode.classList.add('active');
             quickSketchMode.classList.remove('active');
             cakeBuilderSection.classList.add('active');
             quickSketchSection.classList.remove('active');
             updateStepsPreview();
+        }
+
+        // Close fullscreen overlay
+        function closeBuilderOverlay() {
+            if (!builderOverlay) return;
+            builderOverlay.classList.remove('open');
+            document.body.classList.remove('builder-overlay-open');
+            // After fade-out transition, hide
+            setTimeout(() => {
+                if (!builderOverlay.classList.contains('open')) {
+                    builderOverlay.style.display = 'none';
+                }
+            }, 350);
+            // Switch back to Quick Sketch mode in the inline view
+            quickSketchMode.classList.add('active');
+            cakeBuilderMode.classList.remove('active');
+            quickSketchSection.classList.add('active');
+            cakeBuilderSection.classList.remove('active');
+        }
+
+        quickSketchMode.addEventListener('click', () => {
+            closeBuilderOverlay();
+        });
+
+        cakeBuilderMode.addEventListener('click', () => {
+            openBuilderOverlay();
+        });
+
+        // Close on X button or Back link
+        if (builderCloseBtn) {
+            builderCloseBtn.addEventListener('click', closeBuilderOverlay);
+        }
+        if (builderBackLink) {
+            builderBackLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                closeBuilderOverlay();
+            });
+        }
+
+        // Close on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && builderOverlay && builderOverlay.classList.contains('open')) {
+                closeBuilderOverlay();
+            }
         });
 
         // Update steps preview when config changes
