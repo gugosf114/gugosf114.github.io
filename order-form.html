@@ -418,6 +418,10 @@
 
                                     <!-- PHASE 1: Configuration -->
                                     <div id="builderConfig" class="builder-phase active">
+                                        <div class="phase1-layout">
+
+                                        <!-- LEFT COLUMN: Config Card -->
+                                        <div class="phase1-config">
                                         <div class="config-card">
                                             <div class="card-glow"></div>
                                             <h4 class="config-title">Configure Your Cake</h4>
@@ -512,6 +516,92 @@
                                                 <div class="btn-shine"></div>
                                             </button>
                                         </div>
+                                        </div><!-- end phase1-config -->
+
+                                        <!-- RIGHT COLUMN: Guide Panel -->
+                                        <div class="phase1-guide">
+
+                                            <!-- How It Works -->
+                                            <div class="guide-card">
+                                                <div class="card-glow"></div>
+                                                <h4 class="guide-card-title">
+                                                    <span>🎯</span> How It Works
+                                                </h4>
+                                                <div class="workflow-steps">
+                                                    <div class="workflow-step">
+                                                        <div class="workflow-num">1</div>
+                                                        <div class="workflow-info">
+                                                            <strong>Configure</strong>
+                                                            <span>Choose tiers, topper & text placement</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="workflow-step">
+                                                        <div class="workflow-num">2</div>
+                                                        <div class="workflow-info">
+                                                            <strong>Describe Each Layer</strong>
+                                                            <span>Tell us the colors, theme & style for each part</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="workflow-step">
+                                                        <div class="workflow-num">3</div>
+                                                        <div class="workflow-info">
+                                                            <strong>AI Generates a Sketch</strong>
+                                                            <span>See each component visualized one by one</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="workflow-step">
+                                                        <div class="workflow-num">4</div>
+                                                        <div class="workflow-info">
+                                                            <strong>Approve or Retry</strong>
+                                                            <span>Love it? Move on. Not quite? Regenerate.</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="workflow-step">
+                                                        <div class="workflow-num">5</div>
+                                                        <div class="workflow-info">
+                                                            <strong>Download Your Design</strong>
+                                                            <span>Get a PDF or image of your full cake concept</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Prompt Examples -->
+                                            <div class="guide-card">
+                                                <div class="card-glow"></div>
+                                                <h4 class="guide-card-title">
+                                                    <span>💡</span> Example Prompts
+                                                </h4>
+                                                <p class="guide-card-hint">When asked to describe each layer, try something like:</p>
+                                                <div class="example-prompts">
+                                                    <div class="example-prompt">
+                                                        <span class="example-label">Tier</span>
+                                                        <span class="example-text">"Pink buttercream with white drip and gold sprinkles"</span>
+                                                    </div>
+                                                    <div class="example-prompt">
+                                                        <span class="example-label">Tier</span>
+                                                        <span class="example-text">"Navy blue fondant with silver stars and moon"</span>
+                                                    </div>
+                                                    <div class="example-prompt">
+                                                        <span class="example-label">Topper</span>
+                                                        <span class="example-text">"Baby Yoda holding a cupcake, green fondant"</span>
+                                                    </div>
+                                                    <div class="example-prompt">
+                                                        <span class="example-label">Board</span>
+                                                        <span class="example-text">"White fondant with gold leaf border"</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Pro Tip -->
+                                            <div class="guide-tip">
+                                                <span class="tip-icon">✨</span>
+                                                <p><strong>Pro tip:</strong> The more detail you give, the better the sketch. Include colors, textures, and references to specific styles.</p>
+                                            </div>
+
+                                        </div><!-- end phase1-guide -->
+
+                                        </div><!-- end phase1-layout -->
                                     </div>
 
                                     <!-- PHASE 2: Step-by-Step Building -->
@@ -2841,9 +2931,179 @@
         position: relative;
         z-index: 1;
         width: 100%;
-        max-width: 800px;
-        padding: 90px 24px 40px;
+        max-width: 1100px;
+        padding: 90px 32px 40px;
         margin: 0 auto;
+    }
+
+    /* Phase 1 Two-Column Layout */
+    .phase1-layout {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 1.5rem;
+        align-items: start;
+    }
+
+    .phase1-config {
+        min-width: 0;
+    }
+
+    .phase1-guide {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        min-width: 0;
+    }
+
+    /* Guide Cards */
+    .guide-card {
+        position: relative;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1.5rem;
+        overflow: hidden;
+    }
+
+    .guide-card-title {
+        font-family: 'Fredoka One', cursive;
+        font-size: 1.05rem;
+        color: white;
+        margin: 0 0 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .guide-card-hint {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.8rem;
+        margin: 0 0 0.75rem;
+    }
+
+    /* Workflow Steps */
+    .workflow-steps {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .workflow-step {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .workflow-num {
+        flex-shrink: 0;
+        width: 26px;
+        height: 26px;
+        background: linear-gradient(135deg, var(--pink), #d41f7e);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        font-weight: 800;
+        font-family: 'Nunito', sans-serif;
+    }
+
+    .workflow-info {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .workflow-info strong {
+        color: white;
+        font-size: 0.85rem;
+        font-family: 'Nunito', sans-serif;
+    }
+
+    .workflow-info span {
+        color: rgba(255, 255, 255, 0.45);
+        font-size: 0.75rem;
+        line-height: 1.3;
+    }
+
+    /* Example Prompts */
+    .example-prompts {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .example-prompt {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 0.6rem 0.75rem;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 10px;
+        transition: background 0.2s ease;
+    }
+
+    .example-prompt:hover {
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    .example-label {
+        flex-shrink: 0;
+        font-size: 0.65rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--pink);
+        background: rgba(236, 38, 143, 0.15);
+        padding: 3px 7px;
+        border-radius: 6px;
+        margin-top: 1px;
+    }
+
+    .example-text {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.8rem;
+        font-style: italic;
+        line-height: 1.4;
+    }
+
+    /* Pro Tip */
+    .guide-tip {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+        padding: 1rem;
+        background: linear-gradient(135deg, rgba(255, 197, 50, 0.08), rgba(236, 38, 143, 0.08));
+        border: 1px solid rgba(255, 197, 50, 0.2);
+        border-radius: 14px;
+    }
+
+    .tip-icon {
+        font-size: 1.1rem;
+        flex-shrink: 0;
+        margin-top: 1px;
+    }
+
+    .guide-tip p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.8rem;
+        line-height: 1.5;
+    }
+
+    .guide-tip strong {
+        color: var(--yellow);
+    }
+
+    /* Stack to single column on smaller screens */
+    @media (max-width: 900px) {
+        .phase1-layout {
+            grid-template-columns: 1fr;
+        }
     }
 
     /* Override builder container inside overlay — remove its own background since overlay provides it */
