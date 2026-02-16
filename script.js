@@ -274,6 +274,17 @@ if (orderForm) {
 
         const formData = new FormData(orderForm);
 
+        // Dynamic subject line: "Cake Order - Sarah Johnson - Mar 15"
+        const custName = formData.get('name') || 'Unknown';
+        const productType = formData.get('product_type') || 'Order';
+        const eventDate = formData.get('event_date');
+        let dateLabel = '';
+        if (eventDate) {
+            const d = new Date(eventDate + 'T00:00:00');
+            dateLabel = ' - ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        }
+        formData.set('subject', productType + ' Order - ' + custName + dateLabel);
+
         try {
             const response = await fetch('https://api.web3forms.com/submit', {
                 method: 'POST',

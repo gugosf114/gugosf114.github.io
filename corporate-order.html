@@ -1124,6 +1124,17 @@
         const submitBtn = this.querySelector('button[type="submit"]');
         const btnText = submitBtn.querySelector('.btn-text');
 
+        // Dynamic subject line: "Corporate - Acme Inc - Logo Cookies - Mar 15"
+        const companyName = formData.get('company_name') || 'Unknown Company';
+        const productType = formData.get('product_type') || 'Order';
+        const eventDate = formData.get('event_date');
+        let dateLabel = '';
+        if (eventDate) {
+            const d = new Date(eventDate + 'T00:00:00');
+            dateLabel = ' - ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        }
+        formData.set('subject', 'Corporate - ' + companyName + ' - ' + productType + dateLabel);
+
         submitBtn.disabled = true;
         btnText.textContent = 'Sending...';
 

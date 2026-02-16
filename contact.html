@@ -448,6 +448,13 @@
         e.preventDefault();
 
         const formData = new FormData(this);
+
+        // Dynamic subject line: "Contact - Jane Smith"
+        const firstName = formData.get('first_name') || '';
+        const lastName = formData.get('last_name') || '';
+        const fullName = (firstName + ' ' + lastName).trim() || 'Unknown';
+        formData.set('subject', 'Contact - ' + fullName);
+
         const submitBtn = this.querySelector('.btn');
 
         submitBtn.disabled = true;
