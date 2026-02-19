@@ -1763,17 +1763,26 @@
        ============================================ */
     .order-heading {
         font-family: 'Fredoka One', cursive;
-        font-size: 2rem;
+        font-size: clamp(2.2rem, 4vw, 3rem);
         color: var(--dark-brown);
         margin-bottom: 1.5rem;
         text-align: center;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .order-form-card {
         background: var(--dark-brown);
-        padding: 2rem;
-        border-radius: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 2.5rem;
+        border-radius: 24px;
+        border: none;
+        box-shadow:
+            0 4px 12px rgba(0, 0, 0, 0.1),
+            0 8px 24px rgba(0, 0, 0, 0.12),
+            0 16px 48px rgba(0, 0, 0, 0.1),
+            0 24px 64px rgba(0, 0, 0, 0.08);
+        transform: perspective(800px) translateZ(0);
+        transform-style: preserve-3d;
+        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     /* Form labels on dark bg */
@@ -1813,9 +1822,15 @@
 
     /* Radio options on dark bg */
     .order-form-card .radio-option {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        box-shadow: none;
+        background: rgba(255, 255, 255, 0.07);
+        border: none;
+        border-radius: 16px;
+        box-shadow:
+            0 2px 6px rgba(0, 0, 0, 0.2),
+            0 4px 12px rgba(0, 0, 0, 0.15),
+            inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        transform: perspective(800px) translateZ(0);
+        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .order-form-card .radio-option span {
@@ -1824,7 +1839,11 @@
 
     .order-form-card .radio-option:hover {
         background: rgba(236, 38, 143, 0.1);
-        border-color: var(--pink);
+        transform: perspective(800px) translateY(-4px) translateZ(8px);
+        box-shadow:
+            0 4px 12px rgba(236, 38, 143, 0.15),
+            0 8px 24px rgba(0, 0, 0, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.08);
     }
 
     .order-form-card .radio-option input[type="radio"]:checked + span {
