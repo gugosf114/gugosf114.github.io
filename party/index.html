@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete the Party | My Baking Creations</title>
+    <meta name="description" content="Bounce houses, tableware, balloon arches, LED marquees and more. Let us handle the party so you can enjoy every moment.">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../logo_icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <meta name="theme-color" content="#EC268F">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+    :root {
+        --pink: #EC268F;
+        --pink-dark: #D11F7E;
+        --yellow: #FFC532;
+        --yellow-dark: #E5AF2D;
+        --dark-brown: #622D2B;
+        --brown: #C36239;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+        min-height: 100vh;
+        background: linear-gradient(160deg, #0d0d1a 0%, #1a1028 30%, #0f1a2e 60%, #0d0d1a 100%);
+        font-family: 'Poppins', sans-serif;
+        color: rgba(255,255,255,0.9);
+        overflow-x: hidden;
+    }
+
+    /* ══════════════════════════════════
+       ANIMATED BACKGROUND
+    ══════════════════════════════════ */
+    .party-bg {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        z-index: 0;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    .party-bg canvas {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+    }
+
+    .bg-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        opacity: 0.3;
+        animation: drift 25s ease-in-out infinite;
+    }
+
+    .bg-orb.orb-pink {
+        width: 500px; height: 500px;
+        background: radial-gradient(circle, var(--pink) 0%, transparent 70%);
+        top: -150px; right: -100px;
+    }
+
+    .bg-orb.orb-yellow {
+        width: 350px; height: 350px;
+        background: radial-gradient(circle, var(--yellow) 0%, transparent 70%);
+        bottom: -80px; left: -80px;
+        animation-delay: -8s;
+    }
+
+    .bg-orb.orb-purple {
+        width: 300px; height: 300px;
+        background: radial-gradient(circle, #7c3aed 0%, transparent 70%);
+        top: 40%; left: 30%;
+        animation-delay: -16s;
+    }
+
+    @keyframes drift {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33% { transform: translate(40px, -30px) scale(1.08); }
+        66% { transform: translate(-25px, 25px) scale(0.94); }
+    }
+
+    /* ══════════════════════════════════
+       FLOATING LOGO
+    ══════════════════════════════════ */
+    .floating-logo {
+        position: fixed;
+        top: 20px; left: 20px;
+        z-index: 100;
+        background: rgba(255,255,255,0.08);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 14px;
+        padding: 10px;
+        border: 1px solid rgba(255,255,255,0.15);
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .floating-logo:hover {
+        background: rgba(255,255,255,0.15);
+        transform: scale(1.05);
+    }
+
+    .floating-logo img {
+        display: block;
+        height: 45px;
+        width: auto;
+    }
+
+    /* ══════════════════════════════════
+       MAIN CONTENT
+    ══════════════════════════════════ */
+    .party-main {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* ══════════════════════════════════
+       HERO
+    ══════════════════════════════════ */
+    .party-hero {
+        text-align: center;
+        padding: 8rem 1.5rem 4rem;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, rgba(236,38,143,0.15), rgba(255,197,50,0.15));
+        border: 1px solid rgba(236,38,143,0.3);
+        color: var(--pink);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 0.5rem 1.4rem;
+        border-radius: 50px;
+        margin-bottom: 2rem;
+        animation: pulse-glow 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+        0%, 100% { box-shadow: 0 0 15px rgba(236,38,143,0.2); }
+        50% { box-shadow: 0 0 30px rgba(236,38,143,0.4); }
+    }
+
+    .party-hero h1 {
+        font-family: 'Fredoka One', cursive;
+        font-size: clamp(2.4rem, 6vw, 4rem);
+        color: white;
+        line-height: 1.15;
+        margin-bottom: 1.2rem;
+    }
+
+    .party-hero h1 .accent {
+        background: linear-gradient(135deg, var(--pink), var(--yellow), var(--pink));
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradient-text 4s ease-in-out infinite;
+    }
+
+    @keyframes gradient-text {
+        0%, 100% { background-position: 0% center; }
+        50% { background-position: 200% center; }
+    }
+
+    .party-hero .subtitle {
+        font-size: 1.1rem;
+        color: rgba(255,255,255,0.6);
+        max-width: 520px;
+        margin: 0 auto 2.5rem;
+        line-height: 1.7;
+        font-weight: 300;
+    }
+
+    .hero-trust {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .hero-trust-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: rgba(255,255,255,0.7);
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .hero-trust-item svg {
+        width: 20px; height: 20px;
+        fill: var(--pink);
+        flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════════
+       SECTION TITLES
+    ══════════════════════════════════ */
+    .section-header {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding: 0 1.5rem;
+    }
+
+    .section-header .label {
+        display: inline-block;
+        color: var(--yellow);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        margin-bottom: 0.8rem;
+    }
+
+    .section-header h2 {
+        font-family: 'Fredoka One', cursive;
+        font-size: clamp(1.6rem, 4vw, 2.4rem);
+        color: white;
+        margin-bottom: 0.6rem;
+    }
+
+    .section-header p {
+        color: rgba(255,255,255,0.5);
+        font-size: 0.95rem;
+        max-width: 500px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    /* ══════════════════════════════════
+       BOUNCE HOUSE CARDS
+    ══════════════════════════════════ */
+    .rentals-section {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem 5rem;
+    }
+
+    .rentals-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.8rem;
+    }
+
+    .rental-card {
+        position: relative;
+        background: rgba(255,255,255,0.04);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 24px;
+        padding: 2.2rem 1.8rem 1.8rem;
+        text-align: center;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .rental-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--pink), var(--yellow), var(--pink));
+        background-size: 200% 100%;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    .rental-card:hover {
+        transform: translateY(-8px);
+        border-color: rgba(236,38,143,0.2);
+        box-shadow:
+            0 8px 32px rgba(236,38,143,0.12),
+            0 24px 64px rgba(0,0,0,0.3);
+    }
+
+    .rental-card:hover::before { opacity: 1; }
+
+    .card-badge {
+        position: absolute;
+        top: 1.2rem; right: 1.2rem;
+        background: linear-gradient(135deg, var(--yellow), var(--yellow-dark));
+        color: #1a1028;
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        padding: 0.3rem 0.8rem;
+        border-radius: 50px;
+        box-shadow: 0 3px 12px rgba(255,197,50,0.3);
+    }
+
+    .card-icon {
+        width: 72px; height: 72px;
+        margin: 0 auto 1.4rem;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, rgba(236,38,143,0.1), rgba(255,197,50,0.08));
+        border: 1px solid rgba(236,38,143,0.15);
+        box-shadow: 0 4px 16px rgba(236,38,143,0.1);
+        transition: all 0.35s ease;
+    }
+
+    .card-icon svg {
+        width: 32px; height: 32px;
+        stroke: var(--pink);
+        stroke-width: 1.8;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    .rental-card:hover .card-icon {
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: 0 8px 24px rgba(236,38,143,0.2);
+    }
+
+    .rental-card h3 {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 0.5rem;
+    }
+
+    .rental-card .card-desc {
+        color: rgba(255,255,255,0.55);
+        font-size: 0.85rem;
+        line-height: 1.6;
+        margin-bottom: 1.2rem;
+    }
+
+    .card-tags {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.4rem;
+        margin-bottom: 1.4rem;
+    }
+
+    .card-tags span {
+        background: rgba(255,255,255,0.06);
+        color: rgba(255,255,255,0.6);
+        font-size: 0.7rem;
+        font-weight: 500;
+        padding: 0.25rem 0.65rem;
+        border-radius: 50px;
+        border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .card-price-row {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .card-price {
+        font-size: 1.8rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--pink), var(--yellow));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .card-price-unit {
+        color: rgba(255,255,255,0.4);
+        font-size: 0.78rem;
+    }
+
+    .btn-order {
+        display: block;
+        width: 100%;
+        padding: 0.85rem 1.5rem;
+        background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+        color: white;
+        border: none;
+        border-radius: 14px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.88rem;
+        font-weight: 700;
+        cursor: pointer;
+        letter-spacing: 0.3px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 16px rgba(236,38,143,0.25);
+    }
+
+    .btn-order::after {
+        content: '';
+        position: absolute;
+        top: 0; left: -100%;
+        width: 100%; height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+        transition: left 0.5s ease;
+    }
+
+    .btn-order:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(236,38,143,0.35);
+    }
+
+    .btn-order:hover::after { left: 100%; }
+
+    /* ══════════════════════════════════
+       PACKAGES SECTION
+    ══════════════════════════════════ */
+    .packages-section {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem 5rem;
+    }
+
+    .packages-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.8rem;
+    }
+
+    .package-card {
+        position: relative;
+        background: rgba(255,255,255,0.03);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 24px;
+        padding: 2.2rem 1.8rem 1.8rem;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .package-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(255,197,50,0.2);
+        box-shadow:
+            0 8px 32px rgba(255,197,50,0.08),
+            0 24px 64px rgba(0,0,0,0.25);
+    }
+
+    .package-card h3 {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 0.4rem;
+    }
+
+    .package-card .pkg-subtitle {
+        color: var(--yellow);
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+    }
+
+    .pkg-list {
+        list-style: none;
+        margin-bottom: 1.5rem;
+    }
+
+    .pkg-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+        color: rgba(255,255,255,0.65);
+        font-size: 0.88rem;
+        padding: 0.4rem 0;
+        line-height: 1.5;
+    }
+
+    .pkg-list li svg {
+        width: 18px; height: 18px;
+        fill: var(--pink);
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .pkg-price-row {
+        display: flex;
+        align-items: baseline;
+        gap: 0.5rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .pkg-price {
+        font-size: 2rem;
+        font-weight: 800;
+        color: white;
+    }
+
+    .pkg-price-note {
+        color: rgba(255,255,255,0.4);
+        font-size: 0.8rem;
+    }
+
+    .btn-pkg {
+        display: block;
+        width: 100%;
+        padding: 0.85rem 1.5rem;
+        background: rgba(255,255,255,0.06);
+        color: white;
+        border: 1.5px solid rgba(255,255,255,0.12);
+        border-radius: 14px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.88rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-pkg:hover {
+        background: rgba(236,38,143,0.1);
+        border-color: var(--pink);
+        transform: translateY(-2px);
+    }
+
+    .package-card.featured {
+        border-color: rgba(236,38,143,0.2);
+        background: linear-gradient(160deg, rgba(236,38,143,0.06), rgba(255,197,50,0.03));
+    }
+
+    .package-card.featured .btn-pkg {
+        background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+        border-color: transparent;
+        box-shadow: 0 4px 16px rgba(236,38,143,0.25);
+    }
+
+    .package-card.featured .btn-pkg:hover {
+        box-shadow: 0 8px 30px rgba(236,38,143,0.35);
+    }
+
+    /* ══════════════════════════════════
+       BOTTOM CTA
+    ══════════════════════════════════ */
+    .bottom-cta {
+        text-align: center;
+        padding: 4rem 1.5rem 5rem;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .bottom-cta h2 {
+        font-family: 'Fredoka One', cursive;
+        font-size: clamp(1.5rem, 3.5vw, 2rem);
+        color: white;
+        margin-bottom: 0.8rem;
+    }
+
+    .bottom-cta p {
+        color: rgba(255,255,255,0.5);
+        font-size: 0.95rem;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+    }
+
+    .btn-cta-main {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 1.1rem 2.5rem;
+        background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+        color: white;
+        border: none;
+        border-radius: 16px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 6px 24px rgba(236,38,143,0.3);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-cta-main::after {
+        content: '';
+        position: absolute;
+        top: 0; left: -100%;
+        width: 100%; height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+        0%, 100% { left: -100%; }
+        50% { left: 100%; }
+    }
+
+    .btn-cta-main:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 40px rgba(236,38,143,0.4);
+    }
+
+    .btn-cta-main svg {
+        width: 20px; height: 20px;
+        fill: currentColor;
+    }
+
+    .contact-alt {
+        margin-top: 1.5rem;
+        color: rgba(255,255,255,0.4);
+        font-size: 0.85rem;
+    }
+
+    .contact-alt a {
+        color: var(--pink);
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .contact-alt a:hover { color: var(--yellow); }
+
+    /* ══════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════ */
+    @media (max-width: 700px) {
+        .party-hero { padding: 7rem 1.2rem 3rem; }
+        .party-hero h1 { font-size: 2rem; }
+        .rentals-grid,
+        .packages-grid { grid-template-columns: 1fr; }
+        .hero-trust { gap: 1rem; }
+        .floating-logo img { height: 36px; }
+        .floating-logo { top: 12px; left: 12px; padding: 8px; }
+    }
+
+    @media (max-width: 380px) {
+        .party-hero h1 { font-size: 1.7rem; }
+        .rental-card,
+        .package-card { padding: 1.5rem 1.2rem 1.4rem; }
+    }
+    </style>
+</head>
+<body>
+
+    <!-- Animated Background -->
+    <div class="party-bg">
+        <canvas id="partyParticles"></canvas>
+        <div class="bg-orb orb-pink"></div>
+        <div class="bg-orb orb-yellow"></div>
+        <div class="bg-orb orb-purple"></div>
+    </div>
+
+    <!-- Floating Logo -->
+    <a href="../index.html" class="floating-logo">
+        <img src="../logo_icon.png" alt="My Baking Creations" width="60" height="55">
+    </a>
+
+    <main class="party-main">
+
+        <!-- ═══ HERO ═══ -->
+        <section class="party-hero">
+            <div class="hero-badge">Party Rentals &amp; Extras</div>
+            <h1>Complete the <span class="accent">Party</span></h1>
+            <p class="subtitle">The cake is just the beginning. Bounce houses, decor, tableware &mdash; we handle everything so you can enjoy every moment.</p>
+            <div class="hero-trust">
+                <div class="hero-trust-item">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <span>Professional Setup</span>
+                </div>
+                <div class="hero-trust-item">
+                    <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                    <span>Full-Day Rentals</span>
+                </div>
+                <div class="hero-trust-item">
+                    <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                    <span>Insured &amp; Safe</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ BOUNCE HOUSES ═══ -->
+        <section class="rentals-section">
+            <div class="section-header">
+                <div class="label">Headline Rentals</div>
+                <h2>Bounce Houses</h2>
+                <p>Full-day rentals with professional setup and teardown included. All units are commercial-grade and insured.</p>
+            </div>
+
+            <div class="rentals-grid">
+                <div class="rental-card">
+                    <span class="card-badge">Popular</span>
+                    <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M3 21V11l2-4V5h2v2h2V5h2v2h2V5h2v2h2V5h2v2l2 4v10"/><path d="M3 21h18"/><path d="M7 11v4h4v-4"/><path d="M13 11v4h4v-4"/><path d="M10 21v-4h4v4"/><path d="M6 7h12"/></svg></div>
+                    <h3>Classic Castle Bouncer</h3>
+                    <p class="card-desc">The crowd favorite. Fits up to 8 kids at once. Colorful, safe, and built for all-day fun.</p>
+                    <div class="card-tags">
+                        <span>Setup Included</span>
+                        <span>All Day</span>
+                        <span>Ages 3-12</span>
+                    </div>
+                    <div class="card-price-row">
+                        <span class="card-price">$400</span>
+                        <span class="card-price-unit">/ full day</span>
+                    </div>
+                    <button class="btn-order">Reserve Now</button>
+                </div>
+
+                <div class="rental-card">
+                    <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M2 15c2-1 4 1 6 0s4-2 6 0 4 1 6 0"/><path d="M2 19c2-1 4 1 6 0s4-2 6 0 4 1 6 0"/><path d="M17 3l-5 10"/><path d="M12 13l5-10"/><path d="M8 8l8-2"/></svg></div>
+                    <h3>Tropical Slide Combo</h3>
+                    <p class="card-desc">Bouncer + water slide in one unit. Perfect for summer parties. Hose hookup required.</p>
+                    <div class="card-tags">
+                        <span>Slide + Bounce</span>
+                        <span>Water Ready</span>
+                        <span>Ages 4-14</span>
+                    </div>
+                    <div class="card-price-row">
+                        <span class="card-price">$550</span>
+                        <span class="card-price-unit">/ full day</span>
+                    </div>
+                    <button class="btn-order">Reserve Now</button>
+                </div>
+
+                <div class="rental-card">
+                    <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M9 21V16a3 3 0 0 1 6 0v5"/><path d="M6 12a6 6 0 0 1 12 0"/><path d="M4 21h16"/></svg></div>
+                    <h3>Toddler Play Zone</h3>
+                    <p class="card-desc">Low-height bouncer designed for the littlest ones. Fully enclosed, soft, and colorful.</p>
+                    <div class="card-tags">
+                        <span>Low Height</span>
+                        <span>Enclosed</span>
+                        <span>Ages 1-5</span>
+                    </div>
+                    <div class="card-price-row">
+                        <span class="card-price">$325</span>
+                        <span class="card-price-unit">/ full day</span>
+                    </div>
+                    <button class="btn-order">Reserve Now</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ PARTY PACKAGES ═══ -->
+        <section class="packages-section">
+            <div class="section-header">
+                <div class="label">Everything Else</div>
+                <h2>Party Packages</h2>
+                <p>Don't stress the details. We'll match everything to your theme and deliver it ready to go.</p>
+            </div>
+
+            <div class="packages-grid">
+                <div class="package-card">
+                    <h3>Essentials</h3>
+                    <div class="pkg-subtitle">Tableware for 24 guests</div>
+                    <ul class="pkg-list">
+                        <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Theme-matched plates &amp; napkins</li>
+                        <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Cups with lids</li>
+                        <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Cutlery &amp; tablecloth</li>
+                    </ul>
+                    <div class="pkg-price-row">
+                        <span class="pkg-price">$75</span>
+                        <span class="pkg-price-note">/ 24 guests</span>
+                    </div>
+                    <button class="btn-pkg">Add to Order</button>
+                </div>
+
+                <div class="package-card featured">
+                    <span class="card-badge">Best Value</span>
+                    <h3>Full Party Setup</h3>
+                    <div class="pkg-subtitle">Decor + Tableware + Extras</div>
+                    <ul class="pkg-list">
+                        <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Everything in Essentials</li>
+                        <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Custom balloon arch (12 ft)</li>
+                        <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Party favor bags (up to 20)</li>
+                        <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> On-site setup before guests arrive</li>
+                    </ul>
+                    <div class="pkg-price-row">
+                        <span class="pkg-price">$275</span>
+                        <span class="pkg-price-note">/ package</span>
+                    </div>
+                    <button class="btn-pkg">Add to Order</button>
+                </div>
+
+                <div class="package-card">
+                    <h3>Custom</h3>
+                    <div class="pkg-subtitle">Tell us your vision</div>
+                    <ul class="pkg-list">
+                        <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> LED letter marquees</li>
+                        <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Themed wall decor</li>
+                        <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Any combination you need</li>
+                        <li><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> We'll put together a quote</li>
+                    </ul>
+                    <div class="pkg-price-row">
+                        <span class="pkg-price">Varies</span>
+                    </div>
+                    <button class="btn-pkg">Get a Quote</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ BOTTOM CTA ═══ -->
+        <section class="bottom-cta">
+            <h2>Ready to Plan Your Party?</h2>
+            <p>Tell us about your event and we'll put together a package that fits. Same team, same quality, same attention to detail you know from our cakes.</p>
+            <a href="../book-consultation.html" class="btn-cta-main">
+                <span>Get Started</span>
+                <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+            </a>
+            <p class="contact-alt">Email us: <a href="mailto:party@mybakingcreations.com">party@mybakingcreations.com</a> &nbsp;|&nbsp; Call: <a href="tel:7072967777">(707) 296-7777</a></p>
+            <p class="contact-alt" style="margin-top:0.6rem; font-size:0.78rem;">Serving Marin County &middot; San Francisco &middot; Peninsula &middot; Palo Alto &middot; South Bay</p>
+        </section>
+
+    </main>
+
+    <script>
+    // Particle animation
+    (function() {
+        const canvas = document.getElementById('partyParticles');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        const particles = [];
+        const count = 40;
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.vx = (Math.random() - 0.5) * 0.4;
+                this.vy = (Math.random() - 0.5) * 0.4;
+                this.opacity = Math.random() * 0.4 + 0.1;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255,255,255,${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < count; i++) particles.push(new Particle());
+
+        function drawLines() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const d = Math.sqrt(dx * dx + dy * dy);
+                    if (d < 140) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(255,255,255,${0.08 * (1 - d / 140)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function loop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            drawLines();
+            requestAnimationFrame(loop);
+        }
+        loop();
+    })();
+    </script>
+
+</body>
+</html>
