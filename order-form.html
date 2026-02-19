@@ -767,6 +767,24 @@
                         </div><!-- end aiPreviewSection -->
 
                         <div class="form-group">
+                            <label for="party_size">Approximate Party Size</label>
+                            <select id="party_size" name="party_size" style="width:100%; padding:0.75rem 1rem; font-family:'Poppins',sans-serif; font-size:0.95rem; border:2px solid rgba(255,255,255,0.15); border-radius:8px; background:rgba(255,255,255,0.08); color:#FDFBF8; cursor:pointer; appearance:none; -webkit-appearance:none; background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23EC268F' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E&quot;); background-repeat:no-repeat; background-position:right 1rem center; transition:border-color 0.3s ease, box-shadow 0.3s ease;">
+                                <option value="" selected>Unknown</option>
+                                <option value="5">Up to 5 guests</option>
+                                <option value="10">6 – 10 guests</option>
+                                <option value="15">11 – 15 guests</option>
+                                <option value="20">16 – 20 guests</option>
+                                <option value="25">21 – 25 guests</option>
+                                <option value="30">26 – 30 guests</option>
+                                <option value="35">31 – 35 guests</option>
+                                <option value="40">36 – 40 guests</option>
+                                <option value="45">41 – 45 guests</option>
+                                <option value="50">46 – 50 guests</option>
+                            </select>
+                            <small>Helps us recommend the right serving size</small>
+                        </div>
+
+                        <div class="form-group">
                             <label for="reference_photo">Reference Photo (Optional) <span class="hint-icon has-hint hint-lg" data-hint="Have an exact photo of the cake you want? Upload it here - no AI sketch needed!" data-hint-pos="top">?</span></label>
                             <input type="file" id="reference_photo" name="attachment" accept="image/*,.pdf">
                             <small>Upload a photo or sketch (Max 5MB)</small>
