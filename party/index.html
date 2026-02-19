@@ -303,25 +303,23 @@
     }
 
     .card-icon {
-        width: 72px; height: 72px;
+        width: 100%;
+        max-width: 260px;
+        height: 180px;
         margin: 0 auto 1.4rem;
         border-radius: 18px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, rgba(236,38,143,0.1), rgba(255,197,50,0.08));
-        border: 1px solid rgba(236,38,143,0.15);
-        box-shadow: 0 4px 16px rgba(236,38,143,0.1);
+        overflow: hidden;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+        box-shadow: 0 4px 16px rgba(0,0,0,0.2);
         transition: all 0.35s ease;
     }
 
-    .card-icon svg {
-        width: 32px; height: 32px;
-        stroke: var(--pink);
-        stroke-width: 1.8;
-        fill: none;
-        stroke-linecap: round;
-        stroke-linejoin: round;
+    .card-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
     }
 
     .rental-card:hover .card-icon {
@@ -695,7 +693,7 @@
             <div class="rentals-grid">
                 <div class="rental-card">
                     <span class="card-badge">Popular</span>
-                    <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M3 21V11l2-4V5h2v2h2V5h2v2h2V5h2v2h2V5h2v2l2 4v10"/><path d="M3 21h18"/><path d="M7 11v4h4v-4"/><path d="M13 11v4h4v-4"/><path d="M10 21v-4h4v4"/><path d="M6 7h12"/></svg></div>
+                    <div class="card-icon"><img src="castle-bouncer.jpg" alt="Classic Castle Bouncer" loading="lazy"></div>
                     <h3>Classic Castle Bouncer</h3>
                     <p class="card-desc">The crowd favorite. Fits up to 8 kids at once. Colorful, safe, and built for all-day fun.</p>
                     <div class="card-tags">
@@ -711,7 +709,7 @@
                 </div>
 
                 <div class="rental-card">
-                    <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M2 15c2-1 4 1 6 0s4-2 6 0 4 1 6 0"/><path d="M2 19c2-1 4 1 6 0s4-2 6 0 4 1 6 0"/><path d="M17 3l-5 10"/><path d="M12 13l5-10"/><path d="M8 8l8-2"/></svg></div>
+                    <div class="card-icon"><img src="slide-combo.jpg" alt="Tropical Slide Combo" loading="lazy"></div>
                     <h3>Tropical Slide Combo</h3>
                     <p class="card-desc">Bouncer + water slide in one unit. Perfect for summer parties. Hose hookup required.</p>
                     <div class="card-tags">
@@ -727,7 +725,7 @@
                 </div>
 
                 <div class="rental-card">
-                    <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M9 21V16a3 3 0 0 1 6 0v5"/><path d="M6 12a6 6 0 0 1 12 0"/><path d="M4 21h16"/></svg></div>
+                    <div class="card-icon"><img src="toddler-bouncer.jpg" alt="Toddler Play Zone" loading="lazy"></div>
                     <h3>Toddler Play Zone</h3>
                     <p class="card-desc">Low-height bouncer designed for the littlest ones. Fully enclosed, soft, and colorful.</p>
                     <div class="card-tags">
