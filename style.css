@@ -306,7 +306,7 @@ nav {
     display: flex;
     flex: 1;
     justify-content: flex-end;
-    gap: 1.25rem;
+    gap: 1rem;
     list-style: none;
     align-items: center;
 }

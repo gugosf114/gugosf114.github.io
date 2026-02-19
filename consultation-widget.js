@@ -1,29 +1,29 @@
 /**
- * Floating Consultation Widget
- * Premium, draggable "Book 15-Min Consultation" button
+ * Floating Party Rentals Widget
+ * Premium, draggable "Party Rentals" button
  */
 (function() {
     'use strict';
 
-    // Don't load on the consultation page itself
-    if (window.location.pathname.includes('book-consultation')) return;
+    // Don't load on the party page itself
+    if (window.location.pathname.includes('/party')) return;
 
     // Create widget HTML
     const widget = document.createElement('div');
     widget.id = 'consultationWidget';
     widget.innerHTML = `
-        <a href="book-consultation.html" class="consultation-widget-btn" id="consultationBtn">
+        <a href="party/" class="consultation-widget-btn" id="consultationBtn">
             <div class="widget-glow"></div>
             <div class="widget-pulse"></div>
             <div class="widget-content">
                 <div class="widget-icon">
                     <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                        <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
+                        <path d="M12 6c0-.55-.45-1-1-1H7c-.55 0-1 .45-1 1v2l-3.89 4.12c-.37.39-.11 1 .42 1H6v5c0 .55.45 1 1 1h2c.55 0 1-.45 1-1v-5h3.47c.53 0 .79-.62.42-1L12 8.12V6zM16 6l3 6h-2v6h-2v-6h-2l3-6z"/>
                     </svg>
                 </div>
                 <div class="widget-text">
-                    <span class="widget-label">Free Consultation</span>
-                    <span class="widget-sublabel">15 min video call</span>
+                    <span class="widget-label">Party Rentals</span>
+                    <span class="widget-sublabel">Complete the Party</span>
                 </div>
             </div>
             <div class="widget-shine"></div>
@@ -377,8 +377,8 @@
         if (e.type === 'touchend' && !hasMoved) {
             const touchDuration = Date.now() - touchStartTime;
             if (touchDuration < 300) {
-                // Quick tap - navigate to consultation page
-                window.location.href = 'book-consultation.html';
+                // Quick tap - navigate to party rentals page
+                window.location.href = 'party/';
             }
         }
 
