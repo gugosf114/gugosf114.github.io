@@ -60,19 +60,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-  <!-- Product Category Pages (NEW) -->
-  <url>
-    <loc>https://mybakingcreations.com/cakes.html</loc>
-    <lastmod>2026-01-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mybakingcreations.com/cookies.html</loc>
-    <lastmod>2026-01-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
   <!-- Gallery Pages -->
   <url>
     <loc>https://mybakingcreations.com/gallery-cakepops.html</loc>
@@ -213,6 +200,26 @@
     <lastmod>2026-01-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <!-- Party Rentals -->
+  <url>
+    <loc>https://mybakingcreations.com/party/</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Legal -->
+  <url>
+    <loc>https://mybakingcreations.com/terms-of-service.html</loc>
+    <lastmod>2026-01-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://mybakingcreations.com/privacy-policy.html</loc>
+    <lastmod>2026-01-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
   <!-- Ordering Pages -->
   <url>

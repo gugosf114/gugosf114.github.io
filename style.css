@@ -83,26 +83,6 @@ body {
     overflow-x: hidden;
 }
 
-/* ========== HALO GLOW FRAME ========== */
-body::after {
-    content: '';
-    position: fixed;
-    top: 60px; left: 0; right: 0; bottom: 0;
-    pointer-events: none;
-    z-index: 998;
-    box-shadow:
-        inset 0 8px 25px rgba(236,38,143,0.28),
-        inset 0 -8px 25px rgba(98,45,43,0.28),
-        inset 8px 0 25px rgba(255,197,50,0.22),
-        inset -8px 0 25px rgba(236,38,143,0.22);
-    animation: haloShift 6s ease-in-out infinite;
-}
-
-@keyframes haloShift {
-    0% { filter: hue-rotate(0deg); }
-    50% { filter: hue-rotate(15deg); }
-    100% { filter: hue-rotate(0deg); }
-}
 
 /* Disable fixed background on mobile - causes scroll jank on iOS */
 @media (max-width: 768px) {
