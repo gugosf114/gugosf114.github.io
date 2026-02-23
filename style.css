@@ -511,6 +511,12 @@ a.nav-cta:active {
     font-weight: 500;
 }
 
+.dropdown-divider {
+    border-top: 1px solid rgba(98, 45, 43, 0.15);
+    margin: 0.35rem 1rem;
+    list-style: none;
+}
+
 /* Hide mobile dropdown indicator on desktop */
 .mobile-dropdown-indicator {
     display: none !important;

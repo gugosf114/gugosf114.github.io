@@ -2,6 +2,11 @@
 User-agent: *
 Allow: /
 
+# Block old Wix internal paths (waste crawl budget on 404s)
+Disallow: /_api/
+Disallow: /_frog
+Disallow: /cart
+
 # Explicitly allow AI search crawlers
 User-agent: GPTBot
 Allow: /
