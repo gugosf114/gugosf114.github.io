@@ -12,18 +12,14 @@
     const widget = document.createElement('div');
     widget.id = 'consultationWidget';
     widget.innerHTML = `
-        <a href="party/" class="consultation-widget-btn" id="consultationBtn">
+        <a href="https://thewhole.party/" target="_blank" rel="noopener" class="consultation-widget-btn" id="consultationBtn">
             <div class="widget-glow"></div>
             <div class="widget-pulse"></div>
             <div class="widget-content">
-                <div class="widget-icon">
-                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                        <path d="M12 6c0-.55-.45-1-1-1H7c-.55 0-1 .45-1 1v2l-3.89 4.12c-.37.39-.11 1 .42 1H6v5c0 .55.45 1 1 1h2c.55 0 1-.45 1-1v-5h3.47c.53 0 .79-.62.42-1L12 8.12V6zM16 6l3 6h-2v6h-2v-6h-2l3-6z"/>
-                    </svg>
-                </div>
+                <div class="widget-icon"></div>
                 <div class="widget-text">
                     <span class="widget-label">Party Rentals</span>
-                    <span class="widget-sublabel">Complete the Party</span>
+                    <span class="widget-sublabel">The Whole Party</span>
                 </div>
             </div>
             <div class="widget-shine"></div>
@@ -378,7 +374,7 @@
             const touchDuration = Date.now() - touchStartTime;
             if (touchDuration < 300) {
                 // Quick tap - navigate to party rentals page
-                window.location.href = 'party/';
+                window.location.href = 'https://thewhole.party/';
             }
         }
 
