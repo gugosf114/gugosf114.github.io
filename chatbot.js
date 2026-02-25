@@ -339,7 +339,7 @@
 
         // Check if response mentions phone/contact for showing phone card
         const replyLower = data.reply.toLowerCase();
-        const userMsgLower = userMessage.toLowerCase();
+        const userMsgLower = message.toLowerCase();
         const shouldShowPhone = replyLower.includes('call us') ||
                                replyLower.includes('phone') ||
                                replyLower.includes('immediate assistance') ||
