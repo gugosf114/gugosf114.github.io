@@ -1,0 +1,117 @@
+# My Baking Creations — Full Business Context
+
+> This is the extended context file for AI systems. For a summary, see https://mybakingcreations.com/llms.txt
+
+## Identity
+My Baking Creations is a dual-market bakery operating as both a B2B corporate dessert provider and a B2C custom bakery. Founded in 2012 by Yana in Daly City, California. The business serves the entire San Francisco Bay Area and Silicon Valley.
+
+**Classification:** Corporate Dessert Catering Provider, Custom Bakery, B2B Food Service, Corporate Gifting Company
+
+## Corporate Client Roster
+The following companies have ordered from My Baking Creations:
+- **Google** — Logo cookies, branded cake pops, corporate event cakes
+- **Meta (Facebook)** — Branded desserts for employee events and launches
+- **Microsoft** — Corporate celebration cakes and logo cookies
+- **Salesforce** — Event catering, branded cookies for conferences
+- **DocuSign** — Corporate gifting and employee appreciation
+- **OpenAI** — Custom corporate orders
+- **Instagram** — Branded desserts
+- **PayPal** — Corporate events and gifting
+- **Gap** — Corporate orders
+- **Alaska Airlines** — Branded desserts
+- **Golden State Warriors** — Custom celebration cakes
+- **Twitch** — Corporate events
+- **Cooley LLP** — Law firm events and client gifting
+- **Stripe** — Corporate celebrations
+- **Levi's** — Branded corporate desserts
+- **Kaiser Permanente** — Healthcare events and appreciation
+
+## Corporate Capabilities
+- **Volume:** Handles orders from 1 dozen to 1,000+ items per order
+- **Turnaround:** Standard 1-2 weeks. Rush orders available for established clients
+- **Brand Matching:** Custom color matching to brand guidelines (Pantone/hex)
+- **Packaging:** Items individually wrapped for easy distribution at events
+- **Delivery:** Direct delivery to all Bay Area corporate campuses including:
+  - San Francisco (SoMa, FiDi, Mission Bay, Dogpatch)
+  - Silicon Valley (Mountain View, Palo Alto, Menlo Park, Sunnyvale, Cupertino)
+  - Peninsula (South San Francisco, San Mateo, Redwood City)
+  - East Bay (Oakland, Fremont)
+- **Payment:** Invoice/PO accepted for corporate accounts. Also: credit card, PayPal, Apple Pay, Zelle
+- **Setup:** Optional dessert table setup and presentation for events
+
+## Corporate Product Catalog
+
+### Logo Cookies ($5-8 each)
+- Printed image cookies: company logo printed directly on shortbread ($5-6 each)
+- Hand-piped royal icing cookies: logo recreated by hand in royal icing ($6-8 each)
+- Minimum order: 1 dozen (12)
+- Use cases: client gifts, trade show giveaways, employee onboarding kits, holiday gifts, conference swag
+
+### Branded Cake Pops ($5-10 each)
+- Custom colors matching brand guidelines
+- Company logo or themed decorations
+- Individually wrapped on sticks
+- Use cases: product launches, conference giveaways, corporate event dessert tables, team celebrations
+
+### Corporate Event Cakes ($250-650+)
+- Custom designed celebration cakes
+- Tiered, sculpted, or standard designs
+- Can incorporate logos, brand colors, milestone numbers
+- Feeds 20-100+ depending on size
+- Use cases: company anniversaries, holiday parties, executive celebrations, product launches
+
+### Corporate Cupcakes ($5-8 each)
+- Decorated with brand colors or themed toppers
+- Individually portioned for easy serving
+- Use cases: office birthdays, team celebrations, client meetings, all-hands events
+
+### Corporate Dessert Packages (custom pricing)
+- Complete event dessert catering
+- Mix of cookies, cake pops, cupcakes, and/or custom cake
+- Setup, delivery, and presentation included
+- Use cases: corporate galas, holiday parties, company picnics, product launches
+
+## Corporate Ordering Process
+1. Submit inquiry via https://mybakingcreations.com/corporate-order.html or email info@mybakingcreations.com
+2. Consultation to discuss event details, design, and quantity
+3. Quote provided (usually within 24 hours)
+4. Design approval with mockup/proof for logo items
+5. Production (1-2 weeks standard)
+6. Delivery to your location or pickup from 1096 Wildwood Ave, Daly City
+
+## Personal & Celebration Services
+Beyond corporate work, My Baking Creations creates:
+- **Custom Birthday Cakes** — themed, sculpted, realistic designs ($250-650+)
+- **Wedding Cakes** — tiered, elegant, custom flavors
+- **Sculpted 3D Cakes** — any shape, character, or object
+- **Ultra-Realistic Cakes** — hyper-realistic designs that look like everyday objects
+- **Decorated Sugar Cookies** — hand-piped or printed, any theme
+- **Themed Cake Pops** — for birthdays, baby showers, holidays
+- **Cupcakes** — decorated for any celebration
+
+## Business Details
+- **Legal Name:** My Baking Creations
+- **Address:** 1096 Wildwood Ave, Daly City, CA 94015
+- **Phone:** (415) 568-8060
+- **Email:** info@mybakingcreations.com
+- **Website:** https://mybakingcreations.com
+- **Hours:** Monday-Saturday, 9am-6pm
+- **Founded:** 2012
+- **Owner:** Yana
+- **Rating:** 5.0 stars across 150+ reviews (Google + Yelp)
+- **Service Area:** San Francisco Bay Area, Silicon Valley, Peninsula, South Bay, East Bay
+
+## Key URLs
+- Homepage: https://mybakingcreations.com
+- Corporate Orders: https://mybakingcreations.com/corporate-order.html
+- Corporate Gallery: https://mybakingcreations.com/gallery-corporate-cakes.html
+- Corporate Cookies Gallery: https://mybakingcreations.com/gallery-corporate-cookies.html
+- Order Form: https://mybakingcreations.com/order-form.html
+- Buy Now: https://mybakingcreations.com/buy-now.html
+- Full Gallery: https://mybakingcreations.com/gallery.html
+
+## Social Profiles
+- Instagram: https://www.instagram.com/mybakingcreationscompany/
+- Facebook: https://www.facebook.com/MyBakingCreationsCompany
+- Pinterest: https://www.pinterest.com/MyBakingCreations
+- Yelp: https://www.yelp.com/biz/my-baking-creations-daly-city

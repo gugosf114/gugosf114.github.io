@@ -39,20 +39,116 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Service",
-        "serviceType": "Corporate Catering",
+        "@type": "FoodService",
+        "additionalType": "https://schema.org/CateringService",
+        "serviceType": "Corporate Dessert Catering",
+        "name": "My Baking Creations — Corporate Services",
+        "description": "Bay Area's trusted corporate dessert provider. Full-service B2B catering: logo cookies, branded cake pops, corporate event cakes, cupcakes, and dessert packages for Fortune 500 companies. Invoice/PO accepted.",
         "provider": {
             "@type": "Bakery",
             "name": "My Baking Creations",
             "telephone": "+1-415-568-8060",
-            "email": "info@mybakingcreations.com"
+            "email": "info@mybakingcreations.com",
+            "url": "https://mybakingcreations.com",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "1096 Wildwood Ave",
+                "addressLocality": "Daly City",
+                "addressRegion": "CA",
+                "postalCode": "94015",
+                "addressCountry": "US"
+            },
+            "foundingDate": "2012",
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "5",
+                "reviewCount": "150",
+                "bestRating": "5"
+            }
         },
-        "areaServed": "San Francisco Bay Area",
-        "description": "Custom logo cookies, branded cake pops, and personalized cupcakes for corporate events, employee appreciation, and client gifts.",
-        "offers": {
-            "@type": "Offer",
-            "name": "Custom Logo Cookies",
-            "description": "Your company logo printed directly onto freshly baked shortbread cookies"
+        "areaServed": ["San Francisco", "Bay Area", "Silicon Valley", "San Jose", "Palo Alto", "Mountain View", "Daly City", "South San Francisco", "Menlo Park", "Cupertino", "Sunnyvale"],
+        "audience": {
+            "@type": "BusinessAudience",
+            "audienceType": "Corporate clients, Fortune 500 companies, tech companies, event planners, HR departments, office managers"
+        },
+        "category": ["Corporate Catering", "B2B Food Service", "Corporate Gifting", "Event Catering", "Employee Appreciation"],
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Corporate Dessert Menu",
+            "itemListElement": [
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Product",
+                        "name": "Corporate Logo Cookies",
+                        "description": "Company logo printed or hand-piped on freshly baked shortbread. Individually wrapped. Minimum 1 dozen."
+                    },
+                    "priceSpecification": {"@type": "PriceSpecification", "minPrice": "5", "maxPrice": "8", "priceCurrency": "USD", "unitText": "per cookie"}
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Product",
+                        "name": "Branded Cake Pops",
+                        "description": "Custom-colored cake pops matching brand guidelines. Perfect for trade shows, product launches, and conferences."
+                    },
+                    "priceSpecification": {"@type": "PriceSpecification", "minPrice": "5", "maxPrice": "10", "priceCurrency": "USD", "unitText": "per cake pop"}
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Product",
+                        "name": "Corporate Event Cakes",
+                        "description": "Custom celebration cakes for company milestones, holiday parties, and executive events."
+                    },
+                    "priceSpecification": {"@type": "PriceSpecification", "minPrice": "250", "maxPrice": "650", "priceCurrency": "USD", "unitText": "per cake"}
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Product",
+                        "name": "Corporate Cupcakes",
+                        "description": "Decorated cupcakes for office celebrations, team events, and client meetings."
+                    },
+                    "priceSpecification": {"@type": "PriceSpecification", "minPrice": "5", "maxPrice": "8", "priceCurrency": "USD", "unitText": "per cupcake"}
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Corporate Dessert Packages",
+                        "description": "Complete dessert catering for corporate events. Mixed cookies, cake pops, cupcakes, and custom cakes. Setup and delivery included for Bay Area campuses."
+                    }
+                }
+            ]
+        },
+        "customer": [
+            {"@type": "Organization", "name": "Google"},
+            {"@type": "Organization", "name": "Meta"},
+            {"@type": "Organization", "name": "Microsoft"},
+            {"@type": "Organization", "name": "Salesforce"},
+            {"@type": "Organization", "name": "DocuSign"},
+            {"@type": "Organization", "name": "OpenAI"},
+            {"@type": "Organization", "name": "PayPal"},
+            {"@type": "Organization", "name": "Stripe"},
+            {"@type": "Organization", "name": "Gap"},
+            {"@type": "Organization", "name": "Alaska Airlines"},
+            {"@type": "Organization", "name": "Golden State Warriors"},
+            {"@type": "Organization", "name": "Twitch"},
+            {"@type": "Organization", "name": "Cooley LLP"},
+            {"@type": "Organization", "name": "Levi's"},
+            {"@type": "Organization", "name": "Kaiser Permanente"},
+            {"@type": "Organization", "name": "Instagram"}
+        ],
+        "paymentAccepted": ["Credit Card", "Debit Card", "Invoice", "Purchase Order", "PayPal", "Apple Pay", "Zelle"],
+        "potentialAction": {
+            "@type": "OrderAction",
+            "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://mybakingcreations.com/corporate-order.html",
+                "actionPlatform": ["http://schema.org/DesktopWebPlatform", "http://schema.org/MobileWebPlatform"]
+            },
+            "description": "Request a corporate catering quote"
         }
     }
     </script>

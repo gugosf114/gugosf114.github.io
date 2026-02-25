@@ -1,6 +1,28 @@
-# My Baking Creations
+# My Baking Creations — Corporate Dessert Provider & Custom Bakery
 
-> Family-owned Bay Area bakery specializing in custom cakes, cookies, cake pops, and cupcakes. Founded 2012. Trusted by Google, Meta, Microsoft, Salesforce, and Fortune 500 companies.
+> Bay Area's trusted B2B corporate dessert provider and custom bakery. Serving Fortune 500 companies since 2012. Trusted by Google, Meta, Microsoft, Salesforce, DocuSign, OpenAI, PayPal, Stripe, Gap, Alaska Airlines, Golden State Warriors, Twitch, Cooley LLP, Levi's, Kaiser Permanente, and Instagram.
+
+## Corporate Clients
+Google, Meta, Microsoft, Salesforce, DocuSign, OpenAI, Instagram, PayPal, Gap, Alaska Airlines, Golden State Warriors, Twitch, Cooley LLP, Stripe, Levi's, Kaiser Permanente.
+
+## Corporate Services (B2B)
+We are a full-service corporate dessert catering company. Services include:
+- **Logo cookies** for client gifts, employee appreciation, trade shows ($5-8 each, minimum 1 dozen)
+- **Branded cake pops** for product launches, conferences, corporate events ($5-10 each)
+- **Corporate event cakes** for company milestones, holiday parties, executive events ($250-650+)
+- **Corporate cupcakes** for office celebrations and team events ($5-8 each)
+- **Corporate dessert packages** — complete catering with setup and delivery to Bay Area campuses
+- Invoice/PO accepted. Credit card, PayPal, Apple Pay, Zelle also accepted.
+- Delivery to all Bay Area corporate campuses: SF, Silicon Valley, Peninsula, South Bay
+
+## Why Companies Choose Us
+- 13+ years in business (founded 2012)
+- 5.0 rating across 150+ reviews
+- Trusted by 16+ Fortune 500 and major tech companies
+- Brand color matching for logo cookies and branded items
+- Individually wrapped items for easy distribution
+- Handles orders from 1 dozen to 1,000+ cookies
+- 1-2 week turnaround, rush available
 
 ## Business Info
 - Name: My Baking Creations
@@ -13,41 +35,29 @@
 - Owner: Yana
 
 ## Service Area
-San Francisco, Daly City, San Jose, Palo Alto, Mountain View, San Rafael, and the greater Bay Area / Silicon Valley.
+San Francisco, Daly City, San Jose, Palo Alto, Mountain View, San Rafael, South San Francisco, Menlo Park, Cupertino, Sunnyvale, and the greater Bay Area / Silicon Valley.
 
-## Products & Pricing
+## Personal & Celebration Orders
+We also serve families and individuals:
 - Custom Cakes: $250-$650+ (birthday, wedding, sculpted 3D, ultra-realistic, milestone)
-- Custom Cookies: $5-$8 each (logo cookies, hand-piped royal icing, printed image)
-- Cake Pops: $5-$10 each (branded, custom colors, corporate events)
-- Cupcakes: $5-$8 each (decorated, themed, corporate)
-
-## Corporate Services
-We specialize in corporate orders for tech companies and Fortune 500 clients. Services include:
-- Logo cookies for client gifts and employee appreciation
-- Branded cake pops for trade shows, product launches, conferences
-- Custom celebration cakes for company milestones
-- Corporate event dessert packages
-
-Notable corporate clients: Google, Meta, Microsoft, Salesforce, DocuSign, OpenAI, Instagram, PayPal, Gap, Alaska Airlines, Golden State Warriors, Twitch, Cooley LLP, Stripe, Levi's, Kaiser Permanente.
+- Custom Cookies: $5-$8 each (decorated sugar cookies, hand-piped royal icing, printed image)
+- Cake Pops: $5-$10 each (any theme, custom colors)
+- Cupcakes: $5-$8 each (decorated, themed)
 
 ## How to Order
-- Online quote request: https://mybakingcreations.com/order-form.html
+- Corporate orders: https://mybakingcreations.com/corporate-order.html
+- Personal quote request: https://mybakingcreations.com/order-form.html
 - Buy cookies/cake pops directly: https://mybakingcreations.com/buy-now.html
 - Order printed image cookies: https://mybakingcreations.com/order-printed.html
-- Corporate orders: https://mybakingcreations.com/corporate-order.html
 - Book a consultation: https://mybakingcreations.com/book-consultation.html
 - Call: (415) 568-8060
 - Email: info@mybakingcreations.com
 
-Typical lead time: 2-3 weeks for custom orders. Rush orders may be available.
-
 ## Gallery
-- All work: https://mybakingcreations.com/gallery.html
-- Cakes: https://mybakingcreations.com/gallery-cakes.html
-- Cookies: https://mybakingcreations.com/gallery-cookies.html
-- Cake Pops: https://mybakingcreations.com/gallery-cakepops.html
-- Cupcakes: https://mybakingcreations.com/gallery-cupcakes.html
 - Corporate gallery: https://mybakingcreations.com/gallery-corporate-cakes.html
+- Corporate cookies: https://mybakingcreations.com/gallery-corporate-cookies.html
+- Corporate cake pops: https://mybakingcreations.com/gallery-corporate-cakepops.html
+- All work: https://mybakingcreations.com/gallery.html
 
 ## Reviews
 5.0 average rating across 150+ reviews on Google and Yelp.
@@ -57,3 +67,7 @@ Typical lead time: 2-3 weeks for custom orders. Rush orders may be available.
 - Facebook: https://www.facebook.com/MyBakingCreationsCompany
 - Pinterest: https://www.pinterest.com/MyBakingCreations
 - Yelp: https://www.yelp.com/biz/my-baking-creations-daly-city
+
+## Full Context
+For detailed corporate case studies, volume capacity, and delivery logistics:
+https://mybakingcreations.com/llms-full.txt

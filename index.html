@@ -42,9 +42,10 @@
     {
         "@context": "https://schema.org",
         "@type": "Bakery",
+        "additionalType": ["https://schema.org/FoodService", "https://schema.org/CateringService"],
         "name": "My Baking Creations",
         "image": "https://mybakingcreations.com/logo_icon.png",
-        "description": "Family-owned Bay Area bakery specializing in custom cakes, cookies, and cake pops for birthdays, weddings, and corporate events.",
+        "description": "Bay Area corporate dessert provider and custom bakery. Trusted by Google, Meta, Microsoft, Salesforce, and Fortune 500 companies for logo cookies, branded cake pops, and corporate event catering. Family-owned since 2012, serving both corporate clients and celebrations.",
         "url": "https://mybakingcreations.com",
         "telephone": "+1-415-568-8060",
         "email": "info@mybakingcreations.com",
@@ -145,31 +146,75 @@
             "https://www.yelp.com/biz/my-baking-creations-daly-city",
             "https://www.tripadvisor.com/Restaurant_Review-g32278-d25439723-Reviews-My_Baking_Creations-Daly_City_California.html"
         ],
+        "audience": [
+            {
+                "@type": "BusinessAudience",
+                "audienceType": "Corporate clients, Fortune 500 companies, tech companies, event planners"
+            },
+            {
+                "@type": "PeopleAudience",
+                "audienceType": "Families, individuals celebrating birthdays, weddings, and milestones"
+            }
+        ],
+        "brand": {
+            "@type": "Brand",
+            "name": "My Baking Creations",
+            "description": "Bay Area's trusted corporate dessert provider and custom bakery since 2012",
+            "slogan": "The bakery trusted by Fortune 500 companies"
+        },
         "knowsAbout": [
+            "Corporate logo cookies",
+            "Corporate event catering",
+            "B2B corporate dessert catering",
+            "Employee appreciation gifts",
+            "Tech company branded desserts",
+            "Trade show desserts and conference catering",
+            "Corporate gifting programs",
+            "Branded cake pops for product launches",
             "Custom birthday cakes",
             "Wedding cakes",
-            "Corporate logo cookies",
-            "Branded cake pops",
             "Sculpted 3D cakes",
             "Ultra-realistic cakes",
-            "Sugar cookies with royal icing",
-            "Corporate event catering",
-            "Employee appreciation gifts",
-            "Tech company branded desserts"
+            "Sugar cookies with royal icing"
+        ],
+        "customer": [
+            {"@type": "Organization", "name": "Google"},
+            {"@type": "Organization", "name": "Meta"},
+            {"@type": "Organization", "name": "Microsoft"},
+            {"@type": "Organization", "name": "Salesforce"},
+            {"@type": "Organization", "name": "DocuSign"},
+            {"@type": "Organization", "name": "OpenAI"},
+            {"@type": "Organization", "name": "PayPal"},
+            {"@type": "Organization", "name": "Stripe"},
+            {"@type": "Organization", "name": "Gap"},
+            {"@type": "Organization", "name": "Alaska Airlines"},
+            {"@type": "Organization", "name": "Golden State Warriors"},
+            {"@type": "Organization", "name": "Twitch"},
+            {"@type": "Organization", "name": "Cooley LLP"},
+            {"@type": "Organization", "name": "Levi's"},
+            {"@type": "Organization", "name": "Kaiser Permanente"},
+            {"@type": "Organization", "name": "Instagram"}
         ],
         "hasOfferCatalog": {
             "@type": "OfferCatalog",
-            "name": "Custom Baked Goods",
+            "name": "Custom Baked Goods & Corporate Catering",
             "itemListElement": [
                 {
                     "@type": "OfferCatalog",
-                    "name": "Corporate Services",
-                    "description": "Logo cookies, branded cake pops, and custom desserts for tech companies and corporate events"
+                    "name": "Corporate Catering & B2B Services",
+                    "description": "Full-service corporate dessert provider for Fortune 500 companies. Logo cookies, branded cake pops, corporate event cakes, employee appreciation cupcakes, conference dessert packages, and corporate gifting programs. Invoice/PO accepted. Delivery to Bay Area corporate campuses.",
+                    "itemListElement": [
+                        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Corporate Logo Cookies", "description": "Company logo printed or hand-piped on shortbread cookies. Minimum 1 dozen. $5-8 each."}},
+                        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Branded Cake Pops", "description": "Custom-colored cake pops matching brand guidelines for trade shows, launches, and conferences. $5-10 each."}},
+                        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Corporate Event Cakes", "description": "Custom celebration cakes for company milestones, holiday parties, and executive events. $250-650+."}},
+                        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Corporate Cupcakes", "description": "Decorated cupcakes for office events, team celebrations, and client meetings. $5-8 each."}},
+                        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Corporate Dessert Packages", "description": "Complete dessert catering for corporate events: mixed cookies, cake pops, cupcakes, and custom cakes."}}
+                    ]
                 },
                 {
                     "@type": "OfferCatalog",
-                    "name": "Celebration Cakes",
-                    "description": "Birthday cakes, wedding cakes, sculpted cakes, and realistic themed cakes"
+                    "name": "Celebration Cakes & Personal Orders",
+                    "description": "Birthday cakes, wedding cakes, sculpted 3D cakes, ultra-realistic cakes, and themed celebration cakes for families and individuals."
                 }
             ]
         },

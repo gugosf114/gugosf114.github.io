@@ -26,9 +26,10 @@ Allow: /
 User-agent: GoogleOther
 Allow: /
 
-# LLM context file
+# LLM context files
 # See https://llmstxt.org for the standard
 LLMs-Txt: https://mybakingcreations.com/llms.txt
+LLMs-Full-Txt: https://mybakingcreations.com/llms-full.txt
 
 # Sitemap location
 Sitemap: https://mybakingcreations.com/sitemap.xml
