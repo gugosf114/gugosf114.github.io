@@ -201,13 +201,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Party Rentals -->
-  <url>
-    <loc>https://mybakingcreations.com/party/</loc>
-    <lastmod>2026-02-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
+  <!-- Party Rentals — moved to thewhole.party -->
   <!-- Legal -->
   <url>
     <loc>https://mybakingcreations.com/terms-of-service.html</loc>
