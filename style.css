@@ -214,6 +214,12 @@ body {
     }
 }
 
+@media (max-width: 375px) {
+    .social-sidebar {
+        display: none;
+    }
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -802,6 +808,7 @@ a.nav-cta:active {
         left: 50%;
         transform: translateX(-50%);
         animation: bounce-scroll-mobile 2s ease-in-out infinite;
+        display: none;
     }
     .scroll-indicator-text {
         font-size: 0.7rem;

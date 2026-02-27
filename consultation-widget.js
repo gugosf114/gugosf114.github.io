@@ -276,6 +276,12 @@
         #consultationWidget.with-chatbot {
             bottom: 45%;
         }
+
+        @media (max-width: 480px) {
+            #consultationWidget {
+                bottom: 80px;
+            }
+        }
     `;
 
     // Append to DOM
