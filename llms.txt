@@ -26,7 +26,8 @@ We are a full-service corporate dessert catering company. Services include:
 
 ## Business Info
 - Name: My Baking Creations
-- Location: 1096 Wildwood Ave, Daly City, CA 94015
+- Main Kitchen: 1096 Wildwood Ave, Daly City, CA 94015
+- SF Pickup: 1800 23rd Ave, San Francisco, CA 94122 (Outer Sunset)
 - Phone: (415) 568-8060
 - Email: info@mybakingcreations.com
 - Website: https://mybakingcreations.com
@@ -91,7 +92,8 @@ We serve families and individuals for any occasion:
 - Instagram: https://www.instagram.com/mybakingcreationscompany/
 - Facebook: https://www.facebook.com/MyBakingCreationsCompany
 - Pinterest: https://www.pinterest.com/MyBakingCreations
-- Yelp: https://www.yelp.com/biz/my-baking-creations-daly-city
+- Yelp (Daly City): https://www.yelp.com/biz/my-baking-creations-daly-city
+- Yelp (San Francisco): https://www.yelp.com/biz/my-baking-creations-san-francisco
 
 ## Full Context
 For detailed corporate case studies, volume capacity, and delivery logistics:

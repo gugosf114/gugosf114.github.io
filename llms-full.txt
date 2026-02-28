@@ -77,7 +77,9 @@ The following companies have ordered from My Baking Creations:
 3. Quote provided (usually within 24 hours)
 4. Design approval with mockup/proof for logo items
 5. Production (1-2 weeks standard)
-6. Delivery to your location or pickup from 1096 Wildwood Ave, Daly City
+6. Delivery to your location or pickup from:
+   - **Main Kitchen:** 1096 Wildwood Ave, Daly City, CA 94015
+   - **SF Pickup:** 1800 23rd Ave, San Francisco, CA 94122 (Outer Sunset)
 
 ## Personal & Celebration Services
 Beyond corporate work, My Baking Creations creates:
@@ -91,7 +93,8 @@ Beyond corporate work, My Baking Creations creates:
 
 ## Business Details
 - **Legal Name:** My Baking Creations
-- **Address:** 1096 Wildwood Ave, Daly City, CA 94015
+- **Main Kitchen:** 1096 Wildwood Ave, Daly City, CA 94015
+- **SF Pickup:** 1800 23rd Ave, San Francisco, CA 94122 (Outer Sunset)
 - **Phone:** (415) 568-8060
 - **Email:** info@mybakingcreations.com
 - **Website:** https://mybakingcreations.com
@@ -114,4 +117,5 @@ Beyond corporate work, My Baking Creations creates:
 - Instagram: https://www.instagram.com/mybakingcreationscompany/
 - Facebook: https://www.facebook.com/MyBakingCreationsCompany
 - Pinterest: https://www.pinterest.com/MyBakingCreations
-- Yelp: https://www.yelp.com/biz/my-baking-creations-daly-city
+- Yelp (Daly City): https://www.yelp.com/biz/my-baking-creations-daly-city
+- Yelp (San Francisco): https://www.yelp.com/biz/my-baking-creations-san-francisco
