@@ -38,3 +38,39 @@
 - **Sequential Thinking**: Mandatory for planning business outreach or complex email sorting.
 - **Google Workspace**: Use to cross-reference customer emails with order spreadsheets.
 - **Filesystem**: Scopes to `C:\Users\georg\Documents\GitHub\` for site audits.
+
+---
+
+## CURRENT WORK: BAKER'S AGENT — WIRING & DEBUG
+**Status**: UI exists, nothing wired. Needs full integration.
+**Last updated**: 2026-02-28
+
+### What's Done (DO NOT TOUCH)
+1. **mybakingcreations.com** — Production website. Works. Brings in revenue. Stable.
+2. **Thursday** (`/thursday/index.html`) — Order tracker PWA. Firebase-backed, password-gated, real-time sync. Works. Yana uses it daily. This is the Monday.com replacement ($0 vs $350/yr).
+
+### What Needs Work: Baker's Agent
+- **Repo**: Likely separate repo `Bakers-Agent` (check GitHub: github.com/gugosf114) or local at `C:\Users\georg\Documents\GitHub\Bakers-Agent`
+- **Problem**: The UI is built — tiles, buttons, cards, charts (some with fake data). Looks professional. But clicking anything does nothing. No wiring, no backend calls, no real data flowing.
+- **Goal**: Wire it up to the bakery's real systems so it actually functions. Once working for MBC, potentially offer to others.
+
+### Debug Pickup Checklist (Next Session)
+1. **Locate the Baker's Agent repo** — check GitHub and `C:\Users\georg\Documents\GitHub\` for `Bakers-Agent` or similar
+2. **Inventory the UI** — catalog every tile/button/card and what it's supposed to do
+3. **Identify what each tile needs** — real data source, API call, script, or integration
+4. **Wire one tile at a time** — get it working end-to-end before moving to the next
+5. **UX fix**: Every tile must have an intuitive output location — user clicks, user immediately sees where the result appears. No guessing.
+
+### Key Principle (From George)
+> "It's a brand new TV and all the cables are just hanging."
+> The UI is there. The design is there. What's missing is the wiring — real data, real actions, real outputs in obvious places.
+
+### Environment Notes
+- **Desktop sessions** (C drive) have full power: Puppeteer, Desktop Commander, MCP tools, browser jumping between Search Console and Analytics
+- **Cloud/phone sessions** (GitHub web) are limited — no browser control, no MCP, no desktop tools
+- **This work should be done on desktop** for full capability
+
+### DO NOT
+- Split work across Perplexity, Codex, Grok, etc. — one AI, one context, no telephone game
+- Add fake data or placeholder outputs — wire to real sources or don't wire at all
+- Make tiles that show a single number with no context — that's a "flag for bullshit"
