@@ -74,16 +74,72 @@
 - **Offline capable**: Falls back to localStorage when Firebase unavailable
 
 ### What Needs Work: Baker's Agent
-- **Repo**: Likely separate repo `Bakers-Agent` (check GitHub: github.com/gugosf114) or local at `C:\Users\georg\Documents\GitHub\Bakers-Agent`
-- **Problem**: The UI is built — tiles, buttons, cards, charts (some with fake data). Looks professional. But clicking anything does nothing. No wiring, no backend calls, no real data flowing.
-- **Goal**: Wire it up to the bakery's real systems so it actually functions. Once working for MBC, potentially offer to others.
+- **Repo**: Separate repo `Bakers-Agent` — local at `C:\Users\georg\Documents\GitHub\bakers-agent`
+- **Scale**: 198 files, 36,290 lines — ~41 Cloud Functions + shared library + tests + UI (React/Vite)
+- **Problem**: UI is built (tiles, buttons, cards, charts) but nothing wired. No backend calls, no real data flowing.
+- **Goal**: Wire it up to the bakery's real systems. Once working for MBC, potentially offer to others.
+- **UI tiles**: The Pope, AI Visibility, Brand Check, SEO Scan (4 Agent Fleet tiles in AgentTiles.tsx)
 
-### Debug Pickup Checklist (Next Session)
-1. **Locate the Baker's Agent repo** — check GitHub and `C:\Users\georg\Documents\GitHub\` for `Bakers-Agent` or similar
-2. **Inventory the UI** — catalog every tile/button/card and what it's supposed to do
-3. **Identify what each tile needs** — real data source, API call, script, or integration
-4. **Wire one tile at a time** — get it working end-to-end before moving to the next
-5. **UX fix**: Every tile must have an intuitive output location — user clicks, user immediately sees where the result appears. No guessing.
+### Baker's Agent Full Audit (2026-02-28, completed on desktop)
+**Method**: 198 files partitioned into 6 non-overlapping groups, 6 parallel reviewer agents, zero gaps.
+**Result**: 8 CRITICAL, 20 HIGH, 12 MEDIUM findings. **612 tests passing after fixes.**
+
+#### CRITICAL FIXES COMPLETED
+1. `shared/bakers_shared/secrets.py` — Added `.strip()` to Secret Manager reads (trailing newlines corrupted all API keys)
+2. `shared/bakers_shared/pubsub.py` — Silent `except: pass` → logged exception (was eating errors silently)
+3. `shared/bakers_shared/pubsub.py` — Top-level `pubsub_v1` import → lazy wrapper `_pubsub_v1()` (prevented crash in functions without pubsub dep)
+4. `shared/bakers_shared/config.py` — Removed `ghp_` and `sk-` from `_PLACEHOLDER_SNIPPETS` (false-positived on real GitHub/OpenAI tokens)
+5. `ai-visibility-v1`, `gbp-reviews-agent-v1`, `seo-brief-v1`, `bakers-agent-v1` requirements — Removed banned `google-cloud-aiplatform` SDK (corrupts gRPC, breaks Firestore)
+6. `segment-builder-v1/requirements.txt` — Added missing `functions-framework`
+
+#### HIGH FIXES COMPLETED
+7. `shared/bakers_shared/firestore.py` — `FIRESTORE_DB` env var moved from module-level to inside `client()` function
+8. `shared/google_oauth.py` — Added `.strip()` on secret reads
+9. `seo-brief-v1/main.py` — Full Vertex AI SDK → REST API migration, model → gemini-2.5-flash
+10. `bakers-agent-v1/main.py` — Full multimodal Vertex AI SDK → REST API migration (GCS image URIs via `fileData.fileUri`)
+11. `dun-curiosity-v1`, `dun-pope-v1` — Model defaults gemini-2.0-flash → gemini-2.5-flash
+12. `ui/AgentTiles.tsx` — Fixed stale closure in 180s timeout (functional `setTiles` updater)
+13. `local-seo-feeder-v1`, `reorder-predictor-v1`, `reorder-reminder-activator-v1` — Gen1 → Gen2 CloudEvent signatures
+
+#### KNOWN RULES (from audit — DO NOT VIOLATE)
+- **BANNED SDK**: Never use `google-cloud-aiplatform` or `google-generativeai` — corrupts global gRPC auth, breaks Firestore. Use REST API (`requests.post`) instead.
+- **Vertex AI REST**: For GCS URI support (multimodal), use `https://{LOCATION}-aiplatform.googleapis.com/v1/projects/{PROJECT}/locations/{LOCATION}/publishers/google/models/{MODEL}:generateContent` with OAuth2 service account auth
+- **Shared `llm.py`**: Uses `generativelanguage.googleapis.com` REST with API key. Does NOT support multimodal/GCS URIs — that's why `bakers-agent-v1` has its own REST call.
+- **Gen2 signatures**: All Cloud Functions must use `@functions_framework.cloud_event` + `decode_pubsub(cloud_event)`, NOT Gen1 `(event, context)`
+- **Secret Manager values**: Always `.strip()` — trailing newlines are invisible killers
+- **Model standard**: `gemini-2.5-flash` (not 2.0-flash, not 2.5-pro unless specified)
+
+#### UNFIXED (MEDIUM — next session)
+- `shared/bakers_shared/rate_limit.py:64` — `assert` in production code path (removed under `-O`)
+- `shared/bakers_shared/llm.py:133` — JSON fence-stripping regex fails if Gemini adds preamble before fence
+- `shared/bakers_shared/mcp_client.py:423` — `except Exception: pass` with zero logging
+- `shared/bakers_shared/firestore_store.py:78` — Silent `except Exception: return False` in lock claim
+- `shared/bakers_shared/pubsubutil.py:28` — `stable_json_dumps` (sorted keys) vs `pubsub.py` plain `json.dumps` — two `publish_json` behave differently
+- `commerce-feeds-v1/main.py:453` — Content-Type header unpacked but never returned to client
+- `attribution-v1/main.py:322` — Non-idempotent `snapshot_id` (uses `datetime.now()`) — Pub/Sub retries create duplicates
+- `ui-trigger-v1/main.py:130` — `print()` instead of structured logger
+- `seo-pr-writer-v1/main.py:111` — Module-level Secret Manager call on cold start
+- `ui/AgentTiles.tsx:163` — Score field names hardcoded to one schema (3/4 tiles show "Complete" with no number)
+- `ui/OpsView.tsx:160` — `draft.caption.slice()` crashes on missing Firestore field
+
+#### DEAD CODE (cleanup when convenient)
+- `ui/EmailView.tsx` + `ui/CustomersView.tsx` — defined but never routed in App.tsx
+- `ui/styles.css` — 833-line legacy CSS not imported anywhere
+- `ui/config.json` — contains `passwordHash` and Firebase keys but never read by React app
+- `deploy_helpers.sh` — syncs to `shared/` instead of `bakers_shared/`, incompatible with current layout
+- `poster-pinterest-v1/adapter.py:31-33` — 3 computed values silently discarded
+- `tests/test_directory_feeds.py:78` — tautological assertion `f1["feed_id"] == f1["feed_id"]`
+- `tests/test_reorder_reminder_activator.py:136` — test with zero assertions
+
+#### SECURITY NOTE
+- `gbp_secret.json` — Live OAuth `client_secret` + `refresh_token` was in git. Credentials must be rotated in GCP Console. Deleting the file doesn't purge git history.
+
+### Debug Pickup Checklist (Next Session — WIRING)
+1. **Open Baker's Agent repo on desktop** — `C:\Users\georg\Documents\GitHub\bakers-agent`
+2. **Fix remaining MEDIUM issues** — list above, all surgical edits
+3. **Wire the UI**: Inventory every tile in AgentTiles.tsx, OpsView.tsx — map each to its Cloud Function
+4. **UX fix**: Every tile must show output in an obvious place. Click → result. No guessing.
+5. **Test**: `python -m pytest tests/ -v` (should stay at 612+ passing)
 
 ### Key Principle (From George)
 > "It's a brand new TV and all the cables are just hanging."
