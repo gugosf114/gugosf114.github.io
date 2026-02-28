@@ -47,7 +47,31 @@
 
 ### What's Done (DO NOT TOUCH)
 1. **mybakingcreations.com** — Production website. Works. Brings in revenue. Stable.
-2. **Thursday** (`/thursday/index.html`) — Order tracker PWA. Firebase-backed, password-gated, real-time sync. Works. Yana uses it daily. This is the Monday.com replacement ($0 vs $350/yr).
+2. **Thursday** (`/thursday/index.html`) — Order tracker PWA. Works. Yana uses it daily. Monday.com replacement ($0 vs $350/yr).
+
+### Thursday Architecture Reference (2,794 lines, single-file PWA)
+- **Location**: `/thursday/index.html` + `manifest.json` + icons
+- **Backend**: Firebase Realtime Database + Firebase Storage (project: `mbc-thursday`)
+- **Auth**: Simple password gate (not Firebase Auth)
+- **Data model**: `orders[]` and `archive[]` synced to Firebase refs `/orders` and `/archive`
+- **3 Views**: Dashboard (`renderDashboard`), Active Orders (`renderOrdersView`), Archive
+- **Dashboard tiles** (all wired to real order data, not fake):
+  - Active Orders count → clicks to Orders view
+  - Due This Week count
+  - Unpaid Invoices → clicks to filtered Orders view
+  - Sketches Pending → clicks to filtered Orders view
+  - Revenue (Paid) / Outstanding / Avg Order Value — calculated from order prices
+  - Alert banners: overdue (red), due today (orange), due tomorrow (yellow)
+  - Mini calendar with order dots
+  - Upcoming due dates list
+  - Quick Actions: New Order, View All, Export CSV
+- **Order CRUD**: Add/edit/archive/restore, per-field inline editing (`updateField`)
+- **Order fields**: customerName, email, phone, item type, flavor, quantity, price, dueDateTime, invoice status, sketch status, person (Yana/TopG), notes, components, attachments
+- **Email parser**: Paste raw customer email → regex extraction → auto-populate new order (`parseOrderFromEmail`, 200+ lines of parsing logic)
+- **Attachments**: Upload to Firebase Storage per order
+- **Views**: Table mode + Card mode toggle for orders
+- **Extras**: Haiku emotional support button, "Just World" button (Yana's morale features)
+- **Offline capable**: Falls back to localStorage when Firebase unavailable
 
 ### What Needs Work: Baker's Agent
 - **Repo**: Likely separate repo `Bakers-Agent` (check GitHub: github.com/gugosf114) or local at `C:\Users\georg\Documents\GitHub\Bakers-Agent`
