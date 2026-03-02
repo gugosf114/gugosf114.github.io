@@ -6,6 +6,7 @@ const cssTree = require('css-tree');
 
 const ROOT = process.cwd();
 const errors = [];
+let warnCount = 0;
 
 // ANSI colors for output
 const RED = '\x1b[31m';
@@ -20,6 +21,7 @@ function logError(file, line, message) {
 }
 
 function logWarn(message) {
+    warnCount++;
     console.log(`${YELLOW}WARN${RESET} ${message}`);
 }
 
@@ -365,8 +367,12 @@ async function main() {
 
     // Summary
     console.log('\n' + '='.repeat(50));
+    console.log(`  errors: ${errors.length}  |  warnings: ${warnCount}`);
     if (errors.length === 0) {
         console.log(`${GREEN}✓ All validations passed${RESET}`);
+        if (warnCount > 0) {
+            console.log(`${YELLOW}  (${warnCount} non-blocking warnings — review if count increases)${RESET}`);
+        }
         process.exit(0);
     } else {
         console.log(`${RED}✗ ${errors.length} error(s) found${RESET}`);
