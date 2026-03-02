@@ -2312,12 +2312,10 @@ footer {
     }
 
     .dropdown-menu a {
-        padding: 0.6rem 1rem;
         font-size: 1rem;
     }
 
     .dropdown-subcategory a {
-        padding-left: 1.5rem;
         font-size: 0.95rem;
     }
 
@@ -2473,7 +2471,6 @@ footer {
     }
 
     .hero-subtitle {
-        font-size: 1.3rem;
         margin-bottom: 1.5rem;
     }
 
@@ -3207,7 +3204,6 @@ footer {
 
     /* 5. SECTION HEADERS - Scale down */
     .section-header h2 {
-        font-size: 1.6rem;
         line-height: 1.3;
     }
 

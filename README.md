@@ -200,6 +200,23 @@ All images are WebP format. `convert-to-webp.py` automates JPG/PNG conversion at
 | `generate-sitemap.js` | Node.js | Auto-generate sitemap.xml from HTML files |
 | `add-lazy-loading.js` | Node.js | Add lazy loading to all images |
 
+## Site Validator
+
+Automated validation runs on every push and PR via GitHub Actions. It checks for broken internal links, missing images/assets, CSS syntax errors, and conflicting CSS declarations.
+
+**Run locally before pushing:**
+
+```bash
+npm install cheerio css-tree glob
+node .github/scripts/validate-site.js
+```
+
+- Internal broken links and missing assets are **blocking errors** (build fails)
+- External URL issues (Yelp 403s, CDN timeouts) are **non-blocking warnings**
+- CSS conflicts in the same selector are blocking (prevents cascade regressions in `style.css`)
+
+The GitHub Actions workflow (`.github/workflows/validate-and-deploy.yml`) runs validate first, then deploys to Pages only if validation passes.
+
 ## Thursday Dashboard (Internal)
 
 Password-protected PWA at `/thursday/` for internal order management:
