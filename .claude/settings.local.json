@@ -11,7 +11,8 @@
       "WebSearch",
       "WebFetch",
       "Task",
-      "TodoWrite"
+      "TodoWrite",
+      "mcp__Claude_Preview__preview_start"
     ]
   },
   "mcpServers": {

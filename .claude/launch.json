@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "bakery-site",
-      "runtimeExecutable": "npx.cmd",
-      "runtimeArgs": ["http-server", ".", "-p", "8080", "-c-1"],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["node_modules/http-server/bin/http-server", ".", "-p", "8080", "-c-1"],
       "port": 8080
     }
   ]
