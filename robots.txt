@@ -33,3 +33,4 @@ LLMs-Full-Txt: https://mybakingcreations.com/llms-full.txt
 
 # Sitemap location
 Sitemap: https://mybakingcreations.com/sitemap.xml
+Sitemap: https://mybakingcreations.com/sitemap-images.xml
