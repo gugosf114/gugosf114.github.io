@@ -61,14 +61,21 @@ function resolvePath(fromFile, href) {
     return resolved;
 }
 
-// Check if file exists (handles directory index.html)
+// Check if file exists (handles GitHub Pages URL resolution)
+// GitHub Pages resolves: /about → about.html, / → index.html, /dir/ → dir/index.html
 function fileExists(filePath) {
     if (fs.existsSync(filePath)) {
-        return fs.statSync(filePath).isFile();
+        const stat = fs.statSync(filePath);
+        if (stat.isFile()) return true;
+        // It's a directory — check for index.html inside it
+        if (stat.isDirectory()) {
+            const indexPath = path.join(filePath, 'index.html');
+            return fs.existsSync(indexPath);
+        }
     }
-    // Check for index.html if it's a directory path
-    const indexPath = path.join(filePath, 'index.html');
-    if (fs.existsSync(indexPath)) {
+    // GitHub Pages resolution: try appending .html (e.g., /about → about.html)
+    const withHtml = filePath + '.html';
+    if (fs.existsSync(withHtml) && fs.statSync(withHtml).isFile()) {
         return true;
     }
     return false;

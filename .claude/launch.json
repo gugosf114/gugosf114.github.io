@@ -4,7 +4,7 @@
     {
       "name": "bakery-site",
       "runtimeExecutable": "node",
-      "runtimeArgs": ["node_modules/http-server/bin/http-server", ".", "-p", "8080", "-c-1"],
+      "runtimeArgs": ["node_modules/http-server/bin/http-server", ".", "-p", "8080", "-c-1", "--ext", "html"],
       "port": 8080
     }
   ]

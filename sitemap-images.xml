@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://mybakingcreations.com/gallery-cakepops.html</loc>
+    <loc>https://mybakingcreations.com/gallery-cakepops</loc>
     <image:image>
       <image:loc>https://mybakingcreations.com/images/gallery/cakepops/01%20Giraffe%20Cake%20Pops.jpg</image:loc>
       <image:caption>Custom giraffe themed cake pops San Francisco Bay Area bakery</image:caption>
@@ -133,7 +133,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://mybakingcreations.com/gallery-cakes.html</loc>
+    <loc>https://mybakingcreations.com/gallery-cakes</loc>
     <image:image>
       <image:loc>https://mybakingcreations.com/images/gallery/cakes/Sculpted%20Baby%20Yoda%20Cake.jpg</image:loc>
       <image:caption>Sculpted Baby Yoda custom cake</image:caption>
@@ -148,7 +148,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://mybakingcreations.com/gallery-cakes-realistic.html</loc>
+    <loc>https://mybakingcreations.com/gallery-cakes-realistic</loc>
     <image:image>
       <image:loc>https://mybakingcreations.com/images/gallery/realist/Realistic%20Hot%20Dog%20Cake.jpg</image:loc>
       <image:caption>Custom realistic hot dog illusion cake San Francisco Bay Area bakery</image:caption>
@@ -191,7 +191,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://mybakingcreations.com/gallery-cakes-sculpted.html</loc>
+    <loc>https://mybakingcreations.com/gallery-cakes-sculpted</loc>
     <image:image>
       <image:loc>https://mybakingcreations.com/images/gallery/cakes/Basketball%20themed%20custom%20sculpted%20cake.jpg</image:loc>
       <image:caption>Custom basketball themed sculpted cake by Bay Area bakery</image:caption>
@@ -270,7 +270,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://mybakingcreations.com/gallery-cakes-wedding.html</loc>
+    <loc>https://mybakingcreations.com/gallery-cakes-wedding</loc>
     <image:image>
       <image:loc>https://mybakingcreations.com/images/gallery/wedding/3%20tier%20white%20patterned%20wedding%20cake.png</image:loc>
       <image:caption>Custom 3 tier white patterned wedding cake San Francisco Bay Area bakery</image:caption>
@@ -305,7 +305,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://mybakingcreations.com/gallery-cookies.html</loc>
+    <loc>https://mybakingcreations.com/gallery-cookies</loc>
     <image:image>
       <image:loc>https://mybakingcreations.com/images/gallery/handpiped/Hand%20Piped%20Penguin%20Cookies.jpg</image:loc>
       <image:caption>Hand piped decorated cookies</image:caption>
@@ -316,7 +316,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://mybakingcreations.com/gallery-cookies-hand-piped.html</loc>
+    <loc>https://mybakingcreations.com/gallery-cookies-hand-piped</loc>
     <image:image>
       <image:loc>https://mybakingcreations.com/images/gallery/handpiped/01%20Baby%20Shower%20Calendar%20theme%20Cookies.jpg</image:loc>
       <image:caption>Baby shower calendar themed cookies</image:caption>
@@ -575,7 +575,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://mybakingcreations.com/gallery-cookies-printed.html</loc>
+    <loc>https://mybakingcreations.com/gallery-cookies-printed</loc>
     <image:image>
       <image:loc>https://mybakingcreations.com/images/gallery/printed/01%20Printed%20Image%20Superhero%20Photo%20Cookies.jpg</image:loc>
       <image:caption>Custom printed superhero photo cookies San Francisco Bay Area bakery</image:caption>
@@ -622,7 +622,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://mybakingcreations.com/gallery-cupcakes.html</loc>
+    <loc>https://mybakingcreations.com/gallery-cupcakes</loc>
     <image:image>
       <image:loc>https://mybakingcreations.com/images/gallery/cupcakes/01%20Star%20Wars%20theme%20cupcakes%20three.jpg</image:loc>
       <image:caption>Custom Star Wars themed cupcakes San Francisco bakery</image:caption>
@@ -765,7 +765,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://mybakingcreations.com/gallery-corporate-cakepops.html</loc>
+    <loc>https://mybakingcreations.com/gallery-corporate-cakepops</loc>
     <image:image>
       <image:loc>https://mybakingcreations.com/images/gallery/corporatecakepops/Alaska-Airlines-BofA-Corporate-Cake-Pops-San-Francisco.jpg</image:loc>
       <image:caption>Alaska Airlines Bank of America corporate cake pops San Francisco Bay Area</image:caption>
@@ -840,7 +840,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://mybakingcreations.com/gallery-corporate-cakes.html</loc>
+    <loc>https://mybakingcreations.com/gallery-corporate-cakes</loc>
     <image:image>
       <image:loc>https://mybakingcreations.com/images/gallery/corporatecakes/Levis-Jean-Corporate-Business-Cake-San-Francisco.jpg</image:loc>
       <image:caption>Levis Jean corporate business cake San Francisco Bay Area</image:caption>
@@ -927,7 +927,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://mybakingcreations.com/gallery-corporate-cookies.html</loc>
+    <loc>https://mybakingcreations.com/gallery-corporate-cookies</loc>
     <image:image>
       <image:loc>https://mybakingcreations.com/images/gallery/corporatehandpiped/Meta-Facebook-Logo-Corporate-Cookies-San-Francisco.jpg</image:loc>
       <image:caption>Meta Facebook logo corporate cookies San Francisco Bay Area</image:caption>
@@ -1094,7 +1094,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://mybakingcreations.com/gallery-corporate-cookies-printed.html</loc>
+    <loc>https://mybakingcreations.com/gallery-corporate-cookies-printed</loc>
     <image:image>
       <image:loc>https://mybakingcreations.com/images/gallery/corporateprintedimage/PayPal-Venmo-Logo-Corporate-Cookies-San-Francisco.jpg</image:loc>
       <image:caption>PayPal and Venmo logo corporate cookies San Francisco Bay Area</image:caption>
@@ -1161,7 +1161,7 @@
     </image:image>
   </url>
   <url>
-    <loc>https://mybakingcreations.com/gallery-corporate-cupcakes.html</loc>
+    <loc>https://mybakingcreations.com/gallery-corporate-cupcakes</loc>
     <image:image>
       <image:loc>https://mybakingcreations.com/images/gallery/corporatecupcakes/Data-AI-Custom-Corporate-Cupcakes-San-Francisco.jpg</image:loc>
       <image:caption>Data AI custom corporate cupcakes San Francisco Bay Area</image:caption>
