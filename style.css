@@ -4976,3 +4976,31 @@ header nav .search-container svg {
 /* Cake order form — AI mode toggle */
 .ai-mode-content { display: none; }
 .ai-mode-content.active { display: block; }
+
+/* Order form card — maroon matching footer */
+.order-form-card {
+    background: linear-gradient(135deg, var(--dark-brown) 0%, #4a2220 100%);
+    color: var(--white);
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+.order-form-card label,
+.order-form-card .form-group label {
+    color: rgba(255,255,255,0.9);
+}
+.order-form-card input,
+.order-form-card textarea,
+.order-form-card select {
+    background: rgba(255,255,255,0.12);
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 8px;
+    padding: 0.6rem 0.8rem;
+    width: 100%;
+}
+.order-form-card input::placeholder,
+.order-form-card textarea::placeholder {
+    color: rgba(255,255,255,0.5);
+}
