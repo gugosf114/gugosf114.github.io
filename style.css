@@ -4972,3 +4972,7 @@ header nav .search-container svg {
         padding: 20px 16px;
     }
 }
+
+/* Cake order form — AI mode toggle */
+.ai-mode-content { display: none; }
+.ai-mode-content.active { display: block; }
