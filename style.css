@@ -4977,30 +4977,102 @@ header nav .search-container svg {
 .ai-mode-content { display: none; }
 .ai-mode-content.active { display: block; }
 
-/* Order form card — maroon matching footer */
+/* Order form card — dark brown matching footer, restored from 69eb8f4 */
 .order-form-card {
-    background: linear-gradient(135deg, var(--dark-brown) 0%, #4a2220 100%);
+    background: var(--dark-brown);
     color: var(--white);
-    border-radius: 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
     padding: 2rem;
     max-width: 700px;
     margin: 0 auto;
 }
-.order-form-card label,
 .order-form-card .form-group label {
-    color: rgba(255,255,255,0.9);
+    color: var(--yellow);
 }
-.order-form-card input,
-.order-form-card textarea,
-.order-form-card select {
-    background: rgba(255,255,255,0.12);
-    color: var(--white);
-    border: 1px solid rgba(255,255,255,0.25);
+.order-form-card .form-group input[type="text"],
+.order-form-card .form-group input[type="email"],
+.order-form-card .form-group input[type="tel"],
+.order-form-card .form-group input[type="date"],
+.order-form-card .form-group textarea {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: white;
+    width: 100%;
     border-radius: 8px;
     padding: 0.6rem 0.8rem;
-    width: 100%;
 }
-.order-form-card input::placeholder,
-.order-form-card textarea::placeholder {
-    color: rgba(255,255,255,0.5);
+.order-form-card .form-group input::placeholder,
+.order-form-card .form-group textarea::placeholder {
+    color: rgba(255,255,255,0.4);
+}
+.order-form-card .form-group input:focus,
+.order-form-card .form-group textarea:focus {
+    border-color: var(--pink);
+    background: rgba(255,255,255,0.08);
+    outline: none;
+}
+.order-form-card .form-group select {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.85);
+    width: 100%;
+    border-radius: 8px;
+    padding: 0.6rem 0.8rem;
+}
+.order-form-card .form-group input[type="file"] {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.7);
+}
+
+/* AI mode toggle buttons — restored from commit 69eb8f4 */
+.ai-mode-toggle {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 4px;
+    background: #f5f5f5;
+    border-radius: 12px;
+}
+.mode-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--brown);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+.mode-btn:hover {
+    background: rgba(236, 38, 143, 0.1);
+}
+.mode-btn.active {
+    background: white;
+    color: var(--pink);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.mode-icon {
+    font-size: 1.1rem;
+}
+.mode-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    color: white;
+    font-size: 0.55rem;
+    padding: 2px 5px;
+    border-radius: 6px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
