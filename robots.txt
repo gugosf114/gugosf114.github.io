@@ -6,6 +6,10 @@ Allow: /
 Disallow: /_api/
 Disallow: /_frog
 Disallow: /cart
+Disallow: /services-5
+Disallow: /contact-3
+Disallow: /about-1
+Disallow: /gallery-7
 
 # Explicitly allow AI search crawlers
 User-agent: GPTBot
