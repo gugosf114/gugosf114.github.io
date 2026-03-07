@@ -2667,7 +2667,7 @@
     /* Cake Builder Container */
     .cake-builder-container {
         position: relative;
-        background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+        background: linear-gradient(160deg, #1a0f0b 0%, #2d1a14 35%, #1a1020 100%);
         border-radius: 20px;
         padding: 1.5rem;
         overflow: hidden;
@@ -3080,7 +3080,7 @@
     }
 
     .config-select option {
-        background: #1a1a2e;
+        background: #2d1a14;
         color: white;
     }
 
@@ -3706,7 +3706,7 @@
         align-items: center;
         gap: 6px;
         padding: 0.6rem 1rem;
-        background: linear-gradient(135deg, #1a1a2e, #16213e);
+        background: linear-gradient(135deg, #2d1a14, #1a1020);
         border: 1px solid rgba(255, 255, 255, 0.2);
         color: white;
         border-radius: 10px;
@@ -3832,7 +3832,7 @@
         position: fixed;
         inset: 0;
         z-index: 9999;
-        background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+        background: linear-gradient(160deg, #1a0f0b 0%, #2d1a14 35%, #1a1020 100%);
         overflow-y: auto;
         overflow-x: hidden;
         opacity: 0;
@@ -3885,7 +3885,7 @@
     .overlay-orb-3 {
         width: 200px;
         height: 200px;
-        background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+        background: radial-gradient(circle, var(--brown) 0%, transparent 70%);
         top: 40%;
         left: 50%;
         animation: float-orb 18s ease-in-out infinite;
@@ -4513,6 +4513,9 @@
 
         // Initialize if elements exist
         if (!quickSketchMode || !cakeBuilderMode) return;
+
+        // Move builder overlay to body to escape transform containing block
+        if (builderOverlay) document.body.appendChild(builderOverlay);
 
         // Mode Toggle
         // Open fullscreen overlay
