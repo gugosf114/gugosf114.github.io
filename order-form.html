@@ -337,95 +337,146 @@
                         <!-- AI CAKE PREVIEW SECTION -->
                         <div id="aiPreviewSection" class="form-group" style="display: none;">
 
-                            <!-- MODE TOGGLE -->
-                            <div class="ai-mode-toggle">
-                                <button type="button" class="mode-btn active" data-mode="quick" id="quickSketchMode">
-                                    <span class="mode-icon">⚡</span>
-                                    <span class="mode-label">Quick Sketch</span>
+                                                        <!-- Hidden triggers for builder JS compatibility -->
+                            <button type="button" id="quickSketchMode" style="display:none;"></button>
+                            <button type="button" id="cakeBuilderMode" style="display:none;"></button>
+
+                            <!-- Design Studio CTA -->
+                            <button type="button" id="openSketcherBtn" class="sketcher-cta">
+                                <div class="sketcher-cta-shimmer"></div>
+                                <div class="sketcher-cta-inner">
+                                    <svg class="sketcher-cta-icon" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                    <div class="sketcher-cta-text">
+                                        <strong>Open Design Studio</strong>
+                                        <span>AI-powered sketch from your description</span>
+                                    </div>
+                                    <svg class="sketcher-cta-arrow" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                                </div>
+                            </button>
+
+                            <!-- ========== DESIGN STUDIO OVERLAY ========== -->
+                            <div id="sketcherOverlay" class="sketcher-overlay">
+                                <div class="sketcher-overlay-bg">
+                                    <div class="sketcher-orb sketcher-orb-1"></div>
+                                    <div class="sketcher-orb sketcher-orb-2"></div>
+                                    <div class="sketcher-orb sketcher-orb-3"></div>
+                                </div>
+
+                                <button type="button" id="sketcherCloseBtn" class="sketcher-close-btn" aria-label="Close Design Studio">
+                                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
                                 </button>
-                                <button type="button" class="mode-btn" data-mode="builder" id="cakeBuilderMode">
-                                    <span class="mode-icon">🎨</span>
-                                    <span class="mode-label">Cake Builder</span>
-                                    <span class="mode-badge">PRO</span>
-                                </button>
+
+                                <div class="sketcher-overlay-inner">
+                                    <!-- Header -->
+                                    <div class="sketcher-header">
+                                        <img src="logo_icon.png" alt="My Baking Creations" class="sketcher-logo">
+                                        <h2 class="sketcher-title">Design <span class="sketcher-accent">Studio</span></h2>
+                                        <p class="sketcher-subtitle">See your cake idea come to life with AI</p>
+                                    </div>
+
+                                    <!-- Two-column layout -->
+                                    <div class="sketcher-layout">
+                                        <!-- Left: Input -->
+                                        <div class="sketcher-input-col">
+                                            <div class="sketcher-card">
+                                                <div class="sketcher-card-glow"></div>
+                                                <div class="sketcher-desc-label">
+                                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                                                    <span>Your Description</span>
+                                                </div>
+                                                <p id="sketchDescPreview" class="sketcher-desc-text">Describe your cake in the order form first...</p>
+                                                <button type="button" id="sketchEditBtn" class="sketcher-edit-link">
+                                                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                                    Edit in form
+                                                </button>
+                                            </div>
+
+                                            <button type="button" id="generatePreviewBtn" class="sketcher-generate-btn">
+                                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                                <span>Generate Sketch</span>
+                                            </button>
+
+                                            <div class="sketcher-divider"><span>or</span></div>
+
+                                            <button type="button" id="switchToBuilderBtn" class="sketcher-builder-link">
+                                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+                                                <span>Build layer by layer</span>
+                                                <span class="sketcher-pro-tag">PRO</span>
+                                            </button>
+
+                                            <p class="sketcher-powered">Powered by Google Gemini &middot; For inspiration only</p>
+                                        </div>
+
+                                        <!-- Right: Result -->
+                                        <div class="sketcher-result-col">
+                                            <!-- Empty state -->
+                                            <div id="sketchEmptyState" class="sketcher-empty">
+                                                <div class="sketcher-empty-icon">
+                                                    <svg viewBox="0 0 80 80" width="64" height="64" fill="none"><rect x="8" y="44" width="64" height="28" rx="4" stroke="rgba(236,38,143,0.25)" stroke-width="1.5" stroke-dasharray="4 3"/><rect x="16" y="24" width="48" height="24" rx="4" stroke="rgba(255,197,50,0.25)" stroke-width="1.5" stroke-dasharray="4 3"/><rect x="26" y="8" width="28" height="20" rx="4" stroke="rgba(236,38,143,0.25)" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="40" cy="4" r="4" stroke="rgba(255,197,50,0.35)" stroke-width="1.5" stroke-dasharray="3 2"/></svg>
+                                                </div>
+                                                <p>Your sketch will appear here</p>
+                                                <span>Describe your cake, then hit Generate</span>
+                                            </div>
+
+                                            <!-- Loading -->
+                                            <div id="previewLoading" style="display: none;" class="sketcher-loading">
+                                                <div class="sketcher-spinner"></div>
+                                                <p>Creating your sketch...</p>
+                                                <span>This usually takes 10-15 seconds</span>
+                                            </div>
+
+                                            <!-- Result -->
+                                            <div id="previewResult" style="display: none;">
+                                                <div class="sketcher-image-wrap">
+                                                    <img id="previewImage" src="" alt="AI generated cake sketch">
+                                                    <div id="imageWatermark" class="sketcher-watermark">
+                                                        <img src="logo_icon.png" alt="My Baking Creations" style="height: 20px; width: auto;">
+                                                        <span>mybakingcreations.com</span>
+                                                    </div>
+                                                </div>
+
+                                                <div id="colorPaletteSection" class="sketcher-palette">
+                                                    <div class="sketcher-section-header">
+                                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+                                                        <strong>Color Palette</strong>
+                                                        <span class="sketcher-hint">Click to copy</span>
+                                                    </div>
+                                                    <div id="colorSwatches" class="sketcher-swatches"></div>
+                                                </div>
+
+                                                <div id="refineSection" class="sketcher-refine">
+                                                    <div class="sketcher-section-header">
+                                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                                                        <strong>Refine This Design</strong>
+                                                    </div>
+                                                    <div class="sketcher-refine-row">
+                                                        <input type="text" id="refineInput" placeholder="e.g., 'Make it more colorful' or 'Add flowers'" class="sketcher-refine-input">
+                                                        <button type="button" id="refineBtn" class="sketcher-refine-btn">Refine</button>
+                                                    </div>
+                                                    <div id="refinementHistory" class="sketcher-refine-history"></div>
+                                                </div>
+
+                                                <div class="sketcher-actions">
+                                                    <a id="downloadPreviewBtn" download="my-cake-design.png" class="sketcher-action-btn">
+                                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                                        Download
+                                                    </a>
+                                                    <button type="button" id="downloadPdfBtn" class="sketcher-action-btn">
+                                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                                        PDF
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <!-- Error -->
+                                            <div id="previewError" style="display: none;" class="sketcher-error"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
-                            <!-- QUICK SKETCH MODE (existing functionality) -->
-                            <div id="quickSketchSection" class="ai-mode-content active">
-                                <div style="background: linear-gradient(135deg, #fff5f8 0%, #fff 100%); border: 2px dashed var(--pink); border-radius: 15px; padding: 1.25rem;">
-                                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
-                                        <strong style="font-family: 'Fredoka One', cursive; color: var(--pink); font-size: 1rem;">AI Preview</strong>
-                                        <span style="background: var(--pink); color: white; font-size: 0.65rem; padding: 2px 6px; border-radius: 8px; font-weight: 600;">NEW</span>
-                                    </div>
-                                    <p style="color: var(--brown); font-size: 0.85rem; margin-bottom: 1rem;">
-                                        Want to see your idea come to life? Describe your design above, then click below!
-                                    </p>
-                                    <button type="button" id="generatePreviewBtn" class="electric-btn">Generate Preview</button>
-
-                                <div id="previewLoading" style="display: none; margin-top: 1rem; text-align: center;">
-                                    <div style="display: inline-block; width: 25px; height: 25px; border: 3px solid var(--light-pink); border-top-color: var(--pink); border-radius: 50%; animation: spin 1s linear infinite;"></div>
-                                    <p style="color: var(--brown); margin-top: 0.5rem; font-size: 0.85rem;">Creating your preview...</p>
-                                </div>
-
-                                <div id="previewResult" style="display: none; margin-top: 1rem;">
-                                    <!-- Image with logo watermark -->
-                                    <div style="position: relative; display: inline-block; width: 100%;">
-                                        <img id="previewImage" src="" alt="AI generated preview" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                                        <div id="imageWatermark" style="position: absolute; bottom: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 6px 10px; border-radius: 8px; display: flex; align-items: center; gap: 6px; font-size: 0.65rem; color: #5D4E37;">
-                                            <img src="logo_icon.png" alt="My Baking Creations" style="height: 20px; width: auto;">
-                                            <span style="font-family: 'Nunito', sans-serif; font-weight: 600;">mybakingcreations.com</span>
-                                        </div>
-                                    </div>
-
-                                    <!-- Color Palette Section -->
-                                    <div id="colorPaletteSection" style="margin-top: 1rem; padding: 0.75rem; background: #fafafa; border-radius: 10px; border: 1px solid #eee;">
-                                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                                            <span style="font-size: 0.9rem;">🎨</span>
-                                            <strong style="font-family: 'Nunito', sans-serif; font-size: 0.85rem; color: var(--dark-brown);">Color Palette</strong>
-                                            <span style="font-size: 0.7rem; color: #888;">Click to copy hex code</span>
-                                        </div>
-                                        <div id="colorSwatches" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
-                                    </div>
-
-                                    <!-- Refine Design Section -->
-                                    <div id="refineSection" style="margin-top: 1rem;">
-                                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                                            <span style="font-size: 0.9rem;">✨</span>
-                                            <strong style="font-family: 'Nunito', sans-serif; font-size: 0.85rem; color: var(--dark-brown);">Refine This Design</strong>
-                                        </div>
-                                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                                            <input type="text" id="refineInput" placeholder="e.g., 'Make it more colorful' or 'Add flowers'" style="flex: 1; min-width: 180px; padding: 0.5rem 0.75rem; border: 2px solid #eee; border-radius: 10px; font-size: 0.85rem; font-family: 'Nunito', sans-serif;">
-                                            <button type="button" id="refineBtn" style="background: linear-gradient(135deg, var(--pink) 0%, #d41f7e 100%); color: white; border: none; padding: 0.5rem 1rem; border-radius: 10px; font-size: 0.85rem; font-weight: 600; cursor: pointer; font-family: 'Nunito', sans-serif; white-space: nowrap;">Refine</button>
-                                        </div>
-                                        <div id="refinementHistory" style="margin-top: 0.5rem; font-size: 0.75rem; color: #888;"></div>
-                                    </div>
-
-                                    <!-- Action Buttons -->
-                                    <div style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                                        <a id="downloadPreviewBtn" download="my-cake-design.png" style="background: var(--brown); color: white; padding: 0.5rem 1rem; border-radius: 15px; font-size: 0.8rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;">
-                                            <span>⬇️</span> Download Image
-                                        </a>
-                                        <button type="button" id="downloadPdfBtn" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; border: none; padding: 0.5rem 1rem; border-radius: 15px; font-size: 0.8rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;">
-                                            <span>📄</span> Download PDF
-                                        </button>
-                                    </div>
-
-                                    <!-- Attribution -->
-                                    <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid #eee; text-align: center;">
-                                        <span style="font-size: 0.7rem; color: #999; font-style: italic;">Powered by Anthropic Claude</span>
-                                    </div>
-                                </div>
-
-                                <div id="previewError" style="display: none; margin-top: 1rem; padding: 0.6rem; background: #fff3f3; border-radius: 8px; color: #c44; font-size: 0.85rem;"></div>
-
-                                <p style="color: #999; font-size: 0.7rem; margin-top: 0.75rem; font-style: italic;">
-                                    Powered by Google Gemini • For inspiration only
-                                </p>
-                                </div>
-                            </div><!-- end quickSketchSection -->
-
                             <!-- CAKE BUILDER MODE (new modular builder) -->
-                            <div id="cakeBuilderSection" class="ai-mode-content">
+                            <div id="cakeBuilderSection" style="display:block;">
 
                             <!-- Full-Screen Overlay (opens like consultation page) -->
                             <div id="builderFullscreenOverlay" class="builder-fullscreen-overlay">
@@ -1795,70 +1846,694 @@
        CAKE BUILDER - PREMIUM DARK THEME
        =========================================== */
 
-    /* Mode Toggle */
-    .ai-mode-toggle {
-        display: flex;
-        gap: 0.5rem;
-        margin-bottom: 1rem;
-        padding: 4px;
-        background: #f5f5f5;
-        border-radius: 12px;
+    /* ===========================================
+       DESIGN STUDIO - CTA & OVERLAY
+       =========================================== */
+
+    /* CTA Button */
+    .sketcher-cta {
+        position: relative;
+        width: 100%;
+        background: transparent;
+        border: 1px solid rgba(236, 38, 143, 0.25);
+        border-radius: 16px;
+        padding: 0;
+        cursor: pointer;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .mode-btn {
+    .sketcher-cta:hover {
+        border-color: var(--pink);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(236, 38, 143, 0.2);
+    }
+
+    .sketcher-cta-shimmer {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(236, 38, 143, 0.06), transparent);
+        animation: cta-shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes cta-shimmer {
+        0%, 100% { left: -100%; }
+        50% { left: 100%; }
+    }
+
+    .sketcher-cta-inner {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.1rem 1.25rem;
+    }
+
+    .sketcher-cta-icon {
+        color: var(--pink);
+        flex-shrink: 0;
+        filter: drop-shadow(0 0 8px rgba(236, 38, 143, 0.4));
+    }
+
+    .sketcher-cta-text {
         flex: 1;
+        text-align: left;
+    }
+
+    .sketcher-cta-text strong {
+        display: block;
+        font-family: 'Fredoka One', cursive;
+        font-size: 1rem;
+        color: white;
+        margin-bottom: 2px;
+    }
+
+    .sketcher-cta-text span {
+        display: block;
+        font-size: 0.78rem;
+        color: rgba(255, 255, 255, 0.45);
+        font-family: 'Nunito', sans-serif;
+    }
+
+    .sketcher-cta-arrow {
+        flex-shrink: 0;
+        color: rgba(255, 255, 255, 0.35);
+        transition: all 0.3s ease;
+    }
+
+    .sketcher-cta:hover .sketcher-cta-arrow {
+        transform: translateX(4px);
+        color: var(--pink);
+    }
+
+    /* Overlay */
+    .sketcher-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        background: linear-gradient(160deg, #1a0f0b 0%, #2d1a14 35%, #1a1020 100%);
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .sketcher-overlay.open {
+        display: block;
+    }
+
+    body.sketcher-open {
+        overflow: hidden;
+    }
+
+    /* Background Orbs */
+    .sketcher-overlay-bg {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    .sketcher-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.18;
+    }
+
+    .sketcher-orb-1 {
+        width: 350px;
+        height: 350px;
+        background: radial-gradient(circle, var(--pink) 0%, transparent 70%);
+        top: -100px;
+        right: -80px;
+        animation: sketcher-float 15s ease-in-out infinite;
+    }
+
+    .sketcher-orb-2 {
+        width: 250px;
+        height: 250px;
+        background: radial-gradient(circle, var(--yellow) 0%, transparent 70%);
+        bottom: -60px;
+        left: -60px;
+        animation: sketcher-float 15s ease-in-out infinite;
+        animation-delay: -7s;
+    }
+
+    .sketcher-orb-3 {
+        width: 180px;
+        height: 180px;
+        background: radial-gradient(circle, rgba(139, 92, 246, 0.8) 0%, transparent 70%);
+        top: 40%;
+        left: 50%;
+        animation: sketcher-float 18s ease-in-out infinite;
+        animation-delay: -3s;
+    }
+
+    @keyframes sketcher-float {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        50% { transform: translate(20px, -20px) scale(1.1); }
+    }
+
+    /* Close Button */
+    .sketcher-close-btn {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 10001;
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.6);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 0.5rem;
-        padding: 0.75rem 1rem;
-        background: transparent;
-        border: none;
-        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .sketcher-close-btn:hover {
+        background: rgba(255, 255, 255, 0.12);
+        color: white;
+        transform: rotate(90deg);
+    }
+
+    /* Inner Content */
+    .sketcher-overlay-inner {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 1000px;
+        padding: 50px 32px 40px;
+        margin: 0 auto;
+    }
+
+    /* Header */
+    .sketcher-header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+    }
+
+    .sketcher-logo {
+        width: 48px;
+        height: 48px;
+        object-fit: contain;
+        margin-bottom: 0.75rem;
+        filter: drop-shadow(0 4px 12px rgba(236, 38, 143, 0.3));
+    }
+
+    .sketcher-title {
+        font-family: 'Fredoka One', cursive;
+        font-size: clamp(1.5rem, 3vw, 2.2rem);
+        color: white;
+        margin: 0 0 0.5rem;
+    }
+
+    .sketcher-accent {
+        background: linear-gradient(135deg, var(--pink), var(--yellow));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .sketcher-subtitle {
+        color: rgba(255, 255, 255, 0.45);
+        font-size: 0.95rem;
+        margin: 0;
         font-family: 'Nunito', sans-serif;
-        font-size: 0.85rem;
+    }
+
+    /* Two-Column Layout */
+    .sketcher-layout {
+        display: grid;
+        grid-template-columns: 0.85fr 1.15fr;
+        gap: 2rem;
+        align-items: start;
+    }
+
+    /* Left Column */
+    .sketcher-input-col {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    /* Description Card */
+    .sketcher-card {
+        position: relative;
+        background: rgba(255, 255, 255, 0.035);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        padding: 1.25rem;
+        overflow: hidden;
+    }
+
+    .sketcher-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        border-radius: 16px;
+        padding: 1px;
+        background: linear-gradient(135deg, rgba(236, 38, 143, 0.25), rgba(255, 197, 50, 0.25), rgba(236, 38, 143, 0.25));
+        background-size: 300% 300%;
+        animation: sketcher-border 6s ease infinite;
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+    }
+
+    @keyframes sketcher-border {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+
+    .sketcher-card-glow {
+        position: absolute;
+        top: -50%; left: -50%;
+        width: 200%; height: 200%;
+        background: radial-gradient(circle, rgba(236, 38, 143, 0.05) 0%, transparent 50%);
+        animation: sketcher-glow 12s linear infinite;
+        pointer-events: none;
+    }
+
+    @keyframes sketcher-glow {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .sketcher-desc-label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--yellow);
+        font-size: 0.78rem;
         font-weight: 700;
-        color: var(--brown);
+        font-family: 'Nunito', sans-serif;
+        margin-bottom: 0.75rem;
+        text-shadow: 0 0 15px rgba(255, 197, 50, 0.15);
+    }
+
+    .sketcher-desc-label svg { opacity: 0.7; }
+
+    .sketcher-desc-text {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.88rem;
+        line-height: 1.6;
+        margin: 0 0 0.75rem;
+        font-family: 'Nunito', sans-serif;
+        font-style: italic;
+        min-height: 2.5rem;
+    }
+
+    .sketcher-edit-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: none;
+        border: none;
+        color: var(--pink);
+        font-size: 0.76rem;
+        font-weight: 600;
+        font-family: 'Nunito', sans-serif;
+        cursor: pointer;
+        padding: 0;
+        transition: opacity 0.2s;
+    }
+
+    .sketcher-edit-link:hover { opacity: 0.7; }
+
+    /* Generate Button */
+    .sketcher-generate-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        padding: 1rem 2rem;
+        background: linear-gradient(135deg, var(--pink), #d41f7e);
+        border: none;
+        border-radius: 14px;
+        color: white;
+        font-family: 'Nunito', sans-serif;
+        font-size: 1rem;
+        font-weight: 800;
         cursor: pointer;
         transition: all 0.3s ease;
         position: relative;
+        overflow: hidden;
     }
 
-    .mode-btn:hover {
-        background: rgba(236, 38, 143, 0.1);
-    }
-
-    .mode-btn.active {
-        background: white;
-        color: var(--pink);
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    .mode-icon {
-        font-size: 1.1rem;
-    }
-
-    .mode-badge {
+    .sketcher-generate-btn::before {
+        content: '';
         position: absolute;
-        top: -4px;
-        right: -4px;
+        top: 0; left: -100%; width: 100%; height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        animation: cta-shimmer 3s ease-in-out infinite;
+    }
+
+    .sketcher-generate-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(236, 38, 143, 0.4);
+    }
+
+    .sketcher-generate-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    /* Divider */
+    .sketcher-divider {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .sketcher-divider::before,
+    .sketcher-divider::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.07);
+    }
+
+    .sketcher-divider span {
+        color: rgba(255, 255, 255, 0.25);
+        font-size: 0.7rem;
+        font-family: 'Nunito', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Builder Link */
+    .sketcher-builder-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        padding: 0.75rem 1.5rem;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        color: rgba(255, 255, 255, 0.6);
+        font-family: 'Nunito', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .sketcher-builder-link:hover {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(255, 255, 255, 0.15);
+        color: white;
+    }
+
+    .sketcher-pro-tag {
         background: linear-gradient(135deg, #8b5cf6, #6366f1);
         color: white;
         font-size: 0.55rem;
-        padding: 2px 5px;
+        padding: 2px 6px;
         border-radius: 6px;
         font-weight: 800;
         letter-spacing: 0.5px;
     }
 
-    /* Mode Content */
-    .ai-mode-content {
-        display: none;
+    .sketcher-powered {
+        color: rgba(255, 255, 255, 0.25);
+        font-size: 0.7rem;
+        text-align: center;
+        margin: 0;
+        font-style: italic;
+        font-family: 'Nunito', sans-serif;
     }
 
-    .ai-mode-content.active {
-        display: block;
+    /* Right Column */
+    .sketcher-result-col {
+        min-height: 400px;
+        display: flex;
+        flex-direction: column;
     }
+
+    /* Empty State */
+    .sketcher-empty {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 3rem 2rem;
+        background: rgba(255, 255, 255, 0.015);
+        border: 1px dashed rgba(255, 255, 255, 0.06);
+        border-radius: 16px;
+        min-height: 350px;
+    }
+
+    .sketcher-empty-icon { margin-bottom: 1.5rem; opacity: 0.6; }
+
+    .sketcher-empty p {
+        color: rgba(255, 255, 255, 0.45);
+        font-family: 'Nunito', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin: 0 0 0.25rem;
+    }
+
+    .sketcher-empty span {
+        color: rgba(255, 255, 255, 0.25);
+        font-size: 0.78rem;
+        font-family: 'Nunito', sans-serif;
+    }
+
+    /* Loading */
+    .sketcher-loading {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 3rem;
+        min-height: 350px;
+    }
+
+    .sketcher-spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid rgba(255, 255, 255, 0.08);
+        border-top-color: var(--pink);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-bottom: 1rem;
+    }
+
+    .sketcher-loading p {
+        color: rgba(255, 255, 255, 0.6);
+        font-family: 'Nunito', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin: 0 0 0.25rem;
+    }
+
+    .sketcher-loading span {
+        color: rgba(255, 255, 255, 0.35);
+        font-size: 0.78rem;
+        font-family: 'Nunito', sans-serif;
+    }
+
+    /* Image Result */
+    .sketcher-image-wrap {
+        position: relative;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        margin-bottom: 1.25rem;
+    }
+
+    .sketcher-image-wrap img { width: 100%; display: block; }
+
+    .sketcher-watermark {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 6px 10px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.65rem;
+        color: #5D4E37;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 600;
+    }
+
+    /* Section Headers */
+    .sketcher-section-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+        color: white;
+        font-family: 'Nunito', sans-serif;
+        font-size: 0.85rem;
+    }
+
+    .sketcher-section-header svg {
+        color: var(--yellow);
+        flex-shrink: 0;
+    }
+
+    .sketcher-hint {
+        margin-left: auto;
+        color: rgba(255, 255, 255, 0.3);
+        font-size: 0.68rem;
+        font-weight: normal;
+    }
+
+    /* Palette */
+    .sketcher-palette {
+        background: rgba(255, 255, 255, 0.025);
+        border-radius: 12px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .sketcher-swatches {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    /* Refine */
+    .sketcher-refine {
+        background: rgba(255, 255, 255, 0.025);
+        border-radius: 12px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .sketcher-refine-row {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .sketcher-refine-input {
+        flex: 1;
+        min-width: 0;
+        padding: 0.6rem 0.75rem;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+        color: white;
+        font-size: 0.85rem;
+        font-family: 'Nunito', sans-serif;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+
+    .sketcher-refine-input::placeholder { color: rgba(255, 255, 255, 0.25); }
+
+    .sketcher-refine-input:focus {
+        border-color: var(--pink);
+        box-shadow: 0 0 15px rgba(236, 38, 143, 0.12);
+    }
+
+    .sketcher-refine-btn {
+        padding: 0.6rem 1rem;
+        background: linear-gradient(135deg, var(--pink), #d41f7e);
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-size: 0.85rem;
+        font-weight: 700;
+        font-family: 'Nunito', sans-serif;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all 0.3s ease;
+    }
+
+    .sketcher-refine-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 15px rgba(236, 38, 143, 0.3);
+    }
+
+    .sketcher-refine-history {
+        margin-top: 0.5rem;
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.35);
+    }
+
+    /* Actions */
+    .sketcher-actions {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .sketcher-action-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 0.6rem 1.25rem;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.8rem;
+        font-weight: 600;
+        font-family: 'Nunito', sans-serif;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .sketcher-action-btn:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: white;
+        transform: translateY(-1px);
+    }
+
+    /* Error */
+    .sketcher-error {
+        background: rgba(239, 68, 68, 0.08);
+        border: 1px solid rgba(239, 68, 68, 0.2);
+        color: #fca5a5;
+        padding: 0.75rem 1rem;
+        border-radius: 10px;
+        font-size: 0.85rem;
+        font-family: 'Nunito', sans-serif;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .sketcher-layout { grid-template-columns: 1fr; }
+        .sketcher-overlay-inner { padding: 50px 16px 30px; }
+        .sketcher-close-btn { top: 12px; right: 12px; width: 38px; height: 38px; }
+        .sketcher-result-col { min-height: 300px; }
+        .sketcher-empty { min-height: 250px; padding: 2rem 1rem; }
+    }
+
+    @media (max-width: 480px) {
+        .sketcher-overlay-inner { padding: 45px 10px 20px; }
+    }
+
+
 
     /* ============================================
        ORDER FORM DARK CARD THEME
@@ -3612,6 +4287,97 @@
     }
 
     </style>
+
+        <!-- Design Studio Overlay Management -->
+    <script>
+    (function() {
+        'use strict';
+
+        var openBtn = document.getElementById('openSketcherBtn');
+        var overlay = document.getElementById('sketcherOverlay');
+        var closeBtn = document.getElementById('sketcherCloseBtn');
+        var editBtn = document.getElementById('sketchEditBtn');
+        var switchBtn = document.getElementById('switchToBuilderBtn');
+        var descPreview = document.getElementById('sketchDescPreview');
+        var orderTextarea = document.getElementById('order_details');
+        var emptyState = document.getElementById('sketchEmptyState');
+        var prevLoading = document.getElementById('previewLoading');
+        var prevResult = document.getElementById('previewResult');
+
+        if (!openBtn || !overlay) return;
+
+        // Move overlay to body to escape transform containing block
+        document.body.appendChild(overlay);
+
+        function openOverlay() {
+            // Sync description from form
+            var desc = orderTextarea ? orderTextarea.value.trim() : '';
+            if (desc) {
+                descPreview.textContent = desc;
+                descPreview.style.fontStyle = 'italic';
+            } else {
+                descPreview.textContent = 'No description yet \u2014 go back and describe your cake first.';
+                descPreview.style.fontStyle = 'normal';
+            }
+            overlay.classList.add('open');
+            document.body.classList.add('sketcher-open');
+            // Show correct state
+            if (prevResult && prevResult.style.display !== 'none') {
+                if (emptyState) emptyState.style.display = 'none';
+            }
+        }
+
+        function closeOverlay() {
+            overlay.classList.remove('open');
+            document.body.classList.remove('sketcher-open');
+        }
+
+        openBtn.addEventListener('click', openOverlay);
+        closeBtn.addEventListener('click', closeOverlay);
+
+        // Close on Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && overlay.classList.contains('open')) {
+                closeOverlay();
+            }
+        });
+
+        // Edit in form
+        if (editBtn) {
+            editBtn.addEventListener('click', function() {
+                closeOverlay();
+                setTimeout(function() {
+                    if (orderTextarea) {
+                        orderTextarea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        orderTextarea.focus();
+                    }
+                }, 400);
+            });
+        }
+
+        // Switch to builder
+        if (switchBtn) {
+            switchBtn.addEventListener('click', function() {
+                closeOverlay();
+                var builderTrigger = document.getElementById('cakeBuilderMode');
+                if (builderTrigger) {
+                    setTimeout(function() { builderTrigger.click(); }, 400);
+                }
+            });
+        }
+
+        // Hide empty state when generate is clicked
+        var genBtn = document.getElementById('generatePreviewBtn');
+        if (genBtn && emptyState) {
+            genBtn.addEventListener('click', function() {
+                var desc = orderTextarea ? orderTextarea.value.trim() : '';
+                if (desc.length >= 10) {
+                    emptyState.style.display = 'none';
+                }
+            }, true);
+        }
+    })();
+    </script>
 
     <!-- Cake Builder JavaScript -->
     <script>
