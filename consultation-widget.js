@@ -1,25 +1,29 @@
 /**
- * Floating Party Rentals Widget
- * Premium, draggable "Party Rentals" button
+ * Floating Consultation Widget
+ * Premium, draggable "Book 15-Min Consultation" button
  */
 (function() {
     'use strict';
 
-    // Don't load on the party page itself
-    if (window.location.pathname.includes('/party')) return;
+    // Don't load on the consultation page itself
+    if (window.location.pathname.includes('book-consultation')) return;
 
     // Create widget HTML
     const widget = document.createElement('div');
     widget.id = 'consultationWidget';
     widget.innerHTML = `
-        <a href="https://thewhole.party/" target="_blank" rel="noopener" class="consultation-widget-btn" id="consultationBtn">
+        <a href="book-consultation.html" class="consultation-widget-btn" id="consultationBtn">
             <div class="widget-glow"></div>
             <div class="widget-pulse"></div>
             <div class="widget-content">
-                <div class="widget-icon"></div>
+                <div class="widget-icon">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                        <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
+                    </svg>
+                </div>
                 <div class="widget-text">
-                    <span class="widget-label">Party Rentals</span>
-                    <span class="widget-sublabel">The Whole Party</span>
+                    <span class="widget-label">Free Consultation</span>
+                    <span class="widget-sublabel">15 min video call</span>
                 </div>
             </div>
             <div class="widget-shine"></div>
@@ -379,8 +383,8 @@
         if (e.type === 'touchend' && !hasMoved) {
             const touchDuration = Date.now() - touchStartTime;
             if (touchDuration < 300) {
-                // Quick tap - navigate to party rentals page
-                window.location.href = 'https://thewhole.party/';
+                // Quick tap - navigate to consultation page
+                window.location.href = 'book-consultation.html';
             }
         }
 
