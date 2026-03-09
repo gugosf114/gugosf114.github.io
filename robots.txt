@@ -6,6 +6,15 @@ Allow: /
 Disallow: /_api/
 Disallow: /_frog
 
+# Block Wix-era redirect stubs (canonical tags + JS redirects exist but waste crawl budget)
+Disallow: /about-1
+Disallow: /contact-3
+Disallow: /gallery-7
+Disallow: /services-5
+Disallow: /cakes
+Disallow: /cookies
+Disallow: /cart
+
 # Explicitly allow AI search crawlers
 User-agent: GPTBot
 Allow: /
