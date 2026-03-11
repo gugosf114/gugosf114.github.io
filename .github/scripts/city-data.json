@@ -1,0 +1,402 @@
+[
+  {
+    "name":"South San Francisco","slug":"south-san-francisco","miles":3,"driveMinutes":10,"orderBy":"3:00 PM",
+    "wiki":"South_San_Francisco,_California",
+    "neighborhoods":["Downtown South San Francisco","Sign Hill","Sunshine Gardens","Westborough"],
+    "landmarks":["Sign Hill Park","South San Francisco Conference Center"],
+    "corporateNote":"Genentech and the Oyster Point biotech corridor",
+    "culturalNote":"this vibrant, diverse community just minutes from our door",
+    "neighbors":["daly-city","san-bruno","pacifica"],
+    "faq":[
+      {"q":"How fast can you deliver to South San Francisco?","a":"Just 3 miles away! Delivery takes about 10 minutes. Order by 3:00 PM for same-day. Custom cakes need 2-3 weeks advance notice."},
+      {"q":"Can I pick up instead of getting delivery?","a":"Yes! Our bakery at 1096 Wildwood Ave in Daly City is a 10-minute drive from SSF. Many customers prefer free pickup."},
+      {"q":"Do you do corporate orders for SSF biotech companies?","a":"Yes! We deliver branded cookies and celebration cakes to Genentech, Amgen, and companies throughout Oyster Point."}
+    ],
+    "meta":"Custom cake delivery in South San Francisco. Birthday, wedding & corporate cakes from Daly City. Order by 3 PM for same-day delivery!",
+    "heroDesc":"Birthday cakes, wedding cakes, and corporate treats delivered from your closest neighbor bakery. Just 3 miles from our door to yours."
+  },
+  {
+    "name":"San Bruno","slug":"san-bruno","miles":5,"driveMinutes":12,"orderBy":"3:00 PM",
+    "wiki":"San_Bruno,_California",
+    "neighborhoods":["Downtown San Bruno","Crestmoor","Mills Park","Bayhill"],
+    "landmarks":["San Bruno Mountain State Park","The Shops at Tanforan"],
+    "corporateNote":"businesses near SFO and the Bayhill Office Park",
+    "culturalNote":"San Bruno families who celebrate big from first birthdays to golden anniversaries",
+    "neighbors":["south-san-francisco","millbrae","pacifica"],
+    "faq":[
+      {"q":"Do you deliver cakes to addresses near SFO airport?","a":"Yes! We deliver throughout San Bruno including the Bayhill area near SFO and hotels for airport-area events."},
+      {"q":"How far in advance should I order for San Bruno delivery?","a":"Custom cakes need 2-3 weeks. Simpler designs and cookies need about 1 week. Same-day available for in-stock items by 3:00 PM."},
+      {"q":"What's the delivery fee to San Bruno?","a":"San Bruno is just 5 miles away so fees are minimal. Many customers choose free pickup at our Daly City location since it's so close."}
+    ],
+    "meta":"Custom cake delivery in San Bruno, CA. Sculpted birthday cakes, wedding cakes & decorated cookies. Minutes from our Daly City bakery!",
+    "heroDesc":"Handcrafted birthday cakes, sculpted designs, and corporate treats delivered to your San Bruno celebration. Order online today."
+  },
+  {
+    "name":"Pacifica","slug":"pacifica","miles":6,"driveMinutes":12,"orderBy":"3:00 PM",
+    "wiki":"Pacifica,_California",
+    "neighborhoods":["Linda Mar","Rockaway Beach","Pedro Point","Sharp Park"],
+    "landmarks":["Pacifica Pier","Linda Mar Beach"],
+    "corporateNote":"",
+    "culturalNote":"Pacifica's tight-knit coastal community where every celebration has an ocean breeze",
+    "neighbors":["daly-city","south-san-francisco","san-bruno"],
+    "faq":[
+      {"q":"Can you deliver during foggy weather in Pacifica?","a":"Yes! We deliver rain or shine. Our drivers know coastal conditions and secure all cakes in specialized carriers for safe transport."},
+      {"q":"Do you deliver to Pedro Point and south Pacifica?","a":"We deliver everywhere in Pacifica — from Sharp Park down to Pedro Point and Shelter Cove. The entire city is in our zone."},
+      {"q":"Is pickup an option for Pacifica residents?","a":"Absolutely! Our Daly City bakery is just 12 minutes from most of Pacifica. Pickup is always free."}
+    ],
+    "meta":"Custom cake delivery to Pacifica, CA. Birthday cakes, wedding cakes & cookies delivered from Daly City to Linda Mar, Rockaway & Pedro Point!",
+    "heroDesc":"Fresh custom cakes delivered to Pacifica's coastal neighborhoods. From Linda Mar to Rockaway Beach, your celebration cake is just minutes away."
+  },
+  {
+    "name":"Millbrae","slug":"millbrae","miles":7,"driveMinutes":15,"orderBy":"2:30 PM",
+    "wiki":"Millbrae,_California",
+    "neighborhoods":["Downtown Millbrae","Meadows","Millbrae Highlands","Green Hills"],
+    "landmarks":["Millbrae BART station area","Green Hills Country Club"],
+    "corporateNote":"businesses and event venues near the Millbrae BART/Caltrain transit hub",
+    "culturalNote":"Millbrae's charming community that values quality and tradition",
+    "neighbors":["san-bruno","burlingame","south-san-francisco"],
+    "faq":[
+      {"q":"Can you deliver to event venues in Millbrae?","a":"Yes! We deliver to all Millbrae locations — restaurants, hotels, community centers, and homes. Provide the venue address when ordering."},
+      {"q":"What's the same-day delivery cutoff for Millbrae?","a":"Order by 2:30 PM for same-day delivery. Custom cakes require 2-3 weeks advance notice for design work."},
+      {"q":"Do you offer tasting sessions for Millbrae wedding couples?","a":"Yes! Tastings are available by appointment at our Daly City bakery — just 15 minutes from Millbrae."}
+    ],
+    "meta":"Custom cake delivery in Millbrae, CA. Handcrafted birthday cakes, wedding cakes & corporate cookies. Just 15 minutes from our bakery!",
+    "heroDesc":"Custom cakes, cookies, and cake pops delivered to Millbrae. Handcrafted treats for birthday parties, weddings, and corporate events."
+  },
+  {
+    "name":"Burlingame","slug":"burlingame","miles":10,"driveMinutes":18,"orderBy":"2:30 PM",
+    "wiki":"Burlingame,_California",
+    "neighborhoods":["Downtown Burlingame","Burlingame Hills","North Burlingame","Ray Park"],
+    "landmarks":["Burlingame Avenue","Washington Park"],
+    "corporateNote":"Peninsula corridor offices and Burlingame Avenue businesses",
+    "culturalNote":"Burlingame's tree-lined neighborhoods where elegance meets community spirit",
+    "neighbors":["millbrae","san-mateo","foster-city"],
+    "faq":[
+      {"q":"Do you deliver to Burlingame Avenue restaurants?","a":"Yes! We regularly deliver to businesses and restaurants along Burlingame Avenue and Broadway. We coordinate with venue staff for event setups."},
+      {"q":"Can you create cakes for outdoor Burlingame events?","a":"Absolutely! We've created cakes for Washington Park events, backyard parties in the hills, and garden celebrations. We advise on heat-stable designs."},
+      {"q":"What's most popular for Burlingame customers?","a":"Sculpted 3D cakes for kids' birthdays and elegant tiered cakes for milestone celebrations. Decorated cookie sets are popular for boutique events."}
+    ],
+    "meta":"Custom cake delivery in Burlingame, CA. Artisan birthday cakes, wedding tiers & corporate cookies. Delivery from Daly City in 18 minutes!",
+    "heroDesc":"Artisan cakes and decorated cookies delivered to Burlingame. From Burlingame Avenue celebrations to private events in the hills."
+  },
+  {
+    "name":"San Mateo","slug":"san-mateo","miles":14,"driveMinutes":22,"orderBy":"2:00 PM",
+    "wiki":"San_Mateo,_California",
+    "neighborhoods":["Downtown San Mateo","Hillsdale","San Mateo Park","Baywood"],
+    "landmarks":["Central Park","Hillsdale Shopping Center"],
+    "corporateNote":"San Mateo tech companies and Peninsula office parks",
+    "culturalNote":"the heart of the Peninsula where every neighborhood has its own celebration style",
+    "neighbors":["burlingame","foster-city","belmont"],
+    "faq":[
+      {"q":"Can you deliver to Central Park or other San Mateo parks?","a":"Yes! We deliver to any San Mateo location including parks. For park deliveries, we coordinate timing so your cake arrives right when needed."},
+      {"q":"Do you offer corporate catering for San Mateo businesses?","a":"We do! Branded cookies with company logos, celebration cakes for office milestones, and curated treat boxes. Bulk pricing for recurring orders."},
+      {"q":"How should I order for a San Mateo wedding?","a":"Book 4-6 weeks in advance. Schedule a tasting at our Daly City bakery — just 22 minutes from San Mateo. We coordinate delivery with your venue."}
+    ],
+    "meta":"Custom cake delivery in San Mateo, CA. Birthday, wedding & corporate cakes handcrafted in Daly City. Delivery in ~22 minutes!",
+    "heroDesc":"Custom cakes delivered to San Mateo — birthday designs, wedding tiers, and corporate treats for the heart of the Peninsula."
+  },
+  {
+    "name":"Foster City","slug":"foster-city","miles":16,"driveMinutes":24,"orderBy":"2:00 PM",
+    "wiki":"Foster_City,_California",
+    "neighborhoods":["Foster City","Shore Park","Metro Center","Mariner's Island"],
+    "landmarks":["Leo Ryan Park","Gilead Sciences campus"],
+    "corporateNote":"Gilead Sciences, Visa, and other Foster City tech campuses",
+    "culturalNote":"Foster City's waterfront community where every park and lagoon becomes a celebration venue",
+    "neighbors":["san-mateo","belmont","redwood-city"],
+    "faq":[
+      {"q":"Can you deliver to corporate offices in Foster City?","a":"Absolutely! We regularly deliver to Metro Center offices. Branded cookies with your company logo are our most popular corporate item."},
+      {"q":"Do you deliver to parks and outdoor venues in Foster City?","a":"Yes! We deliver to Leo Ryan Park and any Foster City outdoor venue. We time deliveries so cakes arrive right before your event."},
+      {"q":"What about last-minute Foster City celebrations?","a":"For same-day, contact us by 2:00 PM. Custom designs need 2-3 weeks, but we often have decorated standard cakes for quicker turnaround."}
+    ],
+    "meta":"Custom cake delivery to Foster City, CA. Birthday cakes, wedding tiers & corporate cookies. Delivered to your lagoon-side event!",
+    "heroDesc":"Custom cakes delivered to Foster City — from waterfront birthday parties to corporate celebrations at Peninsula tech offices."
+  },
+  {
+    "name":"Belmont","slug":"belmont","miles":17,"driveMinutes":24,"orderBy":"2:00 PM",
+    "wiki":"Belmont,_California",
+    "neighborhoods":["Downtown Belmont","Belmont Hills","Hallmark neighborhood","Harbor area"],
+    "landmarks":["Twin Pines Park","Ralston Hall"],
+    "corporateNote":"",
+    "culturalNote":"Belmont's intimate hillside community where every celebration feels personal",
+    "neighbors":["san-mateo","san-carlos","foster-city"],
+    "faq":[
+      {"q":"Can you deliver up into the Belmont Hills?","a":"Yes! We deliver to all Belmont addresses including hillside homes. Our team is experienced with Peninsula hill driving and keeps cakes secure."},
+      {"q":"What cakes are popular for Belmont celebrations?","a":"Sculpted 3D cakes for kids' birthdays and elegant tiered designs for adult celebrations. Decorated cookie sets for neighborhood gatherings."},
+      {"q":"Do you deliver on weekends to Belmont?","a":"Yes, Saturdays. Sunday may be available for large orders — inquire when booking. Place weekend orders by Thursday for best time slots."}
+    ],
+    "meta":"Custom cake delivery in Belmont, CA. Birthday cakes, wedding designs & cookies handcrafted in Daly City. Delivered fresh!",
+    "heroDesc":"Handcrafted custom cakes delivered to Belmont. Birthday designs, wedding tiers, and sweet treats for your hillside celebration."
+  },
+  {
+    "name":"San Carlos","slug":"san-carlos","miles":19,"driveMinutes":28,"orderBy":"1:30 PM",
+    "wiki":"San_Carlos,_California",
+    "neighborhoods":["Downtown San Carlos","Devonshire","White Oaks","Arroyo"],
+    "landmarks":["Laureola Park","Hiller Aviation Museum"],
+    "corporateNote":"San Carlos businesses along Industrial Road and El Camino",
+    "culturalNote":"the City of Good Living where community celebrations are a way of life",
+    "neighbors":["belmont","redwood-city","san-mateo"],
+    "faq":[
+      {"q":"Is same-day delivery to San Carlos available?","a":"Yes! Order by 1:30 PM for same-day delivery on in-stock items. Custom cakes require 2-3 weeks advance notice."},
+      {"q":"Can you deliver to parks in San Carlos?","a":"Yes, we deliver to Laureola Park, Burton Park, and all San Carlos venues. Have someone ready to receive the cake at delivery time."},
+      {"q":"Do you do kids' birthday cakes for San Carlos?","a":"Absolutely! From princess castles to superheroes, dinosaurs to video game themes — sculpted 3D cakes are our specialty for San Carlos kids."}
+    ],
+    "meta":"Custom cake delivery in San Carlos, CA. Sculpted birthday cakes, wedding designs & corporate cookies for the City of Good Living!",
+    "heroDesc":"Fresh custom cakes delivered to San Carlos. Sculpted birthday designs, wedding cakes, and treats for the City of Good Living."
+  },
+  {
+    "name":"Redwood City","slug":"redwood-city","miles":22,"driveMinutes":30,"orderBy":"1:30 PM",
+    "wiki":"Redwood_City,_California",
+    "neighborhoods":["Downtown Redwood City","Woodside Plaza","Friendly Acres","Redwood Shores"],
+    "landmarks":["Courthouse Square","Fox Theatre area"],
+    "corporateNote":"Oracle, EA, and other Redwood Shores tech campuses",
+    "culturalNote":"Redwood City's vibrant downtown and diverse neighborhoods from Friendly Acres to Redwood Shores",
+    "neighbors":["san-carlos","menlo-park","foster-city"],
+    "faq":[
+      {"q":"Do you deliver to Redwood Shores offices?","a":"Yes! Redwood Shores is one of our regular corporate zones. We deliver to Oracle, EA, and other campuses following corporate delivery protocols."},
+      {"q":"Can you do a cake for a Courthouse Square event?","a":"Absolutely! We've delivered to Downtown Redwood City events. We coordinate timing with your schedule and recommend designs for the setting."},
+      {"q":"How much notice for a Redwood City wedding cake?","a":"Book 4-6 weeks out. Start with a tasting at our Daly City bakery — about 30 minutes away. We deliver to your venue on the big day."}
+    ],
+    "meta":"Custom cake delivery to Redwood City, CA. Birthday cakes, wedding tiers & corporate cookies. Handcrafted in Daly City!",
+    "heroDesc":"Custom cakes delivered to Redwood City — from Downtown celebrations to Redwood Shores corporate events. Handcrafted and delivered fresh."
+  },
+  {
+    "name":"Menlo Park","slug":"menlo-park","miles":25,"driveMinutes":32,"orderBy":"1:00 PM",
+    "wiki":"Menlo_Park,_California",
+    "neighborhoods":["Downtown Menlo Park","Belle Haven","Sharon Heights","Stanford Hills"],
+    "landmarks":["Meta headquarters","Sand Hill Road corridor"],
+    "corporateNote":"Meta, Sand Hill Road venture capital firms, and Stanford Research Park",
+    "culturalNote":"Silicon Valley's innovation hub where celebrations match the ambition",
+    "neighbors":["redwood-city","palo-alto","san-carlos"],
+    "faq":[
+      {"q":"Can you deliver to the Meta campus?","a":"Yes! We regularly deliver to Meta and other Menlo Park tech offices. Branded cookies with company logos are our top corporate seller."},
+      {"q":"Do you deliver to venues near Stanford?","a":"Absolutely. We deliver to Sharon Heights, Stanford Hills, and the Sand Hill Road corridor for corporate events and celebrations."},
+      {"q":"What's your delivery range to Menlo Park?","a":"25 miles, about 32 minutes. We deliver throughout all of Menlo Park. Order by 1:00 PM for same-day. Custom designs need 2-3 weeks."}
+    ],
+    "meta":"Custom cake delivery to Menlo Park, CA. Artisan birthday cakes, wedding designs & corporate cookies for Silicon Valley events!",
+    "heroDesc":"Artisan custom cakes delivered to Menlo Park. Birthday masterpieces, wedding designs, and corporate treats for Silicon Valley's innovation hub."
+  },
+  {
+    "name":"Sunnyvale","slug":"sunnyvale","miles":35,"driveMinutes":42,"orderBy":"12:00 PM",
+    "wiki":"Sunnyvale,_California",
+    "neighborhoods":["Downtown Sunnyvale","Lakewood","Cherry Chase","Heritage District"],
+    "landmarks":["Murphy Avenue","Google Sunnyvale offices"],
+    "corporateNote":"Google, LinkedIn, and dozens of tech companies along the 101 corridor",
+    "culturalNote":"one of Silicon Valley's most diverse cities where Diwali, Lunar New Year, and every tradition deserves a custom cake",
+    "neighbors":["mountain-view","santa-clara","cupertino"],
+    "faq":[
+      {"q":"How long does delivery to Sunnyvale take?","a":"About 42 minutes via Highway 101. Cakes are transported in climate-controlled, secured carriers to arrive in perfect condition."},
+      {"q":"Is there an extra delivery fee for Sunnyvale?","a":"Yes, Sunnyvale is in our extended zone at 35 miles. Contact us for pricing. Free pickup available at our Daly City bakery."},
+      {"q":"Do you create cakes for Indian and Asian celebrations?","a":"Absolutely! Diwali cakes, Lunar New Year designs, and celebration treats for every cultural tradition. Share your vision, we'll bring it to life."}
+    ],
+    "meta":"Custom cake delivery in Sunnyvale, CA. Birthday cakes, wedding designs & corporate cookies for Silicon Valley. Handcrafted in Daly City!",
+    "heroDesc":"Custom cakes delivered to Sunnyvale — handcrafted birthday designs, wedding tiers, and tech company corporate orders."
+  },
+  {
+    "name":"Santa Clara","slug":"santa-clara","miles":37,"driveMinutes":44,"orderBy":"12:00 PM",
+    "wiki":"Santa_Clara,_California",
+    "neighborhoods":["Downtown Santa Clara","Old Quad","Santa Clara University area","Great America area"],
+    "landmarks":["Levi's Stadium","Santa Clara University"],
+    "corporateNote":"Intel, Nvidia, and the tech giants that call Santa Clara home",
+    "culturalNote":"a city where tech innovation meets family tradition, from game day tailgates to university graduations",
+    "neighbors":["sunnyvale","san-jose","milpitas"],
+    "faq":[
+      {"q":"Can you create 49ers or game day themed cakes?","a":"Yes! Game day cakes are popular here. 49ers-themed designs, football-shaped cakes, and team-color cookies for tailgates near Levi's Stadium."},
+      {"q":"Do you deliver to Santa Clara tech offices?","a":"Absolutely. We deliver to Intel, Nvidia, and other campuses. Branded cookie sets with company logos are our most popular corporate item."},
+      {"q":"How far ahead should I order for Santa Clara?","a":"Custom cakes: 2-3 weeks. Same-day in-stock items: order by 12:00 PM. Wedding cakes: 4-6 weeks."}
+    ],
+    "meta":"Custom cake delivery to Santa Clara, CA. Birthday cakes, game day treats & corporate orders near Levi's Stadium!",
+    "heroDesc":"Custom cakes for Santa Clara celebrations — birthday designs, game day treats, and corporate orders near Levi's Stadium and the tech corridor."
+  },
+  {
+    "name":"Cupertino","slug":"cupertino","miles":36,"driveMinutes":42,"orderBy":"12:00 PM",
+    "wiki":"Cupertino,_California",
+    "neighborhoods":["Downtown Cupertino","Rancho Rinconada","Monta Vista","Garden Gate"],
+    "landmarks":["Apple Park","De Anza College"],
+    "corporateNote":"Apple Park and Cupertino's world-class tech employers",
+    "culturalNote":"Cupertino's remarkably diverse community where Chinese, Indian, and global celebrations shine",
+    "neighbors":["sunnyvale","los-altos","saratoga"],
+    "faq":[
+      {"q":"Can you deliver to Apple Park?","a":"Yes! We deliver to Apple and other Cupertino campuses following corporate protocols. Logo-branded cookies and celebration cakes are top sellers."},
+      {"q":"Do you make cakes for Chinese and Indian celebrations?","a":"We love it! Longevity birthday cakes, Diwali designs, Moon Festival treats, and more. Share your cultural vision and we'll craft something meaningful."},
+      {"q":"What's the delivery fee for Cupertino?","a":"Cupertino is in our extended zone at 36 miles. Contact us for pricing. Many customers bundle cake + cookies to offset delivery cost."}
+    ],
+    "meta":"Custom cake delivery to Cupertino, CA. Birthday cakes, wedding designs & Apple-worthy corporate cookies. Handcrafted in Daly City!",
+    "heroDesc":"Custom cakes delivered to Cupertino — birthday masterpieces, wedding tiers, and corporate treats for Apple Park and beyond."
+  },
+  {
+    "name":"Los Altos","slug":"los-altos","miles":30,"driveMinutes":38,"orderBy":"12:30 PM",
+    "wiki":"Los_Altos,_California",
+    "neighborhoods":["Downtown Los Altos","Country Club","Loyola Corners","North Los Altos"],
+    "landmarks":["Los Altos History Museum","Downtown Los Altos Triangle"],
+    "corporateNote":"nearby tech executives and Los Altos professionals",
+    "culturalNote":"Los Altos' refined community where craftsmanship and quality are the standard",
+    "neighbors":["palo-alto","mountain-view","cupertino"],
+    "faq":[
+      {"q":"Do you deliver to Los Altos Hills?","a":"Yes! We deliver to both Los Altos and Los Altos Hills. We're familiar with hillside roads and take extra care for elevated addresses."},
+      {"q":"What cake styles are popular in Los Altos?","a":"Elegant designs — hand-painted florals, clean buttercream, sophisticated tiered cakes. Realistic and sculpted cakes for milestone birthdays."},
+      {"q":"Can I schedule a tasting before ordering?","a":"Yes! Tastings by appointment at our Daly City bakery — about 38 minutes from Los Altos. Sample flavors and plan your cake in person."}
+    ],
+    "meta":"Custom cake delivery to Los Altos, CA. Elegant birthday cakes, wedding designs & artisan cookies for refined celebrations!",
+    "heroDesc":"Artisan custom cakes delivered to Los Altos — elegant birthday designs, wedding tiers, and refined treats for the South Bay's most discerning community."
+  },
+  {
+    "name":"Campbell","slug":"campbell","miles":42,"driveMinutes":48,"orderBy":"11:30 AM",
+    "wiki":"Campbell,_California",
+    "neighborhoods":["Downtown Campbell","Pruneyard","White Oaks","Ainsley Park"],
+    "landmarks":["Pruneyard Shopping Center","Downtown Campbell Avenue"],
+    "corporateNote":"Pruneyard district businesses and Campbell Avenue restaurants",
+    "culturalNote":"the Orchard City where downtown energy rivals cities twice its size",
+    "neighbors":["san-jose","saratoga","los-altos"],
+    "faq":[
+      {"q":"Is Campbell too far for delivery from Daly City?","a":"Not at all! Campbell is 42 miles in our extended zone. Delivery takes ~48 minutes and cakes arrive in perfect condition. Extended zone fee applies."},
+      {"q":"Can you deliver to Pruneyard events?","a":"Yes! We've delivered to Pruneyard Shopping Center events and surrounding restaurants. Just provide venue details for coordinated timing."},
+      {"q":"Do you offer pickup closer to Campbell?","a":"Pickup is at our Daly City bakery. For Campbell, delivery is usually most convenient. Ask about South Bay coordination when ordering."}
+    ],
+    "meta":"Custom cake delivery to Campbell, CA. Sculpted birthday cakes, wedding tiers & cookies for Pruneyard events!",
+    "heroDesc":"Custom cakes delivered to Campbell — birthday designs, wedding creations, and sweet treats for the Orchard City's best celebrations."
+  },
+  {
+    "name":"Milpitas","slug":"milpitas","miles":38,"driveMinutes":44,"orderBy":"12:00 PM",
+    "wiki":"Milpitas,_California",
+    "neighborhoods":["Downtown Milpitas","Midtown","Sunnyhills","Calaveras Hills"],
+    "landmarks":["Great Mall","Ed Levin County Park"],
+    "corporateNote":"Cisco and major tech employers near the Great Mall corridor",
+    "culturalNote":"one of the Bay Area's most diverse cities where Vietnamese, Indian, Filipino, and global traditions all get celebrated",
+    "neighbors":["san-jose","fremont","santa-clara"],
+    "faq":[
+      {"q":"Do you deliver to the Great Mall area?","a":"Yes! We deliver to all Milpitas locations including the Great Mall area, business parks, and residential neighborhoods."},
+      {"q":"Can you create cakes for Vietnamese or Indian celebrations?","a":"Absolutely! Many Milpitas customers request cultural designs. We've created cakes for Vietnamese weddings, Indian engagements, Diwali, and more."},
+      {"q":"What's the minimum order for Milpitas delivery?","a":"We have a modest minimum for extended zones like Milpitas. Contact us for current minimums — most birthday cake orders exceed it naturally."}
+    ],
+    "meta":"Custom cake delivery to Milpitas, CA. Birthday cakes, wedding designs & corporate cookies at Silicon Valley's gateway!",
+    "heroDesc":"Custom cakes for Milpitas celebrations — birthday designs, wedding cakes, and corporate treats at the gateway to Silicon Valley."
+  },
+  {
+    "name":"Saratoga","slug":"saratoga","miles":40,"driveMinutes":46,"orderBy":"11:30 AM",
+    "wiki":"Saratoga,_California",
+    "neighborhoods":["Saratoga Village","Congress Springs","Quito Village","Saratoga Woods"],
+    "landmarks":["Mountain Winery","Hakone Gardens"],
+    "corporateNote":"",
+    "culturalNote":"Saratoga's elegant foothill community where vineyard weddings and garden parties set the standard",
+    "neighbors":["campbell","cupertino","los-altos"],
+    "faq":[
+      {"q":"Can you deliver a wedding cake to Mountain Winery?","a":"Yes! We've delivered to Mountain Winery and other Saratoga wine country venues. We coordinate with venue staff and design cakes stable for hillside transport."},
+      {"q":"Do you deliver to Hakone Gardens events?","a":"Absolutely! Hakone is one of Saratoga's most beautiful venues and we've delivered celebration cakes there. We follow the venue's delivery guidelines."},
+      {"q":"Is Saratoga within your delivery area?","a":"Yes, in our extended zone at 40 miles. About 46 minutes. Extended delivery fee applies — contact us for pricing."}
+    ],
+    "meta":"Custom cake delivery to Saratoga, CA. Elegant wedding cakes, birthday designs & artisan cookies for Mountain Winery events!",
+    "heroDesc":"Elegant custom cakes delivered to Saratoga — wedding masterpieces, refined birthday designs, and artisan treats for the foothills."
+  },
+  {
+    "name":"Oakland","slug":"oakland","miles":16,"driveMinutes":25,"orderBy":"2:00 PM",
+    "wiki":"Oakland,_California",
+    "neighborhoods":["Downtown Oakland","Lake Merritt","Temescal","Rockridge","Jack London Square"],
+    "landmarks":["Lake Merritt","Jack London Square"],
+    "corporateNote":"Downtown Oakland businesses and the growing Uptown district",
+    "culturalNote":"Oakland's culturally rich community where every neighborhood celebrates with its own flavor",
+    "neighbors":["berkeley","san-francisco","hayward"],
+    "faq":[
+      {"q":"Do you deliver across the Bay Bridge to Oakland?","a":"Yes! Oakland is a regular delivery area. Bay Bridge route takes about 25 minutes. We plan deliveries to avoid peak traffic."},
+      {"q":"Can you deliver to Jack London Square venues?","a":"Absolutely. We've delivered to restaurants, event spaces, and waterfront venues at Jack London Square. We coordinate with venue staff."},
+      {"q":"Do you charge extra for bridge crossing to Oakland?","a":"Delivery fee is based on the 16-mile distance. Bridge toll is included in pricing — no surprise fees. Contact us for exact pricing."}
+    ],
+    "meta":"Custom cake delivery to Oakland, CA. Birthday cakes, wedding tiers & corporate cookies delivered across the Bay Bridge!",
+    "heroDesc":"Custom cakes delivered across the Bay to Oakland. Birthday designs, wedding cakes, and corporate treats for the Town's best celebrations."
+  },
+  {
+    "name":"Berkeley","slug":"berkeley","miles":18,"driveMinutes":30,"orderBy":"2:00 PM",
+    "wiki":"Berkeley,_California",
+    "neighborhoods":["Downtown Berkeley","North Berkeley","South Berkeley","UC Berkeley campus","Gourmet Ghetto"],
+    "landmarks":["UC Berkeley campus","North Berkeley Gourmet Ghetto"],
+    "corporateNote":"UC Berkeley departments and campus organizations",
+    "culturalNote":"Berkeley's creative and diverse community where every celebration is as unique as the city itself",
+    "neighbors":["oakland","san-francisco","daly-city"],
+    "faq":[
+      {"q":"Can you deliver to UC Berkeley campus?","a":"Yes! Provide the building name, room number, and loading dock details. We've delivered for department celebrations, graduations, and student events."},
+      {"q":"Do you make Cal Bears themed cakes?","a":"Absolutely! Cal Bears cakes are popular for graduation parties and game days. We incorporate the Cal logo, blue and gold, into sculpted and decorated designs."},
+      {"q":"Is Berkeley delivery reliable with bridge traffic?","a":"We plan deliveries around Bay Bridge traffic. Most Berkeley runs are scheduled outside peak hours. Your cake arrives on schedule — guaranteed."}
+    ],
+    "meta":"Custom cake delivery to Berkeley, CA. Birthday cakes, wedding tiers & Cal Bears treats for UC Berkeley events!",
+    "heroDesc":"Custom cakes delivered to Berkeley — birthday creations, wedding designs, and Cal Bears celebration treats across the bridge."
+  },
+  {
+    "name":"Fremont","slug":"fremont","miles":32,"driveMinutes":40,"orderBy":"12:30 PM",
+    "wiki":"Fremont,_California",
+    "neighborhoods":["Irvington","Niles","Centerville","Mission San Jose","Warm Springs"],
+    "landmarks":["Niles Canyon","Mission Peak"],
+    "corporateNote":"the Warm Springs tech area and growing Fremont business parks",
+    "culturalNote":"the East Bay's largest and most diverse city where Afghan, Indian, Chinese, and every global tradition gets celebrated",
+    "neighbors":["union-city","milpitas","hayward"],
+    "faq":[
+      {"q":"Do you deliver to all five Fremont districts?","a":"Yes! Irvington, Niles, Centerville, Mission San Jose, and Warm Springs. No part of Fremont is outside our zone."},
+      {"q":"Is there a delivery fee for Fremont?","a":"Yes, extended zone at 32 miles. Contact us for pricing. Many customers combine cake + cookies to make delivery even more worthwhile."},
+      {"q":"Can you make cakes for Afghan or Indian weddings?","a":"Cultural wedding cakes are a specialty! Elaborate multi-tier designs for Afghan, Indian, Pakistani, and other traditions. We work closely with you on the aesthetic."}
+    ],
+    "meta":"Custom cake delivery in Fremont, CA. Birthday cakes, wedding designs & cookies for Irvington, Niles & Mission San Jose!",
+    "heroDesc":"Custom cakes delivered to Fremont — from Irvington to Warm Springs, handcrafted birthday and wedding cakes for the East Bay's largest city."
+  },
+  {
+    "name":"Hayward","slug":"hayward","miles":24,"driveMinutes":30,"orderBy":"1:30 PM",
+    "wiki":"Hayward,_California",
+    "neighborhoods":["Downtown Hayward","South Hayward","Hayward Hills","Cal State East Bay area"],
+    "landmarks":["Japanese Gardens","Cal State East Bay"],
+    "corporateNote":"Cal State East Bay and local businesses",
+    "culturalNote":"the Heart of the Bay where community spirit shines at every celebration",
+    "neighbors":["fremont","union-city","oakland"],
+    "faq":[
+      {"q":"Can you deliver to Cal State East Bay?","a":"Yes! Provide building and room details plus campus delivery instructions. We've delivered for department celebrations, graduation events, and student parties."},
+      {"q":"Do you deliver to the Hayward Hills?","a":"We do! Our drivers handle East Bay hill roads. All cakes are secured for hillside transport and arrive in perfect condition."},
+      {"q":"How do I order for a Hayward weekend party?","a":"Place custom orders 2-3 weeks ahead. For weekend delivery, order by Thursday. Saturday same-day available if you order by 1:30 PM."}
+    ],
+    "meta":"Custom cake delivery in Hayward, CA. Birthday cakes, wedding tiers & cookies for the Heart of the Bay!",
+    "heroDesc":"Custom cakes delivered to Hayward — birthday designs, celebration cakes, and sweet treats for the Heart of the Bay."
+  },
+  {
+    "name":"Union City","slug":"union-city","miles":28,"driveMinutes":35,"orderBy":"1:00 PM",
+    "wiki":"Union_City,_California",
+    "neighborhoods":["Alvarado District","Decoto","Station District","Hillside"],
+    "landmarks":["Union City BART station area","Dry Creek Pioneer Regional Park"],
+    "corporateNote":"",
+    "culturalNote":"Union City's close-knit community where family gatherings bring everyone together",
+    "neighbors":["fremont","hayward","milpitas"],
+    "faq":[
+      {"q":"Is Union City within your delivery zone?","a":"Absolutely! Extended zone at 28 miles, about 35 minutes. Contact us for delivery pricing."},
+      {"q":"Can I pick up using BART?","a":"Great idea! Our bakery is near Daly City BART — a quick walk or rideshare. Several Union City customers take BART for free pickup."},
+      {"q":"Do you create quinceañera cakes?","a":"Yes! Quinceañera cakes are one of our most popular requests. Elaborate tiered designs with custom colors, edible flowers, and personalized details. Book 3-4 weeks ahead."}
+    ],
+    "meta":"Custom cake delivery to Union City, CA. Birthday cakes, wedding tiers & decorated cookies. Handcrafted in Daly City!",
+    "heroDesc":"Custom cakes delivered to Union City — handcrafted birthday designs, wedding cakes, and sweet treats for your East Bay celebration."
+  },
+  {
+    "name":"Novato","slug":"novato","miles":32,"driveMinutes":40,"orderBy":"12:30 PM",
+    "wiki":"Novato,_California",
+    "neighborhoods":["Downtown Novato","Hamilton","Indian Valley","Bel Marin Keys"],
+    "landmarks":["Stafford Lake","Hamilton Field"],
+    "corporateNote":"",
+    "culturalNote":"Marin County's largest city where natural beauty sets the stage for unforgettable celebrations",
+    "neighbors":["san-rafael","berkeley","oakland"],
+    "faq":[
+      {"q":"Is Novato too far north for delivery?","a":"Not at all! 32 miles via Highway 101 North, about 40 minutes. Extended delivery fee applies — contact us for pricing."},
+      {"q":"Can you deliver to Indian Valley or Hamilton venues?","a":"Yes! We deliver to all Novato areas including Indian Valley, Hamilton, Bel Marin Keys, and Downtown. We know the neighborhoods."},
+      {"q":"Do you deliver to other Marin cities?","a":"Yes! We also deliver to San Rafael. Between San Rafael and Novato, we cover a large portion of Marin County."}
+    ],
+    "meta":"Custom cake delivery to Novato, CA. Birthday cakes, wedding tiers & cookies for Marin's largest city!",
+    "heroDesc":"Custom cakes delivered to North Bay's Novato — birthday designs, wedding cakes, and celebration treats for Marin's largest city."
+  },
+  {
+    "name":"Walnut Creek","slug":"walnut-creek","miles":30,"driveMinutes":38,"orderBy":"12:30 PM",
+    "wiki":"Walnut_Creek,_California",
+    "neighborhoods":["Downtown Walnut Creek","Rossmoor","Northgate","Saranap"],
+    "landmarks":["Broadway Plaza","Lesher Center for the Arts"],
+    "corporateNote":"Walnut Creek's business community and Rossmoor's active residents",
+    "culturalNote":"the East Bay's most sophisticated suburb where celebrations are polished and memorable",
+    "neighbors":["oakland","berkeley","hayward"],
+    "faq":[
+      {"q":"Do you deliver through the Caldecott Tunnel?","a":"Yes! We drive through Caldecott to reach Walnut Creek and Contra Costa County. About 38 minutes from Daly City. Cakes secured for safe transit."},
+      {"q":"Can you deliver to Rossmoor?","a":"Absolutely! We're familiar with Rossmoor's gate and delivery procedures. Provide the clubhouse or address and we handle the rest."},
+      {"q":"What celebrations do you cater to in Walnut Creek?","a":"Everything! Birthdays, weddings, baby showers, corporate events, retirement parties, holiday gatherings. Sculpted birthday cakes and elegant wedding tiers are our top sellers."}
+    ],
+    "meta":"Custom cake delivery to Walnut Creek, CA. Elegant birthday cakes, wedding designs & corporate cookies for Contra Costa County!",
+    "heroDesc":"Custom cakes delivered to Walnut Creek — elegant birthday designs, wedding tiers, and corporate treats for Contra Costa County."
+  }
+]
