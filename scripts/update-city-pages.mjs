@@ -612,6 +612,449 @@ function generateCityPage(d) {
         });
     </script>
 
+    <style>
+    /* Instagram Feed - Post Style */
+    .ig-feed {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    .ig-post {
+        background: #fff;
+        border: 1px solid #dbdbdb;
+        border-radius: 8px;
+        overflow: hidden;
+        text-decoration: none;
+        color: #262626;
+        display: block;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .ig-post:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+    .ig-post-header {
+        display: flex;
+        align-items: center;
+        padding: 12px;
+        gap: 10px;
+    }
+    .ig-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        object-fit: cover;
+        background: transparent;
+    }
+    .ig-user-info {
+        display: flex;
+        flex-direction: column;
+    }
+    .ig-username {
+        font-weight: 600;
+        font-size: 0.85rem;
+        color: #262626;
+    }
+    .ig-location {
+        font-size: 0.75rem;
+        color: #8e8e8e;
+    }
+    .ig-post-image {
+        aspect-ratio: 1;
+        overflow: hidden;
+        background: #fafafa;
+    }
+    .ig-post-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    /* Video Posts */
+    .ig-post-video {
+        aspect-ratio: 9/16;
+        overflow: hidden;
+        background: #000;
+        position: relative;
+    }
+    .ig-post-video video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .ig-reel-badge {
+        margin-left: auto;
+        background: linear-gradient(45deg, #f09433, #e6683c, #dc2743);
+        color: white;
+        font-size: 0.65rem;
+        font-weight: 700;
+        padding: 3px 8px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .ig-video-post {
+        cursor: pointer;
+    }
+    .ig-video-post .ig-post-header {
+        position: relative;
+    }
+    .ig-post-actions {
+        display: flex;
+        gap: 12px;
+        padding: 10px 12px 6px;
+    }
+    .ig-icon {
+        width: 24px;
+        height: 24px;
+        fill: none;
+        stroke: #262626;
+        stroke-width: 2;
+        cursor: pointer;
+    }
+    .ig-post-likes {
+        font-weight: 600;
+        font-size: 0.85rem;
+        padding: 0 12px 4px;
+        color: #262626;
+    }
+    .ig-post-caption {
+        font-size: 0.85rem;
+        padding: 0 12px 12px;
+        color: #262626;
+        line-height: 1.4;
+    }
+    .ig-post-caption strong {
+        font-weight: 600;
+    }
+    .btn-instagram {
+        background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        color: white;
+        padding: 0.9rem 1.8rem;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .btn-instagram:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(225, 48, 108, 0.4);
+    }
+    @media (max-width: 900px) {
+        .ig-feed {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        .ig-post:nth-child(3) {
+            display: none;
+        }
+    }
+    @media (max-width: 550px) {
+        .ig-feed {
+            grid-template-columns: 1fr;
+            max-width: 350px;
+        }
+        .ig-post:nth-child(2),
+        .ig-post:nth-child(3) {
+            display: none;
+        }
+    }
+
+    /* Corporate Logos Grid - Larger logos, tight rows */
+    .corporate-logos-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        padding: 2rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.08);
+        border: none;
+        border-radius: 20px;
+        background: var(--white);
+        max-width: 1000px;
+        margin: 0 auto;
+        perspective: 1000px;
+    }
+    .corporate-logos-grid img {
+        height: 110px;
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
+        margin: 0 auto;
+        padding: 1rem;
+        display: block;
+        background-color: #ffffff;
+        border-radius: 12px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+    }
+    .corporate-logos-grid img:hover {
+        transform: translateY(-8px) scale(1.05);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        z-index: 10;
+        position: relative;
+    }
+    @media (max-width: 800px) {
+        .corporate-logos-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .corporate-logos-grid img {
+            height: 80px;
+            padding: 1rem;
+        }
+    }
+    @media (max-width: 500px) {
+        .corporate-logos-grid {
+            grid-template-columns: repeat(2, 1fr);
+            padding: 0.75rem;
+            gap: 0;
+            border-radius: 15px;
+        }
+        .corporate-logos-grid img {
+            height: 50px;
+            padding: 0.5rem;
+        }
+    }
+
+    /* Logo Tagline */
+    .logo-tagline {
+        display: block;
+        text-align: center;
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--dark-brown);
+        text-decoration: none;
+        margin: 1.75rem auto 0;
+        padding: 0.75rem 1.5rem;
+        max-width: 600px;
+        transition: all 0.3s ease;
+        border-radius: 10px;
+    }
+    .logo-tagline:hover {
+        color: var(--pink);
+        background: rgba(255, 107, 139, 0.08);
+        transform: translateY(-2px);
+    }
+    @media (max-width: 600px) {
+        .logo-tagline {
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+        }
+    }
+
+    /* Hero Carousel Styles - 3 Images at Once */
+    .hero-carousel {
+        position: relative;
+        overflow: hidden;
+        background: #ffffff;
+        padding: 6rem 2rem 3rem;
+    }
+    .hero-carousel::before,
+    .hero-carousel::after {
+        display: none;
+    }
+    /* Homepage keeps larger hero */
+    .hero-home {
+        min-height: 600px;
+        padding: 6rem 2rem 3rem;
+        margin-top: 3rem;
+    }
+    /* Carousel Track Container */
+    .carousel-track-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        overflow: hidden;
+    }
+    .carousel-track {
+        display: flex;
+        height: 100%;
+        transition: transform 0.6s ease-in-out;
+    }
+    .carousel-slide {
+        flex: 0 0 33.333%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 4px;
+        box-sizing: border-box;
+    }
+    .carousel-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: #ffffff;
+    }
+    .hero-carousel .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+    /* Text box - semi-transparent grey background for readability */
+    .hero-text-box {
+        background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.45) 100%);
+        padding: 2.5rem 3rem;
+        border-radius: 20px;
+        max-width: 850px;
+        margin: 0 auto;
+    }
+    .hero-carousel .hero-logo {
+        filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+    }
+    .hero-carousel .hero-badge {
+        background: var(--yellow);
+        color: var(--dark-brown);
+        text-shadow: none;
+    }
+    .hero-carousel h1 {
+        color: white;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+        min-height: 2.4em;
+    }
+    .hero-carousel h1 .highlight {
+        color: var(--pink);
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    }
+    .hero-carousel h1 .highlight-yellow {
+        color: var(--yellow);
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    }
+    .hero-carousel .hero-subtitle {
+        font-size: 1.43rem;
+        color: white;
+        text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+    }
+    .hero-carousel .hero-description {
+        font-size: 1.43rem;
+        color: white;
+        font-weight: 600;
+        max-width: 700px;
+        margin: 0 auto 2rem;
+        text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+    }
+    .hero-dots {
+        position: absolute;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 8px;
+        z-index: 4;
+        background: var(--yellow) !important; /* Brand yellow #FFC532 */
+        padding: 10px 16px;
+        border-radius: 20px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .hero-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: 2px solid white;
+        background: white;
+        cursor: pointer;
+        /* Only animate compositable properties (transform, opacity) to avoid jank */
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        padding: 0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+    .hero-dot:hover {
+        background: var(--pink);
+        border-color: var(--pink);
+    }
+    .hero-dot.active {
+        background: var(--pink);
+        border-color: var(--pink);
+        transform: scale(1.2);
+    }
+    @media (max-width: 768px) {
+        /* Mobile: Show 1 image */
+        .carousel-slide {
+            flex: 0 0 100%;
+        }
+        .hero-text-box {
+            padding: 1.25rem 1rem;
+            margin: 0 0.5rem;
+            border-radius: 15px;
+        }
+        /* CRITICAL: Fixed height container for typewriter headline to prevent layout shift */
+        .hero-text-box h1.typewriter-headline {
+            font-size: 1.5rem !important;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+            /* Fixed height to fit "Custom Cakes, Cookies & Cake Pops" on 2 lines */
+            height: 3.9rem;
+            min-height: 3.9rem;
+            max-height: 3.9rem;
+            overflow: hidden;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-start;
+            justify-content: center;
+        }
+        .hero-carousel .hero-description {
+            font-size: 0.95rem !important;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        .hero-carousel .hero-badge {
+            font-size: 0.75rem;
+            padding: 0.35rem 0.8rem;
+            margin-bottom: 0.75rem;
+        }
+        .hero-carousel .hero-logo {
+            width: 60px;
+            margin-bottom: 0.75rem;
+        }
+        .hero-dots {
+            bottom: 10px;
+            gap: 5px;
+            padding: 6px 10px;
+        }
+        .hero-dot {
+            width: 7px;
+            height: 7px;
+        }
+        .hero-home {
+            min-height: auto;
+            padding: 5rem 1rem 2.5rem;
+            margin-top: 70px;
+        }
+        .hero-buttons {
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .hero-buttons .btn {
+            width: 100%;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.9rem;
+        }
+    }
+    @media (max-width: 480px) {
+        .hero-home {
+            padding: 4.5rem 0.75rem 2rem;
+        }
+        .hero-text-box {
+            padding: 1rem 0.75rem;
+            margin: 0 0.25rem;
+        }
+        .hero-text-box h1.typewriter-headline {
+            font-size: 1.3rem !important;
+            /* Slightly smaller height for smaller screens */
+            height: 3.4rem;
+            min-height: 3.4rem;
+            max-height: 3.4rem;
+        }
+        .hero-carousel .hero-description {
+            font-size: 0.85rem !important;
+        }
+    }
+    </style>
+
     <script src="carousel.js" defer></script>
     <script src="tilt-effects.js" defer></script>
     <script src="nav-particles.js" defer></script>
