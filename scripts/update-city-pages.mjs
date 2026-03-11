@@ -1,4 +1,136 @@
-<!DOCTYPE html>
+#!/usr/bin/env node
+/**
+ * City Page Template Updater
+ *
+ * Reads each custom-cakes-{city}.html, extracts city-specific content,
+ * and regenerates the page using the current homepage template features.
+ *
+ * Usage: node scripts/update-city-pages.mjs [--dry-run] [--city=daly-city]
+ */
+
+import { readFileSync, writeFileSync, readdirSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = join(__dirname, '..');
+
+const dryRun = process.argv.includes('--dry-run');
+const singleCity = process.argv.find(a => a.startsWith('--city='))?.split('=')[1];
+
+// ─── Extract city-specific data from existing page ───────────────────────
+
+function extractCityData(html, slug) {
+  const get = (re) => {
+    const m = html.match(re);
+    return m ? m[1].trim() : '';
+  };
+
+  // Title
+  const title = get(/<title>([^<]+)<\/title>/);
+
+  // Meta description
+  const metaDesc = get(/<meta\s+name="description"\s+content="([^"]+)"/);
+
+  // Canonical
+  const canonical = get(/<link\s+rel="canonical"\s+href="([^"]+)"/);
+
+  // OG tags
+  const ogTitle = get(/<meta\s+property="og:title"\s+content="([^"]+)"/);
+  const ogDesc = get(/<meta\s+property="og:description"\s+content="([^"]+)"/);
+
+  // Twitter tags
+  const twitterTitle = get(/<meta\s+name="twitter:title"\s+content="([^"]+)"/);
+  const twitterDesc = get(/<meta\s+name="twitter:description"\s+content="([^"]+)"/);
+
+  // JSON-LD areaServed
+  const areaServedMatch = html.match(/"areaServed"\s*:\s*\{[^}]+\}/s);
+  const areaServed = areaServedMatch ? areaServedMatch[0].replace('"areaServed" :', '"areaServed":') : '';
+
+  // Hero badge text
+  const heroBadge = get(/<div class="hero-badge">([^<]+)<\/div>/);
+
+  // Hero H1 (may contain spans)
+  const heroH1Match = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/);
+  const heroH1 = heroH1Match ? heroH1Match[1].trim() : '';
+
+  // Hero description
+  const heroDesc = get(/<p class="hero-description">([^<]+)<\/p>/);
+
+  // Hero breadcrumb
+  const breadcrumbMatch = html.match(/<p class="hero-breadcrumb">([\s\S]*?)<\/p>/);
+  const heroBreadcrumb = breadcrumbMatch ? breadcrumbMatch[1].trim() : '';
+
+  // Breadcrumb JSON-LD
+  const breadcrumbJsonMatch = html.match(/<script type="application\/ld\+json">\s*\{[^{]*"@type"\s*:\s*"BreadcrumbList"[\s\S]*?\}\s*<\/script>/);
+  const breadcrumbJson = breadcrumbJsonMatch ? breadcrumbJsonMatch[0] : '';
+
+  // SEO content paragraphs (inside .seo-content div)
+  const seoMatch = html.match(/<div class="seo-content"[^>]*>([\s\S]*?)<\/div>\s*<\/div>\s*<\/section>/);
+  const seoContent = seoMatch ? seoMatch[1].trim() : '';
+
+  // City name from hero H1 (extract from highlight-yellow span or after "in ")
+  const cityNameMatch = heroH1.match(/<span class="highlight-yellow">([^<]+)<\/span>/);
+  const cityName = cityNameMatch ? cityNameMatch[1] : slug.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join(' ');
+
+  // Service cards section - extract city-localized descriptions
+  const servicesMatch = html.match(/<div class="tile-grid-4">([\s\S]*?)<\/div>\s*<\/div>\s*<\/section>/);
+  const servicesHtml = servicesMatch ? servicesMatch[1].trim() : '';
+
+  // Extract individual service card texts
+  const cakeCardDesc = get(/<h3>Custom Cakes<\/h3>\s*<p>([^<]+)<\/p>/);
+  const cookieCardDesc = get(/<h3>Custom Cookies<\/h3>\s*<p>([^<]+)<\/p>/);
+  const cakepopCardDesc = get(/<h3>Cake Pops<\/h3>\s*<p>([^<]+)<\/p>/);
+
+  // CTA section heading
+  const ctaHeadingMatch = html.match(/<h2>([^<]*<span class="highlight">Custom Cake<\/span>[^<]*)<\/h2>\s*<\/div>\s*<div class="section-header">/);
+  // Try alternate pattern
+  const ctaMatch = html.match(/Order Your\s+([^<]+)\s*<span class="highlight">Custom Cake<\/span>/);
+  const ctaCityPrefix = ctaMatch ? ctaMatch[1].trim() : cityName;
+
+  // Services section header
+  const servicesHeaderMatch = html.match(/What We\s*<span class="highlight">Create<\/span>\s*(?:for\s+([^<]+))?/);
+  const servicesCitySuffix = servicesHeaderMatch && servicesHeaderMatch[1] ? servicesHeaderMatch[1].trim() : cityName;
+
+  // Bakery JSON-LD description
+  const jsonLdDescMatch = html.match(/"@type"\s*:\s*"Bakery"[\s\S]*?"description"\s*:\s*"([^"]+)"/);
+  const jsonLdDesc = jsonLdDescMatch ? jsonLdDescMatch[1] : '';
+
+  // JSON-LD sameAs
+  const sameAsMatch = html.match(/"sameAs"\s*:\s*\[([\s\S]*?)\]/);
+  const sameAs = sameAsMatch ? sameAsMatch[1].trim() : '';
+
+  return {
+    slug,
+    cityName,
+    title,
+    metaDesc,
+    canonical,
+    ogTitle,
+    ogDesc,
+    twitterTitle,
+    twitterDesc,
+    areaServed,
+    heroBadge,
+    heroH1,
+    heroDesc,
+    heroBreadcrumb,
+    breadcrumbJson,
+    seoContent,
+    cakeCardDesc,
+    cookieCardDesc,
+    cakepopCardDesc,
+    ctaCityPrefix,
+    servicesCitySuffix,
+    jsonLdDesc,
+    sameAs,
+  };
+}
+
+// ─── Generate updated city page ──────────────────────────────────────────
+
+function generateCityPage(d) {
+  return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta name="google-site-verification" content="google56fbc2040830820a" />
@@ -17,29 +149,29 @@
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#EC268F">
-    <title>Custom Cake Delivery in Redwood City, CA | My Baking Creations</title>
-    <meta name="description" content="Custom cake delivery to Redwood City, CA. Birthday cakes, wedding tiers & corporate cookies. Handcrafted in Daly City!">
+    <title>${d.title}</title>
+    <meta name="description" content="${d.metaDesc}">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <link rel="canonical" href="https://mybakingcreations.com/custom-cakes-redwood-city">
-    <meta property="og:title" content="Custom Cake Delivery Redwood City | My Baking Creations">
-    <meta property="og:description" content="Custom cakes delivered to Redwood City — from Downtown celebrations to Redwood Shores corporate events. Handcrafted and delivered fresh.">
+    <link rel="canonical" href="${d.canonical}">
+    <meta property="og:title" content="${d.ogTitle}">
+    <meta property="og:description" content="${d.ogDesc}">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://mybakingcreations.com/custom-cakes-redwood-city">
+    <meta property="og:url" content="${d.canonical}">
     <meta property="og:locale" content="en_US">
     <meta property="og:site_name" content="My Baking Creations">
     <meta property="og:image" content="https://mybakingcreations.com/images/gallery/carousel/carousel%201.jpg">
     <meta property="og:image:width" content="1920">
     <meta property="og:image:height" content="1066">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Custom Cake Delivery Redwood City | My Baking Creations">
-    <meta name="twitter:description" content="Custom cakes delivered to Redwood City — from Downtown celebrations to Redwood Shores corporate events. Handcrafted and delivered fresh.">
+    <meta name="twitter:title" content="${d.twitterTitle}">
+    <meta name="twitter:description" content="${d.twitterDesc}">
     <meta name="twitter:image" content="https://mybakingcreations.com/logo_icon.png">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Bakery",
         "name": "My Baking Creations",
-        "description": "Custom cakes, cookies, and cake pops delivered to Redwood City for birthdays, weddings, and corporate events.",
+        "description": "${d.jsonLdDesc || `Custom cakes, cookies, and cake pops for ${d.cityName} birthdays, weddings, and corporate events.`}",
         "url": "https://mybakingcreations.com",
         "telephone": "+1-415-568-8060",
         "email": "info@mybakingcreations.com",
@@ -56,11 +188,10 @@
             "latitude": 37.6879,
             "longitude": -122.4702
         },
-        "areaServed": {
-        "@type": "City",
-        "name": "Redwood City",
-        "sameAs": "https://en.wikipedia.org/wiki/Redwood_City,_California"
-    },
+        ${d.areaServed || `"areaServed": {
+            "@type": "City",
+            "name": "${d.cityName}"
+        }`},
         "openingHours": "Mo-Sa 09:00-18:00",
         "priceRange": "$$",
         "servesCuisine": "Bakery",
@@ -92,32 +223,14 @@
             }
         ],
         "sameAs": [
-            "https://www.instagram.com/mybakingcreationscompany/",
-        "https://www.facebook.com/MyBakingCreationsCompany",
-        "https://www.pinterest.com/MyBakingCreations",
-        "https://www.yelp.com/biz/my-baking-creations-san-francisco"
+            ${d.sameAs || `"https://www.instagram.com/mybakingcreationscompany/",
+            "https://www.facebook.com/MyBakingCreationsCompany",
+            "https://www.pinterest.com/MyBakingCreations",
+            "https://www.yelp.com/biz/my-baking-creations-san-francisco"`}
         ]
     }
     </script>
-    <script type="application/ld+json">
-    {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-        {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://mybakingcreations.com/"
-        },
-        {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Custom Cake Delivery Redwood City"
-        }
-    ]
-}
-    </script>
+    ${d.breadcrumbJson}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.google-analytics.com">
@@ -205,24 +318,24 @@
     <section class="hero hero-carousel">
         <div class="carousel-track-container">
             <div class="carousel-track">
-                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 1.webp" type="image/webp"><img src="images/gallery/carousel/carousel 1.jpg" alt="Custom birthday cake delivery in Redwood City" width="707" height="393" fetchpriority="high"></picture></div>
-                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 2.webp" type="image/webp"><img src="images/gallery/carousel/carousel 2.jpg" alt="Decorated cookies for Redwood City events" width="707" height="429" fetchpriority="high"></picture></div>
-                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 3.webp" type="image/webp"><img src="images/gallery/carousel/carousel 3.jpg" alt="Wedding cake for Redwood City celebrations" width="707" height="391" fetchpriority="high"></picture></div>
-                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 4.webp" type="image/webp"><img src="images/gallery/carousel/carousel 4.jpg" alt="Custom themed cake pops for Redwood City" width="707" height="321" loading="lazy"></picture></div>
-                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 5.webp" type="image/webp"><img src="images/gallery/carousel/carousel 5.jpg" alt="Corporate logo cookies for Redwood City businesses" width="707" height="388" loading="lazy"></picture></div>
-                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 10.webp" type="image/webp"><img src="images/gallery/carousel/carousel 10.jpg" alt="Realistic sculpted cake design for Redwood City" width="707" height="365" loading="lazy"></picture></div>
-                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 7.webp" type="image/webp"><img src="images/gallery/carousel/carousel 7.jpg" alt="Hand-piped decorated cookies for Redwood City" width="707" height="509" loading="lazy"></picture></div>
-                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 8.webp" type="image/webp"><img src="images/gallery/carousel/carousel 8.jpg" alt="Custom cupcakes for Redwood City parties" width="707" height="292" loading="lazy"></picture></div>
-                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 9.webp" type="image/webp"><img src="images/gallery/carousel/carousel 9.jpg" alt="Artisan baked goods delivered to Redwood City" width="707" height="437" loading="lazy"></picture></div>
-                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 6.webp" type="image/webp"><img src="images/gallery/carousel/carousel 6.jpg" alt="Custom celebration cake for Redwood City" width="707" height="342" loading="lazy"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 1.webp" type="image/webp"><img src="images/gallery/carousel/carousel 1.jpg" alt="Custom birthday cake delivery in ${d.cityName}" width="707" height="393" fetchpriority="high"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 2.webp" type="image/webp"><img src="images/gallery/carousel/carousel 2.jpg" alt="Decorated cookies for ${d.cityName} events" width="707" height="429" fetchpriority="high"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 3.webp" type="image/webp"><img src="images/gallery/carousel/carousel 3.jpg" alt="Wedding cake for ${d.cityName} celebrations" width="707" height="391" fetchpriority="high"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 4.webp" type="image/webp"><img src="images/gallery/carousel/carousel 4.jpg" alt="Custom themed cake pops for ${d.cityName}" width="707" height="321" loading="lazy"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 5.webp" type="image/webp"><img src="images/gallery/carousel/carousel 5.jpg" alt="Corporate logo cookies for ${d.cityName} businesses" width="707" height="388" loading="lazy"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 10.webp" type="image/webp"><img src="images/gallery/carousel/carousel 10.jpg" alt="Realistic sculpted cake design for ${d.cityName}" width="707" height="365" loading="lazy"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 7.webp" type="image/webp"><img src="images/gallery/carousel/carousel 7.jpg" alt="Hand-piped decorated cookies for ${d.cityName}" width="707" height="509" loading="lazy"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 8.webp" type="image/webp"><img src="images/gallery/carousel/carousel 8.jpg" alt="Custom cupcakes for ${d.cityName} parties" width="707" height="292" loading="lazy"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 9.webp" type="image/webp"><img src="images/gallery/carousel/carousel 9.jpg" alt="Artisan baked goods delivered to ${d.cityName}" width="707" height="437" loading="lazy"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel 6.webp" type="image/webp"><img src="images/gallery/carousel/carousel 6.jpg" alt="Custom celebration cake for ${d.cityName}" width="707" height="342" loading="lazy"></picture></div>
             </div>
         </div>
         <div class="hero-content">
             <div class="hero-text-box">
-                <p class="hero-breadcrumb"><a href="/">Home</a> / <a href="delivery-areas">Delivery Areas</a> / Redwood City</p>
-                <div class="hero-badge">Delivering to Redwood City Since 2012</div>
-                <h1><span class="highlight">Custom Cake Delivery</span> in <span class="highlight-yellow">Redwood City</span>, CA</h1>
-                <p class="hero-description">Custom cakes delivered to Redwood City — from Downtown celebrations to Redwood Shores corporate events. Handcrafted and delivered fresh.</p>
+                <p class="hero-breadcrumb">${d.heroBreadcrumb}</p>
+                <div class="hero-badge">${d.heroBadge}</div>
+                <h1>${d.heroH1}</h1>
+                <p class="hero-description">${d.heroDesc}</p>
                 <div class="hero-buttons">
                     <a href="order-form" class="btn btn-primary">Order Your Cake</a>
                     <a href="gallery" class="btn btn-secondary">View Our Work</a>
@@ -253,12 +366,10 @@
     <section class="page-content">
         <div class="section-wrapper section-beige reveal">
             <div class="section-header">
-                <h2>Redwood City's Premier <span class="highlight">Custom Cake Bakery</span></h2>
+                <h2>${d.cityName}'s Premier <span class="highlight">Custom Cake Bakery</span></h2>
             </div>
             <div class="seo-content" style="max-width: 900px; margin: 0 auto; text-align: left; line-height: 1.8;">
-                <p style="margin-bottom:1.5rem;">Looking for custom cake delivery in Redwood City? My Baking Creations delivers handcrafted cakes, cookies, and cake pops to all Redwood City neighborhoods including Downtown Redwood City, Woodside Plaza, Friendly Acres, Redwood Shores. Just 22 miles from our Daly City bakery, your celebration treats arrive fresh in approximately 30 minutes.</p>
-                <p style="margin-bottom:1.5rem;">Redwood City celebrations deserve extraordinary cakes. Whether you're hosting a birthday party near Courthouse Square, a wedding at a local venue, or an event at Fox Theatre area, our custom cakes become the centerpiece. We've been creating sculpted 3D cakes, ultra-realistic designs, and hand-decorated cookies for Redwood City's vibrant downtown and diverse neighborhoods from Friendly Acres to Redwood Shores since 2012.</p>
-                <p style="margin-bottom:1.5rem;">Delivery to Redwood City takes approximately 30 minutes from our Wildwood Avenue bakery in Daly City. We also serve Oracle, EA, and other Redwood Shores tech campuses with branded cookies and corporate celebration cakes. Order by 1:30 PM for same-day delivery, or book your custom cake 2–3 weeks in advance for the perfect design.</p>
+                ${d.seoContent}
             </div>
         </div>
     </section>
@@ -267,35 +378,35 @@
     <section id="services" class="page-content" style="padding-top: 0;">
         <div class="section-wrapper section-beige reveal">
             <div class="section-header">
-                <h2>What We <span class="highlight">Create</span> for Redwood City</h2>
-                <p>From elegant wedding cakes to playful birthday treats, every creation is custom-designed for your Redwood City celebration.</p>
+                <h2>What We <span class="highlight">Create</span> for ${d.servicesCitySuffix}</h2>
+                <p>From elegant wedding cakes to playful birthday treats, every creation is custom-designed for your ${d.cityName} celebration.</p>
             </div>
             <div class="tile-grid-4">
                 <a href="gallery-cakes" class="service-card reveal reveal-delay-1">
-                    <picture><source srcset="images/gallery/categoryplaceholder/cakes.webp" type="image/webp"><img src="images/gallery/categoryplaceholder/cakes.jpg" alt="Custom cakes for Redwood City" width="280" height="150" loading="lazy" style="width: 100%; height: 150px; object-fit: contain; background-color: #FFF8F0; border-radius: 15px; margin-bottom: 1rem;"></picture>
+                    <picture><source srcset="images/gallery/categoryplaceholder/cakes.webp" type="image/webp"><img src="images/gallery/categoryplaceholder/cakes.jpg" alt="Custom cakes for ${d.cityName}" width="280" height="150" loading="lazy" style="width: 100%; height: 150px; object-fit: contain; background-color: #FFF8F0; border-radius: 15px; margin-bottom: 1rem;"></picture>
                     <h3>Custom Cakes</h3>
-                    <p>Birthday, wedding, and celebration cakes delivered fresh to Redwood City.</p>
+                    <p>${d.cakeCardDesc || `Birthday, wedding, and celebration cakes for ${d.cityName} families and events.`}</p>
                     <span class="price">$250 – $650+</span>
                     <span class="btn btn-secondary">View Cakes</span>
                 </a>
                 <a href="gallery-cookies" class="service-card reveal reveal-delay-2">
-                    <picture><source srcset="images/gallery/categoryplaceholder/cookies.webp" type="image/webp"><img src="images/gallery/categoryplaceholder/cookies.PNG" alt="Custom cookies for Redwood City" width="280" height="150" loading="lazy" style="width: 100%; height: 150px; object-fit: contain; background-color: #FFF8F0; border-radius: 15px; margin-bottom: 1rem;"></picture>
+                    <picture><source srcset="images/gallery/categoryplaceholder/cookies.webp" type="image/webp"><img src="images/gallery/categoryplaceholder/cookies.PNG" alt="Custom cookies for ${d.cityName}" width="280" height="150" loading="lazy" style="width: 100%; height: 150px; object-fit: contain; background-color: #FFF8F0; border-radius: 15px; margin-bottom: 1rem;"></picture>
                     <h3>Custom Cookies</h3>
-                    <p>Decorated cookies and party favors for Redwood City celebrations.</p>
+                    <p>${d.cookieCardDesc || `Decorated cookies and party favors for ${d.cityName} celebrations and events.`}</p>
                     <span class="price">$5 – $8</span>
                     <span class="btn btn-secondary">View Cookies</span>
                 </a>
                 <a href="gallery-cakepops" class="service-card reveal reveal-delay-3">
-                    <picture><source srcset="images/gallery/categoryplaceholder/cakepops.webp" type="image/webp"><img src="images/gallery/categoryplaceholder/cakepops.jpg" alt="Cake pops for Redwood City events" width="280" height="150" loading="lazy" style="width: 100%; height: 150px; object-fit: cover; background-color: #FFFFFF; border-radius: 15px; margin-bottom: 1rem;"></picture>
+                    <picture><source srcset="images/gallery/categoryplaceholder/cakepops.webp" type="image/webp"><img src="images/gallery/categoryplaceholder/cakepops.jpg" alt="Cake pops for ${d.cityName} events" width="280" height="150" loading="lazy" style="width: 100%; height: 150px; object-fit: cover; background-color: #FFFFFF; border-radius: 15px; margin-bottom: 1rem;"></picture>
                     <h3>Cake Pops</h3>
-                    <p>Custom cake pops for Redwood City birthday parties, baby showers, and events.</p>
+                    <p>${d.cakepopCardDesc || `Custom cake pops for ${d.cityName} birthday parties, baby showers, and special events.`}</p>
                     <span class="price">$5 – $10</span>
                     <span class="btn btn-secondary">View Cake Pops</span>
                 </a>
                 <a href="gallery-cupcakes" class="service-card reveal reveal-delay-4">
-                    <picture><source srcset="images/gallery/categoryplaceholder/Bumble bee themed cupcakes.webp" type="image/webp"><img src="images/gallery/categoryplaceholder/Bumble bee themed cupcakes.jpg" alt="Custom cupcakes for Redwood City" width="280" height="150" loading="lazy" style="width: 100%; height: 150px; object-fit: cover; background-color: #FFF8F0; border-radius: 15px; margin-bottom: 1rem;"></picture>
+                    <picture><source srcset="images/gallery/categoryplaceholder/Bumble bee themed cupcakes.webp" type="image/webp"><img src="images/gallery/categoryplaceholder/Bumble bee themed cupcakes.jpg" alt="Custom cupcakes for ${d.cityName}" width="280" height="150" loading="lazy" style="width: 100%; height: 150px; object-fit: cover; background-color: #FFF8F0; border-radius: 15px; margin-bottom: 1rem;"></picture>
                     <h3>Cupcakes</h3>
-                    <p>Custom cupcakes for Redwood City office parties, team celebrations, and birthday events. Easy to serve, no cutting required.</p>
+                    <p>Custom cupcakes for ${d.cityName} office parties, team celebrations, and birthday events. Easy to serve, no cutting required.</p>
                     <span class="price">$5 – $8</span>
                     <span class="btn btn-secondary">View Cupcakes</span>
                 </a>
@@ -422,7 +533,7 @@
     <section class="page-content" style="padding-top: 0;">
         <div class="section-wrapper section-beige reveal">
             <div class="section-header">
-                <h2>Order Your Redwood City <span class="highlight">Custom Cake</span></h2>
+                <h2>Order Your ${d.ctaCityPrefix} <span class="highlight">Custom Cake</span></h2>
                 <p style="max-width: 700px; margin: 0 auto;">Ready to order? Visit us at 1096 Wildwood Ave or contact us for a free consultation. We typically book 2-3 weeks in advance for custom orders.</p>
             </div>
             <div style="text-align: center; margin-top: 2rem;">
@@ -510,4 +621,48 @@
     <link rel="stylesheet" href="chatbot.css?v=2">
     <script src="chatbot.js?v=2" defer></script>
 </body>
-</html>
+</html>`;
+}
+
+// ─── Main ────────────────────────────────────────────────────────────────
+
+const files = readdirSync(ROOT)
+  .filter(f => f.startsWith('custom-cakes-') && f.endsWith('.html'))
+  .sort();
+
+console.log(`Found ${files.length} city pages`);
+
+let updated = 0;
+let errors = 0;
+
+for (const file of files) {
+  const slug = file.replace('custom-cakes-', '').replace('.html', '');
+
+  if (singleCity && slug !== singleCity) continue;
+
+  try {
+    const html = readFileSync(join(ROOT, file), 'utf-8');
+    const data = extractCityData(html, slug);
+
+    if (!data.heroH1 || !data.seoContent) {
+      console.warn(`  WARN: ${file} — missing hero H1 or SEO content, skipping`);
+      errors++;
+      continue;
+    }
+
+    const newHtml = generateCityPage(data);
+
+    if (dryRun) {
+      console.log(`  [DRY] ${file} — ${data.cityName} (${data.title})`);
+    } else {
+      writeFileSync(join(ROOT, file), newHtml, 'utf-8');
+      console.log(`  OK: ${file} — ${data.cityName}`);
+    }
+    updated++;
+  } catch (err) {
+    console.error(`  ERR: ${file} — ${err.message}`);
+    errors++;
+  }
+}
+
+console.log(`\nDone: ${updated} updated, ${errors} errors${dryRun ? ' (dry run)' : ''}`);
