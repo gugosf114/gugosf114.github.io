@@ -994,6 +994,10 @@
         // ========== CONFIG ==========
         const APP_PASSWORD = 'mbc2012';
 
+        // Review emailer — Google Apps Script URL (24hr delayed review request)
+        // Replace with your deployed URL after setting up the script
+        const REVIEW_EMAILER_URL = 'https://script.google.com/macros/s/AKfycbzV_gVv4ROY4XEBNIsCZlt9RT6esExrxyTu-MbBiTk7DCvGntkUAUTciQp4dlb94nKP/exec';
+
         // ========== FIREBASE CONFIG ==========
         const firebaseConfig = {
             apiKey: "AIzaSyAM5ORQKqQ_cpqD5mIXcb7VsmFPJBVWNbg",
@@ -1435,6 +1439,24 @@
                 saveData();
                 renderView();
                 showToast('Order archived');
+
+                // Trigger 24hr review request email (fire-and-forget)
+                sendReviewRequest(order.customerName, order.email);
+            }
+        }
+
+        function sendReviewRequest(name, email) {
+            if (!REVIEW_EMAILER_URL || REVIEW_EMAILER_URL === 'PASTE_YOUR_REVIEW_EMAILER_URL_HERE') return;
+            if (!email) return;
+            try {
+                fetch(REVIEW_EMAILER_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({ name: name || 'there', email: email })
+                });
+            } catch (e) {
+                // Silent fail — review email is non-critical
             }
         }
 
