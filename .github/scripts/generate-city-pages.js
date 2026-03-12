@@ -680,7 +680,7 @@ const hubHtml = `<!DOCTYPE html>
     </style>
 
     <script>
-    fetch('order-form-modal.html').then(r=>r.text()).then(h=>{document.body.insertAdjacentHTML('beforeend',h);const s=document.createElement('script');s.src='script.js';document.body.appendChild(s);});
+    fetch('order-form-modal.html').then(r=>r.text()).then(h=>{document.body.insertAdjacentHTML('beforeend',h);const a=document.createElement('script');a.src='autoresponder.js';document.body.appendChild(a);const s=document.createElement('script');s.src='script.js';document.body.appendChild(s);});
     </script>
     <link rel="stylesheet" href="chatbot.css?v=2">
     <script src="chatbot.js?v=2" defer></script>

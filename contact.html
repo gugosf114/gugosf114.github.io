@@ -208,6 +208,7 @@
         </div>
     </footer>
 
+    <script src="autoresponder.js"></script>
     <script>
     document.getElementById('contactForm').addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -223,6 +224,11 @@
             });
             const data = await response.json();
             if (data.success) {
+                sendConfirmationEmail({
+                    email: formData.get('email'),
+                    name: formData.get('first_name'),
+                    form_type: 'contact'
+                });
                 alert('Success! We will reply within 24 hours.');
                 this.reset();
             } else {

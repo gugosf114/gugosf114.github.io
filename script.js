@@ -298,6 +298,14 @@ if (orderForm) {
             const data = await response.json();
 
             if (data.success) {
+                // Send confirmation email to customer
+                sendConfirmationEmail({
+                    email: formData.get('email'),
+                    name: formData.get('name'),
+                    form_type: 'order',
+                    product_type: formData.get('product_type'),
+                    event_date: formData.get('event_date')
+                });
                 alert('Thank you! Your order inquiry has been sent. We\'ll get back to you within 24 hours.');
                 orderForm.reset();
                 // Only close modal if it exists (not on dedicated order page)

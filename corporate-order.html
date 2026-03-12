@@ -982,6 +982,7 @@
     }
     </style>
 
+    <script src="autoresponder.js"></script>
     <script>
     // Add 'filled' class to inputs when they have content
     (function() {
@@ -1160,6 +1161,15 @@
             const data = await response.json();
 
             if (data.success) {
+                sendConfirmationEmail({
+                    email: formData.get('email'),
+                    name: formData.get('contact_name'),
+                    form_type: 'corporate',
+                    company_name: formData.get('company_name'),
+                    product_type: formData.get('product_type'),
+                    quantity: formData.get('quantity'),
+                    event_date: formData.get('event_date')
+                });
                 alert('Thank you! Your corporate order inquiry has been received. We\'ll respond within 24 hours with a detailed quote.');
                 this.reset();
                 document.getElementById('delivery_address_group').style.display = 'none';

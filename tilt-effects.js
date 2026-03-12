@@ -5,6 +5,9 @@ function loadOrderModal() {
         .then(r => r.text())
         .then(h => {
             document.body.insertAdjacentHTML('beforeend', h);
+            const ar = document.createElement('script');
+            ar.src = 'autoresponder.js';
+            document.body.appendChild(ar);
             const script = document.createElement('script');
             script.src = 'script.js';
             document.body.appendChild(script);
