@@ -533,6 +533,17 @@
         }
         .archive-btn:active { transform: scale(0.95); }
 
+        .delete-btn {
+            background: transparent; border: 1px solid var(--border); color: var(--text-muted);
+            padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px; transition: all 0.25s ease;
+        }
+        .delete-btn:hover {
+            background: linear-gradient(135deg, var(--accent-red) 0%, #cc0000 100%);
+            border-color: var(--accent-red); color: #fff; transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(235,77,75,0.3);
+        }
+        .delete-btn:active { transform: scale(0.95); }
+
         .add-row {
             display: flex; align-items: center; gap: 8px; padding: 14px 16px;
             color: var(--text-muted); cursor: pointer; border-top: 1px solid var(--border); transition: all 0.2s ease;
@@ -696,6 +707,7 @@
         }
         .table-card-actions .status-pill { flex: 1; text-align: center; }
         .table-card-actions .archive-btn { flex: 1; text-align: center; padding: 10px; }
+        .table-card-actions .delete-btn { flex: 0; text-align: center; padding: 10px; white-space: nowrap; }
 
         .sidebar-email-box {
             padding: 16px; border-top: 1px solid var(--border);
@@ -1470,6 +1482,24 @@
                 renderView();
                 showToast('Order restored');
             }
+        }
+
+        // ========== DELETE ==========
+        function deleteOrder(id) {
+            const order = orders.find(o => o.id === id) || archive.find(o => o.id === id);
+            if (!order) return;
+            const name = order.customerName || 'this order';
+            if (!confirm(`Permanently delete "${name}"?\n\nThis cannot be undone.`)) return;
+
+            const orderIdx = orders.findIndex(o => o.id === id);
+            if (orderIdx !== -1) orders.splice(orderIdx, 1);
+
+            const archiveIdx = archive.findIndex(o => o.id === id);
+            if (archiveIdx !== -1) archive.splice(archiveIdx, 1);
+
+            saveData();
+            renderView();
+            showToast('Order deleted');
         }
 
         // ========== CONTACT MODAL ==========
@@ -2552,8 +2582,8 @@
                 </td>`,
 
                 actions: currentView !== 'archive'
-                    ? `<td><button class="archive-btn" onclick="archiveOrder('${order.id}')">✓ Complete</button></td>`
-                    : `<td><button class="archive-btn" onclick="restoreOrder('${order.id}')">↩ Restore</button></td>`
+                    ? `<td><button class="archive-btn" onclick="archiveOrder('${order.id}')">✓ Complete</button> <button class="delete-btn" onclick="deleteOrder('${order.id}')">🗑</button></td>`
+                    : `<td><button class="archive-btn" onclick="restoreOrder('${order.id}')">↩ Restore</button> <button class="delete-btn" onclick="deleteOrder('${order.id}')">🗑</button></td>`
             };
 
             return `<tr>${columnOrder.map(col => cells[col] || '<td></td>').join('')}</tr>`;
@@ -2604,6 +2634,7 @@
                         <button class="archive-btn" onclick="${isArchive ? `restoreOrder('${order.id}')` : `archiveOrder('${order.id}')`}">
                             ${isArchive ? '↩ Restore' : '✓ Complete'}
                         </button>
+                        <button class="delete-btn" onclick="deleteOrder('${order.id}')">🗑</button>
                     </div>
                 </div>
             `;
