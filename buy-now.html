@@ -40,7 +40,7 @@
         "brand": {"@type": "Brand", "name": "My Baking Creations"},
         "offers": {
             "@type": "Offer",
-            "price": "72",
+            "price": "90",
             "priceCurrency": "USD",
             "priceValidUntil": "2026-12-31",
             "availability": "https://schema.org/InStock",
@@ -375,8 +375,9 @@
         100% { transform: rotate(360deg); }
     }
 
-    /* Hero Image */
-    .product-hero-image {
+    /* Hero Carousel */
+    .hero-carousel {
+        position: relative;
         width: 100%;
         aspect-ratio: 16 / 9;
         border-radius: 20px;
@@ -385,10 +386,45 @@
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
     }
 
-    .product-hero-image img {
+    .hero-carousel img {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
+        opacity: 0;
+        transition: opacity 0.8s ease;
+    }
+
+    .hero-carousel img.active {
+        opacity: 1;
+    }
+
+    .hero-carousel .carousel-dots {
+        position: absolute;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 8px;
+        z-index: 2;
+    }
+
+    .hero-carousel .carousel-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        padding: 0;
+    }
+
+    .hero-carousel .carousel-dot.active {
+        background: #e8426f;
+        transform: scale(1.2);
     }
 
     /* Product Info */
@@ -863,16 +899,25 @@
             <div class="product-showcase">
                 <div class="card-glow"></div>
 
-                <!-- Hero Image -->
-                <div class="product-hero-image">
-                    <img src="images/gallery/printed/Printed Image Photo Cookies_Happy Birthday Design.jpg" alt="Printed Image Cookies - Happy Birthday Design" width="800" height="450">
+                <!-- Hero Carousel -->
+                <div class="hero-carousel" id="heroCarousel">
+                    <img src="images/gallery/printed/Printed Image Photo Cookies_Happy Birthday Design.jpg" alt="Printed Image Cookies - Happy Birthday Design" class="active">
+                    <img src="images/gallery/corporateprintedimage/Microsoft-Copilot-PayPal-Corporate-Cookies-Bay-Area.jpg" alt="Microsoft Copilot and PayPal corporate logo cookies" loading="lazy">
+                    <img src="images/gallery/corporateprintedimage/Salesforce-US-Air-Force-Logo-Corporate-Cookies-San-Francisco.jpg" alt="Salesforce and US Air Force logo cookies" loading="lazy">
+                    <img src="images/gallery/corporateprintedimage/Meta-Nestle-Printed-Image-Corporate-Cookies-San-Francisco.jpg" alt="Meta and Nestle corporate logo cookies" loading="lazy">
+                    <div class="carousel-dots">
+                        <button class="carousel-dot active" onclick="goToSlide(0)"></button>
+                        <button class="carousel-dot" onclick="goToSlide(1)"></button>
+                        <button class="carousel-dot" onclick="goToSlide(2)"></button>
+                        <button class="carousel-dot" onclick="goToSlide(3)"></button>
+                    </div>
                 </div>
 
                 <h2 class="product-title">Printed Image Cookies</h2>
                 <p class="product-tagline">Your image, printed on freshly baked butter cookies with smooth white royal icing. Made fresh to order by the bakery trusted by Google, Meta, and Salesforce.</p>
 
                 <div class="product-price-display">
-                    <span class="price">$72</span>
+                    <span class="price">$90</span>
                     <span class="unit"> / dozen</span>
                 </div>
 
@@ -889,19 +934,19 @@
 
                 <!-- Gallery -->
                 <div class="product-gallery">
-                    <img src="images/ordernow/printedimage/Printed Image Dragon Ball Z Themed Cookies.jpg" alt="Dragon Ball Z themed printed cookies" loading="lazy" onclick="openLightbox(0)">
-                    <img src="images/ordernow/printedimage/Printed Image Lion King Themed Cookies.jpg" alt="Lion King themed printed cookies" loading="lazy" onclick="openLightbox(1)">
-                    <img src="images/ordernow/printedimage/Printed Image Superhero Photo Cookies.jpg" alt="Superhero themed printed cookies" loading="lazy" onclick="openLightbox(2)">
-                    <img src="images/ordernow/printedimage/Printed Image Unicorn Themed Cookies.jpg" alt="Unicorn themed printed cookies" loading="lazy" onclick="openLightbox(3)">
-                    <img src="images/ordernow/printedimage/Printed Image_Hot Air Balloon_Photo Cookies 2.jpg" alt="Hot Air Balloon themed printed cookies" loading="lazy" onclick="openLightbox(4)">
-                    <img src="images/ordernow/printedimage/Printed Image_Mario Themed Cookies.jpg" alt="Mario themed printed cookies" loading="lazy" onclick="openLightbox(5)">
-                    <img src="images/ordernow/printedimage/PRINTED IMAGE_Octonauts Themed Custom Cookies.jpg" alt="Octonauts themed printed cookies" loading="lazy" onclick="openLightbox(6)">
+                    <img src="images/gallery/corporateprintedimage/PayPal-Venmo-Logo-Corporate-Cookies-San-Francisco.jpg" alt="PayPal and Venmo logo cookies" loading="lazy" onclick="openLightbox(0)">
+                    <img src="images/gallery/corporateprintedimage/Twitch-Logo-Corporate-Cookies-San-Francisco.jpg" alt="Twitch logo cookies" loading="lazy" onclick="openLightbox(1)">
+                    <img src="images/gallery/printed/Printed Image Photo Cookies_Happy Birthday Design.jpg" alt="Happy Birthday photo cookies" loading="lazy" onclick="openLightbox(2)">
+                    <img src="images/gallery/corporateprintedimage/GAP-Logo-Corporate-Cookies-Bay-Area.webp" alt="GAP logo cookies" loading="lazy" onclick="openLightbox(3)">
+                    <img src="images/gallery/corporateprintedimage/SFO-Airport-T3W-Logo-Corporate-Cookies-San-Francisco.jpg" alt="SFO Airport logo cookies" loading="lazy" onclick="openLightbox(4)">
+                    <img src="images/gallery/printed/Printed image cookie 5.jpg" alt="Custom printed image cookies" loading="lazy" onclick="openLightbox(5)">
+                    <img src="images/gallery/corporateprintedimage/Andersen-Tax-Logo-Corporate-Cookies-Bay-Area.jpg" alt="Andersen Tax corporate logo cookies" loading="lazy" onclick="openLightbox(6)">
                     <img src="images/ordernow/printedimage/PRINTED IMAGE_Owl Themed Cookies.jpg" alt="Owl themed printed cookies" loading="lazy" onclick="openLightbox(7)">
                 </div>
 
                 <!-- CTA Button -->
                 <a href="order-form" class="btn-order-now">
-                    <span>Order Now — $72 / Dozen</span>
+                    <span>Order Now — $90 / Dozen</span>
                     <span class="btn-arrow">
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
                     </span>
@@ -1046,16 +1091,39 @@
     })();
     </script>
 
+    <!-- Hero Carousel Auto-Rotate -->
+    <script>
+    (function() {
+        const carousel = document.getElementById('heroCarousel');
+        if (!carousel) return;
+        const images = carousel.querySelectorAll('img');
+        const dots = carousel.querySelectorAll('.carousel-dot');
+        let current = 0;
+
+        window.goToSlide = function(index) {
+            images[current].classList.remove('active');
+            dots[current].classList.remove('active');
+            current = index;
+            images[current].classList.add('active');
+            dots[current].classList.add('active');
+        };
+
+        setInterval(function() {
+            goToSlide((current + 1) % images.length);
+        }, 4000);
+    })();
+    </script>
+
     <!-- Lightbox Script -->
     <script>
     const galleryImages = [
-        'images/ordernow/printedimage/Printed Image Dragon Ball Z Themed Cookies.jpg',
-        'images/ordernow/printedimage/Printed Image Lion King Themed Cookies.jpg',
-        'images/ordernow/printedimage/Printed Image Superhero Photo Cookies.jpg',
-        'images/ordernow/printedimage/Printed Image Unicorn Themed Cookies.jpg',
-        'images/ordernow/printedimage/Printed Image_Hot Air Balloon_Photo Cookies 2.jpg',
-        'images/ordernow/printedimage/Printed Image_Mario Themed Cookies.jpg',
-        'images/ordernow/printedimage/PRINTED IMAGE_Octonauts Themed Custom Cookies.jpg',
+        'images/gallery/corporateprintedimage/PayPal-Venmo-Logo-Corporate-Cookies-San-Francisco.jpg',
+        'images/gallery/corporateprintedimage/Twitch-Logo-Corporate-Cookies-San-Francisco.jpg',
+        'images/gallery/printed/Printed Image Photo Cookies_Happy Birthday Design.jpg',
+        'images/gallery/corporateprintedimage/GAP-Logo-Corporate-Cookies-Bay-Area.webp',
+        'images/gallery/corporateprintedimage/SFO-Airport-T3W-Logo-Corporate-Cookies-San-Francisco.jpg',
+        'images/gallery/printed/Printed image cookie 5.jpg',
+        'images/gallery/corporateprintedimage/Andersen-Tax-Logo-Corporate-Cookies-Bay-Area.jpg',
         'images/ordernow/printedimage/PRINTED IMAGE_Owl Themed Cookies.jpg'
     ];
     let currentIndex = 0;
