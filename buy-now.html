@@ -13,9 +13,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#EC268F">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="logo_icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <title>Order Photo Cookies Now | Ships in 48 Hours | My Baking Creations</title>
     <meta name="description" content="Upload your photo, we print it on cookies. Ships in 48 hours. Nationwide delivery. Perfect last-minute gift.">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="canonical" href="https://mybakingcreations.com/buy-now">
     <!-- Open Graph -->
     <meta property="og:title" content="Order Custom Cookies Online | My Baking Creations">
@@ -25,26 +27,51 @@
     <meta property="og:image" content="https://mybakingcreations.com/images/gallery/carousel/carousel%201.jpg">
     <meta property="og:image:width" content="1920">
     <meta property="og:image:height" content="1066">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="My Baking Creations">
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Bakery",
-        "name": "My Baking Creations",
-        "image": "https://mybakingcreations.com/logo_icon.png",
-        "url": "https://mybakingcreations.com",
-        "telephone": "+1-415-568-8060",
-        "email": "info@mybakingcreations.com",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "1096 Wildwood Ave",
-            "addressLocality": "Daly City",
-            "addressRegion": "CA",
-            "postalCode": "94015",
-            "addressCountry": "US"
+        "@type": "Product",
+        "name": "Printed Image Cookies",
+        "description": "Upload your photo, we print it on freshly baked butter cookies with white royal icing. Ships nationwide.",
+        "image": "https://mybakingcreations.com/images/gallery/printed/Printed Image Photo Cookies_Happy Birthday Design.jpg",
+        "brand": {"@type": "Brand", "name": "My Baking Creations"},
+        "offers": {
+            "@type": "Offer",
+            "price": "72",
+            "priceCurrency": "USD",
+            "priceValidUntil": "2026-12-31",
+            "availability": "https://schema.org/InStock",
+            "url": "https://mybakingcreations.com/buy-now",
+            "seller": {
+                "@type": "Bakery",
+                "name": "My Baking Creations",
+                "telephone": "+1-415-568-8060"
+            },
+            "shippingDetails": {
+                "@type": "OfferShippingDetails",
+                "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "US"
+                },
+                "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 3,
+                        "maxValue": 5,
+                        "unitCode": "DAY"
+                    }
+                }
+            }
         },
-        "priceRange": "$$",
-        "areaServed": ["San Francisco", "Bay Area", "Silicon Valley", "San Jose", "Palo Alto", "Mountain View", "Daly City"]
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5",
+            "reviewCount": "48"
+        }
     }
     </script>
     <!-- FAQ Schema for AI Search -->
@@ -66,7 +93,7 @@
                 "name": "How fast do custom cookies ship?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Our printed image cookies ship within 48 hours of your order. Local Bay Area delivery is also available for same-day or next-day orders with advance notice."
+                    "text": "Our printed image cookies ship within 3-5 business days of your order. Local Bay Area delivery is also available for same-day or next-day orders with advance notice."
                 }
             },
             {
@@ -80,165 +107,6 @@
         ]
     }
     </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <style>
-    .quickship-hero {
-        background: linear-gradient(135deg, #fdf6f0 0%, #fff5e6 100%);
-        padding: 7rem 2rem 1rem;
-        text-align: center;
-    }
-    .quickship-hero h1 {
-        font-family: 'Fredoka One', cursive;
-        font-size: 2.8rem;
-        color: var(--dark-brown);
-        margin-bottom: 0.5rem;
-    }
-    .quickship-hero h1 span { color: #e8426f; }
-    .quickship-hero p {
-        font-size: 1.2rem;
-        color: #5A3020;
-        max-width: 900px;
-        margin: 0 auto;
-    }
-    .products-grid {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 1rem 2rem;
-    }
-    .products-grid .product-card {
-        max-width: 380px;
-        width: 100%;
-    }
-    @media (max-width: 700px) {
-        .products-grid { max-width: 400px; }
-        .quickship-hero h1 { font-size: 2rem; }
-    }
-    .product-card {
-        background: #fff;
-        border-radius: 20px;
-        border: 2px solid #000000;
-        overflow: hidden;
-        transition: all 0.3s ease;
-        display: block;
-        text-decoration: none;
-        color: inherit;
-        cursor: pointer;
-    }
-    .product-card:hover {
-        transform: translateY(-5px);
-        border-color: #e8426f;
-        box-shadow: 0 15px 40px rgba(232, 66, 111, 0.2);
-    }
-    .product-image {
-        aspect-ratio: 1;
-        overflow: hidden;
-        background: #fffaf5;
-    }
-    .product-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    .product-info {
-        padding: 1.5rem;
-        text-align: center;
-        background: #e6d5c3;
-    }
-    .product-name {
-        font-family: 'Fredoka One', cursive;
-        font-size: 1.4rem;
-        color: var(--dark-brown);
-        margin-bottom: 0.5rem;
-    }
-    .product-desc {
-        font-size: 0.95rem;
-        color: #5A3020;
-        line-height: 1.5;
-        margin-bottom: 1rem;
-    }
-    .product-price {
-        font-family: 'Fredoka One', cursive;
-        font-size: 1.5rem;
-        color: #e8426f;
-        display: block;
-        margin-bottom: 1rem;
-    }
-    .btn-order {
-        background: #e8426f;
-        color: #fff;
-        padding: 0.75rem 2rem;
-        border-radius: 30px;
-        font-weight: 700;
-        font-size: 1rem;
-        text-decoration: none;
-        display: inline-block;
-        transition: all 0.3s ease;
-    }
-    .btn-order:hover {
-        background: #d13a63;
-        transform: translateY(-2px);
-    }
-    .order-note {
-        text-align: center;
-        padding: 2rem;
-        max-width: 600px;
-        margin: 0 auto;
-        font-size: 1rem;
-        color: #5A3020;
-    }
-    .order-note strong { color: #e8426f; }
-
-    /* Product Detail Sections */
-    .product-detail {
-        max-width: 1000px;
-        margin: 0 auto 3rem;
-        padding: 2rem;
-    }
-    .product-detail h2 {
-        font-family: 'Fredoka One', cursive;
-        font-size: 2rem;
-        color: var(--dark-brown);
-        text-align: center;
-        margin-bottom: 1.5rem;
-    }
-    .product-detail h2 span { color: #e8426f; }
-    .product-gallery {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1rem;
-    }
-    @media (max-width: 800px) {
-        .product-gallery { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 500px) {
-        .product-gallery { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; }
-    }
-    .product-gallery img {
-        width: 100%;
-        aspect-ratio: 1;
-        object-fit: cover;
-        border-radius: 15px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
-        transition: all 0.3s ease;
-    }
-    .product-gallery img:hover {
-        box-shadow: 0 8px 25px rgba(236, 38, 143, 0.2), 0 4px 12px rgba(0, 0, 0, 0.1);
-        transform: scale(1.03);
-    }
-    .section-divider {
-        width: 100px;
-        height: 4px;
-        background: var(--yellow);
-        margin: 3rem auto;
-        border-radius: 2px;
-    }
-    </style>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -249,161 +117,977 @@
         ]
     }
     </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+    /* ============================================
+       ORDER PAGE - LIGHT PREMIUM IMMERSIVE STYLE
+       ============================================ */
+
+    .order-page {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #fdf6f0 0%, #fff5e6 40%, #fef0f5 100%);
+        overflow-x: hidden;
+        position: relative;
+    }
+
+    /* Animated Background */
+    .order-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        overflow: hidden;
+    }
+
+    #orderParticles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .bg-gradient-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.35;
+        animation: float-orb 20s ease-in-out infinite;
+    }
+
+    .orb-1 {
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(236, 38, 143, 0.3) 0%, transparent 70%);
+        top: -100px;
+        right: -100px;
+        animation-delay: 0s;
+    }
+
+    .orb-2 {
+        width: 350px;
+        height: 350px;
+        background: radial-gradient(circle, rgba(255, 197, 50, 0.3) 0%, transparent 70%);
+        bottom: -80px;
+        left: -80px;
+        animation-delay: -7s;
+    }
+
+    .orb-3 {
+        width: 250px;
+        height: 250px;
+        background: radial-gradient(circle, rgba(232, 66, 111, 0.2) 0%, transparent 70%);
+        top: 40%;
+        left: 60%;
+        animation-delay: -14s;
+    }
+
+    @keyframes float-orb {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        25% { transform: translate(30px, -30px) scale(1.1); }
+        50% { transform: translate(-20px, 20px) scale(0.95); }
+        75% { transform: translate(20px, 10px) scale(1.05); }
+    }
+
+    /* Floating Logo */
+    .floating-logo {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 10px;
+        border: 1px solid rgba(236, 38, 143, 0.15);
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .floating-logo:hover {
+        background: rgba(255, 255, 255, 0.9);
+        transform: scale(1.05);
+        box-shadow: 0 8px 30px rgba(236, 38, 143, 0.15);
+    }
+
+    .floating-logo img {
+        display: block;
+        height: 50px;
+        width: auto;
+    }
+
+    /* Main Container */
+    .order-main {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 100px 20px 40px;
+    }
+
+    .order-container {
+        width: 100%;
+        max-width: 800px;
+    }
+
+    /* Header */
+    .order-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .premium-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, rgba(236, 38, 143, 0.12), rgba(255, 197, 50, 0.12));
+        border: 1px solid rgba(236, 38, 143, 0.3);
+        color: #e8426f;
+        font-size: 0.85rem;
+        font-weight: 700;
+        padding: 8px 16px;
+        border-radius: 30px;
+        margin-bottom: 1.5rem;
+        animation: pulse-badge 3s ease-in-out infinite;
+    }
+
+    .badge-icon {
+        display: flex;
+        animation: spin-star 4s linear infinite;
+    }
+
+    @keyframes spin-star {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse-badge {
+        0%, 100% { box-shadow: 0 0 15px rgba(236, 38, 143, 0.15); }
+        50% { box-shadow: 0 0 25px rgba(236, 38, 143, 0.25); }
+    }
+
+    .order-header h1 {
+        font-family: 'Fredoka One', cursive;
+        font-size: 2.5rem;
+        color: var(--dark-brown);
+        margin-bottom: 1rem;
+        line-height: 1.2;
+    }
+
+    .gradient-text {
+        background: linear-gradient(135deg, #e8426f, #FFC532, #e8426f);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradient-shift 3s ease-in-out infinite;
+    }
+
+    @keyframes gradient-shift {
+        0%, 100% { background-position: 0% center; }
+        50% { background-position: 200% center; }
+    }
+
+    .order-subtitle {
+        font-size: 1.1rem;
+        color: #5A3020;
+        line-height: 1.6;
+        max-width: 550px;
+        margin: 0 auto;
+    }
+
+    /* Trust Strip */
+    .trust-strip {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .trust-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #5A3020;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    /* Product Card - Light Glassmorphism */
+    .product-showcase {
+        position: relative;
+        background: rgba(255, 255, 255, 0.65);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 30px;
+        border: 1px solid rgba(236, 38, 143, 0.12);
+        padding: 2.5rem;
+        overflow: hidden;
+        margin-bottom: 2rem;
+    }
+
+    .product-showcase::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 30px;
+        padding: 2px;
+        background: linear-gradient(135deg, rgba(236, 38, 143, 0.3), rgba(255, 197, 50, 0.3), rgba(236, 38, 143, 0.3), rgba(255, 197, 50, 0.3));
+        background-size: 300% 300%;
+        animation: gradient-border 6s ease infinite;
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+    }
+
+    @keyframes gradient-border {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+
+    .card-glow {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(236, 38, 143, 0.05) 0%, transparent 50%);
+        animation: rotate-glow 10s linear infinite;
+        pointer-events: none;
+    }
+
+    @keyframes rotate-glow {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Hero Image */
+    .product-hero-image {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: 20px;
+        overflow: hidden;
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-hero-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Product Info */
+    .product-title {
+        font-family: 'Fredoka One', cursive;
+        font-size: 1.8rem;
+        color: var(--dark-brown);
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .product-tagline {
+        text-align: center;
+        color: #5A3020;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .product-price-display {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .product-price-display .price {
+        font-family: 'Fredoka One', cursive;
+        font-size: 2.2rem;
+        color: #e8426f;
+    }
+
+    .product-price-display .unit {
+        font-size: 1rem;
+        color: #5A3020;
+        font-weight: 600;
+    }
+
+    /* What You Get */
+    .what-you-get {
+        background: rgba(255, 245, 230, 0.6);
+        border: 2px solid rgba(255, 197, 50, 0.3);
+        border-radius: 16px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .what-you-get h3 {
+        font-family: 'Fredoka One', cursive;
+        font-size: 1.1rem;
+        color: var(--dark-brown);
+        margin-bottom: 0.75rem;
+        text-align: center;
+    }
+
+    .what-you-get ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .what-you-get li {
+        color: #5A3020;
+        padding: 0.4rem 0;
+        padding-left: 1.5rem;
+        position: relative;
+        font-weight: 600;
+    }
+
+    .what-you-get li::before {
+        content: "\2713";
+        color: #e8426f;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+    }
+
+    /* Gallery Grid */
+    .product-gallery {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+    }
+
+    .product-gallery img {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .product-gallery img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 25px rgba(236, 38, 143, 0.2);
+    }
+
+    /* CTA Button */
+    .btn-order-now {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        padding: 1.25rem 2rem;
+        background: linear-gradient(135deg, #e8426f, #d13a63);
+        border: none;
+        border-radius: 16px;
+        color: white;
+        font-family: 'Nunito', sans-serif;
+        font-size: 1.15rem;
+        font-weight: 800;
+        cursor: pointer;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .btn-order-now:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 40px rgba(236, 38, 143, 0.35);
+        color: white;
+    }
+
+    .btn-order-now .btn-arrow {
+        display: flex;
+        transition: transform 0.3s ease;
+    }
+
+    .btn-order-now:hover .btn-arrow {
+        transform: translateX(5px);
+    }
+
+    .btn-shine {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        animation: btn-shine 3s ease-in-out infinite;
+    }
+
+    @keyframes btn-shine {
+        0%, 100% { left: -100%; }
+        50% { left: 100%; }
+    }
+
+    /* How It Works */
+    .how-it-works {
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 20px;
+        border: 1px solid rgba(236, 38, 143, 0.1);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .how-it-works h2 {
+        font-family: 'Fredoka One', cursive;
+        font-size: 1.4rem;
+        color: var(--dark-brown);
+        margin-bottom: 1.5rem;
+    }
+
+    .steps-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    .step-item {
+        text-align: center;
+    }
+
+    .step-number {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #e8426f, #d13a63);
+        color: white;
+        font-family: 'Fredoka One', cursive;
+        font-size: 1.1rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 0.75rem;
+        box-shadow: 0 4px 15px rgba(236, 38, 143, 0.3);
+    }
+
+    .step-item h4 {
+        font-family: 'Fredoka One', cursive;
+        font-size: 0.95rem;
+        color: var(--dark-brown);
+        margin-bottom: 0.25rem;
+    }
+
+    .step-item p {
+        font-size: 0.85rem;
+        color: #5A3020;
+        line-height: 1.4;
+    }
+
+    /* Trusted By - Logo Scroll */
+    .bottom-trust {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .trusted-by-text {
+        font-size: 0.85rem;
+        color: rgba(90, 48, 32, 0.6);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 1rem;
+    }
+
+    .logo-scroll {
+        overflow: hidden;
+        position: relative;
+        height: 35px;
+    }
+
+    .logo-scroll::before,
+    .logo-scroll::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 60px;
+        height: 100%;
+        z-index: 2;
+    }
+
+    .logo-scroll::before {
+        left: 0;
+        background: linear-gradient(to right, #fdf6f0, transparent);
+    }
+
+    .logo-scroll::after {
+        right: 0;
+        background: linear-gradient(to left, #fdf6f0, transparent);
+    }
+
+    .logo-track {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+        animation: scroll-logos 20s linear infinite;
+        width: max-content;
+    }
+
+    .logo-track img {
+        height: 28px;
+        opacity: 0.45;
+        filter: grayscale(100%);
+        transition: all 0.3s ease;
+    }
+
+    .logo-track img:hover {
+        opacity: 0.8;
+        filter: grayscale(0%);
+    }
+
+    @keyframes scroll-logos {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+
+    /* Contact Alternative */
+    .contact-alternative {
+        text-align: center;
+        padding: 1rem 0;
+    }
+
+    .contact-alternative p {
+        font-size: 0.9rem;
+        color: rgba(90, 48, 32, 0.7);
+    }
+
+    .contact-alternative a {
+        color: #e8426f;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .contact-alternative a:hover {
+        text-decoration: underline;
+    }
+
+    /* Custom orders nudge */
+    .custom-nudge {
+        text-align: center;
+        margin-bottom: 2rem;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 12px;
+        border: 1px dashed rgba(236, 38, 143, 0.2);
+    }
+
+    .custom-nudge p {
+        font-size: 0.95rem;
+        color: #5A3020;
+    }
+
+    .custom-nudge a {
+        color: #e8426f;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .custom-nudge a:hover {
+        text-decoration: underline;
+    }
+
+    /* Lightbox */
+    .lightbox {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .lightbox.active {
+        display: flex;
+    }
+
+    .lightbox img {
+        max-width: 90%;
+        max-height: 85vh;
+        border-radius: 12px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .lightbox-close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: white;
+        font-size: 2.5rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 10000;
+    }
+
+    .lightbox-prev,
+    .lightbox-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        color: white;
+        font-size: 2rem;
+        background: rgba(255, 255, 255, 0.15);
+        border: none;
+        cursor: pointer;
+        padding: 1rem;
+        border-radius: 50%;
+        transition: background 0.3s ease;
+    }
+
+    .lightbox-prev:hover,
+    .lightbox-next:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+    .lightbox-prev { left: 20px; }
+    .lightbox-next { right: 20px; }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+        .order-main {
+            padding: 80px 15px 30px;
+        }
+
+        .order-header h1 {
+            font-size: 1.8rem;
+        }
+
+        .product-showcase {
+            padding: 1.5rem;
+            border-radius: 20px;
+        }
+
+        .product-gallery {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .steps-row {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .trust-strip {
+            gap: 1rem;
+        }
+
+        .floating-logo {
+            top: 10px;
+            left: 10px;
+            padding: 8px;
+        }
+
+        .floating-logo img {
+            height: 35px;
+        }
+    }
+    </style>
 </head>
-<body>
+<body class="order-page">
 
-    <header>
-        <nav aria-label="Main navigation">
-            <a href="buy-now" class="order-now-btn">Order Now</a>
-            <a href="/" class="logo">
-                <img width="1330" height="1222" src="logo_icon.png" alt="My Baking Creations logo" class="logo-icon">
-                <div class="logo-text">
-                    <span class="my">my</span><span class="baking">baking</span>
-                    <span class="creations">CREATIONS</span>
+    <!-- Animated Background -->
+    <div class="order-bg">
+        <canvas id="orderParticles"></canvas>
+        <div class="bg-gradient-orb orb-1"></div>
+        <div class="bg-gradient-orb orb-2"></div>
+        <div class="bg-gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Floating Logo Link -->
+    <a href="/" class="floating-logo">
+        <img src="logo_icon.png" alt="My Baking Creations" width="60" height="55">
+    </a>
+
+    <!-- Main Content -->
+    <main class="order-main">
+        <div class="order-container">
+
+            <!-- Header -->
+            <div class="order-header">
+                <div class="premium-badge">
+                    <span class="badge-icon">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2L14.09 8.26L21 9.27L16 14.14L17.18 21.02L12 17.77L6.82 21.02L8 14.14L3 9.27L9.91 8.26L12 2Z"/></svg>
+                    </span>
+                    Ships in 3–5 Business Days
                 </div>
-            </a>
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="about">About Us</a></li>
-                <li class="dropdown">
-                    <a href="gallery">Gallery</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="gallery-cakes">Cakes</a></li>
-                        <li class="dropdown-subcategory"><a href="gallery-cakes-sculpted">Sculpted Cakes</a></li>
-                        <li class="dropdown-subcategory"><a href="gallery-cakes-realistic">Realistic Cakes</a></li>
-                        <li class="dropdown-subcategory"><a href="gallery-cakes-wedding">Wedding Cakes</a></li>
-                        <li><a href="gallery-cookies">Cookies</a></li>
-                        <li class="dropdown-subcategory"><a href="gallery-cookies-hand-piped">Hand Piped</a></li>
-                        <li class="dropdown-subcategory"><a href="gallery-cookies-printed">Printed Image</a></li>
-                        <li><a href="gallery-cakepops">Cake Pops</a></li>
-                        <li><a href="gallery-cupcakes">Cupcakes</a></li>
-                        <li class="dropdown-divider"></li>
-                        <li><a href="gallery-corporate-cakes">Corporate Cakes</a></li>
-                        <li><a href="gallery-corporate-cookies">Corporate Cookies</a></li>
-                        <li class="dropdown-subcategory"><a href="gallery-corporate-cookies-printed">Corporate Printed</a></li>
-                        <li><a href="gallery-corporate-cakepops">Corporate Cake Pops</a></li>
-                        <li><a href="gallery-corporate-cupcakes">Corporate Cupcakes</a></li>
-                    </ul>
-                </li>
-                <li><a href="corporate">Corporate Orders</a></li>
-                <li><a href="blog">Blog</a></li>
-                <li><a href="https://thewhole.party/" target="_blank" rel="noopener">Party Rentals</a></li>
-                <li><a href="contact">Contact Us</a></li>
-                <li><a href="order-form" class="nav-cta">Get a Quote</a></li>
-            </ul>
-            <!-- Search Bar -->
-            <div class="search-container">
-                <div class="search-wrapper">
-                    <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" style="width:16px;height:16px;max-width:16px;max-height:16px;"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-                    <input type="text" class="search-input typewriter-active" id="site-search" placeholder="" autocomplete="off">
-                    <span class="typewriter-placeholder" id="search-typewriter"><span class="cursor"></span></span>
-                </div>
-                <div class="search-results" id="search-results"></div>
+                <h1>Your Photo on a <span class="gradient-text">Cookie</span></h1>
+                <p class="order-subtitle">Send us any image — a face, a logo, a pet, a meme — and we print it on freshly baked butter cookies. Nationwide shipping or Bay Area pickup.</p>
             </div>
-            <button class="mobile-menu-btn" aria-label="Menu">&#9776;</button>
-        </nav>
-    </header>
 
-    <main>
-    <section class="quickship-hero">
-        <a href="javascript:history.back()" style="color: #5A3020; font-weight: 700; text-decoration: none; display: inline-block; margin-bottom: 1rem;">← Back</a>
-        <h1>Need Cookies <span>Fast?</span></h1>
-        <p>Forgot a birthday? Last-minute gift? Pick up locally from our Daly City location or ship nationwide.</p>
-        <p style="margin-top:1.5rem; font-size:1rem; color:#5A3020;">For custom cakes, cookies, or cake pops: <a href="order-form" style="color:#e8426f; font-weight:700;">Get a Quote</a>, <a href="contact" style="color:#e8426f; font-weight:700;">Contact Us</a>, or call <a href="tel:4155688060" style="color:#e8426f; font-weight:700;">(415) 568-8060</a>.</p>
-        <p style="margin-top:1rem; font-weight:700;">Click the tile below to view the gallery, then order!</p>
-    </section>
-
-    <section class="page-content">
-        <div class="products-grid">
-            <!-- Printed Image Cookies -->
-            <a href="order-printed" class="product-card">
-                <div class="product-image">
-                    <img src="images/gallery/printed/Printed Image Photo Cookies_Happy Birthday Design.jpg" alt="Printed Image Cookies" loading="lazy">
+            <!-- Trust Strip -->
+            <div class="trust-strip">
+                <div class="trust-item">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="#e8426f"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <span>Nationwide Shipping</span>
                 </div>
-                <div class="product-info">
-                    <h2 class="product-name">Printed Image Cookies</h2>
-                    <p class="product-desc">Send us your photo and we print it on delicious cookies. Faces, logos, pets - if you can picture it, we can cookie it!</p>
-                    <span class="product-price">$72 / dozen</span>
-                    <span class="btn-order">View Gallery</span>
+                <div class="trust-item">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="#e8426f"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                    <span>Bay Area Pickup</span>
                 </div>
-            </a>
-        </div>
+                <div class="trust-item">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="#e8426f"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                    <span>Individually Wrapped</span>
+                </div>
+            </div>
 
-        <div class="order-note">
-            <p><strong>Ships within 3-5 business days</strong><br>
-            Bay Area pickup available. Nationwide shipping.</p>
-            <p style="margin-top:1rem;"><a href="tel:4155688060" style="color:#e8426f;font-weight:700;">(415) 568-8060</a> &middot; <a href="mailto:info@mybakingcreations.com" style="color:#e8426f;">info@mybakingcreations.com</a></p>
+            <!-- Product Showcase Card -->
+            <div class="product-showcase">
+                <div class="card-glow"></div>
+
+                <!-- Hero Image -->
+                <div class="product-hero-image">
+                    <img src="images/gallery/printed/Printed Image Photo Cookies_Happy Birthday Design.jpg" alt="Printed Image Cookies - Happy Birthday Design" width="800" height="450">
+                </div>
+
+                <h2 class="product-title">Printed Image Cookies</h2>
+                <p class="product-tagline">If you can picture it, we can cookie it. Faces, logos, pets, memes — printed on delicious butter cookies with smooth white royal icing.</p>
+
+                <div class="product-price-display">
+                    <span class="price">$72</span>
+                    <span class="unit"> / dozen</span>
+                </div>
+
+                <!-- What You Get -->
+                <div class="what-you-get">
+                    <h3>What You Get</h3>
+                    <ul>
+                        <li>One dozen (12) freshly baked butter cookies</li>
+                        <li>Your image printed on smooth white royal icing</li>
+                        <li>Individually wrapped and beautifully packaged</li>
+                        <li>Ready to gift — no assembly required</li>
+                    </ul>
+                </div>
+
+                <!-- Gallery -->
+                <div class="product-gallery">
+                    <img src="images/ordernow/printedimage/Printed Image Dragon Ball Z Themed Cookies.jpg" alt="Dragon Ball Z themed printed cookies" loading="lazy" onclick="openLightbox(0)">
+                    <img src="images/ordernow/printedimage/Printed Image Lion King Themed Cookies.jpg" alt="Lion King themed printed cookies" loading="lazy" onclick="openLightbox(1)">
+                    <img src="images/ordernow/printedimage/Printed Image Superhero Photo Cookies.jpg" alt="Superhero themed printed cookies" loading="lazy" onclick="openLightbox(2)">
+                    <img src="images/ordernow/printedimage/Printed Image Unicorn Themed Cookies.jpg" alt="Unicorn themed printed cookies" loading="lazy" onclick="openLightbox(3)">
+                    <img src="images/ordernow/printedimage/Printed Image_Hot Air Balloon_Photo Cookies 2.jpg" alt="Hot Air Balloon themed printed cookies" loading="lazy" onclick="openLightbox(4)">
+                    <img src="images/ordernow/printedimage/Printed Image_Mario Themed Cookies.jpg" alt="Mario themed printed cookies" loading="lazy" onclick="openLightbox(5)">
+                    <img src="images/ordernow/printedimage/PRINTED IMAGE_Octonauts Themed Custom Cookies.jpg" alt="Octonauts themed printed cookies" loading="lazy" onclick="openLightbox(6)">
+                    <img src="images/ordernow/printedimage/PRINTED IMAGE_Owl Themed Cookies.jpg" alt="Owl themed printed cookies" loading="lazy" onclick="openLightbox(7)">
+                </div>
+
+                <!-- CTA Button -->
+                <a href="order-form" class="btn-order-now">
+                    <span>Order Now — $72 / Dozen</span>
+                    <span class="btn-arrow">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                    </span>
+                    <div class="btn-shine"></div>
+                </a>
+            </div>
+
+            <!-- How It Works -->
+            <div class="how-it-works">
+                <h2>How It Works</h2>
+                <div class="steps-row">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <h4>Send Your Image</h4>
+                        <p>Upload any photo — birthday, pet, logo, meme. We'll confirm the design.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <h4>We Print & Bake</h4>
+                        <p>Your image is printed on butter cookies with smooth white royal icing.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <h4>Pick Up or Ship</h4>
+                        <p>Grab from Daly City or we ship nationwide. Individually wrapped.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Custom Orders Nudge -->
+            <div class="custom-nudge">
+                <p>Need a custom cake, hand-piped cookies, or cake pops? <a href="order-form">Get a Quote</a> or <a href="book-consultation">Book a Free Consultation</a></p>
+            </div>
+
+            <!-- Trusted By -->
+            <div class="bottom-trust">
+                <p class="trusted-by-text">Trusted by teams at</p>
+                <div class="logo-scroll">
+                    <div class="logo-track">
+                        <img src="company logos/google-logo.png" alt="Google" height="28">
+                        <img src="company logos/meta-logo.png" alt="Meta" height="28">
+                        <img src="company logos/salesforce-logo.png" alt="Salesforce" height="28">
+                        <img src="company logos/docusign-logo.png" alt="DocuSign" height="24">
+                        <img src="company logos/paypal-logo.png" alt="PayPal" height="28">
+                        <img src="company logos/Stripe Logo.png" alt="Stripe" height="28">
+                        <img src="company logos/microsoft-logo.png" alt="Microsoft" height="28">
+                        <img src="company logos/google-logo.png" alt="Google" height="28">
+                        <img src="company logos/meta-logo.png" alt="Meta" height="28">
+                        <img src="company logos/salesforce-logo.png" alt="Salesforce" height="28">
+                        <img src="company logos/docusign-logo.png" alt="DocuSign" height="24">
+                        <img src="company logos/paypal-logo.png" alt="PayPal" height="28">
+                        <img src="company logos/Stripe Logo.png" alt="Stripe" height="28">
+                        <img src="company logos/microsoft-logo.png" alt="Microsoft" height="28">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Alternative -->
+            <div class="contact-alternative">
+                <p>Questions? <a href="tel:4155688060">(415) 568-8060</a> &middot; <a href="mailto:info@mybakingcreations.com">info@mybakingcreations.com</a></p>
+            </div>
+
         </div>
-    </section>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo"><span class="my">my</span><span class="baking">baking</span> Creations</div>
-            <p class="footer-tagline">Family-owned Bay Area bakery since 2012</p>
-            <div class="footer-contact">
-                <p><a href="tel:4155688060">(415) 568-8060</a> | <a href="mailto:info@mybakingcreations.com">info@mybakingcreations.com</a></p>
-            </div>
-            <div class="footer-bottom"><p>&copy; 2026 My Baking Creations</p></div>
-            <div class="footer-ai-credit" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; gap: 0.5rem; opacity: 0.7;">
-                <span style="font-size: 0.75rem; color: rgba(255,255,255,0.6);">AI features powered by</span>
-                <img src="images/anthropic-logo.svg" alt="Anthropic" style="height: 12px; filter: brightness(0) invert(1); opacity: 0.8;">
-                <span style="font-size: 0.75rem; color: rgba(255,255,255,0.8); font-weight: 600;">Claude</span>
-            </div>
-        </div>
-    </footer>
-    <script>document.querySelector('.mobile-menu-btn')?.addEventListener('click',()=>document.querySelector('.nav-links')?.classList.toggle('active'));</script>
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+        <button type="button" class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
+        <button type="button" class="lightbox-prev" onclick="changeSlide(-1, event)">&#10094;</button>
+        <img id="lightbox-img" src="" alt="Enlarged photo">
+        <button type="button" class="lightbox-next" onclick="changeSlide(1, event)">&#10095;</button>
+    </div>
 
-    <!-- Product Card 3D Tilt with Light Effect -->
+    <!-- Particle Canvas -->
     <script>
     (function() {
-        const cards = document.querySelectorAll('.product-card');
+        const canvas = document.getElementById('orderParticles');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
 
-        cards.forEach(card => {
-            // Create light reflection overlay
-            const shine = document.createElement('div');
-            shine.style.cssText = `
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                pointer-events: none;
-                z-index: 5;
-                border-radius: 20px;
-                background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 100%);
-                transition: background 0.1s ease;
-            `;
-            card.style.position = 'relative';
-            card.style.transformStyle = 'preserve-3d';
-            card.style.transition = 'transform 0.15s ease-out, box-shadow 0.3s ease';
-            card.appendChild(shine);
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
 
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
+        const particles = [];
+        const count = 40;
+        const colors = [
+            'rgba(236, 38, 143, 0.15)',
+            'rgba(255, 197, 50, 0.15)',
+            'rgba(232, 66, 111, 0.1)',
+            'rgba(255, 220, 100, 0.12)'
+        ];
 
-                const rotateX = (y - centerY) / 50;
-                const rotateY = (centerX - x) / 50;
+        for (let i = 0; i < count; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 3 + 1,
+                dx: (Math.random() - 0.5) * 0.4,
+                dy: (Math.random() - 0.5) * 0.4,
+                color: colors[Math.floor(Math.random() * colors.length)]
+            });
+        }
 
-                // 3D tilt
-                card.style.transform = `perspective(800px) rotateX(${-rotateX}deg) rotateY(${-rotateY}deg) scale(1.02)`;
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.fill();
 
-                // Light follows cursor
-                const percentX = (x / rect.width) * 100;
-                const percentY = (y / rect.height) * 100;
-                shine.style.background = `radial-gradient(circle at ${percentX}% ${percentY}%, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 60%)`;
+                p.x += p.dx;
+                p.y += p.dy;
+
+                if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
             });
 
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale(1)';
-                shine.style.background = 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 100%)';
-            });
-        });
+            // Draw subtle connections
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 150) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(236, 38, 143, ${0.03 * (1 - dist / 150)})`;
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(draw);
+        }
+        draw();
     })();
+    </script>
+
+    <!-- Lightbox Script -->
+    <script>
+    const galleryImages = [
+        'images/ordernow/printedimage/Printed Image Dragon Ball Z Themed Cookies.jpg',
+        'images/ordernow/printedimage/Printed Image Lion King Themed Cookies.jpg',
+        'images/ordernow/printedimage/Printed Image Superhero Photo Cookies.jpg',
+        'images/ordernow/printedimage/Printed Image Unicorn Themed Cookies.jpg',
+        'images/ordernow/printedimage/Printed Image_Hot Air Balloon_Photo Cookies 2.jpg',
+        'images/ordernow/printedimage/Printed Image_Mario Themed Cookies.jpg',
+        'images/ordernow/printedimage/PRINTED IMAGE_Octonauts Themed Custom Cookies.jpg',
+        'images/ordernow/printedimage/PRINTED IMAGE_Owl Themed Cookies.jpg'
+    ];
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+        currentIndex = index;
+        const lb = document.getElementById('lightbox');
+        document.getElementById('lightbox-img').src = galleryImages[currentIndex];
+        lb.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox(e) {
+        if (e.target === document.getElementById('lightbox') || e.target.classList.contains('lightbox-close')) {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+
+    function changeSlide(direction, e) {
+        e.stopPropagation();
+        currentIndex = (currentIndex + direction + galleryImages.length) % galleryImages.length;
+        document.getElementById('lightbox-img').src = galleryImages[currentIndex];
+    }
+
+    document.addEventListener('keydown', function(e) {
+        const lb = document.getElementById('lightbox');
+        if (!lb.classList.contains('active')) return;
+        if (e.key === 'Escape') { lb.classList.remove('active'); document.body.style.overflow = ''; }
+        if (e.key === 'ArrowLeft') changeSlide(-1, e);
+        if (e.key === 'ArrowRight') changeSlide(1, e);
+    });
     </script>
 
     <!-- Live Activity Feed -->
