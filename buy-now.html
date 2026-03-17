@@ -24,12 +24,12 @@
     <meta property="og:description" content="Upload your photo, we print it on cookies. Ships in 48 hours. Nationwide delivery.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mybakingcreations.com/buy-now">
-    <meta property="og:image" content="https://mybakingcreations.com/images/gallery/carousel/carousel%201.jpg">
+    <meta property="og:image" content="https://mybakingcreations.com/images/gallery/printed/Printed Image Photo Cookies_Happy Birthday Design.jpg">
     <meta property="og:image:width" content="1920">
     <meta property="og:image:height" content="1066">
     <meta property="og:locale" content="en_US">
     <meta property="og:site_name" content="My Baking Creations">
-    <!-- JSON-LD Structured Data -->
+    <!-- JSON-LD -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -52,70 +52,31 @@
             },
             "shippingDetails": {
                 "@type": "OfferShippingDetails",
-                "shippingDestination": {
-                    "@type": "DefinedRegion",
-                    "addressCountry": "US"
-                },
+                "shippingDestination": {"@type": "DefinedRegion", "addressCountry": "US"},
                 "deliveryTime": {
                     "@type": "ShippingDeliveryTime",
-                    "handlingTime": {
-                        "@type": "QuantitativeValue",
-                        "minValue": 1,
-                        "maxValue": 2,
-                        "unitCode": "DAY"
-                    }
+                    "handlingTime": {"@type": "QuantitativeValue", "minValue": 1, "maxValue": 2, "unitCode": "DAY"}
                 }
             }
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "5",
-            "reviewCount": "48"
         }
     }
     </script>
-    <!-- FAQ Schema for AI Search -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [
-            {
-                "@type": "Question",
-                "name": "Can I order custom cookies online from My Baking Creations?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Yes! You can order photo cookies and printed image cookies directly from our website. Upload your image and we print it on freshly baked cookies. Ships in 48 hours with nationwide delivery available."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "How fast do custom cookies ship?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Our printed image cookies ship within 48 hours of your order. Local Bay Area delivery is also available for same-day or next-day orders with advance notice."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Do you ship cookies nationwide?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Yes, we ship custom cookies nationwide across the United States. Cookies are individually wrapped and packaged to arrive fresh."
-                }
-            }
+            {"@type": "Question", "name": "Can I order custom cookies online from My Baking Creations?", "acceptedAnswer": {"@type": "Answer", "text": "Yes! Send us your image and we print it on freshly baked butter cookies. Ships within 48 hours with nationwide delivery available."}},
+            {"@type": "Question", "name": "How fast do custom cookies ship?", "acceptedAnswer": {"@type": "Answer", "text": "Our printed image cookies ship within 48 hours of your order. Bay Area pickup is also available."}},
+            {"@type": "Question", "name": "Do you ship cookies nationwide?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, we ship custom cookies nationwide. Cookies are individually wrapped and packaged to arrive fresh."}}
         ]
     }
     </script>
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://mybakingcreations.com/"},
-            {"@type": "ListItem", "position": 2, "name": "Order Online"}
-        ]
-    }
+    {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://mybakingcreations.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Order Online"}
+    ]}
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -123,631 +84,394 @@
     <link rel="stylesheet" href="style.css">
     <style>
     /* ============================================
-       ORDER PAGE - LIGHT PREMIUM IMMERSIVE STYLE
+       ORDER PAGE - CLEAN PRODUCT LANDING
        ============================================ */
 
     .order-page {
-        min-height: 100vh;
-        background: linear-gradient(135deg, #fdf6f0 0%, #fff5e6 40%, #fef0f5 100%);
+        background: #fff;
         overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .order-hero {
         position: relative;
-    }
-
-    /* Animated Background */
-    .order-bg {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 0;
+        background: var(--dark-brown, #3D1F0E);
         overflow: hidden;
+        padding: 6rem 2rem 4rem;
+        text-align: center;
+        color: #fff;
     }
 
-    #orderParticles {
+    .order-hero::after {
+        content: '';
         position: absolute;
-        top: 0;
+        bottom: -2px;
         left: 0;
         width: 100%;
-        height: 100%;
+        height: 80px;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80'%3E%3Cpath fill='%23ffffff' d='M0,40 C360,80 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,80 L0,80 Z'/%3E%3C/svg%3E") no-repeat center bottom;
+        background-size: cover;
     }
 
-    .bg-gradient-orb {
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(236, 38, 143, 0.25);
+        border: 1px solid rgba(236, 38, 143, 0.5);
+        color: #ff8ab5;
+        font-size: 0.8rem;
+        font-weight: 700;
+        padding: 6px 14px;
+        border-radius: 30px;
+        margin-bottom: 1.5rem;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+
+    .order-hero h1 {
+        font-family: 'Fredoka One', cursive;
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        line-height: 1.15;
+    }
+
+    .order-hero h1 span {
+        color: #FFC532;
+    }
+
+    .order-hero p {
+        font-size: 1.15rem;
+        color: rgba(255,255,255,0.8);
+        max-width: 550px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    .hero-nav {
         position: absolute;
-        border-radius: 50%;
-        filter: blur(80px);
-        opacity: 0.35;
-        animation: float-orb 20s ease-in-out infinite;
-    }
-
-    .orb-1 {
-        width: 400px;
-        height: 400px;
-        background: radial-gradient(circle, rgba(236, 38, 143, 0.3) 0%, transparent 70%);
-        top: -100px;
-        right: -100px;
-        animation-delay: 0s;
-    }
-
-    .orb-2 {
-        width: 350px;
-        height: 350px;
-        background: radial-gradient(circle, rgba(255, 197, 50, 0.3) 0%, transparent 70%);
-        bottom: -80px;
-        left: -80px;
-        animation-delay: -7s;
-    }
-
-    .orb-3 {
-        width: 250px;
-        height: 250px;
-        background: radial-gradient(circle, rgba(232, 66, 111, 0.2) 0%, transparent 70%);
-        top: 40%;
-        left: 60%;
-        animation-delay: -14s;
-    }
-
-    @keyframes float-orb {
-        0%, 100% { transform: translate(0, 0) scale(1); }
-        25% { transform: translate(30px, -30px) scale(1.1); }
-        50% { transform: translate(-20px, 20px) scale(0.95); }
-        75% { transform: translate(20px, 10px) scale(1.05); }
-    }
-
-    /* Floating Logo */
-    .floating-logo {
-        position: fixed;
         top: 20px;
         left: 20px;
-        z-index: 100;
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border-radius: 15px;
-        padding: 10px;
-        border: 1px solid rgba(236, 38, 143, 0.15);
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        z-index: 10;
     }
 
-    .floating-logo:hover {
-        background: rgba(255, 255, 255, 0.9);
-        transform: scale(1.05);
-        box-shadow: 0 8px 30px rgba(236, 38, 143, 0.15);
+    .hero-nav a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: rgba(255,255,255,0.7);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.9rem;
+        transition: color 0.2s;
     }
 
-    .floating-logo img {
-        display: block;
-        height: 50px;
+    .hero-nav a:hover {
+        color: #fff;
+    }
+
+    .hero-nav img {
+        height: 40px;
         width: auto;
     }
 
-    /* Main Container */
-    .order-main {
+    /* ── PRODUCT SECTION ── */
+    .product-section {
+        max-width: 1100px;
+        margin: -2rem auto 0;
+        padding: 0 2rem 4rem;
         position: relative;
-        z-index: 1;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 100px 20px 40px;
-    }
-
-    .order-container {
-        width: 100%;
-        max-width: 800px;
-    }
-
-    /* Header */
-    .order-header {
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-
-    .premium-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: linear-gradient(135deg, rgba(236, 38, 143, 0.12), rgba(255, 197, 50, 0.12));
-        border: 1px solid rgba(236, 38, 143, 0.3);
-        color: #e8426f;
-        font-size: 0.85rem;
-        font-weight: 700;
-        padding: 8px 16px;
-        border-radius: 30px;
-        margin-bottom: 1.5rem;
-        animation: pulse-badge 3s ease-in-out infinite;
-    }
-
-    .badge-icon {
-        display: flex;
-        animation: spin-star 4s linear infinite;
-    }
-
-    @keyframes spin-star {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-
-    @keyframes pulse-badge {
-        0%, 100% { box-shadow: 0 0 15px rgba(236, 38, 143, 0.15); }
-        50% { box-shadow: 0 0 25px rgba(236, 38, 143, 0.25); }
-    }
-
-    .order-header h1 {
-        font-family: 'Fredoka One', cursive;
-        font-size: 2.5rem;
-        color: var(--dark-brown);
-        margin-bottom: 1rem;
-        line-height: 1.2;
-    }
-
-    .gradient-text {
-        background: linear-gradient(135deg, #e8426f, #FFC532, #e8426f);
-        background-size: 200% auto;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        animation: gradient-shift 3s ease-in-out infinite;
-    }
-
-    @keyframes gradient-shift {
-        0%, 100% { background-position: 0% center; }
-        50% { background-position: 200% center; }
-    }
-
-    .order-subtitle {
-        font-size: 1.1rem;
-        color: #5A3020;
-        line-height: 1.6;
-        max-width: 550px;
-        margin: 0 auto;
-    }
-
-    /* Trust Strip */
-    .trust-strip {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        margin-bottom: 2rem;
-        flex-wrap: wrap;
-    }
-
-    .trust-item {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        color: #5A3020;
-        font-size: 0.9rem;
-        font-weight: 600;
-    }
-
-    /* Product Card - Light Glassmorphism */
-    .product-showcase {
-        position: relative;
-        background: rgba(255, 255, 255, 0.65);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-radius: 30px;
-        border: 1px solid rgba(236, 38, 143, 0.12);
-        padding: 2.5rem;
-        overflow: hidden;
-        margin-bottom: 2rem;
-    }
-
-    .product-showcase::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        border-radius: 30px;
-        padding: 2px;
-        background: linear-gradient(135deg, rgba(236, 38, 143, 0.3), rgba(255, 197, 50, 0.3), rgba(236, 38, 143, 0.3), rgba(255, 197, 50, 0.3));
-        background-size: 300% 300%;
-        animation: gradient-border 6s ease infinite;
-        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        pointer-events: none;
-    }
-
-    @keyframes gradient-border {
-        0%, 100% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-    }
-
-    .card-glow {
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle, rgba(236, 38, 143, 0.05) 0%, transparent 50%);
-        animation: rotate-glow 10s linear infinite;
-        pointer-events: none;
-    }
-
-    @keyframes rotate-glow {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-
-    /* Hero Carousel */
-    .hero-carousel {
-        position: relative;
-        width: 100%;
-        aspect-ratio: 16 / 9;
-        border-radius: 20px;
-        overflow: hidden;
-        margin-bottom: 2rem;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .hero-carousel img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        opacity: 0;
-        transition: opacity 0.8s ease;
-    }
-
-    .hero-carousel img.active {
-        opacity: 1;
-    }
-
-    .hero-carousel .carousel-dots {
-        position: absolute;
-        bottom: 12px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 8px;
         z-index: 2;
     }
 
-    .hero-carousel .carousel-dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.5);
-        border: none;
+    .product-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: start;
+    }
+
+    /* Left: Images */
+    .product-images {
+        position: sticky;
+        top: 2rem;
+    }
+
+    .main-image {
+        width: 100%;
+        aspect-ratio: 1;
+        border-radius: 20px;
+        overflow: hidden;
+        background: #FFF8F0;
+        box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+        margin-bottom: 1rem;
         cursor: pointer;
-        transition: all 0.3s ease;
-        padding: 0;
     }
 
-    .hero-carousel .carousel-dot.active {
-        background: #e8426f;
-        transform: scale(1.2);
+    .main-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 0.5s ease;
     }
 
-    /* Product Info */
-    .product-title {
+    .thumb-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
+    }
+
+    .thumb-row img {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        border-radius: 10px;
+        cursor: pointer;
+        border: 3px solid transparent;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .thumb-row img:hover {
+        border-color: #e8426f;
+    }
+
+    .thumb-row img.active {
+        border-color: #e8426f;
+        box-shadow: 0 4px 15px rgba(236, 38, 143, 0.25);
+    }
+
+    /* Right: Details */
+    .product-details {
+        padding-top: 1rem;
+    }
+
+    .product-details h2 {
         font-family: 'Fredoka One', cursive;
-        font-size: 1.8rem;
+        font-size: 2rem;
         color: var(--dark-brown);
-        text-align: center;
         margin-bottom: 0.5rem;
     }
 
-    .product-tagline {
-        text-align: center;
+    .product-details .tagline {
         color: #5A3020;
-        font-size: 1.05rem;
+        font-size: 1rem;
         line-height: 1.6;
         margin-bottom: 1.5rem;
-        max-width: 500px;
-        margin-left: auto;
-        margin-right: auto;
     }
 
-    .product-price-display {
-        text-align: center;
+    .price-block {
+        display: flex;
+        align-items: baseline;
+        gap: 0.5rem;
         margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 2px solid #f0e6dc;
     }
 
-    .product-price-display .price {
+    .price-block .amount {
         font-family: 'Fredoka One', cursive;
-        font-size: 2.2rem;
+        font-size: 2.5rem;
         color: #e8426f;
     }
 
-    .product-price-display .unit {
+    .price-block .per {
         font-size: 1rem;
         color: #5A3020;
         font-weight: 600;
     }
 
-    /* What You Get */
-    .what-you-get {
-        background: rgba(255, 245, 230, 0.6);
-        border: 2px solid rgba(255, 197, 50, 0.3);
-        border-radius: 16px;
-        padding: 1.5rem;
-        margin-bottom: 2rem;
-    }
-
-    .what-you-get h3 {
-        font-family: 'Fredoka One', cursive;
-        font-size: 1.1rem;
-        color: var(--dark-brown);
-        margin-bottom: 0.75rem;
-        text-align: center;
-    }
-
-    .what-you-get ul {
+    .feature-list {
         list-style: none;
         padding: 0;
-        margin: 0;
+        margin: 0 0 2rem 0;
     }
 
-    .what-you-get li {
-        color: #5A3020;
-        padding: 0.4rem 0;
-        padding-left: 1.5rem;
-        position: relative;
+    .feature-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 0.6rem 0;
+        color: #3D1F0E;
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+
+    .feature-list li svg {
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .btn-order {
+        display: block;
+        width: 100%;
+        padding: 1.2rem 2rem;
+        background: #e8426f;
+        color: #fff;
+        font-family: 'Nunito', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 800;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 14px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        margin-bottom: 1rem;
+        box-shadow: 0 4px 20px rgba(236, 38, 143, 0.3);
+    }
+
+    .btn-order:hover {
+        background: #d13a63;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(236, 38, 143, 0.4);
+        color: #fff;
+    }
+
+    .trust-row {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        padding: 1rem 0;
+        flex-wrap: wrap;
+    }
+
+    .trust-row .trust-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.8rem;
+        color: #8B7355;
         font-weight: 600;
     }
 
-    .what-you-get li::before {
-        content: "\2713";
-        color: #e8426f;
-        font-weight: bold;
-        position: absolute;
-        left: 0;
-    }
-
-    /* Gallery Grid */
-    .product-gallery {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 0.75rem;
-        margin-bottom: 2rem;
-    }
-
-    .product-gallery img {
-        width: 100%;
-        aspect-ratio: 1;
-        object-fit: cover;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
-
-    .product-gallery img:hover {
-        transform: scale(1.05);
-        box-shadow: 0 8px 25px rgba(236, 38, 143, 0.2);
-    }
-
-    /* CTA Button */
-    .btn-order-now {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        width: 100%;
-        padding: 1.25rem 2rem;
-        background: linear-gradient(135deg, #e8426f, #d13a63);
-        border: none;
-        border-radius: 16px;
-        color: white;
-        font-family: 'Nunito', sans-serif;
-        font-size: 1.15rem;
-        font-weight: 800;
-        cursor: pointer;
-        overflow: hidden;
-        transition: all 0.3s ease;
-        text-decoration: none;
-    }
-
-    .btn-order-now:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 40px rgba(236, 38, 143, 0.35);
-        color: white;
-    }
-
-    .btn-order-now .btn-arrow {
-        display: flex;
-        transition: transform 0.3s ease;
-    }
-
-    .btn-order-now:hover .btn-arrow {
-        transform: translateX(5px);
-    }
-
-    .btn-shine {
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-        animation: btn-shine 3s ease-in-out infinite;
-    }
-
-    @keyframes btn-shine {
-        0%, 100% { left: -100%; }
-        50% { left: 100%; }
-    }
-
-    /* How It Works */
-    .how-it-works {
-        background: rgba(255, 255, 255, 0.5);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border-radius: 20px;
-        border: 1px solid rgba(236, 38, 143, 0.1);
-        padding: 2rem;
-        margin-bottom: 2rem;
+    /* ── HOW IT WORKS ── */
+    .how-section {
+        background: #FFF8F0;
+        padding: 4rem 2rem;
         text-align: center;
     }
 
-    .how-it-works h2 {
+    .how-section h2 {
         font-family: 'Fredoka One', cursive;
-        font-size: 1.4rem;
+        font-size: 1.8rem;
         color: var(--dark-brown);
-        margin-bottom: 1.5rem;
+        margin-bottom: 2.5rem;
     }
 
-    .steps-row {
+    .how-section h2 span { color: #e8426f; }
+
+    .steps {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
+        gap: 2rem;
+        max-width: 900px;
+        margin: 0 auto;
     }
 
-    .step-item {
-        text-align: center;
+    .step {
+        padding: 2rem 1.5rem;
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
     }
 
-    .step-number {
-        width: 40px;
-        height: 40px;
-        background: linear-gradient(135deg, #e8426f, #d13a63);
-        color: white;
+    .step-num {
+        width: 48px;
+        height: 48px;
+        background: #e8426f;
+        color: #fff;
         font-family: 'Fredoka One', cursive;
-        font-size: 1.1rem;
+        font-size: 1.3rem;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto 0.75rem;
-        box-shadow: 0 4px 15px rgba(236, 38, 143, 0.3);
+        margin: 0 auto 1rem;
     }
 
-    .step-item h4 {
+    .step h3 {
         font-family: 'Fredoka One', cursive;
-        font-size: 0.95rem;
+        font-size: 1.1rem;
         color: var(--dark-brown);
-        margin-bottom: 0.25rem;
+        margin-bottom: 0.5rem;
     }
 
-    .step-item p {
-        font-size: 0.85rem;
+    .step p {
+        font-size: 0.9rem;
         color: #5A3020;
-        line-height: 1.4;
+        line-height: 1.5;
     }
 
-    /* Trusted By - Logo Scroll */
-    .bottom-trust {
+    /* ── LOGO BAR ── */
+    .logo-bar {
+        padding: 3rem 2rem;
         text-align: center;
+        border-top: 1px solid #f0e6dc;
+        border-bottom: 1px solid #f0e6dc;
+    }
+
+    .logo-bar p {
+        font-size: 0.8rem;
+        color: #8B7355;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-weight: 700;
         margin-bottom: 1.5rem;
     }
 
-    .trusted-by-text {
-        font-size: 0.85rem;
-        color: rgba(90, 48, 32, 0.6);
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 1rem;
-    }
-
-    .logo-scroll {
-        overflow: hidden;
-        position: relative;
-        height: 35px;
-    }
-
-    .logo-scroll::before,
-    .logo-scroll::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        width: 60px;
-        height: 100%;
-        z-index: 2;
-    }
-
-    .logo-scroll::before {
-        left: 0;
-        background: linear-gradient(to right, #fdf6f0, transparent);
-    }
-
-    .logo-scroll::after {
-        right: 0;
-        background: linear-gradient(to left, #fdf6f0, transparent);
-    }
-
-    .logo-track {
+    .logo-row {
         display: flex;
+        justify-content: center;
         align-items: center;
-        gap: 3rem;
-        animation: scroll-logos 20s linear infinite;
-        width: max-content;
+        gap: 2.5rem;
+        flex-wrap: wrap;
+        max-width: 800px;
+        margin: 0 auto;
     }
 
-    .logo-track img {
-        height: 28px;
-        opacity: 0.45;
+    .logo-row img {
+        height: 30px;
+        opacity: 0.4;
         filter: grayscale(100%);
         transition: all 0.3s ease;
     }
 
-    .logo-track img:hover {
+    .logo-row img:hover {
         opacity: 0.8;
         filter: grayscale(0%);
     }
 
-    @keyframes scroll-logos {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
-    }
-
-    /* Contact Alternative */
-    .contact-alternative {
+    /* ── CUSTOM CTA ── */
+    .custom-cta {
+        padding: 3rem 2rem;
         text-align: center;
-        padding: 1rem 0;
+        background: #fff;
     }
 
-    .contact-alternative p {
-        font-size: 0.9rem;
-        color: rgba(90, 48, 32, 0.7);
-    }
-
-    .contact-alternative a {
-        color: #e8426f;
-        font-weight: 700;
-        text-decoration: none;
-    }
-
-    .contact-alternative a:hover {
-        text-decoration: underline;
-    }
-
-    /* Custom orders nudge */
-    .custom-nudge {
-        text-align: center;
-        margin-bottom: 2rem;
-        padding: 1rem;
-        background: rgba(255, 255, 255, 0.4);
-        border-radius: 12px;
-        border: 1px dashed rgba(236, 38, 143, 0.2);
-    }
-
-    .custom-nudge p {
-        font-size: 0.95rem;
+    .custom-cta p {
+        font-size: 1rem;
         color: #5A3020;
+        margin-bottom: 0.5rem;
     }
 
-    .custom-nudge a {
+    .custom-cta a {
         color: #e8426f;
         font-weight: 700;
         text-decoration: none;
     }
 
-    .custom-nudge a:hover {
+    .custom-cta a:hover {
         text-decoration: underline;
     }
 
-    /* Lightbox */
+    .custom-cta .contact-line {
+        font-size: 0.9rem;
+        color: #8B7355;
+        margin-top: 0.75rem;
+    }
+
+    /* ── LIGHTBOX ── */
     .lightbox {
         display: none;
         position: fixed;
@@ -755,22 +479,19 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.85);
+        background: rgba(0, 0, 0, 0.9);
         z-index: 9999;
         align-items: center;
         justify-content: center;
         cursor: pointer;
     }
 
-    .lightbox.active {
-        display: flex;
-    }
+    .lightbox.active { display: flex; }
 
     .lightbox img {
         max-width: 90%;
         max-height: 85vh;
         border-radius: 12px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     }
 
     .lightbox-close {
@@ -782,237 +503,196 @@
         background: none;
         border: none;
         cursor: pointer;
-        z-index: 10000;
     }
 
-    .lightbox-prev,
-    .lightbox-next {
+    .lightbox-prev, .lightbox-next {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
         color: white;
         font-size: 2rem;
-        background: rgba(255, 255, 255, 0.15);
+        background: rgba(255,255,255,0.15);
         border: none;
         cursor: pointer;
         padding: 1rem;
         border-radius: 50%;
-        transition: background 0.3s ease;
-    }
-
-    .lightbox-prev:hover,
-    .lightbox-next:hover {
-        background: rgba(255, 255, 255, 0.3);
     }
 
     .lightbox-prev { left: 20px; }
     .lightbox-next { right: 20px; }
 
-    /* Responsive */
-    @media (max-width: 600px) {
-        .order-main {
-            padding: 80px 15px 30px;
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+        .order-hero h1 { font-size: 2rem; }
+        .order-hero { padding: 5rem 1.5rem 3rem; }
+
+        .product-layout {
+            grid-template-columns: 1fr;
+            gap: 2rem;
         }
 
-        .order-header h1 {
-            font-size: 1.8rem;
+        .product-images {
+            position: static;
         }
 
-        .product-showcase {
-            padding: 1.5rem;
-            border-radius: 20px;
-        }
-
-        .product-gallery {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .steps-row {
+        .steps {
             grid-template-columns: 1fr;
             gap: 1rem;
         }
 
-        .trust-strip {
-            gap: 1rem;
+        .logo-row {
+            gap: 1.5rem;
         }
 
-        .floating-logo {
-            top: 10px;
-            left: 10px;
-            padding: 8px;
-        }
-
-        .floating-logo img {
-            height: 35px;
+        .logo-row img {
+            height: 22px;
         }
     }
     </style>
 </head>
 <body class="order-page">
 
-    <!-- Animated Background -->
-    <div class="order-bg">
-        <canvas id="orderParticles"></canvas>
-        <div class="bg-gradient-orb orb-1"></div>
-        <div class="bg-gradient-orb orb-2"></div>
-        <div class="bg-gradient-orb orb-3"></div>
+    <!-- HERO -->
+    <section class="order-hero">
+        <div class="hero-nav">
+            <a href="/"><img src="logo_icon.png" alt="My Baking Creations" width="60" height="55"> Home</a>
+        </div>
+        <div class="hero-badge">Ships Within 48 Hours</div>
+        <h1>Your Photo on a <span>Cookie</span></h1>
+        <p>Send us any image and we print it on freshly baked butter cookies with hand-finished royal icing. Made fresh to order.</p>
+    </section>
+
+    <!-- PRODUCT -->
+    <section class="product-section">
+        <div class="product-layout">
+
+            <!-- Images -->
+            <div class="product-images">
+                <div class="main-image" onclick="openLightbox(currentThumb)">
+                    <img id="mainImg" src="images/gallery/printed/Printed Image Photo Cookies_Happy Birthday Design.jpg" alt="Printed Image Cookies">
+                </div>
+                <div class="thumb-row">
+                    <img src="images/gallery/printed/Printed Image Photo Cookies_Happy Birthday Design.jpg" alt="Happy Birthday cookies" class="active" onclick="switchImage(0, this)">
+                    <img src="images/gallery/corporateprintedimage/Microsoft-Copilot-PayPal-Corporate-Cookies-Bay-Area.jpg" alt="Microsoft and PayPal logo cookies" onclick="switchImage(1, this)">
+                    <img src="images/gallery/corporateprintedimage/PayPal-Venmo-Logo-Corporate-Cookies-San-Francisco.jpg" alt="PayPal and Venmo logo cookies" onclick="switchImage(2, this)">
+                    <img src="images/gallery/corporateprintedimage/Twitch-Logo-Corporate-Cookies-San-Francisco.jpg" alt="Twitch logo cookies" onclick="switchImage(3, this)">
+                </div>
+                <div class="thumb-row" style="margin-top: 0.5rem;">
+                    <img src="images/gallery/corporateprintedimage/Salesforce-US-Air-Force-Logo-Corporate-Cookies-San-Francisco.jpg" alt="Salesforce cookies" onclick="switchImage(4, this)">
+                    <img src="images/gallery/corporateprintedimage/Meta-Nestle-Printed-Image-Corporate-Cookies-San-Francisco.jpg" alt="Meta and Nestle cookies" onclick="switchImage(5, this)">
+                    <img src="images/gallery/corporateprintedimage/SFO-Airport-T3W-Logo-Corporate-Cookies-San-Francisco.jpg" alt="SFO Airport cookies" onclick="switchImage(6, this)">
+                    <img src="images/gallery/printed/Printed image cookie 5.jpg" alt="Custom printed cookies" onclick="switchImage(7, this)">
+                </div>
+            </div>
+
+            <!-- Details -->
+            <div class="product-details">
+                <h2>Printed Image Cookies</h2>
+                <p class="tagline">Your image, printed on freshly baked butter cookies with smooth white royal icing. Trusted by Google, Meta, and Salesforce.</p>
+
+                <div class="price-block">
+                    <span class="amount">$90</span>
+                    <span class="per">/ dozen (12 cookies)</span>
+                </div>
+
+                <ul class="feature-list">
+                    <li>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="#e8426f"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        12 freshly baked butter cookies, made to order
+                    </li>
+                    <li>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="#e8426f"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        Your image printed on smooth white royal icing
+                    </li>
+                    <li>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="#e8426f"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        Individually wrapped and beautifully packaged
+                    </li>
+                    <li>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="#e8426f"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        Ships within 48 hours — nationwide delivery
+                    </li>
+                    <li>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="#e8426f"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        Bay Area pickup available (Daly City)
+                    </li>
+                </ul>
+
+                <a href="order-form" class="btn-order">Order Now — $90 / Dozen</a>
+
+                <div class="trust-row">
+                    <div class="trust-item">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#8B7355"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+                        Secure checkout
+                    </div>
+                    <div class="trust-item">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#8B7355"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                        48-hour turnaround
+                    </div>
+                    <div class="trust-item">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#8B7355"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        Family bakery since 2012
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-section">
+        <h2>How It <span>Works</span></h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <h3>Send Your Image</h3>
+                <p>Send us any photo — a birthday shot, a pet, a company logo. We'll confirm the design with you.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <h3>We Print & Bake</h3>
+                <p>Your image is printed on butter cookies with smooth white royal icing. Made fresh, never frozen.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <h3>Pick Up or Ship</h3>
+                <p>Pick up from our Daly City location or we ship anywhere in the US. Individually wrapped.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRUSTED BY -->
+    <div class="logo-bar">
+        <p>Trusted by teams at</p>
+        <div class="logo-row">
+            <img src="company logos/google-logo.png" alt="Google" height="30">
+            <img src="company logos/meta-logo.png" alt="Meta" height="30">
+            <img src="company logos/salesforce-logo.png" alt="Salesforce" height="30">
+            <img src="company logos/paypal-logo.png" alt="PayPal" height="30">
+            <img src="company logos/microsoft-logo.png" alt="Microsoft" height="30">
+            <img src="company logos/docusign-logo.png" alt="DocuSign" height="24">
+            <img src="company logos/Stripe Logo.png" alt="Stripe" height="30">
+        </div>
     </div>
 
-    <!-- Floating Logo Link -->
-    <a href="/" class="floating-logo">
-        <img src="logo_icon.png" alt="My Baking Creations" width="60" height="55">
-    </a>
+    <!-- CUSTOM / CONTACT -->
+    <div class="custom-cta">
+        <p>Need a custom cake, hand-piped cookies, or cake pops? <a href="order-form">Get a Quote</a> or <a href="book-consultation">Book a Free Consultation</a></p>
+        <p class="contact-line"><a href="tel:4155688060">(415) 568-8060</a> &middot; <a href="mailto:info@mybakingcreations.com">info@mybakingcreations.com</a></p>
+    </div>
 
-    <!-- Main Content -->
-    <main class="order-main">
-        <div class="order-container">
-
-            <!-- Header -->
-            <div class="order-header">
-                <div class="premium-badge">
-                    <span class="badge-icon">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2L14.09 8.26L21 9.27L16 14.14L17.18 21.02L12 17.77L6.82 21.02L8 14.14L3 9.27L9.91 8.26L12 2Z"/></svg>
-                    </span>
-                    Ships Within 48 Hours
-                </div>
-                <h1>Your Photo on a <span class="gradient-text">Cookie</span></h1>
-                <p class="order-subtitle">Send us any image — a face, a logo, a pet — and we print it on freshly baked butter cookies with hand-finished royal icing. Nationwide shipping or Bay Area pickup.</p>
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo"><span class="my">my</span><span class="baking">baking</span> Creations</div>
+            <p class="footer-tagline">Family-owned Bay Area bakery since 2012</p>
+            <div class="footer-contact">
+                <p><a href="tel:4155688060">(415) 568-8060</a> | <a href="mailto:info@mybakingcreations.com">info@mybakingcreations.com</a></p>
             </div>
-
-            <!-- Trust Strip -->
-            <div class="trust-strip">
-                <div class="trust-item">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="#e8426f"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                    <span>Nationwide Shipping</span>
-                </div>
-                <div class="trust-item">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="#e8426f"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
-                    <span>Bay Area Pickup</span>
-                </div>
-                <div class="trust-item">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="#e8426f"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
-                    <span>Individually Wrapped</span>
-                </div>
-            </div>
-
-            <!-- Product Showcase Card -->
-            <div class="product-showcase">
-                <div class="card-glow"></div>
-
-                <!-- Hero Carousel -->
-                <div class="hero-carousel" id="heroCarousel">
-                    <img src="images/gallery/printed/Printed Image Photo Cookies_Happy Birthday Design.jpg" alt="Printed Image Cookies - Happy Birthday Design" class="active">
-                    <img src="images/gallery/corporateprintedimage/Microsoft-Copilot-PayPal-Corporate-Cookies-Bay-Area.jpg" alt="Microsoft Copilot and PayPal corporate logo cookies" loading="lazy">
-                    <img src="images/gallery/corporateprintedimage/Salesforce-US-Air-Force-Logo-Corporate-Cookies-San-Francisco.jpg" alt="Salesforce and US Air Force logo cookies" loading="lazy">
-                    <img src="images/gallery/corporateprintedimage/Meta-Nestle-Printed-Image-Corporate-Cookies-San-Francisco.jpg" alt="Meta and Nestle corporate logo cookies" loading="lazy">
-                    <div class="carousel-dots">
-                        <button class="carousel-dot active" onclick="goToSlide(0)"></button>
-                        <button class="carousel-dot" onclick="goToSlide(1)"></button>
-                        <button class="carousel-dot" onclick="goToSlide(2)"></button>
-                        <button class="carousel-dot" onclick="goToSlide(3)"></button>
-                    </div>
-                </div>
-
-                <h2 class="product-title">Printed Image Cookies</h2>
-                <p class="product-tagline">Your image, printed on freshly baked butter cookies with smooth white royal icing. Made fresh to order by the bakery trusted by Google, Meta, and Salesforce.</p>
-
-                <div class="product-price-display">
-                    <span class="price">$90</span>
-                    <span class="unit"> / dozen</span>
-                </div>
-
-                <!-- What You Get -->
-                <div class="what-you-get">
-                    <h3>What You Get</h3>
-                    <ul>
-                        <li>One dozen (12) freshly baked butter cookies</li>
-                        <li>Your image printed on smooth white royal icing</li>
-                        <li>Individually wrapped and beautifully packaged</li>
-                        <li>Arrives gift-ready — ships within 48 hours</li>
-                    </ul>
-                </div>
-
-                <!-- Gallery -->
-                <div class="product-gallery">
-                    <img src="images/gallery/corporateprintedimage/PayPal-Venmo-Logo-Corporate-Cookies-San-Francisco.jpg" alt="PayPal and Venmo logo cookies" loading="lazy" onclick="openLightbox(0)">
-                    <img src="images/gallery/corporateprintedimage/Twitch-Logo-Corporate-Cookies-San-Francisco.jpg" alt="Twitch logo cookies" loading="lazy" onclick="openLightbox(1)">
-                    <img src="images/gallery/printed/Printed Image Photo Cookies_Happy Birthday Design.jpg" alt="Happy Birthday photo cookies" loading="lazy" onclick="openLightbox(2)">
-                    <img src="images/gallery/corporateprintedimage/GAP-Logo-Corporate-Cookies-Bay-Area.webp" alt="GAP logo cookies" loading="lazy" onclick="openLightbox(3)">
-                    <img src="images/gallery/corporateprintedimage/SFO-Airport-T3W-Logo-Corporate-Cookies-San-Francisco.jpg" alt="SFO Airport logo cookies" loading="lazy" onclick="openLightbox(4)">
-                    <img src="images/gallery/printed/Printed image cookie 5.jpg" alt="Custom printed image cookies" loading="lazy" onclick="openLightbox(5)">
-                    <img src="images/gallery/corporateprintedimage/Andersen-Tax-Logo-Corporate-Cookies-Bay-Area.jpg" alt="Andersen Tax corporate logo cookies" loading="lazy" onclick="openLightbox(6)">
-                    <img src="images/ordernow/printedimage/PRINTED IMAGE_Owl Themed Cookies.jpg" alt="Owl themed printed cookies" loading="lazy" onclick="openLightbox(7)">
-                </div>
-
-                <!-- CTA Button -->
-                <a href="order-form" class="btn-order-now">
-                    <span>Order Now — $90 / Dozen</span>
-                    <span class="btn-arrow">
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
-                    </span>
-                    <div class="btn-shine"></div>
-                </a>
-            </div>
-
-            <!-- How It Works -->
-            <div class="how-it-works">
-                <h2>How It Works</h2>
-                <div class="steps-row">
-                    <div class="step-item">
-                        <div class="step-number">1</div>
-                        <h4>Send Your Image</h4>
-                        <p>Send us any photo — birthday, pet, logo. We'll confirm the design with you.</p>
-                    </div>
-                    <div class="step-item">
-                        <div class="step-number">2</div>
-                        <h4>We Print & Bake</h4>
-                        <p>Your image is printed on butter cookies with smooth white royal icing.</p>
-                    </div>
-                    <div class="step-item">
-                        <div class="step-number">3</div>
-                        <h4>Pick Up or Ship</h4>
-                        <p>Grab from Daly City or we ship nationwide. Individually wrapped.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Custom Orders Nudge -->
-            <div class="custom-nudge">
-                <p>Need a custom cake, hand-piped cookies, or cake pops? <a href="order-form">Get a Quote</a> or <a href="book-consultation">Book a Free Consultation</a></p>
-            </div>
-
-            <!-- Trusted By -->
-            <div class="bottom-trust">
-                <p class="trusted-by-text">Trusted by teams at</p>
-                <div class="logo-scroll">
-                    <div class="logo-track">
-                        <img src="company logos/google-logo.png" alt="Google" height="28">
-                        <img src="company logos/meta-logo.png" alt="Meta" height="28">
-                        <img src="company logos/salesforce-logo.png" alt="Salesforce" height="28">
-                        <img src="company logos/docusign-logo.png" alt="DocuSign" height="24">
-                        <img src="company logos/paypal-logo.png" alt="PayPal" height="28">
-                        <img src="company logos/Stripe Logo.png" alt="Stripe" height="28">
-                        <img src="company logos/microsoft-logo.png" alt="Microsoft" height="28">
-                        <img src="company logos/google-logo.png" alt="Google" height="28">
-                        <img src="company logos/meta-logo.png" alt="Meta" height="28">
-                        <img src="company logos/salesforce-logo.png" alt="Salesforce" height="28">
-                        <img src="company logos/docusign-logo.png" alt="DocuSign" height="24">
-                        <img src="company logos/paypal-logo.png" alt="PayPal" height="28">
-                        <img src="company logos/Stripe Logo.png" alt="Stripe" height="28">
-                        <img src="company logos/microsoft-logo.png" alt="Microsoft" height="28">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contact Alternative -->
-            <div class="contact-alternative">
-                <p>Questions? <a href="tel:4155688060">(415) 568-8060</a> &middot; <a href="mailto:info@mybakingcreations.com">info@mybakingcreations.com</a></p>
-            </div>
-
+            <div class="footer-bottom"><p>&copy; 2026 My Baking Creations</p></div>
         </div>
-    </main>
+    </footer>
 
-    <!-- Lightbox -->
+    <!-- LIGHTBOX -->
     <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
         <button type="button" class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
         <button type="button" class="lightbox-prev" onclick="changeSlide(-1, event)">&#10094;</button>
@@ -1020,119 +700,33 @@
         <button type="button" class="lightbox-next" onclick="changeSlide(1, event)">&#10095;</button>
     </div>
 
-    <!-- Particle Canvas -->
+    <!-- SCRIPTS -->
     <script>
-    (function() {
-        const canvas = document.getElementById('orderParticles');
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resize();
-        window.addEventListener('resize', resize);
-
-        const particles = [];
-        const count = 40;
-        const colors = [
-            'rgba(236, 38, 143, 0.15)',
-            'rgba(255, 197, 50, 0.15)',
-            'rgba(232, 66, 111, 0.1)',
-            'rgba(255, 220, 100, 0.12)'
-        ];
-
-        for (let i = 0; i < count; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                r: Math.random() * 3 + 1,
-                dx: (Math.random() - 0.5) * 0.4,
-                dy: (Math.random() - 0.5) * 0.4,
-                color: colors[Math.floor(Math.random() * colors.length)]
-            });
-        }
-
-        function draw() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                ctx.fillStyle = p.color;
-                ctx.fill();
-
-                p.x += p.dx;
-                p.y += p.dy;
-
-                if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-                if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-            });
-
-            // Draw subtle connections
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 150) {
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(236, 38, 143, ${0.03 * (1 - dist / 150)})`;
-                        ctx.stroke();
-                    }
-                }
-            }
-
-            requestAnimationFrame(draw);
-        }
-        draw();
-    })();
-    </script>
-
-    <!-- Hero Carousel Auto-Rotate -->
-    <script>
-    (function() {
-        const carousel = document.getElementById('heroCarousel');
-        if (!carousel) return;
-        const images = carousel.querySelectorAll('img');
-        const dots = carousel.querySelectorAll('.carousel-dot');
-        let current = 0;
-
-        window.goToSlide = function(index) {
-            images[current].classList.remove('active');
-            dots[current].classList.remove('active');
-            current = index;
-            images[current].classList.add('active');
-            dots[current].classList.add('active');
-        };
-
-        setInterval(function() {
-            goToSlide((current + 1) % images.length);
-        }, 4000);
-    })();
-    </script>
-
-    <!-- Lightbox Script -->
-    <script>
-    const galleryImages = [
+    // Thumbnail → Main Image
+    const allImages = [
+        'images/gallery/printed/Printed Image Photo Cookies_Happy Birthday Design.jpg',
+        'images/gallery/corporateprintedimage/Microsoft-Copilot-PayPal-Corporate-Cookies-Bay-Area.jpg',
         'images/gallery/corporateprintedimage/PayPal-Venmo-Logo-Corporate-Cookies-San-Francisco.jpg',
         'images/gallery/corporateprintedimage/Twitch-Logo-Corporate-Cookies-San-Francisco.jpg',
-        'images/gallery/printed/Printed Image Photo Cookies_Happy Birthday Design.jpg',
-        'images/gallery/corporateprintedimage/GAP-Logo-Corporate-Cookies-Bay-Area.webp',
+        'images/gallery/corporateprintedimage/Salesforce-US-Air-Force-Logo-Corporate-Cookies-San-Francisco.jpg',
+        'images/gallery/corporateprintedimage/Meta-Nestle-Printed-Image-Corporate-Cookies-San-Francisco.jpg',
         'images/gallery/corporateprintedimage/SFO-Airport-T3W-Logo-Corporate-Cookies-San-Francisco.jpg',
-        'images/gallery/printed/Printed image cookie 5.jpg',
-        'images/gallery/corporateprintedimage/Andersen-Tax-Logo-Corporate-Cookies-Bay-Area.jpg',
-        'images/ordernow/printedimage/PRINTED IMAGE_Owl Themed Cookies.jpg'
+        'images/gallery/printed/Printed image cookie 5.jpg'
     ];
-    let currentIndex = 0;
+    let currentThumb = 0;
 
+    function switchImage(index, el) {
+        currentThumb = index;
+        document.getElementById('mainImg').src = allImages[index];
+        document.querySelectorAll('.thumb-row img').forEach(t => t.classList.remove('active'));
+        el.classList.add('active');
+    }
+
+    // Lightbox
     function openLightbox(index) {
-        currentIndex = index;
-        const lb = document.getElementById('lightbox');
-        document.getElementById('lightbox-img').src = galleryImages[currentIndex];
-        lb.classList.add('active');
+        currentThumb = index;
+        document.getElementById('lightbox-img').src = allImages[currentThumb];
+        document.getElementById('lightbox').classList.add('active');
         document.body.style.overflow = 'hidden';
     }
 
@@ -1143,10 +737,10 @@
         }
     }
 
-    function changeSlide(direction, e) {
+    function changeSlide(dir, e) {
         e.stopPropagation();
-        currentIndex = (currentIndex + direction + galleryImages.length) % galleryImages.length;
-        document.getElementById('lightbox-img').src = galleryImages[currentIndex];
+        currentThumb = (currentThumb + dir + allImages.length) % allImages.length;
+        document.getElementById('lightbox-img').src = allImages[currentThumb];
     }
 
     document.addEventListener('keydown', function(e) {
@@ -1157,8 +751,6 @@
         if (e.key === 'ArrowRight') changeSlide(1, e);
     });
     </script>
-
-    <!-- Live Activity Feed -->
     <script src="activity-feed.js" defer></script>
 </body>
 </html>
