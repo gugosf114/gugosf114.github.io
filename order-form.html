@@ -997,6 +997,8 @@
     const PREVIEW_WORKER_URL = 'https://cakeplugin.summer-lake-b6ea.workers.dev/';
 
     const aiPreviewSection = document.getElementById('aiPreviewSection');
+    if (!aiPreviewSection) { /* AI preview elements removed — skip entire block */ }
+    else {
     const generatePreviewBtn = document.getElementById('generatePreviewBtn');
     const previewLoading = document.getElementById('previewLoading');
     const previewResult = document.getElementById('previewResult');
@@ -1597,6 +1599,7 @@
     });
 
     window.addEventListener('resize', resizeTextareaCanvas);
+    } // end aiPreviewSection guard
     </script>
 
     <!-- Electric Button Sparks -->
