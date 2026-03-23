@@ -30,6 +30,7 @@
     {"src": "images/gallery/cakepops/Unicorn Themed Cake Pops 2.jpg", "alt": "Custom unicorn themed cake pops San Francisco Bay Area", "category": "Cake Pops", "url": "gallery-cakepops.html"},
     {"src": "images/gallery/cakepops/Winter_Holiday_Cake_Pops-removebg.png", "alt": "Custom winter holiday cake pops Bay Area bakery", "category": "Cake Pops", "url": "gallery-cakepops.html"},
     {"src": "images/gallery/cakepops/zebra cake pops.jpg", "alt": "Custom zebra animal print cake pops San Francisco bakery", "category": "Cake Pops", "url": "gallery-cakepops.html"},
+    {"src": "images/gallery/cakes/Pikachu Pokemon Sculpted Cake.jpg", "alt": "Custom Pikachu Pokemon sculpted birthday cake San Francisco Bay Area", "category": "Sculpted Cakes", "url": "gallery-cakes-sculpted.html"},
     {"src": "images/gallery/cakes/Basketball themed custom sculpted cake.jpg", "alt": "Custom basketball themed sculpted cake by Bay Area bakery", "category": "Sculpted Cakes", "url": "gallery-cakes-sculpted.html"},
     {"src": "images/gallery/cakes/Cowboy HorseTheme Cake.jpeg", "alt": "Custom cowboy horse theme sculpted cake San Francisco Bay Area", "category": "Sculpted Cakes", "url": "gallery-cakes-sculpted.html"},
     {"src": "images/gallery/cakes/faberge egg 2 cake.jpg", "alt": "Custom Faberge egg sculpted cake by San Francisco bakery", "category": "Sculpted Cakes", "url": "gallery-cakes-sculpted.html"},
@@ -124,6 +125,7 @@
     {"title": "How to Order a Custom Birthday Cake: Complete Guide", "description": "Learn how to order a custom birthday cake in the Bay Area. Step-by-step guide covering timeline, pricing, design ideas, and what to expect from your bakery.", "url": "blog-how-to-order-custom-birthday-cake.html", "keywords": "birthday cake order custom guide timeline pricing design"}
   ],
   "placeholderExamples": [
+    "Pikachu cake",
     "Baby Yoda cake",
     "Corporate cookies",
     "Wedding cake",
