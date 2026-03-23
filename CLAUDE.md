@@ -6,11 +6,10 @@
 - **Owner**: George Abrahamyan (Architect/Operations)
 - **Baker**: Yana (Artistic Lead)
 
-## CRITICAL: BRANCH RULES
-- **George (gugosf114)**: Push directly to `main`. Full access. No restrictions.
-- **Jana/Yana (mykiksf)**: ALWAYS PUSH TO `jana-edits` BRANCH. NEVER PUSH TO MAIN. NO EXCEPTIONS. A GitHub Action reviews the changes and auto-merges if clean. If there are problems, it creates an issue for George. This is non-negotiable.
-- **How to identify the user**: Check the GitHub token or ask. If on Jana's laptop (mykik/mykiksf), push to `jana-edits`. If on George's machine (georg/gugosf114), push to `main`.
+## BRANCH RULES
+- **Everyone pushes directly to `main`** for image/gallery uploads. The risk is minimal (worst case: a cake image lands in the wrong gallery category).
 - **Image source folder on Jana's laptop**: `C:\Users\mykik\OneDrive\Desktop\MBC CAKE POPS` — subfolders: Animal Themed, Custom, Logo Company, Printed Image.
+- The `jana-edits` branch still exists but is not required for image work.
 
 ## THE "IRON LAWS" (Forensic Audit Mode)
 1. **No Telephone Game**: Claude MUST use the `filesystem` tool to see code directly. Never ask George for screenshots. If a visual check is needed, use `puppeteer` or `playwright`.
@@ -38,8 +37,8 @@
 - **Zero tech skills.** Assume she knows nothing about GitHub, branches, code, or HTML.
 - **Never ask her to use the terminal, command line, or edit code manually.**
 - **She tells you what she wants in plain language. You do everything.**
-- **Always push her changes to `jana-edits` branch. Always.**
-- **If she asks to add images to the website, read them from her local MBC CAKE POPS folder, push to the repo, update the HTML, all on `jana-edits`.**
+- **Push image/gallery changes directly to `main` so she can see them live immediately.**
+- **If she asks to add images to the website, read them from her local MBC CAKE POPS folder, push to the repo, and update the HTML.**
 
 ## BUSINESS OPERATIONS PROTOCOLS
 1. **The "Ghost" Mandate**: Our #1 operational goal is isolating corporate clients who ordered in 2024 but are silent in 2025/2026. Use `google_drive` or `gmail` MCPs to hunt these leads.
