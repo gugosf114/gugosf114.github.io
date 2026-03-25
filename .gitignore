@@ -62,3 +62,4 @@ build/
 
 # Claude temp files
 tmpclaude-*
+.claude/worktrees/friendly-haslett/
