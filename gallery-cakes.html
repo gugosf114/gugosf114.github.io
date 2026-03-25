@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script>if(window.location.pathname.endsWith('.html')&&window.location.pathname!=='/404.html'){window.location.replace(window.location.href.replace(/\.html$/,''));}</script>
-
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KB96GDJ011"></script>
     <script>
@@ -114,10 +112,25 @@
         ]
     }
     </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "Custom Cakes",
+        "description": "Handcrafted custom cakes for birthdays, weddings, and celebrations in the San Francisco Bay Area. Available in vanilla, chocolate, red velvet, strawberry, and specialty flavors. Serves 10 to 200 guests.",
+        "brand": {"@type": "Brand", "name": "My Baking Creations"},
+        "offers": {
+            "@type": "AggregateOffer",
+            "priceCurrency": "USD",
+            "lowPrice": "150",
+            "highPrice": "800",
+            "offerCount": "50",
+            "availability": "https://schema.org/InStock"
+        },
+        "image": "https://mybakingcreations.com/images/gallery/carousel/carousel%201.jpg",
+        "category": "Custom Cakes"
+    }
+    </script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -133,6 +146,10 @@
         }
     }
     </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -254,7 +271,6 @@
 
     <section class="page-content" id="gallery-content">
         <div class="section-wrapper section-beige reveal">
-            <p class="section-description">My Baking Creations is a custom cake bakery in Daly City, California, creating sculpted birthday cakes, tiered wedding cakes, and ultra-realistic designs for Bay Area celebrations since 2012. Every cake is baked fresh and hand-decorated by Yana. We deliver to San Francisco, San Jose, Oakland, Palo Alto, and 27 additional cities. Browse our three cake categories below.</p>
             <div class="tile-grid-3">
                 <a href="gallery-cakes-sculpted" class="service-card">
                     <img width="1200" height="1384" src="images/gallery/cakes/Sculpted Baby Yoda Cake.jpg" alt="Sculpted Baby Yoda custom cake" style="width: 100%; height: 150px; object-fit: contain; border-radius: 15px; margin-bottom: 1rem;" loading="lazy">
