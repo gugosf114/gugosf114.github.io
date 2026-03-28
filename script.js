@@ -1,1593 +1,1149 @@
-// Mobile Menu Toggle
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const navLinks = document.querySelector('.nav-links');
 const searchContainer = document.querySelector('.search-container');
-
 if (mobileMenuBtn) {
-    mobileMenuBtn.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        mobileMenuBtn.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
-
-        // Move search bar into mobile menu when opened
-        if (searchContainer && window.innerWidth <= 968) {
-            if (navLinks.classList.contains('active')) {
-                searchContainer.classList.add('mobile-search');
-                navLinks.appendChild(searchContainer);
-            } else {
-                searchContainer.classList.remove('mobile-search');
-                // Move back to original position (after nav-links, before mobile-menu-btn)
-                const nav = document.querySelector('nav');
-                if (nav && mobileMenuBtn) {
-                    nav.insertBefore(searchContainer, mobileMenuBtn);
-                }
-            }
-        }
-    });
+mobileMenuBtn.addEventListener('click', () => {
+navLinks.classList.toggle('active');
+mobileMenuBtn.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+if (searchContainer && window.innerWidth <= 968) {
+if (navLinks.classList.contains('active')) {
+searchContainer.classList.add('mobile-search');
+navLinks.appendChild(searchContainer);
+} else {
+searchContainer.classList.remove('mobile-search');
+const nav = document.querySelector('nav');
+if (nav && mobileMenuBtn) {
+nav.insertBefore(searchContainer, mobileMenuBtn);
 }
-
-// Close mobile menu when clicking a link (for navigation)
+}
+}
+});
+}
 if (navLinks) {
-    navLinks.addEventListener('click', (e) => {
-        const link = e.target.closest('a');
-        // Close menu when clicking a navigation link (not dropdown parent)
-        if (link && !link.closest('.dropdown') || (link && link.getAttribute('href') !== 'gallery.html')) {
-            if (window.innerWidth <= 968 && navLinks.classList.contains('active')) {
-                // Only close if it's not the gallery dropdown toggle
-                if (!link.closest('.dropdown') || link.closest('.dropdown-menu')) {
-                    navLinks.classList.remove('active');
-                    if (mobileMenuBtn) {
-                        mobileMenuBtn.textContent = '☰';
-                    }
-                }
-            }
-        }
-    });
+navLinks.addEventListener('click', (e) => {
+const link = e.target.closest('a');
+if (link && !link.closest('.dropdown') || (link && link.getAttribute('href') !== 'gallery.html')) {
+if (window.innerWidth <= 968 && navLinks.classList.contains('active')) {
+if (!link.closest('.dropdown') || link.closest('.dropdown-menu')) {
+navLinks.classList.remove('active');
+if (mobileMenuBtn) {
+mobileMenuBtn.textContent = '☰';
 }
-
-// Mobile dropdown toggle - make gallery dropdown expandable on mobile
-// Add +/- indicators to dropdown toggles on mobile
+}
+}
+}
+});
+}
 function initMobileDropdownIndicators() {
-    document.querySelectorAll('.dropdown > a').forEach(dropdownToggle => {
-        // Check if indicator already exists
-        if (!dropdownToggle.querySelector('.mobile-dropdown-indicator')) {
-            const indicator = document.createElement('span');
-            indicator.className = 'mobile-dropdown-indicator';
-            indicator.textContent = '+';
-            indicator.setAttribute('aria-hidden', 'true');
-            dropdownToggle.appendChild(indicator);
-        }
-    });
-}
-
-// Initialize indicators on page load if mobile
-if (window.innerWidth <= 968) {
-    initMobileDropdownIndicators();
-}
-
-// Also init on resize to mobile
-window.addEventListener('resize', () => {
-    if (window.innerWidth <= 968) {
-        initMobileDropdownIndicators();
-    }
-});
-
 document.querySelectorAll('.dropdown > a').forEach(dropdownToggle => {
-    dropdownToggle.addEventListener('click', (e) => {
-        if (window.innerWidth <= 968) {
-            const dropdown = dropdownToggle.closest('.dropdown');
-            const dropdownMenu = dropdown.querySelector('.dropdown-menu');
-            const indicator = dropdownToggle.querySelector('.mobile-dropdown-indicator');
-
-            if (dropdownMenu) {
-                e.preventDefault(); // Always prevent navigation on the toggle
-
-                if (dropdown.classList.contains('expanded')) {
-                    // Collapse the dropdown
-                    dropdown.classList.remove('expanded');
-                    if (indicator) indicator.textContent = '+';
-                } else {
-                    // Expand the dropdown
-                    dropdown.classList.add('expanded');
-                    if (indicator) indicator.textContent = '−'; // Using minus sign character
-                }
-            }
-        }
-    });
+if (!dropdownToggle.querySelector('.mobile-dropdown-indicator')) {
+const indicator = document.createElement('span');
+indicator.className = 'mobile-dropdown-indicator';
+indicator.textContent = '+';
+indicator.setAttribute('aria-hidden', 'true');
+dropdownToggle.appendChild(indicator);
+}
 });
-
-// Smooth scroll for anchor links
+}
+if (window.innerWidth <= 968) {
+initMobileDropdownIndicators();
+}
+window.addEventListener('resize', () => {
+if (window.innerWidth <= 968) {
+initMobileDropdownIndicators();
+}
+});
+document.querySelectorAll('.dropdown > a').forEach(dropdownToggle => {
+dropdownToggle.addEventListener('click', (e) => {
+if (window.innerWidth <= 968) {
+const dropdown = dropdownToggle.closest('.dropdown');
+const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+const indicator = dropdownToggle.querySelector('.mobile-dropdown-indicator');
+if (dropdownMenu) {
+e.preventDefault(); 
+if (dropdown.classList.contains('expanded')) {
+dropdown.classList.remove('expanded');
+if (indicator) indicator.textContent = '+';
+} else {
+dropdown.classList.add('expanded');
+if (indicator) indicator.textContent = '−'; 
+}
+}
+}
+});
+});
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
+anchor.addEventListener('click', function (e) {
+e.preventDefault();
+const target = document.querySelector(this.getAttribute('href'));
+if (target) {
+target.scrollIntoView({
+behavior: 'smooth',
+block: 'start'
 });
-
-// Order Form Modal
+}
+});
+});
 const orderModal = document.getElementById('orderModal');
 const orderBtn = document.getElementById('floatingOrderBtn');
 const closeModal = document.querySelector('.close-modal');
 const orderForm = document.getElementById('orderForm');
-
-// Open modal when floating button or any .open-order-form button is clicked
 document.addEventListener('click', (e) => {
-    if (e.target.id === 'floatingOrderBtn' || e.target.classList.contains('open-order-form')) {
-        e.preventDefault();
-        if (orderModal) {
-            orderModal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-    }
+if (e.target.id === 'floatingOrderBtn' || e.target.classList.contains('open-order-form')) {
+e.preventDefault();
+if (orderModal) {
+orderModal.style.display = 'flex';
+document.body.style.overflow = 'hidden';
+}
+}
 });
-
-// Close modal
 if (closeModal) {
-    closeModal.addEventListener('click', () => {
-        if (orderModal) {
-            orderModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-    });
+closeModal.addEventListener('click', () => {
+if (orderModal) {
+orderModal.style.display = 'none';
+document.body.style.overflow = 'auto';
 }
-
-// Close modal when clicking outside
-orderModal?.addEventListener('click', (e) => {
-    if (e.target === orderModal) {
-        orderModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
 });
-
-// FLAVOR DROPDOWN TOGGLE FUNCTIONALITY
-const MAX_INIT_RETRIES = 20; // Max 2 seconds of retrying
-
+}
+orderModal?.addEventListener('click', (e) => {
+if (e.target === orderModal) {
+orderModal.style.display = 'none';
+document.body.style.overflow = 'auto';
+}
+});
+const MAX_INIT_RETRIES = 20; 
 function initFlavorToggle(retryCount = 0) {
-    const productRadios = document.querySelectorAll('input[name="product_type"]');
-    const flavorSection = document.getElementById('flavorSection');
-    const flavorSelect = document.getElementById('flavor');
-
-    if (!productRadios.length || !flavorSection || !flavorSelect) {
-        // Elements not loaded yet, retry with limit
-        if (retryCount < MAX_INIT_RETRIES) {
-            setTimeout(() => initFlavorToggle(retryCount + 1), 100);
-        }
-        return;
-    }
-
-    // Flavor options by product type
-    const flavorOptions = {
-        'Cake': [
-            'Strawberry Vanilla Cream',
-            'Chocolate Mousse',
-            'Lemon Orange Cream',
-            'Blueberry Lavender Cream'
-        ],
-        'Cookies': [
-            'Vanilla Shortbread',
-            'Chocolate Shortbread',
-            'Lemon Orange Shortbread',
-            'Gingerbread'
-        ],
-        'Cake Pops': [
-            'Vanilla',
-            'Chocolate'
-        ],
-        'Cupcakes': [
-            'Vanilla',
-            'Chocolate'
-        ]
-    };
-
-    function updateFlavorOptions(productType) {
-        // Clear existing options except the first placeholder
-        flavorSelect.innerHTML = '<option value="">Select flavor (optional)</option>';
-
-        // Add options for selected product type
-        const flavors = flavorOptions[productType] || [];
-        flavors.forEach(flavor => {
-            const option = document.createElement('option');
-            option.value = flavor;
-            option.textContent = flavor;
-            flavorSelect.appendChild(option);
-        });
-
-        // Show the flavor section
-        flavorSection.style.display = 'block';
-    }
-
-    productRadios.forEach(radio => {
-        radio.addEventListener('change', function() {
-            updateFlavorOptions(this.value);
-        });
-    });
+const productRadios = document.querySelectorAll('input[name="product_type"]');
+const flavorSection = document.getElementById('flavorSection');
+const flavorSelect = document.getElementById('flavor');
+if (!productRadios.length || !flavorSection || !flavorSelect) {
+if (retryCount < MAX_INIT_RETRIES) {
+setTimeout(() => initFlavorToggle(retryCount + 1), 100);
 }
-
-// DELIVERY TOGGLE FUNCTIONALITY
+return;
+}
+const flavorOptions = {
+'Cake': [
+'Strawberry Vanilla Cream',
+'Chocolate Mousse',
+'Lemon Orange Cream',
+'Blueberry Lavender Cream'
+],
+'Cookies': [
+'Vanilla Shortbread',
+'Chocolate Shortbread',
+'Lemon Orange Shortbread',
+'Gingerbread'
+],
+'Cake Pops': [
+'Vanilla',
+'Chocolate'
+],
+'Cupcakes': [
+'Vanilla',
+'Chocolate'
+]
+};
+function updateFlavorOptions(productType) {
+flavorSelect.innerHTML = '<option value="">Select flavor (optional)</option>';
+const flavors = flavorOptions[productType] || [];
+flavors.forEach(flavor => {
+const option = document.createElement('option');
+option.value = flavor;
+option.textContent = flavor;
+flavorSelect.appendChild(option);
+});
+flavorSection.style.display = 'block';
+}
+productRadios.forEach(radio => {
+radio.addEventListener('change', function() {
+updateFlavorOptions(this.value);
+});
+});
+}
 function initDeliveryToggle(retryCount = 0) {
-    const pickupOption = document.getElementById('pickup_option');
-    const deliveryOption = document.getElementById('delivery_option');
-    const deliveryDetailsSection = document.getElementById('deliveryDetailsSection');
-    const deliveryAddress = document.getElementById('delivery_address');
-    const deliveryCity = document.getElementById('delivery_city');
-
-    if (!pickupOption || !deliveryOption || !deliveryDetailsSection) {
-        // Elements not loaded yet, retry with limit
-        if (retryCount < MAX_INIT_RETRIES) {
-            setTimeout(() => initDeliveryToggle(retryCount + 1), 100);
-        }
-        return;
-    }
-
-    function toggleDeliverySection() {
-        if (deliveryOption.checked) {
-            deliveryDetailsSection.style.display = 'block';
-            deliveryAddress.required = true;
-            deliveryCity.required = true;
-        } else {
-            deliveryDetailsSection.style.display = 'none';
-            deliveryAddress.required = false;
-            deliveryCity.required = false;
-        }
-    }
-
-    pickupOption.addEventListener('change', toggleDeliverySection);
-    deliveryOption.addEventListener('change', toggleDeliverySection);
+const pickupOption = document.getElementById('pickup_option');
+const deliveryOption = document.getElementById('delivery_option');
+const deliveryDetailsSection = document.getElementById('deliveryDetailsSection');
+const deliveryAddress = document.getElementById('delivery_address');
+const deliveryCity = document.getElementById('delivery_city');
+if (!pickupOption || !deliveryOption || !deliveryDetailsSection) {
+if (retryCount < MAX_INIT_RETRIES) {
+setTimeout(() => initDeliveryToggle(retryCount + 1), 100);
 }
-
-// Initialize form toggles when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        initFlavorToggle();
-        initDeliveryToggle();
-    });
+return;
+}
+function toggleDeliverySection() {
+if (deliveryOption.checked) {
+deliveryDetailsSection.style.display = 'block';
+deliveryAddress.required = true;
+deliveryCity.required = true;
 } else {
-    initFlavorToggle();
-    initDeliveryToggle();
+deliveryDetailsSection.style.display = 'none';
+deliveryAddress.required = false;
+deliveryCity.required = false;
 }
-
-// Form submission
+}
+pickupOption.addEventListener('change', toggleDeliverySection);
+deliveryOption.addEventListener('change', toggleDeliverySection);
+}
+if (document.readyState === 'loading') {
+document.addEventListener('DOMContentLoaded', () => {
+initFlavorToggle();
+initDeliveryToggle();
+});
+} else {
+initFlavorToggle();
+initDeliveryToggle();
+}
 if (orderForm) {
-    orderForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        // File size validation (5MB max)
-        const fileInput = document.getElementById('reference_photo');
-        if (fileInput && fileInput.files.length > 0) {
-            const file = fileInput.files[0];
-            const maxSize = 5 * 1024 * 1024; // 5MB in bytes
-            if (file.size > maxSize) {
-                alert('File is too large. Please upload a file smaller than 5MB.');
-                return;
-            }
-        }
-
-        const submitBtn = orderForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'Sending...';
-        submitBtn.disabled = true;
-
-        const formData = new FormData(orderForm);
-
-        // Dynamic subject line: "Cake Order - Sarah Johnson - Mar 15"
-        const custName = formData.get('name') || 'Unknown';
-        const productType = formData.get('product_type') || 'Order';
-        const eventDate = formData.get('event_date');
-        let dateLabel = '';
-        if (eventDate) {
-            const d = new Date(eventDate + 'T00:00:00');
-            dateLabel = ' - ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-        }
-        formData.set('subject', productType + ' Order - ' + custName + dateLabel);
-
-        try {
-            const response = await fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                body: formData
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error: ${response.status}`);
-            }
-
-            const data = await response.json();
-
-            if (data.success) {
-                // Send confirmation email to customer
-                sendConfirmationEmail({
-                    email: formData.get('email'),
-                    name: formData.get('name'),
-                    form_type: 'order',
-                    product_type: formData.get('product_type'),
-                    event_date: formData.get('event_date')
-                });
-                alert('Thank you! Your order inquiry has been sent. We\'ll get back to you within 24 hours.');
-                orderForm.reset();
-                // Only close modal if it exists (not on dedicated order page)
-                if (orderModal) {
-                    orderModal.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                }
-                // Reset any conditional sections
-                const deliveryDetailsSection = document.getElementById('deliveryDetailsSection');
-                const aiPreviewSection = document.getElementById('aiPreviewSection');
-                if (deliveryDetailsSection) deliveryDetailsSection.style.display = 'none';
-                if (aiPreviewSection) aiPreviewSection.style.display = 'none';
-            } else {
-                alert('Oops! Something went wrong. Please call us at (415) 568-8060 or email info@mybakingcreations.com');
-            }
-        } catch (error) {
-            console.error('Form submission error:', error);
-            alert('Oops! Something went wrong. Please call us at (415) 568-8060 or email info@mybakingcreations.com');
-        }
-
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-    });
+orderForm.addEventListener('submit', async (e) => {
+e.preventDefault();
+const fileInput = document.getElementById('reference_photo');
+if (fileInput && fileInput.files.length > 0) {
+const file = fileInput.files[0];
+const maxSize = 5 * 1024 * 1024; 
+if (file.size > maxSize) {
+alert('File is too large. Please upload a file smaller than 5MB.');
+return;
 }
-
-// ===========================================
-// HERO CAROUSEL FUNCTIONALITY (Consolidated)
-// ===========================================
-// Track if carousel resize handler is already attached
+}
+const submitBtn = orderForm.querySelector('button[type="submit"]');
+const originalText = submitBtn.textContent;
+submitBtn.textContent = 'Sending...';
+submitBtn.disabled = true;
+const formData = new FormData(orderForm);
+const custName = formData.get('name') || 'Unknown';
+const productType = formData.get('product_type') || 'Order';
+const eventDate = formData.get('event_date');
+let dateLabel = '';
+if (eventDate) {
+const d = new Date(eventDate + 'T00:00:00');
+dateLabel = ' - ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+formData.set('subject', productType + ' Order - ' + custName + dateLabel);
+try {
+const response = await fetch('https://api.web3forms.com/submit', {
+method: 'POST',
+body: formData
+});
+if (!response.ok) {
+throw new Error(`HTTP error: ${response.status}`);
+}
+const data = await response.json();
+if (data.success) {
+sendConfirmationEmail({
+email: formData.get('email'),
+name: formData.get('name'),
+form_type: 'order',
+product_type: formData.get('product_type'),
+event_date: formData.get('event_date')
+});
+alert('Thank you! Your order inquiry has been sent. We\'ll get back to you within 24 hours.');
+orderForm.reset();
+if (orderModal) {
+orderModal.style.display = 'none';
+document.body.style.overflow = 'auto';
+}
+const deliveryDetailsSection = document.getElementById('deliveryDetailsSection');
+const aiPreviewSection = document.getElementById('aiPreviewSection');
+if (deliveryDetailsSection) deliveryDetailsSection.style.display = 'none';
+if (aiPreviewSection) aiPreviewSection.style.display = 'none';
+} else {
+alert('Oops! Something went wrong. Please call us at (415) 568-8060 or email info@mybakingcreations.com');
+}
+} catch (error) {
+console.error('Form submission error:', error);
+alert('Oops! Something went wrong. Please call us at (415) 568-8060 or email info@mybakingcreations.com');
+}
+submitBtn.textContent = originalText;
+submitBtn.disabled = false;
+});
+}
 let heroCarouselResizeHandler = null;
-
 function initHeroCarousel(startSlide = 0) {
-    const track = document.querySelector('.carousel-track');
-    const dots = document.querySelectorAll('.hero-dot');
-
-    if (!track || !dots.length) return;
-
-    let currentSlide = 0;
-    const totalSlides = dots.length;
-    let autoRotate;
-    let isMobile = window.innerWidth <= 768;
-
-    function getSlideWidth() {
-        return isMobile ? 100 : 33.333;
-    }
-
-    function goToSlide(index) {
-        dots[currentSlide].classList.remove('active');
-        currentSlide = index;
-        if (currentSlide >= totalSlides) currentSlide = 0;
-        if (currentSlide < 0) currentSlide = totalSlides - 1;
-        track.style.transform = `translateX(-${currentSlide * getSlideWidth()}%)`;
-        dots[currentSlide].classList.add('active');
-        resetAutoRotate();
-    }
-
-    function nextSlide() {
-        goToSlide(currentSlide + 1);
-    }
-
-    function resetAutoRotate() {
-        clearInterval(autoRotate);
-        autoRotate = setInterval(nextSlide, 4000);
-    }
-
-    // Expose goToSlide globally for dot onclick handlers
-    window.goToSlide = goToSlide;
-
-    // Handle resize - remove previous handler to prevent memory leaks
-    if (heroCarouselResizeHandler) {
-        window.removeEventListener('resize', heroCarouselResizeHandler);
-    }
-    heroCarouselResizeHandler = () => {
-        isMobile = window.innerWidth <= 768;
-        goToSlide(currentSlide);
-    };
-    window.addEventListener('resize', heroCarouselResizeHandler);
-
-    // Set up dot click handlers (replacing inline onclick)
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => goToSlide(index));
-    });
-
-    // Start carousel
-    autoRotate = setInterval(nextSlide, 4000);
-    goToSlide(startSlide);
+const track = document.querySelector('.carousel-track');
+const dots = document.querySelectorAll('.hero-dot');
+if (!track || !dots.length) return;
+let currentSlide = 0;
+const totalSlides = dots.length;
+let autoRotate;
+let isMobile = window.innerWidth <= 768;
+function getSlideWidth() {
+return isMobile ? 100 : 33.333;
 }
-
-// ===========================================
-// LIGHTBOX FUNCTIONALITY (Consolidated)
-// ===========================================
+function goToSlide(index) {
+dots[currentSlide].classList.remove('active');
+currentSlide = index;
+if (currentSlide >= totalSlides) currentSlide = 0;
+if (currentSlide < 0) currentSlide = totalSlides - 1;
+track.style.transform = `translateX(-${currentSlide * getSlideWidth()}%)`;
+dots[currentSlide].classList.add('active');
+resetAutoRotate();
+}
+function nextSlide() {
+goToSlide(currentSlide + 1);
+}
+function resetAutoRotate() {
+clearInterval(autoRotate);
+autoRotate = setInterval(nextSlide, 4000);
+}
+window.goToSlide = goToSlide;
+if (heroCarouselResizeHandler) {
+window.removeEventListener('resize', heroCarouselResizeHandler);
+}
+heroCarouselResizeHandler = () => {
+isMobile = window.innerWidth <= 768;
+goToSlide(currentSlide);
+};
+window.addEventListener('resize', heroCarouselResizeHandler);
+dots.forEach((dot, index) => {
+dot.addEventListener('click', () => goToSlide(index));
+});
+autoRotate = setInterval(nextSlide, 4000);
+goToSlide(startSlide);
+}
 function initLightbox(images) {
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const closeBtn = lightbox?.querySelector('.lightbox-close');
-    const prevBtn = lightbox?.querySelector('.lightbox-prev');
-    const nextBtn = lightbox?.querySelector('.lightbox-next');
-
-    if (!lightbox || !lightboxImg) return;
-
-    let currentIndex = 0;
-    let imageList = images || [];
-
-    function openLightbox(index) {
-        currentIndex = index;
-        if (imageList.length > 0) {
-            lightboxImg.src = imageList[currentIndex];
-        }
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeLightbox() {
-        lightbox.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-    function changeSlide(direction) {
-        currentIndex += direction;
-        if (currentIndex < 0) currentIndex = imageList.length - 1;
-        if (currentIndex >= imageList.length) currentIndex = 0;
-        lightboxImg.src = imageList[currentIndex];
-    }
-
-    // Event listeners
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) closeLightbox();
-    });
-
-    if (closeBtn) {
-        closeBtn.addEventListener('click', closeLightbox);
-    }
-
-    if (prevBtn) {
-        prevBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            changeSlide(-1);
-        });
-    }
-
-    if (nextBtn) {
-        nextBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            changeSlide(1);
-        });
-    }
-
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-        if (!lightbox.classList.contains('active')) return;
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowLeft' && prevBtn) changeSlide(-1);
-        if (e.key === 'ArrowRight' && nextBtn) changeSlide(1);
-    });
-
-    // Expose openLightbox globally
-    window.openLightbox = openLightbox;
-
-    return { openLightbox, closeLightbox, changeSlide };
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const closeBtn = lightbox?.querySelector('.lightbox-close');
+const prevBtn = lightbox?.querySelector('.lightbox-prev');
+const nextBtn = lightbox?.querySelector('.lightbox-next');
+if (!lightbox || !lightboxImg) return;
+let currentIndex = 0;
+let imageList = images || [];
+function openLightbox(index) {
+currentIndex = index;
+if (imageList.length > 0) {
+lightboxImg.src = imageList[currentIndex];
 }
-
-// Simple lightbox for cupcakes (no prev/next)
+lightbox.classList.add('active');
+document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+lightbox.classList.remove('active');
+document.body.style.overflow = '';
+}
+function changeSlide(direction) {
+currentIndex += direction;
+if (currentIndex < 0) currentIndex = imageList.length - 1;
+if (currentIndex >= imageList.length) currentIndex = 0;
+lightboxImg.src = imageList[currentIndex];
+}
+lightbox.addEventListener('click', (e) => {
+if (e.target === lightbox) closeLightbox();
+});
+if (closeBtn) {
+closeBtn.addEventListener('click', closeLightbox);
+}
+if (prevBtn) {
+prevBtn.addEventListener('click', (e) => {
+e.stopPropagation();
+changeSlide(-1);
+});
+}
+if (nextBtn) {
+nextBtn.addEventListener('click', (e) => {
+e.stopPropagation();
+changeSlide(1);
+});
+}
+document.addEventListener('keydown', (e) => {
+if (!lightbox.classList.contains('active')) return;
+if (e.key === 'Escape') closeLightbox();
+if (e.key === 'ArrowLeft' && prevBtn) changeSlide(-1);
+if (e.key === 'ArrowRight' && nextBtn) changeSlide(1);
+});
+window.openLightbox = openLightbox;
+return { openLightbox, closeLightbox, changeSlide };
+}
 function initSimpleLightbox() {
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-
-    if (!lightbox || !lightboxImg) return;
-
-    function openSimpleLightbox(element) {
-        const img = element.querySelector('img');
-        if (img) {
-            lightboxImg.src = img.src;
-            lightboxImg.alt = img.alt;
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-    }
-
-    function closeLightbox() {
-        lightbox.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox || e.target.classList.contains('lightbox-close')) {
-            closeLightbox();
-        }
-    });
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-            closeLightbox();
-        }
-    });
-
-    window.openSimpleLightbox = openSimpleLightbox;
-
-    return { openSimpleLightbox, closeLightbox };
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+if (!lightbox || !lightboxImg) return;
+function openSimpleLightbox(element) {
+const img = element.querySelector('img');
+if (img) {
+lightboxImg.src = img.src;
+lightboxImg.alt = img.alt;
+lightbox.classList.add('active');
+document.body.style.overflow = 'hidden';
 }
-
-// ===========================================
-// SCROLL REVEAL ANIMATIONS
-// ===========================================
+}
+function closeLightbox() {
+lightbox.classList.remove('active');
+document.body.style.overflow = '';
+}
+lightbox.addEventListener('click', (e) => {
+if (e.target === lightbox || e.target.classList.contains('lightbox-close')) {
+closeLightbox();
+}
+});
+document.addEventListener('keydown', (e) => {
+if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+closeLightbox();
+}
+});
+window.openSimpleLightbox = openSimpleLightbox;
+return { openSimpleLightbox, closeLightbox };
+}
 function initScrollReveal() {
-    // Check for reduced motion preference
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (prefersReducedMotion) {
-        // If reduced motion is preferred, make all reveal elements visible immediately
-        document.querySelectorAll('.reveal').forEach(el => {
-            el.classList.add('visible');
-        });
-        return;
-    }
-
-    const revealElements = document.querySelectorAll('.reveal');
-
-    if (revealElements.length === 0) return;
-
-    const observerOptions = {
-        root: null, // viewport
-        rootMargin: '0px 0px 100px 0px', // trigger 100px before element enters viewport
-        threshold: 0.1
-    };
-
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                // Stop observing once revealed
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    revealElements.forEach(el => {
-        revealObserver.observe(el);
-    });
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (prefersReducedMotion) {
+document.querySelectorAll('.reveal').forEach(el => {
+el.classList.add('visible');
+});
+return;
 }
-
-// Initialize scroll reveal when DOM is ready
+const revealElements = document.querySelectorAll('.reveal');
+if (revealElements.length === 0) return;
+const observerOptions = {
+root: null, 
+rootMargin: '0px 0px 100px 0px', 
+threshold: 0.1
+};
+const revealObserver = new IntersectionObserver((entries, observer) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('visible');
+observer.unobserve(entry.target);
+}
+});
+}, observerOptions);
+revealElements.forEach(el => {
+revealObserver.observe(el);
+});
+}
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initScrollReveal);
+document.addEventListener('DOMContentLoaded', initScrollReveal);
 } else {
-    initScrollReveal();
+initScrollReveal();
 }
-
-// ===========================================
-// BUTTON RIPPLE EFFECT
-// ===========================================
 function initButtonRipple() {
-    // Respect reduced motion preference
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        return;
-    }
-
-    // Target all buttons with .btn class
-    document.addEventListener('click', (e) => {
-        const button = e.target.closest('.btn');
-        if (!button) return;
-
-        // Create ripple element
-        const ripple = document.createElement('span');
-        ripple.classList.add('ripple');
-
-        // Get button dimensions and click position
-        const rect = button.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
-
-        // Style the ripple
-        ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = x + 'px';
-        ripple.style.top = y + 'px';
-
-        // Add ripple to button
-        button.appendChild(ripple);
-
-        // Remove ripple after animation completes
-        ripple.addEventListener('animationend', () => {
-            ripple.remove();
-        });
-    });
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+return;
 }
-
-// Initialize ripple effect when DOM is ready
+document.addEventListener('click', (e) => {
+const button = e.target.closest('.btn');
+if (!button) return;
+const ripple = document.createElement('span');
+ripple.classList.add('ripple');
+const rect = button.getBoundingClientRect();
+const size = Math.max(rect.width, rect.height);
+const x = e.clientX - rect.left - size / 2;
+const y = e.clientY - rect.top - size / 2;
+ripple.style.width = ripple.style.height = size + 'px';
+ripple.style.left = x + 'px';
+ripple.style.top = y + 'px';
+button.appendChild(ripple);
+ripple.addEventListener('animationend', () => {
+ripple.remove();
+});
+});
+}
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initButtonRipple);
+document.addEventListener('DOMContentLoaded', initButtonRipple);
 } else {
-    initButtonRipple();
+initButtonRipple();
 }
-
-// ===========================================
-// TYPEWRITER EFFECT (All Pages with .typewriter-headline)
-// ===========================================
 function initTypewriter() {
-    // Respect reduced motion preference - show text immediately
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        return;
-    }
-
-    // Find all typewriter headlines on the page
-    const headlines = document.querySelectorAll('.typewriter-headline');
-    if (headlines.length === 0) return;
-
-    // Initialize typewriter for each headline
-    headlines.forEach(headline => {
-        initSingleTypewriter(headline);
-    });
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+return;
 }
-
+const headlines = document.querySelectorAll('.typewriter-headline');
+if (headlines.length === 0) return;
+headlines.forEach(headline => {
+initSingleTypewriter(headline);
+});
+}
 function initSingleTypewriter(headline) {
-    // Store original HTML structure (preserves spans for SEO and styling)
-    const originalHTML = headline.innerHTML;
-
-    // Build a character map with styling info from original spans
-    const charMap = [];
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = originalHTML;
-
-    function extractChars(node, className) {
-        if (node.nodeType === Node.TEXT_NODE) {
-            for (const char of node.textContent) {
-                charMap.push({ char: char, className: className });
-            }
-        } else if (node.nodeType === Node.ELEMENT_NODE) {
-            // Handle <br> tags as explicit line breaks
-            if (node.tagName === 'BR') {
-                charMap.push({ char: '\n', className: className, isBr: true });
-                return;
-            }
-            const newClass = node.className || className;
-            for (const child of node.childNodes) {
-                extractChars(child, newClass);
-            }
-        }
-    }
-
-    for (const child of tempDiv.childNodes) {
-        extractChars(child, '');
-    }
-
-    // Timing configuration
-    const typeSpeed = 65;        // ms per character when typing
-    const deleteSpeed = 35;      // ms per character when deleting (faster)
-    const pauseAfterType = 3000; // 3 seconds pause after typing complete
-    const pauseBeforeRestart = 500; // 0.5 seconds before restarting
-
-    // Create persistent cursor
-    const cursor = document.createElement('span');
-    cursor.classList.add('typewriter-cursor');
-
-    // Start the loop
-    function startTypewriterLoop() {
-        // Clear headline and add cursor
-        headline.innerHTML = '';
-        headline.classList.add('typing');
-        headline.appendChild(cursor);
-        cursor.classList.remove('hidden');
-
-        let charIndex = 0;
-        let currentSpan = null;
-        let currentClass = null;
-
-        function typeNextChar() {
-            if (charIndex < charMap.length) {
-                const { char, className, isBr } = charMap[charIndex];
-
-                // Handle line break
-                if (isBr) {
-                    const br = document.createElement('br');
-                    headline.insertBefore(br, cursor);
-                    currentSpan = null; // Reset span after br
-                    currentClass = null;
-                    charIndex++;
-                    setTimeout(typeNextChar, typeSpeed);
-                    return;
-                }
-
-                // If class changed or no current span, create new span
-                if (className !== currentClass) {
-                    if (className) {
-                        currentSpan = document.createElement('span');
-                        currentSpan.className = className;
-                        headline.insertBefore(currentSpan, cursor);
-                    } else {
-                        currentSpan = null;
-                    }
-                    currentClass = className;
-                }
-
-                // Add character to current span or directly to headline
-                if (currentSpan) {
-                    currentSpan.appendChild(document.createTextNode(char));
-                } else {
-                    headline.insertBefore(document.createTextNode(char), cursor);
-                }
-
-                charIndex++;
-                setTimeout(typeNextChar, typeSpeed);
-            } else {
-                // Typing complete - pause then start deleting
-                setTimeout(startDeleting, pauseAfterType);
-            }
-        }
-
-        function startDeleting() {
-            // Get all text content for deletion
-            let textContent = '';
-            for (const node of headline.childNodes) {
-                if (node !== cursor) {
-                    textContent += node.textContent || '';
-                }
-            }
-
-            let deleteIndex = textContent.length;
-
-            function deleteNextChar() {
-                if (deleteIndex > 0) {
-                    // Remove one character from the end
-                    deleteIndex--;
-
-                    // Rebuild content up to deleteIndex
-                    headline.innerHTML = '';
-                    let builtChars = 0;
-                    let currentSpan = null;
-                    let currentClass = null;
-
-                    for (let i = 0; i < charMap.length && builtChars < deleteIndex; i++) {
-                        const { char, className } = charMap[i];
-
-                        if (className !== currentClass) {
-                            if (className) {
-                                currentSpan = document.createElement('span');
-                                currentSpan.className = className;
-                                headline.appendChild(currentSpan);
-                            } else {
-                                currentSpan = null;
-                            }
-                            currentClass = className;
-                        }
-
-                        if (currentSpan) {
-                            currentSpan.appendChild(document.createTextNode(char));
-                        } else {
-                            headline.appendChild(document.createTextNode(char));
-                        }
-                        builtChars++;
-                    }
-
-                    headline.appendChild(cursor);
-                    setTimeout(deleteNextChar, deleteSpeed);
-                } else {
-                    // Deletion complete - pause then restart
-                    setTimeout(startTypewriterLoop, pauseBeforeRestart);
-                }
-            }
-
-            deleteNextChar();
-        }
-
-        // Start typing
-        typeNextChar();
-    }
-
-    // Begin the loop
-    startTypewriterLoop();
+const originalHTML = headline.innerHTML;
+const charMap = [];
+const tempDiv = document.createElement('div');
+tempDiv.innerHTML = originalHTML;
+function extractChars(node, className) {
+if (node.nodeType === Node.TEXT_NODE) {
+for (const char of node.textContent) {
+charMap.push({ char: char, className: className });
 }
-
-// Initialize typewriter when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initTypewriter);
+} else if (node.nodeType === Node.ELEMENT_NODE) {
+if (node.tagName === 'BR') {
+charMap.push({ char: '\n', className: className, isBr: true });
+return;
+}
+const newClass = node.className || className;
+for (const child of node.childNodes) {
+extractChars(child, newClass);
+}
+}
+}
+for (const child of tempDiv.childNodes) {
+extractChars(child, '');
+}
+const typeSpeed = 65; 
+const deleteSpeed = 35; 
+const pauseAfterType = 3000; 
+const pauseBeforeRestart = 500; 
+const cursor = document.createElement('span');
+cursor.classList.add('typewriter-cursor');
+function startTypewriterLoop() {
+headline.innerHTML = '';
+headline.classList.add('typing');
+headline.appendChild(cursor);
+cursor.classList.remove('hidden');
+let charIndex = 0;
+let currentSpan = null;
+let currentClass = null;
+function typeNextChar() {
+if (charIndex < charMap.length) {
+const { char, className, isBr } = charMap[charIndex];
+if (isBr) {
+const br = document.createElement('br');
+headline.insertBefore(br, cursor);
+currentSpan = null; 
+currentClass = null;
+charIndex++;
+setTimeout(typeNextChar, typeSpeed);
+return;
+}
+if (className !== currentClass) {
+if (className) {
+currentSpan = document.createElement('span');
+currentSpan.className = className;
+headline.insertBefore(currentSpan, cursor);
 } else {
-    initTypewriter();
+currentSpan = null;
 }
-
-// ===========================================
-// TYPEWRITER EFFECT FOR COOKIE TITLES (One-time, on scroll)
-// ===========================================
+currentClass = className;
+}
+if (currentSpan) {
+currentSpan.appendChild(document.createTextNode(char));
+} else {
+headline.insertBefore(document.createTextNode(char), cursor);
+}
+charIndex++;
+setTimeout(typeNextChar, typeSpeed);
+} else {
+setTimeout(startDeleting, pauseAfterType);
+}
+}
+function startDeleting() {
+let textContent = '';
+for (const node of headline.childNodes) {
+if (node !== cursor) {
+textContent += node.textContent || '';
+}
+}
+let deleteIndex = textContent.length;
+function deleteNextChar() {
+if (deleteIndex > 0) {
+deleteIndex--;
+headline.innerHTML = '';
+let builtChars = 0;
+let currentSpan = null;
+let currentClass = null;
+for (let i = 0; i < charMap.length && builtChars < deleteIndex; i++) {
+const { char, className } = charMap[i];
+if (className !== currentClass) {
+if (className) {
+currentSpan = document.createElement('span');
+currentSpan.className = className;
+headline.appendChild(currentSpan);
+} else {
+currentSpan = null;
+}
+currentClass = className;
+}
+if (currentSpan) {
+currentSpan.appendChild(document.createTextNode(char));
+} else {
+headline.appendChild(document.createTextNode(char));
+}
+builtChars++;
+}
+headline.appendChild(cursor);
+setTimeout(deleteNextChar, deleteSpeed);
+} else {
+setTimeout(startTypewriterLoop, pauseBeforeRestart);
+}
+}
+deleteNextChar();
+}
+typeNextChar();
+}
+startTypewriterLoop();
+}
+if (document.readyState === 'loading') {
+document.addEventListener('DOMContentLoaded', initTypewriter);
+} else {
+initTypewriter();
+}
 function initCookieTypewriter() {
-    // Respect reduced motion preference
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        return;
-    }
-
-    const cookieElements = document.querySelectorAll('.typewriter-cookie');
-    if (cookieElements.length === 0) return;
-
-    cookieElements.forEach(element => {
-        const originalText = element.textContent;
-        element.setAttribute('data-text', originalText);
-        element.textContent = '';
-        element.style.borderRight = '2px solid var(--yellow)';
-
-        let hasTyped = false;
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !hasTyped) {
-                    hasTyped = true;
-                    typeCookieText(element, originalText);
-                    observer.unobserve(element);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        observer.observe(element);
-    });
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+return;
 }
-
+const cookieElements = document.querySelectorAll('.typewriter-cookie');
+if (cookieElements.length === 0) return;
+cookieElements.forEach(element => {
+const originalText = element.textContent;
+element.setAttribute('data-text', originalText);
+element.textContent = '';
+element.style.borderRight = '2px solid var(--yellow)';
+let hasTyped = false;
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting && !hasTyped) {
+hasTyped = true;
+typeCookieText(element, originalText);
+observer.unobserve(element);
+}
+});
+}, { threshold: 0.5 });
+observer.observe(element);
+});
+}
 function typeCookieText(element, text) {
-    let charIndex = 0;
-    const typeSpeed = 80;
-
-    function typeNext() {
-        if (charIndex < text.length) {
-            element.textContent += text.charAt(charIndex);
-            charIndex++;
-            setTimeout(typeNext, typeSpeed);
-        } else {
-            // Remove cursor after typing complete
-            setTimeout(() => {
-                element.style.borderRight = 'none';
-            }, 500);
-        }
-    }
-
-    typeNext();
-}
-
-// Initialize cookie typewriter when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCookieTypewriter);
+let charIndex = 0;
+const typeSpeed = 80;
+function typeNext() {
+if (charIndex < text.length) {
+element.textContent += text.charAt(charIndex);
+charIndex++;
+setTimeout(typeNext, typeSpeed);
 } else {
-    initCookieTypewriter();
+setTimeout(() => {
+element.style.borderRight = 'none';
+}, 500);
 }
-
-// ===========================================
-// SIMPLE SWIPE DETECTION FOR LIGHTBOX
-// ===========================================
+}
+typeNext();
+}
+if (document.readyState === 'loading') {
+document.addEventListener('DOMContentLoaded', initCookieTypewriter);
+} else {
+initCookieTypewriter();
+}
 (function() {
-    let startX = 0;
-
-    document.addEventListener('touchstart', function(e) {
-        if (!document.getElementById('lightbox')?.classList.contains('active')) return;
-        startX = e.touches[0].clientX;
-    }, { passive: true });
-
-    document.addEventListener('touchend', function(e) {
-        if (!document.getElementById('lightbox')?.classList.contains('active')) return;
-        const endX = e.changedTouches[0].clientX;
-        const diff = endX - startX;
-
-        if (Math.abs(diff) > 50) {
-            if (diff < 0) {
-                // Swipe left - next
-                document.querySelector('.lightbox-next')?.click();
-            } else {
-                // Swipe right - prev
-                document.querySelector('.lightbox-prev')?.click();
-            }
-        }
-    }, { passive: true });
+let startX = 0;
+document.addEventListener('touchstart', function(e) {
+if (!document.getElementById('lightbox')?.classList.contains('active')) return;
+startX = e.touches[0].clientX;
+}, { passive: true });
+document.addEventListener('touchend', function(e) {
+if (!document.getElementById('lightbox')?.classList.contains('active')) return;
+const endX = e.changedTouches[0].clientX;
+const diff = endX - startX;
+if (Math.abs(diff) > 50) {
+if (diff < 0) {
+document.querySelector('.lightbox-next')?.click();
+} else {
+document.querySelector('.lightbox-prev')?.click();
+}
+}
+}, { passive: true });
 })();
-
-// ===========================================
-// BLUR-UP LAZY LOADING EFFECT
-// Premium progressive image loading
-// ===========================================
 function initBlurUpLazyLoad() {
-    // Respect reduced motion preference
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        // Just show images normally
-        document.querySelectorAll('.blur-up-container').forEach(container => {
-            container.classList.add('loaded');
-        });
-        return;
-    }
-
-    // Find all blur-up containers
-    const containers = document.querySelectorAll('.blur-up-container');
-    if (containers.length === 0) return;
-
-    // Create intersection observer for lazy loading
-    const observerOptions = {
-        root: null,
-        rootMargin: '50px 0px', // Start loading 50px before entering viewport
-        threshold: 0.01
-    };
-
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const container = entry.target;
-                const fullImage = container.querySelector('.blur-up-full');
-
-                if (fullImage && fullImage.dataset.src) {
-                    // Lazy load: image has data-src, need to swap it to src
-                    const img = new Image();
-
-                    img.onload = function() {
-                        // Set the actual src and mark as loaded
-                        fullImage.src = fullImage.dataset.src;
-                        // Small delay for smooth transition
-                        requestAnimationFrame(() => {
-                            container.classList.add('loaded');
-                        });
-                    };
-
-                    img.onerror = function() {
-                        // On error, still show the placeholder
-                        console.warn('Failed to load image:', fullImage.dataset.src);
-                        container.classList.add('loaded');
-                    };
-
-                    // Start loading the full image
-                    img.src = fullImage.dataset.src;
-                } else if (fullImage && fullImage.src) {
-                    // Image already has src, just wait for it to load
-                    if (fullImage.complete) {
-                        // Already loaded
-                        container.classList.add('loaded');
-                    } else {
-                        fullImage.onload = function() {
-                            container.classList.add('loaded');
-                        };
-                        fullImage.onerror = function() {
-                            container.classList.add('loaded');
-                        };
-                    }
-                }
-
-                // Stop observing this container
-                observer.unobserve(container);
-            }
-        });
-    }, observerOptions);
-
-    // Observe all containers
-    containers.forEach(container => {
-        imageObserver.observe(container);
-    });
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+document.querySelectorAll('.blur-up-container').forEach(container => {
+container.classList.add('loaded');
+});
+return;
 }
-
-// Auto-convert standard lazy images to blur-up (optional enhancement)
+const containers = document.querySelectorAll('.blur-up-container');
+if (containers.length === 0) return;
+const observerOptions = {
+root: null,
+rootMargin: '50px 0px', 
+threshold: 0.01
+};
+const imageObserver = new IntersectionObserver((entries, observer) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+const container = entry.target;
+const fullImage = container.querySelector('.blur-up-full');
+if (fullImage && fullImage.dataset.src) {
+const img = new Image();
+img.onload = function() {
+fullImage.src = fullImage.dataset.src;
+requestAnimationFrame(() => {
+container.classList.add('loaded');
+});
+};
+img.onerror = function() {
+console.warn('Failed to load image:', fullImage.dataset.src);
+container.classList.add('loaded');
+};
+img.src = fullImage.dataset.src;
+} else if (fullImage && fullImage.src) {
+if (fullImage.complete) {
+container.classList.add('loaded');
+} else {
+fullImage.onload = function() {
+container.classList.add('loaded');
+};
+fullImage.onerror = function() {
+container.classList.add('loaded');
+};
+}
+}
+observer.unobserve(container);
+}
+});
+}, observerOptions);
+containers.forEach(container => {
+imageObserver.observe(container);
+});
+}
 function convertToBlurUp(selector) {
-    const images = document.querySelectorAll(selector);
-
-    images.forEach(img => {
-        // Skip if already converted or no src
-        if (img.closest('.blur-up-container') || !img.src) return;
-
-        // Get the parent element
-        const parent = img.parentElement;
-
-        // Create container
-        const container = document.createElement('div');
-        container.className = 'blur-up-container';
-        container.style.width = '100%';
-        container.style.height = '100%';
-
-        // Create placeholder (tiny base64 placeholder or use same src with blur)
-        const placeholder = document.createElement('img');
-        placeholder.className = 'blur-up-placeholder';
-        placeholder.src = img.src; // Use same image, CSS will blur it
-        placeholder.alt = '';
-        placeholder.setAttribute('aria-hidden', 'true');
-
-        // Modify original image
-        img.className = (img.className + ' blur-up-full').trim();
-        img.dataset.src = img.src;
-        img.removeAttribute('src'); // Remove src so it doesn't load immediately
-
-        // Build the structure
-        container.appendChild(placeholder);
-        container.appendChild(img);
-
-        // Replace in DOM
-        parent.appendChild(container);
-    });
-
-    // Initialize the blur-up effect
-    initBlurUpLazyLoad();
+const images = document.querySelectorAll(selector);
+images.forEach(img => {
+if (img.closest('.blur-up-container') || !img.src) return;
+const parent = img.parentElement;
+const container = document.createElement('div');
+container.className = 'blur-up-container';
+container.style.width = '100%';
+container.style.height = '100%';
+const placeholder = document.createElement('img');
+placeholder.className = 'blur-up-placeholder';
+placeholder.src = img.src; 
+placeholder.alt = '';
+placeholder.setAttribute('aria-hidden', 'true');
+img.className = (img.className + ' blur-up-full').trim();
+img.dataset.src = img.src;
+img.removeAttribute('src'); 
+container.appendChild(placeholder);
+container.appendChild(img);
+parent.appendChild(container);
+});
+initBlurUpLazyLoad();
 }
-
-// Initialize blur-up when DOM is ready
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initBlurUpLazyLoad);
+document.addEventListener('DOMContentLoaded', initBlurUpLazyLoad);
 } else {
-    initBlurUpLazyLoad();
+initBlurUpLazyLoad();
 }
-
-// ===========================================
-// TESTIMONIAL CAROUSEL
-// Responsive carousel with touch support
-// ===========================================
 function initTestimonialCarousel() {
-    const track = document.getElementById('testimonialTrack');
-    const prevBtn = document.getElementById('testimonialPrev');
-    const nextBtn = document.getElementById('testimonialNext');
-    const dotsContainer = document.getElementById('testimonialDots');
-
-    if (!track || !prevBtn || !nextBtn || !dotsContainer) return;
-
-    // Select both linked and non-linked testimonial cards
-    const cards = track.querySelectorAll('.testimonial-card-link, .testimonial-card:not(.testimonial-card-link .testimonial-card)');
-    if (cards.length === 0) return;
-
-    let currentIndex = 0;
-    let cardsPerView = getCardsPerView();
-    let totalPages = Math.ceil(cards.length / cardsPerView);
-    let autoPlayInterval;
-
-    function getCardsPerView() {
-        if (window.innerWidth >= 1024) return 3;
-        if (window.innerWidth >= 768) return 2;
-        return 1;
-    }
-
-    function createDots() {
-        dotsContainer.innerHTML = '';
-        for (let i = 0; i < totalPages; i++) {
-            const dot = document.createElement('button');
-            dot.className = 'testimonial-dot' + (i === 0 ? ' active' : '');
-            dot.setAttribute('aria-label', `Go to page ${i + 1}`);
-            dot.addEventListener('click', () => goToPage(i));
-            dotsContainer.appendChild(dot);
-        }
-    }
-
-    function updateDots() {
-        const dots = dotsContainer.querySelectorAll('.testimonial-dot');
-        dots.forEach((dot, i) => {
-            dot.classList.toggle('active', i === currentIndex);
-        });
-    }
-
-    function goToPage(index) {
-        currentIndex = Math.max(0, Math.min(index, totalPages - 1));
-        const cardWidth = 100 / cardsPerView;
-        const offset = currentIndex * cardsPerView * cardWidth;
-        track.style.transform = `translateX(-${offset}%)`;
-        updateDots();
-        resetAutoPlay();
-    }
-
-    function next() {
-        goToPage(currentIndex + 1 >= totalPages ? 0 : currentIndex + 1);
-    }
-
-    function prev() {
-        goToPage(currentIndex - 1 < 0 ? totalPages - 1 : currentIndex - 1);
-    }
-
-    function handleResize() {
-        const newCardsPerView = getCardsPerView();
-        if (newCardsPerView !== cardsPerView) {
-            cardsPerView = newCardsPerView;
-            totalPages = Math.ceil(cards.length / cardsPerView);
-            currentIndex = Math.min(currentIndex, totalPages - 1);
-            createDots();
-            goToPage(currentIndex);
-        }
-    }
-
-    function startAutoPlay() {
-        autoPlayInterval = setInterval(next, 5000);
-    }
-
-    function resetAutoPlay() {
-        clearInterval(autoPlayInterval);
-        startAutoPlay();
-    }
-
-    // Touch/swipe support
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    track.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-    }, { passive: true });
-
-    track.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].clientX;
-        const diff = touchStartX - touchEndX;
-        if (Math.abs(diff) > 50) {
-            if (diff > 0) {
-                next();
-            } else {
-                prev();
-            }
-        }
-    }, { passive: true });
-
-    // Pause autoplay on hover
-    track.addEventListener('mouseenter', () => {
-        clearInterval(autoPlayInterval);
-    });
-
-    track.addEventListener('mouseleave', () => {
-        startAutoPlay();
-    });
-
-    // Event listeners
-    prevBtn.addEventListener('click', prev);
-    nextBtn.addEventListener('click', next);
-    window.addEventListener('resize', handleResize);
-
-    // Initialize
-    createDots();
-    goToPage(0);
-    startAutoPlay();
+const track = document.getElementById('testimonialTrack');
+const prevBtn = document.getElementById('testimonialPrev');
+const nextBtn = document.getElementById('testimonialNext');
+const dotsContainer = document.getElementById('testimonialDots');
+if (!track || !prevBtn || !nextBtn || !dotsContainer) return;
+const cards = track.querySelectorAll('.testimonial-card-link, .testimonial-card:not(.testimonial-card-link .testimonial-card)');
+if (cards.length === 0) return;
+let currentIndex = 0;
+let cardsPerView = getCardsPerView();
+let totalPages = Math.ceil(cards.length / cardsPerView);
+let autoPlayInterval;
+function getCardsPerView() {
+if (window.innerWidth >= 1024) return 3;
+if (window.innerWidth >= 768) return 2;
+return 1;
 }
-
-// Initialize testimonial carousel when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initTestimonialCarousel);
+function createDots() {
+dotsContainer.innerHTML = '';
+for (let i = 0; i < totalPages; i++) {
+const dot = document.createElement('button');
+dot.className = 'testimonial-dot' + (i === 0 ? ' active' : '');
+dot.setAttribute('aria-label', `Go to page ${i + 1}`);
+dot.addEventListener('click', () => goToPage(i));
+dotsContainer.appendChild(dot);
+}
+}
+function updateDots() {
+const dots = dotsContainer.querySelectorAll('.testimonial-dot');
+dots.forEach((dot, i) => {
+dot.classList.toggle('active', i === currentIndex);
+});
+}
+function goToPage(index) {
+currentIndex = Math.max(0, Math.min(index, totalPages - 1));
+const cardWidth = 100 / cardsPerView;
+const offset = currentIndex * cardsPerView * cardWidth;
+track.style.transform = `translateX(-${offset}%)`;
+updateDots();
+resetAutoPlay();
+}
+function next() {
+goToPage(currentIndex + 1 >= totalPages ? 0 : currentIndex + 1);
+}
+function prev() {
+goToPage(currentIndex - 1 < 0 ? totalPages - 1 : currentIndex - 1);
+}
+function handleResize() {
+const newCardsPerView = getCardsPerView();
+if (newCardsPerView !== cardsPerView) {
+cardsPerView = newCardsPerView;
+totalPages = Math.ceil(cards.length / cardsPerView);
+currentIndex = Math.min(currentIndex, totalPages - 1);
+createDots();
+goToPage(currentIndex);
+}
+}
+function startAutoPlay() {
+autoPlayInterval = setInterval(next, 5000);
+}
+function resetAutoPlay() {
+clearInterval(autoPlayInterval);
+startAutoPlay();
+}
+let touchStartX = 0;
+let touchEndX = 0;
+track.addEventListener('touchstart', (e) => {
+touchStartX = e.touches[0].clientX;
+}, { passive: true });
+track.addEventListener('touchend', (e) => {
+touchEndX = e.changedTouches[0].clientX;
+const diff = touchStartX - touchEndX;
+if (Math.abs(diff) > 50) {
+if (diff > 0) {
+next();
 } else {
-    initTestimonialCarousel();
+prev();
 }
-
-// ===========================================
-// SCROLL INDICATOR - Scroll down on each click
-// ===========================================
+}
+}, { passive: true });
+track.addEventListener('mouseenter', () => {
+clearInterval(autoPlayInterval);
+});
+track.addEventListener('mouseleave', () => {
+startAutoPlay();
+});
+prevBtn.addEventListener('click', prev);
+nextBtn.addEventListener('click', next);
+window.addEventListener('resize', handleResize);
+createDots();
+goToPage(0);
+startAutoPlay();
+}
+if (document.readyState === 'loading') {
+document.addEventListener('DOMContentLoaded', initTestimonialCarousel);
+} else {
+initTestimonialCarousel();
+}
 (function() {
-    const scrollIndicator = document.querySelector('.scroll-indicator');
-    if (!scrollIndicator) return;
-
-    scrollIndicator.addEventListener('click', function(e) {
-        e.preventDefault();
-        // Scroll down by 80% of viewport height each click
-        window.scrollBy({
-            top: window.innerHeight * 0.8,
-            behavior: 'smooth'
-        });
-    });
+const scrollIndicator = document.querySelector('.scroll-indicator');
+if (!scrollIndicator) return;
+scrollIndicator.addEventListener('click', function(e) {
+e.preventDefault();
+window.scrollBy({
+top: window.innerHeight * 0.8,
+behavior: 'smooth'
+});
+});
 })();
-
-// ===========================================
-// SITE SEARCH FUNCTIONALITY
-// ===========================================
 (function() {
-    const searchInput = document.getElementById('site-search');
-    const searchResults = document.getElementById('search-results');
-    const typewriterEl = document.getElementById('search-typewriter');
-
-    if (!searchInput || !searchResults) return;
-
-    let searchData = null;
-    let typewriterInterval = null;
-    let currentPlaceholderIndex = 0;
-    let currentCharIndex = 0;
-    let isDeleting = false;
-    let isPaused = false;
-
-    // Load search data
-    fetch('search-data.json')
-        .then(response => response.json())
-        .then(data => {
-            searchData = data;
-            startTypewriterEffect();
-        })
-        .catch(err => console.log('Search data not loaded:', err));
-
-    // Typewriter effect for placeholder
-    function startTypewriterEffect() {
-        if (!searchData || !typewriterEl) return;
-
-        const examples = searchData.placeholderExamples || ['Baby Yoda cake', 'Corporate cookies', 'Wedding cake'];
-
-        function typeChar() {
-            if (searchInput.value !== '' || document.activeElement === searchInput) {
-                // Hide typewriter when user is typing or focused
-                typewriterEl.innerHTML = '';
-                return;
-            }
-
-            const currentText = examples[currentPlaceholderIndex];
-
-            if (isPaused) {
-                return;
-            }
-
-            if (!isDeleting) {
-                // Typing
-                currentCharIndex++;
-                typewriterEl.innerHTML = currentText.substring(0, currentCharIndex) + '<span class="cursor"></span>';
-
-                if (currentCharIndex === currentText.length) {
-                    isPaused = true;
-                    setTimeout(() => {
-                        isPaused = false;
-                        isDeleting = true;
-                    }, 2000); // Pause at end
-                }
-            } else {
-                // Deleting
-                currentCharIndex--;
-                typewriterEl.innerHTML = currentText.substring(0, currentCharIndex) + '<span class="cursor"></span>';
-
-                if (currentCharIndex === 0) {
-                    isDeleting = false;
-                    currentPlaceholderIndex = (currentPlaceholderIndex + 1) % examples.length;
-                }
-            }
-        }
-
-        typewriterInterval = setInterval(typeChar, isDeleting ? 50 : 100);
-    }
-
-    // Search functionality
-    function performSearch(query) {
-        if (!searchData || query.length < 2) {
-            searchResults.classList.remove('active');
-            return;
-        }
-
-        const lowerQuery = query.toLowerCase();
-        const results = [];
-
-        // Search images
-        const imageResults = searchData.images.filter(img =>
-            img.alt.toLowerCase().includes(lowerQuery)
-        ).slice(0, 6);
-
-        // Search blogs
-        const blogResults = searchData.blogs.filter(blog =>
-            blog.title.toLowerCase().includes(lowerQuery) ||
-            blog.description.toLowerCase().includes(lowerQuery) ||
-            (blog.keywords && blog.keywords.toLowerCase().includes(lowerQuery))
-        );
-
-        // Build results HTML
-        let html = '';
-
-        if (imageResults.length > 0) {
-            html += '<div class="search-section-header">Gallery</div>';
-            imageResults.forEach(img => {
-                // Extract a cleaner title from alt text
-                const title = img.alt
-                    .replace(/Custom |San Francisco |Bay Area |bakery/gi, '')
-                    .trim();
-                html += `
-                    <a href="${img.url}" class="search-result-item">
-                        <img src="${img.src}" alt="${img.alt}" class="search-result-image" loading="lazy">
-                        <div class="search-result-info">
-                            <div class="search-result-title">${title}</div>
-                            <div class="search-result-category">${img.category}</div>
-                        </div>
-                    </a>
-                `;
-            });
-        }
-
-        if (blogResults.length > 0) {
-            html += '<div class="search-section-header">Blog Posts</div>';
-            blogResults.forEach(blog => {
-                html += `
-                    <a href="${blog.url}" class="search-result-item">
-                        <div class="search-result-blog-icon">
-                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-                        </div>
-                        <div class="search-result-info">
-                            <div class="search-result-title">${blog.title}</div>
-                            <div class="search-result-category">Blog</div>
-                        </div>
-                    </a>
-                `;
-            });
-        }
-
-        if (html === '') {
-            html = '<div class="search-results-empty">No results found for "' + query + '"</div>';
-        }
-
-        searchResults.innerHTML = html;
-        searchResults.classList.add('active');
-    }
-
-    // Event listeners
-    searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.trim();
-
-        // Hide typewriter when typing
-        if (typewriterEl) {
-            typewriterEl.style.display = query ? 'none' : 'block';
-        }
-
-        performSearch(query);
-    });
-
-    searchInput.addEventListener('focus', () => {
-        if (typewriterEl) {
-            typewriterEl.style.display = 'none';
-        }
-        searchInput.classList.remove('typewriter-active');
-    });
-
-    searchInput.addEventListener('blur', () => {
-        // Delay to allow click on results
-        setTimeout(() => {
-            if (searchInput.value === '') {
-                searchInput.classList.add('typewriter-active');
-                if (typewriterEl) {
-                    typewriterEl.style.display = 'block';
-                }
-            }
-            searchResults.classList.remove('active');
-        }, 200);
-    });
-
-    // Close results when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.search-container')) {
-            searchResults.classList.remove('active');
-        }
-    });
+const searchInput = document.getElementById('site-search');
+const searchResults = document.getElementById('search-results');
+const typewriterEl = document.getElementById('search-typewriter');
+if (!searchInput || !searchResults) return;
+let searchData = null;
+let typewriterInterval = null;
+let currentPlaceholderIndex = 0;
+let currentCharIndex = 0;
+let isDeleting = false;
+let isPaused = false;
+fetch('search-data.json')
+.then(response => response.json())
+.then(data => {
+searchData = data;
+startTypewriterEffect();
+})
+.catch(err => console.log('Search data not loaded:', err));
+function startTypewriterEffect() {
+if (!searchData || !typewriterEl) return;
+const examples = searchData.placeholderExamples || ['Baby Yoda cake', 'Corporate cookies', 'Wedding cake'];
+function typeChar() {
+if (searchInput.value !== '' || document.activeElement === searchInput) {
+typewriterEl.innerHTML = '';
+return;
+}
+const currentText = examples[currentPlaceholderIndex];
+if (isPaused) {
+return;
+}
+if (!isDeleting) {
+currentCharIndex++;
+typewriterEl.innerHTML = currentText.substring(0, currentCharIndex) + '<span class="cursor"></span>';
+if (currentCharIndex === currentText.length) {
+isPaused = true;
+setTimeout(() => {
+isPaused = false;
+isDeleting = true;
+}, 2000); 
+}
+} else {
+currentCharIndex--;
+typewriterEl.innerHTML = currentText.substring(0, currentCharIndex) + '<span class="cursor"></span>';
+if (currentCharIndex === 0) {
+isDeleting = false;
+currentPlaceholderIndex = (currentPlaceholderIndex + 1) % examples.length;
+}
+}
+}
+typewriterInterval = setInterval(typeChar, isDeleting ? 50 : 100);
+}
+function performSearch(query) {
+if (!searchData || query.length < 2) {
+searchResults.classList.remove('active');
+return;
+}
+const lowerQuery = query.toLowerCase();
+const results = [];
+const imageResults = searchData.images.filter(img =>
+img.alt.toLowerCase().includes(lowerQuery)
+).slice(0, 6);
+const blogResults = searchData.blogs.filter(blog =>
+blog.title.toLowerCase().includes(lowerQuery) ||
+blog.description.toLowerCase().includes(lowerQuery) ||
+(blog.keywords && blog.keywords.toLowerCase().includes(lowerQuery))
+);
+let html = '';
+if (imageResults.length > 0) {
+html += '<div class="search-section-header">Gallery</div>';
+imageResults.forEach(img => {
+const title = img.alt
+.replace(/Custom |San Francisco |Bay Area |bakery/gi, '')
+.trim();
+html += `
+<a href="${img.url}" class="search-result-item">
+<img src="${img.src}" alt="${img.alt}" class="search-result-image" loading="lazy">
+<div class="search-result-info">
+<div class="search-result-title">${title}</div>
+<div class="search-result-category">${img.category}</div>
+</div>
+</a>
+`;
+});
+}
+if (blogResults.length > 0) {
+html += '<div class="search-section-header">Blog Posts</div>';
+blogResults.forEach(blog => {
+html += `
+<a href="${blog.url}" class="search-result-item">
+<div class="search-result-blog-icon">
+<svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+</div>
+<div class="search-result-info">
+<div class="search-result-title">${blog.title}</div>
+<div class="search-result-category">Blog</div>
+</div>
+</a>
+`;
+});
+}
+if (html === '') {
+html = '<div class="search-results-empty">No results found for "' + query + '"</div>';
+}
+searchResults.innerHTML = html;
+searchResults.classList.add('active');
+}
+searchInput.addEventListener('input', (e) => {
+const query = e.target.value.trim();
+if (typewriterEl) {
+typewriterEl.style.display = query ? 'none' : 'block';
+}
+performSearch(query);
+});
+searchInput.addEventListener('focus', () => {
+if (typewriterEl) {
+typewriterEl.style.display = 'none';
+}
+searchInput.classList.remove('typewriter-active');
+});
+searchInput.addEventListener('blur', () => {
+setTimeout(() => {
+if (searchInput.value === '') {
+searchInput.classList.add('typewriter-active');
+if (typewriterEl) {
+typewriterEl.style.display = 'block';
+}
+}
+searchResults.classList.remove('active');
+}, 200);
+});
+document.addEventListener('click', (e) => {
+if (!e.target.closest('.search-container')) {
+searchResults.classList.remove('active');
+}
+});
 })();
-
-// ===========================================
-// GALLERY IMAGE PARALLAX HOVER EFFECT
-// Desktop only - subtle image shift on mouse move
-// ===========================================
 (function() {
-    // Only run on devices with hover and fine pointer (desktop)
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-
-    // Respect reduced motion preference
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const galleryItems = document.querySelectorAll('.cake-thumb, .gallery-item');
-    if (galleryItems.length === 0) return;
-
-    galleryItems.forEach(item => {
-        const img = item.querySelector('img');
-        if (!img) return;
-
-        item.addEventListener('mousemove', function(e) {
-            const rect = item.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            // Calculate position as percentage from center (-1 to 1)
-            const xPercent = (x / rect.width - 0.5) * 2;
-            const yPercent = (y / rect.height - 0.5) * 2;
-
-            // Subtle shift (max 8px) in opposite direction of mouse
-            const shiftX = -xPercent * 8;
-            const shiftY = -yPercent * 8;
-
-            img.style.transform = `scale(1.08) translate(${shiftX}px, ${shiftY}px)`;
-        });
-
-        item.addEventListener('mouseleave', function() {
-            img.style.transform = 'scale(1)';
-        });
-    });
+if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+const galleryItems = document.querySelectorAll('.cake-thumb, .gallery-item');
+if (galleryItems.length === 0) return;
+galleryItems.forEach(item => {
+const img = item.querySelector('img');
+if (!img) return;
+item.addEventListener('mousemove', function(e) {
+const rect = item.getBoundingClientRect();
+const x = e.clientX - rect.left;
+const y = e.clientY - rect.top;
+const xPercent = (x / rect.width - 0.5) * 2;
+const yPercent = (y / rect.height - 0.5) * 2;
+const shiftX = -xPercent * 8;
+const shiftY = -yPercent * 8;
+img.style.transform = `scale(1.08) translate(${shiftX}px, ${shiftY}px)`;
+});
+item.addEventListener('mouseleave', function() {
+img.style.transform = 'scale(1)';
+});
+});
 })();
-
-// ===========================================
-// SCROLL-TRIGGERED RATING COUNTER ANIMATION
-// Animates "5.0" ratings when they come into view
-// ===========================================
 (function() {
-    // Respect reduced motion preference
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const ratingCounts = document.querySelectorAll('.rating-count');
-    if (ratingCounts.length === 0) return;
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const element = entry.target;
-                const text = element.textContent;
-                const match = text.match(/(\d+\.?\d*)/);
-
-                if (match) {
-                    const targetValue = parseFloat(match[1]);
-                    const suffix = text.replace(match[1], '');
-
-                    animateCounter(element, targetValue, suffix);
-                }
-                observer.unobserve(element);
-            }
-        });
-    }, { threshold: 0.5 });
-
-    ratingCounts.forEach(el => observer.observe(el));
-
-    function animateCounter(element, target, suffix) {
-        const duration = 1500;
-        const startTime = performance.now();
-        const startValue = 0;
-
-        function update(currentTime) {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-
-            // Ease-out curve for smooth deceleration
-            const easeOut = 1 - Math.pow(1 - progress, 3);
-            const currentValue = startValue + (target - startValue) * easeOut;
-
-            element.textContent = currentValue.toFixed(1) + suffix;
-
-            if (progress < 1) {
-                requestAnimationFrame(update);
-            }
-        }
-
-        requestAnimationFrame(update);
-    }
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+const ratingCounts = document.querySelectorAll('.rating-count');
+if (ratingCounts.length === 0) return;
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+const element = entry.target;
+const text = element.textContent;
+const match = text.match(/(\d+\.?\d*)/);
+if (match) {
+const targetValue = parseFloat(match[1]);
+const suffix = text.replace(match[1], '');
+animateCounter(element, targetValue, suffix);
+}
+observer.unobserve(element);
+}
+});
+}, { threshold: 0.5 });
+ratingCounts.forEach(el => observer.observe(el));
+function animateCounter(element, target, suffix) {
+const duration = 1500;
+const startTime = performance.now();
+const startValue = 0;
+function update(currentTime) {
+const elapsed = currentTime - startTime;
+const progress = Math.min(elapsed / duration, 1);
+const easeOut = 1 - Math.pow(1 - progress, 3);
+const currentValue = startValue + (target - startValue) * easeOut;
+element.textContent = currentValue.toFixed(1) + suffix;
+if (progress < 1) {
+requestAnimationFrame(update);
+}
+}
+requestAnimationFrame(update);
+}
 })();
-
-// ===========================================
-// HOVER HINT BUBBLES - JavaScript Enhancements
-// ===========================================
 (function() {
-    const hints = document.querySelectorAll('.has-hint');
-    if (!hints.length) return;
-
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    let activeHint = null;
-    let hoverTimeout = null;
-
-    hints.forEach(el => {
-        const hasDelay = el.classList.contains('hint-delay');
-        const delay = hasDelay ? 300 : 0; // 300ms delay if hint-delay class
-
-        // Desktop: hover with optional delay
-        el.addEventListener('mouseenter', () => {
-            if (isTouchDevice) return;
-
-            if (delay > 0) {
-                hoverTimeout = setTimeout(() => {
-                    checkEdgeCollision(el);
-                    el.classList.add('hint-active');
-                }, delay);
-            } else {
-                checkEdgeCollision(el);
-            }
-        });
-
-        el.addEventListener('mouseleave', () => {
-            if (isTouchDevice) return;
-
-            clearTimeout(hoverTimeout);
-            el.classList.remove('hint-active', 'hint-flip-bottom', 'hint-flip-top');
-        });
-
-        // Touch: tap to toggle
-        el.addEventListener('click', (e) => {
-            if (!isTouchDevice) return;
-
-            // Don't interfere with actual links/buttons
-            if (el.tagName === 'A' || el.tagName === 'BUTTON') return;
-
-            e.preventDefault();
-
-            // Close any other open hint
-            if (activeHint && activeHint !== el) {
-                activeHint.classList.remove('hint-active', 'hint-flip-bottom', 'hint-flip-top');
-            }
-
-            // Toggle this hint
-            if (el.classList.contains('hint-active')) {
-                el.classList.remove('hint-active', 'hint-flip-bottom', 'hint-flip-top');
-                activeHint = null;
-            } else {
-                checkEdgeCollision(el);
-                el.classList.add('hint-active');
-                activeHint = el;
-            }
-        });
-    });
-
-    // Close hint when tapping outside
-    if (isTouchDevice) {
-        document.addEventListener('click', (e) => {
-            if (activeHint && !activeHint.contains(e.target)) {
-                activeHint.classList.remove('hint-active', 'hint-flip-bottom', 'hint-flip-top');
-                activeHint = null;
-            }
-        });
-    }
-
-    // Check if hint would go off screen and flip it
-    function checkEdgeCollision(el) {
-        const rect = el.getBoundingClientRect();
-        const pos = el.dataset.hintPos || 'top';
-
-        // Remove previous flip classes
-        el.classList.remove('hint-flip-bottom', 'hint-flip-top');
-
-        if (pos === 'top' && rect.top < 80) {
-            // Too close to top, flip to bottom
-            el.classList.add('hint-flip-bottom');
-        } else if (pos === 'bottom' && (window.innerHeight - rect.bottom) < 80) {
-            // Too close to bottom, flip to top
-            el.classList.add('hint-flip-top');
-        }
-    }
+const hints = document.querySelectorAll('.has-hint');
+if (!hints.length) return;
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+let activeHint = null;
+let hoverTimeout = null;
+hints.forEach(el => {
+const hasDelay = el.classList.contains('hint-delay');
+const delay = hasDelay ? 300 : 0; 
+el.addEventListener('mouseenter', () => {
+if (isTouchDevice) return;
+if (delay > 0) {
+hoverTimeout = setTimeout(() => {
+checkEdgeCollision(el);
+el.classList.add('hint-active');
+}, delay);
+} else {
+checkEdgeCollision(el);
+}
+});
+el.addEventListener('mouseleave', () => {
+if (isTouchDevice) return;
+clearTimeout(hoverTimeout);
+el.classList.remove('hint-active', 'hint-flip-bottom', 'hint-flip-top');
+});
+el.addEventListener('click', (e) => {
+if (!isTouchDevice) return;
+if (el.tagName === 'A' || el.tagName === 'BUTTON') return;
+e.preventDefault();
+if (activeHint && activeHint !== el) {
+activeHint.classList.remove('hint-active', 'hint-flip-bottom', 'hint-flip-top');
+}
+if (el.classList.contains('hint-active')) {
+el.classList.remove('hint-active', 'hint-flip-bottom', 'hint-flip-top');
+activeHint = null;
+} else {
+checkEdgeCollision(el);
+el.classList.add('hint-active');
+activeHint = el;
+}
+});
+});
+if (isTouchDevice) {
+document.addEventListener('click', (e) => {
+if (activeHint && !activeHint.contains(e.target)) {
+activeHint.classList.remove('hint-active', 'hint-flip-bottom', 'hint-flip-top');
+activeHint = null;
+}
+});
+}
+function checkEdgeCollision(el) {
+const rect = el.getBoundingClientRect();
+const pos = el.dataset.hintPos || 'top';
+el.classList.remove('hint-flip-bottom', 'hint-flip-top');
+if (pos === 'top' && rect.top < 80) {
+el.classList.add('hint-flip-bottom');
+} else if (pos === 'bottom' && (window.innerHeight - rect.bottom) < 80) {
+el.classList.add('hint-flip-top');
+}
+}
 })();
-
-// ==========================================
-// FLOATING PARTICLES - Bakery dust/sugar effect
-// ==========================================
 (function() {
-    // Respect reduced motion preference
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    // Skip on mobile for performance
-    if (window.innerWidth < 768) return;
-
-    const canvas = document.createElement('canvas');
-    canvas.id = 'particles-canvas';
-    canvas.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 0;
-    `;
-    document.body.insertBefore(canvas, document.body.firstChild);
-
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    const particleCount = 88; // Doubled for more visible effect
-
-    function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    function createParticle() {
-        return {
-            x: Math.random() * canvas.width,
-            y: canvas.height + 10,
-            size: Math.random() * 3.6 + 1.2, // 20% larger
-            speedY: Math.random() * 0.5 + 0.2,
-            speedX: (Math.random() - 0.5) * 0.3,
-            opacity: Math.random() * 0.48 + 0.12, // 20% more visible
-            wobble: Math.random() * Math.PI * 2,
-            wobbleSpeed: Math.random() * 0.02 + 0.01
-        };
-    }
-
-    // Initialize particles
-    for (let i = 0; i < particleCount; i++) {
-        const p = createParticle();
-        p.y = Math.random() * canvas.height;
-        particles.push(p);
-    }
-
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        particles.forEach((p, index) => {
-            // Gentle wobble
-            p.wobble += p.wobbleSpeed;
-            p.x += Math.sin(p.wobble) * 0.3 + p.speedX;
-            p.y -= p.speedY;
-
-            // Reset when off screen
-            if (p.y < -10) {
-                particles[index] = createParticle();
-            }
-
-            // Draw particle
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
-            ctx.fill();
-        });
-
-        requestAnimationFrame(animate);
-    }
-
-    animate();
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+if (window.innerWidth < 768) return;
+const canvas = document.createElement('canvas');
+canvas.id = 'particles-canvas';
+canvas.style.cssText = `
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+pointer-events: none;
+z-index: 0;
+`;
+document.body.insertBefore(canvas, document.body.firstChild);
+const ctx = canvas.getContext('2d');
+let particles = [];
+const particleCount = 88; 
+function resize() {
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+function createParticle() {
+return {
+x: Math.random() * canvas.width,
+y: canvas.height + 10,
+size: Math.random() * 3.6 + 1.2, 
+speedY: Math.random() * 0.5 + 0.2,
+speedX: (Math.random() - 0.5) * 0.3,
+opacity: Math.random() * 0.48 + 0.12, 
+wobble: Math.random() * Math.PI * 2,
+wobbleSpeed: Math.random() * 0.02 + 0.01
+};
+}
+for (let i = 0; i < particleCount; i++) {
+const p = createParticle();
+p.y = Math.random() * canvas.height;
+particles.push(p);
+}
+function animate() {
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+particles.forEach((p, index) => {
+p.wobble += p.wobbleSpeed;
+p.x += Math.sin(p.wobble) * 0.3 + p.speedX;
+p.y -= p.speedY;
+if (p.y < -10) {
+particles[index] = createParticle();
+}
+ctx.beginPath();
+ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
+ctx.fill();
+});
+requestAnimationFrame(animate);
+}
+animate();
 })();
