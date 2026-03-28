@@ -557,7 +557,7 @@
     <!-- HERO -->
     <section class="order-hero">
         <div class="hero-nav">
-            <a href="/"><img src="logo_icon.png" alt="My Baking Creations" width="60" height="55"> Home</a>
+            <a href="/"><img src="logo_icon.png" alt="My Baking Creations" width="60" height="55" loading="lazy"> Home</a>
         </div>
         <div class="hero-badge">Ships Within 48 Hours</div>
         <h1>Your Photo on a <span>Cookie</span></h1>
@@ -571,19 +571,19 @@
             <!-- Images -->
             <div class="product-images">
                 <div class="main-image" onclick="openLightbox(currentThumb)">
-                    <img id="mainImg" src="images/gallery/printed/Printed Image Photo Cookies_Happy Birthday Design.jpg" alt="Printed Image Cookies">
+                    <img id="mainImg" src="images/gallery/printed/Printed Image Photo Cookies_Happy Birthday Design.jpg" alt="Printed Image Cookies" loading="lazy">
                 </div>
                 <div class="thumb-row">
-                    <img src="images/gallery/printed/Printed Image Photo Cookies_Happy Birthday Design.jpg" alt="Happy Birthday cookies" class="active" onclick="switchImage(0, this)">
-                    <img src="images/gallery/corporateprintedimage/Microsoft-Copilot-PayPal-Corporate-Cookies-Bay-Area.jpg" alt="Microsoft and PayPal logo cookies" onclick="switchImage(1, this)">
-                    <img src="images/gallery/corporateprintedimage/PayPal-Venmo-Logo-Corporate-Cookies-San-Francisco.jpg" alt="PayPal and Venmo logo cookies" onclick="switchImage(2, this)">
-                    <img src="images/gallery/corporateprintedimage/Twitch-Logo-Corporate-Cookies-San-Francisco.jpg" alt="Twitch logo cookies" onclick="switchImage(3, this)">
+                    <img src="images/gallery/printed/Printed Image Photo Cookies_Happy Birthday Design.jpg" alt="Happy Birthday cookies" class="active" onclick="switchImage(0, this)" loading="lazy">
+                    <img src="images/gallery/corporateprintedimage/Microsoft-Copilot-PayPal-Corporate-Cookies-Bay-Area.webp" alt="Microsoft and PayPal logo cookies" onclick="switchImage(1, this)" loading="lazy">
+                    <img src="images/gallery/corporateprintedimage/PayPal-Venmo-Logo-Corporate-Cookies-San-Francisco.webp" alt="PayPal and Venmo logo cookies" onclick="switchImage(2, this)" loading="lazy">
+                    <img src="images/gallery/corporateprintedimage/Twitch-Logo-Corporate-Cookies-San-Francisco.webp" alt="Twitch logo cookies" onclick="switchImage(3, this)" loading="lazy">
                 </div>
                 <div class="thumb-row" style="margin-top: 0.5rem;">
-                    <img src="images/gallery/corporateprintedimage/Salesforce-US-Air-Force-Logo-Corporate-Cookies-San-Francisco.jpg" alt="Salesforce cookies" onclick="switchImage(4, this)">
-                    <img src="images/gallery/corporateprintedimage/Meta-Nestle-Printed-Image-Corporate-Cookies-San-Francisco.jpg" alt="Meta and Nestle cookies" onclick="switchImage(5, this)">
-                    <img src="images/gallery/corporateprintedimage/SFO-Airport-T3W-Logo-Corporate-Cookies-San-Francisco.jpg" alt="SFO Airport cookies" onclick="switchImage(6, this)">
-                    <img src="images/gallery/printed/Printed image cookie 5.jpg" alt="Custom printed cookies" onclick="switchImage(7, this)">
+                    <img src="images/gallery/corporateprintedimage/Salesforce-US-Air-Force-Logo-Corporate-Cookies-San-Francisco.webp" alt="Salesforce cookies" onclick="switchImage(4, this)" loading="lazy">
+                    <img src="images/gallery/corporateprintedimage/Meta-Nestle-Printed-Image-Corporate-Cookies-San-Francisco.webp" alt="Meta and Nestle cookies" onclick="switchImage(5, this)" loading="lazy">
+                    <img src="images/gallery/corporateprintedimage/SFO-Airport-T3W-Logo-Corporate-Cookies-San-Francisco.webp" alt="SFO Airport cookies" onclick="switchImage(6, this)" loading="lazy">
+                    <img src="images/gallery/printed/Printed image cookie 5.jpg" alt="Custom printed cookies" onclick="switchImage(7, this)" loading="lazy">
                 </div>
             </div>
 
@@ -666,13 +666,13 @@
     <div class="logo-bar">
         <p>Trusted by teams at</p>
         <div class="logo-row">
-            <img src="company logos/google-logo.png" alt="Google" height="30">
-            <img src="company logos/meta-logo.png" alt="Meta" height="30">
-            <img src="company logos/salesforce-logo.png" alt="Salesforce" height="30">
-            <img src="company logos/paypal-logo.png" alt="PayPal" height="30">
-            <img src="company logos/microsoft-logo.png" alt="Microsoft" height="30">
-            <img src="company logos/docusign-logo.png" alt="DocuSign" height="24">
-            <img src="company logos/Stripe Logo.png" alt="Stripe" height="30">
+            <img src="company logos/google-logo.png" alt="Google" height="30" loading="lazy">
+            <img src="company logos/meta-logo.png" alt="Meta" height="30" loading="lazy">
+            <img src="company logos/salesforce-logo.png" alt="Salesforce" height="30" loading="lazy">
+            <img src="company logos/paypal-logo.png" alt="PayPal" height="30" loading="lazy">
+            <img src="company logos/microsoft-logo.png" alt="Microsoft" height="30" loading="lazy">
+            <img src="company logos/docusign-logo.png" alt="DocuSign" height="24" loading="lazy">
+            <img src="company logos/Stripe Logo.png" alt="Stripe" height="30" loading="lazy">
         </div>
     </div>
 
@@ -698,7 +698,7 @@
     <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
         <button type="button" class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
         <button type="button" class="lightbox-prev" onclick="changeSlide(-1, event)">&#10094;</button>
-        <img id="lightbox-img" src="" alt="Enlarged photo">
+        <img id="lightbox-img" src="" alt="Enlarged photo" loading="lazy">
         <button type="button" class="lightbox-next" onclick="changeSlide(1, event)">&#10095;</button>
     </div>
 
@@ -707,12 +707,12 @@
     // Thumbnail → Main Image
     const allImages = [
         'images/gallery/printed/Printed Image Photo Cookies_Happy Birthday Design.jpg',
-        'images/gallery/corporateprintedimage/Microsoft-Copilot-PayPal-Corporate-Cookies-Bay-Area.jpg',
-        'images/gallery/corporateprintedimage/PayPal-Venmo-Logo-Corporate-Cookies-San-Francisco.jpg',
-        'images/gallery/corporateprintedimage/Twitch-Logo-Corporate-Cookies-San-Francisco.jpg',
-        'images/gallery/corporateprintedimage/Salesforce-US-Air-Force-Logo-Corporate-Cookies-San-Francisco.jpg',
-        'images/gallery/corporateprintedimage/Meta-Nestle-Printed-Image-Corporate-Cookies-San-Francisco.jpg',
-        'images/gallery/corporateprintedimage/SFO-Airport-T3W-Logo-Corporate-Cookies-San-Francisco.jpg',
+        'images/gallery/corporateprintedimage/Microsoft-Copilot-PayPal-Corporate-Cookies-Bay-Area.webp',
+        'images/gallery/corporateprintedimage/PayPal-Venmo-Logo-Corporate-Cookies-San-Francisco.webp',
+        'images/gallery/corporateprintedimage/Twitch-Logo-Corporate-Cookies-San-Francisco.webp',
+        'images/gallery/corporateprintedimage/Salesforce-US-Air-Force-Logo-Corporate-Cookies-San-Francisco.webp',
+        'images/gallery/corporateprintedimage/Meta-Nestle-Printed-Image-Corporate-Cookies-San-Francisco.webp',
+        'images/gallery/corporateprintedimage/SFO-Airport-T3W-Logo-Corporate-Cookies-San-Francisco.webp',
         'images/gallery/printed/Printed image cookie 5.jpg'
     ];
     let currentThumb = 0;
