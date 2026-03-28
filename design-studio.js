@@ -238,9 +238,19 @@
             document.body.classList.remove('sketcher-open');
         }
 
-        // Mode fork: clicking the sketch card from the standalone landing page
-        var sketchCard = document.getElementById('openSketcherBtn');
+        // Mode fork: clicking cards from the standalone landing page
+        var sketchCard = document.getElementById('forkSketchBtn') || document.getElementById('openSketcherBtn');
         if (sketchCard) sketchCard.addEventListener('click', openOverlay);
+
+        // Builder fork button → triggers the hidden cakeBuilderMode button
+        var builderForkBtn = document.getElementById('forkBuilderBtn');
+        if (builderForkBtn) {
+            builderForkBtn.addEventListener('click', function () {
+                var builderTrigger = document.getElementById('cakeBuilderMode');
+                if (builderTrigger) builderTrigger.click();
+            });
+        }
+
         if (closeBtn) closeBtn.addEventListener('click', closeOverlay);
 
         document.addEventListener('keydown', function (e) {
