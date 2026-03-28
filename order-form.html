@@ -369,7 +369,7 @@
                             <small>Include: theme, colors, serving size, and any special requests</small>
                         </div>
 
-                        <!-- AI DESIGN PREVIEW WIDGET (simplified) -->
+                        <!-- AI DESIGN PREVIEW WIDGET -->
                         <div id="studioWidget" class="form-group" style="display: none;">
                             <div class="studio-widget-card">
                                 <div class="studio-widget-header">
@@ -380,25 +380,49 @@
                                     </div>
                                 </div>
 
-                                <p id="widgetDescPreview" class="studio-widget-desc">
-                                    Describe your cake above, then click Generate.
-                                </p>
-
-                                <button type="button" id="widgetGenerateBtn" class="studio-widget-generate">
+                                <button type="button" id="generatePreviewBtn" class="studio-widget-generate">
                                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                                     Generate Quick Sketch
                                 </button>
 
-                                <div id="widgetLoading" style="display:none;" class="studio-widget-loading">
+                                <div id="previewLoading" style="display:none;" class="studio-widget-loading">
                                     <div class="sketcher-spinner"></div>
                                     <span>Creating sketch... 10-15 sec</span>
                                 </div>
 
-                                <div id="widgetResult" style="display:none;" class="studio-widget-result">
-                                    <img id="widgetImage" src="" alt="AI cake sketch preview">
+                                <div id="previewResult" style="display:none;" class="studio-widget-result">
+                                    <img id="previewImage" src="" alt="AI cake sketch preview" style="width:100%; border-radius:12px;">
+                                    <div id="colorPaletteSection" class="sketcher-palette" style="margin-top:1rem;">
+                                        <div class="sketcher-section-header" style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.5rem;">
+                                            <strong style="font-size:0.85rem; color:var(--brown);">Color Palette</strong>
+                                            <span style="font-size:0.75rem; color:#999;">Click to copy</span>
+                                        </div>
+                                        <div id="colorSwatches" class="sketcher-swatches" style="display:flex; gap:0.5rem; flex-wrap:wrap;"></div>
+                                    </div>
                                 </div>
 
-                                <div id="widgetError" style="display:none;" class="studio-widget-error"></div>
+                                <div id="previewError" style="display:none;" class="studio-widget-error"></div>
+
+                                <!-- Refinement -->
+                                <div id="refineSection" style="display:none; margin-top:1rem;">
+                                    <div style="display:flex; gap:0.5rem;">
+                                        <input type="text" id="refineInput" placeholder="e.g., 'Make it more colorful'" style="flex:1; padding:0.6rem 0.75rem; border:2px solid #e8e0d6; border-radius:10px; font-size:0.9rem; font-family:inherit;">
+                                        <button type="button" id="refineBtn" style="padding:0.6rem 1.2rem; background:var(--pink); color:#fff; border:none; border-radius:10px; font-weight:700; cursor:pointer; font-size:0.85rem;">Refine</button>
+                                    </div>
+                                    <div id="refinementHistory" style="margin-top:0.5rem;"></div>
+                                </div>
+
+                                <!-- Download buttons -->
+                                <div style="display:none; margin-top:1rem; gap:0.5rem;" id="widgetDownloads">
+                                    <a id="downloadPreviewBtn" download="my-cake-design.png" style="flex:1; display:flex; align-items:center; justify-content:center; gap:0.4rem; padding:0.65rem; background:#f5f0eb; color:var(--brown); border-radius:10px; font-weight:600; font-size:0.85rem; text-decoration:none; cursor:pointer;">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                        PNG
+                                    </a>
+                                    <button type="button" id="downloadPdfBtn" style="flex:1; display:flex; align-items:center; justify-content:center; gap:0.4rem; padding:0.65rem; background:#f5f0eb; color:var(--brown); border:none; border-radius:10px; font-weight:600; font-size:0.85rem; cursor:pointer;">
+                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                        PDF
+                                    </button>
+                                </div>
 
                                 <a href="design-studio" class="studio-widget-link">
                                     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>

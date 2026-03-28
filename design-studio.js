@@ -399,6 +399,11 @@
                     if (historyEl) historyEl.innerHTML = '';
                     var refInput = document.getElementById('refineInput');
                     if (refInput) refInput.value = '';
+                    // Show refine + download sections
+                    var refSec = document.getElementById('refineSection');
+                    if (refSec) refSec.style.display = 'block';
+                    var dlSec = document.getElementById('widgetDownloads');
+                    if (dlSec) dlSec.style.display = 'flex';
                 }
             } catch (error) {
                 console.error('Preview error:', error);
