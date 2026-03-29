@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pencil — Draw on Preview</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #111; overflow: hidden; cursor: crosshair; font-family: system-ui, sans-serif; }
+
+  canvas {
+    position: fixed; top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: 9999;
+  }
+
+  /* Toolbar */
+  #toolbar {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    z-index: 10000;
+    display: flex; gap: 8px; align-items: center;
+    background: rgba(0,0,0,0.85); backdrop-filter: blur(12px);
+    padding: 10px 18px; border-radius: 14px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  }
+  #toolbar button, #toolbar label {
+    background: rgba(255,255,255,0.1); border: none; color: #fff;
+    padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: background 0.15s;
+  }
+  #toolbar button:hover, #toolbar label:hover { background: rgba(255,255,255,0.2); }
+  #toolbar button.active { background: rgba(255,255,255,0.3); outline: 2px solid #fff; }
+
+  .color-dot {
+    width: 24px; height: 24px; border-radius: 50%;
+    border: 2px solid transparent; cursor: pointer; transition: transform 0.1s;
+  }
+  .color-dot:hover { transform: scale(1.2); }
+  .color-dot.active { border-color: #fff; transform: scale(1.2); }
+
+  .sep { width: 1px; height: 28px; background: rgba(255,255,255,0.2); }
+
+  #size-display { color: #888; font-size: 12px; min-width: 30px; text-align: center; }
+</style>
+</head>
+<body>
+
+<canvas id="c"></canvas>
+
+<div id="toolbar">
+  <!-- Colors -->
+  <div class="color-dot active" style="background:#ff3b3b" data-color="#ff3b3b"></div>
+  <div class="color-dot" style="background:#ffcc00" data-color="#ffcc00"></div>
+  <div class="color-dot" style="background:#00e676" data-color="#00e676"></div>
+  <div class="color-dot" style="background:#448aff" data-color="#448aff"></div>
+  <div class="color-dot" style="background:#ffffff" data-color="#ffffff"></div>
+
+  <div class="sep"></div>
+
+  <!-- Tools -->
+  <button class="active" data-tool="pen">Pen</button>
+  <button data-tool="arrow">Arrow</button>
+  <button data-tool="rect">Rect</button>
+  <button data-tool="text">Text</button>
+
+  <div class="sep"></div>
+
+  <!-- Size -->
+  <button id="size-down">−</button>
+  <span id="size-display">3</span>
+  <button id="size-up">+</button>
+
+  <div class="sep"></div>
+
+  <button id="undo">Undo</button>
+  <button id="clear">Clear</button>
+</div>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+
+let W, H, dpr;
+function resize() {
+  dpr = window.devicePixelRatio || 1;
+  W = window.innerWidth; H = window.innerHeight;
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  redraw();
+}
+window.addEventListener('resize', resize);
+resize();
+
+// State
+let color = '#ff3b3b';
+let tool = 'pen';
+let lineWidth = 3;
+let drawing = false;
+let startX, startY;
+let history = []; // each entry: { type, color, lineWidth, data }
+let currentPath = [];
+
+// Color dots
+document.querySelectorAll('.color-dot').forEach(dot => {
+  dot.addEventListener('click', () => {
+    document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+    dot.classList.add('active');
+    color = dot.dataset.color;
+  });
+});
+
+// Tool buttons
+document.querySelectorAll('[data-tool]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-tool]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    tool = btn.dataset.tool;
+    canvas.style.cursor = tool === 'text' ? 'text' : 'crosshair';
+  });
+});
+
+// Size
+const sizeDisplay = document.getElementById('size-display');
+document.getElementById('size-up').addEventListener('click', () => {
+  lineWidth = Math.min(lineWidth + 1, 20);
+  sizeDisplay.textContent = lineWidth;
+});
+document.getElementById('size-down').addEventListener('click', () => {
+  lineWidth = Math.max(lineWidth - 1, 1);
+  sizeDisplay.textContent = lineWidth;
+});
+
+// Undo / Clear
+document.getElementById('undo').addEventListener('click', () => { history.pop(); redraw(); });
+document.getElementById('clear').addEventListener('click', () => { history = []; redraw(); });
+
+// Drawing
+canvas.addEventListener('mousedown', e => {
+  if (e.target !== canvas) return;
+  drawing = true;
+  startX = e.clientX; startY = e.clientY;
+
+  if (tool === 'pen') {
+    currentPath = [{ x: startX, y: startY }];
+  }
+  if (tool === 'text') {
+    drawing = false;
+    const txt = prompt('Type annotation:');
+    if (txt) {
+      history.push({ type: 'text', color, lineWidth, data: { x: startX, y: startY, text: txt } });
+      redraw();
+    }
+  }
+});
+
+canvas.addEventListener('mousemove', e => {
+  if (!drawing) return;
+  const x = e.clientX, y = e.clientY;
+
+  if (tool === 'pen') {
+    currentPath.push({ x, y });
+    redraw();
+    drawPath(currentPath, color, lineWidth);
+  }
+  if (tool === 'arrow' || tool === 'rect') {
+    redraw();
+    if (tool === 'arrow') drawArrow(startX, startY, x, y, color, lineWidth);
+    if (tool === 'rect') drawRect(startX, startY, x, y, color, lineWidth);
+  }
+});
+
+canvas.addEventListener('mouseup', e => {
+  if (!drawing) return;
+  drawing = false;
+  const x = e.clientX, y = e.clientY;
+
+  if (tool === 'pen') {
+    history.push({ type: 'pen', color, lineWidth, data: [...currentPath] });
+    currentPath = [];
+  }
+  if (tool === 'arrow') {
+    history.push({ type: 'arrow', color, lineWidth, data: { x1: startX, y1: startY, x2: x, y2: y } });
+  }
+  if (tool === 'rect') {
+    history.push({ type: 'rect', color, lineWidth, data: { x1: startX, y1: startY, x2: x, y2: y } });
+  }
+  redraw();
+});
+
+// Keyboard shortcuts
+document.addEventListener('keydown', e => {
+  if (e.key === 'z' && (e.ctrlKey || e.metaKey)) { history.pop(); redraw(); }
+  if (e.key === '1') clickTool('pen');
+  if (e.key === '2') clickTool('arrow');
+  if (e.key === '3') clickTool('rect');
+  if (e.key === '4') clickTool('text');
+});
+
+function clickTool(t) {
+  document.querySelector(`[data-tool="${t}"]`).click();
+}
+
+// Render functions
+function redraw() {
+  ctx.clearRect(0, 0, W, H);
+  for (const item of history) {
+    if (item.type === 'pen') drawPath(item.data, item.color, item.lineWidth);
+    if (item.type === 'arrow') drawArrow(item.data.x1, item.data.y1, item.data.x2, item.data.y2, item.color, item.lineWidth);
+    if (item.type === 'rect') drawRect(item.data.x1, item.data.y1, item.data.x2, item.data.y2, item.color, item.lineWidth);
+    if (item.type === 'text') drawText(item.data.x, item.data.y, item.data.text, item.color, item.lineWidth);
+  }
+}
+
+function drawPath(pts, c, w) {
+  if (pts.length < 2) return;
+  ctx.strokeStyle = c; ctx.lineWidth = w; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  ctx.beginPath();
+  ctx.moveTo(pts[0].x, pts[0].y);
+  for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
+  ctx.stroke();
+}
+
+function drawArrow(x1, y1, x2, y2, c, w) {
+  const headLen = 14 + w * 2;
+  const angle = Math.atan2(y2 - y1, x2 - x1);
+
+  ctx.strokeStyle = c; ctx.fillStyle = c; ctx.lineWidth = w; ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(x1, y1); ctx.lineTo(x2, y2);
+  ctx.stroke();
+
+  // Arrowhead
+  ctx.beginPath();
+  ctx.moveTo(x2, y2);
+  ctx.lineTo(x2 - headLen * Math.cos(angle - 0.4), y2 - headLen * Math.sin(angle - 0.4));
+  ctx.lineTo(x2 - headLen * Math.cos(angle + 0.4), y2 - headLen * Math.sin(angle + 0.4));
+  ctx.closePath();
+  ctx.fill();
+}
+
+function drawRect(x1, y1, x2, y2, c, w) {
+  ctx.strokeStyle = c; ctx.lineWidth = w;
+  ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
+}
+
+function drawText(x, y, text, c, w) {
+  const size = Math.max(16, w * 6);
+  ctx.font = `bold ${size}px system-ui, sans-serif`;
+  ctx.fillStyle = c;
+  ctx.shadowColor = 'rgba(0,0,0,0.6)'; ctx.shadowBlur = 4;
+  ctx.fillText(text, x, y);
+  ctx.shadowBlur = 0;
+}
+</script>
+</body>
+</html>

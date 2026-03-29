@@ -309,6 +309,7 @@
     </div>
 
     <header>
+        <canvas id="nav-particles"></canvas>
         <nav aria-label="Main navigation">
             <a href="buy-now" class="order-now-btn">Order Now</a>
             <a href="/" class="logo">
@@ -403,12 +404,142 @@
         </a>
     </section>
 
+    <!-- CORPORATE DARK THEME — scoped to this page only -->
+    <style>
+        /* Dark corporate backgrounds — consultation page style */
+        #corporate-content .section-wrapper.section-beige {
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%) !important;
+            border-bottom: 1px solid rgba(236,38,143,0.08);
+        }
+
+        /* Section headers — pink-to-purple gradient text */
+        #corporate-content .section-header h2 {
+            background: linear-gradient(135deg, #EC268F, #ff6bb5, #c44dff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        #corporate-content .section-header h2 .highlight {
+            -webkit-text-fill-color: var(--yellow);
+        }
+
+        /* Logo grid container — frosted glass */
+        #corporate-content .corporate-logos-grid {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* Logo tagline */
+        #corporate-content .logo-tagline {
+            color: rgba(255,255,255,0.6) !important;
+        }
+
+        /* Service cards — frosted glass with purple tint */
+        #corporate-content .service-card {
+            background: rgba(255,255,255,0.06) !important;
+            border: 1px solid rgba(236,38,143,0.15) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 18px !important;
+            transition: all 0.3s ease !important;
+        }
+        #corporate-content .service-card:hover {
+            background: rgba(255,255,255,0.1) !important;
+            border-color: rgba(236,38,143,0.35) !important;
+            box-shadow: 0 8px 30px rgba(236,38,143,0.15), 0 0 40px rgba(236,38,143,0.08) !important;
+            transform: translateY(-4px) !important;
+        }
+        #corporate-content .service-card p {
+            color: rgba(255,255,255,0.7) !important;
+        }
+        #corporate-content .service-card h3 span {
+            filter: brightness(1.2);
+        }
+
+        /* FAQ section */
+        #corporate-content .section-wrapper.section-beige h3[style*="color: var(--pink)"] {
+            color: #ff6bb5 !important;
+        }
+        #corporate-content .section-wrapper.section-beige p[style*="color: var(--brown)"] {
+            color: rgba(255,255,255,0.65) !important;
+        }
+        #corporate-content .section-wrapper.section-beige p a[style*="color: var(--pink)"] {
+            color: #ff6bb5 !important;
+        }
+
+        /* Accent divider between sections */
+        #corporate-content .section-wrapper.section-beige::after {
+            content: '';
+            display: block;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(236,38,143,0.3), rgba(255,197,50,0.2), transparent);
+            margin-top: 1rem;
+        }
+
+        /* CTA section — already dark, just boost contrast */
+        #corporate-content .section-wrapper.section-white {
+            background: linear-gradient(165deg, #1E0C22, #170919) !important;
+        }
+
+        /* Floating orbs — consultation page style */
+        .corp-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.55;
+            animation: corpOrbFloat 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .corp-orb-1 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, #EC268F 0%, transparent 70%);
+            top: -80px;
+            right: -80px;
+            animation-delay: 0s;
+        }
+        .corp-orb-2 {
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, #FFC532 0%, transparent 70%);
+            bottom: -60px;
+            left: -60px;
+            animation-delay: -7s;
+        }
+        .corp-orb-3 {
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -14s;
+        }
+        @keyframes corpOrbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.1); }
+            50% { transform: translate(-20px, 20px) scale(0.95); }
+            75% { transform: translate(20px, 10px) scale(1.05); }
+        }
+    </style>
+
     <!-- MAIN CORPORATE CONTENT -->
     <section id="corporate-content" class="page-content">
         <!-- Trusted Companies -->
-        <div class="section-wrapper section-beige reveal" style="margin-bottom: 3rem;">
+        <div class="section-wrapper reveal" style="margin-bottom: 3rem; position: relative; overflow: hidden; background: linear-gradient(135deg, #0a1628 0%, #112240 40%, #0d1f3c 100%); border-radius: 25px;">
+            <!-- Floating orbs -->
+            <div class="corp-orb corp-orb-1"></div>
+            <div class="corp-orb corp-orb-2"></div>
+            <div class="corp-orb corp-orb-3"></div>
+            <!-- Plexus canvas -->
+            <canvas id="trustedPlexus" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;"></canvas>
+            <div style="position: relative; z-index: 1;">
             <div class="section-header">
-                <h2>Trusted by Leading Companies</h2>
+                <h2 style="color: #fff;">Trusted by Leading Companies</h2>
             </div>
             <div class="corporate-logos-grid">
                 <img width="2400" height="811" src="company logos/google-logo.png" alt="Google" loading="lazy">
@@ -428,10 +559,11 @@
                 <img src="images/gallery/companylogos/Levi's logo.png" alt="Levi's" loading="lazy">
                 <img width="441" height="379" src="company logos/Kaiser Logo.png" alt="Kaiser Permanente" loading="lazy">
             </div>
-            <a href="gallery" class="logo-tagline">Don't just take our word for it - we've got the cookies to prove it.</a>
+            <a href="gallery" class="logo-tagline" style="color: rgba(255,255,255,0.85);">Don't just take our word for it - we've got the cookies to prove it.</a>
             <div style="text-align: center; margin-top: 1.5rem;">
                 <a href="corporate-order" class="btn" style="background: linear-gradient(145deg, #3D1A3E, #2A1028, #1E0C22); color: #fff; font-weight: 700;">Request Corporate Quote</a>
             </div>
+            </div><!-- close z-index wrapper -->
         </div>
 
         <!-- Live Activity Feed is loaded as fixed widget via script -->
@@ -495,8 +627,12 @@
         </div>
 
         <!-- Logo Preview Tool - PREMIUM FEATURED -->
-        <div class="section-wrapper reveal" style="margin-bottom: 3rem; background: linear-gradient(135deg, rgba(45,20,44,0.97), rgba(30,15,40,0.95)); border-radius: 25px; padding: 0;">
-        <div class="logo-preview-section featured-ai-section" id="cookiePreviewSection">
+        <div class="section-wrapper reveal" style="margin-bottom: 3rem; background: linear-gradient(135deg, rgba(45,20,44,0.97), rgba(30,15,40,0.95)); border-radius: 25px; padding: 0; position: relative; overflow: hidden;">
+        <div class="corp-orb" style="opacity: 0.7; width: 450px; height: 450px; background: radial-gradient(circle, #ff4da6 0%, transparent 65%); top: -120px; right: -100px; filter: blur(70px);"></div>
+        <div class="corp-orb" style="opacity: 0.7; width: 380px; height: 380px; background: radial-gradient(circle, #FFD700 0%, transparent 65%); bottom: -100px; left: -80px; filter: blur(70px);"></div>
+        <div class="corp-orb" style="opacity: 0.45; width: 280px; height: 280px; background: radial-gradient(circle, #a855f7 0%, transparent 65%); top: 40%; left: 50%; transform: translate(-50%, -50%); filter: blur(70px);"></div>
+        <canvas id="previewPlexus" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;"></canvas>
+        <div class="logo-preview-section featured-ai-section" id="cookiePreviewSection" style="position: relative; z-index: 1;">
             <canvas id="cookiePreviewParticles" class="feature-particles-canvas"></canvas>
             <div class="featured-ai-header">
                 <span class="new-feature-badge">NEW FEATURE</span>
@@ -1776,5 +1912,95 @@
     <!-- AI Chatbot Widget -->
     <link rel="stylesheet" href="chatbot.css?v=2">
     <script src="chatbot.js?v=2" defer></script>
+
+    <!-- Nav Plexus Constellation -->
+    <script src="nav-plexus.js" defer></script>
+
+    <!-- Section Plexus — subtle constellation on dark corporate sections -->
+    <script>
+    (function() {
+        function initSectionPlexus(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const parent = canvas.parentElement;
+            let particles = [];
+            const isMobile = window.innerWidth < 768;
+            const count = isMobile ? 25 : 50;
+            const connectDist = 120;
+            const colors = ['rgba(236,38,143,', 'rgba(255,197,50,', 'rgba(139,92,246,', 'rgba(255,255,255,'];
+
+            function resize() {
+                const rect = parent.getBoundingClientRect();
+                canvas.width = rect.width;
+                canvas.height = rect.height;
+            }
+
+            function seed() {
+                particles = [];
+                for (let i = 0; i < count; i++) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        vx: (Math.random() - 0.5) * 0.3,
+                        vy: (Math.random() - 0.5) * 0.3,
+                        r: 1.5 + Math.random() * 1.5,
+                        ci: Math.floor(Math.random() * colors.length)
+                    });
+                }
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                // Lines
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < connectDist) {
+                            const alpha = (1 - dist / connectDist) * 0.2;
+                            ctx.strokeStyle = 'rgba(255,255,255,' + alpha + ')';
+                            ctx.lineWidth = 0.8;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                // Dots
+                for (const p of particles) {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = colors[p.ci] + '0.5)';
+                    ctx.fill();
+                    // Move
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+                }
+                requestAnimationFrame(draw);
+            }
+
+            resize();
+            seed();
+            draw();
+            window.addEventListener('resize', () => { resize(); seed(); });
+        }
+
+        // Init when DOM ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                initSectionPlexus('trustedPlexus');
+                initSectionPlexus('previewPlexus');
+            });
+        } else {
+            initSectionPlexus('trustedPlexus');
+            initSectionPlexus('previewPlexus');
+        }
+    })();
+    </script>
 </body>
 </html>
