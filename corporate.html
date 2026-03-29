@@ -510,7 +510,7 @@
             <div class="logo-preview-container">
                 <div class="logo-preview-upload-area" id="uploadArea">
                     <div class="upload-icon">
-                        <svg viewBox="0 0 24 24" width="48" height="48" fill="var(--pink)">
+                        <svg viewBox="0 0 24 24" width="48" height="48" fill="#ff6b8a">
                             <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/>
                         </svg>
                     </div>
@@ -765,7 +765,7 @@
     .featured-ai-section {
         position: relative;
         padding: 2rem;
-        background: linear-gradient(135deg, #fffbf5 0%, #fff5f8 50%, #fffbf0 100%);
+        background: linear-gradient(135deg, rgba(45,20,44,0.97), rgba(30,15,40,0.95));
         border-radius: 25px;
         overflow: hidden;
         border: 3px solid transparent;
@@ -813,8 +813,9 @@
     .featured-ai-title {
         font-family: 'Fredoka One', cursive;
         font-size: 1.6rem;
-        color: var(--dark-brown);
+        color: #fff;
         margin-bottom: 0.5rem;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
 
     .featured-ai-title span {
@@ -824,13 +825,13 @@
     .featured-ai-hint.speech-bubble {
         display: inline-block;
         position: relative;
-        background: linear-gradient(135deg, #fff5f8 0%, #fffbf5 100%);
-        border: 2px solid var(--pink);
+        background: linear-gradient(135deg, rgba(236,38,143,0.15) 0%, rgba(236,38,143,0.08) 100%);
+        border: 2px solid rgba(236,38,143,0.5);
         border-radius: 20px;
         padding: 0.6rem 1rem;
         margin-bottom: 1rem;
         white-space: nowrap;
-        box-shadow: 0 4px 15px rgba(236, 38, 143, 0.15);
+        box-shadow: 0 4px 15px rgba(236, 38, 143, 0.25);
         animation: bubble-float 3s ease-in-out infinite;
     }
 
@@ -844,7 +845,7 @@
         height: 0;
         border-left: 8px solid transparent;
         border-right: 8px solid transparent;
-        border-top: 10px solid var(--pink);
+        border-top: 10px solid rgba(236,38,143,0.5);
     }
 
     .featured-ai-hint.speech-bubble::after {
@@ -857,21 +858,21 @@
         height: 0;
         border-left: 6px solid transparent;
         border-right: 6px solid transparent;
-        border-top: 8px solid #fff5f8;
+        border-top: 8px solid rgba(236,38,143,0.15);
     }
 
     .featured-ai-hint .hint-text {
         font-family: 'Nunito', sans-serif;
         font-size: 0.85rem;
         font-weight: 700;
-        color: var(--pink);
+        color: #ff6b8a;
     }
 
     .featured-ai-hint .bubble-cursor {
         font-family: 'Nunito', sans-serif;
         font-size: 0.85rem;
         font-weight: 700;
-        color: var(--pink);
+        color: #ff6b8a;
         animation: blink-cursor 0.7s step-end infinite;
     }
 
@@ -887,14 +888,14 @@
 
     .featured-ai-subtitle {
         font-size: 1rem;
-        color: var(--brown);
+        color: rgba(255,255,255,0.85);
         margin-bottom: 0.5rem;
     }
 
     .featured-ai-note {
         font-size: 0.85rem;
-        color: var(--brown);
-        opacity: 0.8;
+        color: rgba(255,255,255,0.6);
+        opacity: 1;
         margin-bottom: 1.5rem;
     }
 
@@ -911,9 +912,9 @@
         align-items: center;
         justify-content: center;
         padding: 3rem 2rem;
-        border: 3px dashed var(--pink);
+        border: 3px dashed rgba(236,38,143,0.5);
         border-radius: 20px;
-        background: linear-gradient(135deg, #fff9fa 0%, #fff 100%);
+        background: rgba(255,255,255,0.05);
         cursor: pointer;
         transition: all 0.3s ease;
         max-width: 450px;
@@ -922,9 +923,9 @@
     .logo-preview-upload-area:hover,
     .logo-preview-upload-area.dragover {
         border-color: var(--yellow);
-        background: linear-gradient(135deg, #fffbf0 0%, #fff 100%);
+        background: rgba(255,255,255,0.1);
         transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(255, 193, 7, 0.2);
+        box-shadow: 0 8px 25px rgba(236,38,143,0.25);
     }
     .upload-icon {
         margin-bottom: 1rem;
@@ -932,12 +933,12 @@
     .upload-text {
         font-size: 1.2rem;
         font-weight: 700;
-        color: var(--dark-brown);
+        color: #fff;
         margin-bottom: 0.5rem;
     }
     .upload-hint {
         font-size: 0.9rem;
-        color: var(--brown);
+        color: rgba(255,255,255,0.6);
     }
     .logo-preview-result {
         text-align: center;
