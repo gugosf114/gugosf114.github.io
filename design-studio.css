@@ -2500,20 +2500,6 @@
     box-shadow: 0 12px 40px rgba(255,197,50,0.15);
 }
 
-.fork-card-badge {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: linear-gradient(135deg, var(--yellow), #f0a500);
-    color: var(--brown);
-    font-size: 0.7rem;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    padding: 4px 12px;
-    border-radius: 20px;
-    text-transform: uppercase;
-}
-
 .fork-card-icon {
     width: 64px;
     height: 64px;
