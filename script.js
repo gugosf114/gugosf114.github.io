@@ -398,9 +398,9 @@ return;
 const revealElements = document.querySelectorAll('.reveal');
 if (revealElements.length === 0) return;
 const observerOptions = {
-root: null, 
-rootMargin: '0px 0px 100px 0px', 
-threshold: 0.1
+root: null,
+rootMargin: '0px 0px 300px 0px',
+threshold: 0
 };
 const revealObserver = new IntersectionObserver((entries, observer) => {
 entries.forEach(entry => {
@@ -413,6 +413,20 @@ observer.unobserve(entry.target);
 revealElements.forEach(el => {
 revealObserver.observe(el);
 });
+function revealFallback() {
+const vh = window.innerHeight;
+revealElements.forEach(el => {
+if (el.classList.contains('visible')) return;
+const rect = el.getBoundingClientRect();
+if (rect.top < vh + 300) {
+el.classList.add('visible');
+}
+});
+}
+window.addEventListener('scroll', revealFallback, { passive: true });
+setTimeout(revealFallback, 500);
+setTimeout(revealFallback, 1500);
+window.addEventListener('load', revealFallback);
 }
 if (document.readyState === 'loading') {
 document.addEventListener('DOMContentLoaded', initScrollReveal);
