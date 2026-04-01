@@ -60,7 +60,14 @@
         "name": "Burlingame",
         "sameAs": "https://en.wikipedia.org/wiki/Burlingame,_California"
     },
-        "openingHours": "Mo-Sa 09:00-18:00",
+        "openingHoursSpecification": [
+        {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "opens": "09:00",
+            "closes": "18:00"
+        }
+    ],
         "priceRange": "$$",
         "servesCuisine": "Bakery",
         "foundingDate": "2012",
@@ -94,8 +101,15 @@
             "https://www.instagram.com/mybakingcreationscompany/",
         "https://www.facebook.com/MyBakingCreationsCompany",
         "https://www.pinterest.com/MyBakingCreations/",
-        "https://www.yelp.com/biz/my-baking-creations-san-francisco"
-        ]
+        "https://www.yelp.com/biz/my-baking-creations-daly-city"
+        ],
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "150",
+            "bestRating": "5",
+            "worstRating": "1"
+        }
     }
     </script>
     <script type="application/ld+json">
