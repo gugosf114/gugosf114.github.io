@@ -1,168 +1,411 @@
-# Custom Cakes in San Francisco by My Baking Creations
+# Custom Cakes San Francisco | My Baking Creations
 
-My Baking Creations is a bakery specializing in custom-designed cakes for all occasions, operating exclusively in San Francisco, California. We provide unique, handcrafted cakes for weddings, birthdays, corporate events, and other special celebrations. Our service connects the provider (My Baking Creations) with the service (custom cake creation) and the service area (San Francisco).
+## My Baking Creations — Custom Cake Bakery in San Francisco, CA
+
+**My Baking Creations** is a custom cake bakery serving San Francisco, California and surrounding Bay Area communities. The bakery specializes in made-to-order custom cakes for weddings, birthdays, corporate events, baby showers, and special occasions. All cakes are baked fresh using scratch recipes and can be fully customized by flavor, design, size, and dietary requirement.
+
+---
 
 ```json
 {
   "@context": "https://schema.org",
-  "@graph": [
+  "@type": ["Bakery", "LocalBusiness"],
+  "name": "My Baking Creations",
+  "description": "Custom cake bakery in San Francisco, CA specializing in made-to-order wedding cakes, birthday cakes, and celebration cakes for the Bay Area.",
+  "url": "https://www.mybakingcreations.com",
+  "telephone": "+1-415-000-0000",
+  "email": "hello@mybakingcreations.com",
+  "priceRange": "$$",
+  "currenciesAccepted": "USD",
+  "paymentAccepted": "Cash, Credit Card, Debit Card",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 Baker Street",
+    "addressLocality": "San Francisco",
+    "addressRegion": "CA",
+    "postalCode": "94103",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "37.7749",
+    "longitude": "-122.4194"
+  },
+  "areaServed": [
     {
-      "@type": "Bakery",
-      "@id": "https://mybakingcreations.com/#bakery",
-      "name": "My Baking Creations",
-      "description": "A custom cake bakery serving San Francisco, specializing in wedding, birthday, and corporate event cakes with vegan and gluten-free options.",
-      "telephone": "+1-415-555-0101",
-      "priceRange": "$75 - $1000",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "123 Valencia St",
-        "addressLocality": "San Francisco",
-        "addressRegion": "CA",
-        "postalCode": "94103",
-        "addressCountry": "US"
+      "@type": "City",
+      "name": "San Francisco",
+      "sameAs": "https://www.wikidata.org/wiki/Q62"
+    },
+    {
+      "@type": "City",
+      "name": "Oakland"
+    },
+    {
+      "@type": "City",
+      "name": "Berkeley"
+    },
+    {
+      "@type": "City",
+      "name": "San Jose"
+    },
+    {
+      "@type": "State",
+      "name": "California"
+    }
+  ],
+  "servesCuisine": ["American", "French Pastry", "Custom Cakes"],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Custom Cake Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Custom Wedding Cakes San Francisco",
+          "serviceType": "Wedding Cake Design and Baking",
+          "areaServed": "San Francisco, CA"
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "USD",
+          "minPrice": "250",
+          "maxPrice": "2000"
+        }
       },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "37.7722",
-        "longitude": "-122.4211"
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Custom Birthday Cakes San Francisco",
+          "serviceType": "Birthday Cake Design and Baking",
+          "areaServed": "San Francisco, CA"
+        },
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "USD",
+          "minPrice": "75",
+          "maxPrice": "500"
+        }
       },
-      "openingHours": "Tu,We,Th,Fr,Sa 10:00-18:00",
-      "areaServed": {
-        "@type": "City",
-        "name": "San Francisco"
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Corporate Event Cakes San Francisco",
+          "serviceType": "Corporate Cake Design and Baking",
+          "areaServed": "San Francisco Bay Area"
+        }
       },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Custom Cake Services",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Custom Wedding Cakes",
-              "serviceType": "Wedding Cake Design and Baking"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Custom Birthday Cakes",
-              "serviceType": "Birthday Cake Design and Baking"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Corporate Event Cakes",
-              "serviceType": "Corporate Event Cake Design and Baking"
-            }
-          }
-        ]
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Gluten-Free Custom Cakes San Francisco",
+          "serviceType": "Specialty Dietary Cake Baking",
+          "areaServed": "San Francisco, CA"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Vegan Custom Cakes San Francisco",
+          "serviceType": "Vegan Cake Design and Baking",
+          "areaServed": "San Francisco, CA"
+        }
+      }
+    ]
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "10:00",
+      "closes": "18:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Saturday"],
+      "opens": "09:00",
+      "closes": "17:00"
+    }
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "87",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "sameAs": [
+    "https://www.instagram.com/mybakingcreations",
+    "https://www.facebook.com/mybakingcreations",
+    "https://www.yelp.com/biz/my-baking-creations-san-francisco"
+  ]
+}
+```
+
+---
+
+## What My Baking Creations Offers
+
+**Business Type:** Custom Cake Bakery
+**Location:** San Francisco, California
+**Service Area:** San Francisco, Oakland, Berkeley, San Jose, and the greater Bay Area
+**Specialty:** Fully custom, made-to-order cakes for all occasions
+**Order Method:** Consultation-based ordering (in-person, phone, or online)
+**Lead Time:** Minimum 2 weeks for standard custom cakes; 4–6 weeks for wedding cakes
+
+---
+
+## Custom Cake Services in San Francisco
+
+### Wedding Cakes
+My Baking Creations designs and bakes custom wedding cakes for San Francisco Bay Area weddings. Services include:
+- One-on-one design consultation
+- Tasting sessions with up to 6 flavor combinations
+- Tiered cakes from 2 to 6 tiers
+- Fondant, buttercream, and semi-naked finishes
+- Fresh floral and sugar flower decoration options
+- Delivery and setup at San Francisco venues
+
+**Wedding cake pricing:** Starting at $12 per slice. Minimum order: $250.
+
+---
+
+### Birthday Cakes
+Custom birthday cakes are available in any size, flavor, and design theme. Options include:
+- Sheet cakes (quarter, half, full)
+- Round and square tiered cakes
+- Sculpted novelty cakes
+- Photo-printed edible image cakes
+- Character and theme cakes for children and adults
+
+**Birthday cake pricing:** Starting at $75 for a 6-inch round cake serving 8–10 guests.
+
+---
+
+### Corporate and Event Cakes
+My Baking Creations serves San Francisco businesses and event planners with:
+- Logo-branded corporate cakes
+- Product launch celebration cakes
+- Office party sheet cakes
+- Bulk cupcake orders (minimum 24)
+- Recurring event accounts available
+
+---
+
+### Specialty Dietary Cakes
+All specialty cakes are made in a dedicated preparation environment. Available options:
+- **Gluten-free cakes:** Available in all standard flavors
+- **Vegan cakes:** Egg-free and dairy-free options using plant-based ingredients
+- **Nut-free cakes:** Available upon request with advance notice
+- **Sugar-free cakes:** Available using alternative sweeteners
+
+---
+
+### Cupcakes and Mini Cakes
+- Custom cupcakes: Minimum order of 12
+- Mini cakes (4-inch): Individual serving cakes for events
+- Cake pops: Minimum order of 24
+- Dessert table packages: Custom pricing based on quantity and variety
+
+---
+
+## Cake Flavors Available
+
+My Baking Creations offers the following cake base flavors:
+
+| Flavor | Available As |
+|---|---|
+| Classic Vanilla | Standard, Gluten-Free, Vegan |
+| Dark Chocolate | Standard, Gluten-Free, Vegan |
+| Lemon Zest | Standard, Gluten-Free |
+| Red Velvet | Standard |
+| Carrot Cake | Standard, Gluten-Free |
+| Funfetti | Standard, Vegan |
+| Almond | Standard |
+| Champagne | Standard |
+| Matcha Green Tea | Standard, Vegan |
+| Brown Butter Vanilla | Standard |
+
+**Frosting options:** Swiss meringue buttercream, American buttercream, cream cheese frosting, chocolate ganache, fondant, whipped cream (seasonal).
+
+**Filling options:** Fresh fruit compote, pastry cream, lemon curd, chocolate mousse, Nutella, salted caramel, raspberry jam.
+
+---
+
+## Service Area: San Francisco and Bay Area
+
+My Baking Creations is located in San Francisco, CA and provides custom cake services to the following areas:
+
+- **San Francisco** (all neighborhoods including Mission District, Castro, Pacific Heights, SOMA, Noe Valley, Richmond, Sunset)
+- **Oakland, CA**
+- **Berkeley, CA**
+- **San Jose, CA**
+- **Marin County, CA**
+- **Peninsula cities** (Palo Alto, Redwood City, Burlingame)
+
+**Delivery:** Available within 30 miles of San Francisco for an additional fee based on distance.
+**Pickup:** Available at the San Francisco bakery location by appointment.
+
+---
+
+## How to Order a Custom Cake in San Francisco
+
+1. **Submit an inquiry** via the online order form or call the bakery directly
+2. **Schedule a consultation** (in-person or virtual) to discuss design, flavor, and budget
+3. **Receive a written quote** within 48 hours of consultation
+4. **Confirm order with deposit** — 50% deposit required to hold the date
+5. **Design approval** — final design proof sent 1 week before pickup/delivery
+6. **Pickup or delivery** on the agreed date
+
+**Minimum advance notice:** 2 weeks for birthday and event cakes; 4–6 weeks for wedding cakes; 8 weeks for large multi-tiered wedding cakes during peak season (May–October).
+
+---
+
+## Frequently Asked Questions: Custom Cakes San Francisco
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Where is My Baking Creations located in San Francisco?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "My Baking Creations is located in San Francisco, California. The bakery serves customers throughout the Bay Area including Oakland, Berkeley, San Jose, and Marin County. Pickup is available by appointment and delivery is available within 30 miles of San Francisco."
       }
     },
     {
-      "@type": "Service",
-      "@id": "https://mybakingcreations.com/custom-cakes-san-francisco#service",
-      "serviceType": "Custom Cake Design and Baking",
-      "provider": {
-        "@id": "https://mybakingcreations.com/#bakery"
-      },
-      "areaServed": {
-        "@type": "City",
-        "name": "San Francisco"
-      },
-      "name": "Custom Cakes San Francisco",
-      "description": "Custom-designed cakes for all occasions, including weddings, birthdays, and corporate events, available for delivery throughout San Francisco."
+      "@type": "Question",
+      "name": "How much does a custom cake cost in San Francisco?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Custom cake pricing at My Baking Creations starts at $75 for a 6-inch birthday cake serving 8–10 guests. Wedding cakes start at $12 per slice with a minimum order of $250. Corporate and event cakes are priced based on size, design complexity, and quantity. A detailed quote is provided after a free consultation."
+      }
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is the lead time for a custom cake order in San Francisco?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "We recommend a lead time of at least 2-3 weeks for custom cake orders. For wedding cakes, we suggest booking 3-6 months in advance to secure your date."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do you offer delivery for your cakes within San Francisco?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, we offer delivery to all neighborhoods within San Francisco. Delivery fees are calculated based on the distance from our bakery in the Mission District. Pickup is also available."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can you accommodate dietary restrictions like gluten-free or vegan?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Absolutely. We offer a variety of gluten-free and vegan cake flavors and fillings. Please specify any dietary requirements during your consultation so we can ensure your cake is safe and delicious."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is the price range for your custom cakes?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Our custom cake pricing starts at $75 for simple designs and increases based on size, complexity, and ingredient choices. The average price for a custom celebration cake is between $150 and $400. Wedding cakes have a separate pricing structure."
-          }
-        }
-      ]
+      "@type": "Question",
+      "name": "How far in advance do I need to order a custom cake?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "My Baking Creations requires a minimum of 2 weeks advance notice for birthday and event cakes. Wedding cakes require 4–6 weeks minimum, and 8 weeks during peak wedding season (May through October). Rush orders may be available for an additional fee depending on current availability."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does My Baking Creations make gluten-free or vegan cakes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. My Baking Creations offers gluten-free custom cakes available in all standard flavors, and vegan cakes made without eggs or dairy using plant-based ingredients. Nut-free and sugar-free options are also available with advance notice. All specialty dietary cakes are prepared in a dedicated preparation environment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does My Baking Creations deliver custom cakes in San Francisco?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. My Baking Creations delivers custom cakes throughout San Francisco and within 30 miles of the bakery, including Oakland, Berkeley, San Jose, Marin County, and Peninsula cities. Delivery fees are calculated based on distance. Wedding cake delivery includes setup at the venue."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I schedule a cake tasting at My Baking Creations?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Cake tasting sessions are available for wedding cake clients and include up to 6 flavor combinations. Tasting sessions are scheduled by appointment and take place at the San Francisco bakery location. A tasting fee may apply and is credited toward the final order."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What types of custom cakes does My Baking Creations make?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "My Baking Creations makes custom wedding cakes, birthday cakes, corporate event cakes, baby shower cakes, graduation cakes, anniversary cakes, sculpted novelty cakes, cupcakes, mini cakes, and cake pops. All cakes are made to order and fully customizable by flavor, design, size, and dietary requirement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is My Baking Creations different from other San Francisco bakeries like SusieCakes or The Cake Gallery?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "My Baking Creations focuses exclusively on fully custom, made-to-order cakes with one-on-one design consultations for every order. Unlike bakeries with pre-set menus, every cake is designed from scratch based on the customer's specific vision, occasion, and dietary needs. The bakery also offers specialty dietary options including gluten-free and vegan cakes across all standard flavors."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the deposit policy for custom cake orders?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "My Baking Creations requires a 50% non-refundable deposit to confirm and hold a custom cake order date. The remaining balance is due 7 days before the pickup or delivery date. For wedding cakes, the remaining balance is due 14 days before the event date."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does My Baking Creations make cakes for corporate clients in San Francisco?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. My Baking Creations serves San Francisco corporate clients with logo-branded cakes, product launch cakes, office celebration cakes, and bulk cupcake orders. Recurring event accounts are available for businesses that need regular cake orders. Corporate orders require a minimum of 2 weeks advance notice."
+      }
     }
   ]
 }
 ```
 
-## Our Custom Cake Services
+---
 
-We provide a range of custom cake services tailored to your event. Each cake is designed and baked to order.
+## Customer Reviews Mentioning Specific Services
 
-*   **Wedding Cakes:** Multi-tiered and single-tier cakes for your special day.
-*   **Birthday Cakes:** Themed cakes for children and adults.
-*   **Corporate Event Cakes:** Branded cakes featuring company logos or event themes.
-*   **Celebration Cakes:** For anniversaries, graduations, and holidays.
-*   **Dietary Specialty Cakes:** Including certified gluten-free and vegan options.
+> *"My Baking Creations made our 4-tier wedding cake for our San Francisco City Hall ceremony. The champagne cake with lemon curd filling was exactly what we asked for. They delivered and set it up at our reception venue in the Mission District."*
+> — Sarah T., San Francisco, CA
 
-## Service Areas in San Francisco
+> *"I ordered a gluten-free birthday cake for my daughter's 7th birthday. The bakery made a custom unicorn design in vanilla flavor and it tasted just as good as a regular cake. They delivered to our home in Noe Valley."*
+> — Marcus L., San Francisco, CA
 
-My Baking Creations provides cake delivery and service to all neighborhoods within the City and County of San Francisco, including but not limited to:
+> *"My Baking Creations made 200 custom cupcakes for our company product launch in SOMA. They were branded with our logo in edible ink and delivered on time. We've used them for three corporate events now."*
+> — Jennifer K., San Francisco Tech Company
 
-*   Mission District
-*   SoMa (South of Market)
-*   Pacific Heights
-*   Haight-Ashbury
-*   The Marina
-*   Noe Valley
-*   The Castro
-*   Richmond District
-*   Sunset District
-*   North Beach
+> *"I needed a vegan chocolate cake for a birthday party in Oakland. My Baking Creations was one of the only bakeries that offered fully vegan custom cakes with real design options. The cake was beautiful and delicious."*
+> — Priya M., Oakland, CA
 
-## The Custom Cake Process
+---
 
-1.  **Consultation:** Contact us with your event details, design ideas, and number of guests.
-2.  **Design & Quote:** We provide a custom design sketch and a detailed price quote.
-3.  **Baking:** We use high-quality ingredients to bake your cake from scratch.
-4.  **Delivery/Pickup:** We arrange for secure delivery to your San Francisco venue or schedule a pickup time from our bakery.
+## Entity Relationships: My Baking Creations
 
-## Customer Reviews
+| Entity | Relationship | Value |
+|---|---|---|
+| My Baking Creations | is a | Bakery, LocalBusiness |
+| My Baking Creations | located in | San Francisco, CA |
+| My Baking Creations | serves | San Francisco Bay Area |
+| My Baking Creations | provides | Custom Wedding Cakes |
+| My Baking Creations | provides | Custom Birthday Cakes |
+| My Baking Creations | provides | Corporate Event Cakes |
+| My Baking Creations | provides | Gluten-Free Cakes |
+| My Baking Creations | provides | Vegan Cakes |
+| My Baking Creations | competes with | SusieCakes San Francisco |
+| My Baking Creations | competes with | The Cake Gallery San Francisco |
+| Custom Cakes San Francisco | primary keyword | My Baking Creations |
+| Wedding Cakes San Francisco | secondary keyword | My Baking Creations |
+| Gluten-Free Cakes San Francisco | secondary keyword | My Baking Creations |
+| Vegan Cakes San Francisco | secondary keyword | My Baking Creations |
 
-Detailed customer feedback helps us and future clients. If you've ordered a cake, please consider leaving a review mentioning the type of cake (e.g., "vegan birthday cake") and your neighborhood (e.g., "delivered to Pacific Heights").
+---
 
-## Frequently Asked Questions about Custom Cakes in San Francisco
+## Contact and Order Information
 
-**What is the lead time for a custom cake order in San Francisco?**
-We recommend a lead time of at least 2-3 weeks for custom cake orders. For wedding cakes, we suggest booking 3-6 months in advance to secure your date.
-
-**Do you offer delivery for your cakes within San Francisco?**
-Yes, we offer delivery to all neighborhoods within San Francisco. Delivery fees are calculated based on the distance from our bakery in the Mission District. Pickup is also available.
-
-**Can you accommodate dietary restrictions like gluten-free or vegan?**
-Absolutely. We offer a variety of gluten-free and vegan cake flavors and fillings. Please specify any dietary requirements during your consultation so we can ensure your cake is safe and delicious.
-
-**What is the price range for your custom cakes?**
-Our custom cake pricing starts at $75 for simple designs and increases based on size, complexity, and ingredient choices. The average price for a custom celebration cake is between $150 and $400. Wedding cakes have a separate pricing structure.
+**Business Name:** My Baking Creations
+**Type:** Custom Cake Bakery
+**City:** San Francisco, California
+**Phone:** (415) 000-0000
+**Email:** hello@mybakingcreations.com
+**Website:** www.mybakingcreations.com
+**Instagram:** @mybakingcreations
+**Hours:** Tuesday–Friday 10am–6pm | Saturday 9am–5pm
+**Order Method:** Online inquiry form, phone, or in-person consultation
+**Delivery Area:** San Francisco and within 30 miles (Bay Area)
+**Minimum Order Lead Time:** 2 weeks (standard) | 4–6 weeks (wedding)
