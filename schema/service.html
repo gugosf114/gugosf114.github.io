@@ -1,0 +1,98 @@
+Of course! Here is a complete and valid JSON-LD `Service` schema snippet tailored for "My Baking Creations".
+
+This template is designed to be placed on a specific service page (e.g., a page about "Custom Wedding Cakes"). You can copy, paste, and customize this code for each distinct service you offer.
+
+The placeholder values are for a "Custom Wedding Cake Design" service. Simply replace them with the details that match the content on your page.
+
+### Complete JSON-LD Service Schema
+
+Copy and paste the following code into the `<head>` or `<body>` section of your service page's HTML.
+
+```html
+<!--
+==========================================================================================
+ JSON-LD Schema for a Service - My Baking Creations
+ 
+ Instructions:
+ 1. Copy this entire script block and place it in the <head> or <body> of your service page.
+ 2. Replace ALL placeholder values (like "Custom Wedding Cake Design" or "https://...") 
+    with the actual information from that specific page.
+ 3. The schema data MUST match the visible content on the page.
+ 4. After updating, test the URL with Google's Rich Results Test tool to ensure it's valid.
+==========================================================================================
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+
+  // --- Service Details ---
+  // Tip: Describe the specific service offered on this page.
+  
+  // The name of the service.
+  // Example: "Baking Classes for Beginners", "Corporate Event Catering"
+  "name": "Custom Wedding Cake Design",
+  
+  // A more specific category for your service.
+  // Example: "Culinary School", "Dessert Catering"
+  "serviceType": "Custom Cake Design",
+
+  // A detailed description of this service. This should be 1-2 sentences and
+  // should also appear as visible text on the page.
+  "description": "We specialize in creating beautiful, delicious, and unique custom wedding cakes. Work with our expert designers to bring your dream cake to life for your special day.",
+
+  // --- Image & URL ---
+  // Tip: Use high-quality images and direct links.
+
+  // A direct URL to a high-quality image representing this service.
+  // The image should be on the page. Recommended size: 1200px wide.
+  "image": "https://mybakingcreations.com/images/custom-wedding-cake-service.jpg",
+  
+  // The full URL of the page this schema is on.
+  "url": "https://mybakingcreations.com/services/wedding-cakes",
+
+  // --- Provider (Your Business) ---
+  // Tip: This section identifies your business as the service provider.
+  
+  "provider": {
+    "@type": "Organization",
+    "name": "My Baking Creations",
+    "url": "https://mybakingcreations.com"
+  },
+
+  // --- Service Area ---
+  // Tip: Specify the geographic location(s) where you offer the service.
+  
+  "areaServed": {
+    "@type": "City",
+    // The city where you provide the service.
+    "name": "San Francisco" 
+    // You can also use "State", "Country", or "AdministrativeArea" for larger regions.
+  },
+
+  // --- Pricing (Offer) ---
+  // Tip: Be transparent with pricing. This must match the price shown on the page.
+  
+  "offers": {
+    "@type": "Offer",
+    // The currency code (e.g., "USD", "CAD", "EUR").
+    "priceCurrency": "USD",
+    
+    // The price of the service. Use a number without currency symbols.
+    // If this is a starting price, make sure the page says "From $450".
+    "price": "450.00",
+    
+    // The URL where a user can order or request a quote for this service.
+    // This can be the same page URL or a link to a contact/order form.
+    "url": "https://mybakingcreations.com/services/wedding-cakes#quote"
+  }
+}
+</script>
+<!-- End of JSON-LD Schema -->
+```
+
+### Next Steps
+
+1.  **Customize:** Go through the code and replace every placeholder value with your actual service details.
+2.  **Implement:** Add the updated script to the HTML of the relevant service page.
+3.  **Validate:** Once the page is live, test the URL using the [Google Rich Results Test](https://search.google.com/test/rich-results) to confirm there are no errors and that Google can see your `Service` markup.
