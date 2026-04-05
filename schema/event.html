@@ -1,112 +1,169 @@
-Of course. Here is a complete and valid JSON-LD Event schema snippet tailored for "My Baking Creations."
-
-This template includes all the recommended fields, plus other highly recommended properties like `image`, `offers`, and `organizer` to give you the best chance of earning a rich result on Google.
-
-The values are realistic placeholders designed to be easily updated by a non-technical person. Each section is explained with HTML comments.
-
-### Complete JSON-LD Event Schema Snippet
-
-Copy and paste this entire code block into the `<head>` or `<body>` section of the specific event page on your website.
-
-```html
-<!--
-==========================================================================================
-// START: Event Schema Markup for JSON-LD
-// * Instructions:
-// 1. Replace the placeholder values below with the specific details for your event.
-// 2. Ensure the information here EXACTLY matches the information visible on the page.
-// 3. Place this script in the <head> or <body> of your event page.
-// 4. Test the URL of the page with Google's Rich Results Test tool after publishing.
-==========================================================================================
--->
 <script type="application/ld+json">
 {
+  <!-- ============================================================
+       EVENT SCHEMA FOR MY BAKING CREATIONS
+       Website: https://mybakingcreations.com
+
+       HOW TO USE THIS SCHEMA:
+       1. Copy this entire <script> block into the <head> section
+          of the webpage that describes your event.
+       2. Replace the placeholder values below with your real
+          event details.
+       3. Make sure the information here EXACTLY matches what
+          visitors can read on your webpage.
+       4. Test your page at: https://search.google.com/test/rich-results
+       ============================================================ -->
+
   "@context": "https://schema.org",
+
+  <!-- This tells search engines what type of structured data this is.
+       Do NOT change "@type": "Event" -->
   "@type": "Event",
 
-  // --- Event Name ---
-  // Enter the name of your event. This should be the main headline on your page.
+  <!-- ============================================================
+       EVENT NAME
+       Replace with the exact name of your event as it appears
+       on your webpage. Keep it clear and descriptive.
+       ============================================================ -->
   "name": "Holiday Cookie Decorating Workshop",
 
-  // --- Event Dates & Times ---
-  // Use YYYY-MM-DDTHH:MM format. T separates date and time.
-  // Be sure to include the timezone offset (e.g., -05:00 for EST, -08:00 for PST).
-  "startDate": "2024-12-07T10:00-05:00",
-  "endDate": "2024-12-07T12:00-05:00",
+  <!-- ============================================================
+       EVENT DESCRIPTION
+       Write a short summary of what the event is about.
+       This may appear in Google search results.
+       ============================================================ -->
+  "description": "Join us for a fun and festive Holiday Cookie Decorating Workshop at My Baking Creations! Learn professional decorating techniques, work with royal icing, and take home a dozen beautifully decorated cookies. All skill levels welcome. Supplies and ingredients are included in the ticket price.",
 
-  // --- Event Status & Mode ---
-  // These typically do not need to be changed unless the event is cancelled or online.
+  <!-- ============================================================
+       START DATE AND TIME
+       Format: YYYY-MM-DDTHH:MM:SS
+       Example: 2024-12-14T10:00:00 means December 14, 2024 at 10:00 AM
+       Change the date and time to match your event.
+       ============================================================ -->
+  "startDate": "2024-12-14T10:00:00",
+
+  <!-- ============================================================
+       END DATE AND TIME
+       Format: YYYY-MM-DDTHH:MM:SS
+       Example: 2024-12-14T13:00:00 means December 14, 2024 at 1:00 PM
+       Change the date and time to match when your event ends.
+       ============================================================ -->
+  "endDate": "2024-12-14T13:00:00",
+
+  <!-- ============================================================
+       EVENT STATUS
+       Use one of these options (copy and paste exactly):
+       - "https://schema.org/EventScheduled"     (event is happening as planned)
+       - "https://schema.org/EventCancelled"     (event has been cancelled)
+       - "https://schema.org/EventPostponed"     (event has been postponed)
+       - "https://schema.org/EventRescheduled"   (event moved to a new date)
+       ============================================================ -->
   "eventStatus": "https://schema.org/EventScheduled",
+
+  <!-- ============================================================
+       EVENT ATTENDANCE MODE
+       Use one of these options (copy and paste exactly):
+       - "https://schema.org/OfflineEventAttendanceMode"  (in-person event)
+       - "https://schema.org/OnlineEventAttendanceMode"   (virtual/online event)
+       - "https://schema.org/MixedEventAttendanceMode"    (both in-person and online)
+       ============================================================ -->
   "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
 
-  // --- Event Location ---
-  // Update the name and address of the event venue.
+  <!-- ============================================================
+       LOCATION
+       Fill in the physical address where your event will be held.
+       If your event is online, replace this entire "location" block with:
+       "location": {
+         "@type": "VirtualLocation",
+         "url": "https://mybakingcreations.com/live-workshop"
+       }
+       ============================================================ -->
   "location": {
     "@type": "Place",
+
+    <!-- The name of the venue or your business name -->
     "name": "My Baking Creations Studio",
+
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "123 Sweet Street",
-      "addressLocality": "Bakersville",
-      "addressRegion": "CA",
-      "postalCode": "90210",
+
+      <!-- Street number and street name -->
+      "streetAddress": "123 Sweet Maple Lane",
+
+      <!-- City -->
+      "addressLocality": "Springfield",
+
+      <!-- State abbreviation (for US addresses) -->
+      "addressRegion": "IL",
+
+      <!-- ZIP or postal code -->
+      "postalCode": "62701",
+
+      <!-- Two-letter country code. US = United States -->
       "addressCountry": "US"
     }
   },
 
-  // --- Event Image ---
-  // Add URLs to high-quality images of the event.
-  // Google recommends multiple images in different aspect ratios (1x1, 4x3, 16x9).
-  "image": [
-    "https://mybakingcreations.com/images/cookie-workshop-16x9.jpg",
-    "https://mybakingcreations.com/images/cookie-workshop-4x3.jpg",
-    "https://mybakingcreations.com/images/cookie-workshop-1x1.jpg"
-   ],
-
-  // --- Event Description ---
-  // A short, compelling summary of the event.
-  "description": "Join us for a fun-filled morning of holiday cookie decorating! We'll provide the cookies, icing, and sprinkles. Perfect for all ages and skill levels.",
-
-  // --- Ticket & Pricing Information ---
-  // Update the price, currency, and the URL to your registration/ticket page.
-  "offers": {
-    "@type": "Offer",
-    "url": "https://mybakingcreations.com/events/holiday-workshop-tickets",
-    "price": "45.00",
-    "priceCurrency": "USD",
-    "availability": "https://schema.org/InStock",
-    "validFrom": "2024-10-01T00:00"
-  },
-
-  // --- Event Organizer ---
-  // This should be your business information.
+  <!-- ============================================================
+       ORGANIZER
+       This is the person or business hosting the event.
+       Update the name and url to match your business.
+       ============================================================ -->
   "organizer": {
     "@type": "Organization",
     "name": "My Baking Creations",
     "url": "https://mybakingcreations.com"
+  },
+
+  <!-- ============================================================
+       EVENT IMAGE
+       Add a link to an image that represents your event.
+       This image may appear in Google search results.
+       Replace the URL below with a real image URL from your website.
+       Recommended size: at least 1200 x 628 pixels.
+       ============================================================ -->
+  "image": [
+    "https://mybakingcreations.com/images/holiday-cookie-workshop.jpg"
+  ],
+
+  <!-- ============================================================
+       OFFERS / TICKET INFORMATION
+       Fill in the ticket price and where people can buy tickets.
+       If the event is free, set "price" to "0".
+       ============================================================ -->
+  "offers": {
+    "@type": "Offer",
+
+    <!-- The URL where people can register or buy tickets -->
+    "url": "https://mybakingcreations.com/events/holiday-cookie-workshop",
+
+    <!-- Ticket price as a number only (no dollar sign) -->
+    "price": "65",
+
+    <!-- Currency code. USD = US Dollars, EUR = Euros, GBP = British Pounds -->
+    "priceCurrency": "USD",
+
+    <!-- Ticket availability. Use one of these options:
+         - "https://schema.org/InStock"       (tickets available)
+         - "https://schema.org/SoldOut"       (sold out)
+         - "https://schema.org/PreOrder"      (not yet on sale)
+    -->
+    "availability": "https://schema.org/InStock",
+
+    <!-- The date when tickets go on sale (YYYY-MM-DDTHH:MM:SS format) -->
+    "validFrom": "2024-11-01T09:00:00"
+  },
+
+  <!-- ============================================================
+       PERFORMER (OPTIONAL)
+       If a specific person is leading or performing at the event,
+       add their name here. If not applicable, you can delete
+       this entire "performer" section.
+       ============================================================ -->
+  "performer": {
+    "@type": "Person",
+    "name": "Jane Smith, Head Baker & Instructor"
   }
+
 }
 </script>
-<!--
-// END: Event Schema Markup
-==========================================================================================
--->
-```
-
-### How to Customize This Schema
-
-1.  **`name`**: Change `"Holiday Cookie Decorating Workshop"` to the title of your event (e.g., "Advanced Sourdough Masterclass").
-2.  **`startDate` / `endDate`**: Update the date and time. The `T` is required. The `-05:00` is the timezone offset from UTC (this example is for US Eastern Time). Adjust it for your specific timezone.
-3.  **`location`**:
-    *   `name`: Change `"My Baking Creations Studio"` to the name of your venue.
-    *   `streetAddress`, `addressLocality`, etc.: Update with the venue's full address.
-4.  **`image`**: Replace the placeholder URLs with direct links to actual images for your event. Using the recommended aspect ratios will help your event look its best in search results.
-5.  **`description`**: Write a new description that matches what's on your page.
-6.  **`offers`**:
-    *   `url`: Change this to the direct URL where customers can buy tickets or register.
-    *   `price`: Update the ticket price. Do not include a currency symbol.
-    *   `priceCurrency`: Change `"USD"` to the appropriate 3-letter currency code if needed (e.g., "CAD", "EUR").
-    *   `validFrom`: Set this to the date when tickets go on sale.
-7.  **`organizer`**: This is already set to your business details and likely does not need to be changed.
-
-After you've updated the values and added the script to your webpage, use the [Google Rich Results Test](https://search.google.com/test/rich-results) to validate it.
