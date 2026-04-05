@@ -1,0 +1,139 @@
+Of course! Here is a complete and valid JSON-LD Menu schema snippet tailored for "My Baking Creations".
+
+This code is designed to be easily understood and updated by someone with minimal technical knowledge. It includes clear HTML comments explaining what each part does and which values to customize.
+
+### Complete JSON-LD Menu Schema Snippet
+
+Simply copy and paste this entire code block into the `<head>` or `<body>` section of your menu page's HTML.
+
+```html
+<!--
+==================================================================
+// START: Schema.org JSON-LD for Menu
+//
+// This code provides structured data about your menu to search
+// engines like Google, which can help them understand your
+// offerings and display them in rich results.
+//
+// IMPORTANT: Update the placeholder values below to match the
+// exact content visible on your menu page.
+//
+// After updating, test this code using Google's Rich Results Test:
+// https://search.google.com/test/rich-results
+==================================================================
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Menu",
+
+  // <!-- 1. General Menu Information -->
+  // <!-- Update these details to describe your overall menu. -->
+  "name": "My Baking Creations Menu",
+  "description": "Discover our delicious, handcrafted cakes, pastries, and breads, all baked fresh daily with the finest ingredients.",
+  "inLanguage": "en-US", // <!-- Use language codes like "en-US" for US English or "en-GB" for UK English. -->
+  "url": "https://mybakingcreations.com/menu", // <!-- The full URL of the page where this menu is located. -->
+
+  // <!-- 2. Menu Sections -->
+  // <!-- This is a list of your menu categories (e.g., "Cakes", "Pastries", "Breads"). -->
+  // <!-- You can add more sections by copying a whole { ... } block (from curly brace to curly brace, including the comma). -->
+  "hasMenuSection": [
+    {
+      // <!-- START: Menu Section 1 -->
+      "@type": "MenuSection",
+      "name": "Custom Cakes", // <!-- The name of this menu section. -->
+      "description": "Beautifully decorated cakes for any occasion. Available in various sizes and flavors.", // <!-- Optional: A description for this section. -->
+
+      // <!-- This is a list of individual items within this section. -->
+      // <!-- To add more items, copy a whole { ... } block. -->
+      "hasMenuItem": [
+        {
+          // <!-- START: Menu Item 1.1 -->
+          "@type": "MenuItem",
+          "name": "Classic Chocolate Fudge Cake", // <!-- The name of the menu item. -->
+          "description": "A rich, moist chocolate cake with a decadent fudge frosting. Perfect for birthdays.", // <!-- A description of the item. -->
+          "offers": {
+            "@type": "Offer",
+            "price": "45.00", // <!-- The price of the item. Do not include currency symbols. -->
+            "priceCurrency": "USD" // <!-- The 3-letter currency code (e.g., USD, CAD, EUR). -->
+          }
+          // <!-- END: Menu Item 1.1 -->
+        },
+        {
+          // <!-- START: Menu Item 1.2 -->
+          "@type": "MenuItem",
+          "name": "Lemon Raspberry Delight Cake",
+          "description": "A light and zesty lemon cake layered with fresh raspberry filling and cream cheese frosting.",
+          "offers": {
+            "@type": "Offer",
+            "price": "50.00",
+            "priceCurrency": "USD"
+          }
+          // <!-- END: Menu Item 1.2 -->
+        }
+      ]
+      // <!-- END: Menu Section 1 -->
+    },
+    {
+      // <!-- START: Menu Section 2 -->
+      "@type": "MenuSection",
+      "name": "Morning Pastries",
+      "description": "Start your day right with our freshly baked pastries, available daily until sold out.",
+
+      "hasMenuItem": [
+        {
+          // <!-- START: Menu Item 2.1 -->
+          "@type": "MenuItem",
+          "name": "Butter Croissant",
+          "description": "Flaky, buttery, and baked to golden perfection.",
+          "offers": {
+            "@type": "Offer",
+            "price": "3.50",
+            "priceCurrency": "USD"
+          }
+          // <!-- END: Menu Item 2.1 -->
+        },
+        {
+          // <!-- START: Menu Item 2.2 -->
+          "@type": "MenuItem",
+          "name": "Almond Bear Claw",
+          "description": "A sweet pastry filled with rich almond paste and topped with sliced almonds.",
+          "offers": {
+            "@type": "Offer",
+            "price": "4.25",
+            "priceCurrency": "USD"
+          }
+          // <!-- END: Menu Item 2.2 -->
+        }
+      ]
+      // <!-- END: Menu Section 2 -->
+    }
+  ]
+}
+</script>
+<!--
+// END: Schema.org JSON-LD for Menu
+==================================================================
+-->
+```
+
+### How to Customize This Code
+
+1.  **General Menu Information**:
+    *   Change `"name": "My Baking Creations Menu"` to the title of your menu.
+    *   Update the `"description"` to briefly describe your bakery's offerings.
+    *   Verify the `"url"` is the exact web address of your menu page.
+
+2.  **Menu Sections (`hasMenuSection`)**:
+    *   Each `{...}` block inside the `hasMenuSection` square brackets `[...]` is a category, like "Custom Cakes" or "Morning Pastries".
+    *   Change the `name` and `description` for each section to match your menu.
+
+3.  **Menu Items (`hasMenuItem`)**:
+    *   Inside each section, each `{...}` block inside the `hasMenuItem` square brackets `[...]` is a single food item.
+    *   Update the `name`, `description`, and `price` for each item. **Important:** Do not include currency symbols like `$` in the `price` field.
+
+4.  **Adding/Removing Content**:
+    *   **To add a new menu item** to a section, copy an entire `MenuItem` block (from `{` to `}`), add a comma after the previous item, and paste it in. Then, update the new item's details.
+    *   **To add a new menu section**, copy an entire `MenuSection` block (from its opening `{` to its closing `}`), add a comma after the previous section, and paste it in. Then, update the new section's name and add its items.
+
+After you've updated the values and placed the code on your website, use **Google's Rich Results Test** to ensure it's valid and error-free.
