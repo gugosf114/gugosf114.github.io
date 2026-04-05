@@ -1,0 +1,185 @@
+Of course. Here is a complete and valid JSON-LD `HowTo` schema snippet, designed to be easy for a non-technical person to update.
+
+It includes all the recommended fields, realistic placeholder values for "My Baking Creations," and detailed comments explaining each section.
+
+Simply copy and paste this code into the `<head>` or `<body>` section of the relevant web page (e.g., a recipe or tutorial page).
+
+***
+
+### Complete HowTo Schema for My Baking Creations
+
+```html
+<!--
+================================================================================
+// HowTo Schema Markup for My Baking Creations
+//
+// INSTRUCTIONS:
+// 1. Copy this entire code block and place it in the <head> section of your web page.
+// 2. Replace all the placeholder values (e.g., "REPLACE WITH...") with the
+//    actual information from your page.
+// 3. IMPORTANT: The information in this schema MUST EXACTLY MATCH the visible
+//    content on your page. For example, the steps listed here must be the
+//    same steps users see on the page.
+// 4. To add more steps, supplies, or tools, simply copy and paste one of the
+//    existing blocks (e.g., { ... },) and update its content.
+// 5. After updating, test the URL of your page with the Google Rich Results Test tool
+//    to ensure it's valid.
+//
+================================================================================
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+
+  // <!-- 1. General Information: The name and description of the guide. -->
+  // <!-- This should match the main title (H1) and introduction on your page. -->
+  "name": "How to Bake Perfect Chocolate Chip Cookies",
+  "description": "A step-by-step guide to baking delicious, soft, and chewy chocolate chip cookies from scratch. Perfect for beginners and baking enthusiasts alike.",
+
+  // <!-- 2. Main Image: A high-quality image of the finished result. -->
+  // <!-- Use a full URL (https://...). Recommended size: at least 1200px wide. -->
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://mybakingcreations.com/images/perfect-chocolate-chip-cookies.jpg",
+    "height": "800",
+    "width": "1200"
+  },
+
+  // <!-- 3. Total Time: The total time required from start to finish. -->
+  // <!-- Format: "PT_H_M_S". P=Period, T=Time. Examples: "PT2H30M" for 2 hours 30 minutes. "PT45M" for 45 minutes. -->
+  "totalTime": "PT1H15M",
+
+  // <!-- 4. Estimated Cost: The approximate cost of all supplies. -->
+  // <!-- Use the standard 3-letter currency code (e.g., USD, CAD, EUR). -->
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "currency": "USD",
+    "value": "15.00"
+  },
+
+  // <!-- 5. Supplies (Ingredients): List all necessary ingredients. -->
+  // <!-- Add more by copying a line: { "@type": "HowToSupply", "name": "New Ingredient" }, -->
+  "supply": [
+    {
+      "@type": "HowToSupply",
+      "name": "All-purpose flour"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "Baking soda"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "Salt"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "Unsalted butter"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "Granulated sugar"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "Brown sugar"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "Vanilla extract"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "Eggs"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "Semi-sweet chocolate chips"
+    }
+  ],
+
+  // <!-- 6. Tools: List all tools required for the project. -->
+  // <!-- Add more by copying a line: { "@type": "HowToTool", "name": "New Tool" }, -->
+  "tool": [
+    {
+      "@type": "HowToTool",
+      "name": "Mixing bowls"
+    },
+    {
+      "@type": "HowToTool",
+      "name": "Whisk"
+    },
+    {
+      "@type": "HowToTool",
+      "name": "Electric mixer"
+    },
+    {
+      "@type": "HowToTool",
+      "name": "Baking sheets"
+    },
+    {
+      "@type": "HowToTool",
+      "name": "Oven"
+    }
+  ],
+
+  // <!-- 7. Steps: Provide a step-by-step guide. -->
+  // <!-- This is the most important section. Each step must match the content on your page. -->
+  // <!-- To add a new step, copy an entire block from { to }, and paste it after the previous one. -->
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Preparation",
+      "text": "Preheat your oven to 375°F (190°C). Line baking sheets with parchment paper to prevent sticking.",
+      "url": "https://mybakingcreations.com/cookie-recipe#step1",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://mybakingcreations.com/images/cookie-step-1-oven.jpg",
+        "height": "400",
+        "width": "600"
+      }
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Mix Dry Ingredients",
+      "text": "In a medium bowl, whisk together the all-purpose flour, baking soda, and salt. Set aside for later.",
+      "url": "https://mybakingcreations.com/cookie-recipe#step2",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://mybakingcreations.com/images/cookie-step-2-dry-ingredients.jpg",
+        "height": "400",
+        "width": "600"
+      }
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Cream Butter and Sugars",
+      "text": "In a large bowl, use an electric mixer to beat the softened butter, granulated sugar, and brown sugar until the mixture is light and fluffy, about 2-3 minutes.",
+      "url": "https://mybakingcreations.com/cookie-recipe#step3",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://mybakingcreations.com/images/cookie-step-3-creaming-butter.jpg",
+        "height": "400",
+        "width": "600"
+      }
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Combine and Bake",
+      "text": "Beat in the eggs one at a time, then stir in the vanilla. Gradually add the dry ingredient mixture. Fold in the chocolate chips. Drop rounded tablespoons of dough onto the prepared baking sheets and bake for 10-12 minutes, or until golden brown.",
+      "url": "https://mybakingcreations.com/cookie-recipe#step4",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://mybakingcreations.com/images/cookie-step-4-baking.jpg",
+        "height": "400",
+        "width": "600"
+      }
+    }
+  ],
+
+  // <!-- 8. Final Result: Describe the final outcome or yield. -->
+  "yield": "Makes approximately 3 dozen cookies."
+}
+</script>
+```

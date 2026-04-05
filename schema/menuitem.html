@@ -1,0 +1,74 @@
+Of course! Here is a complete and valid JSON-LD `MenuItem` schema snippet, tailored for your business and designed to be easily updated by a non-technical person.
+
+This code includes all the recommended fields, realistic placeholder values, and detailed comments explaining how to customize each part.
+
+### How to Use This Snippet
+1.  **Copy** the entire code block below.
+2.  **Paste** it into the `<head>` or `<body>` section of the specific product page (e.g., the page for your "Classic Chocolate Chip Cookie").
+3.  **Customize** the placeholder values to match the information visible on that page.
+4.  **Validate** the page URL using the [Google Rich Results Test](https://search.google.com/test/rich-results) to ensure there are no errors.
+
+---
+
+```html
+<!--
+==================================================================
+== Schema.org JSON-LD for a Single Menu Item (e.g., a product)  ==
+==                                                              ==
+== INSTRUCTIONS:                                                ==
+== 1. Copy this entire script block.                            ==
+== 2. Paste it into the HTML of the relevant product page.      ==
+== 3. Replace all placeholder values below with your actual     ==
+==    product information. The values MUST match the content   ==
+==    visible on the page.                                      ==
+== 4. Test the URL with Google's Rich Results Test.             ==
+==================================================================
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MenuItem",
+
+  // <!-- 1. Menu Item Name: Replace with the exact name of the item as shown on the page. -->
+  "name": "Classic Chocolate Chip Cookie",
+
+  // <!-- 2. Description: Replace with the product's description. This should match the on-page text. -->
+  "description": "A timeless classic, our chocolate chip cookie is baked to perfection with a soft, chewy center and loaded with rich, semi-sweet chocolate chips. Made with real butter and pure vanilla extract.",
+
+  // <!-- 3. Image: Provide a direct link to a high-quality image of the menu item. -->
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://mybakingcreations.com/images/classic-chocolate-chip-cookie.jpg",
+    "height": "800",
+    "width": "1200"
+  },
+
+  // <!-- 4. Offer Details: Update the price, currency, and availability. -->
+  "offers": {
+    "@type": "Offer",
+    // <!-- The URL of this specific product page. -->
+    "url": "https://mybakingcreations.com/products/classic-chocolate-chip-cookie",
+    // <!-- The price of the item. Do not include a currency symbol. -->
+    "price": "3.50",
+    // <!-- The 3-letter currency code (e.g., USD, CAD, EUR). -->
+    "priceCurrency": "USD",
+    // <!-- Availability status. Use "InStock", "OutOfStock", "PreOrder", etc. -->
+    "availability": "https://schema.org/InStock"
+  },
+
+  // <!-- 5. Nutrition Information: Fill in the nutritional details for the item. -->
+  "nutrition": {
+    "@type": "NutritionInformation",
+    // <!-- Serving size (e.g., "1 cookie", "1 slice (100g)"). -->
+    "servingSize": "1 cookie (50g)",
+    // <!-- Calories, including the unit (e.g., "250 calories" or "250 kcal"). -->
+    "calories": "245 calories",
+    "fatContent": "12 g",
+    "carbohydrateContent": "30 g",
+    "proteinContent": "3 g",
+    "sugarContent": "18 g"
+  }
+}
+</script>
+<!-- ================== End of MenuItem Schema ================== -->
+```
