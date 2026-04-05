@@ -1,98 +1,259 @@
-Of course! Here is a complete and valid JSON-LD `Service` schema snippet tailored for "My Baking Creations".
-
-This template is designed to be placed on a specific service page (e.g., a page about "Custom Wedding Cakes"). You can copy, paste, and customize this code for each distinct service you offer.
-
-The placeholder values are for a "Custom Wedding Cake Design" service. Simply replace them with the details that match the content on your page.
-
-### Complete JSON-LD Service Schema
-
-Copy and paste the following code into the `<head>` or `<body>` section of your service page's HTML.
-
-```html
-<!--
-==========================================================================================
- JSON-LD Schema for a Service - My Baking Creations
- 
- Instructions:
- 1. Copy this entire script block and place it in the <head> or <body> of your service page.
- 2. Replace ALL placeholder values (like "Custom Wedding Cake Design" or "https://...") 
-    with the actual information from that specific page.
- 3. The schema data MUST match the visible content on the page.
- 4. After updating, test the URL with Google's Rich Results Test tool to ensure it's valid.
-==========================================================================================
--->
 <script type="application/ld+json">
 {
+  <!-- ============================================================
+       SERVICE SCHEMA FOR MY BAKING CREATIONS
+       ============================================================
+       HOW TO USE THIS SCHEMA:
+       1. Copy this entire <script> block into the <head> section
+          of your webpage (or just before the closing </body> tag).
+       2. Replace all placeholder values (marked with comments)
+          with your real business information.
+       3. After updating, test your page at:
+          https://search.google.com/test/rich-results
+       4. Make sure every value here matches what visitors
+          can actually read on your webpage.
+       ============================================================ -->
+
   "@context": "https://schema.org",
+
+  <!-- The type of schema — "Service" tells Google this page
+       describes a service your business offers. Do not change this. -->
   "@type": "Service",
 
-  // --- Service Details ---
-  // Tip: Describe the specific service offered on this page.
-  
-  // The name of the service.
-  // Example: "Baking Classes for Beginners", "Corporate Event Catering"
-  "name": "Custom Wedding Cake Design",
-  
-  // A more specific category for your service.
-  // Example: "Culinary School", "Dessert Catering"
-  "serviceType": "Custom Cake Design",
+  <!-- The name of the specific service you are describing.
+       Example: "Custom Wedding Cakes" or "Birthday Cake Orders" -->
+  "name": "Custom Baked Goods & Cake Design",
 
-  // A detailed description of this service. This should be 1-2 sentences and
-  // should also appear as visible text on the page.
-  "description": "We specialize in creating beautiful, delicious, and unique custom wedding cakes. Work with our expert designers to bring your dream cake to life for your special day.",
+  <!-- A short, clear description of this service.
+       Keep it to 1–3 sentences. Match the text on your webpage. -->
+  "description": "My Baking Creations offers fully custom cakes, cupcakes, cookies, and specialty baked goods for weddings, birthdays, corporate events, and everyday celebrations. Every item is handcrafted to order using premium ingredients and personalized designs.",
 
-  // --- Image & URL ---
-  // Tip: Use high-quality images and direct links.
+  <!-- The full web address (URL) of the page where this service is described. -->
+  "url": "https://mybakingcreations.com/services",
 
-  // A direct URL to a high-quality image representing this service.
-  // The image should be on the page. Recommended size: 1200px wide.
-  "image": "https://mybakingcreations.com/images/custom-wedding-cake-service.jpg",
-  
-  // The full URL of the page this schema is on.
-  "url": "https://mybakingcreations.com/services/wedding-cakes",
+  <!-- One or more photos that represent this service.
+       Replace the URL with a real image hosted on your website.
+       "caption" is the alt text / description of the image. -->
+  "image": [
+    {
+      "@type": "ImageObject",
+      "url": "https://mybakingcreations.com/images/custom-cakes-service.jpg",
+      "caption": "A selection of custom decorated cakes made by My Baking Creations",
+      "width": 1200,
+      "height": 800
+    },
+    {
+      "@type": "ImageObject",
+      "url": "https://mybakingcreations.com/images/cupcakes-cookies.jpg",
+      "caption": "Assorted custom cupcakes and decorated cookies available for order",
+      "width": 1200,
+      "height": 800
+    }
+  ],
 
-  // --- Provider (Your Business) ---
-  // Tip: This section identifies your business as the service provider.
-  
-  "provider": {
-    "@type": "Organization",
-    "name": "My Baking Creations",
-    "url": "https://mybakingcreations.com"
-  },
+  <!-- The category or type of service.
+       Update this to match your primary service category. -->
+  "serviceType": "Custom Cake Design and Baked Goods",
 
-  // --- Service Area ---
-  // Tip: Specify the geographic location(s) where you offer the service.
-  
+  <!-- The category of the business providing this service. -->
+  "category": "Bakery",
+
+  <!-- The geographic area where you provide this service.
+       Update the city, state, and postal code to match your area.
+       If you ship nationally, you can change "City" to your country. -->
   "areaServed": {
     "@type": "City",
-    // The city where you provide the service.
-    "name": "San Francisco" 
-    // You can also use "State", "Country", or "AdministrativeArea" for larger regions.
+    "name": "Your City, State"
   },
 
-  // --- Pricing (Offer) ---
-  // Tip: Be transparent with pricing. This must match the price shown on the page.
-  
-  "offers": {
-    "@type": "Offer",
-    // The currency code (e.g., "USD", "CAD", "EUR").
-    "priceCurrency": "USD",
-    
-    // The price of the service. Use a number without currency symbols.
-    // If this is a starting price, make sure the page says "From $450".
-    "price": "450.00",
-    
-    // The URL where a user can order or request a quote for this service.
-    // This can be the same page URL or a link to a contact/order form.
-    "url": "https://mybakingcreations.com/services/wedding-cakes#quote"
+  <!-- OFFERS SECTION
+       This section describes pricing and availability.
+       You can list one offer or multiple offers (one per service tier). -->
+  "offers": [
+    {
+      <!-- Each offer is a "Offer" type — do not change this. -->
+      "@type": "Offer",
+
+      <!-- The name of this specific offer or pricing tier. -->
+      "name": "Custom Birthday Cake",
+
+      <!-- A brief description of what is included in this offer. -->
+      "description": "A fully custom birthday cake designed to your specifications, available in a variety of flavors, fillings, and decorating styles. Serves 10–50 guests depending on size selected.",
+
+      <!-- The starting price for this offer.
+           Use a number only — no dollar signs. -->
+      "price": "75.00",
+
+      <!-- The currency for the price above.
+           "USD" = US Dollars. Change if needed (e.g., "CAD", "GBP"). -->
+      "priceCurrency": "USD",
+
+      <!-- Whether this item is currently available.
+           Options: "InStock", "OutOfStock", "PreOrder", "Discontinued" -->
+      "availability": "https://schema.org/InStock",
+
+      <!-- The URL where a customer can place an order or learn more. -->
+      "url": "https://mybakingcreations.com/order/birthday-cake",
+
+      <!-- The date this offer becomes valid (YYYY-MM-DD format).
+           Update to today's date or your business launch date. -->
+      "validFrom": "2024-01-01",
+
+      <!-- The date this offer expires (YYYY-MM-DD format).
+           Update to a future date, or remove this line if the offer never expires. -->
+      "validThrough": "2025-12-31",
+
+      <!-- How the customer will receive this item.
+           Options: "OnSitePickup", "DeliveryModeDirectDownload", "DeliveryModeFreight"
+           Use "OnSitePickup" if customers pick up in person. -->
+      "availableDeliveryMethod": "http://purl.org/goodrelations/v1#DeliveryModePickUp",
+
+      <!-- The seller of this offer — your business. -->
+      "seller": {
+        "@type": "LocalBusiness",
+        "name": "My Baking Creations",
+        "url": "https://mybakingcreations.com"
+      }
+    },
+    {
+      "@type": "Offer",
+
+      <!-- Second offer — update or duplicate this block for each service you offer. -->
+      "name": "Custom Wedding Cake",
+      "description": "Elegant, multi-tiered wedding cakes designed in collaboration with the couple. Includes a tasting consultation, custom design sketch, and delivery to your venue within our service area.",
+      "price": "350.00",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://mybakingcreations.com/order/wedding-cake",
+      "validFrom": "2024-01-01",
+      "validThrough": "2025-12-31",
+      "availableDeliveryMethod": "http://purl.org/goodrelations/v1#DeliveryModeFreight",
+      "seller": {
+        "@type": "LocalBusiness",
+        "name": "My Baking Creations",
+        "url": "https://mybakingcreations.com"
+      }
+    },
+    {
+      "@type": "Offer",
+      "name": "Decorated Cookie Sets",
+      "description": "Custom royal icing decorated sugar cookies for any occasion. Minimum order of one dozen. Perfect for party favors, holidays, and corporate gifting.",
+      "price": "48.00",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "url": "https://mybakingcreations.com/order/cookie-sets",
+      "validFrom": "2024-01-01",
+      "validThrough": "2025-12-31",
+      "availableDeliveryMethod": "http://purl.org/goodrelations/v1#DeliveryModePickUp",
+      "seller": {
+        "@type": "LocalBusiness",
+        "name": "My Baking Creations",
+        "url": "https://mybakingcreations.com"
+      }
+    }
+  ],
+
+  <!-- PROVIDER SECTION
+       This is the business that provides the service.
+       Update all fields below with your real business information. -->
+  "provider": {
+    "@type": "LocalBusiness",
+
+    <!-- Your official business name exactly as it appears on your website. -->
+    "name": "My Baking Creations",
+
+    <!-- Your business website homepage URL. -->
+    "url": "https://mybakingcreations.com",
+
+    <!-- Your business logo image URL. -->
+    "logo": "https://mybakingcreations.com/images/logo.png",
+
+    <!-- Your business phone number in international format.
+         Example for US: "+1-555-123-4567" -->
+    "telephone": "+1-555-123-4567",
+
+    <!-- Your business contact email address. -->
+    "email": "hello@mybakingcreations.com",
+
+    <!-- Your physical business address.
+         If you are home-based and prefer not to list an address,
+         you may remove the "address" block entirely. -->
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "123 Bakery Lane",
+      "addressLocality": "Your City",
+      "addressRegion": "ST",
+      "postalCode": "00000",
+      "addressCountry": "US"
+    },
+
+    <!-- Your average customer review rating.
+         "ratingValue" is your average score (e.g., 4.9 out of 5).
+         "reviewCount" is the total number of reviews you have received.
+         Update both numbers to match your real review data. -->
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "87",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+
+    <!-- Your business hours for each day you are open.
+         Format: "Mo,Tu,We,Th,Fr" then "opens" and "closes" times in 24-hour format.
+         Duplicate or remove blocks as needed for your schedule. -->
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "17:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Saturday"],
+        "opens": "10:00",
+        "closes": "14:00"
+      }
+    ],
+
+    <!-- Links to your social media profiles.
+         Add or remove lines as needed. Delete any you do not use. -->
+    "sameAs": [
+      "https://www.facebook.com/mybakingcreations",
+      "https://www.instagram.com/mybakingcreations",
+      "https://www.pinterest.com/mybakingcreations"
+    ]
+  },
+
+  <!-- HOW THE SERVICE IS PERFORMED
+       Describe the general process or channel through which
+       your service is delivered to customers. -->
+  "serviceOutput": "Custom baked goods crafted to order and available for pickup or local delivery",
+
+  <!-- Whether the service requires a booking or appointment.
+       Set to true if customers must place an order in advance. -->
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "My Baking Creations Service Menu",
+    "itemListElement": [
+      {
+        "@type": "OfferCatalog",
+        "name": "Cakes",
+        "description": "Custom birthday cakes, wedding cakes, anniversary cakes, and celebration cakes"
+      },
+      {
+        "@type": "OfferCatalog",
+        "name": "Cupcakes",
+        "description": "Individually decorated cupcakes available by the dozen for any occasion"
+      },
+      {
+        "@type": "OfferCatalog",
+        "name": "Cookies",
+        "description": "Custom decorated sugar cookies with royal icing for events and gifting"
+      }
+    ]
   }
+
 }
 </script>
-<!-- End of JSON-LD Schema -->
-```
-
-### Next Steps
-
-1.  **Customize:** Go through the code and replace every placeholder value with your actual service details.
-2.  **Implement:** Add the updated script to the HTML of the relevant service page.
-3.  **Validate:** Once the page is live, test the URL using the [Google Rich Results Test](https://search.google.com/test/rich-results) to confirm there are no errors and that Google can see your `Service` markup.
