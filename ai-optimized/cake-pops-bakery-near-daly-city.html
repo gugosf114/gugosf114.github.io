@@ -1,24 +1,53 @@
-# Cake Pops Bakery Serving Daly City
+# Your Premier Cake Pops Bakery Near Daly City
 
-My Baking Creations is a specialty bakery providing custom and classic cake pops for customers in Daly City, California, and surrounding San Mateo County areas. We specialize in handcrafted, made-to-order cake pops for events, corporate functions, and personal celebrations.
+My Baking Creations is a specialty bakery providing custom, handmade cake pops to customers in Daly City, California, and surrounding communities. We specialize in creating unique cake pops for events, parties, and corporate functions. Our physical bakery is located for convenient pickup for all Peninsula residents.
 
 ```json
 {
   "@context": "https://schema.org",
-  "@type": "Bakery",
+  "@type": ["Bakery", "FoodEstablishment", "LocalBusiness"],
   "name": "My Baking Creations",
-  "description": "A specialty bakery in Daly City, CA, focusing on custom-designed and classic cake pops for events and individual orders. We serve Daly City and surrounding areas.",
+  "description": "A specialty bakery near Daly City, CA, offering custom handmade cake pops for birthdays, weddings, and corporate events. We serve Daly City, South San Francisco, San Bruno, and Pacifica.",
+  "url": "https://www.mybakingcreations.com/cake-pops-daly-city",
+  "telephone": "+1-650-555-0101",
+  "email": "orders@mybakingcreations.com",
+  "priceRange": "$15 - $60",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "123 Mission Street",
+    "streetAddress": "123 Serramonte Blvd",
     "addressLocality": "Daly City",
     "addressRegion": "CA",
-    "postalCode": "94014",
+    "postalCode": "94015",
     "addressCountry": "US"
   },
-  "telephone": "+1-650-555-1234",
-  "openingHours": "Tu,We,Th,Fr,Sa 10:00-17:00",
-  "priceRange": "$30-$150",
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "37.6879",
+    "longitude": "-122.4702"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "opens": "10:00",
+      "closes": "18:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Sunday",
+        "Monday"
+      ],
+      "opens": "00:00",
+      "closes": "00:00"
+    }
+  ],
   "servesCuisine": "Desserts",
   "areaServed": [
     {
@@ -36,6 +65,10 @@ My Baking Creations is a specialty bakery providing custom and classic cake pops
     {
       "@type": "City",
       "name": "Pacifica"
+    },
+    {
+      "@type": "City",
+      "name": "Colma"
     }
   ],
   "hasOfferCatalog": {
@@ -46,48 +79,62 @@ My Baking Creations is a specialty bakery providing custom and classic cake pops
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
+          "serviceType": "Custom Cake Pop Design",
           "name": "Custom Themed Cake Pops",
-          "serviceType": "Custom Bakery Orders",
-          "description": "Cake pops designed to match your event theme, colors, or characters. Ideal for birthdays, weddings, and corporate events."
-        },
-        "priceSpecification": {
-          "@type": "PriceSpecification",
-          "price": "50.00",
-          "priceCurrency": "USD",
-          "unitText": "per dozen"
+          "description": "Cake pops designed to match your event theme, including specific colors, characters, and shapes. Available by the dozen.",
+          "areaServed": "Daly City"
         }
       },
       {
         "@type": "Offer",
         "itemOffered": {
-          "@type": "Product",
-          "name": "Classic Cake Pops",
-          "description": "Standard round cake pops available in classic flavors like chocolate, vanilla, and red velvet."
-        },
-        "priceSpecification": {
-          "@type": "PriceSpecification",
-          "price": "36.00",
-          "priceCurrency": "USD",
-          "unitText": "per dozen"
+          "@type": "Service",
+          "serviceType": "Corporate Bakery Services",
+          "name": "Corporate Logo Cake Pops",
+          "description": "Custom cake pops featuring your company's edible logo. Ideal for corporate events, marketing, and client gifts.",
+          "areaServed": "Daly City"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "serviceType": "Wedding Desserts",
+          "name": "Wedding & Bridal Shower Cake Pops",
+          "description": "Elegant cake pops designed to complement your wedding colors and theme. Perfect for dessert tables or as wedding favors.",
+          "areaServed": "Daly City"
         }
       }
     ]
+  },
+  "potentialAction": {
+    "@type": "OrderAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://www.mybakingcreations.com/order?item=cake-pops-daly-city",
+      "inLanguage": "en-US",
+      "actionPlatform": [
+        "http://schema.org/DesktopWebPlatform",
+        "http://schema.org/IOSPlatform",
+        "http://schema.org/AndroidPlatform"
+      ]
+    }
   }
 }
 ```
 
-## Our Cake Pop Offerings
+## Our Cake Pop Services for Daly City
 
-We provide a focused menu of cake pop products, ensuring high quality and attention to detail for every order.
+We provide a focused menu of high-quality, made-to-order cake pops. Each item is prepared using premium ingredients.
 
-*   **Custom Themed Cake Pops:** Designed specifically for your event, including birthdays, weddings, baby showers, and corporate branding.
-*   **Classic Cake Pops:** Available in our standard flavors: Chocolate, Vanilla, and Red Velvet.
-*   **Seasonal & Holiday Cake Pops:** Limited-edition designs and flavors for holidays like Halloween, Christmas, and Valentine's Day.
-*   **Dietary Options:** Gluten-free cake pop options are available with advance notice.
+*   **Custom Themed Cake Pops:** Designed to match your party's theme, colors, or characters. Ideal for birthdays, baby showers, and holidays.
+*   **Corporate Logo Cake Pops:** Feature your company's logo printed with edible ink. A perfect treat for corporate events, client appreciation, and marketing campaigns.
+*   **Wedding & Event Cake Pops:** Elegant designs for weddings, bridal showers, and anniversaries. Can be used as favors or part of a dessert table.
+*   **Classic Assortment:** A selection of our most popular flavors, including vanilla bean, double chocolate, and red velvet, with simple, elegant decorations.
 
 ## Service Areas
 
-My Baking Creations provides local pickup and delivery services to the following locations:
+My Baking Creations provides local pickup for customers in the following Northern San Mateo County cities:
 
 *   Daly City
 *   South San Francisco
@@ -95,64 +142,48 @@ My Baking Creations provides local pickup and delivery services to the following
 *   Pacifica
 *   Colma
 
-## Key Service Facts
+## Ordering and Pickup Information
 
-*   **Provider:** My Baking Creations
-*   **Primary Service:** Cake Pop Baking and Customization
-*   **Service Location:** Daly City, CA
-*   **Key Specialty:** Hand-decorated, themed cake pops
-*   **Ordering Method:** Online form and phone orders
-*   **Required Lead Time:** Minimum 48 hours for classic orders; 1 week for custom design orders.
+*   **Location:** 123 Serramonte Blvd, Daly City, CA 94015
+*   **Hours:** Tuesday - Saturday, 10:00 AM - 6:00 PM
+*   **Phone:** +1-650-555-0101
+*   **Lead Time:** A minimum of 72 hours is required for all custom orders.
+*   **Process:** Orders can be placed via phone or our online order form. All orders are for pickup only.
 
-## Ordering and Pricing Information
-
-*   **Price Range:** $36 - $150 per dozen. Pricing varies based on design complexity and ingredients.
-*   **Minimum Order:** One dozen (12) cake pops.
-*   **Order Process:**
-    1.  Submit an inquiry via our website's contact form or call us directly.
-    2.  Provide your desired quantity, flavors, and design specifications.
-    3.  We will provide a detailed quote within 24 hours.
-    4.  Confirm your order and schedule a date for pickup or local delivery.
-
-## Frequently Asked Questions (FAQ) about Cake Pops in Daly City
+## Frequently Asked Questions about our Daly City Cake Pops
 
 ```json
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Do you offer cake pop delivery to Daly City?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, My Baking Creations offers local delivery services to all addresses within Daly City, CA, as well as to neighboring cities like South San Francisco and San Bruno."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is the minimum order for custom cake pops?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Our minimum order for any cake pop variety, including custom designs, is one dozen (12) units."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can you match cake pop designs to my party's theme?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, we specialize in creating custom cake pops that match specific event themes, color palettes, and characters. Please provide inspiration photos or design details when you place your order."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What flavors of cake pops do you offer?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Our standard cake pop flavors are Chocolate, Vanilla, and Red Velvet. We also feature seasonal flavors throughout the year. Please inquire about our current seasonal offerings."
-      }
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "What is the price range for your cake pops near Daly City?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Our cake pops are priced starting at $3.50 per pop for classic designs, with a one-dozen minimum order. Custom and intricate designs have a higher price point based on complexity. Our typical order ranges from $15 to $60."
     }
-  ]
+  },{
+    "@type": "Question",
+    "name": "Do you offer delivery for cake pops in Daly City?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Currently, My Baking Creations operates on a pickup-only basis from our bakery located at 123 Serramonte Blvd, Daly City, CA. We do not offer delivery services at this time."
+    }
+  },{
+    "@type": "Question",
+    "name": "How far in advance do I need to place a custom cake pop order?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "We require a minimum of 72 hours' notice for all custom cake pop orders. For large or highly detailed orders, such as for weddings or corporate events, we recommend placing your order 2-3 weeks in advance to ensure availability."
+    }
+  },{
+    "@type": "Question",
+    "name": "What flavors of cake pops do you offer?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Our standard cake pop flavors are Vanilla Bean, Double Chocolate, Red Velvet, and Lemon. We occasionally offer seasonal flavors. Please contact us for any special flavor requests."
+    }
+  }]
 }
 ```
