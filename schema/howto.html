@@ -5,149 +5,120 @@
      HOW TO USE THIS CODE:
      1. Copy this entire block of code
      2. Paste it inside the <head> section of the relevant page
-        (for example, a recipe or tutorial page)
-     3. Replace the placeholder values with your real content
+     3. Replace the placeholder values with your actual content
      4. Test it at: https://search.google.com/test/rich-results
-     5. Make sure everything shown here matches what visitors
-        can actually read on your page
-
-     IMPORTANT: Every value you see in quotes "" can be changed.
-     Do NOT change the words that appear before the colons (:)
-     as those are the technical field names Google reads.
      ============================================================ -->
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
+
+  <!-- The type of schema — do not change this value -->
   "@type": "HowTo",
 
-  <!-- ── BASIC INFORMATION ──────────────────────────────────────
-       name: The title of your tutorial or how-to guide.
-             This should match the heading on your page exactly.
-       description: A short summary of what the reader will learn
-                    or make. Keep it to 1–2 sentences.
-  ──────────────────────────────────────────────────────────── -->
-  "name": "How to Make Classic Vanilla Cupcakes from Scratch",
-  "description": "Learn how to bake light, fluffy vanilla cupcakes with a creamy buttercream frosting using simple ingredients you already have at home. Perfect for beginners and experienced bakers alike.",
+  <!-- BUSINESS / PAGE NAME: Update this to match the title of your how-to guide -->
+  "name": "How to Bake a Classic Vanilla Layer Cake from Scratch",
 
-  <!-- ── WEBSITE / SOURCE ───────────────────────────────────────
-       url: The full web address of the page this schema lives on.
-            Change this to match the exact page URL.
-  ──────────────────────────────────────────────────────────── -->
-  "url": "https://mybakingcreations.com/recipes/classic-vanilla-cupcakes",
+  <!-- DESCRIPTION: Write a short summary of what this guide teaches (1–2 sentences) -->
+  "description": "Learn how to bake a moist and fluffy classic vanilla layer cake from scratch using simple pantry ingredients. This step-by-step guide from My Baking Creations walks you through everything from mixing the batter to frosting the finished cake.",
 
-  <!-- ── IMAGES ─────────────────────────────────────────────────
-       image: A photo that represents the finished result.
-              Use the full URL of an image hosted on your website.
-              Recommended size: at least 1200 x 628 pixels.
-  ──────────────────────────────────────────────────────────── -->
-  "image": {
-    "@type": "ImageObject",
-    "url": "https://mybakingcreations.com/images/vanilla-cupcakes-finished.jpg",
-    "width": 1200,
-    "height": 628
-  },
+  <!-- YOUR WEBSITE URL: Update this to the exact page URL where this guide lives -->
+  "url": "https://mybakingcreations.com/how-to-bake-vanilla-layer-cake",
 
-  <!-- ── AUTHOR INFORMATION ─────────────────────────────────────
-       author: Who created this guide. Change the name to yours
-               or your business name.
-  ──────────────────────────────────────────────────────────── -->
+  <!-- AUTHOR: Update with your name or business name -->
   "author": {
-    "@type": "Person",
+    "@type": "Organization",
     "name": "My Baking Creations",
     "url": "https://mybakingcreations.com"
   },
 
-  <!-- ── PUBLISHER INFORMATION ──────────────────────────────────
-       publisher: The business or brand publishing this content.
-                  The logo URL should point to your actual logo image.
-  ──────────────────────────────────────────────────────────── -->
-  "publisher": {
-    "@type": "Organization",
-    "name": "My Baking Creations",
-    "url": "https://mybakingcreations.com",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://mybakingcreations.com/images/logo.png"
-    }
+  <!-- IMAGE: Replace with a real image URL from your website (recommended: 1200x628px) -->
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://mybakingcreations.com/images/vanilla-layer-cake.jpg",
+    "width": 1200,
+    "height": 628
   },
 
-  <!-- ── DATE INFORMATION ───────────────────────────────────────
-       datePublished: When you first published this guide.
-       dateModified:  When you last updated it.
-       Format: YYYY-MM-DD (Year-Month-Day)
-  ──────────────────────────────────────────────────────────── -->
-  "datePublished": "2024-01-15",
-  "dateModified": "2025-01-10",
+  <!-- TOTAL TIME: Use ISO 8601 duration format. Examples:
+       PT30M = 30 minutes | PT1H = 1 hour | PT1H30M = 1 hour 30 minutes -->
+  "totalTime": "PT1H30M",
 
-  <!-- ── TIME REQUIRED ──────────────────────────────────────────
-       prepTime:  How long to gather and prepare ingredients.
-       performTime: The active cooking or baking time.
-       totalTime: The full time from start to finish.
-       Format: PT then the number, then M for minutes or H for hours.
-       Examples: PT15M = 15 minutes | PT1H = 1 hour | PT1H30M = 1 hour 30 minutes
-  ──────────────────────────────────────────────────────────── -->
-  "prepTime": "PT15M",
-  "performTime": "PT20M",
-  "totalTime": "PT35M",
+  <!-- PREP TIME: How long preparation takes before baking begins -->
+  "prepTime": "PT20M",
 
-  <!-- ── YIELD / SERVINGS ───────────────────────────────────────
-       yield: How many servings, pieces, or portions this makes.
-  ──────────────────────────────────────────────────────────── -->
-  "yield": "12 cupcakes",
+  <!-- PERFORM TIME: The active baking / cooking time -->
+  "performTime": "PT1H10M",
 
-  <!-- ── ESTIMATED COST ─────────────────────────────────────────
-       estimatedCost: An approximate cost to make this recipe or
-                      complete this project. Change the currency
-                      and value to match your real estimate.
-                      currency uses standard codes: USD, GBP, EUR, CAD, AUD
-  ──────────────────────────────────────────────────────────── -->
+  <!-- ESTIMATED COST: Update the currency and value to reflect your recipe's ingredient cost -->
   "estimatedCost": {
     "@type": "MonetaryAmount",
     "currency": "USD",
-    "value": "8.00"
+    "value": "12.00"
   },
 
-  <!-- ── DIFFICULTY / CATEGORY ──────────────────────────────────
-       These help Google understand what kind of content this is.
-       Change the values to match your actual content.
-  ──────────────────────────────────────────────────────────── -->
-  "keywords": "vanilla cupcakes, baking from scratch, easy cupcake recipe, buttercream frosting",
+  <!-- YIELD: How many servings or pieces this recipe produces -->
+  "yield": "12 servings",
 
-  <!-- ── TOOLS NEEDED ───────────────────────────────────────────
-       tool: List every piece of equipment needed to complete
-             the steps. Add or remove items as needed.
-             Copy the {"@type": "HowToTool", "name": "..."} block
-             to add more tools.
-  ──────────────────────────────────────────────────────────── -->
+  <!-- SUPPLY / INGREDIENTS: List every ingredient needed.
+       Copy and paste the {} block to add more ingredients. -->
+  "supply": [
+    {
+      "@type": "HowToSupply",
+      "name": "2 1/2 cups all-purpose flour"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "2 cups granulated sugar"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "1 cup unsalted butter, softened"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "4 large eggs, room temperature"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "1 cup whole milk"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "2 teaspoons pure vanilla extract"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "1 tablespoon baking powder"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "1/2 teaspoon salt"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "Vanilla buttercream frosting (store-bought or homemade)"
+    }
+  ],
+
+  <!-- TOOL / EQUIPMENT: List every piece of equipment needed.
+       Copy and paste the {} block to add more tools. -->
   "tool": [
     {
       "@type": "HowToTool",
-      "name": "12-cup muffin tin"
+      "name": "Two 9-inch round cake pans"
     },
     {
       "@type": "HowToTool",
-      "name": "Cupcake liners / paper cases"
+      "name": "Stand mixer or hand mixer"
     },
     {
       "@type": "HowToTool",
-      "name": "Electric hand mixer or stand mixer"
-    },
-    {
-      "@type": "HowToTool",
-      "name": "Two large mixing bowls"
-    },
-    {
-      "@type": "HowToTool",
-      "name": "Measuring cups and spoons"
+      "name": "Large mixing bowl"
     },
     {
       "@type": "HowToTool",
       "name": "Rubber spatula"
-    },
-    {
-      "@type": "HowToTool",
-      "name": "Piping bag and star tip (optional, for frosting)"
     },
     {
       "@type": "HowToTool",
@@ -156,174 +127,102 @@
     {
       "@type": "HowToTool",
       "name": "Wire cooling rack"
+    },
+    {
+      "@type": "HowToTool",
+      "name": "Offset spatula or butter knife for frosting"
     }
   ],
 
-  <!-- ── INGREDIENTS / SUPPLIES ─────────────────────────────────
-       supply: List every ingredient or material needed.
-               Add or remove items by copying the block pattern.
-  ──────────────────────────────────────────────────────────── -->
-  "supply": [
-    {
-      "@type": "HowToSupply",
-      "name": "1 and 1/2 cups all-purpose flour"
-    },
-    {
-      "@type": "HowToSupply",
-      "name": "1 and 1/2 teaspoons baking powder"
-    },
-    {
-      "@type": "HowToSupply",
-      "name": "1/4 teaspoon salt"
-    },
-    {
-      "@type": "HowToSupply",
-      "name": "1/2 cup unsalted butter, softened to room temperature"
-    },
-    {
-      "@type": "HowToSupply",
-      "name": "1 cup granulated white sugar"
-    },
-    {
-      "@type": "HowToSupply",
-      "name": "2 large eggs, room temperature"
-    },
-    {
-      "@type": "HowToSupply",
-      "name": "2 teaspoons pure vanilla extract"
-    },
-    {
-      "@type": "HowToSupply",
-      "name": "1/2 cup whole milk, room temperature"
-    },
-    {
-      "@type": "HowToSupply",
-      "name": "1 cup unsalted butter (for frosting)"
-    },
-    {
-      "@type": "HowToSupply",
-      "name": "3 cups powdered sugar, sifted (for frosting)"
-    },
-    {
-      "@type": "HowToSupply",
-      "name": "2 tablespoons heavy cream (for frosting)"
-    },
-    {
-      "@type": "HowToSupply",
-      "name": "1 teaspoon vanilla extract (for frosting)"
-    }
-  ],
-
-  <!-- ── STEP-BY-STEP INSTRUCTIONS ─────────────────────────────
-       step: This is the most important section. Each step needs:
-             - name:  A short title for the step (shown in search results)
-             - text:  The full instruction for that step
-             - image: A photo showing that step (optional but recommended)
-             - url:   Link to the specific step on your page (optional)
-
-       TO ADD A NEW STEP: Copy one entire step block (from the
-       opening { to the closing }) and paste it after the last
-       step, separated by a comma.
-
-       TO REMOVE A STEP: Delete the entire step block including
-       its surrounding { } and the comma before it.
-  ──────────────────────────────────────────────────────────── -->
+  <!-- STEPS: Each step needs a name (short title) and text (full instructions).
+       Copy and paste an entire {} block to add more steps.
+       Make sure the "url" in each step points to the correct page + anchor. -->
   "step": [
-
     {
       "@type": "HowToStep",
-      "position": 1,
-      "name": "Preheat the oven and prepare your muffin tin",
-      "text": "Preheat your oven to 350°F (175°C). Line a 12-cup muffin tin with paper cupcake liners. Make sure your butter, eggs, and milk are all at room temperature before you begin — this helps everything mix together smoothly.",
-      "image": {
-        "@type": "ImageObject",
-        "url": "https://mybakingcreations.com/images/steps/step-1-preheat-oven.jpg"
-      },
-      "url": "https://mybakingcreations.com/recipes/classic-vanilla-cupcakes#step-1"
-    },
 
+      <!-- STEP NUMBER: Update the position number for each step (1, 2, 3...) -->
+      "position": 1,
+
+      <!-- STEP NAME: A short, clear title for this step -->
+      "name": "Preheat the Oven and Prepare Your Pans",
+
+      <!-- STEP TEXT: Full instructions for this step. Be as detailed as needed. -->
+      "text": "Preheat your oven to 350°F (175°C). Grease two 9-inch round cake pans with butter or non-stick spray, then dust lightly with flour. Tap out any excess flour and set the pans aside.",
+
+      <!-- STEP URL: Link to the section of your page where this step appears -->
+      "url": "https://mybakingcreations.com/how-to-bake-vanilla-layer-cake#step-1",
+
+      <!-- STEP IMAGE: A photo showing this specific step (optional but recommended) -->
+      "image": "https://mybakingcreations.com/images/step-1-preheat-oven.jpg"
+    },
     {
       "@type": "HowToStep",
       "position": 2,
-      "name": "Mix the dry ingredients",
-      "text": "In a medium mixing bowl, whisk together the all-purpose flour, baking powder, and salt until evenly combined. Set this bowl aside. Whisking the dry ingredients separately ensures the baking powder is evenly distributed throughout the batter.",
-      "image": {
-        "@type": "ImageObject",
-        "url": "https://mybakingcreations.com/images/steps/step-2-dry-ingredients.jpg"
-      },
-      "url": "https://mybakingcreations.com/recipes/classic-vanilla-cupcakes#step-2"
+      "name": "Cream the Butter and Sugar",
+      "text": "In the bowl of a stand mixer fitted with the paddle attachment, beat the softened butter and granulated sugar together on medium-high speed for 3–4 minutes until the mixture is pale, light, and fluffy. Scrape down the sides of the bowl as needed.",
+      "url": "https://mybakingcreations.com/how-to-bake-vanilla-layer-cake#step-2",
+      "image": "https://mybakingcreations.com/images/step-2-cream-butter-sugar.jpg"
     },
-
     {
       "@type": "HowToStep",
       "position": 3,
-      "name": "Cream the butter and sugar",
-      "text": "In a large mixing bowl, use your electric mixer on medium-high speed to beat the softened butter and granulated sugar together for about 3 minutes, until the mixture is pale, light, and fluffy. Scrape down the sides of the bowl with a rubber spatula halfway through.",
-      "image": {
-        "@type": "ImageObject",
-        "url": "https://mybakingcreations.com/images/steps/step-3-cream-butter-sugar.jpg"
-      },
-      "url": "https://mybakingcreations.com/recipes/classic-vanilla-cupcakes#step-3"
+      "name": "Add the Eggs and Vanilla",
+      "text": "Add the eggs one at a time, beating well after each addition. Scrape down the sides of the bowl between additions. Add the vanilla extract and mix until fully combined. The batter should look smooth and creamy.",
+      "url": "https://mybakingcreations.com/how-to-bake-vanilla-layer-cake#step-3",
+      "image": "https://mybakingcreations.com/images/step-3-add-eggs-vanilla.jpg"
     },
-
     {
       "@type": "HowToStep",
       "position": 4,
-      "name": "Add the eggs and vanilla",
-      "text": "Add the eggs to the butter-sugar mixture one at a time, beating well on medium speed after each addition. Then add the vanilla extract and mix until just combined. The batter may look slightly curdled at this stage — that is completely normal.",
-      "image": {
-        "@type": "ImageObject",
-        "url": "https://mybakingcreations.com/images/steps/step-4-add-eggs-vanilla.jpg"
-      },
-      "url": "https://mybakingcreations.com/recipes/classic-vanilla-cupcakes#step-4"
+      "name": "Combine the Dry Ingredients",
+      "text": "In a separate bowl, whisk together the all-purpose flour, baking powder, and salt until evenly combined. This ensures the leavening is distributed evenly throughout the batter.",
+      "url": "https://mybakingcreations.com/how-to-bake-vanilla-layer-cake#step-4",
+      "image": "https://mybakingcreations.com/images/step-4-dry-ingredients.jpg"
     },
-
     {
       "@type": "HowToStep",
       "position": 5,
-      "name": "Combine wet and dry ingredients",
-      "text": "With the mixer on low speed, add half of the flour mixture to the butter mixture and stir until just combined. Pour in all of the milk and mix briefly. Add the remaining flour mixture and stir until the batter is smooth. Do not overmix — stop as soon as you no longer see dry flour streaks.",
-      "image": {
-        "@type": "ImageObject",
-        "url": "https://mybakingcreations.com/images/steps/step-5-combine-batter.jpg"
-      },
-      "url": "https://mybakingcreations.com/recipes/classic-vanilla-cupcakes#step-5"
+      "name": "Alternate Adding Dry Ingredients and Milk",
+      "text": "With the mixer on low speed, add the dry ingredient mixture in three additions, alternating with the milk in two additions (dry, milk, dry, milk, dry). Begin and end with the dry ingredients. Mix just until each addition is incorporated — do not overmix.",
+      "url": "https://mybakingcreations.com/how-to-bake-vanilla-layer-cake#step-5",
+      "image": "https://mybakingcreations.com/images/step-5-alternate-dry-wet.jpg"
     },
-
     {
       "@type": "HowToStep",
       "position": 6,
-      "name": "Fill the cupcake liners and bake",
-      "text": "Spoon or pour the batter evenly into the 12 prepared cupcake liners, filling each one about two-thirds full. Place the muffin tin in the preheated oven and bake for 18 to 20 minutes, or until a toothpick inserted into the center of a cupcake comes out clean.",
-      "image": {
-        "@type": "ImageObject",
-        "url": "https://mybakingcreations.com/images/steps/step-6-fill-and-bake.jpg"
-      },
-      "url": "https://mybakingcreations.com/recipes/classic-vanilla-cupcakes#step-6"
+      "name": "Divide the Batter and Bake",
+      "text": "Divide the batter evenly between the two prepared cake pans. Smooth the tops with a rubber spatula. Bake in the preheated oven for 28–32 minutes, or until a toothpick inserted into the center comes out clean and the edges are just beginning to pull away from the sides of the pan.",
+      "url": "https://mybakingcreations.com/how-to-bake-vanilla-layer-cake#step-6",
+      "image": "https://mybakingcreations.com/images/step-6-bake-cake.jpg"
     },
-
     {
       "@type": "HowToStep",
       "position": 7,
-      "name": "Cool the cupcakes completely",
-      "text": "Remove the muffin tin from the oven and allow the cupcakes to cool in the tin for 5 minutes. Then transfer them to a wire cooling rack and let them cool completely — at least 30 minutes. Never frost warm cupcakes, as the frosting will melt and slide off.",
-      "image": {
-        "@type": "ImageObject",
-        "url": "https://mybakingcreations.com/images/steps/step-7-cool-cupcakes.jpg"
-      },
-      "url": "https://mybakingcreations.com/recipes/classic-vanilla-cupcakes#step-7"
+      "name": "Cool the Cake Layers",
+      "text": "Remove the pans from the oven and let the cakes cool in the pans for 10 minutes. Then carefully turn them out onto a wire cooling rack and allow them to cool completely — at least 1 hour — before frosting. Frosting a warm cake will cause the frosting to melt.",
+      "url": "https://mybakingcreations.com/how-to-bake-vanilla-layer-cake#step-7",
+      "image": "https://mybakingcreations.com/images/step-7-cool-cake.jpg"
     },
-
     {
       "@type": "HowToStep",
       "position": 8,
-      "name": "Make the vanilla buttercream frosting",
-      "text": "Beat 1 cup of softened unsalted butter with your electric mixer on medium speed for 2 minutes until creamy. Gradually add the sifted powdered sugar, one cup at a time, mixing on low after each addition. Add the heavy cream and vanilla extract, then increase the mixer speed to high and beat for 3 minutes until the frosting is light, fluffy, and spreadable.",
-      "image": {
-        "@type": "ImageObject",
-        "url": "https://mybakingcreations.com/images/steps/step-8-make-frosting.jpg"
-      },
-      "url": "https://mybakingcreations.com/recipes/classic-vanilla-cupcakes#step-8"
-    },
+      "name": "Frost and Assemble the Cake",
+      "text": "Place one cooled cake layer on a serving plate or cake board. Spread an even layer of vanilla buttercream frosting over the top using an offset spatula. Place the second cake layer on top, then frost the top and sides of the entire cake. Decorate as desired and serve.",
+      "url": "https://mybakingcreations.com/how-to-bake-vanilla-layer-cake#step-8",
+      "image": "https://mybakingcreations.com/images/step-8-frost-assemble.jpg"
+    }
+  ]
 
-    {
+}
+</script>
+
+<!-- ============================================================
+     IMPORTANT REMINDERS BEFORE YOU GO LIVE:
+     1. Replace ALL image URLs with real images hosted on your website.
+     2. Make sure every step listed here matches the visible text on your page.
+     3. Update the page URL in the "url" fields to match your actual page address.
+     4. Test this code at https://search.google.com/test/rich-results
+     5. Do NOT change "@context", "@type", or any field names (the words before the colons).
+        Only update the VALUES (the words inside the quotation marks after the colons).
+     ============================================================ -->
