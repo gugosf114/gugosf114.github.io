@@ -4,193 +4,186 @@
        SERVICE SCHEMA FOR MY BAKING CREATIONS
        ============================================================
        HOW TO USE THIS SCHEMA:
-       1. Copy this entire <script> block into the <head> section
-          of your webpage (or just before the closing </body> tag).
-       2. Replace all placeholder values (marked with comments)
-          with your real business information.
-       3. After updating, test your page at:
+       1. Replace all placeholder values with your real information
+       2. Paste this entire <script> block into the <head> section
+          of your relevant service pages (e.g., custom cakes page)
+       3. After adding, test it at:
           https://search.google.com/test/rich-results
-       4. Make sure every value here matches what visitors
-          can actually read on your webpage.
+       4. Make sure everything here matches what visitors see on
+          your actual webpage — Google checks for consistency!
        ============================================================ -->
 
   "@context": "https://schema.org",
 
   <!-- The type of schema — "Service" tells Google this page
-       describes a service your business offers. Do not change this. -->
+       describes a service your business offers -->
   "@type": "Service",
 
-  <!-- The name of the specific service you are describing.
-       Example: "Custom Wedding Cakes" or "Birthday Cake Orders" -->
-  "name": "Custom Baked Goods & Cake Design",
-
-  <!-- A short, clear description of this service.
-       Keep it to 1–3 sentences. Match the text on your webpage. -->
-  "description": "My Baking Creations offers fully custom cakes, cupcakes, cookies, and specialty baked goods for weddings, birthdays, corporate events, and everyday celebrations. Every item is handcrafted to order using premium ingredients and personalized designs.",
-
-  <!-- The full web address (URL) of the page where this service is described. -->
+  <!-- ── BASIC SERVICE INFORMATION ─────────────────────────────
+       Update the name, description, and URL to match your page -->
+  "name": "Custom Baked Goods & Celebration Cakes",
+  "description": "My Baking Creations offers handcrafted custom cakes, cupcakes, cookies, and pastries for weddings, birthdays, corporate events, and everyday celebrations. Every order is made fresh to order using premium ingredients.",
   "url": "https://mybakingcreations.com/services",
 
-  <!-- One or more photos that represent this service.
-       Replace the URL with a real image hosted on your website.
-       "caption" is the alt text / description of the image. -->
+  <!-- ── SERVICE CATEGORY ───────────────────────────────────────
+       A short label describing the type of service -->
+  "serviceType": "Custom Baking & Cake Design",
+
+  <!-- ── SERVICE OUTPUT ─────────────────────────────────────────
+       What the customer receives at the end of the service -->
+  "serviceOutput": "Freshly baked, custom-decorated cakes and baked goods delivered or ready for pickup",
+
+  <!-- ── AREA SERVED ─────────────────────────────────────────────
+       List the cities, regions, or states you serve.
+       You can add more items inside the [ ] separated by commas -->
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "Your City Name"
+    },
+    {
+      "@type": "State",
+      "name": "Your State Name"
+    }
+  ],
+
+  <!-- ── AUDIENCE ────────────────────────────────────────────────
+       Who is this service designed for? -->
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Individuals, couples, families, and businesses planning celebrations or events"
+  },
+
+  <!-- ── IMAGE ──────────────────────────────────────────────────
+       IMPORTANT: Replace this URL with a real photo of your baked
+       goods. Use a high-quality image (at least 1200 x 630 px).
+       This image may appear in Google search results! -->
   "image": [
     {
       "@type": "ImageObject",
-      "url": "https://mybakingcreations.com/images/custom-cakes-service.jpg",
-      "caption": "A selection of custom decorated cakes made by My Baking Creations",
+      "url": "https://mybakingcreations.com/images/custom-celebration-cake.jpg",
+      "caption": "Custom celebration cake made by My Baking Creations",
       "width": 1200,
-      "height": 800
+      "height": 630
     },
     {
       "@type": "ImageObject",
-      "url": "https://mybakingcreations.com/images/cupcakes-cookies.jpg",
-      "caption": "Assorted custom cupcakes and decorated cookies available for order",
+      "url": "https://mybakingcreations.com/images/wedding-cake-display.jpg",
+      "caption": "Elegant wedding cake designed and baked by My Baking Creations",
       "width": 1200,
-      "height": 800
+      "height": 630
     }
   ],
 
-  <!-- The category or type of service.
-       Update this to match your primary service category. -->
-  "serviceType": "Custom Cake Design and Baked Goods",
-
-  <!-- The category of the business providing this service. -->
-  "category": "Bakery",
-
-  <!-- The geographic area where you provide this service.
-       Update the city, state, and postal code to match your area.
-       If you ship nationally, you can change "City" to your country. -->
-  "areaServed": {
-    "@type": "City",
-    "name": "Your City, State"
-  },
-
-  <!-- OFFERS SECTION
-       This section describes pricing and availability.
-       You can list one offer or multiple offers (one per service tier). -->
+  <!-- ── OFFERS ──────────────────────────────────────────────────
+       List your pricing options here. You can duplicate the { }
+       block to add more pricing tiers or individual products.
+       "priceCurrency" should be your 3-letter currency code
+       (USD = US Dollar, GBP = British Pound, EUR = Euro, etc.)
+       "priceSpecification" lets you set a price range (min/max) -->
   "offers": [
     {
-      <!-- Each offer is a "Offer" type — do not change this. -->
       "@type": "Offer",
-
-      <!-- The name of this specific offer or pricing tier. -->
       "name": "Custom Birthday Cake",
-
-      <!-- A brief description of what is included in this offer. -->
-      "description": "A fully custom birthday cake designed to your specifications, available in a variety of flavors, fillings, and decorating styles. Serves 10–50 guests depending on size selected.",
-
-      <!-- The starting price for this offer.
-           Use a number only — no dollar signs. -->
-      "price": "75.00",
-
-      <!-- The currency for the price above.
-           "USD" = US Dollars. Change if needed (e.g., "CAD", "GBP"). -->
+      "description": "Personalized birthday cakes in your choice of flavor, size, and design. Feeds 10–50 guests.",
       "priceCurrency": "USD",
-
-      <!-- Whether this item is currently available.
-           Options: "InStock", "OutOfStock", "PreOrder", "Discontinued" -->
+      "price": "65.00",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "minPrice": "65.00",
+        "maxPrice": "250.00",
+        "priceCurrency": "USD"
+      },
       "availability": "https://schema.org/InStock",
-
-      <!-- The URL where a customer can place an order or learn more. -->
-      "url": "https://mybakingcreations.com/order/birthday-cake",
-
-      <!-- The date this offer becomes valid (YYYY-MM-DD format).
-           Update to today's date or your business launch date. -->
-      "validFrom": "2024-01-01",
-
-      <!-- The date this offer expires (YYYY-MM-DD format).
-           Update to a future date, or remove this line if the offer never expires. -->
-      "validThrough": "2025-12-31",
-
-      <!-- How the customer will receive this item.
-           Options: "OnSitePickup", "DeliveryModeDirectDownload", "DeliveryModeFreight"
-           Use "OnSitePickup" if customers pick up in person. -->
-      "availableDeliveryMethod": "http://purl.org/goodrelations/v1#DeliveryModePickUp",
-
-      <!-- The seller of this offer — your business. -->
-      "seller": {
-        "@type": "LocalBusiness",
-        "name": "My Baking Creations",
-        "url": "https://mybakingcreations.com"
-      }
+      "url": "https://mybakingcreations.com/services/birthday-cakes"
     },
     {
       "@type": "Offer",
-
-      <!-- Second offer — update or duplicate this block for each service you offer. -->
-      "name": "Custom Wedding Cake",
-      "description": "Elegant, multi-tiered wedding cakes designed in collaboration with the couple. Includes a tasting consultation, custom design sketch, and delivery to your venue within our service area.",
+      "name": "Wedding Cake",
+      "description": "Multi-tier wedding cakes crafted to match your theme and color palette. Tastings available by appointment.",
+      "priceCurrency": "USD",
       "price": "350.00",
-      "priceCurrency": "USD",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "minPrice": "350.00",
+        "maxPrice": "1200.00",
+        "priceCurrency": "USD"
+      },
       "availability": "https://schema.org/InStock",
-      "url": "https://mybakingcreations.com/order/wedding-cake",
-      "validFrom": "2024-01-01",
-      "validThrough": "2025-12-31",
-      "availableDeliveryMethod": "http://purl.org/goodrelations/v1#DeliveryModeFreight",
-      "seller": {
-        "@type": "LocalBusiness",
-        "name": "My Baking Creations",
-        "url": "https://mybakingcreations.com"
-      }
+      "url": "https://mybakingcreations.com/services/wedding-cakes"
     },
     {
       "@type": "Offer",
-      "name": "Decorated Cookie Sets",
-      "description": "Custom royal icing decorated sugar cookies for any occasion. Minimum order of one dozen. Perfect for party favors, holidays, and corporate gifting.",
-      "price": "48.00",
+      "name": "Custom Cupcakes (Dozen)",
+      "description": "One dozen decorated cupcakes in your choice of flavor and frosting. Perfect for parties and events.",
       "priceCurrency": "USD",
+      "price": "36.00",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "minPrice": "36.00",
+        "maxPrice": "60.00",
+        "priceCurrency": "USD"
+      },
       "availability": "https://schema.org/InStock",
-      "url": "https://mybakingcreations.com/order/cookie-sets",
-      "validFrom": "2024-01-01",
-      "validThrough": "2025-12-31",
-      "availableDeliveryMethod": "http://purl.org/goodrelations/v1#DeliveryModePickUp",
-      "seller": {
-        "@type": "LocalBusiness",
-        "name": "My Baking Creations",
-        "url": "https://mybakingcreations.com"
-      }
+      "url": "https://mybakingcreations.com/services/cupcakes"
+    },
+    {
+      "@type": "Offer",
+      "name": "Decorated Sugar Cookies (Dozen)",
+      "description": "Hand-decorated royal icing sugar cookies in custom shapes and designs for any occasion.",
+      "priceCurrency": "USD",
+      "price": "48.00",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "minPrice": "48.00",
+        "maxPrice": "80.00",
+        "priceCurrency": "USD"
+      },
+      "availability": "https://schema.org/InStock",
+      "url": "https://mybakingcreations.com/services/sugar-cookies"
     }
   ],
 
-  <!-- PROVIDER SECTION
-       This is the business that provides the service.
-       Update all fields below with your real business information. -->
+  <!-- ── PROVIDER (YOUR BUSINESS) ───────────────────────────────
+       This section identifies who provides the service.
+       Fill in your real business details below. -->
   "provider": {
     "@type": "LocalBusiness",
-
-    <!-- Your official business name exactly as it appears on your website. -->
     "name": "My Baking Creations",
-
-    <!-- Your business website homepage URL. -->
     "url": "https://mybakingcreations.com",
 
-    <!-- Your business logo image URL. -->
+    <!-- Replace with your actual business logo URL -->
     "logo": "https://mybakingcreations.com/images/logo.png",
 
-    <!-- Your business phone number in international format.
-         Example for US: "+1-555-123-4567" -->
-    "telephone": "+1-555-123-4567",
+    <!-- Replace with your real phone number -->
+    "telephone": "+1-555-000-0000",
 
-    <!-- Your business contact email address. -->
+    <!-- Replace with your real email address -->
     "email": "hello@mybakingcreations.com",
 
-    <!-- Your physical business address.
-         If you are home-based and prefer not to list an address,
+    <!-- Replace with your real business address.
+         If you are home-based and prefer not to show your address,
          you may remove the "address" block entirely. -->
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "123 Bakery Lane",
       "addressLocality": "Your City",
-      "addressRegion": "ST",
+      "addressRegion": "Your State",
       "postalCode": "00000",
       "addressCountry": "US"
     },
 
-    <!-- Your average customer review rating.
-         "ratingValue" is your average score (e.g., 4.9 out of 5).
-         "reviewCount" is the total number of reviews you have received.
-         Update both numbers to match your real review data. -->
+    <!-- Your business hours. Format: Day HH:MM-HH:MM (24-hour clock)
+         Mo=Monday, Tu=Tuesday, We=Wednesday, Th=Thursday,
+         Fr=Friday, Sa=Saturday, Su=Sunday
+         Example: "Mo-Fr 09:00-17:00" means Mon–Fri, 9am to 5pm -->
+    "openingHours": [
+      "Mo-Fr 09:00-17:00",
+      "Sa 10:00-15:00"
+    ],
+
+    <!-- Your average star rating. Update "ratingValue" (1–5) and
+         "reviewCount" to reflect your real reviews. -->
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.9",
@@ -199,26 +192,8 @@
       "worstRating": "1"
     },
 
-    <!-- Your business hours for each day you are open.
-         Format: "Mo,Tu,We,Th,Fr" then "opens" and "closes" times in 24-hour format.
-         Duplicate or remove blocks as needed for your schedule. -->
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "09:00",
-        "closes": "17:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Saturday"],
-        "opens": "10:00",
-        "closes": "14:00"
-      }
-    ],
-
-    <!-- Links to your social media profiles.
-         Add or remove lines as needed. Delete any you do not use. -->
+    <!-- Links to your social media profiles. Remove any lines
+         that don't apply to your business. -->
     "sameAs": [
       "https://www.facebook.com/mybakingcreations",
       "https://www.instagram.com/mybakingcreations",
@@ -226,33 +201,20 @@
     ]
   },
 
-  <!-- HOW THE SERVICE IS PERFORMED
-       Describe the general process or channel through which
-       your service is delivered to customers. -->
-  "serviceOutput": "Custom baked goods crafted to order and available for pickup or local delivery",
+  <!-- ── TERMS OF SERVICE & ADDITIONAL INFO ─────────────────────
+       Optional but helpful — link to your ordering/policy page -->
+  "termsOfService": "https://mybakingcreations.com/ordering-policy",
 
-  <!-- Whether the service requires a booking or appointment.
-       Set to true if customers must place an order in advance. -->
+  <!-- ── CATEGORY ────────────────────────────────────────────────
+       A broad category tag for your service -->
+  "category": "Bakery & Custom Cake Design",
+
+  <!-- ── HAS OFFER CATALOG ──────────────────────────────────────
+       Links to a full menu or catalog page if you have one -->
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
-    "name": "My Baking Creations Service Menu",
-    "itemListElement": [
-      {
-        "@type": "OfferCatalog",
-        "name": "Cakes",
-        "description": "Custom birthday cakes, wedding cakes, anniversary cakes, and celebration cakes"
-      },
-      {
-        "@type": "OfferCatalog",
-        "name": "Cupcakes",
-        "description": "Individually decorated cupcakes available by the dozen for any occasion"
-      },
-      {
-        "@type": "OfferCatalog",
-        "name": "Cookies",
-        "description": "Custom decorated sugar cookies with royal icing for events and gifting"
-      }
-    ]
+    "name": "My Baking Creations Full Menu & Services",
+    "url": "https://mybakingcreations.com/menu"
   }
 
 }
