@@ -9,43 +9,52 @@
        The image should be a direct URL to a photo of your product.
        ============================================================ -->
   "name": "Classic Vanilla Birthday Cake",
-  "description": "A beautifully handcrafted vanilla birthday cake made with fresh, high-quality ingredients. Moist layers of vanilla sponge filled with buttercream frosting and decorated to order. Perfect for birthdays, celebrations, and special occasions.",
-  "image": "https://mybakingcreations.com/images/classic-vanilla-birthday-cake.jpg",
+  "description": "A beautifully handcrafted vanilla birthday cake made with fresh, high-quality ingredients. Moist layers of vanilla sponge filled with smooth buttercream frosting, perfect for any celebration.",
+  "image": [
+    "https://mybakingcreations.com/images/vanilla-birthday-cake.jpg"
+  ],
 
   <!-- ============================================================
-       PRODUCT IDENTIFIERS
-       SKU = your internal product code (make one up if needed).
-       Brand = your business name or the brand of the product.
+       BRAND INFORMATION
+       Update "name" below to match your business name.
        ============================================================ -->
-  "sku": "MBC-CAKE-001",
   "brand": {
     "@type": "Brand",
     "name": "My Baking Creations"
   },
 
   <!-- ============================================================
+       PRODUCT IDENTIFIERS
+       SKU = your internal product code (e.g. "CAKE-001")
+       MPN = manufacturer part number (can be same as SKU for small businesses)
+       ============================================================ -->
+  "sku": "MBC-CAKE-001",
+  "mpn": "MBC-CAKE-001",
+
+  <!-- ============================================================
        PRODUCT CATEGORY
        Describe the general category this product belongs to.
        ============================================================ -->
-  "category": "Custom Cakes & Baked Goods",
+  "category": "Custom Cakes",
 
   <!-- ============================================================
        OFFERS / PRICING
-       Update the price, currency, and availability status.
-       priceCurrency uses ISO 4217 codes: USD, GBP, EUR, AUD, etc.
+       Update the price, currency, and availability.
+       priceCurrency uses standard 3-letter codes: USD, GBP, EUR, CAD, AUD
        availability options:
          - https://schema.org/InStock
          - https://schema.org/OutOfStock
          - https://schema.org/PreOrder
-       priceValidUntil = the date your price is valid until (YYYY-MM-DD).
+       priceValidUntil = the date your price is valid until (YYYY-MM-DD format)
        ============================================================ -->
   "offers": {
     "@type": "Offer",
-    "url": "https://mybakingcreations.com/products/classic-vanilla-birthday-cake",
+    "url": "https://mybakingcreations.com/products/vanilla-birthday-cake",
     "priceCurrency": "USD",
     "price": "65.00",
     "priceValidUntil": "2025-12-31",
     "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition",
     "seller": {
       "@type": "Organization",
       "name": "My Baking Creations",
@@ -55,16 +64,16 @@
 
   <!-- ============================================================
        AGGREGATE RATING
-       This shows the star rating in Google search results.
-       ratingValue = average star rating (e.g. 4.8 out of 5).
-       reviewCount = total number of reviews you have received.
-       bestRating = the highest possible rating (usually 5).
-       worstRating = the lowest possible rating (usually 1).
-       IMPORTANT: These numbers must match what is visible on your page.
+       This shows your overall star rating in Google search results.
+       ratingValue = your average star rating (e.g. 4.8 out of 5)
+       reviewCount = total number of reviews you have received
+       bestRating  = the highest possible rating (usually 5)
+       worstRating = the lowest possible rating (usually 1)
+       IMPORTANT: These numbers must match what is visibly shown on your page.
        ============================================================ -->
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": "4.9",
+    "ratingValue": "4.8",
     "reviewCount": "47",
     "bestRating": "5",
     "worstRating": "1"
@@ -72,11 +81,11 @@
 
   <!-- ============================================================
        INDIVIDUAL REVIEWS
-       You can add one or more real customer reviews here.
-       Each review should match a review that is visible on your page.
-       To add more reviews, copy the entire { } block and separate
-       each block with a comma.
-       datePublished uses the format: YYYY-MM-DD
+       Add one review block per customer review shown on your page.
+       You can copy and paste the curly-brace block { } to add more reviews.
+       datePublished uses YYYY-MM-DD format.
+       ratingValue = the star rating this specific reviewer gave (1 to 5)
+       IMPORTANT: Only include reviews that are visibly displayed on your page.
        ============================================================ -->
   "review": [
     {
@@ -87,8 +96,8 @@
         "bestRating": "5",
         "worstRating": "1"
       },
-      "name": "Absolutely stunning cake!",
-      "reviewBody": "I ordered the vanilla birthday cake for my daughter's party and it was absolutely perfect. The cake was moist, delicious, and the decoration was even better than I imagined. Everyone at the party was asking where I got it from. Will definitely be ordering again!",
+      "name": "Absolutely delicious!",
+      "reviewBody": "This vanilla cake was the highlight of my daughter's birthday party. Everyone kept asking where I got it from. The frosting was perfectly sweet and the sponge was so moist. Will definitely be ordering again!",
       "datePublished": "2024-11-15",
       "author": {
         "@type": "Person",
@@ -103,12 +112,12 @@
         "bestRating": "5",
         "worstRating": "1"
       },
-      "name": "Best cake I have ever tasted",
-      "reviewBody": "This vanilla cake is hands down the best I have ever had. The sponge was light and fluffy, the buttercream was not too sweet, and the whole thing looked incredible. Delivery was on time and it arrived in perfect condition. Highly recommend My Baking Creations!",
-      "datePublished": "2024-10-03",
+      "name": "Beautiful and tasty",
+      "reviewBody": "Ordered this for my husband's surprise birthday. It looked stunning and tasted even better. The whole family loved it. Great communication from the baker too — she made sure every detail was perfect.",
+      "datePublished": "2024-10-28",
       "author": {
         "@type": "Person",
-        "name": "James T."
+        "name": "Jennifer L."
       }
     },
     {
@@ -119,12 +128,12 @@
         "bestRating": "5",
         "worstRating": "1"
       },
-      "name": "Great quality and lovely presentation",
-      "reviewBody": "Really happy with my order. The cake tasted wonderful and looked beautiful. I would have given 5 stars but delivery was slightly later than expected. The quality of the cake itself was outstanding though and I would definitely order again.",
-      "datePublished": "2024-09-20",
+      "name": "Great quality, highly recommend",
+      "reviewBody": "Really lovely cake, very fresh and made with care. Delivery was on time and it was packaged beautifully. Took off one star only because I wished the portion size was slightly larger, but the taste was outstanding.",
+      "datePublished": "2024-09-10",
       "author": {
         "@type": "Person",
-        "name": "Laura K."
+        "name": "David R."
       }
     }
   ]
