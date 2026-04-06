@@ -6,7 +6,6 @@
     'use strict';
 
     // Don't load on consultation page
-    if (window.location.pathname.includes('book-consultation')) return;
 
     // Create styles
     const styles = document.createElement('style');

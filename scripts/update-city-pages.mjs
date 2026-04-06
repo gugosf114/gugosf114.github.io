@@ -534,7 +534,7 @@ function generateCityPage(d) {
         <div class="section-wrapper section-beige reveal">
             <div class="section-header">
                 <h2>Order Your ${d.ctaCityPrefix} <span class="highlight">Custom Cake</span></h2>
-                <p style="max-width: 700px; margin: 0 auto;">Ready to order? Visit us at 1096 Wildwood Ave or contact us for a free consultation. We typically book 2-3 weeks in advance for custom orders.</p>
+                <p style="max-width: 700px; margin: 0 auto;">Ready to order? Visit us at 1096 Wildwood Ave or contact us to get started. We typically book 2-3 weeks in advance for custom orders.</p>
             </div>
             <div style="text-align: center; margin-top: 2rem;">
                 <a href="order-form" class="btn btn-primary">Request a Quote</a>
@@ -559,7 +559,6 @@ function generateCityPage(d) {
                 <a href="partners">Partner With Us</a>
                 <a href="blog">Blog</a>
                 <a href="contact">Contact</a>
-                <a href="book-consultation">Book Consultation</a>
                 <a href="corporate-order">Corporate Quote</a>
                 <a href="order-printed">Printed Cookies</a>
             </div>
