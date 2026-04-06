@@ -1,17 +1,3 @@
-<!-- ============================================================
-     MENU ITEM SCHEMA MARKUP FOR MY BAKING CREATIONS
-     Website: https://mybakingcreations.com
-
-     HOW TO USE THIS CODE:
-     1. Copy this entire block of code
-     2. Paste it into the <head> section of your webpage
-        (or just before the closing </body> tag)
-     3. Replace the placeholder values with your real information
-     4. Each section below has comments explaining what to change
-     5. After updating, test your page at:
-        https://search.google.com/test/rich-results
-     ============================================================ -->
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -19,69 +5,67 @@
 
   <!-- ============================================================
        BASIC ITEM INFORMATION
-       Change "name" to the exact name of your menu item as it
-       appears on your website or menu.
-       Change "description" to a short, appealing description
-       of the item (1-2 sentences works best).
+       Update "name" to the exact name of this baked good as it
+       appears on your website or menu. Update "description" with
+       a short, appealing description of the item (1-2 sentences).
        ============================================================ -->
   "name": "Classic Vanilla Birthday Cake",
-  "description": "A light and fluffy three-layer vanilla sponge cake filled with silky buttercream frosting and topped with hand-piped rosettes. Perfect for birthdays and special celebrations.",
+  "description": "A moist, fluffy vanilla layer cake frosted with creamy buttercream and decorated with colorful sprinkles — perfect for any celebration.",
 
   <!-- ============================================================
        ITEM URL
-       Change this to the full web address of the page where
-       this specific menu item is listed on your website.
+       Replace this with the direct link to this item's page on
+       your website.
        ============================================================ -->
   "url": "https://mybakingcreations.com/menu/classic-vanilla-birthday-cake",
 
   <!-- ============================================================
        ITEM IMAGE
-       Change this to the full web address of a photo of your item.
-       Use a high-quality image (at least 800x600 pixels recommended).
-       The image must already be uploaded to your website.
+       Replace the URL below with a direct link to a high-quality
+       photo of this item. Recommended size: at least 1200x800px.
        ============================================================ -->
   "image": {
     "@type": "ImageObject",
     "url": "https://mybakingcreations.com/images/classic-vanilla-birthday-cake.jpg",
     "width": 1200,
-    "height": 900,
+    "height": 800,
     "caption": "Classic Vanilla Birthday Cake by My Baking Creations"
   },
 
   <!-- ============================================================
        MENU SECTION
-       This tells search engines which part of your menu this
-       item belongs to. Change "name" to your category name,
-       for example: "Cakes", "Cupcakes", "Cookies", "Pastries".
+       This tells search engines which section of your menu this
+       item belongs to. Update "name" to match your menu category
+       (e.g., "Cakes", "Cupcakes", "Cookies", "Seasonal Specials").
        ============================================================ -->
-  "suitableForDiet": "https://schema.org/HalalDiet",
-
-  "inMenuSection": {
+  "hasMenuSection": {
     "@type": "MenuSection",
-    "name": "Custom Cakes",
-    "description": "Handcrafted celebration cakes made to order for any occasion"
+    "name": "Cakes",
+    "description": "Custom and classic cakes baked fresh to order for every occasion."
   },
 
   <!-- ============================================================
-       PRICING INFORMATION
-       Change "price" to the actual price of your item (numbers only,
-       no dollar sign — the currency is set separately).
-       Change "priceCurrency" if you use a currency other than USD:
-         USD = US Dollar | GBP = British Pound | EUR = Euro
-         CAD = Canadian Dollar | AUD = Australian Dollar
-       Change "availability" if the item is not always available:
-         InStock = Available now
-         OutOfStock = Not currently available
-         PreOrder = Must be ordered in advance
+       PRICING & AVAILABILITY
+       Update "price" to the actual price of this item (numbers only,
+       no dollar sign). Update "priceCurrency" if you use a currency
+       other than US Dollars (USD). Update "availability" to one of:
+         - "https://schema.org/InStock"       (available now)
+         - "https://schema.org/PreOrder"      (order in advance)
+         - "https://schema.org/OutOfStock"    (not available)
+       Update "validFrom" and "validThrough" if this is a seasonal
+       or limited-time item (use YYYY-MM-DD format). Remove those
+       two lines if the item is available year-round.
        ============================================================ -->
   "offers": {
     "@type": "Offer",
-    "price": "65.00",
+    "price": "48.00",
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock",
+    "validFrom": "2024-01-01",
+    "validThrough": "2024-12-31",
     "url": "https://mybakingcreations.com/menu/classic-vanilla-birthday-cake",
     "seller": {
-      "@type": "LocalBusiness",
+      "@type": "Organization",
       "name": "My Baking Creations",
       "url": "https://mybakingcreations.com"
     }
@@ -89,90 +73,98 @@
 
   <!-- ============================================================
        NUTRITION INFORMATION
-       Fill in the nutritional values for a single serving of
-       your item. If you do not know these values, you can:
-         - Remove this entire "nutrition" section, OR
-         - Ask your recipe software or nutritionist for the values
-       
-       "servingSize" = describe one portion (e.g., "1 slice", "1 cupcake")
-       "calories" = number of calories per serving
-       All other values use grams (g) or milligrams (mg) as noted.
+       Fill in the nutritional values for ONE SERVING of this item.
+       Update "servingSize" to describe one portion (e.g., "1 slice",
+       "1 cupcake", "1 cookie"). All calorie and gram values should
+       be numbers only. If you do not have exact nutrition data,
+       consult a nutrition calculator or remove this entire section.
        ============================================================ -->
   "nutrition": {
     "@type": "NutritionInformation",
-    "servingSize": "1 slice (approximately 120g)",
+    "servingSize": "1 slice (120g)",
     "calories": "420 calories",
     "fatContent": "18 g",
     "saturatedFatContent": "10 g",
     "transFatContent": "0 g",
-    "carbohydrateContent": "62 g",
-    "sugarContent": "45 g",
-    "fiberContent": "1 g",
-    "proteinContent": "5 g",
+    "cholesterolContent": "75 mg",
     "sodiumContent": "280 mg",
-    "cholesterolContent": "75 mg"
+    "carbohydrateContent": "62 g",
+    "fiberContent": "1 g",
+    "sugarContent": "44 g",
+    "proteinContent": "5 g"
   },
 
   <!-- ============================================================
-       MENU ITEM ADDITIONAL DETAILS
-       "menuAddOn" lists optional extras customers can add.
-       Remove any add-ons that do not apply to your business,
-       or add more by copying the {} block pattern.
+       SUITABLE FOR DIETS
+       List any special diets this item qualifies for. Remove any
+       that do not apply. Common options:
+         - "https://schema.org/GlutenFreeDiet"
+         - "https://schema.org/VegetarianDiet"
+         - "https://schema.org/VeganDiet"
+         - "https://schema.org/KosherDiet"
+         - "https://schema.org/HalalDiet"
+         - "https://schema.org/DiabeticDiet"
+         - "https://schema.org/LowCalorieDiet"
+         - "https://schema.org/LowFatDiet"
+         - "https://schema.org/LowLactoseDiet"
+         - "https://schema.org/LowSaltDiet"
        ============================================================ -->
-  "menuAddOn": [
+  "suitableForDiet": [
+    "https://schema.org/VegetarianDiet"
+  ],
+
+  <!-- ============================================================
+       ALLERGEN & ADDITIONAL INFORMATION
+       Use "description" inside additionalProperty to note allergens
+       or other important details customers should know. Update or
+       add entries as needed for your specific item.
+       ============================================================ -->
+  "additionalProperty": [
     {
-      "@type": "MenuItem",
-      "name": "Custom Message Topper",
-      "description": "Add a personalized edible message or name to your cake",
-      "offers": {
-        "@type": "Offer",
-        "price": "5.00",
-        "priceCurrency": "USD"
-      }
+      "@type": "PropertyValue",
+      "name": "Allergens",
+      "value": "Contains: wheat, eggs, milk, soy. May contain traces of nuts."
     },
     {
-      "@type": "MenuItem",
-      "name": "Extra Decorative Flowers",
-      "description": "Add a bouquet of handcrafted sugar flowers to the top of your cake",
-      "offers": {
-        "@type": "Offer",
-        "price": "15.00",
-        "priceCurrency": "USD"
-      }
+      "@type": "PropertyValue",
+      "name": "Serving Suggestion",
+      "value": "Best served at room temperature. Store in a cool, dry place or refrigerate for up to 3 days."
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Customization",
+      "value": "Available in custom sizes (6-inch, 8-inch, 10-inch) and custom frosting colors. Contact us to personalize."
     }
   ],
 
   <!-- ============================================================
        BUSINESS / PROVIDER INFORMATION
-       This links the menu item back to your business.
-       Update "name" and "url" if they are different from what
-       is shown below.
+       This links the menu item back to your business. Update the
+       details below to match your business information exactly as
+       it appears on your website and Google Business Profile.
        ============================================================ -->
   "provider": {
-    "@type": "LocalBusiness",
+    "@type": "FoodEstablishment",
     "name": "My Baking Creations",
     "url": "https://mybakingcreations.com",
-    "telephone": "+1-555-000-0000",
+    "telephone": "+1-555-123-4567",
+    "email": "hello@mybakingcreations.com",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "123 Bakery Lane",
+      "streetAddress": "123 Sweet Street",
       "addressLocality": "Your City",
-      "addressRegion": "Your State",
+      "addressRegion": "YS",
       "postalCode": "00000",
       "addressCountry": "US"
-    }
+    },
+    "servesCuisine": "Bakery",
+    "priceRange": "$$",
+    "image": "https://mybakingcreations.com/images/logo.png",
+    "sameAs": [
+      "https://www.facebook.com/mybakingcreations",
+      "https://www.instagram.com/mybakingcreations"
+    ]
   }
 
 }
 </script>
-
-<!-- ============================================================
-     REMINDER CHECKLIST BEFORE YOU GO LIVE:
-     [ ] Replace all placeholder text with your real information
-     [ ] Make sure the item name matches exactly what is on your page
-     [ ] Make sure the price matches exactly what is on your page
-     [ ] Upload a real photo and update the image URL
-     [ ] Update your business address and phone number
-     [ ] Test the page at https://search.google.com/test/rich-results
-     [ ] Fix any errors shown in the test tool before publishing
-     ============================================================ -->
