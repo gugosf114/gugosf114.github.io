@@ -1,186 +1,225 @@
 <script type="application/ld+json">
 {
+  /* ============================================================
+     MY BAKING CREATIONS - MENU SCHEMA MARKUP
+     ============================================================
+     HOW TO USE THIS SCHEMA:
+     1. Copy this entire <script> block into the <head> section
+        of your menu page (e.g., mybakingcreations.com/menu)
+     2. Replace any placeholder values with your real information
+     3. Test it at: https://search.google.com/test/rich-results
+     4. Make sure everything here matches what visitors see on
+        your actual menu page exactly
+     ============================================================ */
+
   "@context": "https://schema.org",
+
+  /* The type of schema - do not change this */
   "@type": "Menu",
 
-  <!-- ============================================================
-       MENU BASICS
-       Update the name, description, and url to match your page.
-       ============================================================ -->
-  "name": "My Baking Creations Menu",
-  "description": "Explore our full selection of freshly baked goods, including cakes, cookies, pastries, and custom orders available at My Baking Creations.",
-  "url": "https://mybakingcreations.com/menu",
-  "inLanguage": "en-US",
+  /* ── BASIC MENU INFORMATION ─────────────────────────────── */
 
-  <!-- ============================================================
-       MENU SECTIONS
-       Each object inside "hasMenuSection" is one category of items
-       (e.g., Cakes, Cookies, Pastries). Add or remove sections
-       as needed by copying the pattern below.
-       ============================================================ -->
+  /* The name of your menu */
+  "name": "My Baking Creations Menu",
+
+  /* A short description of your menu */
+  "description": "Explore our full selection of freshly baked goods, including cakes, cookies, pastries, and custom celebration cakes made with love in every batch.",
+
+  /* The web address of your menu page */
+  "url": "https://mybakingcreations.com/menu",
+
+  /* The language your menu is written in (en = English) */
+  "inLanguage": "en",
+
+  /* ── MENU SECTIONS ──────────────────────────────────────── */
+  /* Each section below represents a category on your menu.
+     You can add more sections by copying the { } block and
+     separating them with a comma. You can also remove any
+     sections you do not need. */
+
   "hasMenuSection": [
 
-    <!-- ── SECTION 1: Cakes ── -->
+    /* ── SECTION 1: CAKES ─────────────────────────────────── */
     {
       "@type": "MenuSection",
+
+      /* Name of this menu category */
       "name": "Cakes",
-      "description": "Custom and ready-made cakes for every occasion, baked fresh to order.",
+
+      /* Short description of this category */
+      "description": "Beautifully crafted cakes for every occasion, available in a variety of flavors and sizes.",
+
+      /* List of individual items in this category */
       "hasMenuItem": [
 
-        <!-- Each item below is one product in this section.
-             Copy and paste a block to add more items. -->
+        /* ── ITEM 1 ── */
         {
           "@type": "MenuItem",
-          "name": "Classic Vanilla Birthday Cake",
-          "description": "Light and fluffy vanilla sponge layered with buttercream frosting and your choice of decoration.",
+
+          /* Name of this baked item */
+          "name": "Classic Vanilla Layer Cake",
+
+          /* Description visible on your menu page */
+          "description": "Light and fluffy vanilla sponge layered with silky buttercream frosting. Available in 6-inch and 8-inch sizes.",
+
+          /* Price of this item - update currency symbol if needed */
           "offers": {
             "@type": "Offer",
-            "price": "45.00",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock"
+            "price": "38.00",
+            "priceCurrency": "USD"
           }
         },
+
+        /* ── ITEM 2 ── */
         {
           "@type": "MenuItem",
           "name": "Rich Chocolate Fudge Cake",
-          "description": "Decadent three-layer chocolate cake filled with dark chocolate ganache and finished with chocolate buttercream.",
+          "description": "Decadent triple-chocolate cake with ganache filling and chocolate buttercream. A chocolate lover's dream.",
           "offers": {
             "@type": "Offer",
-            "price": "50.00",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock"
+            "price": "42.00",
+            "priceCurrency": "USD"
           }
         },
+
+        /* ── ITEM 3 ── */
         {
           "@type": "MenuItem",
-          "name": "Custom Wedding Cake (Per Tier)",
-          "description": "Fully customisable wedding cakes designed to match your theme. Price shown is per tier — contact us for a full quote.",
+          "name": "Custom Celebration Cake",
+          "description": "Fully personalized cakes for birthdays, weddings, and special events. Contact us to discuss your design and flavor preferences.",
           "offers": {
             "@type": "Offer",
-            "price": "120.00",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock"
+            "price": "75.00",
+            "priceCurrency": "USD"
           }
         }
 
       ]
     },
 
-    <!-- ── SECTION 2: Cookies ── -->
+    /* ── SECTION 2: COOKIES ───────────────────────────────── */
     {
       "@type": "MenuSection",
       "name": "Cookies",
-      "description": "Hand-crafted cookies baked daily in a variety of classic and seasonal flavours.",
+      "description": "Freshly baked cookies in classic and seasonal flavors, sold by the dozen or as individual treats.",
       "hasMenuItem": [
 
+        /* ── ITEM 1 ── */
         {
           "@type": "MenuItem",
-          "name": "Chocolate Chip Cookies (Dozen)",
-          "description": "Soft-baked cookies loaded with semi-sweet chocolate chips. Sold by the dozen.",
-          "offers": {
-            "@type": "Offer",
-            "price": "18.00",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock"
-          }
-        },
-        {
-          "@type": "MenuItem",
-          "name": "Decorated Sugar Cookies (Half Dozen)",
-          "description": "Buttery sugar cookies hand-decorated with royal icing. Perfect for parties and gifts.",
-          "offers": {
-            "@type": "Offer",
-            "price": "24.00",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock"
-          }
-        },
-        {
-          "@type": "MenuItem",
-          "name": "Snickerdoodle Cookies (Dozen)",
-          "description": "Classic cinnamon-sugar rolled cookies with a soft, chewy centre.",
-          "offers": {
-            "@type": "Offer",
-            "price": "16.00",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock"
-          }
-        }
-
-      ]
-    },
-
-    <!-- ── SECTION 3: Pastries & Breads ── -->
-    {
-      "@type": "MenuSection",
-      "name": "Pastries & Breads",
-      "description": "Freshly baked pastries and artisan breads made from scratch every morning.",
-      "hasMenuItem": [
-
-        {
-          "@type": "MenuItem",
-          "name": "Butter Croissant",
-          "description": "Flaky, golden all-butter croissant baked fresh each morning. Available plain or filled.",
-          "offers": {
-            "@type": "Offer",
-            "price": "4.50",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock"
-          }
-        },
-        {
-          "@type": "MenuItem",
-          "name": "Cinnamon Roll",
-          "description": "Oversized cinnamon roll swirled with brown sugar and cinnamon, topped with cream cheese glaze.",
-          "offers": {
-            "@type": "Offer",
-            "price": "5.50",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock"
-          }
-        },
-        {
-          "@type": "MenuItem",
-          "name": "Sourdough Loaf",
-          "description": "Rustic artisan sourdough with a crispy crust and open crumb. Baked in small batches — pre-order recommended.",
+          "name": "Chocolate Chip Cookies",
+          "description": "Golden, chewy cookies loaded with semi-sweet chocolate chips. Baked fresh daily.",
           "offers": {
             "@type": "Offer",
             "price": "12.00",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock"
+            "priceCurrency": "USD"
+          }
+        },
+
+        /* ── ITEM 2 ── */
+        {
+          "@type": "MenuItem",
+          "name": "Snickerdoodle Cookies",
+          "description": "Soft and pillowy cinnamon-sugar cookies with a slightly crisp edge. A timeless favorite.",
+          "offers": {
+            "@type": "Offer",
+            "price": "12.00",
+            "priceCurrency": "USD"
+          }
+        },
+
+        /* ── ITEM 3 ── */
+        {
+          "@type": "MenuItem",
+          "name": "Decorated Sugar Cookies",
+          "description": "Hand-decorated royal icing cookies in custom shapes and themes. Perfect for parties and gifts. Sold by the dozen.",
+          "offers": {
+            "@type": "Offer",
+            "price": "36.00",
+            "priceCurrency": "USD"
           }
         }
 
       ]
     },
 
-    <!-- ── SECTION 4: Cupcakes ── -->
+    /* ── SECTION 3: PASTRIES ──────────────────────────────── */
     {
       "@type": "MenuSection",
-      "name": "Cupcakes",
-      "description": "Moist, generously frosted cupcakes available in standard and mini sizes.",
+      "name": "Pastries",
+      "description": "Flaky, buttery pastries made from scratch using traditional techniques and the finest ingredients.",
       "hasMenuItem": [
 
+        /* ── ITEM 1 ── */
         {
           "@type": "MenuItem",
-          "name": "Assorted Cupcakes (Half Dozen)",
-          "description": "Six cupcakes in your choice of flavours — vanilla, chocolate, red velvet, lemon, or carrot.",
+          "name": "Butter Croissant",
+          "description": "Classic French-style croissant with dozens of flaky, golden layers. Best enjoyed warm.",
           "offers": {
             "@type": "Offer",
-            "price": "22.00",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock"
+            "price": "4.50",
+            "priceCurrency": "USD"
           }
         },
+
+        /* ── ITEM 2 ── */
         {
           "@type": "MenuItem",
-          "name": "Mini Cupcakes (Dozen)",
-          "description": "Bite-sized versions of our most popular cupcake flavours. Great for events and parties.",
+          "name": "Cinnamon Roll",
+          "description": "Oversized, soft cinnamon roll swirled with brown sugar and topped with cream cheese glaze.",
           "offers": {
             "@type": "Offer",
-            "price": "20.00",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock"
+            "price": "5.50",
+            "priceCurrency": "USD"
+          }
+        },
+
+        /* ── ITEM 3 ── */
+        {
+          "@type": "MenuItem",
+          "name": "Blueberry Muffin",
+          "description": "Moist, bakery-style muffin bursting with fresh blueberries and finished with a crunchy sugar top.",
+          "offers": {
+            "@type": "Offer",
+            "price": "3.75",
+            "priceCurrency": "USD"
+          }
+        }
+
+      ]
+    },
+
+    /* ── SECTION 4: SEASONAL SPECIALS ────────────────────── */
+    /* TIP: Update this section regularly to match your current
+       seasonal or limited-time offerings. Remove items that
+       are no longer available. */
+    {
+      "@type": "MenuSection",
+      "name": "Seasonal Specials",
+      "description": "Limited-time creations inspired by the season. Available while supplies last — check back often for new additions.",
+      "hasMenuItem": [
+
+        /* ── ITEM 1 ── */
+        {
+          "@type": "MenuItem",
+          "name": "Pumpkin Spice Loaf",
+          "description": "Warmly spiced pumpkin bread with a cream cheese swirl and pepita topping. A fall favorite.",
+          "offers": {
+            "@type": "Offer",
+            "price": "14.00",
+            "priceCurrency": "USD"
+          }
+        },
+
+        /* ── ITEM 2 ── */
+        {
+          "@type": "MenuItem",
+          "name": "Strawberry Shortcake",
+          "description": "Light vanilla sponge layered with fresh strawberries and whipped cream. Available in spring and summer.",
+          "offers": {
+            "@type": "Offer",
+            "price": "32.00",
+            "priceCurrency": "USD"
           }
         }
 
@@ -188,5 +227,17 @@
     }
 
   ]
+
+  /* ============================================================
+     END OF MENU SCHEMA
+     ============================================================
+     IMPORTANT REMINDERS:
+     - Every price, name, and description above must match
+       exactly what is shown on your visible menu page.
+     - If you add or remove items from your menu page, update
+       this schema at the same time.
+     - Re-test with Google's Rich Results Test after any changes:
+       https://search.google.com/test/rich-results
+     ============================================================ */
 }
 </script>
