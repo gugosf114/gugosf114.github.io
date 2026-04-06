@@ -1,169 +1,174 @@
 <script type="application/ld+json">
 {
-  <!-- ============================================================
-       MY BAKING CREATIONS — LocalBusiness Schema Markup
-       ============================================================
-       HOW TO USE THIS FILE:
-       1. Replace every value marked with [REPLACE] with your real info.
-       2. Do NOT change the field names (the words on the left side).
-       3. Keep all quotation marks, commas, and brackets exactly as they are.
-       4. After updating, test at: https://search.google.com/test/rich-results
-       ============================================================ -->
-
   "@context": "https://schema.org",
+  "@type": "LocalBusiness",
 
-  <!-- The type of business. Change "Bakery" if needed.
-       Other options: "FoodEstablishment", "LocalBusiness", "Store", etc. -->
-  "@type": "Bakery",
-
-  <!-- ── BASIC IDENTITY ─────────────────────────────────────── -->
-
-  <!-- The exact name of your business as it appears on your signage -->
+  <!-- ============================================================
+       BUSINESS NAME
+       Update this to match exactly how your business name appears
+       on your website and Google Business Profile.
+  ============================================================ -->
   "name": "My Baking Creations",
 
-  <!-- A short description of what your business does -->
-  "description": "My Baking Creations offers freshly baked goods including custom cakes, pastries, cookies, and breads made with quality ingredients for every occasion.",
-
-  <!-- Your business website URL -->
+  <!-- ============================================================
+       WEBSITE URL
+       This should be your main website address.
+  ============================================================ -->
   "url": "https://mybakingcreations.com",
 
-  <!-- Your business logo URL — replace with the direct link to your logo image -->
-  "logo": "https://mybakingcreations.com/images/logo.png",
-
-  <!-- A photo of your storefront or products — replace with a real image URL -->
-  "image": "https://mybakingcreations.com/images/storefront.jpg",
-
-  <!-- ── CONTACT INFORMATION ────────────────────────────────── -->
-
-  <!-- Your main business phone number — include country code for best results -->
+  <!-- ============================================================
+       PHONE NUMBER
+       Use your main business phone number.
+       Format: "+1-555-555-5555" (include country code)
+  ============================================================ -->
   "telephone": "+1-555-123-4567",
 
-  <!-- Your business email address -->
+  <!-- ============================================================
+       EMAIL ADDRESS
+       Your primary business contact email address.
+  ============================================================ -->
   "email": "hello@mybakingcreations.com",
 
-  <!-- ── PHYSICAL ADDRESS ───────────────────────────────────── -->
+  <!-- ============================================================
+       BUSINESS DESCRIPTION
+       A short, clear description of what your business offers.
+       Keep it between 1 and 3 sentences.
+  ============================================================ -->
+  "description": "My Baking Creations is a local bakery specializing in custom cakes, fresh pastries, and handcrafted baked goods made with love for every occasion.",
 
+  <!-- ============================================================
+       LOGO
+       Replace the URL below with the direct link to your logo image.
+       The image should be at least 112x112 pixels.
+  ============================================================ -->
+  "logo": "https://mybakingcreations.com/images/logo.png",
+
+  <!-- ============================================================
+       PROFILE IMAGE
+       A photo of your business, storefront, or products.
+       Replace with a direct link to your preferred image.
+  ============================================================ -->
+  "image": "https://mybakingcreations.com/images/storefront.jpg",
+
+  <!-- ============================================================
+       PHYSICAL ADDRESS
+       Fill in each line with your real business address.
+       - streetAddress : building number and street name
+       - addressLocality : your city or town
+       - addressRegion : your state or province abbreviation
+       - postalCode : your ZIP or postal code
+       - addressCountry : two-letter country code (US, CA, GB, etc.)
+  ============================================================ -->
   "address": {
     "@type": "PostalAddress",
-
-    <!-- Street number and street name -->
-    "streetAddress": "123 Sweet Street",
-
-    <!-- City or town -->
-    "addressLocality": "Bakerville",
-
-    <!-- State, province, or region — use 2-letter abbreviation for US states -->
+    "streetAddress": "123 Bakery Lane",
+    "addressLocality": "Sweet Town",
     "addressRegion": "CA",
-
-    <!-- ZIP or postal code -->
     "postalCode": "90210",
-
-    <!-- 2-letter country code — US = United States, CA = Canada, GB = United Kingdom -->
     "addressCountry": "US"
   },
 
-  <!-- ── GPS COORDINATES ────────────────────────────────────── -->
-  <!-- Find your exact coordinates at: https://www.latlong.net
-       Search your address and copy the Latitude and Longitude values -->
-
+  <!-- ============================================================
+       GEO COORDINATES
+       Latitude and longitude of your business location.
+       Find yours by searching your address on Google Maps,
+       right-clicking the pin, and copying the coordinates.
+       Example: 34.0522 (latitude), -118.2437 (longitude)
+  ============================================================ -->
   "geo": {
     "@type": "GeoCoordinates",
-
-    <!-- Your latitude — example: 34.0522 for Los Angeles -->
-    "latitude": "34.0522",
-
-    <!-- Your longitude — example: -118.2437 for Los Angeles -->
-    "longitude": "-118.2437"
+    "latitude": 34.0522,
+    "longitude": -118.2437
   },
 
-  <!-- ── BUSINESS HOURS ─────────────────────────────────────── -->
-  <!-- Format: Day abbreviations + opening and closing times (24-hour clock)
-       Day codes: Mo=Monday, Tu=Tuesday, We=Wednesday, Th=Thursday,
-                  Fr=Friday, Sa=Saturday, Su=Sunday
-       You can combine days with a dash: Mo-Fr means Monday through Friday -->
+  <!-- ============================================================
+       MAP LINK
+       Paste the full Google Maps URL for your business location.
+       Find it by searching your business on Google Maps and
+       copying the URL from your browser address bar.
+  ============================================================ -->
+  "hasMap": "https://maps.google.com/?q=123+Bakery+Lane,+Sweet+Town,+CA+90210",
 
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      "opens": "07:00",   <!-- Opening time — 07:00 = 7:00 AM -->
-      "closes": "18:00"   <!-- Closing time — 18:00 = 6:00 PM -->
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Saturday"],
-      "opens": "08:00",   <!-- Saturday opening time — 08:00 = 8:00 AM -->
-      "closes": "16:00"   <!-- Saturday closing time — 16:00 = 4:00 PM -->
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Sunday"],
-      "opens": "09:00",   <!-- Sunday opening time — 09:00 = 9:00 AM -->
-      "closes": "13:00"   <!-- Sunday closing time — 13:00 = 1:00 PM -->
-    }
+  <!-- ============================================================
+       OPENING HOURS
+       List your business hours for each day you are open.
+       Format: "DayOfWeek HH:MM-HH:MM" using 24-hour time.
+       Days: Monday, Tuesday, Wednesday, Thursday, Friday,
+             Saturday, Sunday
+       You can combine days with a comma: "Monday,Tuesday"
+       Remove or add lines to match your actual schedule.
+  ============================================================ -->
+  "openingHours": [
+    "Monday,Tuesday,Wednesday,Thursday,Friday 07:00-18:00",
+    "Saturday 08:00-17:00",
+    "Sunday 09:00-14:00"
   ],
 
-  <!-- ── PRICE RANGE ─────────────────────────────────────────── -->
-  <!-- Use $ = budget, $$ = moderate, $$$ = upscale, $$$$ = luxury -->
-
+  <!-- ============================================================
+       PRICE RANGE
+       Use dollar signs to indicate your general price range:
+       "$"    = inexpensive
+       "$$"   = moderate
+       "$$$"  = expensive
+       "$$$$" = very expensive
+  ============================================================ -->
   "priceRange": "$$",
 
-  <!-- ── PAYMENT METHODS ─────────────────────────────────────── -->
-  <!-- List the payment types you accept — remove any that don't apply -->
-
-  "paymentAccepted": "Cash, Credit Card, Debit Card, Apple Pay, Google Pay",
-
-  <!-- ── CURRENCIES ACCEPTED ────────────────────────────────── -->
-
+  <!-- ============================================================
+       CURRENCIES ACCEPTED
+       List the currencies your business accepts.
+       Common values: USD, EUR, GBP, CAD, AUD
+  ============================================================ -->
   "currenciesAccepted": "USD",
 
-  <!-- ── SERVICE AREA ───────────────────────────────────────── -->
-  <!-- The city or region your business primarily serves -->
+  <!-- ============================================================
+       PAYMENT ACCEPTED
+       List the payment methods your business accepts.
+       Examples: Cash, Credit Card, Check, Invoice
+  ============================================================ -->
+  "paymentAccepted": "Cash, Credit Card, Debit Card",
 
-  "areaServed": {
-    "@type": "City",
-    "name": "Bakerville"   <!-- Replace with your city name -->
-  },
-
-  <!-- ── SOCIAL MEDIA & SAME-AS PROFILES ───────────────────── -->
-  <!-- Add the full URLs to all your social media profiles.
-       Delete any lines for platforms you don't use. -->
-
+  <!-- ============================================================
+       SOCIAL MEDIA & OTHER PROFILES
+       Add links to all your official social media pages and
+       any other online profiles (Yelp, Facebook, Instagram, etc.)
+       Remove any lines that do not apply to your business.
+  ============================================================ -->
   "sameAs": [
-    "https://www.facebook.com/mybakingcreations",     <!-- Your Facebook page URL -->
-    "https://www.instagram.com/mybakingcreations",    <!-- Your Instagram profile URL -->
-    "https://www.pinterest.com/mybakingcreations",    <!-- Your Pinterest profile URL -->
-    "https://www.yelp.com/biz/my-baking-creations"   <!-- Your Yelp listing URL -->
+    "https://www.facebook.com/mybakingcreations",
+    "https://www.instagram.com/mybakingcreations",
+    "https://www.yelp.com/biz/my-baking-creations"
   ],
 
-  <!-- ── AGGREGATE RATING ───────────────────────────────────── -->
-  <!-- IMPORTANT: Only include this section if you have real, verifiable reviews.
-       Update these numbers to match your actual ratings.
-       ratingValue = your average star rating (e.g., 4.8)
-       reviewCount  = total number of reviews you have received -->
+  <!-- ============================================================
+       AREA SERVED
+       The city, region, or area your business serves.
+       You can list a city name, state, or general region.
+  ============================================================ -->
+  "areaServed": "Sweet Town, CA and surrounding areas",
 
+  <!-- ============================================================
+       FOUNDING YEAR
+       The year your business was established.
+       Replace 2015 with the actual year you opened.
+  ============================================================ -->
+  "foundingDate": "2015",
+
+  <!-- ============================================================
+       AGGREGATE RATING
+       Your overall star rating and total number of reviews.
+       - ratingValue : your average star rating (e.g. 4.8)
+       - reviewCount : total number of reviews you have received
+       Only include this section if you have real reviews.
+       Update these numbers to match your actual ratings.
+  ============================================================ -->
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": "4.8",   <!-- Your average rating out of 5 -->
-    "reviewCount": "127",   <!-- Total number of customer reviews -->
-    "bestRating": "5",      <!-- Maximum possible rating (usually 5) -->
-    "worstRating": "1"      <!-- Minimum possible rating (usually 1) -->
-  },
-
-  <!-- ── MENU / SERVICES URL ───────────────────────────────── -->
-  <!-- Link to your menu or services page if you have one -->
-
-  "menu": "https://mybakingcreations.com/menu",
-
-  <!-- ── FOUNDING YEAR ──────────────────────────────────────── -->
-  <!-- The year your business was established -->
-
-  "foundingDate": "2018",
-
-  <!-- ── KEYWORDS / CATEGORIES ─────────────────────────────── -->
-  <!-- Words that describe your business — helps search engines understand what you offer -->
-
-  "keywords": "bakery, custom cakes, pastries, cookies, bread, wedding cakes, birthday cakes, Bakerville bakery"
+    "ratingValue": "4.9",
+    "reviewCount": "127",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
 
 }
 </script>
