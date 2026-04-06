@@ -1,168 +1,142 @@
 <script type="application/ld+json">
 {
-  <!-- ============================================================
-       EVENT SCHEMA FOR MY BAKING CREATIONS
-       Website: https://mybakingcreations.com
+  /* ============================================================
+     MY BAKING CREATIONS — EVENT SCHEMA MARKUP
+     Website: https://mybakingcreations.com
 
-       HOW TO USE THIS SCHEMA:
-       1. Copy this entire <script> block into the <head> section
-          of the webpage that describes your event.
-       2. Replace the placeholder values below with your real
-          event details.
-       3. Make sure the information here EXACTLY matches what
-          visitors can read on your webpage.
-       4. Test your page at: https://search.google.com/test/rich-results
-       ============================================================ -->
+     HOW TO USE THIS SCHEMA:
+     1. Copy this entire <script> block into the <head> section
+        of the page that describes your event.
+     2. Replace every placeholder value (marked with arrows -->)
+        with your real event details.
+     3. Make sure the details here EXACTLY match what visitors
+        see on the page — Google checks for consistency.
+     4. Test your page at: https://search.google.com/test/rich-results
+     ============================================================ */
 
   "@context": "https://schema.org",
 
-  <!-- This tells search engines what type of structured data this is.
-       Do NOT change "@type": "Event" -->
+  /* The type of structured data — do not change this */
   "@type": "Event",
 
-  <!-- ============================================================
-       EVENT NAME
-       Replace with the exact name of your event as it appears
-       on your webpage. Keep it clear and descriptive.
-       ============================================================ -->
+  /* ── EVENT NAME ─────────────────────────────────────────────
+     Replace with the exact title of your event as it appears
+     on the page. Example: "Holiday Cookie Decorating Workshop" */
   "name": "Holiday Cookie Decorating Workshop",
 
-  <!-- ============================================================
-       EVENT DESCRIPTION
-       Write a short summary of what the event is about.
-       This may appear in Google search results.
-       ============================================================ -->
-  "description": "Join us for a fun and festive Holiday Cookie Decorating Workshop at My Baking Creations! Learn professional decorating techniques, work with royal icing, and take home a dozen beautifully decorated cookies. All skill levels welcome. Supplies and ingredients are included in the ticket price.",
+  /* ── SHORT DESCRIPTION ──────────────────────────────────────
+     Write 1–3 sentences describing what the event is about.
+     Keep it clear and match the text shown on your page. */
+  "description": "Join us for a fun, hands-on cookie decorating workshop at My Baking Creations! Learn professional icing techniques, creative designs, and take home a box of your beautifully decorated treats. All skill levels are welcome — no baking experience required.",
 
-  <!-- ============================================================
-       START DATE AND TIME
-       Format: YYYY-MM-DDTHH:MM:SS
-       Example: 2024-12-14T10:00:00 means December 14, 2024 at 10:00 AM
-       Change the date and time to match your event.
-       ============================================================ -->
-  "startDate": "2024-12-14T10:00:00",
+  /* ── START DATE & TIME ──────────────────────────────────────
+     Format: YYYY-MM-DDTHH:MM:SS
+     Example: 2025-12-06T10:00:00 means December 6, 2025 at 10:00 AM
+     Use your local time. Change the date and time to match your event. */
+  "startDate": "2025-12-06T10:00:00",
 
-  <!-- ============================================================
-       END DATE AND TIME
-       Format: YYYY-MM-DDTHH:MM:SS
-       Example: 2024-12-14T13:00:00 means December 14, 2024 at 1:00 PM
-       Change the date and time to match when your event ends.
-       ============================================================ -->
-  "endDate": "2024-12-14T13:00:00",
+  /* ── END DATE & TIME ────────────────────────────────────────
+     Same format as startDate.
+     Example: 2025-12-06T12:00:00 means the event ends at 12:00 PM
+     on the same day. Adjust if your event spans multiple days. */
+  "endDate": "2025-12-06T12:00:00",
 
-  <!-- ============================================================
-       EVENT STATUS
-       Use one of these options (copy and paste exactly):
-       - "https://schema.org/EventScheduled"     (event is happening as planned)
-       - "https://schema.org/EventCancelled"     (event has been cancelled)
-       - "https://schema.org/EventPostponed"     (event has been postponed)
-       - "https://schema.org/EventRescheduled"   (event moved to a new date)
-       ============================================================ -->
+  /* ── EVENT STATUS ───────────────────────────────────────────
+     Leave as EventScheduled unless the event changes.
+     Other options if needed:
+       EventCancelled   — if the event is cancelled
+       EventPostponed   — if the event is postponed
+       EventRescheduled — if the event has a new date */
   "eventStatus": "https://schema.org/EventScheduled",
 
-  <!-- ============================================================
-       EVENT ATTENDANCE MODE
-       Use one of these options (copy and paste exactly):
-       - "https://schema.org/OfflineEventAttendanceMode"  (in-person event)
-       - "https://schema.org/OnlineEventAttendanceMode"   (virtual/online event)
-       - "https://schema.org/MixedEventAttendanceMode"    (both in-person and online)
-       ============================================================ -->
+  /* ── ATTENDANCE MODE ────────────────────────────────────────
+     Choose ONE of the following and delete the others:
+       OfflineEventAttendanceMode  — in-person event
+       OnlineEventAttendanceMode   — virtual/online event
+       MixedEventAttendanceMode    — both in-person and online */
   "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
 
-  <!-- ============================================================
-       LOCATION
-       Fill in the physical address where your event will be held.
-       If your event is online, replace this entire "location" block with:
-       "location": {
-         "@type": "VirtualLocation",
-         "url": "https://mybakingcreations.com/live-workshop"
-       }
-       ============================================================ -->
+  /* ── LOCATION ───────────────────────────────────────────────
+     Fill in the physical address where the event takes place.
+     Every field below should match your real location details. */
   "location": {
     "@type": "Place",
 
-    <!-- The name of the venue or your business name -->
+    /* The name of the venue or your business name */
     "name": "My Baking Creations Studio",
 
     "address": {
       "@type": "PostalAddress",
 
-      <!-- Street number and street name -->
-      "streetAddress": "123 Sweet Maple Lane",
+      /* Street number and street name */
+      "streetAddress": "123 Sweet Street",
 
-      <!-- City -->
-      "addressLocality": "Springfield",
+      /* City or town */
+      "addressLocality": "Your City",
 
-      <!-- State abbreviation (for US addresses) -->
-      "addressRegion": "IL",
+      /* State abbreviation — example: CA, TX, NY, FL */
+      "addressRegion": "ST",
 
-      <!-- ZIP or postal code -->
-      "postalCode": "62701",
+      /* ZIP or postal code */
+      "postalCode": "00000",
 
-      <!-- Two-letter country code. US = United States -->
+      /* Country code — US for United States */
       "addressCountry": "US"
     }
   },
 
-  <!-- ============================================================
-       ORGANIZER
-       This is the person or business hosting the event.
-       Update the name and url to match your business.
-       ============================================================ -->
+  /* ── ORGANIZER ──────────────────────────────────────────────
+     This is the person or business hosting the event.
+     Update the name and url to match your business. */
   "organizer": {
     "@type": "Organization",
     "name": "My Baking Creations",
     "url": "https://mybakingcreations.com"
   },
 
-  <!-- ============================================================
-       EVENT IMAGE
-       Add a link to an image that represents your event.
-       This image may appear in Google search results.
-       Replace the URL below with a real image URL from your website.
-       Recommended size: at least 1200 x 628 pixels.
-       ============================================================ -->
-  "image": [
-    "https://mybakingcreations.com/images/holiday-cookie-workshop.jpg"
-  ],
+  /* ── EVENT IMAGE ────────────────────────────────────────────
+     Replace with a direct URL to a real image for this event.
+     Recommended size: at least 1200 x 628 pixels.
+     Example: "https://mybakingcreations.com/images/cookie-workshop.jpg" */
+  "image": "https://mybakingcreations.com/images/event-cookie-decorating-workshop.jpg",
 
-  <!-- ============================================================
-       OFFERS / TICKET INFORMATION
-       Fill in the ticket price and where people can buy tickets.
-       If the event is free, set "price" to "0".
-       ============================================================ -->
+  /* ── TICKET / REGISTRATION URL ──────────────────────────────
+     Replace with the link where people can register or buy tickets.
+     If registration is free, you can still link to your contact page. */
+  "url": "https://mybakingcreations.com/events/holiday-cookie-decorating-workshop",
+
+  /* ── OFFERS (TICKET PRICING) ────────────────────────────────
+     Update the price, currency, and availability as needed.
+     Set "price" to 0 if the event is free.
+     Availability options:
+       InStock     — tickets are available
+       SoldOut     — event is fully booked
+       PreOrder    — tickets available for future purchase */
   "offers": {
     "@type": "Offer",
 
-    <!-- The URL where people can register or buy tickets -->
-    "url": "https://mybakingcreations.com/events/holiday-cookie-workshop",
+    /* Ticket or registration page URL */
+    "url": "https://mybakingcreations.com/events/holiday-cookie-decorating-workshop",
 
-    <!-- Ticket price as a number only (no dollar sign) -->
-    "price": "65",
+    /* Price as a number only — no dollar sign */
+    "price": "45.00",
 
-    <!-- Currency code. USD = US Dollars, EUR = Euros, GBP = British Pounds -->
+    /* Currency code — USD for US Dollars */
     "priceCurrency": "USD",
 
-    <!-- Ticket availability. Use one of these options:
-         - "https://schema.org/InStock"       (tickets available)
-         - "https://schema.org/SoldOut"       (sold out)
-         - "https://schema.org/PreOrder"      (not yet on sale)
-    -->
+    /* Ticket availability status */
     "availability": "https://schema.org/InStock",
 
-    <!-- The date when tickets go on sale (YYYY-MM-DDTHH:MM:SS format) -->
-    "validFrom": "2024-11-01T09:00:00"
+    /* Date when ticket sales begin — format: YYYY-MM-DD */
+    "validFrom": "2025-10-01"
   },
 
-  <!-- ============================================================
-       PERFORMER (OPTIONAL)
-       If a specific person is leading or performing at the event,
-       add their name here. If not applicable, you can delete
-       this entire "performer" section.
-       ============================================================ -->
+  /* ── PERFORMER (OPTIONAL) ───────────────────────────────────
+     If an instructor, chef, or speaker is leading the event,
+     add their name here. Delete this section if not applicable. */
   "performer": {
     "@type": "Person",
-    "name": "Jane Smith, Head Baker & Instructor"
+    "name": "Jane Doe, Head Baker & Instructor"
   }
 
 }
