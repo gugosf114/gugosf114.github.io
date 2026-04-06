@@ -15,23 +15,28 @@
   <!-- The type of schema — do not change this value -->
   "@type": "Review",
 
-  <!-- ► CHANGE THIS: The name of the product, service, or business being reviewed -->
+  <!-- ── WHAT IS BEING REVIEWED ──────────────────────────────
+       This section describes your business.
+       Update "name" and "url" to match your business exactly. -->
   "itemReviewed": {
-    "@type": "LocalBusiness",
+    "@type": "Bakery",
     "name": "My Baking Creations",
     "url": "https://mybakingcreations.com"
   },
 
-  <!-- ► CHANGE THIS: Information about the person who wrote the review -->
+  <!-- ── REVIEW AUTHOR ──────────────────────────────────────
+       Replace "Jane Smith" with the real name of the reviewer.
+       This name MUST appear visibly on the same page. -->
   "author": {
     "@type": "Person",
-    "name": "Sarah Thompson"
+    "name": "Jane Smith"
   },
 
-  <!-- ► CHANGE THIS: The star rating given in this review -->
-  <!-- ratingValue = the score given (e.g. 5)          -->
-  <!-- bestRating  = the highest possible score (e.g. 5) -->
-  <!-- worstRating = the lowest possible score (e.g. 1)  -->
+  <!-- ── STAR RATING ────────────────────────────────────────
+       ratingValue = the score given by this reviewer (e.g. 5)
+       bestRating  = the highest possible score (usually 5)
+       worstRating = the lowest possible score (usually 1)
+       Only change "ratingValue" to match the actual review. -->
   "reviewRating": {
     "@type": "Rating",
     "ratingValue": "5",
@@ -39,13 +44,26 @@
     "worstRating": "1"
   },
 
-  <!-- ► CHANGE THIS: The full text of the review exactly as it appears on your page -->
-  "reviewBody": "My Baking Creations made the most beautiful and delicious custom birthday cake for my daughter's party. The attention to detail was incredible, the flavors were amazing, and everyone kept asking where we got it. I will absolutely be ordering again for every special occasion!",
+  <!-- ── REVIEW DATE ────────────────────────────────────────
+       Replace the date below with the date the review was written.
+       Format must be: YYYY-MM-DD  (Year-Month-Day)
+       Example: "2024-03-15" means March 15, 2024 -->
+  "datePublished": "2024-06-10",
 
-  <!-- ► CHANGE THIS: The date the review was published (format must be YYYY-MM-DD) -->
-  "datePublished": "2024-03-15",
+  <!-- ── REVIEW TEXT ────────────────────────────────────────
+       Replace the text below with the actual review content.
+       This text MUST match word-for-word what is visible on the page.
+       Do not include special characters like quotation marks inside the text. -->
+  "reviewBody": "My Baking Creations made the most beautiful and delicious custom cake for my daughter's birthday. The flavors were incredible, the decorations were exactly what we asked for, and it arrived perfectly on time. I could not recommend them more highly — truly a five-star experience from start to finish!",
 
-  <!-- The publisher of the review — update with your website details -->
+  <!-- ── REVIEW HEADLINE ─────────────────────────────────────
+       A short title or summary for the review (like a subject line).
+       Replace with the actual headline shown on the page, if any. -->
+  "name": "Absolutely the best custom cakes in town!",
+
+  <!-- ── YOUR WEBSITE ───────────────────────────────────────
+       This links the review back to your website.
+       You can leave this as-is — it already uses your URL. -->
   "publisher": {
     "@type": "Organization",
     "name": "My Baking Creations",
@@ -56,17 +74,9 @@
 </script>
 
 <!-- ============================================================
-     TIPS FOR NON-TECHNICAL USERS:
-
-     • "name" under author    → Type the reviewer's real name
-     • "ratingValue"          → Change to the number of stars (1–5)
-     • "reviewBody"           → Paste the exact review text shown on your page
-     • "datePublished"        → Use the format YYYY-MM-DD (e.g. 2024-06-01)
-
-     IMPORTANT: The review text and rating in this code MUST match
-     exactly what visitors can read on your webpage. Google will
-     penalise mismatches.
-
-     To add MORE reviews, copy the entire <script> block above
-     and paste it below this one, then update the values.
+     IMPORTANT REMINDERS:
+     ✅ Every value in this schema MUST match text visible on the page.
+     ✅ You can copy this entire block multiple times — once per review.
+     ✅ After updating, test at: https://search.google.com/test/rich-results
+     ✅ Do NOT use curly quotes (" ") — only use straight quotes (" ")
      ============================================================ -->
