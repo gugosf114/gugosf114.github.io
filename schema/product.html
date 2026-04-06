@@ -7,38 +7,48 @@
        PRODUCT BASIC INFORMATION
        Update the name, description, and image for each product.
        The image should be a direct URL to a photo of your product.
-       ============================================================ -->
+  ============================================================ -->
   "name": "Classic Vanilla Birthday Cake",
-  "description": "A beautifully handcrafted vanilla birthday cake made with fresh, high-quality ingredients. Moist layers of vanilla sponge filled with buttercream frosting and decorated to order. Perfect for birthdays, celebrations, and special occasions.",
-  "image": "https://mybakingcreations.com/images/classic-vanilla-birthday-cake.jpg",
+  "description": "A beautifully handcrafted vanilla birthday cake made with fresh, high-quality ingredients. Moist layers of vanilla sponge filled with creamy buttercream frosting, perfect for any celebration.",
+  "image": [
+    "https://mybakingcreations.com/images/vanilla-birthday-cake.jpg"
+  ],
 
   <!-- ============================================================
-       PRODUCT IDENTIFIERS
-       SKU = your internal product code (make one up if needed).
-       Brand = your business name or the brand of the product.
-       ============================================================ -->
-  "sku": "MBC-CAKE-001",
+       BRAND INFORMATION
+       Update "name" below to match your business name.
+  ============================================================ -->
   "brand": {
     "@type": "Brand",
     "name": "My Baking Creations"
   },
 
   <!-- ============================================================
+       PRODUCT IDENTIFIERS
+       SKU = your internal product code (e.g. "CAKE-001")
+       MPN = manufacturer part number (can be same as SKU for small businesses)
+       Update these to match your own product codes.
+  ============================================================ -->
+  "sku": "MBC-CAKE-001",
+  "mpn": "MBC-CAKE-001",
+
+  <!-- ============================================================
        PRODUCT CATEGORY
-       Describe the general category this product belongs to.
-       ============================================================ -->
-  "category": "Custom Cakes & Baked Goods",
+       Update this to match the category of the product on your website.
+  ============================================================ -->
+  "category": "Birthday Cakes",
 
   <!-- ============================================================
        OFFERS / PRICING
-       Update the price, currency, and availability status.
-       priceCurrency uses ISO 4217 codes: USD, GBP, EUR, AUD, etc.
+       Update the price, currency, and availability.
+       priceCurrency: Use standard currency codes (USD, GBP, EUR, etc.)
        availability options:
          - https://schema.org/InStock
          - https://schema.org/OutOfStock
          - https://schema.org/PreOrder
-       priceValidUntil = the date your price is valid until (YYYY-MM-DD).
-       ============================================================ -->
+       priceValidUntil: Set to a future date in YYYY-MM-DD format.
+       url: Link directly to this product's page on your website.
+  ============================================================ -->
   "offers": {
     "@type": "Offer",
     "url": "https://mybakingcreations.com/products/classic-vanilla-birthday-cake",
@@ -48,36 +58,37 @@
     "availability": "https://schema.org/InStock",
     "seller": {
       "@type": "Organization",
-      "name": "My Baking Creations",
-      "url": "https://mybakingcreations.com"
+      "name": "My Baking Creations"
     }
   },
 
   <!-- ============================================================
        AGGREGATE RATING
-       This shows the star rating in Google search results.
-       ratingValue = average star rating (e.g. 4.8 out of 5).
-       reviewCount = total number of reviews you have received.
-       bestRating = the highest possible rating (usually 5).
-       worstRating = the lowest possible rating (usually 1).
-       IMPORTANT: These numbers must match what is visible on your page.
-       ============================================================ -->
+       This shows your overall star rating in Google search results.
+       ratingValue: Your average rating (e.g. 4.8 out of 5)
+       reviewCount: Total number of reviews you have received
+       bestRating: The highest possible rating (usually 5)
+       worstRating: The lowest possible rating (usually 1)
+       IMPORTANT: These numbers MUST match what is visibly shown
+       on your webpage. Do not use fake or inflated numbers.
+  ============================================================ -->
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "47",
+    "ratingValue": "4.8",
+    "reviewCount": "127",
     "bestRating": "5",
     "worstRating": "1"
   },
 
   <!-- ============================================================
        INDIVIDUAL REVIEWS
-       You can add one or more real customer reviews here.
-       Each review should match a review that is visible on your page.
-       To add more reviews, copy the entire { } block and separate
-       each block with a comma.
-       datePublished uses the format: YYYY-MM-DD
-       ============================================================ -->
+       Add one review block per customer review shown on your page.
+       You can copy and paste the entire review block to add more.
+       datePublished: Use YYYY-MM-DD format
+       ratingValue: The star rating this customer gave (1 to 5)
+       IMPORTANT: Only include reviews that are actually visible
+       on your webpage. Schema must match page content exactly.
+  ============================================================ -->
   "review": [
     {
       "@type": "Review",
@@ -87,8 +98,8 @@
         "bestRating": "5",
         "worstRating": "1"
       },
-      "name": "Absolutely stunning cake!",
-      "reviewBody": "I ordered the vanilla birthday cake for my daughter's party and it was absolutely perfect. The cake was moist, delicious, and the decoration was even better than I imagined. Everyone at the party was asking where I got it from. Will definitely be ordering again!",
+      "name": "Absolutely Delicious!",
+      "reviewBody": "I ordered this cake for my daughter's birthday and it was absolutely stunning. The vanilla flavour was perfect and everyone at the party loved it. Will definitely be ordering again!",
       "datePublished": "2024-11-15",
       "author": {
         "@type": "Person",
@@ -103,9 +114,9 @@
         "bestRating": "5",
         "worstRating": "1"
       },
-      "name": "Best cake I have ever tasted",
-      "reviewBody": "This vanilla cake is hands down the best I have ever had. The sponge was light and fluffy, the buttercream was not too sweet, and the whole thing looked incredible. Delivery was on time and it arrived in perfect condition. Highly recommend My Baking Creations!",
-      "datePublished": "2024-10-03",
+      "name": "Best Cake I Have Ever Tasted",
+      "reviewBody": "The cake arrived beautifully packaged and tasted even better than it looked. The buttercream was light and not too sweet. Highly recommend My Baking Creations to anyone looking for a special cake.",
+      "datePublished": "2024-10-22",
       "author": {
         "@type": "Person",
         "name": "James T."
@@ -119,12 +130,12 @@
         "bestRating": "5",
         "worstRating": "1"
       },
-      "name": "Great quality and lovely presentation",
-      "reviewBody": "Really happy with my order. The cake tasted wonderful and looked beautiful. I would have given 5 stars but delivery was slightly later than expected. The quality of the cake itself was outstanding though and I would definitely order again.",
-      "datePublished": "2024-09-20",
+      "name": "Great Quality and Presentation",
+      "reviewBody": "Really lovely cake, great presentation and tasted wonderful. Delivery was on time and the cake was well protected. Would order again for our next celebration.",
+      "datePublished": "2024-09-08",
       "author": {
         "@type": "Person",
-        "name": "Laura K."
+        "name": "Emily R."
       }
     }
   ]
