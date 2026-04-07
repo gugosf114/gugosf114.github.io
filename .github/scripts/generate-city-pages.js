@@ -295,7 +295,7 @@ return `<!DOCTYPE html>
                 <a href="corporate">Corporate Orders</a>
                 <a href="blog">Blog</a>
                 <a href="contact">Contact</a>
-                <a href="book-consultation">Book Consultation</a>
+                
                 <a href="corporate-order">Corporate Quote</a>
                 <a href="order-printed">Printed Cookies</a>
             </div>
@@ -637,7 +637,7 @@ const hubHtml = `<!DOCTYPE html>
             <div class="footer-logo"><span class="my">my</span><span class="baking">baking</span> Creations</div>
             <p class="footer-tagline">Family-owned Bay Area bakery since 2012</p>
             <div class="footer-links">
-                <a href="/">Home</a><a href="about">About Us</a><a href="gallery">Gallery</a><a href="corporate">Corporate Orders</a><a href="blog">Blog</a><a href="contact">Contact</a><a href="book-consultation">Book Consultation</a><a href="corporate-order">Corporate Quote</a><a href="order-printed">Printed Cookies</a>
+                <a href="/">Home</a><a href="about">About Us</a><a href="gallery">Gallery</a><a href="corporate">Corporate Orders</a><a href="blog">Blog</a><a href="contact">Contact</a><a href="corporate-order">Corporate Quote</a><a href="order-printed">Printed Cookies</a>
             </div>
             <div class="footer-sister" style="margin-top:1.2rem;padding:0.8rem 1.5rem;background:rgba(255,255,255,0.05);border-radius:12px;display:inline-flex;align-items:center;gap:0.75rem;">
                 <span style="font-size:0.85rem;color:rgba(255,255,255,0.7);">Need party rentals too?</span>

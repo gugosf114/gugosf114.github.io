@@ -46,7 +46,6 @@ Built by George Abrahamyan. Baked by Yana.
 |------|------|-------------|
 | Buy Now | `buy-now.html` | Fast checkout for printed image cookies, 48-hour nationwide shipping |
 | Order Printed | `order-printed.html` | Photo cookie ordering |
-| Book Consultation | `book-consultation.html` | Free 15-min consultation (Calendly integration) |
 | Corporate Order | `corporate-order.html` | Corporate quote request, 24-hour turnaround, invoice/PO accepted |
 
 ### Gallery Pages — Cakes

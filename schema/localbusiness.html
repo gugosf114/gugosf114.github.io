@@ -1,169 +1,124 @@
 <script type="application/ld+json">
 {
-  <!-- ============================================================
-       MY BAKING CREATIONS — LocalBusiness Schema Markup
-       ============================================================
-       HOW TO USE THIS FILE:
-       1. Replace every value marked with [REPLACE] with your real info.
-       2. Do NOT change the field names (the words on the left side).
-       3. Keep all quotation marks, commas, and brackets exactly as they are.
-       4. After updating, test at: https://search.google.com/test/rich-results
-       ============================================================ -->
+  /* ============================================================
+     MY BAKING CREATIONS — LocalBusiness Schema Markup
+     ============================================================
+     HOW TO USE THIS FILE:
+     - Replace every value marked with [REPLACE] with your real info.
+     - Do NOT change the field names (the parts on the left of the colon).
+     - After updating, test at: https://search.google.com/test/rich-results
+     ============================================================ */
 
   "@context": "https://schema.org",
 
-  <!-- The type of business. Change "Bakery" if needed.
-       Other options: "FoodEstablishment", "LocalBusiness", "Store", etc. -->
+  /* The type of business — change to a more specific type if needed.
+     Full list: https://schema.org/LocalBusiness */
   "@type": "Bakery",
 
-  <!-- ── BASIC IDENTITY ─────────────────────────────────────── -->
+  /* ── BASIC IDENTITY ─────────────────────────────────────── */
 
-  <!-- The exact name of your business as it appears on your signage -->
+  /* Your exact business name as it appears on your signage */
   "name": "My Baking Creations",
 
-  <!-- A short description of what your business does -->
-  "description": "My Baking Creations offers freshly baked goods including custom cakes, pastries, cookies, and breads made with quality ingredients for every occasion.",
+  /* A short description of what your business does */
+  "description": "My Baking Creations offers handcrafted cakes, pastries, and custom baked goods made fresh daily for every occasion.",
 
-  <!-- Your business website URL -->
+  /* Your website address */
   "url": "https://mybakingcreations.com",
 
-  <!-- Your business logo URL — replace with the direct link to your logo image -->
+  /* Your main business logo — use a full URL to the image file */
   "logo": "https://mybakingcreations.com/images/logo.png",
 
-  <!-- A photo of your storefront or products — replace with a real image URL -->
+  /* A photo of your storefront or products — use a full URL */
   "image": "https://mybakingcreations.com/images/storefront.jpg",
 
-  <!-- ── CONTACT INFORMATION ────────────────────────────────── -->
+  /* ── CONTACT INFORMATION ────────────────────────────────── */
 
-  <!-- Your main business phone number — include country code for best results -->
+  /* Your main phone number — include country code for best results */
   "telephone": "+1-555-123-4567",
 
-  <!-- Your business email address -->
+  /* Your business email address */
   "email": "hello@mybakingcreations.com",
 
-  <!-- ── PHYSICAL ADDRESS ───────────────────────────────────── -->
+  /* ── PHYSICAL ADDRESS ───────────────────────────────────── */
+  /* Update every line below with your real address */
 
   "address": {
     "@type": "PostalAddress",
 
-    <!-- Street number and street name -->
-    "streetAddress": "123 Sweet Street",
+    /* Street number and street name */
+    "streetAddress": "123 Sweet Maple Lane",
 
-    <!-- City or town -->
-    "addressLocality": "Bakerville",
+    /* City or town */
+    "addressLocality": "Springfield",
 
-    <!-- State, province, or region — use 2-letter abbreviation for US states -->
-    "addressRegion": "CA",
+    /* State, province, or region — use 2-letter code for US states */
+    "addressRegion": "IL",
 
-    <!-- ZIP or postal code -->
-    "postalCode": "90210",
+    /* ZIP or postal code */
+    "postalCode": "62701",
 
-    <!-- 2-letter country code — US = United States, CA = Canada, GB = United Kingdom -->
+    /* Two-letter country code — US = United States */
     "addressCountry": "US"
   },
 
-  <!-- ── GPS COORDINATES ────────────────────────────────────── -->
-  <!-- Find your exact coordinates at: https://www.latlong.net
-       Search your address and copy the Latitude and Longitude values -->
+  /* ── GPS COORDINATES ────────────────────────────────────── */
+  /* Find your exact coordinates at: https://www.latlong.net
+     Enter your address and copy the Latitude and Longitude values */
 
   "geo": {
     "@type": "GeoCoordinates",
 
-    <!-- Your latitude — example: 34.0522 for Los Angeles -->
-    "latitude": "34.0522",
+    /* Your latitude — example: 39.7817 */
+    "latitude": "39.7817",
 
-    <!-- Your longitude — example: -118.2437 for Los Angeles -->
-    "longitude": "-118.2437"
+    /* Your longitude — example: -89.6501 */
+    "longitude": "-89.6501"
   },
 
-  <!-- ── BUSINESS HOURS ─────────────────────────────────────── -->
-  <!-- Format: Day abbreviations + opening and closing times (24-hour clock)
-       Day codes: Mo=Monday, Tu=Tuesday, We=Wednesday, Th=Thursday,
-                  Fr=Friday, Sa=Saturday, Su=Sunday
-       You can combine days with a dash: Mo-Fr means Monday through Friday -->
+  /* ── OPENING HOURS ──────────────────────────────────────── */
+  /* Format: ["Day HH:MM-HH:MM"]
+     Day codes: Mo=Monday, Tu=Tuesday, We=Wednesday, Th=Thursday,
+                Fr=Friday, Sa=Saturday, Su=Sunday
+     Use 24-hour time. Example: 09:00 = 9am, 17:00 = 5pm */
 
-  "openingHoursSpecification": [
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      "opens": "07:00",   <!-- Opening time — 07:00 = 7:00 AM -->
-      "closes": "18:00"   <!-- Closing time — 18:00 = 6:00 PM -->
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Saturday"],
-      "opens": "08:00",   <!-- Saturday opening time — 08:00 = 8:00 AM -->
-      "closes": "16:00"   <!-- Saturday closing time — 16:00 = 4:00 PM -->
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Sunday"],
-      "opens": "09:00",   <!-- Sunday opening time — 09:00 = 9:00 AM -->
-      "closes": "13:00"   <!-- Sunday closing time — 13:00 = 1:00 PM -->
-    }
+  "openingHours": [
+    "Mo-Fr 07:00-18:00",
+    "Sa 08:00-16:00",
+    "Su 09:00-13:00"
   ],
 
-  <!-- ── PRICE RANGE ─────────────────────────────────────────── -->
-  <!-- Use $ = budget, $$ = moderate, $$$ = upscale, $$$$ = luxury -->
+  /* ── PRICE RANGE ────────────────────────────────────────── */
+  /* Use $ = budget, $$ = moderate, $$$ = upscale, $$$$ = luxury */
 
   "priceRange": "$$",
 
-  <!-- ── PAYMENT METHODS ─────────────────────────────────────── -->
-  <!-- List the payment types you accept — remove any that don't apply -->
+  /* ── PAYMENT METHODS ────────────────────────────────────── */
+  /* List the payment types you accept — remove any that don't apply */
 
   "paymentAccepted": "Cash, Credit Card, Debit Card, Apple Pay, Google Pay",
 
-  <!-- ── CURRENCIES ACCEPTED ────────────────────────────────── -->
+  /* ── CURRENCIES ACCEPTED ────────────────────────────────── */
+  /* Use standard 3-letter currency codes — USD = US Dollar */
 
   "currenciesAccepted": "USD",
 
-  <!-- ── SERVICE AREA ───────────────────────────────────────── -->
-  <!-- The city or region your business primarily serves -->
+  /* ── SERVICE AREA ───────────────────────────────────────── */
+  /* Describe the geographic area you serve */
 
   "areaServed": {
     "@type": "City",
-    "name": "Bakerville"   <!-- Replace with your city name -->
+    "name": "Springfield"
   },
 
-  <!-- ── SOCIAL MEDIA & SAME-AS PROFILES ───────────────────── -->
-  <!-- Add the full URLs to all your social media profiles.
-       Delete any lines for platforms you don't use. -->
+  /* ── SOCIAL MEDIA & OTHER PROFILES ─────────────────────── */
+  /* Add or remove URLs for the platforms your business uses */
 
   "sameAs": [
-    "https://www.facebook.com/mybakingcreations",     <!-- Your Facebook page URL -->
-    "https://www.instagram.com/mybakingcreations",    <!-- Your Instagram profile URL -->
-    "https://www.pinterest.com/mybakingcreations",    <!-- Your Pinterest profile URL -->
-    "https://www.yelp.com/biz/my-baking-creations"   <!-- Your Yelp listing URL -->
-  ],
-
-  <!-- ── AGGREGATE RATING ───────────────────────────────────── -->
-  <!-- IMPORTANT: Only include this section if you have real, verifiable reviews.
-       Update these numbers to match your actual ratings.
-       ratingValue = your average star rating (e.g., 4.8)
-       reviewCount  = total number of reviews you have received -->
-
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.8",   <!-- Your average rating out of 5 -->
-    "reviewCount": "127",   <!-- Total number of customer reviews -->
-    "bestRating": "5",      <!-- Maximum possible rating (usually 5) -->
-    "worstRating": "1"      <!-- Minimum possible rating (usually 1) -->
-  },
-
-  <!-- ── MENU / SERVICES URL ───────────────────────────────── -->
-  <!-- Link to your menu or services page if you have one -->
-
-  "menu": "https://mybakingcreations.com/menu",
-
-  <!-- ── FOUNDING YEAR ──────────────────────────────────────── -->
-  <!-- The year your business was established -->
-
-  "foundingDate": "2018",
-
-  <!-- ── KEYWORDS / CATEGORIES ─────────────────────────────── -->
-  <!-- Words that describe your business — helps search engines understand what you offer -->
-
-  "keywords": "bakery, custom cakes, pastries, cookies, bread, wedding cakes, birthday cakes, Bakerville bakery"
+    "https://www.facebook.com/mybakingcreations",
+    "https://www.instagram.com/mybakingcreations",
+    "https://www.yelp.com/biz/my-baking-creations"
+  ]
 
 }
 </script>
