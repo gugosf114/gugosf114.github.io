@@ -15,6 +15,10 @@ Disallow: /cakes
 Disallow: /cookies
 Disallow: /cart
 
+# Block removed AI-generated orphan pages (2026-04-13 cleanup — files deleted, crawlers should not re-fetch)
+Disallow: /ai-optimized/
+Disallow: /schema/
+
 # Explicitly allow AI search crawlers
 User-agent: GPTBot
 Allow: /
