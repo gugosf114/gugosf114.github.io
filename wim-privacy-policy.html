@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — WiM (What I Meant)</title>
+    <meta name="description" content="Privacy policy for WiM — What I Meant, a voice reconstruction app for Android powered by the Лаврентий engine.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1A1A1E;
+            color: #d4d4d8;
+            line-height: 1.8;
+            padding: 2rem 1rem;
+        }
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-family: 'Georgia', serif;
+            color: #f0f0f4;
+            font-size: 2rem;
+            margin-bottom: 0.25rem;
+        }
+        .subtitle {
+            color: #C49A6C;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+        .dates {
+            color: #888;
+            font-size: 0.85rem;
+            margin-bottom: 2.5rem;
+        }
+        h2 {
+            color: #C8B48A;
+            font-size: 1.15rem;
+            margin-top: 2.5rem;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        h3 {
+            color: #C49A6C;
+            font-size: 1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        p { margin-bottom: 1rem; }
+        strong { color: #f0f0f4; }
+        a { color: #EE5A24; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        ul { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.4rem; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        th, td {
+            text-align: left;
+            padding: 0.6rem 0.8rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        th {
+            color: #C8B48A;
+            font-weight: 600;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            margin: 2rem 0;
+        }
+        .footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            color: #888;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Privacy Policy</h1>
+        <p class="subtitle">WiM — What I Meant &amp; Лаврентий (Lavrentiy)</p>
+        <p class="dates">Effective Date: March 29, 2026 &middot; Last Updated: April 4, 2026</p>
+
+        <p>This Privacy Policy applies to <strong>Лаврентий (Lavrentiy)</strong> for Windows and <strong>WiM — What I Meant</strong> for Android (collectively, "the App"). WiM is powered by the Лаврентий voice reconstruction engine.</p>
+        <p>The App is developed by George Abrahamyants ("we," "us," "our").</p>
+
+        <h2>What the App Does</h2>
+        <p>The App is a voice reconstruction tool that turns messy, real-world speech into clean, professional text. It captures speech via your device's microphone, transcribes it, reconstructs it into polished text matching your chosen tone, and pastes the result into the active application or text field. Whether you're dictating emails, taking meeting notes, or drafting messages on the go, the App delivers what you meant to say — not what the microphone heard.</p>
+        <p>The App includes advanced speech accessibility features — including disfluency detection, clinical reconstruction layers, and personalized learning informed by established speech science research (Brown, 1945; Ghai &amp; Mueller, ASSETS 2021) — that make it particularly effective for users with speech disfluencies.</p>
+
+        <h2>What Data We Collect</h2>
+
+        <h3>Voice Audio</h3>
+        <p>Audio is captured from your microphone <strong>only while you are actively recording</strong> (you press a button to start and stop). Audio is streamed to the OpenAI Whisper API for transcription and is <strong>not stored</strong> by us. Once the transcription is returned, the audio is discarded. We do not record, save, or retain your voice audio.</p>
+
+        <h3>Transcription and Reconstruction Text</h3>
+        <p>Your raw transcription (what the speech recognizer heard) and the reconstructed output (the cleaned text) are stored <strong>locally on your device</strong> in a session history database. This data does not leave your device unless you are signed in and using the cloud reconstruction service, in which case the text is sent to our backend server for processing and is not retained after the response is returned.</p>
+
+        <h3>Voice Profile</h3>
+        <p>The App learns your speech patterns over time: vocabulary you use frequently, corrections the system makes repeatedly, words that trigger disfluency, and filler words. This profile data is stored <strong>locally on your device</strong> in a JSON file.</p>
+        <p><strong>Cloud sync (only if signed in with Google):</strong> A subset of this profile metadata — trigger words (up to 30), onset weights (phonetic difficulty scores), covert avoidance patterns, filler words (up to 25), vocabulary (up to 20), and correction mappings (up to 10) — is synced to our Firestore database. This enables the cloud reconstruction service to personalize output to your speech patterns. <strong>Your raw transcriptions, reconstructed text, session history, and audio are never uploaded.</strong> Only the learned pattern metadata described above.</p>
+
+        <h3>Account Information</h3>
+        <p>If you sign in with Google, we receive your email address, display name, and a unique identifier from Google/Firebase Authentication. This is used solely to identify your account and manage your subscription tier. We do not access your Google contacts, calendar, Drive, or any other Google service.</p>
+
+        <h3>Usage Metadata</h3>
+        <p>We store basic session metadata locally on your device: timestamps, which tone and layer settings were used, word counts, and processing times. This data is used to display your session history and is not transmitted to any server.</p>
+
+        <h2>What Data We Do NOT Collect</h2>
+        <ul>
+            <li>We do not record or store your voice audio</li>
+            <li>We do not collect your location</li>
+            <li>We do not collect your contacts</li>
+            <li>We do not use cookies, tracking pixels, or advertising identifiers</li>
+            <li>We do not fingerprint your device</li>
+            <li>We do not sell or rent any data to anyone</li>
+        </ul>
+
+        <h2>Third-Party Services</h2>
+
+        <h3>OpenAI (Whisper API and GPT)</h3>
+        <p>Voice audio is sent to OpenAI's Whisper API for transcription. Reconstructed text is generated using OpenAI's GPT models. Per OpenAI's API data usage policy (as of March 2025), <strong>data sent through the API is not used to train OpenAI's models</strong> by default. We do not opt in to any data sharing or training programs with OpenAI. For OpenAI's full privacy practices, see: <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">openai.com/policies/privacy-policy</a></p>
+
+        <h3>Google Firebase (Authentication)</h3>
+        <p>If you sign in with Google, authentication is handled by Firebase Authentication, a Google Cloud service. Firebase receives your Google account credentials to verify your identity. See Google's privacy policy at: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></p>
+
+        <h3>Google Cloud Functions (Backend Proxy)</h3>
+        <p>When you are signed in and using cloud reconstruction, your text (not audio) is sent to a Google Cloud Function that acts as a proxy to OpenAI. The text is processed in memory and is not stored. The Cloud Function verifies your identity, checks your subscription tier, and forwards the reconstruction request.</p>
+
+        <h2>Data Storage and Retention</h2>
+        <table>
+            <thead>
+                <tr><th>Data</th><th>Where Stored</th><th>Retention</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Voice audio</td><td>Not stored</td><td>Discarded immediately after transcription</td></tr>
+                <tr><td>Session transcripts</td><td>Your device only</td><td>Until you delete them</td></tr>
+                <tr><td>Voice profile (full)</td><td>Your device only</td><td>Until you delete it or delete the app</td></tr>
+                <tr><td>Profile metadata (synced)</td><td>Firestore (if signed in)</td><td>While account active; deleted after 24 months of inactivity</td></tr>
+                <tr><td>Account info (email, uid)</td><td>Firebase Auth</td><td>Until you delete your account</td></tr>
+                <tr><td>Cloud reconstruction text</td><td>Processed in memory</td><td>Not retained after response</td></tr>
+            </tbody>
+        </table>
+        <p><strong>Retention policy:</strong> We keep your synced profile metadata while your account is active because it personalizes reconstruction output for you. After 24 months of inactivity (no sign-ins, no reconstruction requests), we automatically delete your Firestore data. You can also delete your cloud data immediately at any time — see "Your Rights" below.</p>
+        <p>If you delete your account or uninstall the App, your local data (profile, session history) remains on your device until you manually delete the application folder. Deleting your cloud data via the in-app button does not affect your local data.</p>
+
+        <h2>Data Sharing</h2>
+        <p>We do not share your personal data with any third party except as described above (OpenAI for transcription/reconstruction, Firebase for authentication). We do not share data with advertisers, analytics services, data brokers, or any other entity.</p>
+
+        <h2>AI Model Training</h2>
+        <p><strong>We do not use your data to train any AI model.</strong> Your voice, transcriptions, profile data, and usage patterns are never used for machine learning training, by us or by any third party. OpenAI's API data usage policy confirms that API inputs and outputs are not used for model training by default, and we have not opted into any training data programs.</p>
+
+        <h2>Voice Profile and Biometric Data</h2>
+        <p>The App builds a voice profile that includes vocabulary patterns, disfluency triggers, and learned corrections. This profile describes your <strong>speech patterns</strong>, not your <strong>voice biometrics</strong> (voiceprint, vocal frequency signature, or speaker identification features). The profile cannot be used to identify you by voice. It is stored locally on your device and is not transmitted to any server.</p>
+        <p>If you reside in a jurisdiction with biometric data laws (such as Illinois BIPA, Texas CUBI, or Washington state), please note that we do not collect, store, or process biometric identifiers or biometric information as defined by those laws.</p>
+
+        <h2>Children's Privacy</h2>
+        <p>The App is not directed at children under 13. We do not knowingly collect personal information from children under 13. If you believe a child has provided us with personal information, contact us and we will delete it.</p>
+
+        <h2>Your Rights</h2>
+        <p>You have the right to:</p>
+        <ul>
+            <li><strong>Access</strong> your data — all profile and session data is stored locally on your device and is directly accessible to you. When signed in, the "Export My Data" button downloads all your local and cloud-synced data as a JSON file.</li>
+            <li><strong>Delete</strong> your data — delete the application data to remove all local data. When signed in, the "Delete Cloud Data" button immediately and permanently deletes your Firestore record. Contact us to delete your Firebase Authentication account.</li>
+            <li><strong>Opt out</strong> of cloud processing — use a local API key instead of signing in with Google; all processing stays on your device, nothing is synced to Firestore.</li>
+            <li><strong>Export</strong> your data — in-app export (signed in) or copy your profile and session history directly from your device at any time.</li>
+            <li><strong>Rectify</strong> your data — the Settings screen lets you directly edit your profile (vocabulary, corrections, trigger words, fillers). Changes sync to Firestore automatically when signed in.</li>
+        </ul>
+
+        <h2>Security</h2>
+        <ul>
+            <li>Audio is transmitted to OpenAI over encrypted HTTPS connections</li>
+            <li>Authentication tokens are transmitted over encrypted HTTPS connections</li>
+            <li>Local data is stored with standard operating system file permissions</li>
+            <li>The Cloud Function backend does not log or store request or response bodies</li>
+        </ul>
+
+        <h2>Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time. Changes will be posted to this page with an updated "Last Updated" date. Continued use of the App after changes constitutes acceptance of the revised policy.</p>
+
+        <h2>Contact</h2>
+        <p><strong>George Abrahamyants</strong><br>
+        Email: <a href="mailto:gugosf@gmail.com">gugosf@gmail.com</a><br>
+        GitHub: <a href="https://github.com/gugosf114/lavrentiy" target="_blank" rel="noopener">github.com/gugosf114/lavrentiy</a></p>
+
+        <div class="footer">
+            <p><em>This policy covers both Лаврентий (Lavrentiy) for Windows and WiM — What I Meant for Android. WiM is powered by the Лаврентий voice reconstruction engine.</em></p>
+        </div>
+    </div>
+</body>
+</html>
