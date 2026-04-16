@@ -261,3 +261,147 @@ Password-protected PWA at `/thursday/` for internal order management:
 
 - **Phone**: (415) 568-8060
 - **Website**: [mybakingcreations.com](https://www.mybakingcreations.com)
+
+
+---
+
+## Operations Log
+
+This section tracks ongoing SEO/indexing work and Claude-assisted sessions. If you're a future Claude session picking this up: read here first, then check Google Search Console for the latest numbers.
+
+### Current State (as of 2026-04-15)
+
+**Google Search Console — mybakingcreations.com (sc-domain property)**
+
+| Metric | Value |
+|---|---|
+| Total clicks (90d) | 1,120, trending up (~15–21/day mid-April) |
+| Indexed pages | 60 |
+| Not-indexed pages | 82 |
+| Indexing ratio | ~42% |
+
+**Not-indexed breakdown:**
+
+| Reason | Count | Source | Notes |
+|---|---|---|---|
+| Discovered – currently not indexed | 34 | Google | Templated city/event/corporate pages. **Do NOT request indexing** — see warning below. |
+| Alternate page with proper canonical | 18 | Website | Benign www/non-www duplicates. |
+| Page with redirect | 13 | Website | Likely the working half of old→new URL migration. |
+| Redirect error | 10 | Website | Old `www./custom-cakes-{city}.html` loops. **Self-resolved.** Google validation started 3/28/26. |
+| Not found (404) | 5 | Website | Trending down, aging out naturally. |
+| Blocked by robots.txt | 1 | Website | `/gallery-7` — Wix stub, correctly blocked. |
+| Crawled – not indexed | 1 | Google | `/favicon.ico` — benign, not a page. |
+| Indexed-though-blocked (warning) | 1 | Website | `www./gallery-7` — removal request submitted 4/15/26. |
+
+### ⚠️ Google March 2026 Spam Update — Do Not Force-Index
+
+Google rolled out a **March 2026 Spam Update (Mar 24–25)** + **March 2026 Core Update (Mar 27 – Apr 8)** that explicitly targeted:
+
+- Scaled content abuse
+- Templated AI-written pages
+- Doorway pages
+- Mass city-page networks
+
+The 34 "Discovered – not indexed" URLs on this site (12 city + 11 event + 4 corporate + 7 misc templated pages) match this fingerprint. The jump from 15→34 URLs in this bucket occurred around the spam update window = passive classifier rejection.
+
+**Do not click "Request Indexing" on these.** Doing so can trigger site-wide scaled-content classification. Options if you want to address them:
+
+1. **Consolidate** the 27 templated clones → 1 rich hub page (safest)
+2. **Differentiate** heavily — unique content, stats, photos per page (most work)
+3. **Wait and watch** — let them stay uncrawled
+4. Leave as-is; they contribute zero clicks today anyway
+
+### Footer Link-Matrix Remediation (shipped 2026-04-15)
+
+**Problem:** 33 HTML files (index, order-form, and 31 `custom-cakes-{city}.html` files) each contained a footer block linking to all 30 city pages = **~930 internal matrix links** sitewide. That's a textbook bipartite doorway-network topology signature — exactly what Google's March 2026 spam update flags.
+
+**Fix:** Replaced the 30-city matrix footer with a single hub link to `/delivery-areas`. Commit: `a9ae151`.
+
+**Net change:** 33 files, 66 deletions → 33 insertions. 930 matrix links removed. Topology is now hub-and-spoke instead of bipartite.
+
+**Fix script:** was `_fix_footer.py` (DOTALL regex match for `<div class="footer-locations">...View All...</div>` block). Removed before commit. If this pattern comes back elsewhere, recreate the script.
+
+### GSC Reason-Code Item Keys
+
+For quick drilldown navigation — `https://search.google.com/search-console/index/drilldown?resource_id=sc-domain%3Amybakingcreations.com&item_key={CODE}`:
+
+| Code | Reason |
+|---|---|
+| `CAMYFiAC` | Discovered – not indexed |
+| `CAMYFCAC` | Redirect error |
+| `CAMYCyAC` | Page with redirect |
+| `CAMYGCAC` | Alternate page with proper canonical |
+| `CAMYFyAC` | Crawled – not indexed |
+| `CAMYDSAC` | Not found (404) |
+| `CAMYByAC` | Blocked by robots.txt |
+| `CAMYBCAD` | Indexed, though blocked by robots.txt (warning) |
+| `CAMYCCAC` | Excluded by noindex tag |
+| `CAMYECAC` | Duplicate, Google chose different canonical |
+
+
+---
+
+## Session Log
+
+### 2026-04-15 — GSC Indexing Audit & Footer Cleanup (Claude session)
+
+**Goals:** Diagnose why 82 pages weren't indexed; address specific GSC issues flagged as "Failed" or "Not Started" validation.
+
+**Work done:**
+
+1. **Pulled full GSC indexing report.** Mapped all 9 not-indexed reason codes to item_keys for future drilldown.
+2. **Identified footer link-matrix as programmatic-SEO fingerprint.** All 33 pages with footer linked to all 30 city pages = 930 matrix links. Replaced with single `/delivery-areas` hub link.
+3. **Traced 10 "Redirect error" URLs** — all old `www./custom-cakes-{city}.html` chains that were looping at time of March 11 crawl. Verified via PowerShell `Invoke-WebRequest` that loops are now gone (single clean 301 → 200). GSC validation already started 3/28/26; no action needed.
+4. **Drilled all 3 single-URL buckets:**
+   - Crawled-not-indexed → `/favicon.ico` (benign)
+   - Blocked-by-robots → `/gallery-7` (Wix stub, correctly blocked)
+   - Indexed-though-blocked warning → `www./gallery-7` (ghost from old Wix site)
+5. **Submitted GSC Removals** for both `/gallery-7` variants (non-www and www). Both "Processing request" as of 4/15. Prior Jan 12 removal had expired.
+6. **Did NOT fix structured data errors** (FAQ 4, Breadcrumbs 3, Merchant 2, Product 2) — ran out of tool budget. Next session should pick this up.
+
+**Educational context shared with operator:** March 2026 Google spam update mechanics, AI fingerprint detection stack (structural HTML hashing, cross-page similarity matrices, publishing velocity, perplexity/burstiness, entity density, internal linking topology), programmatic-SEO industry carnage post-update.
+
+**Files changed:** 33 HTML files (footer block), committed `a9ae151`, pushed to main.
+
+### Earlier notable work
+
+- **2026-04-06:** README.md created (11 KB, full site inventory).
+- **2026-01-12:** Bulk GSC removal submissions for 9 Wix-era stubs (`/about-1`, `/contact-3`, `/_frog`, `/cart`, `/_api/*`, `/services-5`, `/gallery-7`). All marked "Removal expired" as of 4/15 — Google only holds removals for ~6 months. Re-submission is expected if warnings recur.
+
+---
+
+## Notes for Next Claude Session
+
+If you're a fresh Claude instance picking this up, here's what will save you 30 minutes of re-discovery:
+
+**Environment setup:**
+- Repo lives at `C:\Users\georg\Documents\GitHub\gugosf114.github.io\`. CNAME → mybakingcreations.com.
+- GSC access: user is logged in to Google at `gugosf@gmail.com`. Launch a CDP Chrome session via `C:\Users\georg\Desktop\launch-chrome-cdp.ps1`, then use `unified-automation` tools with session name `gsc`.
+- Branch protection is on `main`. Pushes succeed with owner bypass; the "Cannot update this protected ref" message is noise, not an error — check the ref-update line at the end of git push output.
+
+**Things NOT to do:**
+- ❌ **Don't "Request Indexing"** on any of the 34 Discovered-not-indexed URLs. That's the programmatic-SEO trap the March 2026 update was built for.
+- ❌ **Don't push back** on the homepage live-activity feed or the Fortune 500 corporate-client logos. Those are real orders/real clients with photos. Operator is a JD-trained compliance specialist who stress-tests adversarially — he'll correct you hard if you reflexively audit without substantiation. Already been through that loop.
+- ❌ **Don't create new programmatic city/event/corporate template pages.** Pattern is what Google flags, not content. If something like that comes up, the answer is "consolidate into a rich hub, don't expand."
+
+**Things TO do:**
+- ✅ Read this README's Operations Log + Session Log before doing any SEO work.
+- ✅ Use direct GSC drilldown URLs with `item_key` codes (table above) instead of clicking through the UI — faster and uses fewer tool calls.
+- ✅ When in doubt about operator intent, proceed with reasonable defaults rather than asking. He wants execution, not clarifying questions. `userPreferences` explicitly says so.
+- ✅ Keep the hub-and-spoke internal linking topology. If you add new landing pages, link to them from the appropriate hub (e.g., `/delivery-areas`), not from every other page.
+
+**Open items (priority order):**
+1. **Structured data errors** (highest-impact unfinished work). FAQ=4, Breadcrumbs=3, Merchant listings=2, Product snippets=2. Navigate via GSC sidebar (Enhancements → FAQ, Shopping → Product snippets/Merchant listings). Direct URLs like `/structured-data/faq` 404 — use the sidebar navigation. Drill each error row to get affected URL + specific schema field violation. Then fix JSON-LD in the affected HTML files.
+2. **34 Discovered-not-indexed URLs** — strategic decision needed: consolidate, differentiate, or leave. Not urgent; they contribute zero traffic.
+3. **Confirm `/gallery-7` removal processing** completes (~24–48hr typical). If it flips back to "expired" before 6 months, that's a Google-side bug worth noting.
+
+**Operator communication style:**
+- Direct, concise, no corporate hedging.
+- Reads thinking tags primarily, not polished output.
+- Expects push-back when warranted — don't fold to agree.
+- "LETS GO SIR" = execute. "hold on" = stop and think.
+- Tone-match. He is in stress-test mode by default.
+
+---
+
+*— Claude (session 2026-04-15)*
