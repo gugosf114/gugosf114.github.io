@@ -186,31 +186,159 @@
                 <div class="carousel-slide"><img loading="lazy" width="1920" height="1166" src="images/gallery/carousel/carousel 2.jpg" alt="Decorated sugar cookies with royal icing designs"></div>
                 <div class="carousel-slide"><img loading="lazy" width="1920" height="930" src="images/gallery/carousel/carousel 6.jpg" alt="Custom celebration cake by My Baking Creations"></div>
             </div>
-            <div class="tile-grid-4">
-                <a href="gallery-cakes" class="service-card reveal reveal-delay-1">
-                    <picture><img src="images/gallery/categoryplaceholder/cakes.webp" alt="Custom Mercedes F1 sculpted cake by My Baking Creations" width="280" height="150" loading="lazy" style="width: 100%; height: 200px; object-fit: contain; background-color: #FFF8F0; border-radius: 15px; margin-bottom: 1rem;"></picture>
-                    <h3>Cakes</h3>
-                    <span class="btn btn-secondary">View Cakes</span>
-                </a>
-                <a href="gallery-cookies" class="service-card reveal reveal-delay-2">
-                    <picture><img src="images/gallery/categoryplaceholder/cookies.webp" alt="Custom elephant baby cookies by My Baking Creations" width="280" height="150" loading="lazy" style="width: 100%; height: 200px; object-fit: contain; background-color: #FFF8F0; border-radius: 15px; margin-bottom: 1rem;"></picture>
-                    <h3>Cookies</h3>
-                    <span class="btn btn-secondary">View Cookies</span>
-                </a>
-                <a href="gallery-cakepops" class="service-card reveal reveal-delay-3">
-                    <picture><img src="images/gallery/categoryplaceholder/cakepops.webp" alt="Custom cake pops by My Baking Creations" width="280" height="150" loading="lazy" style="width: 100%; height: 200px; object-fit: cover; background-color: #FFFFFF; border-radius: 15px; margin-bottom: 1rem;"></picture>
-                    <h3>Cake Pops</h3>
-                    <span class="btn btn-secondary">View Cake Pops</span>
-                </a>
-                <a href="gallery-cupcakes" class="service-card reveal reveal-delay-4">
-                    <picture><source srcset="images/gallery/categoryplaceholder/Bumble bee themed cupcakes.webp" type="image/webp"><img src="images/gallery/categoryplaceholder/Bumble bee themed cupcakes.jpg" alt="Custom cupcakes by My Baking Creations" width="280" height="150" loading="lazy" style="width: 100%; height: 200px; object-fit: cover; background-color: #FFF8F0; border-radius: 15px; margin-bottom: 1rem;"></picture>
-                    <h3>Cupcakes</h3>
-                    <span class="btn btn-secondary">View Cupcakes</span>
-                </a>
-            </div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text-box">
+                <p class="hero-breadcrumb"><a href="/">Home</a> / Gallery</p>
+                <h1 class="typewriter-headline"><span class="highlight-yellow">Our</span> <span class="highlight">Gallery</span></h1>
+                <p class="hero-subtitle" style="margin-bottom: 0.5rem;">Browse our collection of custom creations</p>
+                <p class="hero-subtitle" style="margin-bottom: 0.5rem;">Custom cakes, logo cookies, and cake pops.</p>
+                <p class="hero-subtitle" style="margin-bottom: 0;">From birthdays to Fortune 500 corporate events.</p>
+                <a href="javascript:history.back()" class="back-link">← Back</a>
             </div>
         </div>
+        <div class="hero-dots">
+            <button class="hero-dot active" onclick="goToSlide(0)" aria-label="Slide 1"></button>
+            <button class="hero-dot" onclick="goToSlide(1)" aria-label="Slide 2"></button>
+            <button class="hero-dot" onclick="goToSlide(2)" aria-label="Slide 3"></button>
+            <button class="hero-dot" onclick="goToSlide(3)" aria-label="Slide 4"></button>
+            <button class="hero-dot" onclick="goToSlide(4)" aria-label="Slide 5"></button>
+            <button class="hero-dot" onclick="goToSlide(5)" aria-label="Slide 6"></button>
+            <button class="hero-dot" onclick="goToSlide(6)" aria-label="Slide 7"></button>
+            <button class="hero-dot" onclick="goToSlide(7)" aria-label="Slide 8"></button>
+            <button class="hero-dot" onclick="goToSlide(8)" aria-label="Slide 9"></button>
+            <button class="hero-dot" onclick="goToSlide(9)" aria-label="Slide 10"></button>
+        </div>
+        <!-- Scroll Down Indicator -->
+        <a href="#gallery-content" class="scroll-indicator" aria-label="Scroll down">
+            <span class="scroll-indicator-text">Scroll</span>
+            <div class="scroll-indicator-arrow">
+                <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+            </div>
+        </a>
     </section>
+
+    <!-- GALLERY CATEGORIES -->
+    <section id="gallery-content" class="page-content">
+        <div class="gallery-categories-grid">
+            <a href="gallery-cakes" class="gallery-cat-card">
+                <div class="gallery-cat-img-wrap">
+                    <img loading="lazy" width="280" height="280" src="images/gallery/categoryplaceholder/cakes.webp" alt="Custom sculpted cake by My Baking Creations">
+                </div>
+                <h3 class="gallery-cat-title">Cakes</h3>
+                <span class="gallery-cat-btn">View Cakes</span>
+            </a>
+            <a href="gallery-cookies" class="gallery-cat-card">
+                <div class="gallery-cat-img-wrap">
+                    <img loading="lazy" width="280" height="280" src="images/gallery/categoryplaceholder/cookies.webp" alt="Custom decorated cookies by My Baking Creations">
+                </div>
+                <h3 class="gallery-cat-title">Cookies</h3>
+                <span class="gallery-cat-btn">View Cookies</span>
+            </a>
+            <a href="gallery-cakepops" class="gallery-cat-card">
+                <div class="gallery-cat-img-wrap">
+                    <img loading="lazy" width="280" height="280" src="images/gallery/categoryplaceholder/cakepops.webp" alt="Custom cake pops by My Baking Creations">
+                </div>
+                <h3 class="gallery-cat-title">Cake Pops</h3>
+                <span class="gallery-cat-btn">View Cake Pops</span>
+            </a>
+            <a href="gallery-cupcakes" class="gallery-cat-card">
+                <div class="gallery-cat-img-wrap">
+                    <img loading="lazy" width="280" height="280" src="images/gallery/categoryplaceholder/Bumble bee themed cupcakes.webp" alt="Custom cupcakes by My Baking Creations">
+                </div>
+                <h3 class="gallery-cat-title">Cupcakes</h3>
+                <span class="gallery-cat-btn">View Cupcakes</span>
+            </a>
+        </div>
+    </section>
+
+    <style>
+    .gallery-categories-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        padding: 3rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        background: #b8b8b8;
+        border-radius: 20px;
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+    @media (min-width: 1264px) {
+        .gallery-categories-grid { margin-left: auto; margin-right: auto; }
+    }
+    .gallery-cat-card {
+        background: #d4d4d4;
+        border-radius: 18px;
+        padding: 1.2rem 1.2rem 1.5rem;
+        text-align: center;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .gallery-cat-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+    .gallery-cat-img-wrap {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        border-radius: 14px;
+        overflow: hidden;
+        background: #f5f5f5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .gallery-cat-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .gallery-cat-title {
+        font-family: 'Nunito', sans-serif;
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: #3a3a3a;
+        margin: 0.8rem 0 0.8rem;
+    }
+    .gallery-cat-btn {
+        display: inline-block;
+        background: #FFC532;
+        color: #3a3a3a;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 700;
+        font-size: 0.95rem;
+        padding: 0.6rem 1.8rem;
+        border-radius: 50px;
+        border: none;
+        cursor: pointer;
+        transition: background 0.2s ease, transform 0.15s ease;
+    }
+    .gallery-cat-card:hover .gallery-cat-btn {
+        background: #f0b420;
+        transform: scale(1.03);
+    }
+    @media (max-width: 768px) {
+        .gallery-categories-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            padding: 1.5rem 1rem;
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+        .gallery-cat-title { font-size: 1rem; }
+        .gallery-cat-btn { font-size: 0.85rem; padding: 0.5rem 1.2rem; }
+    }
+    @media (max-width: 400px) {
+        .gallery-categories-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    </style>
 
     </main>
 
