@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0E0E12">
+<title>L1 Guesser — first-language detection from English text alone</title>
+<meta name="description" content="Paste English text. Detect the writer's native language from syntactic, morphological, and lexical transfer patterns.">
+<meta property="og:title" content="L1 Guesser — text-only first-language detection">
+<meta property="og:description" content="Phonetic accent dies in transcription. Linguistic patterns survive. We can read them from text alone.">
+<link rel="canonical" href="https://gugosf114.github.io/l1-guesser/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #E8E2D2;
+    --ink-dim: #8E867A;
+    --ink-bright: #F4EEDC;
+    --paper: #0E0E12;
+    --paper-card: #15141A;
+    --paper-deep: #08080B;
+    --rule: #2A2730;
+    --stamp: #C03030;
+    --stamp-deep: #8A1818;
+    --gold: #C9A24A;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --mono: 'JetBrains Mono', Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background-image:
+      radial-gradient(ellipse at top left, rgba(201,162,74,0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(192,48,48,0.03) 0%, transparent 50%);
+    min-height: 100vh;
+  }
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  header {
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 24px;
+    margin-bottom: 36px;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(38px, 6vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0 0 16px;
+    color: var(--ink-bright);
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 400;
+  }
+  .deck {
+    font-size: clamp(17px, 2.4vw, 21px);
+    color: var(--ink-dim);
+    margin: 0;
+    max-width: 640px;
+  }
+  .deck strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  section {
+    margin-bottom: 36px;
+  }
+  .legend {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    margin-bottom: 12px;
+  }
+  .legend::before {
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 1px;
+    background: var(--rule);
+  }
+  textarea {
+    width: 100%;
+    min-height: 180px;
+    background: var(--paper-card);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--stamp);
+    color: var(--ink-bright);
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.65;
+    padding: 18px 20px;
+    resize: vertical;
+    outline: none;
+    transition: border-color 120ms;
+  }
+  textarea:focus {
+    border-color: var(--gold);
+    border-left-color: var(--stamp);
+  }
+  textarea::placeholder {
+    color: var(--ink-dim);
+    font-style: italic;
+  }
+  .controls {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  button.primary {
+    background: var(--stamp);
+    color: var(--ink-bright);
+    border: 0;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    cursor: pointer;
+    transition: background 100ms, transform 100ms;
+  }
+  button.primary:hover { background: var(--stamp-deep); }
+  button.primary:active { transform: translateY(1px); }
+  button.primary:disabled {
+    background: var(--rule);
+    color: var(--ink-dim);
+    cursor: wait;
+  }
+  .samples {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .samples button {
+    background: transparent;
+    color: var(--ink-dim);
+    border: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: color 100ms, border-color 100ms;
+  }
+  .samples button:hover {
+    color: var(--ink);
+    border-color: var(--gold);
+  }
+  .result {
+    border-top: 1px solid var(--rule);
+    padding-top: 32px;
+    margin-top: 36px;
+  }
+  .result.empty {
+    color: var(--ink-dim);
+    font-style: italic;
+  }
+  .verdict {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .verdict .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+  .verdict .value {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-style: italic;
+    font-size: clamp(34px, 5vw, 48px);
+    color: var(--gold);
+    line-height: 1;
+  }
+  .verdict .conf {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink);
+    border: 1px solid var(--rule);
+    padding: 4px 10px;
+    letter-spacing: 0.14em;
+  }
+  .scores {
+    display: grid;
+    grid-template-columns: 110px 1fr 64px;
+    gap: 6px 14px;
+    align-items: center;
+    margin-bottom: 28px;
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+  .scores .lang {
+    color: var(--ink);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+  .scores .bar {
+    height: 8px;
+    background: var(--paper-deep);
+    border: 1px solid var(--rule);
+    position: relative;
+    overflow: hidden;
+  }
+  .scores .bar::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: var(--w, 0%);
+    background: linear-gradient(90deg, var(--stamp-deep), var(--stamp));
+    transition: width 600ms cubic-bezier(.2,.8,.2,1);
+  }
+  .scores .pct {
+    color: var(--ink-dim);
+    text-align: right;
+  }
+  .evidence-head {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    margin: 0 0 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .marker {
+    border-left: 2px solid var(--gold);
+    padding: 6px 0 6px 16px;
+    margin: 14px 0;
+  }
+  .marker .top {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--ink-dim);
+    margin-bottom: 4px;
+  }
+  .marker .top strong {
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .marker .ev {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .marker .ev::before { content: '“'; color: var(--ink-dim); }
+  .marker .ev::after { content: '”'; color: var(--ink-dim); }
+  .error {
+    background: rgba(192,48,48,0.08);
+    border: 1px solid var(--stamp-deep);
+    color: var(--ink-bright);
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 14px 18px;
+    margin-top: 16px;
+  }
+  footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    color: var(--ink-dim);
+    font-size: 14px;
+  }
+  footer a {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 100ms;
+  }
+  footer a:hover { border-color: var(--gold); }
+  footer p { margin: 0 0 8px; }
+  .colophon {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+    margin-top: 18px !important;
+  }
+  @media (max-width: 480px) {
+    .wrap { padding: 32px 18px 60px; }
+    .scores { grid-template-columns: 90px 1fr 56px; gap: 4px 10px; }
+    button.primary { width: 100%; padding: 16px; }
+    .controls { flex-direction: column; align-items: stretch; }
+    .samples { justify-content: stretch; }
+    .samples button { flex: 1 1 calc(50% - 8px); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Forensic linguistics · Free demo</div>
+    <h1>Guess the writer's <em>first language</em> from English alone.</h1>
+    <p class="deck">
+      Phonetic accent dies in transcription. <strong>Linguistic patterns survive.</strong>
+      Russians drop articles. Mandarin speakers drop tense markers. Spanish speakers calque idioms.
+      Paste English text below and the model identifies the L1 from the syntactic fingerprint.
+    </p>
+  </header>
+
+  <section>
+    <div class="legend">Sample text</div>
+    <textarea id="input" placeholder="Paste a paragraph or two of English text written or transcribed by a non-native speaker. The longer the sample, the sharper the read."></textarea>
+    <div class="controls">
+      <button class="primary" id="run">Analyze</button>
+      <div class="samples">
+        <button data-sample="russian">Russian</button>
+        <button data-sample="spanish">Spanish</button>
+        <button data-sample="mandarin">Mandarin</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="result empty" id="result">
+    <p>Results will appear here. Three candidate L1s evaluated: Russian, Spanish, Mandarin. Matched markers shown as evidence.</p>
+  </section>
+
+  <footer>
+    <p>Powered by <a href="https://wim.app" rel="noopener">WiM</a> and <a href="https://github.com/gugosf114/lavrentiy" rel="noopener">Lavrentiy</a> — voice-to-intent reconstruction. The full L1-transfer normalization runs inside both apps; this demo only classifies.</p>
+    <p class="colophon">v1 · 3 languages · v2 will add Hindi, Arabic, Farsi, French, German, Korean, Japanese</p>
+  </footer>
+</div>
+
+<script>
+  // Cloud Function endpoint. Update after deploy:
+  //   gcloud functions deploy wim-l1-guess --gen2 --runtime=python311 \
+  //     --source=wim-l1-guess-v1 --entry-point=wim_l1_guess \
+  //     --trigger-http --allow-unauthenticated --region=us-central1 \
+  //     --project=bakers-agent
+  const ENDPOINT = "https://us-central1-bakers-agent.cloudfunctions.net/wim-l1-guess";
+
+  const SAMPLES = {
+    russian:
+      "Yesterday I went to store to buy book about history. He very interesting writer. " +
+      "I am needing more time to read. My mothers house is full of advices. " +
+      "He said, that he was tired. Apples, oranges and pears were on table.",
+    spanish:
+      "I have 25 years and I work in a startup in San Francisco. " +
+      "Can I make a question? When I arrived to the office, I washed the hands and started. " +
+      "Is raining outside today. The car red parked in front. I didn't see nothing strange.",
+    mandarin:
+      "Yesterday he bring three book to office. The weather very hot. " +
+      "Although it rained, but we went to meeting. This proposal, I have read carefully. " +
+      "It is good idea, I think. My sister, he is coming next week from Shanghai.",
+  };
+
+  const $ = (id) => document.getElementById(id);
+  const result = $("result");
+  const input = $("input");
+  const runBtn = $("run");
+
+  document.querySelectorAll("[data-sample]").forEach((b) => {
+    b.addEventListener("click", () => {
+      input.value = SAMPLES[b.dataset.sample] || "";
+      input.focus();
+    });
+  });
+
+  runBtn.addEventListener("click", run);
+  input.addEventListener("keydown", (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === "Enter") run();
+  });
+
+  async function run() {
+    const text = input.value.trim();
+    if (!text) {
+      input.focus();
+      return;
+    }
+    runBtn.disabled = true;
+    runBtn.textContent = "Analyzing…";
+    result.classList.remove("empty");
+    result.innerHTML = '<div class="legend">Working</div><p style="color:var(--ink-dim)">Sending to classifier…</p>';
+    try {
+      const resp = await fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      });
+      if (!resp.ok) {
+        const errBody = await resp.text();
+        throw new Error(`API ${resp.status}: ${errBody.slice(0, 200)}`);
+      }
+      const data = await resp.json();
+      render(data);
+    } catch (err) {
+      result.innerHTML = `<div class="legend">Error</div><div class="error">${escapeHtml(err.message)}</div>`;
+    } finally {
+      runBtn.disabled = false;
+      runBtn.textContent = "Analyze";
+    }
+  }
+
+  function render(data) {
+    const top = data.top_l1 || "none";
+    const conf = typeof data.confidence === "number" ? data.confidence : 0;
+    const scores = data.scores || {};
+    const matched = Array.isArray(data.matched_markers) ? data.matched_markers : [];
+
+    const verdictLabel = top === "none" ? "No clear L1 transfer detected" : capitalize(top);
+    const confPct = `${Math.round(conf * 100)}% confidence`;
+
+    const scoreRows = ["russian", "spanish", "mandarin"]
+      .map((l) => {
+        const v = Math.max(0, Math.min(1, +scores[l] || 0));
+        const w = `${(v * 100).toFixed(0)}%`;
+        return `
+          <span class="lang">${l}</span>
+          <span class="bar" style="--w:${w}"></span>
+          <span class="pct">${w}</span>
+        `;
+      })
+      .join("");
+
+    const evidence = matched.length
+      ? matched
+          .map((m) => `
+            <div class="marker">
+              <div class="top"><strong>${escapeHtml(m.l1 || "?")}</strong> · ${escapeHtml(m.marker_id || "")}</div>
+              <div class="ev">${escapeHtml(m.evidence || "")}</div>
+            </div>`)
+          .join("")
+      : '<p style="color:var(--ink-dim);font-style:italic">No specific markers flagged.</p>';
+
+    result.innerHTML = `
+      <div class="verdict">
+        <span class="label">Verdict</span>
+        <span class="value">${escapeHtml(verdictLabel)}</span>
+        <span class="conf">${confPct}</span>
+      </div>
+      <div class="scores">${scoreRows}</div>
+      <h3 class="evidence-head">Evidence — matched markers</h3>
+      ${evidence}
+    `;
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  }
+  function capitalize(s) {
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  }
+</script>
+</body>
+</html>
