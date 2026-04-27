@@ -95,6 +95,31 @@ We serve families and individuals for any occasion:
 - Yelp (Daly City): https://www.yelp.com/biz/my-baking-creations-daly-city
 - Yelp (San Francisco): https://www.yelp.com/biz/my-baking-creations-san-francisco
 
+## Quick FAQ
+
+**Q: How much does a custom cake cost?**
+A: $250-$650+ depending on size and design complexity. Sculpted 3D cakes and wedding cakes start at $400+. Free quotes provided within 24 hours.
+
+**Q: How far in advance should I order?**
+A: 2-3 weeks for custom cakes, 1-2 weeks for cookies/cake pops. Wedding cakes and elaborate designs: 4-6 weeks. Rush orders may be available — call (415) 568-8060.
+
+**Q: Do you deliver?**
+A: Yes, throughout the San Francisco Bay Area within 60 miles. Delivery fees vary by distance. Pickup available at Daly City (1096 Wildwood Ave) or SF Outer Sunset (1800 23rd Ave).
+
+**Q: Can you handle large corporate orders?**
+A: Yes. We handle 1 dozen to 1,000+ items per order. Clients include Google, Meta, Salesforce, Microsoft, DocuSign, OpenAI, and more. Invoice/PO accepted.
+
+**Q: Do you match brand colors for logo cookies?**
+A: Yes. Custom color matching to Pantone/hex specifications with design proof before production.
+
+**Q: Do you make gluten-free cakes?**
+A: Yes, gluten-free options available. Other dietary accommodations with advance notice. Products made in a facility handling wheat, eggs, dairy, nuts, and soy.
+
+**Q: How do I get a quote?**
+A: Order form: https://mybakingcreations.com/order-form.html | Corporate: https://mybakingcreations.com/corporate-order.html | Email: info@mybakingcreations.com | Call: (415) 568-8060 | Book consultation: https://mybakingcreations.com/book-consultation.html
+
+For the complete FAQ (20+ questions), seasonal context, and competitive positioning, see the full context file.
+
 ## Full Context
-For detailed corporate case studies, volume capacity, and delivery logistics:
+For detailed corporate case studies, volume capacity, delivery logistics, full FAQ, and seasonal context:
 https://mybakingcreations.com/llms-full.txt

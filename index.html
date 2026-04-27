@@ -16,7 +16,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#EC268F">
-    <title>Best Custom Cake Bakery Bay Area | My Baking Creations | Daly City & SF</title>
+    <title>Custom Cakes & Cookies Bay Area | Daly City & SF</title>
     <meta name="description" content="Bay Area's top custom cake bakery since 2012. Ultra-realistic 3D cakes, corporate logo cookies, wedding cakes. Trusted by Google, Meta, Salesforce. Order now.">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <link rel="canonical" href="https://mybakingcreations.com/">
@@ -36,7 +36,8 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Bakery",
+        "@type": ["Bakery", "LocalBusiness"],
+        "@id": "https://mybakingcreations.com/#bakery",
         "additionalType": ["https://schema.org/FoodService", "https://schema.org/CateringService"],
         "name": "My Baking Creations",
         "image": "https://mybakingcreations.com/logo_icon.png",
@@ -57,7 +58,21 @@
             "latitude": 37.6879,
             "longitude": -122.4702
         },
-        "openingHours": "Mo-Sa 09:00-18:00",
+        "openingHoursSpecification": [
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                "opens": "09:00",
+                "closes": "18:00"
+            }
+        ],
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "150",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
         "priceRange": "$$",
         "servesCuisine": "Bakery",
         "foundingDate": "2012",
@@ -223,21 +238,6 @@
     <noscript><link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
     <link rel="preload" href="style.css" as="style">
     <link rel="stylesheet" href="style.css">
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "My Baking Creations",
-        "@id": "https://mybakingcreations.com/#bakery",
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "5.0",
-            "reviewCount": "47",
-            "bestRating": "5",
-            "worstRating": "1"
-        }
-    }
-    </script>
 </head>
 <body>
 

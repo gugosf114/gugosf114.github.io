@@ -62,7 +62,7 @@
         "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "5.0",
-            "reviewCount": "47",
+            "reviewCount": "150",
             "bestRating": "5",
             "worstRating": "1"
         },
@@ -73,7 +73,8 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Bakery",
+        "@type": ["Bakery", "LocalBusiness"],
+        "@id": "https://mybakingcreations.com/#bakery",
         "name": "My Baking Creations",
         "image": "https://mybakingcreations.com/logo_icon.png",
         "address": {
@@ -81,20 +82,35 @@
             "streetAddress": "1096 Wildwood Ave",
             "addressLocality": "Daly City",
             "addressRegion": "CA",
-            "postalCode": "94015"
+            "postalCode": "94015",
+            "addressCountry": "US"
         },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 37.6879,
+            "longitude": -122.4702
+        },
+        "openingHoursSpecification": [
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                "opens": "09:00",
+                "closes": "18:00"
+            }
+        ],
         "url": "https://mybakingcreations.com",
         "telephone": "(415) 568-8060",
         "email": "info@mybakingcreations.com",
         "priceRange": "$$",
         "servesCuisine": "Bakery",
         "areaServed": "San Francisco Bay Area",
-        "sameAs": [
-            "https://www.instagram.com/mybakingcreationscompany/",
-            "https://www.facebook.com/MyBakingCreationsCompany",
-            "https://www.pinterest.com/MyBakingCreations/",
-            "https://www.yelp.com/biz/my-baking-creations-san-francisco"
-        ]
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "150",
+            "bestRating": "5",
+            "worstRating": "1"
+        }
     }
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -292,6 +308,7 @@
         <!-- CTA -->
         <div class="section-wrapper section-white">
             <div style="text-align: center;">
+                <p style="font-size: 1.05rem; color: #555; margin-bottom: 1rem; max-width: 600px; margin-left: auto; margin-right: auto;">Curious how the printing process works? Our <a href="blog-custom-logo-cookies-guide" style="color: var(--pink);">custom logo cookies guide</a> covers everything from file formats to color matching.</p>
                 <a href="order-form" class="btn btn-primary" style="font-size: 1.1rem;">Request an Order</a>
             </div>
         </div>

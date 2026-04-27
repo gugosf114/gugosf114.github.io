@@ -17,12 +17,12 @@
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#EC268F">
-        <title>Custom Corporate Cakes &amp; Branded Treats San Francisco | My Baking Creations</title>
-        <meta name="description" content="Sculpted corporate cakes, logo cookies, and branded treats hand-delivered across the Bay Area. Trusted by Google, Meta, Levi's, and Salesforce since 2012. Custom orders welcome.">
+        <title>Corporate Cakes &amp; Branded Treats San Francisco</title>
+        <meta name="description" content="Sculpted corporate cakes, logo cookies, and branded treats hand-delivered across the Bay Area. Trusted by Google, Meta, and Salesforce since 2012.">
     <link rel="canonical" href="https://mybakingcreations.com/corporate">
     <!-- Open Graph -->
     <meta property="og:title" content="Custom Corporate Cakes &amp; Branded Treats San Francisco | My Baking Creations">
-    <meta property="og:description" content="Sculpted corporate cakes, logo cookies, and branded treats hand-delivered across the Bay Area. Trusted by Google, Meta, Levi's, and Salesforce since 2012. Custom orders welcome.">
+    <meta property="og:description" content="Sculpted corporate cakes, logo cookies, and branded treats hand-delivered across the Bay Area. Trusted by Google, Meta, and Salesforce since 2012.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mybakingcreations.com/corporate">
     <meta property="og:image" content="https://mybakingcreations.com/images/gallery/carousel/carousel%201.jpg">
@@ -162,7 +162,8 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Bakery",
+        "@type": ["Bakery", "LocalBusiness"],
+        "@id": "https://mybakingcreations.com/#bakery",
         "name": "My Baking Creations",
         "image": "https://mybakingcreations.com/logo_icon.png",
         "address": {
@@ -178,13 +179,27 @@
             "latitude": 37.6879,
             "longitude": -122.4702
         },
-        "openingHours": "Mo-Sa 09:00-18:00",
+        "openingHoursSpecification": [
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                "opens": "09:00",
+                "closes": "18:00"
+            }
+        ],
         "url": "https://mybakingcreations.com",
         "telephone": "(415) 568-8060",
         "email": "info@mybakingcreations.com",
         "priceRange": "$$",
         "servesCuisine": "Bakery",
         "areaServed": ["San Francisco", "Bay Area", "Silicon Valley", "San Jose", "Palo Alto", "Mountain View", "Daly City"],
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "150",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
         "sameAs": [
             "https://www.instagram.com/mybakingcreationscompany/",
             "https://www.facebook.com/MyBakingCreationsCompany",
@@ -249,9 +264,7 @@
         "name": "Corporate Dessert Catering",
         "description": "Custom branded desserts for Bay Area corporate events, product launches, holiday parties, and employee appreciation. Logo cookies, branded cake pops, and custom cakes for companies including Google, Meta, Salesforce, and DocuSign.",
         "provider": {
-            "@type": "LocalBusiness",
-            "name": "My Baking Creations",
-            "address": {"@type": "PostalAddress", "streetAddress": "1096 Wildwood Ave", "addressLocality": "Daly City", "addressRegion": "CA", "postalCode": "94015"}
+            "@id": "https://mybakingcreations.com/#bakery"
         },
         "areaServed": {"@type": "GeoCircle", "geoMidpoint": {"@type": "GeoCoordinates", "latitude": 37.6879, "longitude": -122.4702}, "geoRadius": "80467"},
         "serviceType": "Corporate Event Catering"
@@ -271,21 +284,6 @@
             {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://mybakingcreations.com/"},
             {"@type": "ListItem", "position": 2, "name": "Corporate Orders", "item": "https://mybakingcreations.com/corporate"}
         ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "My Baking Creations",
-        "@id": "https://mybakingcreations.com/#bakery",
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "5.0",
-            "reviewCount": "47",
-            "bestRating": "5",
-            "worstRating": "1"
-        }
     }
     </script>
 </head>
@@ -719,7 +717,7 @@
                 <p style="font-size: 1.05rem; color: var(--brown); font-weight: 600; line-height: 1.8; margin-bottom: 1.5rem;">My Baking Creations hand-delivers custom corporate cookies, branded cake pops, and event cakes directly to offices and venues throughout San Francisco, Daly City, South San Francisco, Palo Alto, Mountain View, Cupertino, Sunnyvale, and San Jose. Every order arrives individually wrapped in event-ready packaging, presentation-ready, with boardroom setup available on request. Event-ready packaging means your EA can distribute without a project plan.</p>
 
                 <h3 style="font-family: 'Fredoka One', cursive; font-size: 1.2rem; color: var(--pink); margin-bottom: 0.5rem;">Can you print our company logo on cookies?</h3>
-                <p style="font-size: 1.05rem; color: var(--brown); font-weight: 600; line-height: 1.8; margin-bottom: 1.5rem;">My Baking Creations offers two styles of corporate logo cookies: hand-piped royal icing designs for premium artisan gifts, and high-resolution edible image printing for pixel-perfect logo reproduction at scale. Companies like Google, Meta, and Salesforce use our printed logo cookies for employee onboarding, conference swag, and client thank-you packages — scalable from 24 to 2,400 pieces.</p>
+                <p style="font-size: 1.05rem; color: var(--brown); font-weight: 600; line-height: 1.8; margin-bottom: 1.5rem;">My Baking Creations offers two styles of corporate logo cookies: hand-piped royal icing designs for premium artisan gifts, and high-resolution edible image printing for pixel-perfect logo reproduction at scale. Companies like Google, Meta, and Salesforce use our printed logo cookies for employee onboarding, conference swag, and client thank-you packages — scalable from 24 to 2,400 pieces. See our <a href="blog-custom-logo-cookies-guide" style="color: var(--pink);">complete guide to custom logo cookies</a> for details on file formats, turnaround, and the printing process.</p>
 
                 <h3 style="font-family: 'Fredoka One', cursive; font-size: 1.2rem; color: var(--pink); margin-bottom: 0.5rem;">Do you accept purchase orders and invoices for corporate orders?</h3>
                 <p style="font-size: 1.05rem; color: var(--brown); font-weight: 600; line-height: 1.8; margin-bottom: 0.5rem;">My Baking Creations accepts purchase orders, invoices, credit cards, PayPal, Apple Pay, and Zelle. Our corporate ordering process is designed for procurement teams — we provide W-9s, itemized invoices, and Net 30 terms for established accounts. Learn more about <a href="blog-corporate-event-dessert-ideas" style="color: var(--pink);">corporate event dessert ideas</a> that impress clients and employees.</p>
