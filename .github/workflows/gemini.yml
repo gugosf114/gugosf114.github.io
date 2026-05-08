@@ -1,0 +1,32 @@
+name: Gemini AI Automation
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+jobs:
+  gemini-task:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Gemini CLI
+        uses: google-github-actions/run-gemini-cli@v0.1.22
+        with:
+          prompt: |
+            Perform a comprehensive review and optimization pass on this repository.
+            1. Code Review: Identify bugs, security vulnerabilities, and code quality issues in changed files.
+            2. SEO & Accessibility: Check all HTML/Markdown files for missing alt text, meta descriptions, and improper heading structures.
+            3. Asset Optimization: Verify if there are unoptimized images or large assets that could be compressed.
+            4. If this is a pull request, provide a detailed summary of findings as a PR comment. 
+            5. If there are obvious fixes for SEO or simple bugs, apply the fixes and commit them directly to the branch.
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
