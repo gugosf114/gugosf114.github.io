@@ -10,7 +10,7 @@
 const { google } = require('googleapis');
 
 // Replace with your actual location ID
-const LOCATION_NAME = 'locations/YOUR_LOCATION_ID'; 
+const LOCATION_NAME = 'locations/7400791082088496035'; 
 
 async function getGbpPerformance() {
   console.log('Authenticating with Google...');

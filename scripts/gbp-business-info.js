@@ -9,7 +9,7 @@
 const { google } = require('googleapis');
 
 const ACCOUNT_ID = 'accounts/YOUR_ACCOUNT_ID';
-const LOCATION_ID = 'locations/YOUR_LOCATION_ID';
+const LOCATION_ID = 'locations/7400791082088496035';
 
 async function updateBusinessInfo() {
   console.log('Authenticating with Google...');
