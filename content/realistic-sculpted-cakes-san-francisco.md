@@ -87,7 +87,7 @@ Clients in this category are not price-sensitive. They are investing in a one-of
 
 Each sculpted cake is a custom commission priced according to complexity, size, and the materials required. Pricing reflects the labor, structural engineering, and artistry involved. A quote is provided after Yana reviews your brief — typically within 24–48 hours.
 
-My Baking Creations is based at 1096 Wildwood Ave, Daly City, CA 94015, and delivers across San Francisco, the Peninsula, and select Bay Area locations. Pickup is also available at the Daly City studio and at the Outer Sunset SF location (1800 23rd Ave, 94122).
+My Baking Creations is based at 1096 Wildwood Ave, Daly City, CA 94015, and delivers across San Francisco, the Peninsula, and select Bay Area locations. Pickup is also available at the Daly City studio.
 
 Family-owned since 2012. Over a decade of edible artistry trusted by Bay Area clients for the moments that deserve something extraordinary.
 

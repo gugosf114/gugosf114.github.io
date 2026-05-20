@@ -130,4 +130,4 @@ Yes. The gallery at mybakingcreations.com is searchable by keyword. Search for y
 
 ---
 
-*My Baking Creations · 1096 Wildwood Ave, Daly City, CA 94015 · (415) 568-8060 · info@mybakingcreations.com · SF Pickup: 1800 23rd Ave, San Francisco, CA 94122*
+*My Baking Creations · 1096 Wildwood Ave, Daly City, CA 94015 · (415) 568-8060 · info@mybakingcreations.com*

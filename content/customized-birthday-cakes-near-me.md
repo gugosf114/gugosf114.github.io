@@ -89,7 +89,7 @@ Review the sketches, request any changes, and approve the final design. Once con
 Every cake is made from scratch by Yana and her small team. No shortcuts, no outsourcing, no pre-made components. Production time varies by design complexity — plan for 1 to 2 weeks for most birthday cakes, and 2 to 4 weeks for sculpted designs.
 
 ### Step 5 — Pickup or Delivery
-Pick up at **1096 Wildwood Ave, Daly City, CA 94015** (Monday–Saturday, 9am–6pm), or arrange delivery anywhere in the San Francisco Bay Area. An additional pickup location is available at **1800 23rd Ave, San Francisco, CA 94122** (Outer Sunset) for customers in western San Francisco neighborhoods.
+Pick up at **1096 Wildwood Ave, Daly City, CA 94015** (Monday–Saturday, 9am–6pm), or arrange delivery anywhere in the San Francisco Bay Area.
 
 **A few important notes:**
 - All orders are made-to-order and start from a minimum order threshold — use "starting from" language when budgeting and contact us for a specific quote
@@ -131,7 +131,7 @@ Customers from **94122** (Sunset District), **94112** (Ingleside and Excelsior),
 We recommend reaching out 2 to 3 weeks before your event for most birthday cakes. Sculpted 3D designs require 2 to 4 weeks, and complex multi-element sculptures may need 4 to 6 weeks. We do our best to accommodate shorter timelines — call us at (415) 568-8060 to discuss availability.
 
 **Do you deliver birthday cakes to Daly City and San Francisco?**  
-Yes. We deliver throughout the San Francisco Bay Area from our kitchen at 1096 Wildwood Ave in Daly City (94015). South San Francisco (94080) is approximately 10 minutes away. San Francisco neighborhoods including the Ingleside, Excelsior (94112), and Sunset District (94122) are 15 to 25 minutes from our kitchen. A second pickup location is available at 1800 23rd Ave, San Francisco, CA 94122.
+Yes. We deliver throughout the San Francisco Bay Area from our kitchen at 1096 Wildwood Ave in Daly City (94015). South San Francisco (94080) is approximately 10 minutes away. San Francisco neighborhoods including the Ingleside, Excelsior (94112), and Sunset District (94122) are 15 to 25 minutes from our kitchen.
 
 **What information do I need to provide when ordering?**  
 Share your event date, approximate number of guests, theme or design ideas, flavor preferences, and whether you prefer pickup or delivery. Inspiration photos are always helpful — a screenshot, a Pinterest image, or a photo of the birthday person's favorite thing gives us a strong starting point.

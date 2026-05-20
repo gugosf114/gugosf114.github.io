@@ -94,7 +94,7 @@ Once you're happy with the design direction, you confirm the order and secure yo
 
 **Lead time:** Custom cakes generally require **2 to 3 weeks** of advance notice. Sculpted 3D cakes may require 2 to 4 weeks depending on complexity. Booking early is strongly recommended for weekend dates and peak seasons (graduation in May–June, holidays in November–December).
 
-The bakery serves clients throughout Daly City (94015), the adjacent 94014 zip code, Sunset District (94122), Ingleside/Excelsior (94112), Burlingame (94010), and San Mateo (94401). Pickup is available at the Wildwood Avenue kitchen with free street parking, and a second pickup location is available in the Outer Sunset at 1800 23rd Ave, San Francisco (94122).
+The bakery serves clients throughout Daly City (94015), the adjacent 94014 zip code, Sunset District (94122), Ingleside/Excelsior (94112), Burlingame (94010), and San Mateo (94401). Pickup is available at the Wildwood Avenue kitchen with free street parking.
 
 **[Start your order →](https://mybakingcreations.com/order-form)**
 
@@ -131,7 +131,7 @@ Most custom cakes require 2 to 3 weeks of advance notice. Sculpted 3D cakes may 
 The minimum order is $150. My Baking Creations does not offer budget or discount cakes — every order reflects the premium, hand-crafted quality the bakery is known for.
 
 **Can I pick up my cake in Daly City?**
-Yes. Pickup at 1096 Wildwood Ave, Daly City, CA 94015 is available Monday through Saturday, 9am–6pm. There is free street parking directly in front of the bakery. A second pickup location is available in the Outer Sunset at 1800 23rd Ave, San Francisco (94122).
+Yes. Pickup at 1096 Wildwood Ave, Daly City, CA 94015 is available Monday through Saturday, 9am–6pm. There is free street parking directly in front of the bakery.
 
 **Do you deliver to corporate offices in San Francisco and Silicon Valley?**
 Yes. The bakery delivers to offices throughout San Francisco (SoMa, Financial District), South San Francisco (Oyster Point), Palo Alto, Mountain View, and Menlo Park. For campus deliveries, provide a building number and a contact person and the team handles the rest.

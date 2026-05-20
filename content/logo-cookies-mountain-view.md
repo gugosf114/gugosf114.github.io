@@ -125,7 +125,6 @@ Submit your inquiry at [mybakingcreations.com/corporate-order.html](https://myba
 
 **My Baking Creations**
 1096 Wildwood Ave, Daly City, CA 94015
-SF Pickup: 1800 23rd Ave, San Francisco, CA 94122
 (415) 568-8060 · info@mybakingcreations.com
 Monday–Saturday, 9am–6pm
 

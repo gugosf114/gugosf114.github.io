@@ -101,8 +101,6 @@ My Baking Creations is based at **1096 Wildwood Ave, Daly City, CA 94015** — c
 | SF corporate hubs | SoMa — 94103, Financial District — 94105 |
 | Silicon Valley | Palo Alto — 94301, Mountain View — 94043, Menlo Park |
 
-**SF pickup option:** Customers in San Francisco can also pick up at the Outer Sunset location at 1800 23rd Ave, San Francisco, CA 94122.
-
 For corporate accounts outside the Bay Area, orders can be shipped to remote offices. My Baking Creations accepts **purchase orders, invoices, credit cards, PayPal, Apple Pay, and Zelle** — and provides W-9s and itemized invoices for procurement teams.
 
 ---

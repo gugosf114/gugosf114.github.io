@@ -89,7 +89,6 @@ Specify your packaging preference in the order form.
 
 **Delivery and pickup:**
 - **Pickup:** 1096 Wildwood Ave, Daly City, CA **94015** (home base) — free street parking, Monday–Saturday 9am–6pm
-- **SF Pickup:** 1800 23rd Ave, San Francisco, CA **94122** (Outer Sunset)
 - **Delivery:** Serving Daly City 94015, South San Francisco 94080, San Bruno 94066, Sunset District 94122, SoMa 94103, Financial District 94105, and corporate corridors throughout the Peninsula
 
 ---
@@ -126,7 +125,7 @@ Before production begins, you receive a digital proof showing exactly how your l
 Every cookie is baked fresh, decorated by hand, and packaged specifically for your order. There is no pre-made inventory. No frozen stock. Every batch starts from scratch.
 
 **Step 5 — Pickup or delivery**
-Pick up at the Daly City kitchen (94015) or the Outer Sunset SF location (94122), or arrange delivery to your San Francisco or Peninsula office. Payment options include credit card, PayPal, Apple Pay, Zelle, and invoice/PO for established corporate accounts.
+Pick up at the Daly City kitchen (94015), or arrange delivery to your San Francisco or Peninsula office. Payment options include credit card, PayPal, Apple Pay, Zelle, and invoice/PO for established corporate accounts.
 
 **My Baking Creations has been family-owned since 2012.** Every cookie in the gallery is a real order from a real client. What you see is exactly what you get.
 

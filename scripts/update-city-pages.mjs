@@ -587,7 +587,6 @@ function generateCityPage(d) {
             <div class="footer-contact">
                 <p><a href="tel:4155688060">(415) 568-8060</a> | <a href="mailto:info@mybakingcreations.com">info@mybakingcreations.com</a></p>
                 <p>Main Kitchen: 1096 Wildwood Ave, Daly City, CA 94015</p>
-                <p>SF Pickup: 1800 23rd Ave, San Francisco, CA 94122</p>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 My Baking Creations. All rights reserved. | <a href="privacy-policy" style="color: rgba(255,255,255,0.6);">Privacy Policy</a> | <a href="terms-of-service" style="color: rgba(255,255,255,0.6);">Terms of Service</a></p>

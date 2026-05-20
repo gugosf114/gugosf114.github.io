@@ -15,7 +15,7 @@ ABOUT THE BAKERY:
 - Baker: Yana (artistic lead and owner) - a true artist who creates edible masterpieces
 - Owner/Operations: George Abrahamyan
 - Family-owned and operated since 2012
-- Location: 1096 Wildwood Ave, Daly City, CA 94015 (alternative pickup in Sunset SF available)
+- Location: 1096 Wildwood Ave, Daly City, CA 94015
 - Phone: (415) 568-8060
 - Email: info@mybakingcreations.com
 - Website: www.mybakingcreations.com
@@ -26,7 +26,7 @@ SERVICE AREAS (delivery available within 60 miles of SF):
 San Francisco, San Jose, Palo Alto, Mountain View, Daly City, San Rafael, Oakland, and all surrounding Bay Area cities
 
 PICKUP & DELIVERY:
-- Pickup: 9AM-6PM at 1096 Wildwood Ave, Daly City (alternative Sunset SF location available)
+- Pickup: 9AM-6PM at 1096 Wildwood Ave, Daly City
 - Delivery: Available within 60 miles of SF
 
 PRODUCTS & SPECIALTIES:
@@ -64,7 +64,7 @@ ORDERING PROCESS:
 2. We discuss details together - design, quantity, flavors, pickup/delivery date
 3. Once everything is finalized, we send a separate invoice
 4. We prefer 1-2 weeks advance notice, but life happens - quicker turnaround depends on availability and we try to accommodate every order
-5. Pickup from Daly City (or Sunset SF) OR delivery within 60 miles of SF
+5. Pickup from Daly City OR delivery within 60 miles of SF
 
 CORPORATE CLIENTS - FORTUNE 500 COMPANIES WE'VE SERVED:
 - Google
