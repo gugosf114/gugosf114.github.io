@@ -13,19 +13,25 @@
 </head>
 <body><main>
   <h1>Privacy Policy</h1>
-  <p class="muted">WiM — What I Meant for Android<br>Last updated: July 14, 2026</p>
+  <p class="muted">WiM — What I Meant for Android<br>Last updated: July 15, 2026</p>
   <p>WiM is voice typing designed for speech that includes blocks, repetitions, prolongations, false starts, and fillers. Its default Layer 1 mode runs privately on your phone. Cloud features are optional, require Google sign-in, and require an active WiM Cloud subscription.</p>
   <p class="notice"><strong>WiM is an assistive dictation tool, not a medical device.</strong> It does not diagnose, treat, cure, or prevent any medical condition. Consult a qualified healthcare professional for medical advice, diagnosis, or treatment.</p>
 
   <h2>1. Voice and text processing</h2>
   <h3>Local Layer 1 — default</h3>
-  <ul><li>Recording, transcription, and basic cleanup run on your phone.</li><li>No audio, transcript, or Script Prep context is transmitted.</li></ul>
+  <ul><li>Recording, transcription, and basic cleanup run on your phone.</li><li>No dictation audio, transcript, or Script Prep context is transmitted. If WiM reads up to 200 characters immediately before the cursor for sentence continuity, local Layer 1 keeps that short context on your phone.</li></ul>
   <h3>Cloud speech — optional</h3>
-  <p>L1 Cloud and Layers 2–4 upload the recording to WiM's authenticated Google Cloud backend. Audio is sent to OpenAI for transcription. Transcripts, derived speech context, and optional Script Prep notes are sent to OpenAI for reconstruction; Layer 4 may also send that text context to Anthropic. WiM does not store raw audio. Request logs contain operational fields such as user ID, layer, model, latency, and error type, not audio or transcript contents.</p>
+  <p>L1 Cloud and Layers 2–4 upload the recording to WiM's authenticated Google Cloud backend. Audio is sent to OpenAI for transcription. Transcripts, derived speech context, optional Script Prep notes, and up to 200 characters immediately before the cursor may be sent to OpenAI for reconstruction; Layer 4 may also send that text context to Anthropic. The short pre-cursor context is used only to preserve sentence continuity for the dictation you requested. WiM does not store raw audio. Request logs contain operational fields such as user ID, layer, model, latency, and error type, not audio or transcript contents.</p>
   <p class="notice"><strong>Simple version:</strong> a new install stays on-device. Choosing a cloud mode sends that dictation to the providers named above. Switching back to local L1 stops cloud speech transmission.</p>
 
   <h2>2. Accessibility Service</h2>
-  <p>WiM uses Android Accessibility Service to find the text field you are typing into and insert the transcript you requested. If you explicitly enable Auto-Send, it can also tap the host app's Send button after presenting the completed text. WiM does not use the service to monitor unrelated activity and blocks dictation in password fields.</p>
+  <p>WiM uses Android Accessibility Service to find the text field you chose and insert the transcript you requested. The service receives window-change and view-focus events so it can identify the foreground app and focused editable field. It does not subscribe to text-change, click, scroll, or key events.</p>
+  <ul>
+    <li>When you invoke dictation, WiM may read up to 200 characters immediately before the cursor to preserve sentence continuity. Local Layer 1 keeps this context on your phone. If you choose a cloud layer, the short context is encrypted in transit and included in that reconstruction request.</li>
+    <li>If you enable tap-to-send assist, WiM can locate the visible Send button and move the bubble there, but it clicks Send only after your separate tap on the green bubble. The five-second timer cancels without sending.</li>
+    <li>WiM blocks dictation entirely when the focused field is a password input.</li>
+    <li>Accessibility data is not used for advertising, sale, or unrelated cross-app profiling.</li>
+  </ul>
 
   <h2>3. Account, learning, and sync</h2>
   <p>Google sign-in is handled by Firebase Authentication and provides an email address and unique user ID. WiM stores settings, learned vocabulary, corrections, session history, and personal speaking baselines locally. If cloud backup/sync is enabled, learned profile fields and session records are stored under your user ID in Google Firestore. Short derived pitch, energy, and speaking-rate summaries may be sent with cloud reconstruction; baseline history remains local.</p>
