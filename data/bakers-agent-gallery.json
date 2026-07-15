@@ -1,5 +1,36 @@
 [
   {
+    "id": "87b1136298862bcd3b5a67171f1793f5715457d342ae88281314058459772621",
+    "title": "Custom Sculpted 3D Dragon Birthday Cake",
+    "caption": "Bennett's 4th birthday called for a fully sculpted red dragon cake — textured scales, black claws, horns, and wings, all hand-formed from fondant. My Baking Creations handles custom sculpted kids' birthday cakes across San Francisco and the Bay Area.",
+    "alt_text": "3D sculpted red dragon cake with black horns, claws, and wings. Chest reads \"4 Bennett.\" Displayed on a gray scale-textured board.",
+    "classification": {
+      "audience": "personal",
+      "product_type": "cake",
+      "occasion": "birthday",
+      "styles": [
+        "sculpted",
+        "realistic"
+      ],
+      "brand_or_theme": "Dragon",
+      "gallery_targets": [
+        "all",
+        "cakes",
+        "cakes-sculpted",
+        "cakes-realistic"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cakes",
+      "cakes-sculpted",
+      "cakes-realistic"
+    ],
+    "image_path": "images/gallery/bakers-agent/cake/custom-sculpted-3d-dragon-birthday-cake-87b1136298.webp",
+    "image_url": "/images/gallery/bakers-agent/cake/custom-sculpted-3d-dragon-birthday-cake-87b1136298.webp",
+    "published_at": "2026-07-15T21:54:16.304498+00:00"
+  },
+  {
     "id": "9ca0ee3512b6cf173b25d0954a9e1e5693489858c1358b20a643f6e8b1585d52",
     "title": "Branded Corporate Logo Cookies for Events",
     "caption": "Custom printed Cvent logo cookies — sharp, consistent branding on a clean white royal icing base. Built for conferences, trade shows, and corporate gifting. My Baking Creations fulfills custom branded cookie orders throughout San Francisco and the Bay Area.",
