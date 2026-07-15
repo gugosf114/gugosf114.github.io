@@ -1,1 +1,28 @@
-[]
+[
+  {
+    "id": "9ca0ee3512b6cf173b25d0954a9e1e5693489858c1358b20a643f6e8b1585d52",
+    "title": "Branded Corporate Logo Cookies for Events",
+    "caption": "Custom printed Cvent logo cookies — sharp, consistent branding on a clean white royal icing base. Built for conferences, trade shows, and corporate gifting. My Baking Creations fulfills custom branded cookie orders throughout San Francisco and the Bay Area.",
+    "alt_text": "Three white rectangular cookies with green Cvent logo printed on royal icing, arranged diagonally on a white background.",
+    "classification": {
+      "audience": "corporate",
+      "product_type": "cookies",
+      "occasion": "corporate-event",
+      "styles": [],
+      "brand_or_theme": "",
+      "gallery_targets": [
+        "all",
+        "cookies",
+        "corporate-cookies"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cookies",
+      "corporate-cookies"
+    ],
+    "image_path": "images/gallery/bakers-agent/cookies/branded-corporate-logo-cookies-for-events-9ca0ee3512.webp",
+    "image_url": "/images/gallery/bakers-agent/cookies/branded-corporate-logo-cookies-for-events-9ca0ee3512.webp",
+    "published_at": "2026-07-15T14:45:49.205979+00:00"
+  }
+]
