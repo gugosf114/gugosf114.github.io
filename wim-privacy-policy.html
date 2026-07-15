@@ -1,199 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy — WiM (What I Meant)</title>
-    <meta name="description" content="Privacy policy for WiM — What I Meant, a voice reconstruction app for Android powered by the Лаврентий engine.">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #1A1A1E;
-            color: #d4d4d8;
-            line-height: 1.8;
-            padding: 2rem 1rem;
-        }
-        .container {
-            max-width: 720px;
-            margin: 0 auto;
-        }
-        h1 {
-            font-family: 'Georgia', serif;
-            color: #f0f0f4;
-            font-size: 2rem;
-            margin-bottom: 0.25rem;
-        }
-        .subtitle {
-            color: #C49A6C;
-            font-size: 0.95rem;
-            margin-bottom: 0.5rem;
-        }
-        .dates {
-            color: #888;
-            font-size: 0.85rem;
-            margin-bottom: 2.5rem;
-        }
-        h2 {
-            color: #C8B48A;
-            font-size: 1.15rem;
-            margin-top: 2.5rem;
-            margin-bottom: 0.75rem;
-            padding-bottom: 0.3rem;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-        h3 {
-            color: #C49A6C;
-            font-size: 1rem;
-            margin-top: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-        p { margin-bottom: 1rem; }
-        strong { color: #f0f0f4; }
-        a { color: #EE5A24; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        ul { margin: 0.5rem 0 1rem 1.5rem; }
-        li { margin-bottom: 0.4rem; }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0;
-            font-size: 0.9rem;
-        }
-        th, td {
-            text-align: left;
-            padding: 0.6rem 0.8rem;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-        th {
-            color: #C8B48A;
-            font-weight: 600;
-        }
-        hr {
-            border: none;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            margin: 2rem 0;
-        }
-        .footer {
-            margin-top: 3rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            color: #888;
-            font-size: 0.85rem;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Privacy Policy — WiM (What I Meant)</title>
+  <meta name="description" content="Privacy policy for WiM, the Android voice-typing app built for speech disfluencies.">
+  <link rel="canonical" href="https://mybakingcreations.com/wim-privacy-policy">
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#171719;color:#d7d4cf;font:16px/1.7 system-ui,-apple-system,sans-serif;padding:32px 18px}
+    main{max-width:780px;margin:auto}h1{color:#fff;margin-bottom:0}h2{color:#c8b48a;margin-top:38px;border-bottom:1px solid #38342f;padding-bottom:6px}h3{color:#d5a46f}a{color:#ee7a45}li{margin:7px 0}.muted{color:#999}.notice{border:1px solid #72543d;background:#211d1a;padding:16px;border-radius:10px}table{width:100%;border-collapse:collapse}th,td{padding:8px;text-align:left;border-bottom:1px solid #38342f;vertical-align:top}th{color:#c8b48a}@media(max-width:600px){body{font-size:18px;padding:22px 16px}table{font-size:15px}}
+  </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Privacy Policy</h1>
-        <p class="subtitle">WiM — What I Meant &amp; Лаврентий (Lavrentiy)</p>
-        <p class="dates">Effective Date: March 29, 2026 &middot; Last Updated: April 4, 2026</p>
+<body><main>
+  <h1>Privacy Policy</h1>
+  <p class="muted">WiM — What I Meant for Android<br>Last updated: July 14, 2026</p>
+  <p>WiM is voice typing designed for speech that includes blocks, repetitions, prolongations, false starts, and fillers. Its default Layer 1 mode runs privately on your phone. Cloud features are optional, require Google sign-in, and require the one-time WiM Cloud Unlock purchase.</p>
 
-        <p>This Privacy Policy applies to <strong>Лаврентий (Lavrentiy)</strong> for Windows and <strong>WiM — What I Meant</strong> for Android (collectively, "the App"). WiM is powered by the Лаврентий voice reconstruction engine.</p>
-        <p>The App is developed by George Abrahamyants ("we," "us," "our").</p>
+  <h2>1. Voice and text processing</h2>
+  <h3>Local Layer 1 — default</h3>
+  <ul><li>Recording, transcription, and basic cleanup run on your phone.</li><li>No audio, transcript, or Script Prep context is transmitted.</li></ul>
+  <h3>Cloud speech — optional</h3>
+  <p>L1 Cloud and Layers 2–4 upload the recording to WiM's authenticated Google Cloud backend. Audio is sent to OpenAI for transcription. Transcripts, derived speech context, and optional Script Prep notes are sent to OpenAI for reconstruction; Layer 4 may also send that text context to Anthropic. WiM does not store raw audio. Request logs contain operational fields such as user ID, layer, model, latency, and error type, not audio or transcript contents.</p>
+  <p class="notice"><strong>Simple version:</strong> a new install stays on-device. Choosing a cloud mode sends that dictation to the providers named above. Switching back to local L1 stops cloud speech transmission.</p>
 
-        <h2>What the App Does</h2>
-        <p>The App is a voice reconstruction tool that turns messy, real-world speech into clean, professional text. It captures speech via your device's microphone, transcribes it, reconstructs it into polished text matching your chosen tone, and pastes the result into the active application or text field. Whether you're dictating emails, taking meeting notes, or drafting messages on the go, the App delivers what you meant to say — not what the microphone heard.</p>
-        <p>The App includes advanced speech accessibility features — including disfluency detection, clinical reconstruction layers, and personalized learning informed by established speech science research (Brown, 1945; Ghai &amp; Mueller, ASSETS 2021) — that make it particularly effective for users with speech disfluencies.</p>
+  <h2>2. Accessibility Service</h2>
+  <p>WiM uses Android Accessibility Service to find the text field you are typing into and insert the transcript you requested. If you explicitly enable Auto-Send, it can also tap the host app's Send button after presenting the completed text. WiM does not use the service to monitor unrelated activity and blocks dictation in password fields.</p>
 
-        <h2>What Data We Collect</h2>
+  <h2>3. Account, learning, and sync</h2>
+  <p>Google sign-in is handled by Firebase Authentication and provides an email address and unique user ID. WiM stores settings, learned vocabulary, corrections, session history, and personal speaking baselines locally. If cloud backup/sync is enabled, learned profile fields and session records are stored under your user ID in Google Firestore. Short derived pitch, energy, and speaking-rate summaries may be sent with cloud reconstruction; baseline history remains local.</p>
+  <p>You may export or delete cloud data in the app. Deletion removes the Firestore profile, synced records, and WiM purchase-entitlement binding. Local data remains until you clear app storage or uninstall.</p>
 
-        <h3>Voice Audio</h3>
-        <p>Audio is captured from your microphone <strong>only while you are actively recording</strong> (you press a button to start and stop). Audio is streamed to the OpenAI Whisper API for transcription and is <strong>not stored</strong> by us. Once the transcription is returned, the audio is discarded. We do not record, save, or retain your voice audio.</p>
+  <h2>4. Purchase information</h2>
+  <p>Google Play processes the one-time Cloud Unlock payment. WiM never receives card or bank details. To verify and restore access, the app sends the product ID, Play purchase token, and a one-way hash of the Firebase user ID to WiM's backend. The backend verifies and acknowledges the purchase with Google, then stores the product ID, Play order ID, verification time, entitlement, and a one-way hash of the purchase token.</p>
 
-        <h3>Transcription and Reconstruction Text</h3>
-        <p>Your raw transcription (what the speech recognizer heard) and the reconstructed output (the cleaned text) are stored <strong>locally on your device</strong> in a session history database. This data does not leave your device unless you are signed in and using the cloud reconstruction service, in which case the text is sent to our backend server for processing and is not retained after the response is returned.</p>
+  <h2>5. Reliability and analytics</h2>
+  <p>Firebase Crashlytics, Performance, and Analytics receive crash traces, device/app diagnostics, performance timing, feature interactions, and device identifiers. WiM does not attach audio or transcript text to crash reports or analytics events. These services are used for reliability and product improvement, not advertising.</p>
 
-        <h3>Voice Profile</h3>
-        <p>The App learns your speech patterns over time: vocabulary you use frequently, corrections the system makes repeatedly, words that trigger disfluency, and filler words. This profile data is stored <strong>locally on your device</strong> in a JSON file.</p>
-        <p><strong>Cloud sync (only if signed in with Google):</strong> A subset of this profile metadata — trigger words (up to 30), onset weights (phonetic difficulty scores), covert avoidance patterns, filler words (up to 25), vocabulary (up to 20), and correction mappings (up to 10) — is synced to our Firestore database. This enables the cloud reconstruction service to personalize output to your speech patterns. <strong>Your raw transcriptions, reconstructed text, session history, and audio are never uploaded.</strong> Only the learned pattern metadata described above.</p>
+  <h2>6. Providers</h2>
+  <table><thead><tr><th>Provider</th><th>Purpose</th><th>When</th></tr></thead><tbody>
+    <tr><td>Google Play</td><td>Distribution, purchase processing and verification</td><td>Install, buy, or restore</td></tr>
+    <tr><td>Firebase / Google Cloud</td><td>Sign-in, backend, sync, analytics, diagnostics</td><td>As described above</td></tr>
+    <tr><td>OpenAI</td><td>Cloud transcription and reconstruction</td><td>Cloud speech only</td></tr>
+    <tr><td>Anthropic</td><td>Layer 4 reconstruction</td><td>Layer 4 only</td></tr>
+  </tbody></table>
+  <p>These providers process data to deliver WiM's features. WiM does not sell or rent personal data and does not use it for advertising.</p>
 
-        <h3>Account Information</h3>
-        <p>If you sign in with Google, we receive your email address, display name, and a unique identifier from Google/Firebase Authentication. This is used solely to identify your account and manage your subscription tier. We do not access your Google contacts, calendar, Drive, or any other Google service.</p>
+  <h2>7. Retention and security</h2>
+  <ul><li>Raw audio: processed for the request and not stored by WiM.</li><li>Cloud profile, session, and entitlement data: kept while the account is active or until in-app deletion.</li><li>Operational logs: retained according to Google Cloud logging settings.</li><li>Local data: kept until the user clears app data or uninstalls.</li></ul>
+  <p>Network traffic uses TLS. No system is perfectly secure, so WiM minimizes transmitted and retained data and keeps API credentials off release devices.</p>
 
-        <h3>Usage Metadata</h3>
-        <p>We store basic session metadata locally on your device: timestamps, which tone and layer settings were used, word counts, and processing times. This data is used to display your session history and is not transmitted to any server.</p>
+  <h2>8. Your choices and rights</h2>
+  <ul><li>Use local L1 without an account.</li><li>Stop cloud processing by returning to local L1.</li><li>Disable profile/session backup in Settings.</li><li>Export cloud data in Settings.</li><li>Delete cloud data and the WiM entitlement binding in Settings.</li><li>Disable Accessibility access or other permissions in Android Settings.</li></ul>
 
-        <h2>What Data We Do NOT Collect</h2>
-        <ul>
-            <li>We do not record or store your voice audio</li>
-            <li>We do not collect your location</li>
-            <li>We do not collect your contacts</li>
-            <li>We do not use cookies, tracking pixels, or advertising identifiers</li>
-            <li>We do not fingerprint your device</li>
-            <li>We do not sell or rent any data to anyone</li>
-        </ul>
+  <h2>9. Children and policy changes</h2>
+  <p>WiM is not directed to children under 13. Updated policies will appear at this same address with a new update date; material changes will also be surfaced in the app or store listing.</p>
 
-        <h2>Third-Party Services</h2>
-
-        <h3>OpenAI (Whisper API and GPT)</h3>
-        <p>Voice audio is sent to OpenAI's Whisper API for transcription. Reconstructed text is generated using OpenAI's GPT models. Per OpenAI's API data usage policy (as of March 2025), <strong>data sent through the API is not used to train OpenAI's models</strong> by default. We do not opt in to any data sharing or training programs with OpenAI. For OpenAI's full privacy practices, see: <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">openai.com/policies/privacy-policy</a></p>
-
-        <h3>Google Firebase (Authentication)</h3>
-        <p>If you sign in with Google, authentication is handled by Firebase Authentication, a Google Cloud service. Firebase receives your Google account credentials to verify your identity. See Google's privacy policy at: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></p>
-
-        <h3>Google Cloud Functions (Backend Proxy)</h3>
-        <p>When you are signed in and using cloud reconstruction, your text (not audio) is sent to a Google Cloud Function that acts as a proxy to OpenAI. The text is processed in memory and is not stored. The Cloud Function verifies your identity, checks your subscription tier, and forwards the reconstruction request.</p>
-
-        <h2>Data Storage and Retention</h2>
-        <table>
-            <thead>
-                <tr><th>Data</th><th>Where Stored</th><th>Retention</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>Voice audio</td><td>Not stored</td><td>Discarded immediately after transcription</td></tr>
-                <tr><td>Session transcripts</td><td>Your device only</td><td>Until you delete them</td></tr>
-                <tr><td>Voice profile (full)</td><td>Your device only</td><td>Until you delete it or delete the app</td></tr>
-                <tr><td>Profile metadata (synced)</td><td>Firestore (if signed in)</td><td>While account active; deleted after 24 months of inactivity</td></tr>
-                <tr><td>Account info (email, uid)</td><td>Firebase Auth</td><td>Until you delete your account</td></tr>
-                <tr><td>Cloud reconstruction text</td><td>Processed in memory</td><td>Not retained after response</td></tr>
-            </tbody>
-        </table>
-        <p><strong>Retention policy:</strong> We keep your synced profile metadata while your account is active because it personalizes reconstruction output for you. After 24 months of inactivity (no sign-ins, no reconstruction requests), we automatically delete your Firestore data. You can also delete your cloud data immediately at any time — see "Your Rights" below.</p>
-        <p>If you delete your account or uninstall the App, your local data (profile, session history) remains on your device until you manually delete the application folder. Deleting your cloud data via the in-app button does not affect your local data.</p>
-
-        <h2>Data Sharing</h2>
-        <p>We do not share your personal data with any third party except as described above (OpenAI for transcription/reconstruction, Firebase for authentication). We do not share data with advertisers, analytics services, data brokers, or any other entity.</p>
-
-        <h2>AI Model Training</h2>
-        <p><strong>We do not use your data to train any AI model.</strong> Your voice, transcriptions, profile data, and usage patterns are never used for machine learning training, by us or by any third party. OpenAI's API data usage policy confirms that API inputs and outputs are not used for model training by default, and we have not opted into any training data programs.</p>
-
-        <h2>Voice Profile and Biometric Data</h2>
-        <p>The App builds a voice profile that includes vocabulary patterns, disfluency triggers, and learned corrections. This profile describes your <strong>speech patterns</strong>, not your <strong>voice biometrics</strong> (voiceprint, vocal frequency signature, or speaker identification features). The profile cannot be used to identify you by voice. It is stored locally on your device and is not transmitted to any server.</p>
-        <p>If you reside in a jurisdiction with biometric data laws (such as Illinois BIPA, Texas CUBI, or Washington state), please note that we do not collect, store, or process biometric identifiers or biometric information as defined by those laws.</p>
-
-        <h2>Children's Privacy</h2>
-        <p>The App is not directed at children under 13. We do not knowingly collect personal information from children under 13. If you believe a child has provided us with personal information, contact us and we will delete it.</p>
-
-        <h2>Your Rights</h2>
-        <p>You have the right to:</p>
-        <ul>
-            <li><strong>Access</strong> your data — all profile and session data is stored locally on your device and is directly accessible to you. When signed in, the "Export My Data" button downloads all your local and cloud-synced data as a JSON file.</li>
-            <li><strong>Delete</strong> your data — delete the application data to remove all local data. When signed in, the "Delete Cloud Data" button immediately and permanently deletes your Firestore record. Contact us to delete your Firebase Authentication account.</li>
-            <li><strong>Opt out</strong> of cloud processing — use a local API key instead of signing in with Google; all processing stays on your device, nothing is synced to Firestore.</li>
-            <li><strong>Export</strong> your data — in-app export (signed in) or copy your profile and session history directly from your device at any time.</li>
-            <li><strong>Rectify</strong> your data — the Settings screen lets you directly edit your profile (vocabulary, corrections, trigger words, fillers). Changes sync to Firestore automatically when signed in.</li>
-        </ul>
-
-        <h2>Security</h2>
-        <ul>
-            <li>Audio is transmitted to OpenAI over encrypted HTTPS connections</li>
-            <li>Authentication tokens are transmitted over encrypted HTTPS connections</li>
-            <li>Local data is stored with standard operating system file permissions</li>
-            <li>The Cloud Function backend does not log or store request or response bodies</li>
-        </ul>
-
-        <h2>Changes to This Policy</h2>
-        <p>We may update this Privacy Policy from time to time. Changes will be posted to this page with an updated "Last Updated" date. Continued use of the App after changes constitutes acceptance of the revised policy.</p>
-
-        <h2>Contact</h2>
-        <p><strong>George Abrahamyants</strong><br>
-        Email: <a href="mailto:gugosf@gmail.com">gugosf@gmail.com</a><br>
-        GitHub: <a href="https://github.com/gugosf114/lavrentiy" target="_blank" rel="noopener">github.com/gugosf114/lavrentiy</a></p>
-
-        <div class="footer">
-            <p><em>This policy covers both Лаврентий (Lavrentiy) for Windows and WiM — What I Meant for Android. WiM is powered by the Лаврентий voice reconstruction engine.</em></p>
-        </div>
-    </div>
-</body>
-</html>
+  <h2>10. Contact</h2>
+  <p>George Abrahamyants<br><a href="mailto:gugosf@gmail.com">gugosf@gmail.com</a><br><a href="https://github.com/gugosf114/wim-android">WiM source repository</a></p>
+</main></body></html>
