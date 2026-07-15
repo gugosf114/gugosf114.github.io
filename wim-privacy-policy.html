@@ -29,7 +29,7 @@
 
   <h2>3. Account, learning, and sync</h2>
   <p>Google sign-in is handled by Firebase Authentication and provides an email address and unique user ID. WiM stores settings, learned vocabulary, corrections, session history, and personal speaking baselines locally. If cloud backup/sync is enabled, learned profile fields and session records are stored under your user ID in Google Firestore. Short derived pitch, energy, and speaking-rate summaries may be sent with cloud reconstruction; baseline history remains local.</p>
-  <p>You may export or delete cloud data in the app. Deletion removes the Firestore profile, synced records, and WiM subscription-entitlement binding. It does not cancel the Google Play subscription; cancel it separately in Google Play. Local data remains until you clear app storage or uninstall.</p>
+  <p>You may export or delete your cloud account and data in the app. Deletion removes the Firebase Authentication account, Firestore profile, synced sessions, purchase-token hashes, and WiM subscription-entitlement binding. You may also <a href="/wim-delete-account">request account deletion on the web</a>. Deletion does not cancel the Google Play subscription; cancel it separately in Google Play. Local data remains until you clear app storage or uninstall.</p>
 
   <h2>4. Purchase information</h2>
   <p>WiM Cloud is an auto-renewing $5.99 monthly subscription handled by Google Play. Each subscription billing period includes 300 cloud dictations, including up to 20 Layer IV dictations. Google Play shows the applicable local price before purchase and processes the payment; WiM never receives card or bank details. To verify, renew, and restore access, the app sends the product ID, Play purchase token, and a one-way hash of the Firebase user ID to WiM's backend. The backend verifies and acknowledges the subscription with Google, then stores the product, base plan, Play order, subscription state, expiration and verification times, quota counters, entitlement, and a one-way hash of the purchase token. You may cancel anytime in Google Play; access continues through the paid period unless Google reports an ineligible payment state.</p>
@@ -51,7 +51,7 @@
   <p>Network traffic uses TLS. No system is perfectly secure, so WiM minimizes transmitted and retained data and keeps API credentials off release devices.</p>
 
   <h2>8. Your choices and rights</h2>
-  <ul><li>Use local L1 without an account.</li><li>Stop cloud processing by returning to local L1.</li><li>Disable profile/session backup in Settings.</li><li>Export cloud data in Settings.</li><li>Delete cloud data and the WiM entitlement binding in Settings.</li><li>Manage or cancel WiM Cloud in Google Play subscriptions.</li><li>Disable Accessibility access or other permissions in Android Settings.</li></ul>
+  <ul><li>Use local L1 without an account.</li><li>Stop cloud processing by returning to local L1.</li><li>Disable profile/session backup in Settings.</li><li>Export cloud data in Settings.</li><li>Delete the Firebase account, cloud data, and WiM entitlement binding in Settings or through the <a href="/wim-delete-account">web deletion page</a>.</li><li>Manage or cancel WiM Cloud in Google Play subscriptions.</li><li>Disable Accessibility access or other permissions in Android Settings.</li></ul>
 
   <h2>9. Children and policy changes</h2>
   <p>WiM is not directed to children under 13. Updated policies will appear at this same address with a new update date; material changes will also be surfaced in the app or store listing.</p>
