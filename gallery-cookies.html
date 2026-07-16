@@ -53,7 +53,29 @@
             "priceCurrency": "USD",
             "price": "5",
             "priceValidUntil": "2026-12-31",
-            "availability": "https://schema.org/InStock"
+            "availability": "https://schema.org/InStock",
+            "shippingDetails": {
+                "@type": "OfferShippingDetails",
+                "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "US",
+                    "addressRegion": "CA"
+                },
+                "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 3,
+                        "maxValue": 21,
+                        "unitCode": "DAY"
+                    }
+                }
+            },
+            "hasMerchantReturnPolicy": {
+                "@type": "MerchantReturnPolicy",
+                "applicableCountry": "US",
+                "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+            }
         }
     }
     </script>
@@ -142,14 +164,39 @@
         "@type": "Product",
         "name": "Custom Decorated Cookies",
         "description": "Hand-piped and printed custom cookies for corporate events, birthdays, baby showers, and holidays. Available in butter cookie and sugar cookie bases. Minimum order 12 cookies.",
-        "brand": {"@type": "Brand", "name": "My Baking Creations"},
+        "brand": {
+            "@type": "Brand",
+            "name": "My Baking Creations"
+        },
         "offers": {
             "@type": "AggregateOffer",
             "priceCurrency": "USD",
             "lowPrice": "48",
             "highPrice": "300",
             "offerCount": "100",
-            "availability": "https://schema.org/InStock"
+            "availability": "https://schema.org/InStock",
+            "shippingDetails": {
+                "@type": "OfferShippingDetails",
+                "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "US",
+                    "addressRegion": "CA"
+                },
+                "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 3,
+                        "maxValue": 21,
+                        "unitCode": "DAY"
+                    }
+                }
+            },
+            "hasMerchantReturnPolicy": {
+                "@type": "MerchantReturnPolicy",
+                "applicableCountry": "US",
+                "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+            }
         },
         "image": "https://www.mybakingcreations.com/images/gallery/cookies/hand-piped/hand%20piped%20cookies%201.jpg",
         "category": "Custom Cookies"

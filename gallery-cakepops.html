@@ -53,7 +53,29 @@
             "priceCurrency": "USD",
             "price": "5",
             "priceValidUntil": "2026-12-31",
-            "availability": "https://schema.org/InStock"
+            "availability": "https://schema.org/InStock",
+            "shippingDetails": {
+                "@type": "OfferShippingDetails",
+                "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "US",
+                    "addressRegion": "CA"
+                },
+                "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 3,
+                        "maxValue": 21,
+                        "unitCode": "DAY"
+                    }
+                }
+            },
+            "hasMerchantReturnPolicy": {
+                "@type": "MerchantReturnPolicy",
+                "applicableCountry": "US",
+                "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+            }
         }
     }
     </script>
@@ -109,14 +131,39 @@
         "@type": "Product",
         "name": "Custom Cake Pops",
         "description": "Handcrafted cake pops decorated to match any theme or brand. Perfect for corporate events, birthday parties, baby showers, and wedding favors in the Bay Area. Minimum order 24 cake pops.",
-        "brand": {"@type": "Brand", "name": "My Baking Creations"},
+        "brand": {
+            "@type": "Brand",
+            "name": "My Baking Creations"
+        },
         "offers": {
             "@type": "AggregateOffer",
             "priceCurrency": "USD",
             "lowPrice": "72",
             "highPrice": "500",
             "offerCount": "50",
-            "availability": "https://schema.org/InStock"
+            "availability": "https://schema.org/InStock",
+            "shippingDetails": {
+                "@type": "OfferShippingDetails",
+                "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "US",
+                    "addressRegion": "CA"
+                },
+                "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 3,
+                        "maxValue": 21,
+                        "unitCode": "DAY"
+                    }
+                }
+            },
+            "hasMerchantReturnPolicy": {
+                "@type": "MerchantReturnPolicy",
+                "applicableCountry": "US",
+                "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+            }
         },
         "image": "https://www.mybakingcreations.com/images/gallery/cakepops/cake%20pops%201.jpg",
         "category": "Cake Pops"

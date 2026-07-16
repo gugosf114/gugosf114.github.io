@@ -53,7 +53,29 @@
             "priceCurrency": "USD",
             "price": "300",
             "priceValidUntil": "2026-12-31",
-            "availability": "https://schema.org/InStock"
+            "availability": "https://schema.org/InStock",
+            "shippingDetails": {
+                "@type": "OfferShippingDetails",
+                "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "US",
+                    "addressRegion": "CA"
+                },
+                "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 3,
+                        "maxValue": 21,
+                        "unitCode": "DAY"
+                    }
+                }
+            },
+            "hasMerchantReturnPolicy": {
+                "@type": "MerchantReturnPolicy",
+                "applicableCountry": "US",
+                "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+            }
         }
     }
     </script>
@@ -126,14 +148,39 @@
         "@type": "Product",
         "name": "Custom Cakes",
         "description": "Handcrafted custom cakes for birthdays, weddings, and celebrations in the San Francisco Bay Area. Available in vanilla, chocolate, red velvet, strawberry, and specialty flavors. Serves 10 to 200 guests.",
-        "brand": {"@type": "Brand", "name": "My Baking Creations"},
+        "brand": {
+            "@type": "Brand",
+            "name": "My Baking Creations"
+        },
         "offers": {
             "@type": "AggregateOffer",
             "priceCurrency": "USD",
             "lowPrice": "150",
             "highPrice": "800",
             "offerCount": "50",
-            "availability": "https://schema.org/InStock"
+            "availability": "https://schema.org/InStock",
+            "shippingDetails": {
+                "@type": "OfferShippingDetails",
+                "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "US",
+                    "addressRegion": "CA"
+                },
+                "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 3,
+                        "maxValue": 21,
+                        "unitCode": "DAY"
+                    }
+                }
+            },
+            "hasMerchantReturnPolicy": {
+                "@type": "MerchantReturnPolicy",
+                "applicableCountry": "US",
+                "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+            }
         },
         "image": "https://www.mybakingcreations.com/images/gallery/carousel/carousel%201.jpg",
         "category": "Custom Cakes"

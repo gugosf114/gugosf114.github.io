@@ -57,7 +57,29 @@
             "priceCurrency": "USD",
             "priceValidUntil": "2026-12-31",
             "availability": "https://schema.org/InStock",
-            "url": "https://www.mybakingcreations.com/corporate-order"
+            "url": "https://www.mybakingcreations.com/corporate-order",
+            "shippingDetails": {
+                "@type": "OfferShippingDetails",
+                "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "US",
+                    "addressRegion": "CA"
+                },
+                "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                        "@type": "QuantitativeValue",
+                        "minValue": 3,
+                        "maxValue": 21,
+                        "unitCode": "DAY"
+                    }
+                }
+            },
+            "hasMerchantReturnPolicy": {
+                "@type": "MerchantReturnPolicy",
+                "applicableCountry": "US",
+                "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+            }
         },
         "aggregateRating": {
             "@type": "AggregateRating",
