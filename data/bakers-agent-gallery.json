@@ -1,5 +1,33 @@
 [
   {
+    "id": "656288dc94cfe0041e7c0d608e7b68cc16cba934ce0fc27e49315b21bb3cbb77",
+    "title": "Kawaii Steamed Bao Sculpted Cake",
+    "caption": "This fully sculpted bao cake is covered in smooth fondant with hand-formed pleated folds and an applied kawaii face. A strong choice for themed birthdays or baby showers. My Baking Creations takes custom sculpted cake orders across the Bay Area and San Francisco.",
+    "alt_text": "Sculpted fondant cake shaped like a kawaii steamed bao with brown eyes, pink cheeks, a smile, and pleated top folds.",
+    "classification": {
+      "audience": "personal",
+      "product_type": "cake",
+      "occasion": "birthday",
+      "styles": [
+        "sculpted"
+      ],
+      "brand_or_theme": "kawaii / Asian food theme",
+      "gallery_targets": [
+        "all",
+        "cakes",
+        "cakes-sculpted"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cakes",
+      "cakes-sculpted"
+    ],
+    "image_path": "images/gallery/bakers-agent/cake/kawaii-steamed-bao-sculpted-cake-656288dc94.webp",
+    "image_url": "/images/gallery/bakers-agent/cake/kawaii-steamed-bao-sculpted-cake-656288dc94.webp",
+    "published_at": "2026-07-16T16:13:02.657029+00:00"
+  },
+  {
     "id": "87b1136298862bcd3b5a67171f1793f5715457d342ae88281314058459772621",
     "title": "Custom Sculpted 3D Dragon Birthday Cake",
     "caption": "Bennett's 4th birthday called for a fully sculpted red dragon cake — textured scales, black claws, horns, and wings, all hand-formed from fondant. My Baking Creations handles custom sculpted kids' birthday cakes across San Francisco and the Bay Area.",
