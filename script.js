@@ -239,16 +239,14 @@ form_type: 'order',
 product_type: formData.get('product_type'),
 event_date: formData.get('event_date')
 });
-alert('Thank you! Your order inquiry has been sent. We\'ll get back to you within 24 hours.');
-orderForm.reset();
-if (orderModal) {
-orderModal.style.display = 'none';
-document.body.style.overflow = 'auto';
+if (typeof gtag === 'function') {
+gtag('event', 'generate_lead', {
+form_type: 'order',
+product_type: formData.get('product_type') || 'Unknown',
+transport_type: 'beacon'
+});
 }
-const deliveryDetailsSection = document.getElementById('deliveryDetailsSection');
-const aiPreviewSection = document.getElementById('aiPreviewSection');
-if (deliveryDetailsSection) deliveryDetailsSection.style.display = 'none';
-if (aiPreviewSection) aiPreviewSection.style.display = 'none';
+window.location.href = '/thank-you';
 } else {
 alert('Oops! Something went wrong. Please call us at (415) 568-8060 or email info@mybakingcreations.com');
 }

@@ -23,7 +23,8 @@ const CONFIG = {
         'node_modules',
         '.git',
         'order-form-modal.html',  // Modal, not a page
-        '404.html'                 // Error page
+        '404.html',                // Error page
+        'thank-you.html'           // Post-submit page, noindexed
     ],
 
     // Priority mappings (higher = more important)

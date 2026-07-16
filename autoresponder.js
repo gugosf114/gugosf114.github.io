@@ -13,6 +13,7 @@ function sendConfirmationEmail(data) {
         fetch(MBC_AUTORESPONDER_URL, {
             method: 'POST',
             mode: 'no-cors',
+            keepalive: true,
             headers: { 'Content-Type': 'text/plain' },
             body: JSON.stringify(data)
         });

@@ -295,6 +295,7 @@ function generateCityPage(d) {
                 </li>
                 <li><a href="corporate">Corporate Orders</a></li>
                 <li><a href="blog">Blog</a></li>
+                <li><a href="https://thewhole.party/" target="_blank" rel="noopener">Party Rentals</a></li>
                 <li><a href="contact">Contact Us</a></li>
                 <li><a href="order-form" class="nav-cta">Get a Quote</a></li>
             </ul>
@@ -561,6 +562,10 @@ function generateCityPage(d) {
                 <a href="corporate-order">Corporate Quote</a>
                 <a href="order-printed">Printed Cookies</a>
             </div>
+            <div class="footer-sister" style="margin-top: 1.2rem; padding: 0.8rem 1.5rem; background: rgba(255,255,255,0.05); border-radius: 12px; display: inline-flex; align-items: center; gap: 0.75rem;">
+                <span style="font-size: 0.85rem; color: rgba(255,255,255,0.7);">Need party rentals too?</span>
+                <a href="https://thewhole.party/" target="_blank" rel="noopener" style="color: #EC268F; font-weight: 600; font-size: 0.9rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;">The Whole Party <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg></a>
+            </div>
             <div class="footer-locations" style="margin-top: 1.5rem; font-size: 0.8rem; opacity: 0.7; line-height: 1.8;">
                 <strong style="color: var(--yellow); display: block; margin-bottom: 5px;">Bay Area Delivery Areas:</strong>
                 <a href="custom-cakes-belmont">Belmont</a> | <a href="custom-cakes-berkeley">Berkeley</a> | <a href="custom-cakes-burlingame">Burlingame</a> | <a href="custom-cakes-campbell">Campbell</a> | <a href="custom-cakes-cupertino">Cupertino</a> | <a href="custom-cakes-daly-city">Daly City</a> | <a href="custom-cakes-foster-city">Foster City</a> | <a href="custom-cakes-fremont">Fremont</a> | <a href="custom-cakes-hayward">Hayward</a> | <a href="custom-cakes-los-altos">Los Altos</a> | <a href="custom-cakes-menlo-park">Menlo Park</a> | <a href="custom-cakes-millbrae">Millbrae</a> | <a href="custom-cakes-milpitas">Milpitas</a> | <a href="custom-cakes-mountain-view">Mountain View</a> | <a href="custom-cakes-novato">Novato</a> | <a href="custom-cakes-oakland">Oakland</a> | <a href="custom-cakes-pacifica">Pacifica</a> | <a href="custom-cakes-palo-alto">Palo Alto</a> | <a href="custom-cakes-redwood-city">Redwood City</a> | <a href="custom-cakes-san-bruno">San Bruno</a> | <a href="custom-cakes-san-carlos">San Carlos</a> | <a href="custom-cakes-san-francisco">San Francisco</a> | <a href="custom-cakes-san-jose">San Jose</a> | <a href="custom-cakes-san-mateo">San Mateo</a> | <a href="custom-cakes-san-rafael">San Rafael</a> | <a href="custom-cakes-santa-clara">Santa Clara</a> | <a href="custom-cakes-saratoga">Saratoga</a> | <a href="custom-cakes-south-san-francisco">South San Francisco</a> | <a href="custom-cakes-sunnyvale">Sunnyvale</a> | <a href="custom-cakes-union-city">Union City</a> | <a href="custom-cakes-walnut-creek">Walnut Creek</a> | <a href="delivery-areas" style="color: var(--yellow); font-weight: 600;">View All</a>
@@ -582,6 +587,7 @@ function generateCityPage(d) {
             <div class="footer-contact">
                 <p><a href="tel:4155688060">(415) 568-8060</a> | <a href="mailto:info@mybakingcreations.com">info@mybakingcreations.com</a></p>
                 <p>Main Kitchen: 1096 Wildwood Ave, Daly City, CA 94015</p>
+                <p>SF Pickup: 1800 23rd Ave, San Francisco, CA 94122</p>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 My Baking Creations. All rights reserved. | <a href="privacy-policy" style="color: rgba(255,255,255,0.6);">Privacy Policy</a> | <a href="terms-of-service" style="color: rgba(255,255,255,0.6);">Terms of Service</a></p>
