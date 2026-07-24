@@ -40,6 +40,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # full history so sitemap lastmod gets real git dates
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Regenerate sitemap
+        run: node generate-sitemap.js
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
