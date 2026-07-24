@@ -12,6 +12,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
 
 // Configuration
 const CONFIG = {
@@ -24,7 +25,11 @@ const CONFIG = {
         '.git',
         'order-form-modal.html',  // Modal, not a page
         '404.html',                // Error page
-        'thank-you.html'           // Post-submit page, noindexed
+        'thank-you.html',          // Post-submit page, noindexed
+        'cakes.html',              // Raw-markdown leftover, blocked in robots.txt
+        'google56fbc2040830820a.html',  // Google verification file
+        'thursday',                // App page, not marketing content
+        'tools'                    // Utility pages, not marketing content
     ],
 
     // Priority mappings (higher = more important)
@@ -84,13 +89,35 @@ function findHtmlFiles(dir, files = []) {
 }
 
 /**
- * Get file modification date
+ * Get file modification date from git history (stable across clones/CI,
+ * unlike fs mtime which resets on every checkout). Falls back to mtime
+ * for files not yet committed.
  * @param {string} filePath - Path to file
  * @returns {string} ISO date string (YYYY-MM-DD)
  */
 function getLastMod(filePath) {
+    try {
+        const out = execFileSync(
+            'git', ['log', '-1', '--format=%cs', '--', filePath],
+            { cwd: __dirname, encoding: 'utf8' }
+        ).trim();
+        if (out) return out;
+    } catch (e) {
+        // not a git checkout — fall through to mtime
+    }
     const stat = fs.statSync(filePath);
     return stat.mtime.toISOString().split('T')[0];
+}
+
+/**
+ * Check whether a page opts out of indexing (robots noindex meta tag).
+ * Noindexed pages must not appear in the sitemap.
+ * @param {string} filePath - Path to file
+ * @returns {boolean}
+ */
+function isNoindex(filePath) {
+    const head = fs.readFileSync(filePath, 'utf8').slice(0, 4000);
+    return /<meta[^>]+noindex/i.test(head);
 }
 
 /**
@@ -108,6 +135,15 @@ function filePathToUrl(filePath, rootDir) {
     if (relativePath === 'index.html') {
         return CONFIG.baseUrl + '/';
     }
+
+    // Subdirectory index files become directory URLs
+    if (path.basename(relativePath) === 'index.html') {
+        return CONFIG.baseUrl + '/' + path.dirname(relativePath) + '/';
+    }
+
+    // Extensionless URLs — GitHub Pages serves both, and every page's
+    // canonical tag uses the extensionless form
+    relativePath = relativePath.replace(/\.html$/, '');
 
     return CONFIG.baseUrl + '/' + relativePath;
 }
@@ -171,9 +207,21 @@ function main() {
     const htmlFiles = findHtmlFiles(rootDir);
     console.log(`Found ${htmlFiles.length} HTML files`);
 
+    // Drop noindexed pages (Wix redirect stubs, thank-you, drafts, etc.)
+    const indexableFiles = htmlFiles.filter(f => {
+        if (isNoindex(f)) {
+            console.log(`  skipping (noindex): ${path.relative(rootDir, f)}`);
+            return false;
+        }
+        return true;
+    });
+
     // Build page data
-    const pages = htmlFiles.map(filePath => {
-        const fileName = path.basename(filePath);
+    const pages = indexableFiles.map(filePath => {
+        // Subdir index pages (wim-privacy-policy/index.html) must not inherit
+        // the root index.html priority — key them by relative path instead
+        const relPath = path.relative(rootDir, filePath).replace(/\\/g, '/');
+        const fileName = relPath.includes('/') ? relPath : path.basename(filePath);
         return {
             url: filePathToUrl(filePath, rootDir),
             lastmod: getLastMod(filePath),
