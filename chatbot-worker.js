@@ -119,7 +119,7 @@ IMPORTANT: Never make up specific prices. Pricing varies based on design complex
 
 // CORS headers for cross-origin requests
 const corsHeaders = {
-  'Access-Control-Allow-Origin': '*', // In production, change to: 'https://www.mybakingcreations.com'
+  'Access-Control-Allow-Origin': '*', // In production, change to: 'https://mybakingcreations.com'
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type',
 };

@@ -82,7 +82,7 @@ function sendReviewEmail(e) {
     '<p style="font-size:12px;color:#888">' +
       'My Baking Creations | <a href="tel:4155688060">(415) 568-8060</a> | info@mybakingcreations.com<br>' +
       '1096 Wildwood Ave, Daly City, CA 94015<br>' +
-      '<a href="https://www.mybakingcreations.com">www.mybakingcreations.com</a>' +
+      '<a href="https://mybakingcreations.com">www.mybakingcreations.com</a>' +
     '</p>' +
     '</div>';
 

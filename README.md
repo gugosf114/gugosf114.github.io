@@ -260,7 +260,7 @@ Password-protected PWA at `/thursday/` for internal order management:
 ## Contact
 
 - **Phone**: (415) 568-8060
-- **Website**: [mybakingcreations.com](https://www.mybakingcreations.com)
+- **Website**: [mybakingcreations.com](https://mybakingcreations.com)
 
 
 ---
