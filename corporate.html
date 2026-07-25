@@ -213,6 +213,55 @@
     }
 }
     </script>
+    <!-- Named corporate client testimonials, each tied to the product photographed on the page -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "My Baking Creations corporate client testimonials",
+        "itemListElement": [
+            {
+                "@type": "Review",
+                "itemReviewed": { "@type": "Bakery", "@id": "https://mybakingcreations.com/#bakery" },
+                "author": {
+                    "@type": "Person",
+                    "name": "Maria Cid",
+                    "jobTitle": "Senior Brand Public Relations Manager",
+                    "worksFor": { "@type": "Organization", "name": "Alaska Airlines" }
+                },
+                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+                "reviewBody": "Yana created custom branded cake pops for our Alaska Airlines holiday events - they were a hit. She nailed our brand logos, sent samples for approval beforehand, and delivered flawlessly. We loved them so much we immediately ordered a second batch for another office. Responsive, detail-oriented, and a pleasure to work with.",
+                "image": "https://mybakingcreations.com/images/gallery/corporatecakepops/Alaska-Airlines-Logo-Corporate-Cake-Pops-San-Francisco.jpg"
+            },
+            {
+                "@type": "Review",
+                "itemReviewed": { "@type": "Bakery", "@id": "https://mybakingcreations.com/#bakery" },
+                "author": {
+                    "@type": "Person",
+                    "name": "Jeremiah Preston",
+                    "worksFor": { "@type": "Organization", "name": "DocuSign" }
+                },
+                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+                "reviewBody": "The cookies were beautifully decorated, fresh, and absolutely delicious. From the initial communication through delivery, Yana and her team were professional, responsive, and easy to work with. The cookies were a big hit at our event, and many attendees commented on both the presentation and the taste. Everything arrived on time and exactly as requested.",
+                "image": "https://mybakingcreations.com/images/gallery/corporatehandpiped/DocuSign-Hand-Piped-Corporate-Cookies-San-Francisco.jpg"
+            },
+            {
+                "@type": "Review",
+                "itemReviewed": { "@type": "Bakery", "@id": "https://mybakingcreations.com/#bakery" },
+                "author": {
+                    "@type": "Person",
+                    "name": "Karisma Thompson",
+                    "jobTitle": "Workplace Experience",
+                    "worksFor": { "@type": "Organization", "name": "Gap Inc." }
+                },
+                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+                "reviewBody": "We've been working with My Baking Creations for our workplace events at Gap Inc. for over two years now, and Yana never disappoints. From large-scale custom cookie orders for Athleta events to cupcakes, cakes, and holiday treats, she handles everything with care and professionalism. She's flexible, responsive, and always delivers exactly what we need - even on tight turnarounds. I've recommended her to colleagues here, and the feedback is always the same: incredible quality and great to work with.",
+                "image": "https://mybakingcreations.com/images/gallery/corporateprintedimage/GAP-Logo-Corporate-Cookies-Bay-Area.jpeg"
+            }
+        ]
+    }
+    </script>
+
     <!-- FAQ Schema for AI Overviews + Rich Snippets -->
     <script type="application/ld+json">
     {
@@ -256,7 +305,23 @@
                 "name": "Do you accept purchase orders and invoices for corporate orders?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "My Baking Creations accepts purchase orders, invoices, credit cards, PayPal, Apple Pay, and Zelle. Our corporate ordering process is designed for procurement teams — we provide W-9s, itemized invoices, and Net 30 terms for established accounts."
+                    "text": "My Baking Creations accepts purchase orders, invoices, credit cards, PayPal, Apple Pay, and Zelle. Our corporate ordering process is designed for procurement teams — we provide W-9s, itemized invoices, and Net 30 terms for established accounts. We also split invoices across multiple transactions when a corporate card has a per-charge limit, which is common on large orders."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Which companies has My Baking Creations worked with?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "My Baking Creations has produced branded cookies, cake pops, and cupcakes for Alaska Airlines, Gap Inc., Athleta, DocuSign, Google, Meta, Salesforce, Microsoft, PayPal, Dropbox, Stripe, Levi's, Datadog, Fujifilm, Kaiser Permanente, Cooley, Twitch, and the Golden State Warriors. Several are repeat clients — Gap Inc. has ordered since 2024, including a single 760-cookie order for an Athleta event, and Alaska Airlines ordered 300 branded cake pops across two offices in one week."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can you match our exact brand colors and logo on cookies?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. My Baking Creations matches corporate brand colors and reproduces company logos on cookies, cake pops, and cupcakes. We send samples for brand approval before producing a full run, and we request vector or high-resolution logo files so the printed result stays sharp. Alaska Airlines approved samples of their branded cake pops before the full order, and Gap Inc. logo cookies are produced to their exact brand specification."
                 }
             }
         ]
