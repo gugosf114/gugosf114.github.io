@@ -439,6 +439,70 @@
             </div>
         </div>
 
+        <!-- Client Testimonials - each paired with the actual product we made for them -->
+        <div class="section-wrapper section-white reveal" style="margin-bottom: 3rem;">
+            <div class="section-header">
+                <h2>What Our <span class="highlight">Corporate Clients</span> Say</h2>
+                <p style="color:#666; margin-top:0.5rem;">The words are theirs. The photos are the orders they're talking about.</p>
+            </div>
+
+            <div class="client-testimonials">
+
+                <figure class="client-testimonial">
+                    <img src="images/gallery/corporatecakepops/Alaska-Airlines-Logo-Corporate-Cake-Pops-San-Francisco.jpg"
+                         alt="Custom Alaska Airlines branded cake pops in Alaska blue with the Alaska Airlines wordmark and Eskimo mascot, made by My Baking Creations for Alaska Airlines corporate events"
+                         width="1200" height="1181" loading="lazy">
+                    <blockquote>
+                        Yana created custom branded cake pops for our Alaska Airlines holiday events - they were a hit.
+                        She nailed our brand logos, sent samples for approval beforehand, and delivered flawlessly.
+                        We loved them so much we immediately ordered a second batch for another office.
+                        Responsive, detail-oriented, and a pleasure to work with.
+                    </blockquote>
+                    <figcaption>
+                        <strong>Maria Cid</strong>
+                        <span>Senior Brand Public Relations Manager<br>Corporate Communications, Alaska Airlines</span>
+                        <span class="order-scale">300 branded cake pops &middot; two offices, one week</span>
+                    </figcaption>
+                </figure>
+
+                <figure class="client-testimonial">
+                    <img src="images/gallery/corporatehandpiped/DocuSign-Hand-Piped-Corporate-Cookies-San-Francisco.jpg"
+                         alt="Hand-piped DocuSign logo cookies in yellow with the DocuSign arrow mark, made by My Baking Creations for a DocuSign corporate event in San Francisco"
+                         width="1200" height="1103" loading="lazy">
+                    <blockquote>
+                        The cookies were beautifully decorated, fresh, and absolutely delicious. From the initial
+                        communication through delivery, Yana and her team were professional, responsive, and easy to
+                        work with. The cookies were a big hit at our event, and many attendees commented on both the
+                        presentation and the taste. Everything arrived on time and exactly as requested.
+                    </blockquote>
+                    <figcaption>
+                        <strong>Jeremiah Preston</strong>
+                        <span>DocuSign &middot; <em>Verified Google review</em></span>
+                    </figcaption>
+                </figure>
+
+                <figure class="client-testimonial">
+                    <img src="images/gallery/corporateprintedimage/GAP-Logo-Corporate-Cookies-Bay-Area.jpeg"
+                         alt="Navy GAP logo cookies with the white GAP wordmark, made by My Baking Creations for Gap Inc. at 2 Folsom Street, San Francisco"
+                         width="1600" height="1202" loading="lazy">
+                    <blockquote>
+                        We've been working with My Baking Creations for our workplace events at Gap Inc. for over two
+                        years now, and Yana never disappoints. From large-scale custom cookie orders for Athleta events
+                        to cupcakes, cakes, and holiday treats, she handles everything with care and professionalism.
+                        She's flexible, responsive, and always delivers exactly what we need - even on tight
+                        turnarounds. I've recommended her to colleagues here, and the feedback is always the same:
+                        incredible quality and great to work with.
+                    </blockquote>
+                    <figcaption>
+                        <strong>Karisma Thompson</strong>
+                        <span>Workplace Experience<br>Gap Inc. Headquarters, 2 Folsom St, San Francisco</span>
+                        <span class="order-scale">760 cookies in a single Athleta order &middot; repeat client since 2024</span>
+                    </figcaption>
+                </figure>
+
+            </div>
+        </div>
+
         <!-- Live Activity Feed is loaded as fixed widget via script -->
 
         <!-- Section 1: Corporate Cookies - Two subcategories side by side -->
@@ -923,6 +987,83 @@
         color: var(--brown);
         opacity: 0.7;
         margin-bottom: 1.5rem;
+    }
+
+    /* Client testimonials - photo carries the proof, quote carries the claim */
+    .client-testimonials {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.75rem;
+        max-width: 1150px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    .client-testimonial {
+        margin: 0;
+        background: #fff;
+        border: 1px solid rgba(98,45,43,0.10);
+        border-radius: 18px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.06), 0 8px 28px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .client-testimonial:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 18px rgba(236,38,143,0.12), 0 16px 40px rgba(0,0,0,0.09);
+    }
+    .client-testimonial img {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        display: block;
+    }
+    .client-testimonial blockquote {
+        margin: 0;
+        padding: 1.4rem 1.5rem 1rem;
+        font-size: 0.95rem;
+        line-height: 1.62;
+        color: #3a3a3a;
+        flex: 1;
+    }
+    .client-testimonial blockquote::before {
+        content: '"';
+        font-family: Georgia, serif;
+        font-size: 2.6rem;
+        line-height: 0;
+        color: var(--pink);
+        vertical-align: -0.35em;
+        margin-right: 0.15rem;
+    }
+    .client-testimonial figcaption {
+        padding: 0 1.5rem 1.4rem;
+        border-top: 1px solid rgba(98,45,43,0.08);
+        padding-top: 1rem;
+        margin-top: auto;
+    }
+    .client-testimonial figcaption strong {
+        display: block;
+        font-weight: 700;
+        color: var(--dark-brown);
+        font-size: 1rem;
+    }
+    .client-testimonial figcaption span {
+        display: block;
+        font-size: 0.84rem;
+        color: #777;
+        margin-top: 2px;
+    }
+    /* Scale is the proof. Nobody orders 760 cookies from someone they don't trust. */
+    .client-testimonial figcaption .order-scale {
+        margin-top: 8px;
+        font-size: 0.79rem;
+        font-weight: 700;
+        color: var(--pink);
+        letter-spacing: 0.2px;
+    }
+    @media (max-width: 900px) {
+        .client-testimonials { grid-template-columns: 1fr; gap: 1.5rem; max-width: 520px; }
     }
 
     /* Logo Preview Tool Styles */
