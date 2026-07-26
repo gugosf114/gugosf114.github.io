@@ -1,5 +1,31 @@
 [
   {
+    "id": "b9e895b112367bf8ed2347413613581e555af29b99690582ed3ac119296615eb",
+    "title": "Testimonials - What Our Corporate Clients Say!",
+    "caption": "Yana created custom branded cake pops for our Alaska Airlines holiday events - they were a hit. She nailed our brand logos, sent samples for approval beforehand, and delivered flawlessly. We loved them so much we immediately ordered a second batch for another office. Responsive, detail-oriented, and a pleasure to work with.\n\nMaria Cid\nSenior Brand Public Relations Manager\nCorporate Communications, Alaska Airlines",
+    "alt_text": "12 blue cake pops on white sticks displaying Alaska Airlines text logo and Smiling Man face logo, in a cardboard display stand.",
+    "classification": {
+      "audience": "corporate",
+      "product_type": "cake-pops",
+      "occasion": "general",
+      "styles": [],
+      "brand_or_theme": "Alaska Airlines",
+      "gallery_targets": [
+        "all",
+        "cake-pops",
+        "corporate-cake-pops"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cake-pops",
+      "corporate-cake-pops"
+    ],
+    "image_path": "images/gallery/bakers-agent/cake-pops/testimonials-what-our-corporate-clients-say-b9e895b112.webp",
+    "image_url": "/images/gallery/bakers-agent/cake-pops/testimonials-what-our-corporate-clients-say-b9e895b112.webp",
+    "published_at": "2026-07-26T16:47:39.503325+00:00"
+  },
+  {
     "id": "1b6c6155b4fd60a10f4d0fa88b95737249004cbcc58ff404b727b5f393a44e6e",
     "title": "Custom Cow Theme First Birthday Cake",
     "caption": "Willa's first birthday cake features a hand-sculpted fondant cow topper, black cow-spot patches, and a bold pink name display. My Baking Creations handles custom first birthday cakes throughout San Francisco and the Bay Area.",
