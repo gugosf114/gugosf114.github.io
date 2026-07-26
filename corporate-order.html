@@ -176,9 +176,15 @@
                                 <div class="input-glow"></div>
                             </div>
                             <div class="form-group">
-                                <label for="event_date">Event Date <span class="required">*</span></label>
-                                <input type="date" id="event_date" name="event_date" required>
+                                <label for="event_date">Event Date</label>
+                                <input type="date" id="event_date" name="event_date">
                                 <div class="input-glow"></div>
+                                <div class="radio-group" style="margin-top:10px;">
+                                    <label class="radio-option">
+                                        <input type="checkbox" id="date_unsure" name="date_status" value="Not sure yet" style="margin-right:14px;width:18px;height:18px;cursor:pointer;">
+                                        <span>Not sure yet</span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
 
@@ -1186,6 +1192,23 @@
             btnText.textContent = 'Request Corporate Quote';
         }
     });
+    </script>
+
+    <!-- Event Date: "Not sure yet" toggle. Matches the behaviour on order-form
+         so the same field does not behave differently on two forms. -->
+    <script>
+    (function() {
+        const unsure = document.getElementById('date_unsure');
+        const dateInput = document.getElementById('event_date');
+        if (!unsure || !dateInput) return;
+
+        unsure.addEventListener('change', function() {
+            // Disabled inputs aren't submitted, so the "Not sure yet" line
+            // arrives instead of a blank Event Date.
+            dateInput.disabled = unsure.checked;
+            if (unsure.checked) dateInput.value = '';
+        });
+    })();
     </script>
 
 </body>
