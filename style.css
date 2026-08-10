@@ -23,5 +23,5 @@
 .hero-home .hero-text-box>*:not(.lens-viewport):not(.lens-tint){position:relative;z-index:1}
 .hero-home .hero-text-box .lens-viewport{position:absolute;inset:0;z-index:0;overflow:hidden;border-radius:inherit}
 .hero-home .hero-text-box .lens-strip{position:absolute;top:0;left:0;display:flex;transform-origin:0 0;transition:none;will-change:transform}
-.hero-home .hero-text-box .lens-tint{position:absolute;inset:0;z-index:0;border-radius:inherit;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,0.52) 0%,rgba(0,0,0,0.44) 100%)}
+.hero-home .hero-text-box .lens-tint{position:absolute;inset:0;z-index:0;border-radius:inherit;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,0.42) 0%,rgba(0,0,0,0.35) 100%)}
 }
