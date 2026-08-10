@@ -36,10 +36,17 @@
         var tx = boxR.width / 2 - MAG * uX;
         var ty = boxR.height / 2 - MAG * uY;
         strip.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + MAG + ')';
-        requestAnimationFrame(frame);
     }
 
     window.addEventListener('resize', size);
     size();
-    requestAnimationFrame(frame);
+
+    // Only burn frames while the hero is actually on screen.
+    var running = false;
+    function loop() { if (!running) return; frame(); requestAnimationFrame(loop); }
+    new IntersectionObserver(function (entries) {
+        var visible = entries[0].isIntersecting;
+        if (visible && !running) { running = true; requestAnimationFrame(loop); }
+        if (!visible) running = false;
+    }).observe(box);
 })();
