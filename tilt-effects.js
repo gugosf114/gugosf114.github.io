@@ -189,6 +189,10 @@ if (navCta) {
 (function() {
     const heroBox = document.querySelector('.hero-text-box');
     if (!heroBox) return;
+    // Homepage box is the magnifying lens (hero-lens.js): a 3D transform here
+    // drags the magnified strip and breaks backdrop-filter compositing
+    // (the box smears back to full blur on hover). Keep it static there.
+    if (heroBox.closest('.hero-home')) return;
 
     heroBox.style.transformStyle = 'preserve-3d';
     heroBox.style.transition = 'transform 0.4s ease-out';
