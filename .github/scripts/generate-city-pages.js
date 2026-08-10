@@ -1,3 +1,9 @@
+// WARNING (2026-08-09): the live custom-cakes-* pages have drifted from this template.
+// Post-generation edits on the generated files that this template does NOT emit:
+// tilt-effects.js include, Instagram ig-feed section with lazy-loaded videos
+// (lazy-video.js), and SEO link blocks. Rerunning this script will ERASE those
+// additions on all 30+ city pages. Diff a live city page against this template
+// and port the deltas here before regenerating.
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.resolve(__dirname, '../../');
@@ -71,7 +77,7 @@ return `<!DOCTYPE html>
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
     <link rel="stylesheet" href="style.css">
     <script type="application/ld+json">
     ${bread}
@@ -155,9 +161,9 @@ return `<!DOCTYPE html>
     <section class="hero hero-carousel">
         <div class="carousel-track-container">
             <div class="carousel-track">
-                <div class="carousel-slide"><img width="1920" height="1066" src="images/gallery/carousel/carousel 1.jpg" alt="Custom cake delivery in ${c.name}"></div>
-                <div class="carousel-slide"><img width="1920" height="1166" src="images/gallery/carousel/carousel 2.jpg" alt="Decorated cookies for ${c.name} events"></div>
-                <div class="carousel-slide"><img width="1680" height="929" src="images/gallery/carousel/carousel 3.jpg" alt="Wedding cake for ${c.name} celebrations"></div>
+                <div class="carousel-slide"><img fetchpriority="high" width="1920" height="1066" src="images/gallery/carousel/carousel 1.webp" alt="Custom cake delivery in ${c.name}"></div>
+                <div class="carousel-slide"><img loading="lazy" width="1920" height="1166" src="images/gallery/carousel/carousel 2.webp" alt="Decorated cookies for ${c.name} events"></div>
+                <div class="carousel-slide"><img loading="lazy" width="1680" height="929" src="images/gallery/carousel/carousel 3.webp" alt="Wedding cake for ${c.name} celebrations"></div>
             </div>
         </div>
         <div class="hero-content">
@@ -518,7 +524,7 @@ const hubHtml = `<!DOCTYPE html>
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -579,9 +585,9 @@ const hubHtml = `<!DOCTYPE html>
     <section class="hero hero-carousel">
         <div class="carousel-track-container">
             <div class="carousel-track">
-                <div class="carousel-slide"><img width="1920" height="1066" src="images/gallery/carousel/carousel 1.jpg" alt="Bay Area custom cake delivery"></div>
-                <div class="carousel-slide"><img width="1920" height="1166" src="images/gallery/carousel/carousel 2.jpg" alt="Decorated cookies for Bay Area events"></div>
-                <div class="carousel-slide"><img width="1680" height="929" src="images/gallery/carousel/carousel 3.jpg" alt="Wedding cakes delivered across the Bay Area"></div>
+                <div class="carousel-slide"><img fetchpriority="high" width="1920" height="1066" src="images/gallery/carousel/carousel 1.webp" alt="Bay Area custom cake delivery"></div>
+                <div class="carousel-slide"><img loading="lazy" width="1920" height="1166" src="images/gallery/carousel/carousel 2.webp" alt="Decorated cookies for Bay Area events"></div>
+                <div class="carousel-slide"><img loading="lazy" width="1680" height="929" src="images/gallery/carousel/carousel 3.webp" alt="Wedding cakes delivered across the Bay Area"></div>
             </div>
         </div>
         <div class="hero-content">
