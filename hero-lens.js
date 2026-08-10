@@ -3,7 +3,7 @@
 // tracks the strip's motion frame-by-frame so front and back move in lockstep.
 // Desktop only; mobile keeps its existing clear box.
 (function () {
-    var MAG = 1.45; // magnification factor
+    var MAG = 1.16; // magnification factor
     if (window.matchMedia('(max-width: 768px)').matches) return;
     var box = document.querySelector('.hero-home .hero-text-box');
     var track = document.querySelector('.hero-home .carousel-track');
