@@ -194,6 +194,10 @@
         align-items: start;
     }
 
+    .product-layout > * {
+        min-width: 0;
+    }
+
     /* Left: Images */
     .product-images {
         position: sticky;
@@ -220,7 +224,7 @@
 
     .thumb-row {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 0.5rem;
     }
 
@@ -666,7 +670,7 @@
 
                 <div class="quantity-row" style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:2px solid #f0e6dc;">
                     <label style="font-weight:700; color:#5A3020;">Quantity:</label>
-                    <select id="cookieQty" style="padding:0.6rem 1rem; border:2px solid #f0e6dc; border-radius:10px; font-family:inherit; font-size:1rem; background:#FFF8F0; color:#5A3020; cursor:pointer;" onchange="updatePrice()">
+                    <select id="cookieQty" style="padding:0.6rem 1rem; border:2px solid #f0e6dc; border-radius:10px; font-family:inherit; font-size:1rem; background:#FFF8F0; color:#5A3020; cursor:pointer; max-width:100%; min-width:0;" onchange="updatePrice()">
                         <option value="1">1 dozen (12 cookies) — $90</option>
                         <option value="2">2 dozen (24 cookies) — $180</option>
                         <option value="3">3 dozen (36 cookies) — $270</option>

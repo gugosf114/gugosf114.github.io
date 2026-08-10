@@ -1,9 +1,11 @@
 // Defer loading order form modal until after page is interactive
 // This removes it from the critical request chain
 function loadOrderModal() {
+    if (document.getElementById('orderModal')) return;
     fetch('order-form-modal.html')
         .then(r => r.text())
         .then(h => {
+            if (document.getElementById('orderModal')) return;
             document.body.insertAdjacentHTML('beforeend', h);
             const ar = document.createElement('script');
             ar.src = 'autoresponder.js';
