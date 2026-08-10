@@ -1,43 +1,45 @@
-// Hero lens: the text box shows a sharp, enlarged crop of the slide directly
-// behind it, synced to the carousel — a magnifying glass instead of frosted blur.
+// Hero lens: the text box behaves like a real magnifying glass held over the
+// carousel — it shows the exact region of the strip beneath it, enlarged, and
+// tracks the strip's motion frame-by-frame so front and back move in lockstep.
 // Desktop only; mobile keeps its existing clear box.
 (function () {
+    var MAG = 1.45; // magnification factor
     if (window.matchMedia('(max-width: 768px)').matches) return;
     var box = document.querySelector('.hero-home .hero-text-box');
     var track = document.querySelector('.hero-home .carousel-track');
-    var slides = document.querySelectorAll('.hero-home .carousel-slide img');
-    if (!box || !track || !slides.length) return;
+    if (!box || !track) return;
 
-    var layerA = document.createElement('div');
-    var layerB = document.createElement('div');
-    layerA.className = 'lens-layer';
-    layerB.className = 'lens-layer';
-    box.prepend(layerB);
-    box.prepend(layerA);
-    var showingA = false;
+    // A full magnified copy of the strip lives inside the box.
+    var viewport = document.createElement('div');
+    viewport.className = 'lens-viewport';
+    var strip = track.cloneNode(true);
+    strip.className = 'lens-strip';
+    strip.removeAttribute('style');
+    viewport.appendChild(strip);
+    var tint = document.createElement('div');
+    tint.className = 'lens-tint';
+    box.prepend(tint);
+    box.prepend(viewport);
 
-    function centerIndex() {
-        var m = /translateX\(-?([\d.]+)%\)/.exec(track.style.transform || '');
-        var left = m ? Math.round(parseFloat(m[1]) / 33.333) : 0;
-        return Math.min(left + 1, slides.length - 1);
+    function size() {
+        strip.style.width = track.offsetWidth + 'px';
+        strip.style.height = track.offsetHeight + 'px';
     }
 
-    function update() {
-        var img = slides[centerIndex()];
-        if (!img) return;
-        var url = img.currentSrc || img.src;
-        if (!url) return;
-        var incoming = showingA ? layerB : layerA;
-        var outgoing = showingA ? layerA : layerB;
-        incoming.style.backgroundImage = 'linear-gradient(180deg, rgba(0,0,0,0.52), rgba(0,0,0,0.44)), url("' + url + '")';
-        requestAnimationFrame(function () {
-            incoming.classList.add('visible');
-            outgoing.classList.remove('visible');
-            showingA = !showingA;
-        });
+    function frame() {
+        var boxR = box.getBoundingClientRect();
+        var trackR = track.getBoundingClientRect(); // includes live transform mid-transition
+        // Point of the strip under the box's center, in strip coordinates:
+        var uX = (boxR.left + boxR.width / 2) - trackR.left;
+        var uY = (boxR.top + boxR.height / 2) - trackR.top;
+        // Place the magnified strip so that point sits at the box's center:
+        var tx = boxR.width / 2 - MAG * uX;
+        var ty = boxR.height / 2 - MAG * uY;
+        strip.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + MAG + ')';
+        requestAnimationFrame(frame);
     }
 
-    new MutationObserver(update).observe(track, { attributes: true, attributeFilter: ['style'] });
-    if (document.readyState === 'complete') update();
-    else window.addEventListener('load', update);
+    window.addEventListener('resize', size);
+    size();
+    requestAnimationFrame(frame);
 })();
