@@ -457,6 +457,7 @@ return `<!DOCTYPE html>
     <!-- AI Chatbot Widget -->
     <link rel="stylesheet" href="chatbot.css?v=2">
     <script src="chatbot.js?v=2" defer></script>
+    <script src="hero-lens.js" defer></script>
 </body>
 </html>`;
 }
@@ -681,6 +682,7 @@ const hubHtml = `<!DOCTYPE html>
     </script>
     <link rel="stylesheet" href="chatbot.css?v=2">
     <script src="chatbot.js?v=2" defer></script>
+    <script src="hero-lens.js" defer></script>
 </body>
 </html>`;
 

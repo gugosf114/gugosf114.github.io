@@ -5,8 +5,8 @@
 (function () {
     var MAG = 1.16; // magnification factor
     if (window.matchMedia('(max-width: 768px)').matches) return;
-    var box = document.querySelector('.hero-home .hero-text-box');
-    var track = document.querySelector('.hero-home .carousel-track');
+    var box = document.querySelector('.hero-carousel .hero-text-box');
+    var track = document.querySelector('.hero-carousel .carousel-track');
     if (!box || !track) return;
 
     // A full magnified copy of the strip lives inside the box.
@@ -20,6 +20,7 @@
     tint.className = 'lens-tint';
     box.prepend(tint);
     box.prepend(viewport);
+    box.classList.add('lens-on');
 
     function size() {
         strip.style.width = track.offsetWidth + 'px';
