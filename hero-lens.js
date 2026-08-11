@@ -4,7 +4,10 @@
 // Desktop only; mobile keeps its existing clear box.
 (function () {
     var MAG = 1.16; // magnification factor
+    // Desktop only: bail on small screens AND on touch devices without a real
+    // pointer, so a rotated phone (landscape width > 768px) never gets the lens.
     if (window.matchMedia('(max-width: 768px)').matches) return;
+    if (window.matchMedia('(hover: none)').matches) return;
     var box = document.querySelector('.hero-carousel .hero-text-box');
     var track = document.querySelector('.hero-carousel .carousel-track');
     if (!box || !track) return;
