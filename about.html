@@ -553,393 +553,277 @@
         <div class="section-wrapper section-beige reveal" style="margin-bottom: 3rem;">
             <div class="section-header">
                 <h2>Our <span class="highlight">Process</span></h2>
-                <p>From your idea to your table — here's how it works</p>
+                <p>From your idea to your table — watch it happen as you scroll</p>
             </div>
 
-            <div class="process-progress" id="processProgress">
-                <span class="process-progress-label" id="processProgressLabel">Step 1 of 6</span>
-                <div class="process-progress-track">
-                    <div class="process-progress-fill" id="processProgressFill"></div>
-                </div>
-            </div>
+            <style>
+            /* ── Process scrollytelling (pcs) ─────────────────────────── */
+            .pcs-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:2.5rem;align-items:start}
+            .pcs-stagewrap{position:sticky;top:110px}
+            .pcs-stagecard{background:var(--white);border-radius:24px;padding:1.25rem 1.25rem 1rem;box-shadow:0 10px 34px rgba(98,45,43,0.14),0 2px 8px rgba(98,45,43,0.08)}
+            .pcs-stagecard svg{width:100%;height:auto;display:block}
+            .pcs-stagefoot{display:flex;align-items:center;justify-content:space-between;margin-top:.6rem;gap:.75rem}
+            .pcs-caption{font-family:'Nunito',sans-serif;font-weight:800;font-size:.85rem;color:var(--dark-brown);letter-spacing:.02em}
+            .pcs-dots{display:flex;gap:6px}
+            .pcs-dots i{width:8px;height:8px;border-radius:50%;background:rgba(98,45,43,0.18);transition:background .3s ease,transform .3s ease}
+            .pcs-dots i.on{background:var(--pink);transform:scale(1.25)}
 
-            <div class="process-timeline" id="processTimeline">
-                <!-- Step 1 -->
-                <div class="process-step waiting" data-step="1">
-                    <div class="process-step-number" style="background: var(--pink); color: var(--white);">1</div>
-                    <div class="process-step-content">
-                        <div class="process-scene process-scene-1">
-                            <svg viewBox="0 0 280 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Phone body -->
-                                <rect class="draw" x="30" y="15" width="40" height="70" rx="8" stroke="#EC268F" stroke-width="3" style="--path-len:220"/>
-                                <!-- Phone screen -->
-                                <rect class="fade-in d2" x="36" y="25" width="28" height="42" rx="3" fill="#fef0f5"/>
-                                <!-- Phone home button -->
-                                <circle class="fade-in d2" cx="50" cy="76" r="4" fill="#EC268F"/>
-                                <!-- Signal waves from phone -->
-                                <path class="draw d2" d="M75 35 Q82 32 82 40" stroke="#EC268F" stroke-width="2" stroke-linecap="round" style="--path-len:20"/>
-                                <path class="draw d3" d="M80 28 Q92 24 92 42" stroke="#EC268F" stroke-width="2" stroke-linecap="round" style="--path-len:30"/>
-                                <!-- Speech bubble outline -->
-                                <path class="draw d3" d="M105 22 h100 a12 12 0 0 1 12 12 v30 a12 12 0 0 1-12 12 h-70 l-15 15 v-15 h-15 a12 12 0 0 1-12-12 v-30 a12 12 0 0 1 12-12z" stroke="#3A1A19" stroke-width="2.5" style="--path-len:360"/>
-                                <!-- Bubble fill -->
-                                <path class="fade-in d4" d="M105 22 h100 a12 12 0 0 1 12 12 v30 a12 12 0 0 1-12 12 h-70 l-15 15 v-15 h-15 a12 12 0 0 1-12-12 v-30 a12 12 0 0 1 12-12z" fill="white" opacity="0.9"/>
-                                <!-- Heart inside bubble -->
-                                <path class="draw d4" d="M145 38 c0-6 8-10 14-5 l1 1 1-1 c6-5 14-1 14 5 0 8-15 18-15 18 s-15-10-15-18z" stroke="#EC268F" stroke-width="2" fill="none" style="--path-len:80"/>
-                                <!-- Cake icon inside bubble (3-tier) -->
-                                <path class="draw d4" d="M175 60 h-30 v-8 h4 v-7 h6 v-7 h10 v7 h6 v7 h4 z" stroke="#622D2B" stroke-width="1.5" style="--path-len:120"/>
-                                <!-- Small hearts floating -->
-                                <circle class="fade-in d5" cx="230" cy="30" r="3" fill="#EC268F" opacity="0.4"/>
-                                <circle class="fade-in d5" cx="245" cy="50" r="2" fill="#FFC532" opacity="0.5"/>
-                                <circle class="fade-in d5" cx="255" cy="25" r="2.5" fill="#EC268F" opacity="0.3"/>
+            .pcs-steps{position:relative;padding-left:2rem}
+            .pcs-rail{position:absolute;left:6px;top:12px;bottom:12px;width:4px;border-radius:2px;background:rgba(98,45,43,0.12)}
+            .pcs-rail-fill{position:absolute;left:0;top:0;width:100%;height:0;border-radius:2px;background:linear-gradient(180deg,var(--pink),var(--yellow));transition:height .5s ease}
+            .pcs-step{opacity:.42;transition:opacity .45s ease;padding:1.4rem 0 1.6rem;min-height:300px;display:flex;flex-direction:column;justify-content:center}
+            .pcs-step.is-active{opacity:1}
+            .pcs-num{font-family:'Fredoka One',cursive;font-size:2.9rem;line-height:1;color:transparent;-webkit-text-stroke:2px var(--pink);display:block;margin-bottom:.4rem;transition:color .4s ease,transform .4s cubic-bezier(.34,1.56,.64,1);transform-origin:left bottom}
+            .pcs-step:nth-child(even) .pcs-num{-webkit-text-stroke-color:var(--yellow-dark)}
+            .pcs-step.is-active .pcs-num{color:var(--pink);transform:scale(1.06)}
+            .pcs-step.is-active:nth-child(even) .pcs-num{color:var(--yellow-dark)}
+            .pcs-step h3{font-family:'Fredoka One',cursive;font-size:1.35rem;color:var(--dark-brown);margin:0 0 .5rem}
+            .pcs-step p{font-size:1.02rem;line-height:1.7;color:var(--brown);font-weight:600;margin:0}
+            .pcs-step p a{color:var(--pink);font-weight:700}
+
+            .pcs-ctas{display:flex;flex-direction:column;gap:.6rem;margin-top:1.1rem;max-width:430px}
+            .pcs-cta{display:flex;align-items:center;gap:.8rem;padding:.75rem 1.1rem;border-radius:14px;text-decoration:none;font-family:'Nunito',sans-serif;font-weight:800;transition:transform .2s ease,box-shadow .2s ease}
+            .pcs-cta:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(98,45,43,0.22)}
+            .pcs-cta small{display:block;font-weight:600;font-size:.8rem;opacity:.85}
+            .pcs-cta-pink{background:var(--pink-dark);color:#fff}
+            .pcs-cta-yellow{background:var(--yellow);color:var(--dark-brown)}
+            .pcs-cta-brown{background:var(--dark-brown);color:#fff}
+            .pcs-cta .pcs-ico{font-size:1.3rem}
+
+            /* ── Stage states ──────────────────────────────────────────
+               Every group hidden by default; each stage lights its cast. */
+            .pcs-stage g{opacity:0;transition:opacity .55s ease,transform .65s cubic-bezier(.34,1.56,.64,1)}
+            .pcs-stage .pcs-dream{transform:translateY(6px)}
+            .pcs-stage[data-stage="1"] .pcs-dream{opacity:1;transform:none}
+            .pcs-stage .pcs-sketch path,.pcs-stage .pcs-sketch ellipse{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);transition:stroke-dashoffset 1.1s ease .15s}
+            .pcs-stage[data-stage="2"] .pcs-sketch,.pcs-stage[data-stage="3"] .pcs-sketch,.pcs-stage[data-stage="4"] .pcs-sketch,.pcs-stage[data-stage="5"] .pcs-sketch,.pcs-stage[data-stage="6"] .pcs-sketch{opacity:1}
+            .pcs-stage[data-stage="2"] .pcs-sketch path,.pcs-stage[data-stage="2"] .pcs-sketch ellipse,.pcs-stage[data-stage="3"] .pcs-sketch path,.pcs-stage[data-stage="3"] .pcs-sketch ellipse,.pcs-stage[data-stage="4"] .pcs-sketch path,.pcs-stage[data-stage="4"] .pcs-sketch ellipse,.pcs-stage[data-stage="5"] .pcs-sketch path,.pcs-stage[data-stage="5"] .pcs-sketch ellipse,.pcs-stage[data-stage="6"] .pcs-sketch path,.pcs-stage[data-stage="6"] .pcs-sketch ellipse{stroke-dashoffset:0}
+            .pcs-stage .pcs-alt{transform:translateY(10px) scale(.92)}
+            .pcs-stage[data-stage="2"] .pcs-alt{opacity:1;transform:none}
+            .pcs-stage .pcs-price{transform:rotate(-14deg);transform-origin:236px 34px}
+            .pcs-stage[data-stage="2"] .pcs-price{opacity:1;transform:rotate(0deg)}
+            .pcs-stage .pcs-approve{transform:scale(.4);transform-origin:250px 70px}
+            .pcs-stage[data-stage="3"] .pcs-approve{opacity:1;transform:scale(1)}
+            .pcs-stage .pcs-schedule{transform:translateX(26px)}
+            .pcs-stage[data-stage="4"] .pcs-schedule{opacity:1;transform:none}
+            .pcs-stage .pcs-fill *{opacity:0;transition:opacity .5s ease}
+            .pcs-stage[data-stage="5"] .pcs-fill,.pcs-stage[data-stage="6"] .pcs-fill{opacity:1}
+            .pcs-stage[data-stage="5"] .pcs-fill *,.pcs-stage[data-stage="6"] .pcs-fill *{opacity:1}
+            .pcs-stage[data-stage="5"] .pcs-fill .f1{transition-delay:.1s}
+            .pcs-stage[data-stage="5"] .pcs-fill .f2{transition-delay:.3s}
+            .pcs-stage[data-stage="5"] .pcs-fill .f3{transition-delay:.5s}
+            .pcs-stage[data-stage="5"] .pcs-fill .f4{transition-delay:.7s}
+            .pcs-stage[data-stage="5"] .pcs-fill .f5{transition-delay:.9s}
+            .pcs-stage .pcs-magic{transform:scale(.6);transform-origin:170px 150px}
+            .pcs-stage[data-stage="5"] .pcs-magic{opacity:1;transform:scale(1)}
+            .pcs-stage .pcs-box{transform:translateY(18px)}
+            .pcs-stage[data-stage="6"] .pcs-box{opacity:1;transform:none}
+
+            @media (prefers-reduced-motion: reduce){
+                .pcs-stage g,.pcs-stage .pcs-fill *,.pcs-step,.pcs-num,.pcs-rail-fill{transition:none!important}
+                .pcs-stage .pcs-sketch path,.pcs-stage .pcs-sketch ellipse{stroke-dasharray:none!important;stroke-dashoffset:0!important}
+            }
+            @media (max-width: 900px){
+                .pcs-grid{grid-template-columns:1fr;gap:1.25rem}
+                .pcs-stagewrap{top:86px;z-index:2}
+                .pcs-stagecard{padding:.75rem .9rem .6rem;max-width:340px;margin:0 auto}
+                .pcs-stagecard svg{max-height:180px}
+                .pcs-step{min-height:0;padding:1.5rem 0}
+                .pcs-num{font-size:2.3rem}
+            }
+            </style>
+
+            <div class="pcs-grid">
+                <div class="pcs-stagewrap">
+                    <div class="pcs-stagecard">
+                        <div class="pcs-stage" id="pcsStage" data-stage="1">
+                            <svg viewBox="0 0 340 290" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <!-- plate (always) -->
+                                <g style="opacity:1">
+                                    <ellipse cx="170" cy="253" rx="98" ry="11" stroke="#622D2B" stroke-width="2.5" fill="#FDFBF8"/>
+                                </g>
+                                <!-- STAGE 1: the dream — dashed cake -->
+                                <g class="pcs-dream">
+                                    <path d="M100 250 v-42 a6 6 0 0 1 6-6 h128 a6 6 0 0 1 6 6 v42" stroke="#C36239" stroke-width="2.5" stroke-dasharray="7 7" stroke-linecap="round"/>
+                                    <path d="M118 202 v-40 a6 6 0 0 1 6-6 h92 a6 6 0 0 1 6 6 v40" stroke="#C36239" stroke-width="2.5" stroke-dasharray="7 7" stroke-linecap="round"/>
+                                    <path d="M136 156 v-36 a6 6 0 0 1 6-6 h56 a6 6 0 0 1 6 6 v36" stroke="#C36239" stroke-width="2.5" stroke-dasharray="7 7" stroke-linecap="round"/>
+                                    <circle cx="170" cy="100" r="8" stroke="#EC268F" stroke-width="2.5" stroke-dasharray="5 5"/>
+                                    <path d="M258 92 l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#FFC532" opacity=".8"/>
+                                    <path d="M78 120 l2.5 6 6 2.5-6 2.5-2.5 6-2.5-6-6-2.5 6-2.5z" fill="#EC268F" opacity=".55"/>
+                                    <path d="M262 170 l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#EC268F" opacity=".4"/>
+                                    <text x="252" y="60" font-family="Fredoka One, cursive" font-size="30" fill="#C36239" opacity=".5">?</text>
+                                </g>
+                                <!-- STAGES 2-6: the confident line work -->
+                                <g class="pcs-sketch">
+                                    <path style="--len:280" d="M100 250 v-42 a6 6 0 0 1 6-6 h128 a6 6 0 0 1 6 6 v42" stroke="#622D2B" stroke-width="2.5" stroke-linecap="round"/>
+                                    <path style="--len:220" d="M118 202 v-40 a6 6 0 0 1 6-6 h92 a6 6 0 0 1 6 6 v40" stroke="#622D2B" stroke-width="2.5" stroke-linecap="round"/>
+                                    <path style="--len:160" d="M136 156 v-36 a6 6 0 0 1 6-6 h56 a6 6 0 0 1 6 6 v36" stroke="#622D2B" stroke-width="2.5" stroke-linecap="round"/>
+                                    <path style="--len:170" d="M100 216 q10 10 20 0 q10 10 20 0 q10 10 20 0 q10 10 20 0 q10 10 20 0 q10 10 20 0 q10 10 20 0" stroke="#622D2B" stroke-width="2" stroke-linecap="round"/>
+                                    <path style="--len:130" d="M118 175 q9 9 18 0 q9 9 18 0 q9 9 18 0 q9 9 18 0 q9 9 18 0 q9 9 14 0" stroke="#622D2B" stroke-width="2" stroke-linecap="round"/>
+                                    <path style="--len:90" d="M136 133 q8.5 8 17 0 q8.5 8 17 0 q8.5 8 17 0 q8.5 8 17 0" stroke="#622D2B" stroke-width="2" stroke-linecap="round"/>
+                                    <circle class="pcs-cherryline" cx="170" cy="100" r="8" stroke="#622D2B" stroke-width="2.5" fill="none"/>
+                                    <path style="--len:14" d="M170 92 q2 -8 8 -10" stroke="#622D2B" stroke-width="2" stroke-linecap="round"/>
+                                </g>
+                                <!-- STAGE 2: alternates + price tag -->
+                                <g class="pcs-alt">
+                                    <rect x="18" y="150" width="62" height="78" rx="8" stroke="#C36239" stroke-width="2" fill="#FDFBF8" transform="rotate(-7 49 189)"/>
+                                    <path d="M32 208 v-16 h34 v16 M38 192 v-13 h22 v13" stroke="#C36239" stroke-width="1.8" fill="none" transform="rotate(-7 49 189)"/>
+                                    <circle cx="49" cy="172" r="3.5" stroke="#C36239" stroke-width="1.5" transform="rotate(-7 49 189)"/>
+                                    <rect x="262" y="150" width="62" height="78" rx="8" stroke="#C36239" stroke-width="2" fill="#FDFBF8" transform="rotate(7 293 189)"/>
+                                    <path d="M274 208 v-14 h38 v14 M282 194 v-12 h22 v12 M288 182 v-9 h10 v9" stroke="#C36239" stroke-width="1.8" fill="none" transform="rotate(7 293 189)"/>
+                                </g>
+                                <g class="pcs-price">
+                                    <path d="M236 34 l14 20" stroke="#622D2B" stroke-width="1.8"/>
+                                    <rect x="236" y="52" width="62" height="36" rx="8" fill="#FFC532" stroke="#622D2B" stroke-width="2"/>
+                                    <circle cx="245" cy="61" r="3" fill="#FDFBF8" stroke="#622D2B" stroke-width="1.5"/>
+                                    <text x="272" y="76" text-anchor="middle" font-family="Fredoka One, cursive" font-size="17" fill="#622D2B">$—</text>
+                                </g>
+                                <!-- STAGE 3: approval rosette -->
+                                <g class="pcs-approve">
+                                    <path d="M242 96 l-8 26 10-6 6 10z" fill="#EC268F" opacity=".85"/>
+                                    <path d="M262 96 l8 26-10-6-6 10z" fill="#EC268F" opacity=".85"/>
+                                    <circle cx="252" cy="72" r="26" fill="#EC268F"/>
+                                    <circle cx="252" cy="72" r="20" fill="#FDFBF8"/>
+                                    <path d="M243 72 l7 7 12-14" stroke="#EC268F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                </g>
+                                <!-- STAGE 4: calendar chip + lock -->
+                                <g class="pcs-schedule">
+                                    <rect x="238" y="60" width="76" height="66" rx="10" fill="#FDFBF8" stroke="#622D2B" stroke-width="2.5"/>
+                                    <path d="M238 82 h76" stroke="#622D2B" stroke-width="2"/>
+                                    <rect x="238" y="60" width="76" height="22" rx="10" fill="#EC268F" opacity=".16"/>
+                                    <line x1="256" y1="54" x2="256" y2="68" stroke="#622D2B" stroke-width="3" stroke-linecap="round"/>
+                                    <line x1="296" y1="54" x2="296" y2="68" stroke="#622D2B" stroke-width="3" stroke-linecap="round"/>
+                                    <circle cx="256" cy="96" r="3" fill="#622D2B" opacity=".3"/>
+                                    <circle cx="272" cy="96" r="3" fill="#622D2B" opacity=".3"/>
+                                    <circle cx="288" cy="96" r="3" fill="#622D2B" opacity=".3"/>
+                                    <circle cx="304" cy="96" r="3" fill="#622D2B" opacity=".3"/>
+                                    <circle cx="256" cy="112" r="3" fill="#622D2B" opacity=".3"/>
+                                    <circle cx="272" cy="112" r="8" fill="none" stroke="#EC268F" stroke-width="2.5"/>
+                                    <circle cx="272" cy="112" r="3" fill="#EC268F"/>
+                                    <path d="M296 116 v-5 a7 7 0 0 1 14 0 v5" stroke="#FFC532" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                                    <rect x="293" y="116" width="20" height="15" rx="4" fill="#FFC532" opacity=".9"/>
+                                </g>
+                                <!-- STAGES 5-6: the real cake (fills under the line work) -->
+                                <g class="pcs-fill">
+                                    <path class="f1" d="M100 250 v-42 a6 6 0 0 1 6-6 h128 a6 6 0 0 1 6 6 v42 z" fill="#FFF3E4"/>
+                                    <path class="f2" d="M118 202 v-40 a6 6 0 0 1 6-6 h92 a6 6 0 0 1 6 6 v40 z" fill="#FFF3E4"/>
+                                    <path class="f3" d="M136 156 v-36 a6 6 0 0 1 6-6 h56 a6 6 0 0 1 6 6 v36 z" fill="#FFF3E4"/>
+                                    <path class="f1" d="M100 202 h140 v14 q-10 10 -20 0 q-10 10 -20 0 q-10 10 -20 0 q-10 10 -20 0 q-10 10 -20 0 q-10 10 -20 0 q-10 10 -20 0 z" fill="#EC268F" opacity=".82"/>
+                                    <path class="f2" d="M118 156 h104 v19 q-9 9 -18 0 q-9 9 -18 0 q-9 9 -18 0 q-9 9 -18 0 q-9 9 -18 0 q-9 9 -14 0 z" fill="#EC268F" opacity=".82"/>
+                                    <path class="f3" d="M136 114 h68 v19 q-8.5 8 -17 0 q-8.5 8 -17 0 q-8.5 8 -17 0 q-8.5 8 -17 0 z" fill="#EC268F" opacity=".82"/>
+                                    <circle class="f4" cx="115" cy="236" r="4" fill="#FFC532"/>
+                                    <circle class="f4" cx="137" cy="236" r="4" fill="#EC268F"/>
+                                    <circle class="f4" cx="159" cy="236" r="4" fill="#FFC532"/>
+                                    <circle class="f4" cx="181" cy="236" r="4" fill="#EC268F"/>
+                                    <circle class="f4" cx="203" cy="236" r="4" fill="#FFC532"/>
+                                    <circle class="f4" cx="225" cy="236" r="4" fill="#EC268F"/>
+                                    <circle class="f5" cx="170" cy="100" r="8" fill="#EC268F"/>
+                                    <circle class="f5" cx="167" cy="97" r="2.5" fill="#FDFBF8" opacity=".8"/>
+                                </g>
+                                <g class="pcs-magic">
+                                    <path d="M92 78 l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#FFC532"/>
+                                    <path d="M255 130 l2.5 6.5 6.5 2.5-6.5 2.5-2.5 6.5-2.5-6.5-6.5-2.5 6.5-2.5z" fill="#EC268F" opacity=".8"/>
+                                    <path d="M70 190 l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#EC268F" opacity=".6"/>
+                                </g>
+                                <!-- STAGE 6: boxed, ribboned, ready -->
+                                <g class="pcs-box">
+                                    <path d="M92 160 h156 v88 a6 6 0 0 1 -6 6 h-144 a6 6 0 0 1 -6-6 z" fill="#FBF0E1" opacity=".97" stroke="#622D2B" stroke-width="2.5"/>
+                                    <rect x="86" y="150" width="168" height="14" rx="5" fill="#F3E3CE" stroke="#622D2B" stroke-width="2.5"/>
+                                    <rect x="163" y="150" width="14" height="104" fill="#EC268F"/>
+                                    <path d="M170 150 c-14 -12 -26 -4 -16 4 c-8 8 8 14 16 -4z M170 150 c14 -12 26 -4 16 4 c8 8 -8 14 -16 -4z" fill="#EC268F" stroke="#D11F7E" stroke-width="1.5"/>
+                                    <text x="128" y="212" text-anchor="middle" font-family="Fredoka One, cursive" font-size="16" fill="#EC268F">MBC</text>
+                                    <line x1="48" y1="185" x2="70" y2="185" stroke="#C36239" stroke-width="2.5" stroke-linecap="round" opacity=".55"/>
+                                    <line x1="40" y1="205" x2="66" y2="205" stroke="#C36239" stroke-width="2.5" stroke-linecap="round" opacity=".4"/>
+                                    <line x1="50" y1="225" x2="68" y2="225" stroke="#C36239" stroke-width="2.5" stroke-linecap="round" opacity=".3"/>
+                                </g>
                             </svg>
                         </div>
-                        <h4>Tell Us Your Vision</h4>
+                        <div class="pcs-stagefoot">
+                            <span class="pcs-caption" id="pcsCaption">Step 1 of 6 — Tell Us Your Vision</span>
+                            <span class="pcs-dots" id="pcsDots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pcs-steps">
+                    <div class="pcs-rail"><div class="pcs-rail-fill" id="pcsRailFill"></div></div>
+                    <article class="pcs-step is-active" data-step="1">
+                        <span class="pcs-num">01</span>
+                        <h3>Tell Us Your Vision</h3>
                         <p>Reach out by phone, email, or our website. Share your event date, guest count, theme ideas, and any inspiration photos. Want to get started right away? Try our <a href="order-form#ai-sketch">Sketch Your Cake AI</a> to visualize your dream cake, or <a href="corporate#cookiePreviewSection">see how your logo looks on a cookie</a> — before you even contact us.</p>
-                        <div class="process-cta-links">
-                            <a href="order-form" class="process-cta process-cta-pink">
-                                <span class="process-cta-icon">🎂</span>
-                                <span>Get a Quote <small>Birthdays, weddings & celebrations</small></span>
+                        <div class="pcs-ctas">
+                            <a href="order-form" class="pcs-cta pcs-cta-pink">
+                                <span class="pcs-ico">🎂</span>
+                                <span>Get a Quote <small>Birthdays, weddings &amp; celebrations</small></span>
                             </a>
-                            <a href="corporate-order" class="process-cta process-cta-yellow">
-                                <span class="process-cta-icon">🏢</span>
-                                <span>Corporate Quote <small>Company events & branded treats</small></span>
+                            <a href="corporate-order" class="pcs-cta pcs-cta-yellow">
+                                <span class="pcs-ico">🏢</span>
+                                <span>Corporate Quote <small>Company events &amp; branded treats</small></span>
                             </a>
-                            <a href="contact" class="process-cta process-cta-brown" onclick="if(typeof openChatbot==='function'){event.preventDefault();openChatbot();}">
-                                <span class="process-cta-icon">💬</span>
+                            <a href="contact" class="pcs-cta pcs-cta-brown" onclick="if(typeof openChatbot==='function'){event.preventDefault();openChatbot();}">
+                                <span class="pcs-ico">💬</span>
                                 <span>Quick Question? <small>Chat with us or send a message</small></span>
                             </a>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="process-step waiting" data-step="2">
-                    <div class="process-step-number" style="background: var(--yellow); color: var(--dark-brown);">2</div>
-                    <div class="process-step-content">
-                        <div class="process-scene process-scene-2">
-                            <svg viewBox="0 0 280 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Pencil -->
-                                <g class="fade-in">
-                                    <rect x="15" y="52" width="50" height="12" rx="2" fill="#FFC532" transform="rotate(-8 15 58)"/>
-                                    <polygon points="15,55 5,60 15,65" fill="#3A1A19" transform="rotate(-8 15 58)"/>
-                                    <rect x="58" y="52" width="8" height="12" rx="1" fill="#EC268F" transform="rotate(-8 58 58)"/>
-                                </g>
-                                <!-- 3-tier cake outline being drawn -->
-                                <!-- Bottom tier -->
-                                <path class="draw d2" d="M100 100 h80 v-18 a4 4 0 0 0-4-4 h-72 a4 4 0 0 0-4 4 z" stroke="#622D2B" stroke-width="2.5" style="--path-len:200"/>
-                                <!-- Middle tier -->
-                                <path class="draw d3" d="M112 78 h56 v-16 a4 4 0 0 0-4-4 h-48 a4 4 0 0 0-4 4 z" stroke="#622D2B" stroke-width="2.5" style="--path-len:160"/>
-                                <!-- Top tier -->
-                                <path class="draw d3" d="M124 58 h32 v-14 a4 4 0 0 0-4-4 h-24 a4 4 0 0 0-4 4 z" stroke="#622D2B" stroke-width="2.5" style="--path-len:120"/>
-                                <!-- Cherry on top -->
-                                <circle class="fade-in d4" cx="140" cy="36" r="5" fill="#EC268F"/>
-                                <line class="draw d4" x1="140" y1="41" x2="140" y2="44" stroke="#3A1A19" stroke-width="1.5" style="--path-len:5"/>
-                                <!-- Decorative dots on tiers -->
-                                <circle class="fade-in d4" cx="115" cy="90" r="2" fill="#FFC532"/>
-                                <circle class="fade-in d4" cx="125" cy="90" r="2" fill="#EC268F"/>
-                                <circle class="fade-in d4" cx="135" cy="90" r="2" fill="#FFC532"/>
-                                <circle class="fade-in d4" cx="145" cy="90" r="2" fill="#EC268F"/>
-                                <circle class="fade-in d4" cx="155" cy="90" r="2" fill="#FFC532"/>
-                                <circle class="fade-in d4" cx="165" cy="90" r="2" fill="#EC268F"/>
-                                <!-- Price tag -->
-                                <rect class="draw d4" x="200" y="35" width="55" height="35" rx="6" stroke="#3A1A19" stroke-width="2" style="--path-len:180"/>
-                                <text class="fade-in d5" x="227" y="58" text-anchor="middle" fill="#3A1A19" font-family="Fredoka One, cursive" font-size="14" font-weight="800">$</text>
-                            </svg>
-                        </div>
-                        <h4>Custom Sketches & Pricing</h4>
+                    </article>
+                    <article class="pcs-step" data-step="2">
+                        <span class="pcs-num">02</span>
+                        <h3>Custom Sketches &amp; Pricing</h3>
                         <p>Yana creates multiple design options with pricing — typically within 24–48 hours. No commitment required. This is how every project starts.</p>
-                    </div>
-                </div>
-
-                <!-- Step 3 -->
-                <div class="process-step waiting" data-step="3">
-                    <div class="process-step-number" style="background: var(--brown); color: var(--white);">3</div>
-                    <div class="process-step-content">
-                        <div class="process-scene process-scene-3">
-                            <svg viewBox="0 0 280 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Left person silhouette -->
-                                <circle class="fade-in" cx="35" cy="50" r="12" fill="#622D2B" opacity="0.2"/>
-                                <rect class="fade-in" x="25" y="65" width="20" height="30" rx="8" fill="#622D2B" opacity="0.2"/>
-                                <!-- Left speech bubble -->
-                                <path class="draw" d="M60 20 h70 a8 8 0 0 1 8 8 v24 a8 8 0 0 1-8 8 h-50 l-10 12 v-12 h-10 a8 8 0 0 1-8-8 v-24 a8 8 0 0 1 8-8z" stroke="#622D2B" stroke-width="2.5" style="--path-len:280"/>
-                                <path class="fade-in d2" d="M60 20 h70 a8 8 0 0 1 8 8 v24 a8 8 0 0 1-8 8 h-50 l-10 12 v-12 h-10 a8 8 0 0 1-8-8 v-24 a8 8 0 0 1 8-8z" fill="white" opacity="0.85"/>
-                                <!-- Sketch icon in left bubble -->
-                                <rect class="draw d2" x="72" y="30" width="20" height="22" rx="2" stroke="#622D2B" stroke-width="1.5" style="--path-len:84"/>
-                                <line class="draw d2" x1="76" y1="36" x2="88" y2="36" stroke="#622D2B" stroke-width="1" style="--path-len:12"/>
-                                <line class="draw d2" x1="76" y1="41" x2="85" y2="41" stroke="#622D2B" stroke-width="1" style="--path-len:9"/>
-                                <!-- Pencil edit icon -->
-                                <path class="draw d3" d="M100 30 l8-8 5 5-8 8z M98 42 l2-8 5 5z" stroke="#EC268F" stroke-width="1.5" style="--path-len:60"/>
-                                <!-- Right person silhouette -->
-                                <circle class="fade-in d2" cx="245" cy="50" r="12" fill="#EC268F" opacity="0.2"/>
-                                <rect class="fade-in d2" x="235" y="65" width="20" height="30" rx="8" fill="#EC268F" opacity="0.2"/>
-                                <!-- Right speech bubble -->
-                                <path class="draw d3" d="M150 55 h70 a8 8 0 0 1 8 8 v24 a8 8 0 0 1-8 8 h-10 v12 l-10-12 h-50 a8 8 0 0 1-8-8 v-24 a8 8 0 0 1 8-8z" stroke="#EC268F" stroke-width="2.5" style="--path-len:280"/>
-                                <path class="fade-in d4" d="M150 55 h70 a8 8 0 0 1 8 8 v24 a8 8 0 0 1-8 8 h-10 v12 l-10-12 h-50 a8 8 0 0 1-8-8 v-24 a8 8 0 0 1 8-8z" fill="white" opacity="0.85"/>
-                                <!-- Thumbs up in right bubble -->
-                                <path class="draw d4" d="M180 72 v-10 a4 4 0 0 1 8 0 v6 h8 a4 4 0 0 1 4 4.5 l-2 8 a4 4 0 0 1-4 3.5 h-10 a4 4 0 0 1-4-4 v-8z" stroke="#EC268F" stroke-width="2" style="--path-len:120"/>
-                                <!-- Checkmark -->
-                                <path class="draw d4" d="M172 77 l5 5 10-10" stroke="#EC268F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="--path-len:25"/>
-                            </svg>
-                        </div>
-                        <h4>Revisions & Approval</h4>
+                    </article>
+                    <article class="pcs-step" data-step="3">
+                        <span class="pcs-num">03</span>
+                        <h3>Revisions &amp; Approval</h3>
                         <p>Review the sketches, pick your favorites, request changes. We go back and forth until the design is exactly what you want.</p>
-                    </div>
-                </div>
-
-                <!-- Step 4 -->
-                <div class="process-step waiting" data-step="4">
-                    <div class="process-step-number" style="background: var(--dark-brown); color: var(--white);">4</div>
-                    <div class="process-step-content">
-                        <div class="process-scene process-scene-4">
-                            <svg viewBox="0 0 280 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Invoice/receipt -->
-                                <rect class="draw" x="25" y="10" width="70" height="95" rx="4" stroke="#3A1A19" stroke-width="2.5" style="--path-len:330"/>
-                                <rect class="fade-in d2" x="25" y="10" width="70" height="95" rx="4" fill="white" opacity="0.8"/>
-                                <!-- Invoice header line -->
-                                <line class="draw d2" x1="35" y1="25" x2="85" y2="25" stroke="#3A1A19" stroke-width="2" style="--path-len:50"/>
-                                <!-- Invoice text lines -->
-                                <line class="draw d2" x1="35" y1="38" x2="80" y2="38" stroke="#622D2B" stroke-width="1.5" opacity="0.5" style="--path-len:45"/>
-                                <line class="draw d3" x1="35" y1="48" x2="75" y2="48" stroke="#622D2B" stroke-width="1.5" opacity="0.5" style="--path-len:40"/>
-                                <line class="draw d3" x1="35" y1="58" x2="70" y2="58" stroke="#622D2B" stroke-width="1.5" opacity="0.5" style="--path-len:35"/>
-                                <!-- Total line -->
-                                <line class="draw d3" x1="35" y1="72" x2="85" y2="72" stroke="#3A1A19" stroke-width="2" style="--path-len:50"/>
-                                <!-- Dollar amount -->
-                                <text class="fade-in d3" x="60" y="90" text-anchor="middle" fill="#3A1A19" font-family="Fredoka One, cursive" font-size="16" font-weight="800">$250</text>
-                                <!-- Arrow between invoice and calendar -->
-                                <path class="draw d3" d="M105 58 h25 l-6-5 m6 5 l-6 5" stroke="#EC268F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="--path-len:50"/>
-                                <!-- Calendar -->
-                                <rect class="draw d3" x="140" y="20" width="75" height="70" rx="6" stroke="#3A1A19" stroke-width="2.5" style="--path-len:290"/>
-                                <rect class="fade-in d3" x="140" y="20" width="75" height="70" rx="6" fill="white" opacity="0.8"/>
-                                <!-- Calendar header -->
-                                <rect class="fade-in d3" x="140" y="20" width="75" height="20" rx="6" fill="#EC268F" opacity="0.15"/>
-                                <line class="draw d3" x1="140" y1="40" x2="215" y2="40" stroke="#3A1A19" stroke-width="1.5" style="--path-len:75"/>
-                                <!-- Calendar hooks -->
-                                <line class="draw d3" x1="158" y1="15" x2="158" y2="26" stroke="#3A1A19" stroke-width="2.5" stroke-linecap="round" style="--path-len:11"/>
-                                <line class="draw d3" x1="197" y1="15" x2="197" y2="26" stroke="#3A1A19" stroke-width="2.5" stroke-linecap="round" style="--path-len:11"/>
-                                <!-- Calendar grid dots -->
-                                <circle class="fade-in d4" cx="155" cy="50" r="3" fill="#622D2B" opacity="0.3"/>
-                                <circle class="fade-in d4" cx="170" cy="50" r="3" fill="#622D2B" opacity="0.3"/>
-                                <circle class="fade-in d4" cx="185" cy="50" r="3" fill="#622D2B" opacity="0.3"/>
-                                <circle class="fade-in d4" cx="200" cy="50" r="3" fill="#622D2B" opacity="0.3"/>
-                                <circle class="fade-in d4" cx="155" cy="65" r="3" fill="#622D2B" opacity="0.3"/>
-                                <circle class="fade-in d4" cx="170" cy="65" r="3" fill="#622D2B" opacity="0.3"/>
-                                <!-- Highlighted date -->
-                                <circle class="fade-in d4" cx="185" cy="65" r="7" fill="#EC268F" opacity="0.2"/>
-                                <!-- Big checkmark over calendar -->
-                                <path class="draw d4" d="M165 58 l10 12 22-25" stroke="#EC268F" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="--path-len:55"/>
-                                <!-- Lock icon -->
-                                <path class="draw d4" d="M235 55 v-6 a8 8 0 0 1 16 0 v6" stroke="#FFC532" stroke-width="2.5" stroke-linecap="round" style="--path-len:40"/>
-                                <rect class="draw d4" x="232" y="55" width="22" height="18" rx="4" stroke="#FFC532" stroke-width="2.5" style="--path-len:80"/>
-                                <circle class="fade-in d5" cx="243" cy="64" r="2.5" fill="#FFC532"/>
-                            </svg>
-                        </div>
-                        <h4>Payment & Scheduling</h4>
+                    </article>
+                    <article class="pcs-step" data-step="4">
+                        <span class="pcs-num">04</span>
+                        <h3>Payment &amp; Scheduling</h3>
                         <p>Once you approve, we send a simple invoice. Pay by credit/debit card, PayPal, or Venmo. Your spot on our calendar is locked in.</p>
-                    </div>
-                </div>
-
-                <!-- Step 5 -->
-                <div class="process-step waiting" data-step="5">
-                    <div class="process-step-number" style="background: var(--pink); color: var(--white);">5</div>
-                    <div class="process-step-content">
-                        <div class="process-scene process-scene-5">
-                            <svg viewBox="0 0 280 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Mixing bowl -->
-                                <path class="draw" d="M60 50 Q55 95 100 100 Q140 105 145 100 Q190 95 185 50" stroke="#622D2B" stroke-width="3" stroke-linecap="round" style="--path-len:250"/>
-                                <!-- Bowl rim -->
-                                <ellipse class="draw" cx="122" cy="50" rx="65" ry="8" stroke="#622D2B" stroke-width="2.5" style="--path-len:220"/>
-                                <!-- Bowl fill -->
-                                <path class="fade-in d2" d="M60 50 Q55 95 100 100 Q140 105 145 100 Q190 95 185 50 z" fill="#FFC532" opacity="0.15"/>
-                                <!-- Batter/dough in bowl -->
-                                <ellipse class="fade-in d2" cx="122" cy="55" rx="55" ry="12" fill="#FFC532" opacity="0.3"/>
-                                <!-- Whisk handle -->
-                                <line class="draw d2" x1="155" y1="15" x2="135" y2="48" stroke="#3A1A19" stroke-width="3" stroke-linecap="round" style="--path-len:45"/>
-                                <!-- Whisk wires -->
-                                <g class="stir">
-                                    <path class="draw d2" d="M135 48 Q125 70 135 55" stroke="#3A1A19" stroke-width="1.5" style="--path-len:30"/>
-                                    <path class="draw d3" d="M135 48 Q140 70 135 55" stroke="#3A1A19" stroke-width="1.5" style="--path-len:30"/>
-                                    <path class="draw d3" d="M135 48 Q130 65 135 55" stroke="#3A1A19" stroke-width="1.5" style="--path-len:25"/>
-                                </g>
-                                <!-- Floating ingredients -->
-                                <circle class="fade-in d3" cx="85" cy="30" r="5" fill="#FFC532" opacity="0.6"/>
-                                <circle class="fade-in d3" cx="100" cy="22" r="3" fill="#EC268F" opacity="0.5"/>
-                                <circle class="fade-in d4" cx="70" cy="20" r="4" fill="#622D2B" opacity="0.3"/>
-                                <!-- Splash drops -->
-                                <circle class="fade-in d4" cx="108" cy="38" r="2.5" fill="#FFC532" opacity="0.5"/>
-                                <circle class="fade-in d4" cx="145" cy="35" r="2" fill="#FFC532" opacity="0.4"/>
-                                <!-- Egg -->
-                                <ellipse class="draw d3" cx="210" cy="55" rx="14" ry="18" stroke="#622D2B" stroke-width="2" style="--path-len:100"/>
-                                <ellipse class="fade-in d3" cx="210" cy="55" rx="14" ry="18" fill="#FFF8E7" opacity="0.6"/>
-                                <!-- Butter -->
-                                <rect class="draw d3" x="235" y="65" width="24" height="16" rx="3" stroke="#FFC532" stroke-width="2" style="--path-len:80"/>
-                                <rect class="fade-in d4" x="235" y="65" width="24" height="16" rx="3" fill="#FFC532" opacity="0.3"/>
-                                <!-- Flour bag -->
-                                <path class="draw d4" d="M205 80 h30 v25 h-30 z M205 80 Q220 73 235 80" stroke="#622D2B" stroke-width="2" style="--path-len:140"/>
-                                <!-- Stars/sparkles -->
-                                <path class="fade-in d5" d="M168 25 l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#EC268F" opacity="0.5"/>
-                                <path class="fade-in d5" d="M195 18 l1.5 3.5 3.5 1.5-3.5 1.5-1.5 3.5-1.5-3.5-3.5-1.5 3.5-1.5z" fill="#FFC532" opacity="0.6"/>
-                            </svg>
-                        </div>
-                        <h4>Handcrafted Creation</h4>
+                    </article>
+                    <article class="pcs-step" data-step="5">
+                        <span class="pcs-num">05</span>
+                        <h3>Handcrafted Creation</h3>
                         <p>Every item is made from scratch by hand using the freshest ingredients. No shortcuts, no templates — just Yana's artistry and attention to detail.</p>
-                    </div>
-                </div>
-
-                <!-- Step 6 -->
-                <div class="process-step waiting" data-step="6">
-                    <div class="process-step-number" style="background: var(--yellow); color: var(--dark-brown);">6</div>
-                    <div class="process-step-content">
-                        <div class="process-scene process-scene-6">
-                            <svg viewBox="0 0 280 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Road -->
-                                <line x1="0" y1="95" x2="280" y2="95" stroke="#3A1A19" stroke-width="2"/>
-                                <line x1="20" y1="90" x2="40" y2="90" stroke="#3A1A19" stroke-width="1" opacity="0.3"/>
-                                <line x1="60" y1="90" x2="80" y2="90" stroke="#3A1A19" stroke-width="1" opacity="0.3"/>
-                                <line x1="100" y1="90" x2="120" y2="90" stroke="#3A1A19" stroke-width="1" opacity="0.3"/>
-                                <line x1="140" y1="90" x2="160" y2="90" stroke="#3A1A19" stroke-width="1" opacity="0.3"/>
-                                <line x1="180" y1="90" x2="200" y2="90" stroke="#3A1A19" stroke-width="1" opacity="0.3"/>
-                                <!-- Van group (animates together) -->
-                                <g class="van-group">
-                                    <!-- Van body -->
-                                    <rect class="draw" x="30" y="50" width="85" height="40" rx="5" stroke="#EC268F" stroke-width="2.5" style="--path-len:250"/>
-                                    <rect class="fade-in d2" x="30" y="50" width="85" height="40" rx="5" fill="#EC268F" opacity="0.15"/>
-                                    <!-- Van cabin -->
-                                    <path class="draw d2" d="M115 55 h25 l15 20 v15 h-40 v-35z" stroke="#EC268F" stroke-width="2.5" style="--path-len:140"/>
-                                    <rect class="fade-in d2" x="125" y="60" width="22" height="16" rx="3" fill="#87CEEB" opacity="0.4"/>
-                                    <!-- Windshield -->
-                                    <path class="draw d2" d="M126 60 h18 l10 14 h-28z" stroke="#3A1A19" stroke-width="1.5" style="--path-len:70"/>
-                                    <!-- MBC text on van -->
-                                    <text class="fade-in d3" x="72" y="75" text-anchor="middle" fill="#EC268F" font-family="Fredoka One, cursive" font-size="13" font-weight="800">MBC</text>
-                                    <!-- Cake box on van -->
-                                    <rect class="draw d3" x="45" y="40" width="22" height="14" rx="2" stroke="#FFC532" stroke-width="2" style="--path-len:72"/>
-                                    <path class="draw d3" d="M49 40 l7-6 7 6" stroke="#FFC532" stroke-width="1.5" style="--path-len:20"/>
-                                    <!-- Back wheel -->
-                                    <circle class="draw d2" cx="55" cy="93" r="9" stroke="#3A1A19" stroke-width="2.5" style="--path-len:57"/>
-                                    <circle class="fade-in d2" cx="55" cy="93" r="9" fill="white" opacity="0.8"/>
-                                    <circle class="spin" cx="55" cy="93" r="3" fill="#3A1A19" opacity="0.4"/>
-                                    <!-- Front wheel -->
-                                    <circle class="draw d2" cx="135" cy="93" r="9" stroke="#3A1A19" stroke-width="2.5" style="--path-len:57"/>
-                                    <circle class="fade-in d2" cx="135" cy="93" r="9" fill="white" opacity="0.8"/>
-                                    <circle class="spin" cx="135" cy="93" r="3" fill="#3A1A19" opacity="0.4"/>
-                                </g>
-                                <!-- House at destination -->
-                                <rect class="draw d3" x="210" y="55" width="40" height="40" rx="2" stroke="#622D2B" stroke-width="2" style="--path-len:160"/>
-                                <path class="draw d3" d="M205 58 l25-25 25 25" stroke="#622D2B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="--path-len:75"/>
-                                <rect class="fade-in d4" x="210" y="55" width="40" height="40" rx="2" fill="#622D2B" opacity="0.08"/>
-                                <!-- Door -->
-                                <rect class="draw d4" x="223" y="70" width="14" height="25" rx="2" stroke="#622D2B" stroke-width="1.5" style="--path-len:78"/>
-                                <!-- Door knob -->
-                                <circle class="fade-in d4" cx="234" cy="83" r="2" fill="#FFC532"/>
-                                <!-- Window -->
-                                <rect class="draw d4" x="215" y="60" width="10" height="8" rx="1" stroke="#622D2B" stroke-width="1.5" style="--path-len:36"/>
-                                <!-- Smoke/steam from chimney -->
-                                <path class="fade-in d5" d="M242 30 Q245 22 248 28 Q251 20 254 26" stroke="#622D2B" stroke-width="1.5" fill="none" opacity="0.3"/>
-                            </svg>
-                        </div>
-                        <h4>Pickup or Delivery</h4>
+                    </article>
+                    <article class="pcs-step" data-step="6">
+                        <span class="pcs-num">06</span>
+                        <h3>Pickup or Delivery</h3>
                         <p>Pick up at our Daly City kitchen (9 AM–6 PM), or we deliver anywhere in the San Francisco Bay Area.</p>
-                    </div>
+                    </article>
                 </div>
             </div>
-
-            <button class="process-replay" id="processReplay" onclick="replayProcess()">Replay</button>
 
             <p style="text-align: center; margin-top: 2rem; font-weight: 600; color: var(--dark-brown); font-size: 1.05rem;">We take pride in accommodating budgetary concerns — flexible solutions for every budget. Learn more about <a href="blog-how-to-order-custom-birthday-cake" style="color: var(--pink);">how to order a custom cake</a>.</p>
         </div>
 
         <script>
         (function() {
-            var timeline = document.getElementById('processTimeline');
-            var steps = timeline.querySelectorAll('.process-step');
-            var progress = document.getElementById('processProgress');
-            var progressLabel = document.getElementById('processProgressLabel');
-            var progressFill = document.getElementById('processProgressFill');
-            var replayBtn = document.getElementById('processReplay');
-            var totalSteps = steps.length;
-            var played = false;
-            var timers = [];
+            var stage = document.getElementById('pcsStage');
+            var steps = Array.prototype.slice.call(document.querySelectorAll('.pcs-step'));
+            var fill = document.getElementById('pcsRailFill');
+            var caption = document.getElementById('pcsCaption');
+            var dots = document.getElementById('pcsDots');
+            if (!stage || !steps.length) return;
+            var titles = ['Tell Us Your Vision', 'Custom Sketches & Pricing', 'Revisions & Approval', 'Payment & Scheduling', 'Handcrafted Creation', 'Pickup or Delivery'];
+            var current = 1;
 
-            // Reduced motion check
-            var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (prefersReduced) {
-                steps.forEach(function(s) {
-                    s.classList.remove('waiting');
-                    s.classList.add('done');
-                });
-                timeline.style.setProperty('--timeline-progress', '1');
-                progressFill.style.width = '100%';
-                progressLabel.textContent = 'Step 6 of 6';
-                progress.classList.add('visible');
-                played = true;
-                return;
+            function setStage(n) {
+                if (n === current) return;
+                current = n;
+                stage.setAttribute('data-stage', String(n));
+                steps.forEach(function(s, i) { s.classList.toggle('is-active', i === n - 1); });
+                if (fill) fill.style.height = (((n - 1) / (steps.length - 1)) * 100) + '%';
+                if (caption) caption.textContent = 'Step ' + n + ' of ' + steps.length + ' — ' + titles[n - 1];
+                if (dots) Array.prototype.forEach.call(dots.children, function(d, i) { d.classList.toggle('on', i < n); });
             }
 
-            function playStep(n) {
-                // Mark previous as done
-                if (n > 1) {
-                    steps[n - 2].classList.remove('active');
-                    steps[n - 2].classList.add('done');
-                }
-                // Mark current as active
-                steps[n - 1].classList.remove('waiting');
-                steps[n - 1].classList.add('active');
-                // Update timeline progress
-                timeline.style.setProperty('--timeline-progress', String(n / totalSteps));
-                // Update progress bar
-                progressLabel.textContent = 'Step ' + n + ' of ' + totalSteps;
-                progressFill.style.width = ((n / totalSteps) * 100) + '%';
-            }
-
-            function finishSequence() {
-                steps[totalSteps - 1].classList.remove('active');
-                steps[totalSteps - 1].classList.add('done');
-                replayBtn.classList.add('visible');
-            }
-
-            function startSequence() {
-                // Clear any running timers
-                timers.forEach(function(t) { clearTimeout(t); });
-                timers = [];
-                // Reset all steps and force reflow for SVG animations
-                steps.forEach(function(s) {
-                    s.classList.remove('active', 'done');
-                    s.classList.add('waiting');
-                });
-                void timeline.offsetHeight;
-                timeline.style.setProperty('--timeline-progress', '0');
-                progressFill.style.width = '0%';
-                progressLabel.textContent = 'Step 1 of ' + totalSteps;
-                progress.classList.add('visible');
-                replayBtn.classList.remove('visible');
-
-                // Play each step with 3.5s intervals
-                for (var i = 0; i < totalSteps; i++) {
-                    (function(idx) {
-                        timers.push(setTimeout(function() {
-                            playStep(idx + 1);
-                        }, idx * 3500));
-                    })(i);
-                }
-                // Finish after last step plays
-                timers.push(setTimeout(finishSequence, totalSteps * 3500));
-            }
-
-            // Expose replay
-            window.replayProcess = function() {
-                startSequence();
-            };
-
-            // IntersectionObserver trigger
-            var observer = new IntersectionObserver(function(entries) {
+            var io = new IntersectionObserver(function(entries) {
                 entries.forEach(function(entry) {
-                    if (entry.isIntersecting && !played) {
-                        played = true;
-                        startSequence();
-                    }
+                    if (entry.isIntersecting) setStage(steps.indexOf(entry.target) + 1);
                 });
-            }, { threshold: 0.3 });
-
-            observer.observe(timeline);
+            }, { rootMargin: '-38% 0px -42% 0px' });
+            steps.forEach(function(s) { io.observe(s); });
         })();
         </script>
 
