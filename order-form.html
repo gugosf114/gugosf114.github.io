@@ -733,6 +733,9 @@
     #sketchToggle{position:relative;z-index:1}
     #sketchToggle::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;border-radius:12px;padding:2px;background:linear-gradient(90deg,var(--pink),var(--yellow),var(--pink),var(--yellow),var(--pink));background-size:300% 100%;animation:gradient-shift 3s linear infinite;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;z-index:-1}
     #sketchToggle:hover::before{animation:gradient-shift 1.5s linear infinite}
+    /* When the browser jumps to a missed required field, land it BELOW the
+       sticky header instead of hidden underneath it. */
+    form input, form select, form textarea { scroll-margin-top: 130px; }
     </style>
 
     <!-- Event Date: "Not sure yet" toggle -->
@@ -741,6 +744,10 @@
         const unsure = document.getElementById('date_unsure');
         const dateInput = document.getElementById('event_date');
         if (!unsure || !dateInput) return;
+
+        // Block past dates (local time, not UTC — late-evening PT must not roll to tomorrow)
+        const now = new Date();
+        dateInput.min = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
 
         unsure.addEventListener('change', function() {
             // Disabled inputs aren't submitted, so Yana sees the
