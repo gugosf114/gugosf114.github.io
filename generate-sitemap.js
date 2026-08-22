@@ -28,6 +28,13 @@ const CONFIG = {
         'thank-you.html',          // Post-submit page, noindexed
         'cakes.html',              // Raw-markdown leftover, blocked in robots.txt
         'google56fbc2040830820a.html',  // Google verification file
+        // WiM (the Android app) legal pages live on this domain for Play Store
+        // compliance but are not bakery pages: noindexed, kept out of the sitemap.
+        'wim-android',
+        'wim-delete-account.html',
+        'wim-delete-account',
+        'wim-privacy-policy.html',
+        'wim-privacy-policy',
         'thursday',                // App page, not marketing content
         'tools'                    // Utility pages, not marketing content
     ],
