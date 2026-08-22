@@ -500,6 +500,14 @@
         .contact-cell:hover { background: var(--bg-dark); }
         .contact-email { color: var(--text-primary); font-size: 13px; }
         .contact-phone { color: var(--text-secondary); font-size: 11px; }
+        .contact-thread { font-size: 11px; margin-top: 2px; }
+        .contact-thread a { color: var(--accent-blue, #0073ea); text-decoration: none; }
+        .contact-thread a:hover { text-decoration: underline; }
+        .address-input { margin-top: 6px; font-size: 12px; }
+        .map-link { display: inline-block; margin-top: 4px; font-size: 11px; color: var(--accent-gold); text-decoration: none; }
+        .map-link:hover { text-decoration: underline; }
+        .invoice-link { display: block; margin-top: 4px; font-size: 11px; color: var(--accent-gold); text-decoration: none; }
+        .invoice-link:hover { text-decoration: underline; }
 
         .file-indicator {
             display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px;
@@ -862,11 +870,16 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label">Pickup / Delivery</label>
-                        <select class="form-select" id="formDelivery">
+                        <select class="form-select" id="formDelivery" onchange="toggleAddressField()">
                             <option value="pickup">Pickup</option>
                             <option value="delivery">Delivery</option>
                         </select>
                     </div>
+                </div>
+
+                <div class="form-group" id="formAddressGroup" style="display: none;">
+                    <label class="form-label">Delivery Address</label>
+                    <input type="text" class="form-input" id="formDeliveryAddress" placeholder="Street, city — where it goes">
                 </div>
 
                 <div class="form-group">
@@ -1274,6 +1287,7 @@
                 }
                 if (o.quantity === undefined) o.quantity = 1;
                 if (o.components === undefined) o.components = '';
+                if (o.deliveryAddress === undefined) o.deliveryAddress = '';
             });
         }
         // Note: Migration is now called in the async initApp() at the bottom of the script
@@ -1352,6 +1366,12 @@
             flavorSelect.innerHTML = flavors.map(f => `<option value="${f}">${f}</option>`).join('');
         }
 
+        function toggleAddressField() {
+            const grp = document.getElementById('formAddressGroup');
+            if (!grp) return;
+            grp.style.display = document.getElementById('formDelivery').value === 'delivery' ? 'block' : 'none';
+        }
+
         function showView(view) {
             currentView = view;
             document.querySelectorAll('.nav-item').forEach(el => {
@@ -1372,6 +1392,8 @@
             document.getElementById('formQuantity').value = '1';
             document.getElementById('formComponents').value = '';
             document.getElementById('formDelivery').value = 'pickup';
+            document.getElementById('formDeliveryAddress').value = '';
+            toggleAddressField();
             document.getElementById('formOrderDate').value = new Date().toISOString().split('T')[0];
             document.getElementById('formDueDateTime').value = '';
             document.getElementById('formPrice').value = '';
@@ -1405,6 +1427,7 @@
                 quantity: parseInt(document.getElementById('formQuantity').value) || 1,
                 components: document.getElementById('formComponents').value.trim(),
                 delivery: document.getElementById('formDelivery').value,
+                deliveryAddress: document.getElementById('formDeliveryAddress').value.trim(),
                 orderDate: document.getElementById('formOrderDate').value,
                 dueDate: dueDateTimeVal ? dueDateTimeVal.split('T')[0] : '',
                 dueDateTime: dueDateTimeVal || '',
@@ -1578,7 +1601,7 @@
                 if (e.flavor) document.getElementById('formFlavor').value = e.flavor;
                 if (e.quantity) document.getElementById('formQuantity').value = e.quantity;
                 if (e.components) document.getElementById('formComponents').value = e.components;
-                if (e.delivery) document.getElementById('formDelivery').value = e.delivery;
+                if (e.delivery) { document.getElementById('formDelivery').value = e.delivery; toggleAddressField(); }
                 if (e.dueDate) document.getElementById('formDueDateTime').value = e.dueDate + 'T12:00';
                 if (e.description) document.getElementById('formDescription').value = e.description;
             }
@@ -1605,7 +1628,7 @@
             if (extracted.flavor) document.getElementById('formFlavor').value = extracted.flavor;
             if (extracted.quantity) document.getElementById('formQuantity').value = extracted.quantity;
             if (extracted.components) document.getElementById('formComponents').value = extracted.components;
-            if (extracted.delivery) document.getElementById('formDelivery').value = extracted.delivery;
+            if (extracted.delivery) { document.getElementById('formDelivery').value = extracted.delivery; toggleAddressField(); }
             if (extracted.dueDate) document.getElementById('formDueDateTime').value = extracted.dueDate + 'T12:00';
             if (extracted.description) document.getElementById('formDescription').value = extracted.description;
 
@@ -2096,10 +2119,10 @@
         // ========== EXPORT ==========
         function exportCSV() {
             const data = currentView === 'archive' ? archive : orders;
-            const headers = ['Customer', 'Email', 'Phone', 'Item', 'Flavor', 'Qty', 'Components', 'Pickup/Delivery', 'Order Date', 'Due Date/Time', 'Sketch', 'Invoice', 'Price', 'Description', 'Person'];
+            const headers = ['Customer', 'Email', 'Phone', 'Item', 'Flavor', 'Qty', 'Components', 'Pickup/Delivery', 'Delivery Address', 'Order Date', 'Due Date/Time', 'Sketch', 'Invoice', 'Price', 'Description', 'Person'];
             const rows = data.map(o => [
                 o.customerName, o.email, o.phone || '', o.item, o.flavor, o.quantity || 1,
-                o.components || '', o.delivery, o.orderDate, o.dueDateTime || o.dueDate || '',
+                o.components || '', o.delivery, o.deliveryAddress || '', o.orderDate, o.dueDateTime || o.dueDate || '',
                 o.sketch, o.invoice, o.price || 0, o.description || '', o.person
             ]);
 
@@ -2430,7 +2453,8 @@
                     (o.phone && o.phone.includes(search)) ||
                     o.item.toLowerCase().includes(search) ||
                     o.flavor.toLowerCase().includes(search) ||
-                    (o.components && o.components.toLowerCase().includes(search))
+                    (o.components && o.components.toLowerCase().includes(search)) ||
+                    (o.deliveryAddress && o.deliveryAddress.toLowerCase().includes(search))
                 );
             }
 
@@ -2504,6 +2528,7 @@
                     <div class="contact-cell" onclick="openContactModal('${order.id}')">
                         <div class="contact-email"><a href="mailto:${escapeHtml(order.email)}" class="contact-link" onclick="event.stopPropagation();">${escapeHtml(order.email)}</a></div>
                         ${order.phone ? `<div class="contact-phone"><a href="tel:${order.phone.replace(/[^\d+]/g, '')}" class="contact-link" onclick="event.stopPropagation();">${escapeHtml(order.phone)}</a></div>` : ''}
+                        ${order.gmailThreadId ? `<div class="contact-thread"><a href="https://mail.google.com/mail/u/info@mybakingcreations.com/#all/${order.gmailThreadId}" target="_blank" rel="noopener" onclick="event.stopPropagation();">Email thread</a></div>` : ''}
                     </div>
                 </td>`,
 
@@ -2536,6 +2561,12 @@
                         <option value="pickup" ${order.delivery === 'pickup' ? 'selected' : ''}>Pickup</option>
                         <option value="delivery" ${order.delivery === 'delivery' ? 'selected' : ''}>Delivery</option>
                     </select>
+                    ${order.delivery === 'delivery' ? `
+                        <input type="text" class="cell-input address-input" value="${escapeHtml(order.deliveryAddress || '')}"
+                            placeholder="Delivery address..." title="${escapeHtml(order.deliveryAddress || '')}"
+                            onchange="updateField('${order.id}', 'deliveryAddress', this.value)">
+                        ${order.deliveryAddress ? `<a class="map-link" href="https://maps.google.com/?q=${encodeURIComponent(order.deliveryAddress)}" target="_blank" rel="noopener">Open in Maps</a>` : ''}
+                    ` : ''}
                 </td>`,
 
                 orderDate: `<td>
@@ -2555,6 +2586,7 @@
                     <span class="status-pill status-${order.invoice}" onclick="updateField('${order.id}', 'invoice', '${order.invoice === 'sent' ? 'paid' : 'sent'}')">
                         ${order.invoice === 'sent' ? 'Sent' : 'Paid'}
                     </span>
+                    ${order.invoiceUrl ? `<a class="invoice-link" href="${order.invoiceUrl}" target="_blank" rel="noopener">${escapeHtml(order.invoiceNumber || 'Open invoice')}</a>` : ''}
                 </td>`,
 
                 price: `<td>
@@ -2613,7 +2645,7 @@
                     </div>` : ''}
                     <div class="table-card-field">
                         <span class="table-card-label">Contact</span>
-                        <span><a href="mailto:${escapeHtml(order.email)}" class="contact-link">${escapeHtml(order.email)}</a>${order.phone ? ` · <a href="tel:${order.phone.replace(/[^\d+]/g, '')}" class="contact-link">${escapeHtml(order.phone)}</a>` : ''}</span>
+                        <span><a href="mailto:${escapeHtml(order.email)}" class="contact-link">${escapeHtml(order.email)}</a>${order.phone ? ` · <a href="tel:${order.phone.replace(/[^\d+]/g, '')}" class="contact-link">${escapeHtml(order.phone)}</a>` : ''}${order.gmailThreadId ? ` · <a href="https://mail.google.com/mail/u/info@mybakingcreations.com/#all/${order.gmailThreadId}" target="_blank" rel="noopener" class="contact-link">Email thread</a>` : ''}${order.invoiceUrl ? ` · <a href="${order.invoiceUrl}" target="_blank" rel="noopener" class="contact-link">${escapeHtml(order.invoiceNumber || 'Invoice')}</a>` : ''}</span>
                     </div>
                     ${(order.dueDateTime || order.dueDate) ? `<div class="table-card-field">
                         <span class="table-card-label">Due</span>
@@ -2621,7 +2653,7 @@
                     </div>` : ''}
                     <div class="table-card-field">
                         <span class="table-card-label">Delivery</span>
-                        <span>${order.delivery === 'pickup' ? 'Pickup' : 'Delivery'}</span>
+                        <span>${order.delivery === 'pickup' ? 'Pickup' : 'Delivery'}${order.delivery === 'delivery' && order.deliveryAddress ? ` · <a class="contact-link" href="https://maps.google.com/?q=${encodeURIComponent(order.deliveryAddress)}" target="_blank" rel="noopener">${escapeHtml(order.deliveryAddress)}</a>` : ''}</span>
                     </div>
                     ${order.price ? `<div class="table-card-field">
                         <span class="table-card-label">Price</span>
