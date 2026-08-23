@@ -1,5 +1,31 @@
 [
   {
+    "id": "7fa4bc3954870dbf056375a8903cd9884fa5b2c3f4f4b7eda9857d5d5387a839",
+    "title": "Corporate Branded Cupcakes with Logo Toppers",
+    "caption": "Chocolate cupcakes topped with printed edible logo plaques — built for corporate events, client gifting, and team meetings across the Bay Area. Flagstar Bank and WD Elevate shown. Custom branded cupcakes delivered throughout San Francisco and the Peninsula.",
+    "alt_text": "Two dozen chocolate cupcakes with cream frosting, each topped with a white rectangular edible plaque printed with Flagstar or WD Elevate logos.",
+    "classification": {
+      "audience": "corporate",
+      "product_type": "cupcakes",
+      "occasion": "corporate-event",
+      "styles": [],
+      "brand_or_theme": "",
+      "gallery_targets": [
+        "all",
+        "cupcakes",
+        "corporate-cupcakes"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cupcakes",
+      "corporate-cupcakes"
+    ],
+    "image_path": "images/gallery/bakers-agent/cupcakes/corporate-branded-cupcakes-with-logo-toppers-7fa4bc3954.webp",
+    "image_url": "/images/gallery/bakers-agent/cupcakes/corporate-branded-cupcakes-with-logo-toppers-7fa4bc3954.webp",
+    "published_at": "2026-08-23T12:01:09.015494+00:00"
+  },
+  {
     "id": "9c3789ab47e8a9528feea497f68df05bc68abc8d5fd82d288ad06fef83985c4e",
     "title": "Emoji Themed Hand-Piped Custom Cookies",
     "caption": "Ten hand-piped emoji cookies capturing every emotion in one box. Custom decorated sugar cookies made to order in Daly City, serving San Francisco and the Bay Area. Perfect for office events, parties, or just because.",
