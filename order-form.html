@@ -374,6 +374,8 @@
                         </div>
 
                         <!-- AI DESIGN PREVIEW WIDGET -->
+                        <!-- about.html links here as order-form#ai-sketch -->
+                        <span id="ai-sketch"></span>
                         <div id="studioWidget" class="form-group" style="display: none;">
                             <button type="button" id="sketchToggle" style="width:100%; display:flex; align-items:center; gap:0.6rem; padding:0.8rem 1rem; background:rgba(236,38,143,0.08); border:none; border-radius:12px; color:#FFC532; font-family:'Nunito',sans-serif; font-weight:700; font-size:0.9rem; cursor:pointer; text-align:left;">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#FFC532" stroke-width="1.5" style="flex-shrink:0;width:18px;height:18px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -558,6 +560,26 @@
                 sketchToggle.style.display = 'none';
                 sketchCard.style.display = 'block';
             });
+        }
+
+        // Arriving from the "Sketch Your Cake AI" link on /about. That link
+        // promises the sketch tool, so open it. Without this the hash lands on
+        // a widget that stays hidden until a product type is picked, and the
+        // visitor sees nothing happen.
+        if (window.location.hash === '#ai-sketch') {
+            if (!document.querySelector('input[name="product_type"]:checked')) {
+                var cakeRadio = document.querySelector('input[name="product_type"][value="Cake"]');
+                if (cakeRadio) {
+                    cakeRadio.checked = true;
+                    cakeRadio.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+            }
+            widget.style.display = 'block';
+            if (sketchToggle && sketchCard) {
+                sketchToggle.style.display = 'none';
+                sketchCard.style.display = 'block';
+            }
+            widget.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
         if (descPreview) {
