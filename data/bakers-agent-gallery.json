@@ -1,5 +1,31 @@
 [
   {
+    "id": "7fa4bc3954870dbf056375a8903cd9884fa5b2c3f4f4b7eda9857d5d5387a839-2",
+    "title": "Corporate Branded Cupcakes with Logo Toppers",
+    "caption": "Chocolate cupcakes topped with printed edible logo plaques — built for corporate events, client gifting, and team meetings across the Bay Area. Flagstar Bank and WD Elevate shown. Custom branded cupcakes delivered throughout San Francisco and the Peninsula.",
+    "alt_text": "Two dozen chocolate cupcakes with cream frosting, each topped with a white rectangular edible plaque printed with Flagstar or WD Elevate logos.",
+    "classification": {
+      "audience": "corporate",
+      "product_type": "cupcakes",
+      "occasion": "corporate-event",
+      "styles": [],
+      "brand_or_theme": "",
+      "gallery_targets": [
+        "all",
+        "cupcakes",
+        "corporate-cupcakes"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cupcakes",
+      "corporate-cupcakes"
+    ],
+    "image_path": "images/gallery/bakers-agent/cupcakes/corporate-branded-cupcakes-with-logo-toppers-7fa4bc3954-2.webp",
+    "image_url": "/images/gallery/bakers-agent/cupcakes/corporate-branded-cupcakes-with-logo-toppers-7fa4bc3954-2.webp",
+    "published_at": "2026-08-23T12:01:14.424277+00:00"
+  },
+  {
     "id": "7fa4bc3954870dbf056375a8903cd9884fa5b2c3f4f4b7eda9857d5d5387a839",
     "title": "Corporate Branded Cupcakes with Logo Toppers",
     "caption": "Chocolate cupcakes topped with printed edible logo plaques — built for corporate events, client gifting, and team meetings across the Bay Area. Flagstar Bank and WD Elevate shown. Custom branded cupcakes delivered throughout San Francisco and the Peninsula.",
