@@ -1,5 +1,37 @@
 [
   {
+    "id": "06bccf37b87a764901c248937e114976f1197d717a16cfcb7402fd2384be64dc",
+    "title": "Custom Charizard Pokémon Birthday Cake",
+    "caption": "A single-tier Pokémon birthday cake designed as a Poké Ball, topped with a hand-sculpted Charizard figure and personalized with the birthday name. Custom character birthday cakes made to order across the Bay Area and San Francisco.",
+    "alt_text": "Single-tier Pokémon Poké Ball cake with sculpted Charizard topper, \"Mikey\" name plaque, and number 4 centerpiece.",
+    "classification": {
+      "audience": "personal",
+      "product_type": "cake",
+      "occasion": "birthday",
+      "styles": [
+        "hand-piped",
+        "realistic",
+        "sculpted"
+      ],
+      "brand_or_theme": "",
+      "gallery_targets": [
+        "all",
+        "cakes",
+        "cakes-sculpted",
+        "cakes-realistic"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cakes",
+      "cakes-sculpted",
+      "cakes-realistic"
+    ],
+    "image_path": "images/gallery/bakers-agent/cake/custom-charizard-pok-mon-birthday-cake-06bccf37b8.webp",
+    "image_url": "/images/gallery/bakers-agent/cake/custom-charizard-pok-mon-birthday-cake-06bccf37b8.webp",
+    "published_at": "2026-08-23T04:43:00.193241+00:00"
+  },
+  {
     "id": "447ea5879cefdda20006884243436da5ef86fd4a09034fe5e293a870bdf7ff1c",
     "title": "Hand-Piped Meta Family Corporate Logo Cookies",
     "caption": "Five sets of custom royal icing cookies covering the full Meta family — WhatsApp, Facebook, Instagram, Messenger, and Meta. Hand-piped with brand-accurate colors and sharp detail. A proven corporate gifting choice for tech companies across San Francisco and the Bay Area.",
