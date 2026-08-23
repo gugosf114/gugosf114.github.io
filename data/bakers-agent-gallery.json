@@ -1,5 +1,29 @@
 [
   {
+    "id": "43091aab7af200e7db0a787a677b4f2b6e50cd697e8c08a213f4bc284d447f36",
+    "title": "Custom Sculpted Pirate Ship Birthday Cake",
+    "caption": "A fully sculpted 3D pirate ship cake with hand-painted wood grain, metallic gold trim, edible sails, and a personalized name on the hull. Custom sculpted cakes made to order across the Bay Area and San Francisco.",
+    "alt_text": "3D sculpted pirate ship cake with brown fondant hull, gold trim, edible sails, skull flag, and \"Xavier\" on the side.",
+    "classification": {
+      "audience": "personal",
+      "product_type": "cake",
+      "occasion": "birthday",
+      "styles": [],
+      "brand_or_theme": "",
+      "gallery_targets": [
+        "all",
+        "cakes"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cakes"
+    ],
+    "image_path": "images/gallery/bakers-agent/cake/custom-sculpted-pirate-ship-birthday-cake-43091aab7a.webp",
+    "image_url": "/images/gallery/bakers-agent/cake/custom-sculpted-pirate-ship-birthday-cake-43091aab7a.webp",
+    "published_at": "2026-08-23T05:07:09.376673+00:00"
+  },
+  {
     "id": "06bccf37b87a764901c248937e114976f1197d717a16cfcb7402fd2384be64dc",
     "title": "Custom Charizard Pokémon Birthday Cake",
     "caption": "A single-tier Pokémon birthday cake designed as a Poké Ball, topped with a hand-sculpted Charizard figure and personalized with the birthday name. Custom character birthday cakes made to order across the Bay Area and San Francisco.",
