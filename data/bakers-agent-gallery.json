@@ -1,5 +1,35 @@
 [
   {
+    "id": "9c3789ab47e8a9528feea497f68df05bc68abc8d5fd82d288ad06fef83985c4e",
+    "title": "Emoji Themed Hand-Piped Custom Cookies",
+    "caption": "Ten hand-piped emoji cookies capturing every emotion in one box. Custom decorated sugar cookies made to order in Daly City, serving San Francisco and the Bay Area. Perfect for office events, parties, or just because.",
+    "alt_text": "Ten round sugar cookies decorated as emoji faces including laughing crying, angry, sunglasses, cursing, and wacky expressions.",
+    "classification": {
+      "audience": "corporate",
+      "product_type": "cookies",
+      "occasion": "general",
+      "styles": [
+        "hand-piped"
+      ],
+      "brand_or_theme": "",
+      "gallery_targets": [
+        "all",
+        "cookies",
+        "corporate-cookies",
+        "cookies-hand-piped"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cookies",
+      "corporate-cookies",
+      "cookies-hand-piped"
+    ],
+    "image_path": "images/gallery/bakers-agent/cookies/emoji-themed-hand-piped-custom-cookies-9c3789ab47.webp",
+    "image_url": "/images/gallery/bakers-agent/cookies/emoji-themed-hand-piped-custom-cookies-9c3789ab47.webp",
+    "published_at": "2026-08-23T07:28:36.554874+00:00"
+  },
+  {
     "id": "6546f08c0ed516873e8a1b8af13eec9475f34b7f05338bfae76d5a9bf79ec4e4-2",
     "title": "Realistic Amazon Box Sculpted Cake",
     "caption": "Every detail is edible — from the Amazon Prime tape and USPS Priority Mail label to the printed barcodes and tracking number. A fully sculpted cake built for the online shopping obsessive. Custom sculpted cakes made to order across the Bay Area and San Francisco.",
