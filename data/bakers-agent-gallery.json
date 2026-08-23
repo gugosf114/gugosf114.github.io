@@ -1,5 +1,31 @@
 [
   {
+    "id": "d17221d675e7cfc928edcba45e99e239ba0305aebcbd2d1e7d5cd71895d2fa54",
+    "title": "Branded Cake Pops UCSF Event",
+    "caption": "Custom printed cake pops branded for UC Law SF — available in chocolate and vanilla. Built for institutional events, conferences, and graduations across San Francisco. Corporate dessert orders delivered throughout the Bay Area.",
+    "alt_text": "Ten white cake pops with blue UC Law SF edible logo discs, displayed upright in a white box, labeled chocolate and vanilla.",
+    "classification": {
+      "audience": "corporate",
+      "product_type": "cake-pops",
+      "occasion": "general",
+      "styles": [],
+      "brand_or_theme": "",
+      "gallery_targets": [
+        "all",
+        "cake-pops",
+        "corporate-cake-pops"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cake-pops",
+      "corporate-cake-pops"
+    ],
+    "image_path": "images/gallery/bakers-agent/cake-pops/branded-cake-pops-ucsf-event-d17221d675.webp",
+    "image_url": "/images/gallery/bakers-agent/cake-pops/branded-cake-pops-ucsf-event-d17221d675.webp",
+    "published_at": "2026-08-23T16:56:12.136880+00:00"
+  },
+  {
     "id": "a6d8f39af4b9944a6136ac082c062f8316a047bd580e6ac5beb863896e45bf6d",
     "title": "Realistic Sculpted Duckhorn Wine Bottle Cake",
     "caption": "A fully sculpted wine bottle cake — every detail edible, from the pale yellow fondant body to the black foil top and printed Duckhorn Vineyards label. Custom sculpted cakes made to order in Daly City, serving San Francisco and the Bay Area.",
