@@ -1,5 +1,30 @@
 [
   {
+    "id": "1dda3e6f9f9a7571788db0b6df73b493690d02af12685c50b0ab498325d05eac-3",
+    "title": "Corporate Branded  Cupcakes and Cake Pops",
+    "caption": "Cupcakes topped with printed fondant logo plaques, plus white chocolate cake pops featuring Company logo— available in vanilla and chocolate. Custom corporate dessert sets made to order and delivered across the Bay Area and San Francisco.",
+    "alt_text": "Box of 12 Flagstar-branded cupcakes with white frosting and logo toppers, plus white cake pops with Flagstar star symbol, chocolate and vanilla.",
+    "classification": {
+      "audience": "corporate",
+      "product_type": "other",
+      "occasion": "corporate-event",
+      "styles": [
+        "printed",
+        "branded"
+      ],
+      "brand_or_theme": "Flagstar",
+      "gallery_targets": [
+        "all"
+      ]
+    },
+    "gallery_targets": [
+      "all"
+    ],
+    "image_path": "images/gallery/bakers-agent/other/corporate-branded-cupcakes-and-cake-pops-1dda3e6f9f-3.webp",
+    "image_url": "/images/gallery/bakers-agent/other/corporate-branded-cupcakes-and-cake-pops-1dda3e6f9f-3.webp",
+    "published_at": "2026-08-28T13:04:49.519191+00:00"
+  },
+  {
     "id": "1dda3e6f9f9a7571788db0b6df73b493690d02af12685c50b0ab498325d05eac-2",
     "title": "Corporate Branded  Cupcakes and Cake Pops",
     "caption": "Cupcakes topped with printed fondant logo plaques, plus white chocolate cake pops featuring Company logo— available in vanilla and chocolate. Custom corporate dessert sets made to order and delivered across the Bay Area and San Francisco.",
