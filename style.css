@@ -25,3 +25,7 @@
 .hero-carousel .hero-text-box.lens-on .lens-strip{position:absolute;top:0;left:0;display:flex;transform-origin:0 0;transition:none;will-change:transform}
 .hero-carousel .hero-text-box.lens-on .lens-tint{position:absolute;inset:0;z-index:0;border-radius:inherit;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,0.42) 0%,rgba(0,0,0,0.35) 100%)}
 }
+
+/* Order Now in the mobile menu (2026-08-28) */
+@media (min-width:969px){.li-ordernow{display:none}}
+.nav-cta--pink{background:linear-gradient(135deg,var(--pink),var(--pink-dark)) !important;color:#fff !important}
