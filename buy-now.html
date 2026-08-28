@@ -439,6 +439,9 @@
 
     .logo-row img {
         height: 30px;
+        width: auto;
+        max-width: 160px;
+        object-fit: contain;
         opacity: 0.4;
         filter: grayscale(100%);
         transition: all 0.3s ease;
@@ -553,6 +556,7 @@
 
         .logo-row img {
             height: 22px;
+            width: auto;
         }
     }
     </style>
@@ -920,7 +924,7 @@
     <!-- AI Chatbot Widget -->
     <link rel="stylesheet" href="chatbot.css">
     <script src="chatbot.js" defer></script>
-    <script src="https://www.paypal.com/sdk/js?client-id=BAAWrqUBSYrM5GuFpN43KZHxZAJvb_39F9mt1SIA4TX2tYQVOo0N9Hmfw-BbC55szL-UoAlsXCOPaW3_fE&currency=USD&intent=capture&enable-funding=card&components=buttons"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=BAAWrqUBSYrM5GuFpN43KZHxZAJvb_39F9mt1SIA4TX2tYQVOo0N9Hmfw-BbC55szL-UoAlsXCOPaW3_fE&currency=USD&intent=capture&enable-funding=card&disable-funding=paylater&components=buttons"></script>
     <script>
     if (window.paypal && document.getElementById('paypal-button-container')) {
         paypal.Buttons({
