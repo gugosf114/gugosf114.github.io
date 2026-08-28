@@ -28,4 +28,4 @@
 
 /* Order Now in the mobile menu (2026-08-28) */
 @media (min-width:969px){.li-ordernow{display:none}}
-.nav-cta--pink{background:linear-gradient(135deg,var(--pink),var(--pink-dark)) !important;color:#fff !important}
+ul.nav-links li.li-ordernow a.nav-cta.nav-cta--pink{background:linear-gradient(135deg,var(--pink),var(--pink-dark)) !important;background-image:linear-gradient(135deg,var(--pink),var(--pink-dark)) !important;color:#fff !important}
