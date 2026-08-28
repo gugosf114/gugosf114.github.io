@@ -704,6 +704,10 @@
 
                 <a href="order-form?product=cookies&qty=1" class="btn-order">Order Now — $90</a>
 
+                <div style="text-align:center; margin:0.9rem 0 0.2rem; color:#8B7355; font-size:0.9rem; font-weight:600;">or pay now by card or PayPal:</div>
+                <div id="paypal-button-container" style="max-width:420px; margin:0.4rem auto 0;"></div>
+                <p id="paypal-paid-note" style="display:none; text-align:center; font-weight:700; color:#2e7d32; margin-top:0.8rem;"></p>
+
                 <div class="trust-row">
                     <div class="trust-item">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="#8B7355"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
@@ -916,5 +920,37 @@
     <!-- AI Chatbot Widget -->
     <link rel="stylesheet" href="chatbot.css">
     <script src="chatbot.js" defer></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=BAAWrqUBSYrM5GuFpN43KZHxZAJvb_39F9mt1SIA4TX2tYQVOo0N9Hmfw-BbC55szL-UoAlsXCOPaW3_fE&currency=USD&intent=capture&enable-funding=card&components=buttons"></script>
+    <script>
+    if (window.paypal && document.getElementById('paypal-button-container')) {
+        paypal.Buttons({
+            style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'pay' },
+            createOrder: function(data, actions) {
+                const qty = parseInt(document.getElementById('cookieQty').value) || 1;
+                return actions.order.create({
+                    purchase_units: [{
+                        description: 'Printed Image Cookies — ' + qty + ' dozen (' + (qty * 12) + ' cookies)',
+                        amount: { currency_code: 'USD', value: String(qty * 90) + '.00' }
+                    }],
+                    application_context: { shipping_preference: 'GET_FROM_FILE' }
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    const note = document.getElementById('paypal-paid-note');
+                    note.style.display = 'block';
+                    note.textContent = 'Payment received — thank you! Now email your photo to info@mybakingcreations.com and we will confirm the design within a few hours.';
+                    document.getElementById('paypal-button-container').style.display = 'none';
+                });
+            },
+            onError: function(err) {
+                const note = document.getElementById('paypal-paid-note');
+                note.style.display = 'block';
+                note.style.color = '#b00020';
+                note.textContent = 'Card checkout is unavailable right now — please use the Order Now button above.';
+            }
+        }).render('#paypal-button-container');
+    }
+    </script>
 </body>
 </html>
