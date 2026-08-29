@@ -180,6 +180,19 @@
       var matching = items.filter(function (item) {
         return Array.isArray(item.gallery_targets) && item.gallery_targets.indexOf(target) !== -1;
       });
+
+      /* One card per cake, not per photo.
+         Photos of the same bake share an upload id: <hash>, <hash>-2, <hash>-3.
+         Keep the first of each group, which is the newest the feed lists. */
+      var seen = {};
+      matching = matching.filter(function (item) {
+        var upload = String(item.id || '').replace(/-\d+$/, '');
+        if (!upload) return true;
+        if (seen[upload]) return false;
+        seen[upload] = true;
+        return true;
+      });
+
       if (!matching.length) return;
       var container = createContainer();
       var passes = container.rail ? 3 : 1;
