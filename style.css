@@ -29,3 +29,5 @@
 /* Order Now in the mobile menu (2026-08-28) */
 @media (min-width:969px){.li-ordernow{display:none}}
 ul.nav-links li.li-ordernow a.nav-cta.nav-cta--pink{background:linear-gradient(135deg,var(--pink),var(--pink-dark)) !important;background-image:linear-gradient(135deg,var(--pink),var(--pink-dark)) !important;color:#fff !important}
+
+.hero-text-box .hero-description,.hero-text-box .hero-subtitle,.hero-text-box .hero-seo-note{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:normal;border:0}
