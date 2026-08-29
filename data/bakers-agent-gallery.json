@@ -1,5 +1,36 @@
 [
   {
+    "id": "20a3830aba8ec016bf58b20df2d1bdf8e69ecef5bf98638036d88deffceaa359-2",
+    "title": "Realistic Amazon Package Sculpted Cake",
+    "caption": "A hyperrealistic sculpted cake built to look exactly like an Amazon Prime shipping box — complete with edible Priority Mail label, printed tracking number, and Amazon Prime tape. Custom sculpted cakes made to order, serving San Francisco and the Bay Area.",
+    "alt_text": "Sculpted cake designed to look like an Amazon Prime cardboard shipping box with printed edible Priority Mail and tracking labels.",
+    "classification": {
+      "audience": "personal",
+      "product_type": "cake",
+      "occasion": "general",
+      "styles": [
+        "sculpted",
+        "realistic"
+      ],
+      "brand_or_theme": "Ultra Realistic",
+      "gallery_targets": [
+        "all",
+        "cakes",
+        "cakes-sculpted",
+        "cakes-realistic"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cakes",
+      "cakes-sculpted",
+      "cakes-realistic"
+    ],
+    "image_path": "images/gallery/bakers-agent/cake/realistic-amazon-package-sculpted-cake-20a3830aba-2.webp",
+    "image_url": "/images/gallery/bakers-agent/cake/realistic-amazon-package-sculpted-cake-20a3830aba-2.webp",
+    "published_at": "2026-08-29T06:49:51.422279+00:00"
+  },
+  {
     "id": "20a3830aba8ec016bf58b20df2d1bdf8e69ecef5bf98638036d88deffceaa359",
     "title": "Realistic Amazon Package Sculpted Cake",
     "caption": "A hyperrealistic sculpted cake built to look exactly like an Amazon Prime shipping box — complete with edible Priority Mail label, printed tracking number, and Amazon Prime tape. Custom sculpted cakes made to order, serving San Francisco and the Bay Area.",
