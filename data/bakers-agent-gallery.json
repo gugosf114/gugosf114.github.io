@@ -1,5 +1,33 @@
 [
   {
+    "id": "4c4dff021efeeea9851e2be8c46de265021ca854f461849f467e9fd2fc8e3118",
+    "title": "Custom Pirate Ship Sculpted Birthday Cake",
+    "caption": "A fully sculpted pirate ship cake built with hand-textured wood-plank fondant, gold-painted railings, black cannons, edible wafer paper sails, and a personalized name on the hull. Custom sculpted cakes made to order across the Bay Area.",
+    "alt_text": "Sculpted pirate ship birthday cake with fondant wood planks, gold trim, edible sails, and blue wave base board, personalized \"Xavier",
+    "classification": {
+      "audience": "personal",
+      "product_type": "cake",
+      "occasion": "corporate-event",
+      "styles": [
+        "sculpted"
+      ],
+      "brand_or_theme": "",
+      "gallery_targets": [
+        "all",
+        "cakes",
+        "cakes-sculpted"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cakes",
+      "cakes-sculpted"
+    ],
+    "image_path": "images/gallery/bakers-agent/cake/custom-pirate-ship-sculpted-birthday-cake-4c4dff021e.webp",
+    "image_url": "/images/gallery/bakers-agent/cake/custom-pirate-ship-sculpted-birthday-cake-4c4dff021e.webp",
+    "published_at": "2026-08-29T09:19:40.211240+00:00"
+  },
+  {
     "id": "20a3830aba8ec016bf58b20df2d1bdf8e69ecef5bf98638036d88deffceaa359-3",
     "title": "Realistic Amazon Package Sculpted Cake",
     "caption": "A hyperrealistic sculpted cake built to look exactly like an Amazon Prime shipping box — complete with edible Priority Mail label, printed tracking number, and Amazon Prime tape. Custom sculpted cakes made to order, serving San Francisco and the Bay Area.",
