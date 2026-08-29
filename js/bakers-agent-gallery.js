@@ -60,7 +60,7 @@
   }
 
   var MOBILE = window.matchMedia('(max-width: 768px)');
-  var TILE = 175;
+  var TILE = 115;
 
   function injectStyles() {
     if (document.getElementById('ba-latest-css')) return;
@@ -73,12 +73,12 @@
       'mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}' +
       '.ba-rail::-webkit-scrollbar{display:none}' +
       '.ba-rail.is-grabbing{cursor:grabbing}' +
-      '.ba-track{display:flex;gap:10px;width:max-content;padding:0 14px}' +
+      '.ba-track{display:flex;gap:8px;width:max-content;padding:0 10px}' +
       '.ba-rail .bakers-agent-gallery-card{width:' + TILE + 'px;flex:none;' +
       'transition:transform .18s ease,box-shadow .18s ease}' +
       '.ba-rail .bakers-agent-gallery-card.is-held{transform:scale(1.045);' +
       'box-shadow:0 10px 26px rgba(236,38,143,.34);outline:2px solid #EC268F;outline-offset:-2px}' +
-      '.ba-rail .bakers-agent-gallery-card span{font-size:10.5px;padding:7px 9px;' +
+      '.ba-rail .bakers-agent-gallery-card span{font-size:9.5px;padding:5px 7px;' +
       'white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
       '@media (prefers-reduced-motion:reduce){.ba-rail{scroll-behavior:auto}}';
     document.head.appendChild(css);
