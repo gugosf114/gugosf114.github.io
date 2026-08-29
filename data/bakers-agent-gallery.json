@@ -1,5 +1,36 @@
 [
   {
+    "id": "fe11ae8d65a4c15ace618db95f640acc2cdf2a31210971366550d713c91ef5a5",
+    "title": "Mercedes-Benz Pagoda Birthday Cake",
+    "caption": "Four angles of one sculpted cake — front grille, side profile, rear trunk, and open interior with a wood-rimmed steering wheel. Every detail is fondant or isomalt, built for a 70th birthday (all edible). Custom sculpted cakes made to order across the Bay Area.",
+    "alt_text": "Four-angle view of a sculpted fondant 1968 Mercedes-Benz 280SL Pagoda birthday cake with red interior, isomalt windshield, and California license plate reading 70, made in the Bay Area.",
+    "classification": {
+      "audience": "personal",
+      "product_type": "cake",
+      "occasion": "birthday",
+      "styles": [
+        "sculpted",
+        "realistic"
+      ],
+      "brand_or_theme": "Mercedes-Benz 280SL Pagoda",
+      "gallery_targets": [
+        "all",
+        "cakes",
+        "cakes-sculpted",
+        "cakes-realistic"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cakes",
+      "cakes-sculpted",
+      "cakes-realistic"
+    ],
+    "image_path": "images/gallery/bakers-agent/cake/mercedes-benz-pagoda-birthday-cake-fe11ae8d65.webp",
+    "image_url": "/images/gallery/bakers-agent/cake/mercedes-benz-pagoda-birthday-cake-fe11ae8d65.webp",
+    "published_at": "2026-08-29T11:03:34.399531+00:00"
+  },
+  {
     "id": "4c4dff021efeeea9851e2be8c46de265021ca854f461849f467e9fd2fc8e3118",
     "title": "Custom Pirate Ship Sculpted Birthday Cake",
     "caption": "A fully sculpted pirate ship cake built with hand-textured wood-plank fondant, gold-painted railings, black cannons, edible wafer paper sails, and a personalized name on the hull. Custom sculpted cakes made to order across the Bay Area.",
