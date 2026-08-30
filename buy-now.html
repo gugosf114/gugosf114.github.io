@@ -110,6 +110,8 @@
     }
 
     .pc-wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+    /* display rules below would otherwise beat the hidden attribute */
+    .order-page [hidden] { display: none !important; }
 
     .pc-eyebrow {
       display: inline-flex; align-items: center; gap: 9px;
@@ -240,7 +242,10 @@
       display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr);
       gap: clamp(24px, 4vw, 52px); align-items: center;
     }
-    .pc-arrives img { width: 100%; border-radius: 18px; display: block; box-shadow: var(--lift); }
+    .pc-arrives img {
+      width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center;
+      border-radius: 18px; display: block; box-shadow: var(--lift);
+    }
     .pc-h2 {
       font-family: 'Fredoka One', 'Fredoka Fallback', cursive;
       font-size: clamp(1.7rem, 3.4vw, 2.5rem); color: var(--ink);
@@ -322,7 +327,8 @@
     @media (max-width: 900px) {
       .pc-hero-grid, .pc-arrives-grid, .pc-order-grid { grid-template-columns: 1fr; }
       .pc-hero-grid { gap: 30px; }
-      .pc-stage { order: -1; }
+      /* facts read as label-above-value once the row gets narrow */
+      .pc-facts li { flex-direction: column; gap: 3px; }
     }
     @media (prefers-reduced-motion: reduce) {
       .pc-preview.is-on { animation: none; }
@@ -521,7 +527,7 @@
 
             <a href="order-form" class="btn-order">Start your order — $90</a>
 
-            <p class="pc-paypal-note">or pay now by card</p>
+            <p class="pc-paypal-note" id="payByCardNote" hidden>or pay now by card</p>
             <div id="paypal-button-container"></div>
             <p id="paypal-paid-note" style="display:none;margin-top:12px;font-size:.9rem"></p>
           </div>
@@ -763,6 +769,15 @@
           if (photo) resetBtn.click();
         });
       });
+    })();
+
+    /* Card payment only announces itself once it has actually rendered. */
+    (function () {
+      var note = document.getElementById('payByCardNote');
+      var box = document.getElementById('paypal-button-container');
+      if (!note || !box) return;
+      function check() { if (box.children.length) note.hidden = false; }
+      setTimeout(check, 1200); setTimeout(check, 4000);
     })();
 
     /* ── Price follows the quantity ─────────────────────────────────────── */
