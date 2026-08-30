@@ -44,14 +44,13 @@
     var button = document.createElement('button');
     button.type = 'button';
     button.className = 'bakers-agent-gallery-card';
-    button.style.cssText = 'appearance:none;border:0;background:#fff;padding:0;border-radius:14px;overflow:hidden;box-shadow:0 8px 24px rgba(63,35,20,.12);cursor:zoom-in;text-align:left;min-width:0';
     var image = document.createElement('img');
     image.src = item.image_url;
     image.alt = item.alt_text || item.title || 'Bakery creation';
     image.loading = 'lazy';
-    image.style.cssText = 'display:block;width:100%;aspect-ratio:1/1;object-fit:cover';
+    image.className = 'ba-card-img';
     var label = document.createElement('span');
-    label.style.cssText = 'display:block;padding:10px 12px;color:#4a2b20;font:600 14px/1.35 Outfit,Arial,sans-serif';
+    label.className = 'ba-card-label';
     label.appendChild(text(item.title || 'Latest creation'));
     button.appendChild(image);
     button.appendChild(label);
@@ -66,27 +65,41 @@
     if (document.getElementById('ba-latest-css')) return;
     var css = document.createElement('style');
     css.id = 'ba-latest-css';
-    css.textContent =
-      '.ba-rail{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-ms-overflow-style:none;' +
-      '-webkit-overflow-scrolling:touch;cursor:grab;' +
-      '-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);' +
-      'mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}' +
-      '.ba-rail::-webkit-scrollbar{display:none}' +
-      '.ba-rail.is-grabbing{cursor:grabbing}' +
-      '.ba-track{display:flex;gap:8px;width:max-content;padding:0 10px}' +
-      '.ba-rail .bakers-agent-gallery-card{width:' + TILE + 'px;flex:none;' +
-      'transition:transform .18s ease,box-shadow .18s ease}' +
-      '.ba-rail .bakers-agent-gallery-card.is-held{transform:scale(1.045);' +
-      'box-shadow:0 10px 26px rgba(236,38,143,.34);outline:2px solid #EC268F;outline-offset:-2px}' +
-      '.ba-rail .bakers-agent-gallery-card span{font-size:9.5px;padding:5px 7px;' +
-      'white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
-      '@media (prefers-reduced-motion:reduce){.ba-rail{scroll-behavior:auto}}';
+    css.textContent = [
+      /* card - matches .service-card's material, at tile scale */
+      '.bakers-agent-gallery-card{appearance:none;border:0;padding:0;min-width:0;cursor:zoom-in;',
+      'text-align:left;background:var(--white,#FDFBF8);border-radius:18px;overflow:hidden;',
+      'box-shadow:var(--shadow-card,0 2px 12px rgba(0,0,0,.1));',
+      'transition:transform .3s ease,box-shadow .3s ease;font-family:inherit}',
+      '.bakers-agent-gallery-card:hover{transform:translateY(-6px);',
+      'box-shadow:var(--shadow-hover,0 8px 25px rgba(236,38,143,.2))}',
+      '.bakers-agent-gallery-card:focus-visible{outline:3px solid var(--pink,#EC268F);outline-offset:3px}',
+      '.ba-card-img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;background:#FFF8F0}',
+      '.ba-card-label{display:block;padding:12px 14px;color:var(--dark-brown,#622D2B);',
+      "font-family:'Nunito','Nunito Fallback',sans-serif;font-weight:700;font-size:.92rem;line-height:1.35}",
+      /* desktop grid */
+      '.ba-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1.25rem}',
+      /* mobile rail */
+      '.ba-rail{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-ms-overflow-style:none;',
+      '-webkit-overflow-scrolling:touch;cursor:grab;',
+      '-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);',
+      'mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}',
+      '.ba-rail::-webkit-scrollbar{display:none}',
+      '.ba-rail.is-grabbing{cursor:grabbing}',
+      '.ba-track{display:flex;gap:8px;width:max-content;padding:0 10px}',
+      '.ba-rail .bakers-agent-gallery-card{width:' + TILE + 'px;flex:none;border-radius:14px}',
+      '.ba-rail .bakers-agent-gallery-card:hover{transform:none}',
+      '.ba-rail .bakers-agent-gallery-card.is-held{transform:scale(1.045);',
+      'box-shadow:0 10px 26px rgba(236,38,143,.34);outline:2px solid var(--pink,#EC268F);outline-offset:-2px}',
+      '.ba-rail .ba-card-label{font-size:.62rem;padding:6px 8px;',
+      'white-space:nowrap;overflow:hidden;text-overflow:ellipsis}',
+      '@media (prefers-reduced-motion:reduce){.ba-rail{scroll-behavior:auto}}'
+    ].join('');
     document.head.appendChild(css);
   }
 
   /* Horizontal auto-scrolling rail. Drag to move it, tap a card to stop on it. */
   function makeRail(wrapper) {
-    injectStyles();
     var rail = document.createElement('div');
     rail.className = 'ba-rail';
     var track = document.createElement('div');
@@ -147,25 +160,69 @@
     };
   }
 
-  function createContainer() {
-    var wrapper = document.createElement('section');
-    wrapper.className = 'bakers-agent-latest';
-    wrapper.style.cssText = 'max-width:1200px;margin:28px auto;padding:0 20px';
-    var heading = document.createElement('h2');
-    heading.appendChild(text('Latest creations'));
-    heading.style.cssText = 'text-align:center;margin:0 0 18px;color:#4a2b20';
-    wrapper.appendChild(heading);
+  /* One card per bake.
+     Pass 1: photos of one bake share an upload id (<hash>, <hash>-2, ...).
+     Pass 2: the same cake published twice under a reworded title
+     ("Custom Pirate Ship Sculpted..." vs "Custom Sculpted Pirate Ship...")
+     - compare the sorted set of words. */
+  function titleKey(t) {
+    return String(t || '').toLowerCase().replace(/[^a-z0-9 ]+/g, ' ')
+      .split(/\s+/).filter(Boolean).sort().join(' ');
+  }
+  function onePerBake(list) {
+    var uploads = {}, titles = {};
+    return list.filter(function (item) {
+      var upload = String(item.id || '').replace(/-\d+$/, '');
+      if (upload) {
+        if (uploads[upload]) return false;
+        uploads[upload] = true;
+      }
+      var tk = titleKey(item.title);
+      if (tk) {
+        if (titles[tk]) return false;
+        titles[tk] = true;
+      }
+      return true;
+    });
+  }
 
+  function createContainer() {
+    injectStyles();
+
+    /* Use the site's own section furniture so this block reads as part of
+       the page, not bolted onto it: cream wrapper, Fredoka heading with a
+       pink highlight word, same as "What We Create". */
+    var section = document.createElement('section');
+    section.className = 'page-content bakers-agent-latest';
+
+    var wrapper = document.createElement('div');
+    wrapper.className = 'section-wrapper section-beige';
+
+    var header = document.createElement('div');
+    header.className = 'section-header';
+    var heading = document.createElement('h2');
+    heading.appendChild(text('Latest '));
+    var hl = document.createElement('span');
+    hl.className = 'highlight';
+    hl.appendChild(text('Creations'));
+    heading.appendChild(hl);
+    var sub = document.createElement('p');
+    sub.appendChild(text('Fresh out of our kitchen'));
+    header.appendChild(heading);
+    header.appendChild(sub);
+    wrapper.appendChild(header);
+
+    section.appendChild(wrapper);
     var anchor = document.querySelector('.gallery-order-cta, .gallery-cta, footer');
-    if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(wrapper, anchor);
-    else document.body.appendChild(wrapper);
+    if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(section, anchor);
+    else document.body.appendChild(section);
 
     if (MOBILE.matches) {
       var rail = makeRail(wrapper);
       return { node: rail.track, done: rail.start, rail: true };
     }
     var grid = document.createElement('div');
-    grid.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px';
+    grid.className = 'ba-grid';
     wrapper.appendChild(grid);
     return { node: grid, done: function () {}, rail: false };
   }
@@ -181,31 +238,12 @@
         return Array.isArray(item.gallery_targets) && item.gallery_targets.indexOf(target) !== -1;
       });
 
-      /* One card per cake, not per photo.
-         Photos of the same bake share an upload id: <hash>, <hash>-2, <hash>-3.
-         Keep the first of each group, which is the newest the feed lists. */
-      var seen = {};
-      matching = matching.filter(function (item) {
-        var upload = String(item.id || '').replace(/-\d+$/, '');
-        if (!upload) return true;
-        if (seen[upload]) return false;
-        seen[upload] = true;
-        return true;
-      });
+      matching = onePerBake(matching);
 
       /* Some pages have nothing tagged for them (wedding cakes, printed
          cookies, corporate printed cookies). Rather than draw nothing, fall
          back to the newest bakes from the whole feed. */
-      if (!matching.length) {
-        var pool = {};
-        matching = items.filter(function (item) {
-          var upload = String(item.id || '').replace(/-\d+$/, '');
-          if (!upload) return true;
-          if (pool[upload]) return false;
-          pool[upload] = true;
-          return true;
-        }).slice(0, 12);
-      }
+      if (!matching.length) matching = onePerBake(items).slice(0, 12);
 
       if (!matching.length) return;
       var container = createContainer();
