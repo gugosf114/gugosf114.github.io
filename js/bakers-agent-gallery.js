@@ -19,7 +19,20 @@
     'gallery-cookies-printed': 'cookies-printed',
     'gallery-corporate-cookies-printed': 'corporate-cookies-printed'
   };
-  var target = pageMap[pageKey];
+  /* Gallery pages have an exact target above. The city and occasion landing
+     pages are the ones with no photos on them at all, so the strip earns its
+     place there - work out what each is about from its name. Anything not
+     listed here (privacy, cart, thank-you...) still gets nothing. */
+  var LANDING = /^(custom-cakes-[a-z-]+|anniversary-cakes|baby-shower-cakes|bridal-shower-cakes|cake-pops-party-favors|client-appreciation-gifts|conference-desserts|corporate-cake-balls|corporate-gifting|corporate-logo-cookies-[a-z-]+|corporate|cupcakes-for-corporate-event|custom-birthday-cakes-san-francisco|custom-cookies-san-francisco|custom-cookies|custom-cupcake-towers|delivery-areas|first-birthday-cakes|gender-reveal-cakes|graduation-cakes|hand-piped-logo-cookies|hand-piped-royal-icing-cookies|holiday-dessert-catering|office-birthday-cakes|product-launch-cakes|quinceanera-cakes|retirement-party-cakes|sculpted-3d-cakes|sweet-sixteen-cakes|team-building-treats|wedding-cake-flavors)$/;
+
+  function guessTarget(key) {
+    if (/cookie/.test(key)) return 'cookies';
+    if (/cake-pop|cake-balls/.test(key)) return 'cake-pops';
+    if (/cupcake/.test(key)) return 'cupcakes';
+    return 'cakes';
+  }
+
+  var target = pageMap[pageKey] || (LANDING.test(pageKey) ? guessTarget(pageKey) : null);
   if (!target) return;
 
   function text(value) {
@@ -240,10 +253,22 @@
 
       matching = onePerBake(matching);
 
-      /* Some pages have nothing tagged for them (wedding cakes, printed
-         cookies, corporate printed cookies). Rather than draw nothing, fall
-         back to the newest bakes from the whole feed. */
-      if (!matching.length) matching = onePerBake(items).slice(0, 12);
+      /* Thin pages read as broken rather than curated: a strip of one card
+         is not a strip. Top up with the newest other bakes, so every page
+         gets a real row. Covers the three pages with nothing tagged at all
+         (wedding cakes, printed cookies, corporate printed cookies) and the
+         thin ones (cupcakes had 1, cake pops 2). */
+      var MIN = 6, MAX = 12;
+      if (matching.length < MIN) {
+        var have = {};
+        matching.forEach(function (m) { have[m.id] = true; });
+        onePerBake(items).forEach(function (extra) {
+          if (matching.length >= MIN || have[extra.id]) return;
+          matching.push(extra);
+          have[extra.id] = true;
+        });
+      }
+      matching = matching.slice(0, MAX);
 
       if (!matching.length) return;
       var container = createContainer();
