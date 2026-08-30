@@ -193,6 +193,20 @@
         return true;
       });
 
+      /* Some pages have nothing tagged for them (wedding cakes, printed
+         cookies, corporate printed cookies). Rather than draw nothing, fall
+         back to the newest bakes from the whole feed. */
+      if (!matching.length) {
+        var pool = {};
+        matching = items.filter(function (item) {
+          var upload = String(item.id || '').replace(/-\d+$/, '');
+          if (!upload) return true;
+          if (pool[upload]) return false;
+          pool[upload] = true;
+          return true;
+        }).slice(0, 12);
+      }
+
       if (!matching.length) return;
       var container = createContainer();
       var passes = container.rail ? 3 : 1;
