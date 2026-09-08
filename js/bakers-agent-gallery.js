@@ -11,7 +11,7 @@
     'gallery-corporate-cakes': 'corporate-cakes',
     'gallery-corporate-cookies': 'corporate-cookies',
     'gallery-corporate-cakepops': 'corporate-cake-pops',
-    'gallery-corporate-cupcakes': 'corporate-cupcakes',
+    'cupcakes-for-corporate-event': 'corporate-cupcakes',
     'gallery-cakes-sculpted': 'cakes-sculpted',
     'gallery-cakes-realistic': 'cakes-realistic',
     'gallery-cakes-wedding': 'cakes-wedding',
