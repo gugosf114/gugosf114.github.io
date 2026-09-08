@@ -108,7 +108,7 @@ The fact that multiple departments within the same company order independently â
 
 ### Authenticity You Can See
 
-Every photo in our gallery is a real product we made. No stock images, no AI-generated mockups. Browse hundreds of real corporate orders at [mybakingcreations.com/gallery-corporate-cupcakes](https://mybakingcreations.com/gallery-corporate-cupcakes).
+Every photo in our gallery is a real product we made. No stock images, no AI-generated mockups. Browse hundreds of real corporate orders at [mybakingcreations.com/cupcakes-for-corporate-event](https://mybakingcreations.com/cupcakes-for-corporate-event).
 
 ---
 

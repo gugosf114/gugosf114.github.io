@@ -11,7 +11,7 @@
     'gallery-corporate-cakes': 'corporate-cakes',
     'gallery-corporate-cookies': 'corporate-cookies',
     'gallery-corporate-cakepops': 'corporate-cake-pops',
-    'gallery-corporate-cupcakes': 'corporate-cupcakes',
+    'cupcakes-for-corporate-event': 'corporate-cupcakes',
     'gallery-cakes-sculpted': 'cakes-sculpted',
     'gallery-cakes-realistic': 'cakes-realistic',
     'gallery-cakes-wedding': 'cakes-wedding',
@@ -23,7 +23,7 @@
      pages are the ones with no photos on them at all, so the strip earns its
      place there - work out what each is about from its name. Anything not
      listed here (privacy, cart, thank-you...) still gets nothing. */
-  var LANDING = /^(custom-cakes-[a-z-]+|anniversary-cakes|baby-shower-cakes|bridal-shower-cakes|cake-pops-party-favors|client-appreciation-gifts|conference-desserts|corporate-cake-balls|corporate-gifting|corporate-logo-cookies-[a-z-]+|corporate|cupcakes-for-corporate-event|custom-birthday-cakes-san-francisco|custom-cookies-san-francisco|custom-cookies|custom-cupcake-towers|delivery-areas|first-birthday-cakes|gender-reveal-cakes|graduation-cakes|hand-piped-logo-cookies|hand-piped-royal-icing-cookies|holiday-dessert-catering|office-birthday-cakes|product-launch-cakes|quinceanera-cakes|retirement-party-cakes|sculpted-3d-cakes|sweet-sixteen-cakes|team-building-treats|wedding-cake-flavors)$/;
+  var LANDING = /^(custom-cakes-[a-z-]+|anniversary-cakes|baby-shower-cakes|bridal-shower-cakes|cake-pops-party-favors|client-appreciation-gifts|conference-desserts|corporate-cake-balls|corporate-gifting|corporate-logo-cookies-[a-z-]+|corporate|custom-birthday-cakes-san-francisco|custom-cookies-san-francisco|custom-cookies|custom-cupcake-towers|delivery-areas|first-birthday-cakes|gender-reveal-cakes|graduation-cakes|hand-piped-logo-cookies|hand-piped-royal-icing-cookies|holiday-dessert-catering|office-birthday-cakes|product-launch-cakes|quinceanera-cakes|retirement-party-cakes|sculpted-3d-cakes|sweet-sixteen-cakes|team-building-treats|wedding-cake-flavors)$/;
 
   function guessTarget(key) {
     if (/cookie/.test(key)) return 'cookies';
