@@ -1,5 +1,34 @@
 [
   {
+    "id": "bc28ed181b9ea24f6c9c824009eb1419b5cefd6295bd607aad37c3416b189da0",
+    "title": "Branded Cake Pops for Corporate Events",
+    "caption": "Custom cake pops printed with your company logo and brand colors, packaged and ready to distribute. A polished, on-brand treat for product launches, conferences, and employee events across the Bay Area.",
+    "alt_text": "Box of white cake pops printed with the WD Elevate corporate logo, arranged in rows inside a windowed bakery box, made for a Bay Area corporate event.",
+    "classification": {
+      "audience": "corporate",
+      "product_type": "cake-pops",
+      "occasion": "corporate-event",
+      "styles": [
+        "printed",
+        "branded"
+      ],
+      "brand_or_theme": "WD Elevate",
+      "gallery_targets": [
+        "all",
+        "cake-pops",
+        "corporate-cake-pops"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cake-pops",
+      "corporate-cake-pops"
+    ],
+    "image_path": "images/gallery/bakers-agent/cake-pops/branded-cake-pops-for-corporate-events-bc28ed181b.webp",
+    "image_url": "/images/gallery/bakers-agent/cake-pops/branded-cake-pops-for-corporate-events-bc28ed181b.webp",
+    "published_at": "2026-09-09T21:32:36.784701+00:00"
+  },
+  {
     "id": "08dc4ec9d58b839a0213e0ed427e8f572e2a73f53db40acf2d8ef33c4f34e65a-3",
     "title": "Custom Kids Birthday Cakes Pokémon Roblox Ghostbusters",
     "caption": "Three custom character birthday cakes — Pokémon Eeveelutions, Roblox with Squid Game, and Ghostbusters with Slimer — each with hand-sculpted fondant figures and themed details. Built to order for Bay Area families.",
