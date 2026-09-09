@@ -335,7 +335,18 @@
       .pc-drop, .btn-order, .thumb-row img { transition: none; }
       .btn-order:hover, .pc-drop:hover, .thumb-row img:hover { transform: none; }
     }
-    </style>
+    
+    .pc-mail-btn { display: inline-block; margin: 10px 0 6px; padding: 12px 20px; border-radius: 999px; background: var(--pink, #EC268F); color: #fff !important; font-weight: 800; text-decoration: none; }
+    .pc-pay { margin-top: 20px; }
+    .pc-ship { border: 1px solid rgba(0,0,0,.12); border-radius: 12px; padding: 12px 14px 10px; margin: 0; }
+    .pc-ship legend { font-weight: 700; padding: 0 6px; }
+    .pc-ship label { display: block; margin: 6px 0; font-size: .95rem; cursor: pointer; }
+    .pc-ship input { margin-right: 8px; }
+    .pc-pay-label { font-weight: 800; font-size: 1.1rem; margin: 16px 0 10px; }
+    .pc-pay-hint { font-size: .86rem; color: var(--ink-40); margin-top: 10px; }
+    .pc-quote-link { margin-top: 12px; font-size: .9rem; }
+    #paypal-button-container { max-width: 420px; }
+</style>
 </head>
 <body class="order-page">
 
@@ -423,7 +434,7 @@
           <div class="pc-drop" id="uploadArea" role="button" tabindex="0"
                aria-label="Add a photo to see it on a cookie">
             <span class="pc-drop-title">Add a photo &rarr;</span>
-            <span class="pc-drop-hint">See it on the cookie before you order. Nothing is sent to us.</span>
+            <span class="pc-drop-hint">See it on the cookie before you order. We only receive it when you pay.</span>
           </div>
           <input type="file" id="logoUpload" accept="image/*" hidden>
         </div>
@@ -525,11 +536,18 @@
               </select>
             </div>
 
-            <a href="order-form" class="btn-order">Start your order — $90</a>
-
-            <p class="pc-paypal-note" id="payByCardNote" hidden>or pay now by card</p>
-            <div id="paypal-button-container"></div>
-            <p id="paypal-paid-note" style="display:none;margin-top:12px;font-size:.9rem"></p>
+            <div class="pc-pay" id="payBlock">
+              <fieldset class="pc-ship">
+                <legend>How do you want them?</legend>
+                <label><input type="radio" name="fulfil" value="ship" checked> Ship them — free shipping, leaves the bakery within 48 hours</label>
+                <label><input type="radio" name="fulfil" value="pickup"> Pick up in Daly City — free</label>
+              </fieldset>
+              <p class="pc-pay-label" id="payLabel">Pay $90 — card or PayPal</p>
+              <div id="paypal-button-container"></div>
+              <p class="pc-pay-hint" id="payHint">Add your photo at the top first, then pay. After payment you email us that photo and we send a design proof before anything is baked.</p>
+              <p id="paypal-paid-note" style="display:none;margin-top:12px;font-size:.95rem;line-height:1.5"></p>
+              <p class="pc-quote-link"><a href="order-form">Prefer to talk first? Send an order request instead &rarr;</a></p>
+            </div>
           </div>
 
           <div class="pc-ways">
@@ -709,7 +727,7 @@
         var reader = new FileReader();
         reader.onload = function (e) {
           var img = new Image();
-          img.onload = function () { photo = img; render(); };
+          img.onload = function () { photo = img; window.__mbcPhoto = file; window.__mbcPhotoImg = img; render(); };
           img.src = e.target.result;
         };
         reader.readAsDataURL(file);
@@ -750,7 +768,7 @@
       dlSquare.addEventListener('click', function () { save(cvSquare, 'my-photo-cookie-square.png'); });
 
       resetBtn.addEventListener('click', function () {
-        photo = null;
+        photo = null; window.__mbcPhoto = null; window.__mbcPhotoImg = null;
         preview.classList.remove('is-on');
         tabs.hidden = true; actions.hidden = true;
         mainImg.style.display = '';
@@ -785,13 +803,13 @@
       var qty = document.getElementById('cookieQty');
       var amount = document.querySelector('.price-block .amount');
       var per = document.querySelector('.price-block .per');
-      var cta = document.querySelector('.btn-order');
+      var cta = document.getElementById('payLabel');
       if (!qty || !amount) return;
       qty.addEventListener('change', function () {
         var n = parseInt(qty.value, 10) || 1;
         amount.textContent = '$' + (n * 90);
         per.textContent = n === 1 ? 'a dozen' : n + ' dozen';
-        if (cta) cta.textContent = 'Start your order — $' + (n * 90);
+        if (cta) cta.textContent = 'Pay $' + (n * 90) + ' — card or PayPal';
       });
     })();
     </script>
@@ -805,33 +823,93 @@
     <script src="https://www.paypal.com/sdk/js?client-id=BAAWrqUBSYrM5GuFpN43KZHxZAJvb_39F9mt1SIA4TX2tYQVOo0N9Hmfw-BbC55szL-UoAlsXCOPaW3_fE&currency=USD&intent=capture&enable-funding=card&disable-funding=paylater&components=buttons"></script>
     <script>
     if (window.paypal && document.getElementById('paypal-button-container')) {
-        paypal.Buttons({
-            style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'pay' },
-            createOrder: function(data, actions) {
-                const qty = parseInt(document.getElementById('cookieQty').value) || 1;
-                return actions.order.create({
-                    purchase_units: [{
-                        description: 'Printed Image Cookies — ' + qty + ' dozen (' + (qty * 12) + ' cookies)',
-                        amount: { currency_code: 'USD', value: String(qty * 90) + '.00' }
-                    }],
-                    application_context: { shipping_preference: 'GET_FROM_FILE' }
-                });
-            },
-            onApprove: function(data, actions) {
-                return actions.order.capture().then(function(details) {
-                    const note = document.getElementById('paypal-paid-note');
-                    note.style.display = 'block';
-                    note.textContent = 'Payment received — thank you! Now email your photo to info@mybakingcreations.com and we will confirm the design within a few hours.';
-                    document.getElementById('paypal-button-container').style.display = 'none';
-                });
-            },
-            onError: function(err) {
-                const note = document.getElementById('paypal-paid-note');
-                note.style.display = 'block';
-                note.style.color = '#b00020';
-                note.textContent = 'Card checkout is unavailable right now — please use the Order Now button above.';
-            }
-        }).render('#paypal-button-container');
+      var W3_KEY = 'bb1321a2-591e-405f-afb6-d93a8e4f721d';
+      function $id(id) { return document.getElementById(id); }
+      function fulfil() { var r = document.querySelector('input[name="fulfil"]:checked'); return r ? r.value : 'ship'; }
+      function shape() { var t = document.querySelector('.pc-shape-tab[aria-pressed="true"]'); return (t && t.dataset.shape) ? t.dataset.shape : 'round'; }
+      function say(msg, bad) { var n = $id('paypal-paid-note'); n.style.display = 'block'; n.style.color = bad ? '#b00020' : ''; n.innerHTML = msg; }
+      /* phone photos can be 10 MB; the mail relay takes 5. Shrink big ones to a 2000px JPEG. */
+      function photoForMail() {
+        var f = window.__mbcPhoto, img = window.__mbcPhotoImg;
+        if (!f) return Promise.resolve(null);
+        if (f.size <= 4000000 || !img) return Promise.resolve(f);
+        return new Promise(function (res) {
+          var max = 2000, s = Math.min(1, max / Math.max(img.width, img.height));
+          var c = document.createElement('canvas'); c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+          c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+          c.toBlob(function (b) { res(b ? new File([b], 'photo.jpg', { type: 'image/jpeg' }) : f); }, 'image/jpeg', 0.9);
+        });
+      }
+      paypal.Buttons({
+        style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'pay' },
+        onClick: function (data, actions) {
+          if (!window.__mbcPhoto) {
+            say('Add your photo first &mdash; tap &ldquo;Add a photo&rdquo; at the top of the page. We print exactly what you send.', true);
+            var ua = $id('uploadArea');
+            if (ua) { ua.scrollIntoView({ behavior: 'smooth', block: 'center' }); ua.classList.add('dragover'); setTimeout(function () { ua.classList.remove('dragover'); }, 1800); }
+            return actions.reject();
+          }
+          return actions.resolve();
+        },
+        createOrder: function (data, actions) {
+          var qty = parseInt($id('cookieQty').value, 10) || 1;
+          var f = fulfil();
+          return actions.order.create({
+            purchase_units: [{
+              description: 'Printed photo cookies — ' + qty + ' dozen (' + (qty * 12) + ' cookies) — ' + (f === 'pickup' ? 'PICKUP Daly City' : 'SHIP'),
+              amount: { currency_code: 'USD', value: String(qty * 90) + '.00' }
+            }],
+            application_context: { shipping_preference: f === 'pickup' ? 'NO_SHIPPING' : 'GET_FROM_FILE' }
+          });
+        },
+        onApprove: function (data, actions) {
+          return actions.order.capture().then(function (d) {
+            var qty = parseInt($id('cookieQty').value, 10) || 1;
+            var f = fulfil();
+            var payer = d.payer || {};
+            var nm = payer.name ? [payer.name.given_name, payer.name.surname].filter(Boolean).join(' ') : '';
+            var pu = (d.purchase_units && d.purchase_units[0]) || {};
+            var sh = pu.shipping || {};
+            var a = sh.address || {};
+            var addr = [a.address_line_1, a.address_line_2, a.admin_area_2, a.admin_area_1, a.postal_code, a.country_code].filter(Boolean).join(', ');
+            var shipTo = (sh.name && sh.name.full_name) ? sh.name.full_name : nm;
+            var cap = (pu.payments && pu.payments.captures && pu.payments.captures[0]) || {};
+            var amount = (cap.amount && cap.amount.value) ? cap.amount.value : String(qty * 90) + '.00';
+            var lines = [
+              'PAID ORDER — printed photo cookies',
+              'Quantity: ' + qty + ' dozen (' + (qty * 12) + ' cookies)',
+              'Shape: ' + shape(),
+              'Paid: $' + amount + ' USD via PayPal',
+              'PayPal order: ' + d.id + (cap.id ? ' / capture ' + cap.id : ''),
+              (f === 'pickup') ? 'Fulfilment: PICKUP at 1096 Wildwood Ave, Daly City' : 'Fulfilment: SHIP to ' + shipTo + ' — ' + addr,
+              'Photo: customer emails it to info@ (subject: Photo for order ' + d.id + ')'
+            ].join('\n');
+            ['.pc-ship', '#paypal-button-container', '#payLabel', '#payHint'].forEach(function (sel) { var el = document.querySelector(sel); if (el) el.style.display = 'none'; });
+            say('Payment received &mdash; order <b>' + d.id + '</b>. Sending us your photo&hellip;');
+            var mailto = 'mailto:info@mybakingcreations.com?subject=' + encodeURIComponent('Photo for order ' + d.id) + '&body=' + encodeURIComponent('Order ' + d.id + ' — ' + qty + ' dozen ' + shape() + ' photo cookies — ' + (f === 'pickup' ? 'pickup Daly City' : 'ship') + '. Photo attached.');
+            var ok = 'Payment received &mdash; order <b>' + d.id + '</b>. One last step: send us the photo you previewed.<br><a class="pc-mail-btn" href="' + mailto + '">Email my photo &rarr;</a><br><span style="font-size:.86rem;color:var(--ink-40)">Attach the picture to that email. We reply with a design proof within a few hours, then bake. Your PayPal receipt is in your inbox.</span>';
+            var fallback = ok;
+            photoForMail().then(function (file) {
+              var fd = new FormData();
+              fd.append('access_key', W3_KEY);
+              fd.append('subject', 'PAID ORDER — ' + qty + ' dozen photo cookies — $' + amount + ' — ' + (f === 'pickup' ? 'pickup' : 'ship'));
+              fd.append('from_name', 'My Baking Creations Website');
+              fd.append('name', nm || shipTo || 'PayPal buyer');
+              fd.append('email', payer.email_address || '');
+              fd.append('phone', (payer.phone && payer.phone.phone_number && payer.phone.phone_number.national_number) || '');
+              fd.append('product_type', 'Printed photo cookies (paid online)');
+              fd.append('delivery_method', f === 'pickup' ? 'Pickup — Daly City' : 'Ship — free shipping');
+              fd.append('delivery_address', addr);
+              fd.append('order_details', lines);
+              return fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd }).then(function (r) { return r.json(); });
+            }).then(function (j) { say((j && j.success) ? ok : fallback, !(j && j.success)); })
+              .catch(function () { say(fallback, true); });
+          });
+        },
+        onError: function (err) {
+          say('Checkout did not load. Email <a href="mailto:info@mybakingcreations.com">info@mybakingcreations.com</a> or <a href="order-form">send an order request</a> and we invoice you.', true);
+        }
+      }).render('#paypal-button-container');
     }
     </script>
 </body>
