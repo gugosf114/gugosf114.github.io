@@ -204,6 +204,11 @@
     .pc-shape-tab[aria-pressed="true"] {
       background: var(--ink); border-color: var(--ink); color: #fff;
     }
+    .pc-bg { margin-top: 12px; }
+    .pc-bg-label { display: block; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-40); margin-bottom: 6px; }
+    .pc-bg-tabs { margin-top: 0; }
+    .pc-bg-note { font-size: .84rem; color: var(--ink-40); margin: 8px 0 0; }
+    .pc-bg-note.is-busy { color: var(--ink); font-weight: 700; }
     .pc-stage-actions {
       display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px;
     }
@@ -457,6 +462,15 @@
             <button type="button" class="pc-shape-tab" data-shape="square" aria-pressed="false">Square</button>
           </div>
 
+          <div class="pc-bg" id="bgChoice" hidden>
+            <span class="pc-bg-label">Background</span>
+            <div class="pc-shape-tabs pc-bg-tabs" id="bgTabs">
+              <button type="button" class="pc-shape-tab" data-bg="keep" aria-pressed="true">Keep it</button>
+              <button type="button" class="pc-shape-tab" data-bg="white" aria-pressed="false">Cut it out</button>
+            </div>
+            <p class="pc-bg-note" id="bgNote">Cut-out puts just your subject on the white icing. Works best with one clear subject.</p>
+          </div>
+
           <div class="pc-stage-actions" id="stageActions" hidden>
             <button type="button" class="pc-mini" id="downloadBtnRound">Save this preview</button>
             <button type="button" class="pc-mini" id="downloadBtnSquare" hidden>Save this preview</button>
@@ -663,6 +677,11 @@
       var resetBtn   = document.getElementById('resetBtn');
       if (!uploadArea || !cvRound || !cvSquare) return;
 
+      var bgBox = document.getElementById('bgChoice');
+      var bgTabs = document.getElementById('bgTabs');
+      var bgNote = document.getElementById('bgNote');
+      var origPhoto = null, cutPhoto = null, bgMode = 'keep', busy = false;
+      window.__mbcBg = 'keep';
       var baseRound = new Image(); baseRound.src = ROUND_SRC;
       var baseSquare = new Image(); baseSquare.src = SQUARE_SRC;
       var photo = null;
@@ -719,14 +738,89 @@
         tabs.hidden = false;
         actions.hidden = false;
         uploadArea.querySelector('.pc-drop-title').textContent = 'Use a different photo →';
+        if (bgBox) bgBox.hidden = false;
       }
+
+      /* ── Background cut-out, on the customer's own phone ──────────────────
+         A small open model (U²-Net-p, 4.6 MB, Apache-2.0) runs in the browser
+         through onnxruntime-web. Nothing is uploaded. If it cannot run here,
+         the choice is still saved on the order and we cut it out by hand. */
+      var ORT_CDN = 'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/';
+      var session = null;
+      function loadOrt() {
+        if (window.ort) return Promise.resolve();
+        return new Promise(function (res, rej) {
+          var s = document.createElement('script'); s.src = ORT_CDN + 'ort.min.js';
+          s.onload = res; s.onerror = function () { rej(new Error('runtime failed to load')); };
+          document.head.appendChild(s);
+        });
+      }
+      function getSession() {
+        if (session) return Promise.resolve(session);
+        return loadOrt().then(function () {
+          ort.env.wasm.wasmPaths = ORT_CDN; ort.env.wasm.numThreads = 1;
+          return ort.InferenceSession.create('models/u2netp.onnx', { executionProviders: ['wasm'] });
+        }).then(function (s) { session = s; return s; });
+      }
+      function cutout(img) {
+        return getSession().then(function (s) {
+          var S = 320, c = document.createElement('canvas'); c.width = S; c.height = S;
+          var ctx = c.getContext('2d'); ctx.drawImage(img, 0, 0, S, S);
+          var d = ctx.getImageData(0, 0, S, S).data, input = new Float32Array(3 * S * S);
+          var mean = [0.485, 0.456, 0.406], std = [0.229, 0.224, 0.225];
+          for (var i = 0; i < S * S; i++) {
+            input[i] = (d[i * 4] / 255 - mean[0]) / std[0];
+            input[S * S + i] = (d[i * 4 + 1] / 255 - mean[1]) / std[1];
+            input[2 * S * S + i] = (d[i * 4 + 2] / 255 - mean[2]) / std[2];
+          }
+          return s.run({ 'input.1': new ort.Tensor('float32', input, [1, 3, S, S]) });
+        }).then(function (out) {
+          var S = 320, m = out['1959'].data, mn = Infinity, mx = -Infinity, i;
+          for (i = 0; i < m.length; i++) { if (m[i] < mn) mn = m[i]; if (m[i] > mx) mx = m[i]; }
+          var mc = document.createElement('canvas'); mc.width = S; mc.height = S;
+          var mctx = mc.getContext('2d'), md = mctx.createImageData(S, S);
+          for (i = 0; i < S * S; i++) {
+            var v = (m[i] - mn) / ((mx - mn) || 1); v = Math.min(1, Math.max(0, (v - 0.15) / 0.7));
+            md.data[i * 4] = 255; md.data[i * 4 + 1] = 255; md.data[i * 4 + 2] = 255; md.data[i * 4 + 3] = Math.round(v * 255);
+          }
+          mctx.putImageData(md, 0, 0);
+          var W = Math.min(img.width, 1600), H = Math.round(img.height * W / img.width);
+          var oc = document.createElement('canvas'); oc.width = W; oc.height = H;
+          var octx = oc.getContext('2d');
+          octx.drawImage(mc, 0, 0, W, H);
+          octx.globalCompositeOperation = 'source-in'; octx.drawImage(img, 0, 0, W, H);
+          octx.globalCompositeOperation = 'destination-over'; octx.fillStyle = '#fff'; octx.fillRect(0, 0, W, H);
+          return new Promise(function (res, rej) {
+            var o = new Image(); o.onload = function () { res(o); }; o.onerror = rej; o.src = oc.toDataURL('image/png');
+          });
+        });
+      }
+      function setBg(mode) {
+        bgMode = mode; window.__mbcBg = mode;
+        bgTabs.querySelectorAll('.pc-shape-tab').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.bg === mode)); });
+      }
+      function note(msg, isBusy) { if (!bgNote) return; bgNote.textContent = msg; bgNote.classList.toggle('is-busy', !!isBusy); }
+      if (bgTabs) bgTabs.addEventListener('click', function (e) {
+        var btn = e.target.closest('.pc-shape-tab'); if (!btn || !origPhoto || busy) return;
+        var mode = btn.dataset.bg; setBg(mode);
+        if (mode === 'keep') { photo = origPhoto; render(); note('Cut-out puts just your subject on the white icing. Works best with one clear subject.'); return; }
+        if (cutPhoto) { photo = cutPhoto; render(); note('Background cut out. Tap Keep it to go back.'); return; }
+        busy = true; note('Cutting out the background… first time downloads about 6 MB.', true);
+        cutout(origPhoto).then(function (img) {
+          busy = false; cutPhoto = img; if (bgMode === 'white') { photo = img; render(); }
+          note('Background cut out. Tap Keep it to go back.'); window.__mbcCutOk = true;
+        }).catch(function (err) {
+          busy = false; window.__mbcCutErr = String(err && err.message || err);
+          note('Could not cut it out on this phone. Your choice is saved: we cut it out by hand before printing.');
+        });
+      });
 
       function accept(file) {
         if (!file || !file.type || file.type.indexOf('image/') !== 0) return;
         var reader = new FileReader();
         reader.onload = function (e) {
           var img = new Image();
-          img.onload = function () { photo = img; window.__mbcPhoto = file; window.__mbcPhotoImg = img; render(); };
+          img.onload = function () { photo = img; origPhoto = img; cutPhoto = null; setBg('keep'); note('Cut-out puts just your subject on the white icing. Works best with one clear subject.'); window.__mbcPhoto = file; window.__mbcPhotoImg = img; render(); };
           img.src = e.target.result;
         };
         reader.readAsDataURL(file);
@@ -767,7 +861,7 @@
       dlSquare.addEventListener('click', function () { save(cvSquare, 'my-photo-cookie-square.png'); });
 
       resetBtn.addEventListener('click', function () {
-        photo = null; window.__mbcPhoto = null; window.__mbcPhotoImg = null;
+        photo = null; origPhoto = null; cutPhoto = null; setBg('keep'); if (bgBox) bgBox.hidden = true; window.__mbcPhoto = null; window.__mbcPhotoImg = null;
         preview.classList.remove('is-on');
         tabs.hidden = true; actions.hidden = true;
         mainImg.style.display = '';
@@ -878,6 +972,7 @@
               'PAID ORDER — printed photo cookies',
               'Quantity: ' + qty + ' dozen (' + (qty * 12) + ' cookies)',
               'Shape: ' + shape(),
+              'Background: ' + (window.__mbcBg === 'white' ? 'CUT OUT — print subject on white' : 'keep as in the photo'),
               'Paid: $' + amount + ' USD via PayPal',
               'PayPal order: ' + d.id + (cap.id ? ' / capture ' + cap.id : ''),
               (f === 'pickup') ? 'Fulfilment: PICKUP at 1096 Wildwood Ave, Daly City' : 'Fulfilment: SHIP to ' + shipTo + ' — ' + addr,
@@ -885,7 +980,7 @@
             ].join('\n');
             ['.pc-ship', '#paypal-button-container', '#payLabel', '#payHint'].forEach(function (sel) { var el = document.querySelector(sel); if (el) el.style.display = 'none'; });
             say('Payment received &mdash; order <b>' + d.id + '</b>. Sending us your photo&hellip;');
-            var mailto = 'mailto:info@mybakingcreations.com?subject=' + encodeURIComponent('Photo for order ' + d.id) + '&body=' + encodeURIComponent('Order ' + d.id + ' — ' + qty + ' dozen ' + shape() + ' photo cookies — ' + (f === 'pickup' ? 'pickup Daly City' : 'ship') + '. Photo attached.');
+            var mailto = 'mailto:info@mybakingcreations.com?subject=' + encodeURIComponent('Photo for order ' + d.id) + '&body=' + encodeURIComponent('Order ' + d.id + ' — ' + qty + ' dozen ' + shape() + ' photo cookies — ' + (f === 'pickup' ? 'pickup Daly City' : 'ship') + ' — background: ' + (window.__mbcBg === 'white' ? 'cut out, white' : 'keep') + '. Photo attached.');
             var ok = 'Payment received &mdash; order <b>' + d.id + '</b>. One last step: send us the photo you previewed.<br><a class="pc-mail-btn" href="' + mailto + '">Email my photo &rarr;</a><br><span style="font-size:.86rem;color:var(--ink-40)">Attach the picture to that email. We reply with a design proof within a few hours, then bake. Your PayPal receipt is in your inbox.</span>';
             var fallback = ok;
             photoForMail().then(function (file) {
