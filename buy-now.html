@@ -97,260 +97,447 @@
        Everything is namespaced .pc- to stay clear of the sitewide stylesheet. */
 
     .order-page {
-      --paper:  #FDFBF8;
-      --cream:  #EFE9DC;
-      --ink:    #622D2B;
-      --ink-60: rgba(98, 45, 43, 0.62);
-      --ink-40: rgba(98, 45, 43, 0.40);
-      --pink:   #EC268F;
+      --paper: #FFFDF9;
+      --cream: #F3E8D5;
+      --cream-deep: #E8D5B8;
+      --ink: #572426;
+      --ink-deep: #351316;
+      --ink-60: rgba(87, 36, 38, 0.78);
+      --ink-40: rgba(87, 36, 38, 0.68);
+      --pink: #EC268F;
+      --pink-deep: #C91873;
       --yellow: #FFC532;
-      --crumb:  #E8C89B;   /* the baked edge, sampled from the cookies */
-      --rule:   rgba(98, 45, 43, 0.14);
-      --lift:   0 18px 50px rgba(98,45,43,.13), 0 4px 14px rgba(98,45,43,.08);
+      --crumb: #E5BD86;
+      --rule: rgba(87, 36, 38, 0.16);
+      --lift: 0 30px 80px rgba(73, 33, 28, 0.16), 0 8px 24px rgba(73, 33, 28, 0.09);
+      color: var(--ink);
+      background-color: #FBF6EE;
+      background-image:
+        radial-gradient(circle at 8% 5%, rgba(236, 38, 143, 0.08), transparent 25rem),
+        radial-gradient(circle at 90% 23%, rgba(255, 197, 50, 0.14), transparent 28rem),
+        radial-gradient(rgba(87, 36, 38, 0.07) 0.7px, transparent 0.7px);
+      background-size: auto, auto, 16px 16px;
+      overflow-x: hidden;
     }
 
     .pc-wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
-    /* display rules below would otherwise beat the hidden attribute */
     .order-page [hidden] { display: none !important; }
+    .order-page > .social-sidebar { display: none; }
+    .order-page #chatbot-toggle { display: none !important; }
 
     .pc-eyebrow {
       display: inline-flex; align-items: center; gap: 9px;
       font-family: 'Nunito', sans-serif; font-weight: 800;
-      font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
+      font-size: .74rem; letter-spacing: .16em; text-transform: uppercase;
       color: var(--ink); background: var(--yellow);
-      padding: 7px 15px; border-radius: 999px;
+      padding: 8px 16px; border-radius: 999px;
+      box-shadow: 0 8px 24px rgba(255, 197, 50, 0.2);
     }
     .pc-eyebrow::before {
       content: ""; width: 7px; height: 7px; border-radius: 50%;
       background: var(--ink); flex: none;
     }
 
-    /* ── Hero ─────────────────────────────────────────────────────────────── */
-    .pc-hero { padding: clamp(38px, 7vw, 84px) 0 clamp(30px, 5vw, 56px); }
-    .pc-hero-grid {
-      display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-      gap: clamp(28px, 5vw, 68px); align-items: center;
+    /* ── Hero: one photo becomes a gift ───────────────────────────────────── */
+    .pc-hero {
+      position: relative; isolation: isolate; overflow: hidden;
+      padding: clamp(126px, 11vw, 158px) 0 clamp(54px, 7vw, 92px);
     }
+    .pc-hero::before {
+      content: ""; position: absolute; z-index: -1;
+      width: clamp(270px, 42vw, 620px); aspect-ratio: 1; border-radius: 50%;
+      right: clamp(-260px, -11vw, -80px); top: clamp(70px, 8vw, 120px);
+      background: radial-gradient(circle, rgba(236, 38, 143, 0.13), rgba(236, 38, 143, 0) 68%);
+      pointer-events: none;
+    }
+    .pc-hero::after {
+      content: ""; position: absolute; z-index: -1;
+      width: clamp(220px, 34vw, 500px); aspect-ratio: 1; border-radius: 50%;
+      left: clamp(-240px, -13vw, -90px); bottom: -38%;
+      background: radial-gradient(circle, rgba(255, 197, 50, 0.16), rgba(255, 197, 50, 0) 70%);
+      pointer-events: none;
+    }
+    .pc-hero-grid {
+      display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+      grid-template-areas: "copy stage" "promises stage";
+      column-gap: clamp(44px, 7vw, 92px); row-gap: 18px; align-items: center;
+    }
+    .pc-hero-copy { grid-area: copy; max-width: 530px; align-self: end; }
     .pc-hero h1 {
       font-family: 'Fredoka One', 'Fredoka Fallback', cursive;
-      font-size: clamp(2.5rem, 6.2vw, 4.4rem);
-      line-height: 1.02; color: var(--ink);
-      margin: 20px 0 0; letter-spacing: -0.01em;
+      font-size: clamp(3rem, 6.5vw, 5.15rem);
+      line-height: .98; color: var(--ink-deep);
+      margin: 22px 0 0; letter-spacing: -0.025em;
+      text-wrap: balance;
     }
     .pc-hero h1 em { font-style: normal; color: var(--pink); }
     .pc-lede {
-      font-size: clamp(1.02rem, 1.5vw, 1.2rem); line-height: 1.65;
-      color: var(--ink-60); max-width: 46ch; margin: 18px 0 0;
+      font-size: clamp(1.04rem, 1.45vw, 1.2rem); line-height: 1.7;
+      color: var(--ink-60); max-width: 47ch; margin: 20px 0 0;
+    }
+    .pc-assurances {
+      grid-area: promises; align-self: start;
+      display: flex; flex-wrap: wrap; gap: 9px 18px; margin-top: 18px;
+      color: var(--ink-60); font-size: .84rem; font-weight: 800;
+    }
+    .pc-assurances span { display: inline-flex; align-items: center; gap: 7px; }
+    .pc-assurances span::before {
+      content: "✓"; display: grid; place-items: center; width: 19px; height: 19px;
+      border-radius: 50%; color: #fff; background: var(--pink); font-size: .68rem;
     }
 
-    /* ── The drop zone ────────────────────────────────────────────────────── */
+    /* ── The drop zone: the first little bit of magic ─────────────────────── */
     .pc-drop {
-      margin-top: 28px; width: 100%; display: flex; flex-direction: column;
-      align-items: flex-start; gap: 6px; text-align: left;
-      background: var(--paper); border: 2px dashed var(--crumb);
-      border-radius: 20px; padding: 22px 24px; cursor: pointer;
-      transition: border-color .18s ease, background .18s ease, transform .18s ease;
+      margin-top: 30px; width: 100%; display: grid;
+      grid-template-columns: 52px minmax(0, 1fr); column-gap: 16px; row-gap: 4px;
+      align-items: center; text-align: left;
+      background: rgba(255, 253, 249, 0.9); border: 1.5px solid var(--crumb);
+      border-radius: 22px; padding: 20px 22px; cursor: pointer;
+      box-shadow: 0 12px 34px rgba(73, 33, 28, 0.08), inset 0 0 0 5px rgba(255, 255, 255, 0.54);
+      transition: border-color .2s ease, background .2s ease, transform .2s ease, box-shadow .2s ease;
+    }
+    .pc-drop::before {
+      content: "+"; grid-row: 1 / 3; display: grid; place-items: center;
+      width: 52px; height: 52px; border-radius: 17px;
+      background: linear-gradient(145deg, var(--pink), var(--pink-deep)); color: #fff;
+      font: 800 1.7rem/1 'Nunito', sans-serif;
+      box-shadow: 0 10px 24px rgba(236, 38, 143, 0.25);
     }
     .pc-drop:hover, .pc-drop.dragover {
-      border-color: var(--pink); background: #fff; transform: translateY(-2px);
+      border-color: var(--pink); background: #fff; transform: translateY(-3px);
+      box-shadow: 0 18px 40px rgba(73, 33, 28, 0.11), inset 0 0 0 5px rgba(236, 38, 143, 0.05);
     }
-    .pc-drop:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
+    .pc-drop:focus-visible { outline: 3px solid var(--pink); outline-offset: 4px; }
     .pc-drop-title {
       font-family: 'Nunito', sans-serif; font-weight: 800;
-      font-size: 1.06rem; color: var(--ink);
+      font-size: 1.08rem; color: var(--ink-deep);
     }
-    .pc-drop-hint { font-size: .86rem; color: var(--ink-40); }
+    .pc-drop-hint { font-size: .88rem; line-height: 1.5; color: var(--ink-40); }
 
-    /* ── The cookie stage — the signature of the page ─────────────────────── */
+    /* ── The cookie stage: the page's signature object ────────────────────── */
     .pc-stage {
-      position: relative; border-radius: 28px; padding: clamp(18px, 3vw, 34px);
-      background:
-        radial-gradient(120% 90% at 50% 0%, #fff 0%, var(--cream) 74%);
-      box-shadow: var(--lift);
+      grid-area: stage;
+      position: relative; border-radius: 34px; padding: clamp(20px, 3vw, 36px);
+      background: radial-gradient(120% 90% at 50% 0%, #fff 0%, var(--cream) 76%);
+      border: 1px solid rgba(87, 36, 38, 0.08); box-shadow: var(--lift);
+      transition: transform .35s ease, box-shadow .35s ease;
     }
+    .pc-stage:hover { transform: translateY(-5px) rotate(-.35deg); box-shadow: 0 38px 92px rgba(73, 33, 28, 0.2), 0 10px 28px rgba(73, 33, 28, 0.1); }
     .pc-stage-inner {
-      position: relative; border-radius: 18px; overflow: hidden;
+      position: relative; border-radius: 22px; overflow: hidden;
       aspect-ratio: 1 / 1; background: var(--paper);
+      border: 7px solid rgba(255, 255, 255, 0.75);
+      box-shadow: 0 10px 30px rgba(73, 33, 28, 0.12);
     }
     .pc-stage-inner img, .pc-stage-inner canvas {
       width: 100%; height: 100%; object-fit: cover; display: block;
     }
+    .pc-stage-stamp {
+      position: absolute; z-index: 3; right: clamp(28px, 4vw, 48px); top: clamp(28px, 4vw, 48px);
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 8px 12px; border-radius: 999px;
+      background: rgba(255, 253, 249, 0.9); border: 1px solid rgba(87, 36, 38, 0.12);
+      backdrop-filter: blur(12px); color: var(--ink); box-shadow: 0 8px 24px rgba(73, 33, 28, 0.13);
+      font-size: .7rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+    }
+    .pc-stage-stamp::before { content: "♥"; color: var(--pink); font-size: .8rem; }
     .pc-stage-caption {
       display: flex; justify-content: space-between; align-items: baseline;
-      gap: 14px; margin-top: 14px;
-      font-size: .82rem; color: var(--ink-40);
+      gap: 16px; margin-top: 16px;
+      font-size: .84rem; line-height: 1.45; color: var(--ink-40);
     }
     .pc-stage-caption strong {
-      font-weight: 800; color: var(--ink); font-size: .78rem;
-      letter-spacing: .1em; text-transform: uppercase;
+      font-weight: 800; color: var(--ink); font-size: .79rem;
+      letter-spacing: .12em; text-transform: uppercase;
     }
 
-    /* the preview settles onto the cookie the way icing does — once, briefly */
     @keyframes pc-settle {
       from { opacity: 0; transform: scale(1.04); }
-      to   { opacity: 1; transform: scale(1); }
+      to { opacity: 1; transform: scale(1); }
     }
     .pc-preview { display: none; }
     .pc-preview.is-on { display: block; animation: pc-settle .42s cubic-bezier(.2,.7,.3,1) both; }
-
     .pc-shape-tabs { display: flex; gap: 8px; margin-top: 14px; }
     .pc-shape-tab {
       flex: 1; border: 1.5px solid var(--rule); background: var(--paper);
-      border-radius: 999px; padding: 9px 12px; cursor: pointer;
+      border-radius: 999px; padding: 11px 12px; cursor: pointer;
       font-family: 'Nunito', sans-serif; font-weight: 800; font-size: .8rem;
       letter-spacing: .06em; text-transform: uppercase; color: var(--ink-60);
-      transition: all .16s ease;
+      transition: background .16s ease, border-color .16s ease, color .16s ease, transform .16s ease;
     }
-    .pc-shape-tab[aria-pressed="true"] {
-      background: var(--ink); border-color: var(--ink); color: #fff;
-    }
-    .pc-bg { margin-top: 12px; }
-    .pc-bg-label { display: block; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-40); margin-bottom: 6px; }
+    .pc-shape-tab[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+    .pc-shape-tab:focus-visible, .pc-mini:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
+    .pc-bg { margin-top: 14px; }
+    .pc-bg-label { display: block; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-40); margin-bottom: 7px; font-weight: 800; }
     .pc-bg-tabs { margin-top: 0; }
-    .pc-bg-note { font-size: .84rem; color: var(--ink-40); margin: 8px 0 0; }
+    .pc-bg-note { font-size: .86rem; line-height: 1.5; color: var(--ink-40); margin: 9px 0 0; }
     .pc-bg-note.is-busy { color: var(--ink); font-weight: 700; }
-    .pc-stage-actions {
-      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px;
-    }
+    .pc-stage-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
     .pc-mini {
-      border: 1.5px solid var(--rule); background: transparent; color: var(--ink-60);
-      border-radius: 999px; padding: 8px 14px; cursor: pointer;
-      font-family: 'Nunito', sans-serif; font-weight: 700; font-size: .82rem;
+      border: 1.5px solid var(--rule); background: rgba(255,255,255,.55); color: var(--ink-60);
+      border-radius: 999px; padding: 10px 15px; cursor: pointer;
+      font-family: 'Nunito', sans-serif; font-weight: 700; font-size: .84rem;
     }
-    .pc-mini:hover { border-color: var(--ink); color: var(--ink); }
+    .pc-mini:hover { border-color: var(--ink); color: var(--ink); transform: translateY(-1px); }
 
     /* ── Rail of real work ────────────────────────────────────────────────── */
-    .pc-rail { padding: clamp(10px, 2vw, 18px) 0 clamp(34px, 5vw, 60px); }
+    .pc-rail { padding: clamp(6px, 1vw, 12px) 0 clamp(58px, 8vw, 96px); }
     .pc-rail-label {
-      font-weight: 800; font-size: .74rem; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--ink-40); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 16px;
+      font-weight: 800; font-size: .76rem; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--ink-40); margin-bottom: 18px;
     }
+    .pc-rail-label::after { content: ""; height: 1px; flex: 1; background: var(--rule); }
     .thumb-row {
-      display: grid; grid-auto-flow: column; grid-auto-columns: 132px;
-      gap: 12px; overflow-x: auto; padding-bottom: 8px;
-      scrollbar-width: thin;
+      display: grid; grid-auto-flow: column; grid-auto-columns: 148px;
+      gap: 15px; overflow-x: auto; padding: 2px 2px 16px;
+      scrollbar-width: thin; scrollbar-color: var(--crumb) transparent;
     }
     .thumb-row img {
-      width: 132px; height: 132px; object-fit: cover; border-radius: 14px;
-      cursor: pointer; border: 2px solid transparent;
-      transition: border-color .16s ease, transform .16s ease;
+      width: 148px; height: 148px; object-fit: cover; border-radius: 20px;
+      cursor: pointer; border: 3px solid transparent;
+      box-shadow: 0 8px 24px rgba(73, 33, 28, 0.09);
+      transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
     }
-    .thumb-row img:hover { transform: translateY(-3px); }
-    .thumb-row img.active { border-color: var(--pink); }
+    .thumb-row img:hover { transform: translateY(-5px) rotate(-.6deg); box-shadow: 0 14px 30px rgba(73, 33, 28, 0.14); }
+    .thumb-row img.active { border-color: var(--pink); box-shadow: 0 12px 30px rgba(236, 38, 143, 0.18); }
 
-    /* ── What arrives ─────────────────────────────────────────────────────── */
+    /* ── What arrives: the dark, gift-box beat ────────────────────────────── */
     .pc-arrives {
-      background: var(--cream); border-radius: 28px;
-      padding: clamp(26px, 4vw, 52px); margin-bottom: clamp(34px, 5vw, 64px);
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, var(--ink-deep), #6B3031 72%, #7B3935);
+      border-radius: 36px; padding: clamp(32px, 5vw, 66px);
+      margin-bottom: clamp(58px, 8vw, 96px); color: #fff;
+      box-shadow: 0 30px 80px rgba(53, 19, 22, 0.22);
+    }
+    .pc-arrives::before {
+      content: ""; position: absolute; width: 390px; aspect-ratio: 1; border-radius: 50%;
+      right: -140px; top: -190px; pointer-events: none;
+      background: radial-gradient(circle, rgba(255, 197, 50, 0.2), rgba(255, 197, 50, 0) 68%);
     }
     .pc-arrives-grid {
-      display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr);
-      gap: clamp(24px, 4vw, 52px); align-items: center;
+      position: relative; z-index: 1; display: grid;
+      grid-template-columns: minmax(0, 1.04fr) minmax(0, .96fr);
+      gap: clamp(30px, 5vw, 66px); align-items: center;
     }
     .pc-arrives img {
       width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center;
-      border-radius: 18px; display: block; box-shadow: var(--lift);
+      border-radius: 24px; display: block; border: 8px solid rgba(255,255,255,.12);
+      box-shadow: 0 26px 60px rgba(24, 7, 9, 0.32); transform: rotate(-1deg);
     }
     .pc-h2 {
       font-family: 'Fredoka One', 'Fredoka Fallback', cursive;
-      font-size: clamp(1.7rem, 3.4vw, 2.5rem); color: var(--ink);
-      line-height: 1.12; margin: 12px 0 16px;
+      font-size: clamp(2rem, 3.8vw, 3.05rem); color: var(--ink-deep);
+      line-height: 1.08; margin: 14px 0 20px; letter-spacing: -.015em;
+      text-wrap: balance;
     }
+    .pc-arrives .pc-h2 { color: #fff; }
     .pc-facts { list-style: none; margin: 0; padding: 0; }
     .pc-facts li {
-      display: flex; gap: 12px; padding: 13px 0;
-      border-top: 1px solid var(--rule); color: var(--ink-60); font-size: .98rem;
+      display: grid; grid-template-columns: minmax(118px, .72fr) 1.28fr; gap: 16px;
+      padding: 15px 0; border-top: 1px solid rgba(255,255,255,.18);
+      color: rgba(255,255,255,.8); font-size: .98rem; line-height: 1.5;
     }
-    .pc-facts li:last-child { border-bottom: 1px solid var(--rule); }
-    .pc-facts b { color: var(--ink); font-weight: 800; }
+    .pc-facts li:last-child { border-bottom: 1px solid rgba(255,255,255,.18); }
+    .pc-facts b { color: #fff; font-weight: 800; }
 
-    /* ── Order ────────────────────────────────────────────────────────────── */
+    /* ── Order: calm, clear, and worthy of the gift ───────────────────────── */
     .pc-order {
-      border: 2px solid var(--ink); border-radius: 28px; background: var(--paper);
-      padding: clamp(26px, 4vw, 48px); margin-bottom: clamp(34px, 5vw, 64px);
+      position: relative; overflow: hidden;
+      border: 1px solid rgba(87, 36, 38, 0.18); border-radius: 36px;
+      background: linear-gradient(150deg, rgba(255,255,255,.94), rgba(255,250,243,.92));
+      padding: clamp(28px, 4.5vw, 58px); margin-bottom: clamp(58px, 8vw, 96px);
+      box-shadow: var(--lift);
     }
+    .pc-order::before {
+      content: ""; position: absolute; inset: 0 0 auto; height: 8px;
+      background: linear-gradient(90deg, var(--pink) 0 58%, var(--yellow) 58% 100%);
+    }
+    .pc-order-steps {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+      margin: 2px 0 clamp(34px, 5vw, 52px); border-radius: 22px; overflow: hidden;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.1);
+      box-shadow: 0 16px 36px rgba(53, 19, 22, 0.18);
+    }
+    .pc-order-step {
+      display: grid; grid-template-columns: 32px 1fr; column-gap: 11px;
+      align-items: center; padding: 18px 20px; background: var(--ink-deep); color: #fff;
+    }
+    .pc-order-step span {
+      grid-row: 1 / 3; display: grid; place-items: center; width: 32px; height: 32px;
+      border-radius: 50%; background: var(--yellow); color: var(--ink-deep);
+      font-weight: 900; font-size: .82rem;
+    }
+    .pc-order-step strong { font-size: .88rem; line-height: 1.1; }
+    .pc-order-step small { color: rgba(255,255,255,.68); font-size: .76rem; line-height: 1.3; }
     .pc-order-grid {
-      display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,.9fr);
-      gap: clamp(24px, 4vw, 52px); align-items: start;
+      display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
+      gap: clamp(34px, 5vw, 66px); align-items: start;
     }
-    /* The price is said out loud, at display size. This is not a page that
-       competes on price, so it does not whisper the number either. */
-    .price-block { display: flex; align-items: baseline; gap: 12px; margin: 6px 0 4px; }
+    .price-block { display: flex; align-items: baseline; gap: 12px; margin: 8px 0 6px; }
     .price-block .amount {
       font-family: 'Fredoka One', 'Fredoka Fallback', cursive;
-      font-size: clamp(3rem, 7vw, 4.6rem); line-height: .95; color: var(--ink);
+      font-size: clamp(3.5rem, 7vw, 5.25rem); line-height: .92; color: var(--ink-deep);
     }
-    .price-block .per { font-size: 1rem; color: var(--ink-40); font-weight: 700; }
-
-    .quantity-row { margin-top: 22px; }
+    .price-block .per { font-size: 1rem; color: var(--ink-40); font-weight: 800; }
+    .quantity-row { margin-top: 24px; }
     .quantity-row label {
-      display: block; font-weight: 800; font-size: .74rem; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--ink-40); margin-bottom: 8px;
+      display: block; font-weight: 800; font-size: .76rem; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--ink-40); margin-bottom: 9px;
     }
     .quantity-row select {
-      width: 100%; padding: 15px 16px; border-radius: 14px;
+      width: 100%; padding: 16px 17px; border-radius: 16px;
       border: 1.5px solid var(--rule); background: #fff; color: var(--ink);
-      font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 700;
+      font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 800;
+      box-shadow: 0 6px 16px rgba(73, 33, 28, 0.04);
     }
-    .quantity-row select:focus-visible { outline: 3px solid var(--pink); outline-offset: 2px; }
-
-    .btn-order {
-      display: block; width: 100%; margin-top: 18px; padding: 18px 24px;
-      background: var(--pink); color: #fff; border: none; border-radius: 999px;
-      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.06rem;
-      cursor: pointer; text-align: center; text-decoration: none;
-      transition: transform .16s ease, box-shadow .16s ease;
-      box-shadow: 0 10px 26px rgba(236,38,143,.28);
+    .quantity-row select:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
+    .pc-pay {
+      margin-top: 22px; padding: 20px; border-radius: 22px;
+      background: #fff; border: 1px solid rgba(87, 36, 38, 0.11);
+      box-shadow: 0 12px 28px rgba(73, 33, 28, 0.06);
     }
-    .btn-order:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(236,38,143,.34); }
-    .btn-order:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
-
-    .pc-paypal-note {
-      text-align: center; font-size: .82rem; color: var(--ink-40); margin: 18px 0 10px;
+    .pc-ship { border: 0; padding: 0; margin: 0; }
+    .pc-ship legend { font-weight: 800; padding: 0; margin-bottom: 7px; }
+    .pc-ship label {
+      display: flex; gap: 8px; align-items: flex-start; margin: 0; padding: 8px 5px;
+      border-radius: 10px; font-size: .96rem; line-height: 1.45; cursor: pointer;
     }
-    .pc-ways { display: grid; gap: 12px; }
+    .pc-ship label:hover { background: rgba(255, 197, 50, 0.1); }
+    .pc-ship input { margin: 4px 0 0; flex: none; accent-color: var(--pink); width: 17px; height: 17px; }
+    .pc-pay-label { font-weight: 900; font-size: 1.1rem; margin: 17px 0 11px; }
+    .pc-pay-hint { font-size: .88rem; line-height: 1.55; color: var(--ink-40); margin: 12px 0 0; }
+    .pc-quote-link { margin: 15px 0 0; font-size: .92rem; font-weight: 800; }
+    .pc-quote-link a { color: var(--pink-deep); text-underline-offset: 3px; }
+    #paypal-button-container { max-width: none; min-height: 112px; }
+    .pc-mail-btn {
+      display: inline-block; margin: 12px 0 7px; padding: 13px 21px; border-radius: 999px;
+      background: var(--pink); color: #fff !important; font-weight: 800; text-decoration: none;
+      box-shadow: 0 10px 26px rgba(236, 38, 143, 0.24);
+    }
+    .pc-paypal-note { text-align: center; font-size: .84rem; color: var(--ink-40); margin: 18px 0 10px; }
+    .pc-ways { display: grid; gap: 13px; }
     .pc-way {
-      border: 1.5px solid var(--rule); border-radius: 18px; padding: 16px 18px;
+      position: relative; border: 1px solid var(--rule); border-radius: 20px;
+      padding: 18px 19px 18px 54px; background: rgba(255,255,255,.62);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
     }
+    .pc-way::before {
+      content: "✓"; position: absolute; left: 18px; top: 18px;
+      display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%;
+      background: var(--cream); color: var(--pink-deep); font-weight: 900; font-size: .76rem;
+    }
+    .pc-way:hover { transform: translateX(3px); border-color: var(--crumb); background: #fff; }
     .pc-way h3 {
-      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: .95rem;
-      color: var(--ink); margin: 0 0 4px;
+      font-family: 'Nunito', sans-serif; font-weight: 900; font-size: .98rem;
+      color: var(--ink-deep); margin: 0 0 5px;
     }
-    .pc-way p { margin: 0; font-size: .9rem; color: var(--ink-60); line-height: 1.55; }
+    .pc-way p { margin: 0; font-size: .91rem; color: var(--ink-60); line-height: 1.58; }
+    .pc-way a { color: var(--pink-deep); font-weight: 800; text-underline-offset: 3px; }
 
-    /* ── Made here ────────────────────────────────────────────────────────── */
-    .pc-made {
-      text-align: center; padding: 0 0 clamp(40px, 6vw, 76px);
+    /* ── Made here: put the maker back into the purchase ──────────────────── */
+    .pc-made { padding: 0 0 clamp(62px, 9vw, 112px); }
+    .pc-made-card {
+      display: grid; grid-template-columns: minmax(220px, .68fr) minmax(0, 1.32fr);
+      gap: clamp(30px, 5vw, 70px); align-items: center;
+      padding: clamp(28px, 5vw, 64px); border-radius: 36px;
+      background: rgba(255, 253, 249, 0.82); border: 1px solid rgba(87, 36, 38, 0.1);
+      box-shadow: 0 24px 70px rgba(73, 33, 28, 0.11);
     }
-    .pc-made p {
-      max-width: 56ch; margin: 14px auto 0; color: var(--ink-60); font-size: 1.02rem;
+    .pc-maker-photo { position: relative; max-width: 350px; justify-self: center; }
+    .pc-maker-photo img {
+      width: 100%; aspect-ratio: 1; object-fit: cover; display: block;
+      border-radius: 48% 52% 45% 55% / 53% 43% 57% 47%;
+      background: var(--cream); filter: saturate(.92) contrast(1.02);
+      box-shadow: 0 20px 46px rgba(73, 33, 28, 0.16);
     }
-    .pc-made a { color: var(--pink); font-weight: 800; text-decoration: none; }
-    .pc-made a:hover { text-decoration: underline; }
+    .pc-maker-photo span {
+      position: absolute; right: -10px; bottom: 12px; padding: 9px 13px;
+      border-radius: 999px; background: var(--yellow); color: var(--ink-deep);
+      font-size: .75rem; font-weight: 900; letter-spacing: .05em;
+      box-shadow: 0 8px 24px rgba(73, 33, 28, 0.14);
+    }
+    .pc-maker-copy p { max-width: 58ch; margin: 15px 0 0; color: var(--ink-60); font-size: 1.04rem; line-height: 1.72; }
+    .pc-maker-line { color: var(--ink-deep) !important; font-weight: 900; font-size: 1.08rem !important; }
+    .pc-maker-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+    .pc-maker-links a {
+      display: inline-flex; align-items: center; min-height: 46px; padding: 11px 17px;
+      border-radius: 999px; border: 1px solid var(--rule); color: var(--ink);
+      background: #fff; font-weight: 800; text-decoration: none;
+    }
+    .pc-maker-links a:first-child { background: var(--pink); border-color: var(--pink); color: #fff; }
+    .pc-maker-links a:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(73,33,28,.1); }
+    .pc-maker-links a:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
 
-    /* ── Narrow screens ───────────────────────────────────────────────────── */
+    /* Keep the checkout page's last note quiet and human. */
+    .order-page footer { padding-top: 50px; background: var(--ink-deep); }
+    .order-page footer .footer-content { max-width: 920px; }
+    .order-page footer .footer-tagline { font-size: 1rem; color: rgba(255,255,255,.76); }
+    .order-page footer .footer-links { max-width: 700px; margin: 28px auto 0; }
+    .order-page footer .footer-locations,
+    .order-page footer .footer-ai-credit { display: none !important; }
+    .order-page footer .footer-contact { margin-top: 28px; }
+    .order-page footer .footer-bottom { margin-top: 28px; }
+
+    /* The page appears in calm beats as the buyer scrolls. */
+    .pc-motion .pc-reveal { opacity: 0; transform: translateY(24px); }
+    .pc-motion .pc-reveal.is-visible {
+      opacity: 1; transform: translateY(0);
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22,.7,.28,1);
+    }
+
     @media (max-width: 900px) {
-      .pc-hero-grid, .pc-arrives-grid, .pc-order-grid { grid-template-columns: 1fr; }
-      .pc-hero-grid { gap: 30px; }
-      /* facts read as label-above-value once the row gets narrow */
-      .pc-facts li { flex-direction: column; gap: 3px; }
+      .pc-hero { padding-top: 126px; }
+      .pc-hero-grid {
+        grid-template-columns: 1fr; grid-template-areas: "copy" "stage" "promises";
+      }
+      .pc-arrives-grid, .pc-order-grid, .pc-made-card { grid-template-columns: 1fr; }
+      .pc-hero-grid { gap: 38px; }
+      .pc-hero-copy { max-width: none; }
+      .pc-stage:hover { transform: none; box-shadow: var(--lift); }
+      .pc-facts li { grid-template-columns: 1fr; gap: 4px; }
+      .pc-arrives img { transform: none; }
+      .pc-made-card { text-align: center; }
+      .pc-maker-copy p { margin-left: auto; margin-right: auto; }
+      .pc-maker-links { justify-content: center; }
+    }
+    @media (max-width: 560px) {
+      .pc-wrap { padding: 0 20px; }
+      .pc-hero { padding-top: 122px; padding-bottom: 58px; }
+      .pc-hero h1 { font-size: clamp(2.7rem, 12.5vw, 3.35rem); }
+      .pc-lede { line-height: 1.65; }
+      .pc-assurances { display: grid; gap: 9px; margin-top: -14px; }
+      .pc-drop { grid-template-columns: 46px minmax(0, 1fr); padding: 18px; }
+      .pc-drop::before { width: 46px; height: 46px; border-radius: 15px; }
+      .pc-stage { border-radius: 28px; padding: 18px; }
+      .pc-stage-inner { border-width: 5px; }
+      .pc-stage-stamp { right: 28px; top: 28px; }
+      .pc-stage-caption { align-items: flex-start; }
+      .pc-stage-caption span { max-width: 19ch; text-align: right; }
+      .thumb-row { grid-auto-columns: 124px; }
+      .thumb-row img { width: 124px; height: 124px; border-radius: 18px; }
+      .pc-arrives, .pc-order, .pc-made-card { border-radius: 28px; }
+      .pc-order { padding-left: 26px; padding-right: 26px; }
+      .pc-order-steps { grid-template-columns: repeat(3, 1fr); gap: 1px; }
+      .pc-order-step {
+        grid-template-columns: 1fr; grid-template-rows: auto auto auto;
+        justify-items: center; row-gap: 4px; padding: 12px 5px; text-align: center;
+      }
+      .pc-order-step span { grid-row: auto; width: 29px; height: 29px; }
+      .pc-pay { padding: 17px 15px; }
+      .pc-way { padding-left: 51px; }
+      .pc-maker-photo { max-width: 260px; }
+      .pc-maker-photo span { right: 0; }
+      .pc-maker-links { display: grid; }
+      .pc-maker-links a { justify-content: center; }
+      .order-page footer .footer-links { grid-template-columns: 1fr 1fr; }
     }
     @media (prefers-reduced-motion: reduce) {
       .pc-preview.is-on { animation: none; }
-      .pc-drop, .btn-order, .thumb-row img { transition: none; }
-      .btn-order:hover, .pc-drop:hover, .thumb-row img:hover { transform: none; }
+      .pc-drop, .thumb-row img, .pc-stage, .pc-way, .pc-maker-links a { transition: none; }
+      .pc-drop:hover, .thumb-row img:hover, .pc-stage:hover, .pc-way:hover, .pc-maker-links a:hover { transform: none; }
+      .pc-motion .pc-reveal, .pc-motion .pc-reveal.is-visible { opacity: 1; transform: none; transition: none; }
     }
-    
-    .pc-mail-btn { display: inline-block; margin: 10px 0 6px; padding: 12px 20px; border-radius: 999px; background: var(--pink, #EC268F); color: #fff !important; font-weight: 800; text-decoration: none; }
-    .pc-pay { margin-top: 20px; }
-    .pc-ship { border: 1px solid rgba(0,0,0,.12); border-radius: 12px; padding: 12px 14px 10px; margin: 0; }
-    .pc-ship legend { font-weight: 700; padding: 0 6px; }
-    .pc-ship label { display: block; margin: 6px 0; font-size: .95rem; cursor: pointer; }
-    .pc-ship input { margin-right: 8px; }
-    .pc-pay-label { font-weight: 800; font-size: 1.1rem; margin: 16px 0 10px; }
-    .pc-pay-hint { font-size: .86rem; color: var(--ink-40); margin-top: 10px; }
-    .pc-quote-link { margin-top: 12px; font-size: .9rem; }
-    #paypal-button-container { max-width: 420px; }
 </style>
 </head>
 <body class="order-page">
@@ -427,24 +614,24 @@
     <!-- ── HERO — the cookie is the hero, and it starts empty ──────────────── -->
     <section class="pc-hero">
       <div class="pc-wrap pc-hero-grid">
-        <div>
+        <div class="pc-hero-copy pc-reveal">
           <span class="pc-eyebrow">Ships in 48 hours</span>
           <h1>Your picture,<br>on a <em>cookie</em>.</h1>
           <p class="pc-lede">
-            Send us any photo — the birthday kid, the dog, the inside joke — and we
-            print it in edible ink across a butter cookie under smooth royal icing.
-            A dozen arrives individually wrapped, anywhere in the country.
+            Send the face that makes the room light up — the birthday kid, the dog,
+            the inside joke. We print it in edible ink across a butter cookie under
+            smooth royal icing. Twelve arrive wrapped one by one, ready to make someone smile.
           </p>
 
           <div class="pc-drop" id="uploadArea" role="button" tabindex="0"
                aria-label="Add a photo to see it on a cookie">
             <span class="pc-drop-title">Add a photo &rarr;</span>
-            <span class="pc-drop-hint">See it on the cookie before you order. We only receive it when you pay.</span>
+            <span class="pc-drop-hint">Your preview stays on this phone. After payment, one tap opens the email where you attach it.</span>
           </div>
           <input type="file" id="logoUpload" accept="image/*" hidden>
         </div>
 
-        <div class="pc-stage">
+        <div class="pc-stage pc-reveal">
           <div class="pc-stage-inner">
             <img id="mainImg"
                  src="images/gallery/printed/baby-photo-birthday-cookies-san-francisco.webp"
@@ -456,6 +643,7 @@
                       aria-label="Your photo on a square cookie"></canvas>
             </div>
           </div>
+          <span class="pc-stage-stamp" id="stageStamp">Made from a real order</span>
 
           <div class="pc-shape-tabs" id="shapeTabs" hidden>
             <button type="button" class="pc-shape-tab" data-shape="round" aria-pressed="true">Round</button>
@@ -478,15 +666,21 @@
           </div>
 
           <p class="pc-stage-caption">
-            <strong>Actual cookies</strong>
-            <span>Baked in Daly City, printed in edible ink</span>
+            <strong id="stageCaptionTitle">Actual cookies</strong>
+            <span id="stageCaptionText">Baked in Daly City · printed in edible ink</span>
           </p>
+        </div>
+
+        <div class="pc-assurances pc-reveal" aria-label="Order promises">
+          <span>Preview it here</span>
+          <span>Free U.S. shipping</span>
+          <span>Proof before baking</span>
         </div>
       </div>
     </section>
 
     <!-- ── Real work. Tap one to put it on the stage. ──────────────────────── -->
-    <section class="pc-rail">
+    <section class="pc-rail pc-reveal">
       <div class="pc-wrap">
         <p class="pc-rail-label">Cookies we made for other people</p>
         <div class="thumb-row">
@@ -510,7 +704,7 @@
 
     <!-- ── What actually turns up at the door ──────────────────────────────── -->
     <div class="pc-wrap">
-      <section class="pc-arrives">
+      <section class="pc-arrives pc-reveal">
         <div class="pc-arrives-grid">
           <img src="images/gallery/printed/wrapped-cookies-shipping-box.webp"
                alt="A dozen printed image cookies individually wrapped in a ribboned gift box"
@@ -519,17 +713,22 @@
             <span class="pc-eyebrow">What turns up</span>
             <h2 class="pc-h2">A box you can hand<br>straight to someone.</h2>
             <ul class="pc-facts">
-              <li><b>Twelve cookies</b>&nbsp;— baked to order, never from a shelf.</li>
-              <li><b>Individually wrapped</b>&nbsp;— so they travel, and so people can take one home.</li>
-              <li><b>Ribboned box</b>&nbsp;— it is the gift, no wrapping needed.</li>
-              <li><b>Round or square</b>&nbsp;— your picture printed across the whole face.</li>
+              <li><b>Twelve cookies</b><span>Baked for your order, never pulled from a shelf.</span></li>
+              <li><b>Wrapped one by one</b><span>Ready to travel and easy to pass around.</span></li>
+              <li><b>Ribboned box</b><span>Ready to hand over the moment it arrives.</span></li>
+              <li><b>Round or square</b><span>Your picture fills the whole iced face.</span></li>
             </ul>
           </div>
         </div>
       </section>
 
       <!-- ── Order ────────────────────────────────────────────────────────── -->
-      <section class="pc-order" id="order">
+      <section class="pc-order pc-reveal" id="order">
+        <div class="pc-order-steps" aria-label="How your order works">
+          <div class="pc-order-step"><span>1</span><strong>Preview</strong><small>See your photo here</small></div>
+          <div class="pc-order-step"><span>2</span><strong>Pay</strong><small>Card or PayPal</small></div>
+          <div class="pc-order-step"><span>3</span><strong>Approve</strong><small>Before we bake</small></div>
+        </div>
         <div class="pc-order-grid">
           <div>
             <span class="pc-eyebrow">Order</span>
@@ -562,7 +761,7 @@
               </fieldset>
               <p class="pc-pay-label" id="payLabel">Pay $90 — card or PayPal</p>
               <div id="paypal-button-container"></div>
-              <p class="pc-pay-hint" id="payHint">Add your photo at the top first, then pay. After payment you email us that photo and we send a design proof before anything is baked.</p>
+              <p class="pc-pay-hint" id="payHint">Add your photo above, then pay. After payment, one button opens your order email. Attach the same photo and we send a design proof before baking.</p>
               <p id="paypal-paid-note" style="display:none;margin-top:12px;font-size:.95rem;line-height:1.5"></p>
               <p class="pc-quote-link"><a href="order-form">Prefer to talk first? Send an order request instead &rarr;</a></p>
             </div>
@@ -578,13 +777,12 @@
               <p>Free. 1096 Wildwood Avenue — skip shipping entirely if you are local.</p>
             </div>
             <div class="pc-way">
-              <h3>Delivered around the Bay</h3>
-              <p>San Francisco down the Peninsula, across to Oakland and up to Marin.</p>
+              <h3>Your picture gets a human check</h3>
+              <p>After payment, we check it and send a design proof before anything goes in the oven.</p>
             </div>
             <div class="pc-way">
-              <h3>Not sure about your photo?</h3>
-              <p>Drop it into the preview above. Clear, well-lit pictures print best — if
-                 yours will not work, we will tell you before you pay.</p>
+              <h3>Need Bay Area delivery?</h3>
+              <p>From San Francisco to the Peninsula, Oakland and Marin. <a href="order-form">Ask for local delivery &rarr;</a></p>
             </div>
           </div>
         </div>
@@ -594,14 +792,26 @@
     <!-- ── Who made it ─────────────────────────────────────────────────────── -->
     <section class="pc-made">
       <div class="pc-wrap">
-        <span class="pc-eyebrow">Since 2012</span>
-        <h2 class="pc-h2">A family bakery, not a print shop.</h2>
-        <p>
-          Every cookie is baked, iced and printed by us in Daly City. If something
-          about your picture worries you, call and ask for Yana —
-          <a href="tel:+14155688060">(415) 568-8060</a> — or email
-          <a href="mailto:info@mybakingcreations.com">info@mybakingcreations.com</a>.
-        </p>
+        <div class="pc-made-card pc-reveal">
+          <figure class="pc-maker-photo">
+            <img src="images/yana-about.webp" alt="Yana with a handmade R2-D2 birthday cake" width="400" height="400" loading="lazy">
+            <figcaption><span>Yana · baker &amp; artist</span></figcaption>
+          </figure>
+          <div class="pc-maker-copy">
+            <span class="pc-eyebrow">Since 2012</span>
+            <h2 class="pc-h2">A family bakery, not a print shop.</h2>
+            <p>
+              Every cookie is baked, iced and printed by us in Daly City. Your picture
+              is handled by a person who cares how it looks, then shown to you before baking.
+            </p>
+            <p class="pc-maker-line">Baked by Yana. Made for your person.</p>
+            <div class="pc-maker-links">
+              <a href="tel:+14155688060">Call Yana</a>
+              <a href="mailto:info@mybakingcreations.com">Email us</a>
+              <a href="contact" id="pcChatHelp">Ask about your photo</a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
     <footer>
@@ -609,7 +819,7 @@
             <div class="footer-logo">
                 <span class="my">my</span><span class="baking">baking</span> Creations
             </div>
-            <p class="footer-tagline">Family-owned Bay Area bakery since 2012</p>
+            <p class="footer-tagline">Baked by Yana. Made in Daly City since 2012.</p>
             <div class="footer-links">
                 <a href="/">Home</a>
                 <a href="about">About Us</a>
@@ -680,6 +890,9 @@
       var dlRound    = document.getElementById('downloadBtnRound');
       var dlSquare   = document.getElementById('downloadBtnSquare');
       var resetBtn   = document.getElementById('resetBtn');
+      var stageStamp = document.getElementById('stageStamp');
+      var captionTitle = document.getElementById('stageCaptionTitle');
+      var captionText = document.getElementById('stageCaptionText');
       if (!uploadArea || !cvRound || !cvSquare) return;
 
       var bgBox = document.getElementById('bgChoice');
@@ -740,6 +953,9 @@
         drawSquare(cvSquare.getContext('2d'), size);
         mainImg.style.display = 'none';
         preview.classList.add('is-on');
+        if (stageStamp) stageStamp.hidden = true;
+        if (captionTitle) captionTitle.textContent = 'Your preview';
+        if (captionText) captionText.textContent = 'Made on this phone · checked before baking';
         tabs.hidden = false;
         actions.hidden = false;
         uploadArea.querySelector('.pc-drop-title').textContent = 'Use a different photo →';
@@ -868,6 +1084,9 @@
       resetBtn.addEventListener('click', function () {
         photo = null; origPhoto = null; cutPhoto = null; setBg('keep'); if (bgBox) bgBox.hidden = true; window.__mbcPhoto = null; window.__mbcPhotoImg = null;
         preview.classList.remove('is-on');
+        if (stageStamp) stageStamp.hidden = false;
+        if (captionTitle) captionTitle.textContent = 'Actual cookies';
+        if (captionText) captionText.textContent = 'Baked in Daly City · printed in edible ink';
         tabs.hidden = true; actions.hidden = true;
         mainImg.style.display = '';
         fileInput.value = '';
@@ -908,6 +1127,37 @@
         amount.textContent = '$' + (n * 90);
         per.textContent = n === 1 ? 'a dozen' : n + ' dozen';
         if (cta) cta.textContent = 'Pay $' + (n * 90) + ' — card or PayPal';
+      });
+    })();
+
+    /* Calm scroll reveals. Content stays visible when motion is reduced or JS is absent. */
+    (function () {
+      var items = document.querySelectorAll('.pc-reveal');
+      var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!items.length || reduced || !('IntersectionObserver' in window)) {
+        items.forEach(function (item) { item.classList.add('is-visible'); });
+        return;
+      }
+      document.documentElement.classList.add('pc-motion');
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -7% 0px' });
+      items.forEach(function (item) { observer.observe(item); });
+    })();
+
+    /* The fixed chat bubble is replaced by a deliberate help link on this page. */
+    (function () {
+      var help = document.getElementById('pcChatHelp');
+      if (!help) return;
+      help.addEventListener('click', function (event) {
+        var toggle = document.getElementById('chatbot-toggle');
+        if (!toggle) return;
+        event.preventDefault();
+        toggle.click();
       });
     })();
     </script>
