@@ -377,6 +377,22 @@
     .pc-cutout-shape-next { width: 100%; margin-top: 18px; }
     .pc-cutout-shape-cancel { display: block; margin: 10px auto 0; }
     .pc-cutout-action:disabled { opacity: .42; cursor: not-allowed; transform: none; box-shadow: none; }
+    .pc-cutout-body.pc-cutout-body--checkout { width: min(780px, 100%); }
+    .pc-guided-next-photo {
+      padding: clamp(26px, 6vw, 54px); border: 2px dashed var(--crumb); border-radius: 26px;
+      background: rgba(255,255,255,.72); text-align: center;
+    }
+    .pc-guided-next-photo strong { display: block; color: var(--ink-deep); font-size: 1.1rem; }
+    .pc-guided-next-photo p { margin: 8px auto 18px; max-width: 42ch; color: var(--ink-60); line-height: 1.5; }
+    .pc-guided-next-photo .pc-cutout-action { width: 100%; }
+    .pc-guided-checkout-badge {
+      display: flex; align-items: center; justify-content: center; gap: 8px; margin: 0 0 18px;
+      padding: 11px 14px; border-radius: 14px; background: #EAF8EF; color: #166534; font-weight: 900;
+    }
+    #guidedCheckoutMount .pc-h2 { font-size: clamp(1.8rem, 5vw, 2.55rem); }
+    #guidedCheckoutMount .price-block .amount { font-size: clamp(3rem, 10vw, 4.25rem); }
+    #guidedCheckoutMount .pc-lede { font-size: .96rem; }
+    #guidedCheckoutMount .quantity-row { margin-top: 18px; }
     .pc-cutout-guide,
     .pc-cutout-review { padding: 0; border: 0; background: transparent; }
     .pc-cutout-canvas-wrap {
@@ -991,19 +1007,21 @@
             <img src="logo_icon.png" alt="" width="44" height="40">
             <span>Cookie design</span>
           </div>
-          <div class="pc-cutout-progress" aria-label="Three-step cookie design">
+          <div class="pc-cutout-progress" aria-label="Four-step cookie order">
             <span class="is-active" id="cutoutProgressOne">1</span>
             <i></i>
             <span id="cutoutProgressTwo">2</span>
             <i></i>
             <span id="cutoutProgressThree">3</span>
+            <i></i>
+            <span id="cutoutProgressFour">4</span>
           </div>
           <button type="button" class="pc-cutout-close" id="cutoutClose" aria-label="Close without approving">&times;</button>
         </header>
 
         <div class="pc-cutout-body">
           <div class="pc-cutout-copy">
-            <span class="pc-cutout-step-label" id="cutoutStepLabel">Step 1 of 3</span>
+            <span class="pc-cutout-step-label" id="cutoutStepLabel">Step 1 of 4</span>
             <h2 id="cutoutGuideTitle">Round or square?</h2>
             <p id="cutoutGuideText">Choose the cookie shape before we touch the background.</p>
           </div>
@@ -1063,7 +1081,18 @@
             </div>
           </section>
 
-          <p class="pc-cutout-privacy">The cutout happens on this device. After you approve, the original and exact cookie preview are saved privately with your order.</p>
+          <section class="pc-guided-next-photo" id="guidedNextPhotoStep" hidden>
+            <strong id="guidedNextPhotoTitle">One more photo</strong>
+            <p id="guidedNextPhotoText">Add and approve the next design before checkout.</p>
+            <button type="button" class="pc-cutout-action pc-cutout-action--primary" id="guidedNextPhotoButton">Choose the next photo</button>
+          </section>
+
+          <section class="pc-guided-checkout" id="guidedCheckoutStep" hidden>
+            <p class="pc-guided-checkout-badge">✓ Every design is approved</p>
+            <div id="guidedCheckoutMount"></div>
+          </section>
+
+          <p class="pc-cutout-privacy" id="cutoutPrivacy">The cutout happens on this device. After you approve, the original and exact cookie preview are saved privately with your order.</p>
         </div>
       </div>
     </div>
@@ -1119,7 +1148,7 @@
           <div class="pc-order-step"><span>3</span><strong>Pay</strong><small>Card or PayPal</small></div>
         </div>
         <div class="pc-order-grid">
-          <div>
+          <div id="orderColumn">
             <span class="pc-eyebrow">Order</span>
             <h2 class="pc-h2">Printed photo cookies</h2>
             <div class="price-block">
@@ -1411,14 +1440,15 @@
           };
           window.__mbcCutConfirmed = true;
           invalidateSavedOrder(); renderDesignSlots();
-          closeCutoutScreen(false);
-          note('Photo ' + activeSlot + ' approved. This exact cookie will be saved before payment.', false);
           var next = firstMissingSlot();
           if (next) {
-            activeSlot = next;
-            uploadArea.querySelector('.pc-drop-title').textContent = 'Add photo ' + activeSlot + ' →';
+            note('Photo ' + activeSlot + ' approved. Add the next photo to keep going.', false);
+            uploadArea.querySelector('.pc-drop-title').textContent = 'Add photo ' + next + ' →';
+            showNextPhotoStep(next);
           } else {
             uploadArea.querySelector('.pc-drop-title').textContent = 'All designs approved ✓';
+            note('Every design is approved. Continue through checkout.', false);
+            showCheckoutStep();
           }
         }).finally(function () { setCutBusy(false); });
       }
@@ -1431,7 +1461,19 @@
         var button = event.target.closest('[data-design-slot]');
         if (button) startPhotoSlot(parseInt(button.dataset.designSlot, 10));
       });
-      window.addEventListener('mbc:quotechange', function () { renderDesignSlots(); invalidateSavedOrder(); });
+      window.addEventListener('mbc:quotechange', function () {
+        renderDesignSlots(); invalidateSavedOrder();
+        var missing = firstMissingSlot();
+        if (checkoutActive && missing) showNextPhotoStep(missing);
+      });
+      window.addEventListener('mbc:orderpaid', function (event) {
+        if (!checkoutActive) return;
+        setCutStep(4, false);
+        cutoutStepLabel.textContent = 'Order complete';
+        cutoutGuideTitle.textContent = 'Your order is in.';
+        cutoutGuideText.textContent = 'Payment received. Your exact approved files are with the bakery.';
+        if (cutoutClose) cutoutClose.setAttribute('aria-label', 'Close order confirmation');
+      });
       window.__mbcDesignStudio = {
         getDesigns: function () {
           return Array.from({ length: neededDesigns() }, function (_, index) {
@@ -1618,12 +1660,14 @@
       var cutoutShapeCancel = document.getElementById('cutoutShapeCancel');
       var cutoutScreen = document.getElementById('cutoutScreen');
       var cutoutShell = cutoutScreen && cutoutScreen.querySelector('.pc-cutout-shell');
+      var cutoutBody = cutoutScreen && cutoutScreen.querySelector('.pc-cutout-body');
       var cutoutGuideTitle = document.getElementById('cutoutGuideTitle');
       var cutoutGuideText = document.getElementById('cutoutGuideText');
       var cutoutStepLabel = document.getElementById('cutoutStepLabel');
       var cutoutProgressOne = document.getElementById('cutoutProgressOne');
       var cutoutProgressTwo = document.getElementById('cutoutProgressTwo');
       var cutoutProgressThree = document.getElementById('cutoutProgressThree');
+      var cutoutProgressFour = document.getElementById('cutoutProgressFour');
       var cutoutLoading = document.getElementById('cutoutLoading');
       var cutoutLoadingTitle = document.getElementById('cutoutLoadingTitle');
       var cutoutLoadingDetail = document.getElementById('cutoutLoadingDetail');
@@ -1638,8 +1682,19 @@
       var cutoutOriginal = document.getElementById('cutoutOriginal');
       var cutoutCancel = document.getElementById('cutoutCancel');
       var cutoutClose = document.getElementById('cutoutClose');
+      var cutoutPrivacy = document.getElementById('cutoutPrivacy');
+      var guidedNextPhotoStep = document.getElementById('guidedNextPhotoStep');
+      var guidedNextPhotoTitle = document.getElementById('guidedNextPhotoTitle');
+      var guidedNextPhotoText = document.getElementById('guidedNextPhotoText');
+      var guidedNextPhotoButton = document.getElementById('guidedNextPhotoButton');
+      var guidedCheckoutStep = document.getElementById('guidedCheckoutStep');
+      var guidedCheckoutMount = document.getElementById('guidedCheckoutMount');
+      var orderColumn = document.getElementById('orderColumn');
+      var orderHome = orderColumn && orderColumn.parentNode;
+      var orderNext = orderColumn && orderColumn.nextSibling;
       var cutoutLastFocus = null, cutoutHistoryOpen = false;
       var cutoutShape = null, cutoutShapeChosen = false, cutPickerMap = null;
+      var checkoutActive = false;
       window.__mbcCutConfirmed = true;
 
       function setCutBusy(value, title, detail) {
@@ -1654,11 +1709,15 @@
         if (!value && cutoutLoadProgress) cutoutLoadProgress.hidden = true;
       }
       function setCutStep(step, cleanup, choosingBackground) {
-        if (cutoutStepLabel) cutoutStepLabel.textContent = 'Step ' + step + ' of 3' + (cleanup ? ' · optional cleanup' : '');
+        if (cutoutStepLabel) cutoutStepLabel.textContent = 'Step ' + step + ' of 4' + (cleanup ? ' · optional cleanup' : '');
         if (cutoutProgressOne) cutoutProgressOne.classList.toggle('is-active', step >= 1);
         if (cutoutProgressTwo) cutoutProgressTwo.classList.toggle('is-active', step >= 2);
         if (cutoutProgressThree) cutoutProgressThree.classList.toggle('is-active', step >= 3);
-        if (step === 1) {
+        if (cutoutProgressFour) cutoutProgressFour.classList.toggle('is-active', step >= 4);
+        if (step === 4) {
+          cutoutGuideTitle.textContent = 'Secure checkout';
+          cutoutGuideText.textContent = 'Choose the amount and delivery, then pay. Your approved files save before PayPal opens.';
+        } else if (step === 1) {
           cutoutGuideTitle.textContent = 'Round or square?';
           cutoutGuideText.textContent = 'Choose the cookie shape before we touch the background.';
         } else if (step === 2 && choosingBackground) {
@@ -1691,8 +1750,55 @@
         }
         if (cutoutShell) cutoutShell.scrollTop = 0;
       }
+      function hideGuidedSections() {
+        if (cutoutShapeStep) cutoutShapeStep.hidden = true;
+        if (cutoutBackgroundStep) cutoutBackgroundStep.hidden = true;
+        if (cutoutGuide) { cutoutGuide.hidden = true; cutoutGuide.classList.remove('is-awaiting'); }
+        if (cutoutReview) cutoutReview.hidden = true;
+        if (guidedNextPhotoStep) guidedNextPhotoStep.hidden = true;
+        if (guidedCheckoutStep) guidedCheckoutStep.hidden = true;
+      }
+      function restoreCheckout() {
+        if (orderColumn && guidedCheckoutMount && orderColumn.parentNode === guidedCheckoutMount && orderHome) {
+          orderHome.insertBefore(orderColumn, orderNext && orderNext.parentNode === orderHome ? orderNext : null);
+        }
+        checkoutActive = false;
+        if (guidedCheckoutStep) guidedCheckoutStep.hidden = true;
+        if (cutoutBody) cutoutBody.classList.remove('pc-cutout-body--checkout');
+        if (cutoutPrivacy) cutoutPrivacy.hidden = false;
+        if (cutoutClose) cutoutClose.setAttribute('aria-label', 'Close without approving');
+      }
+      function showNextPhotoStep(slot) {
+        restoreCheckout(); openCutoutScreen(); hideGuidedSections();
+        activeSlot = slot; setCutStep(1, false);
+        cutoutStepLabel.textContent = 'Photo ' + slot + ' of ' + neededDesigns();
+        cutoutGuideTitle.textContent = 'Add photo ' + slot;
+        cutoutGuideText.textContent = 'Every different picture gets its own exact design before checkout.';
+        guidedNextPhotoTitle.textContent = 'Photo ' + slot + ' needs a design';
+        guidedNextPhotoText.textContent = cookiesForSlot(slot) + ' cookies will use this picture.';
+        guidedNextPhotoButton.textContent = 'Choose photo ' + slot;
+        guidedNextPhotoStep.hidden = false;
+        if (cutoutPrivacy) cutoutPrivacy.hidden = true;
+        if (cutoutShell) cutoutShell.scrollTop = 0;
+        requestAnimationFrame(function () { guidedNextPhotoButton.focus({ preventScroll: true }); });
+      }
+      function showCheckoutStep() {
+        if (!guidedCheckoutStep || !guidedCheckoutMount || !orderColumn) return;
+        openCutoutScreen(); hideGuidedSections(); checkoutActive = true; setCutStep(4, false);
+        guidedCheckoutStep.hidden = false; guidedCheckoutMount.appendChild(orderColumn);
+        if (cutoutBody) cutoutBody.classList.add('pc-cutout-body--checkout');
+        if (cutoutPrivacy) cutoutPrivacy.hidden = true;
+        if (cutoutClose) cutoutClose.setAttribute('aria-label', 'Close checkout and return to the page');
+        if (cutoutShell) cutoutShell.scrollTop = 0;
+        requestAnimationFrame(function () {
+          var quantityInput = document.getElementById('cookieQty');
+          if (quantityInput) quantityInput.focus({ preventScroll: true });
+          if (cutoutShell) cutoutShell.scrollTop = 0;
+        });
+      }
       function closeCutoutScreen(fromHistory) {
         if (!cutoutScreen || cutoutScreen.hidden) return;
+        restoreCheckout();
         cutoutScreen.hidden = true;
         document.body.classList.remove('pc-cutout-open');
         if (!fromHistory && cutoutHistoryOpen && history.state && history.state.mbcCutout) {
@@ -1915,12 +2021,10 @@
       }
       function showShapeStep() {
         if (!origPhoto || !cutoutShapeStep || !cutoutScreen) return;
-        openCutoutScreen(); setCutStep(1, false);
+        restoreCheckout(); openCutoutScreen(); hideGuidedSections(); setCutStep(1, false);
         cutoutShapeStep.hidden = false;
-        if (cutoutBackgroundStep) cutoutBackgroundStep.hidden = true;
-        cutoutGuide.hidden = true; cutoutGuide.classList.remove('is-awaiting');
-        if (cutoutReview) cutoutReview.hidden = true;
         if (cutoutLoading) cutoutLoading.hidden = true;
+        if (cutoutPrivacy) cutoutPrivacy.hidden = false;
         drawShapeChoices();
         document.querySelectorAll('[data-cutout-shape]').forEach(function (button) {
           button.setAttribute('aria-pressed', String(cutoutShapeChosen && button.dataset.cutoutShape === cutoutShape));
@@ -1934,24 +2038,19 @@
       }
       function showBackgroundStep() {
         if (!origPhoto || !cutoutBackgroundStep || !cutoutScreen) return;
-        openCutoutScreen(); setCutStep(2, false, true);
-        if (cutoutShapeStep) cutoutShapeStep.hidden = true;
+        openCutoutScreen(); hideGuidedSections(); setCutStep(2, false, true);
         cutoutBackgroundStep.hidden = false;
-        if (cutoutGuide) { cutoutGuide.hidden = true; cutoutGuide.classList.remove('is-awaiting'); }
-        if (cutoutReview) cutoutReview.hidden = true;
         if (cutoutLoading) cutoutLoading.hidden = true;
+        if (cutoutPrivacy) cutoutPrivacy.hidden = false;
         if (cutoutShell) cutoutShell.scrollTop = 0;
         requestAnimationFrame(function () { if (cutoutKeepBackground) cutoutKeepBackground.focus({ preventScroll: true }); });
       }
       function showCutGuide(mode) {
         if (!origPhoto || !cutoutGuide || !cutoutScreen) return;
         cutMode = mode;
-        openCutoutScreen();
-        if (cutoutShapeStep) cutoutShapeStep.hidden = true;
-        if (cutoutBackgroundStep) cutoutBackgroundStep.hidden = true;
+        openCutoutScreen(); hideGuidedSections();
         cutoutGuide.hidden = false;
         cutoutGuide.classList.add('is-awaiting');
-        if (cutoutReview) cutoutReview.hidden = true;
         if (cutoutLoading) cutoutLoading.hidden = true;
         if (cutoutTouch) cutoutTouch.hidden = true;
         if (cutoutTapLabel) cutoutTapLabel.hidden = false;
@@ -1974,10 +2073,7 @@
       }
       function showCutReview() {
         if (!cutoutScreen || !cutoutReview || !(bgMode === 'white' ? cutPhoto : origPhoto)) return;
-        openCutoutScreen(); setCutStep(3, false);
-        if (cutoutShapeStep) cutoutShapeStep.hidden = true;
-        if (cutoutBackgroundStep) cutoutBackgroundStep.hidden = true;
-        cutoutGuide.hidden = true; cutoutGuide.classList.remove('is-awaiting');
+        openCutoutScreen(); hideGuidedSections(); setCutStep(3, false);
         cutoutReview.hidden = false;
         if (cutoutClean) cutoutClean.hidden = bgMode !== 'white';
         if (cutoutRetry) cutoutRetry.hidden = bgMode !== 'white';
@@ -2000,6 +2096,12 @@
         window.__mbcCutConfirmed = false;
         note('This photo is not approved yet.', false);
         renderDesignSlots();
+      }
+      function leaveGuidedFlow(fromHistory) {
+        if (!checkoutActive) return cancelCurrentDesign(fromHistory);
+        closeCutoutScreen(!!fromHistory);
+        var order = document.getElementById('order');
+        if (order) setTimeout(function () { order.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 80);
       }
       function runGuidedCut(point, displayPoint) {
         if (!origPhoto || busy) return;
@@ -2083,6 +2185,7 @@
         showBackgroundStep();
       });
       if (cutoutShapeCancel) cutoutShapeCancel.addEventListener('click', function () { cancelCurrentDesign(false); });
+      if (guidedNextPhotoButton) guidedNextPhotoButton.addEventListener('click', function () { startPhotoSlot(activeSlot); });
       if (cutoutKeepBackground) cutoutKeepBackground.addEventListener('click', function () { showOriginalReview(); });
       if (cutoutRemoveBackground) cutoutRemoveBackground.addEventListener('click', function () {
         setBg('white'); window.__mbcCutConfirmed = false;
@@ -2112,12 +2215,12 @@
       if (cutoutRetry) cutoutRetry.addEventListener('click', function () { showCutGuide('positive'); });
       if (cutoutOriginal) cutoutOriginal.addEventListener('click', function () { showOriginalReview(); });
       if (cutoutCancel) cutoutCancel.addEventListener('click', function () { showBackgroundStep(); });
-      if (cutoutClose) cutoutClose.addEventListener('click', function () { cancelCurrentDesign(false); });
+      if (cutoutClose) cutoutClose.addEventListener('click', function () { leaveGuidedFlow(false); });
       window.addEventListener('popstate', function () {
-        if (cutoutScreen && !cutoutScreen.hidden) cancelCurrentDesign(true);
+        if (cutoutScreen && !cutoutScreen.hidden) leaveGuidedFlow(true);
       });
       if (cutoutScreen) cutoutScreen.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape') { event.preventDefault(); cancelCurrentDesign(false); return; }
+        if (event.key === 'Escape') { event.preventDefault(); leaveGuidedFlow(false); return; }
         if (event.key !== 'Tab') return;
         var controls = Array.from(cutoutScreen.querySelectorAll('button:not([disabled]), [tabindex]:not([tabindex="-1"])')).filter(function (node) {
           return !node.hidden && node.offsetParent !== null;
