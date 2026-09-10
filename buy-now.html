@@ -272,6 +272,27 @@
     .pc-bg-tabs { margin-top: 0; }
     .pc-bg-note { font-size: .86rem; line-height: 1.5; color: var(--ink-40); margin: 9px 0 0; }
     .pc-bg-note.is-busy { color: var(--ink); font-weight: 700; }
+    .pc-design-tray { margin-top: 16px; display: grid; gap: 9px; }
+    .pc-design-tray[hidden] { display: none !important; }
+    .pc-design-tray-title { margin: 0; color: var(--ink-deep); font-size: .82rem; font-weight: 900; }
+    .pc-design-slots { display: grid; gap: 8px; }
+    .pc-design-slot {
+      width: 100%; display: grid; grid-template-columns: 48px minmax(0,1fr) auto; gap: 11px; align-items: center;
+      padding: 9px 11px; border: 1.5px solid var(--rule); border-radius: 15px; background: rgba(255,255,255,.72);
+      color: var(--ink); text-align: left; cursor: pointer; font-family: 'Nunito', sans-serif;
+    }
+    .pc-design-slot:hover { border-color: var(--pink); background: #fff; }
+    .pc-design-slot:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+    .pc-design-slot img, .pc-design-slot-mark {
+      width: 48px; height: 48px; border-radius: 11px; object-fit: cover; display: grid; place-items: center;
+      background: var(--cream); color: var(--pink-deep); font-weight: 900;
+    }
+    .pc-design-slot span { display: grid; gap: 2px; }
+    .pc-design-slot strong { color: var(--ink-deep); font-size: .88rem; }
+    .pc-design-slot small { color: var(--ink-40); font-size: .75rem; line-height: 1.3; }
+    .pc-design-slot b { color: var(--pink-deep); font-size: .75rem; white-space: nowrap; }
+    .pc-design-status { margin: 0; color: var(--ink-60); font-size: .8rem; line-height: 1.4; }
+    .pc-design-status.is-ready { color: #166534; font-weight: 900; }
     body.pc-cutout-open { overflow: hidden !important; }
     .pc-cutout-screen {
       position: fixed; inset: 0; z-index: 20000; display: grid; place-items: center;
@@ -325,6 +346,15 @@
     }
     .pc-cutout-copy p { margin: 0; color: var(--ink-60); font-size: 1rem; line-height: 1.5; }
     .pc-cutout-shapes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .pc-cutout-backgrounds { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .pc-cutout-background-choice {
+      min-height: 150px; padding: 22px 16px; border: 2px solid var(--rule); border-radius: 24px;
+      background: rgba(255,255,255,.78); color: var(--ink-deep); cursor: pointer; text-align: center;
+      font: 900 1rem/1.35 'Nunito', sans-serif;
+    }
+    .pc-cutout-background-choice span { display: block; margin-top: 8px; color: var(--ink-60); font-size: .82rem; font-weight: 700; }
+    .pc-cutout-background-choice:hover { border-color: var(--pink); transform: translateY(-2px); }
+    .pc-cutout-background-choice:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
     .pc-cutout-shape-choice {
       position: relative; display: grid; gap: 10px; padding: 14px;
       border: 2px solid var(--rule); border-radius: 24px; background: rgba(255,255,255,.74);
@@ -645,6 +675,11 @@
     }
     .pc-pay-label { font-weight: 900; font-size: 1.1rem; margin: 17px 0 11px; }
     .pc-pay-hint { font-size: .88rem; line-height: 1.55; color: var(--ink-40); margin: 12px 0 0; }
+    .pc-save-progress { margin: 12px 0 0; padding: 12px 13px; border-radius: 13px; background: var(--cream); color: var(--ink-deep); font-size: .84rem; font-weight: 800; }
+    .pc-save-progress[hidden] { display: none !important; }
+    .pc-save-track { height: 7px; margin-top: 8px; overflow: hidden; border-radius: 999px; background: rgba(87,36,38,.12); }
+    .pc-save-track span { display: block; width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg,var(--pink),var(--yellow)); transition: width .2s ease; }
+    #orderSecurity { min-height: 0; margin-top: 8px; }
     .pc-quote-link { margin: 15px 0 0; font-size: .92rem; font-weight: 800; }
     .pc-quote-link a { color: var(--pink-deep); text-underline-offset: 3px; }
     #paypal-button-container { max-width: none; min-height: 112px; }
@@ -890,9 +925,14 @@
           <div class="pc-drop" id="uploadArea" role="button" tabindex="0"
                aria-label="Add a photo to see it on a cookie">
             <span class="pc-drop-title">Add a photo &rarr;</span>
-            <span class="pc-drop-hint">Your preview stays on this phone. After payment, one tap opens the email where you attach it.</span>
+            <span class="pc-drop-hint">Build the exact cookie here. We save both your original and your approved design before payment.</span>
           </div>
           <input type="file" id="logoUpload" accept="image/*" hidden>
+          <div class="pc-design-tray" id="designTray" hidden>
+            <p class="pc-design-tray-title">Your cookie designs</p>
+            <div class="pc-design-slots" id="designSlots"></div>
+            <p class="pc-design-status" id="designStatus" aria-live="polite"></p>
+          </div>
         </div>
 
         <div class="pc-stage pc-reveal">
@@ -920,7 +960,7 @@
               <button type="button" class="pc-shape-tab" data-bg="keep" aria-pressed="true">Keep it</button>
               <button type="button" class="pc-shape-tab" data-bg="white" aria-pressed="false">Cut it out</button>
             </div>
-            <p class="pc-bg-note" id="bgNote">Cut It Out opens a guided screen. Your photo stays on this phone.</p>
+            <p class="pc-bg-note" id="bgNote">Cut It Out happens on this phone. Approved order files are saved privately before payment.</p>
           </div>
 
           <div class="pc-stage-actions" id="stageActions" hidden>
@@ -938,7 +978,7 @@
         <div class="pc-assurances pc-reveal" aria-label="Order promises">
           <span>Preview it here</span>
             <span>FedEx at our cost</span>
-          <span>Proof before baking</span>
+          <span>Approve the exact design</span>
         </div>
       </div>
     </section>
@@ -949,16 +989,16 @@
         <header class="pc-cutout-header">
           <div class="pc-cutout-brand">
             <img src="logo_icon.png" alt="" width="44" height="40">
-            <span>Photo cutout</span>
+            <span>Cookie design</span>
           </div>
-          <div class="pc-cutout-progress" aria-label="Three-step cutout">
+          <div class="pc-cutout-progress" aria-label="Three-step cookie design">
             <span class="is-active" id="cutoutProgressOne">1</span>
             <i></i>
             <span id="cutoutProgressTwo">2</span>
             <i></i>
             <span id="cutoutProgressThree">3</span>
           </div>
-          <button type="button" class="pc-cutout-close" id="cutoutClose" aria-label="Close and use the full photo">&times;</button>
+          <button type="button" class="pc-cutout-close" id="cutoutClose" aria-label="Close without approving">&times;</button>
         </header>
 
         <div class="pc-cutout-body">
@@ -980,7 +1020,14 @@
               </button>
             </div>
             <button type="button" class="pc-cutout-action pc-cutout-action--primary pc-cutout-shape-next" id="cutoutShapeNext" disabled>Next</button>
-            <button type="button" class="pc-cutout-action pc-cutout-shape-cancel" id="cutoutShapeCancel">Use the full photo instead</button>
+            <button type="button" class="pc-cutout-action pc-cutout-shape-cancel" id="cutoutShapeCancel">Close for now</button>
+          </section>
+
+          <section class="pc-cutout-background-step" id="cutoutBackgroundStep" hidden>
+            <div class="pc-cutout-backgrounds" role="group" aria-label="What should stay in the design">
+              <button type="button" class="pc-cutout-background-choice" id="cutoutKeepBackground">Keep the whole photo<span>Print the photo with its own background.</span></button>
+              <button type="button" class="pc-cutout-background-choice" id="cutoutRemoveBackground">Keep only the subject<span>Tap the person, pet, or thing to cut out.</span></button>
+            </div>
           </section>
 
           <section class="pc-cutout-guide" id="cutoutGuide" hidden>
@@ -999,7 +1046,7 @@
               </div>
             </div>
             <div class="pc-cutout-guide-actions">
-              <button type="button" class="pc-cutout-action" id="cutoutCancel">Use the full photo instead</button>
+              <button type="button" class="pc-cutout-action" id="cutoutCancel">Go back</button>
             </div>
           </section>
 
@@ -1007,16 +1054,16 @@
             <div class="pc-cutout-result">
               <canvas id="cutoutResultCanvas" width="800" height="800" aria-label="Your background-free cookie preview"></canvas>
             </div>
-            <p><strong>Look around the whole edge.</strong> If it is clean, tap Next. You still approve our final cookie proof before baking.</p>
+            <p><strong>Check the whole cookie.</strong> This exact picture is what we will print.</p>
             <div class="pc-cutout-review-actions">
-              <button type="button" class="pc-cutout-action pc-cutout-action--primary" id="cutoutConfirm">Next</button>
+              <button type="button" class="pc-cutout-action pc-cutout-action--primary" id="cutoutConfirm">Approve this exact design</button>
               <button type="button" class="pc-cutout-action" id="cutoutClean">Remove one bad spot</button>
               <button type="button" class="pc-cutout-action" id="cutoutRetry">Choose the subject again</button>
               <button type="button" class="pc-cutout-action" id="cutoutOriginal">Use the full photo instead</button>
             </div>
           </section>
 
-          <p class="pc-cutout-privacy">The picture stays on this device. Only the cutout model downloads.</p>
+          <p class="pc-cutout-privacy">The cutout happens on this device. After you approve, the original and exact cookie preview are saved privately with your order.</p>
         </div>
       </div>
     </div>
@@ -1067,9 +1114,9 @@
       <!-- ── Order ────────────────────────────────────────────────────────── -->
       <section class="pc-order pc-reveal" id="order">
         <div class="pc-order-steps" aria-label="How your order works">
-          <div class="pc-order-step"><span>1</span><strong>Preview</strong><small>See your photo here</small></div>
-          <div class="pc-order-step"><span>2</span><strong>Pay</strong><small>Card or PayPal</small></div>
-          <div class="pc-order-step"><span>3</span><strong>Approve</strong><small>Before we bake</small></div>
+          <div class="pc-order-step"><span>1</span><strong>Design</strong><small>See the exact cookie</small></div>
+          <div class="pc-order-step"><span>2</span><strong>Approve</strong><small>Lock every picture</small></div>
+          <div class="pc-order-step"><span>3</span><strong>Pay</strong><small>Card or PayPal</small></div>
         </div>
         <div class="pc-order-grid">
           <div>
@@ -1081,8 +1128,7 @@
             </div>
             <p class="pc-price-minimum"><strong>12-cookie minimum · starts at $60.</strong> The gift box and individual wrapping are included.</p>
             <p class="pc-lede" style="margin-top:6px">
-              Made the day they ship. We confirm your design with you before anything
-              goes in the oven.
+              Made the day they ship. You approve the exact design here before you pay.
             </p>
 
             <div class="quantity-row">
@@ -1100,7 +1146,7 @@
               <select id="photoCount" aria-describedby="photoCountHelp">
                 <option value="1">1 photo</option>
               </select>
-              <p class="pc-field-help" id="photoCountHelp">Each different photo needs at least 12 cookies. This preview shows your first photo.</p>
+              <p class="pc-field-help" id="photoCountHelp">Each different photo needs at least 12 cookies. You approve every design before payment.</p>
             </div>
 
             <div class="pc-pay" id="payBlock">
@@ -1141,8 +1187,13 @@
               </div>
 
               <p class="pc-pay-label" id="payLabel">Pay $60 + shipping — card or PayPal</p>
+              <div id="orderSecurity" data-sitekey="0x4AAAAAAEvQLyGWOk2nUwQ9" aria-label="Secure order check"></div>
               <div id="paypal-button-container"></div>
-              <p class="pc-pay-hint" id="payHint">Add your photo above, then pay. After payment, one button opens your order email. Attach the same photo and we send a design proof before baking.</p>
+              <div class="pc-save-progress" id="saveProgress" role="status" aria-live="polite" hidden>
+                <span id="saveProgressText">Saving your approved design…</span>
+                <div class="pc-save-track"><span id="saveProgressFill"></span></div>
+              </div>
+              <p class="pc-pay-hint" id="payHint">Approve every cookie design above. We save the original pictures and exact previews before PayPal opens.</p>
               <p id="paypal-paid-note" style="display:none;margin-top:12px;font-size:.95rem;line-height:1.5"></p>
               <p class="pc-quote-link"><a href="order-form">Prefer to talk first? Send an order request instead &rarr;</a></p>
             </div>
@@ -1158,8 +1209,8 @@
               <p>Free. 1096 Wildwood Avenue — skip shipping entirely if you are local.</p>
             </div>
             <div class="pc-way">
-              <h3>Your picture gets a human check</h3>
-              <p>After payment, we check it and send a design proof before anything goes in the oven.</p>
+              <h3>You approve the exact print</h3>
+              <p>The picture you approve online is saved with the paid order. We check that same file before baking.</p>
             </div>
             <div class="pc-way">
               <h3>Need Bay Area delivery?</h3>
@@ -1183,7 +1234,7 @@
             <h2 class="pc-h2">A family bakery, not a print shop.</h2>
             <p>
               Every cookie is baked, iced and printed by us in Daly City. Your picture
-              is handled by a person who cares how it looks, then shown to you before baking.
+              is handled by a person who cares how it looks, then checked against the design you approved.
             </p>
             <p class="pc-maker-line">Baked by Yana. Made for your person.</p>
             <div class="pc-maker-links">
@@ -1279,11 +1330,121 @@
       var bgBox = document.getElementById('bgChoice');
       var bgTabs = document.getElementById('bgTabs');
       var bgNote = document.getElementById('bgNote');
+      var designTray = document.getElementById('designTray');
+      var designSlots = document.getElementById('designSlots');
+      var designStatus = document.getElementById('designStatus');
       var origPhoto = null, cutPhoto = null, bgMode = 'keep', busy = false;
+      var designs = [], activeSlot = 1, currentFile = null;
       window.__mbcBg = 'keep';
       var baseRound = new Image(); baseRound.src = ROUND_SRC;
       var baseSquare = new Image(); baseSquare.src = SQUARE_SRC;
       var photo = null;
+
+      function neededDesigns() {
+        return Math.max(1, parseInt((document.getElementById('photoCount') || {}).value, 10) || 1);
+      }
+      function totalCookies() {
+        return Math.max(12, parseInt((document.getElementById('cookieQty') || {}).value, 10) || 12);
+      }
+      function cookiesForSlot(slot) {
+        var count = neededDesigns();
+        return slot === 1 ? totalCookies() - (count - 1) * 12 : 12;
+      }
+      function firstMissingSlot() {
+        for (var slot = 1; slot <= neededDesigns(); slot++) if (!designs[slot - 1]) return slot;
+        return 0;
+      }
+      function invalidateSavedOrder() {
+        if (window.__mbcOrderUpload && window.__mbcOrderUpload.invalidate) window.__mbcOrderUpload.invalidate();
+      }
+      function renderDesignSlots() {
+        if (!designTray || !designSlots) return;
+        var count = neededDesigns();
+        while (designs.length > count) {
+          var removed = designs.pop();
+          if (removed && removed.previewUrl) URL.revokeObjectURL(removed.previewUrl);
+        }
+        designTray.hidden = false; designSlots.innerHTML = '';
+        var approved = 0;
+        for (var slot = 1; slot <= count; slot++) {
+          var design = designs[slot - 1], button = document.createElement('button');
+          button.type = 'button'; button.className = 'pc-design-slot'; button.dataset.designSlot = String(slot);
+          var picture = design
+            ? '<img src="' + design.previewUrl + '" alt="">'
+            : '<span class="pc-design-slot-mark">' + slot + '</span>';
+          if (design) approved++;
+          button.innerHTML = picture + '<span><strong>Photo ' + slot + ' · ' + cookiesForSlot(slot) + ' cookies</strong><small>' +
+            (design ? (design.shape + ' · ' + (design.background === 'cut' ? 'background cut out' : 'full photo')) : 'Needs a photo and approval') +
+            '</small></span><b>' + (design ? 'Replace' : 'Add photo') + '</b>';
+          designSlots.appendChild(button);
+        }
+        designStatus.textContent = approved === count
+          ? (count === 1 ? 'Your design is approved and ready to save.' : 'All ' + count + ' designs are approved and ready to save.')
+          : approved + ' of ' + count + ' approved.';
+        designStatus.classList.toggle('is-ready', approved === count);
+        window.__mbcDesignApproved = approved === count;
+      }
+      function canvasBlob(canvas) {
+        return new Promise(function (resolve, reject) {
+          canvas.toBlob(function (blob) { blob ? resolve(blob) : reject(new Error('Preview could not be saved')); }, 'image/png');
+        });
+      }
+      function approveCurrentDesign() {
+        if (!currentFile || !cutoutShape || (bgMode === 'white' && !cutPhoto)) return Promise.reject(new Error('Design is not ready'));
+        var canvas = cutoutShape === 'square' ? cvSquare : cvRound;
+        var artworkCanvas = document.createElement('canvas');
+        drawPrintArtwork(artworkCanvas, cutoutShape, bgMode === 'white' ? cutPhoto : origPhoto, bgMode === 'white' ? 'contain' : 'cover');
+        setCutBusy(true, 'Saving your exact design…', 'Locking the picture you approved.');
+        return Promise.all([canvasBlob(canvas), canvasBlob(artworkCanvas)]).then(function (blobs) {
+          var blob = blobs[0], artworkBlob = blobs[1];
+          var old = designs[activeSlot - 1];
+          if (old && old.previewUrl) URL.revokeObjectURL(old.previewUrl);
+          designs[activeSlot - 1] = {
+            slot: activeSlot,
+            file: currentFile,
+            approvedBlob: blob,
+            artworkBlob: artworkBlob,
+            previewUrl: URL.createObjectURL(blob),
+            shape: cutoutShape,
+            background: bgMode === 'white' ? 'cut' : 'keep',
+            approvedAt: new Date().toISOString()
+          };
+          window.__mbcCutConfirmed = true;
+          invalidateSavedOrder(); renderDesignSlots();
+          closeCutoutScreen(false);
+          note('Photo ' + activeSlot + ' approved. This exact cookie will be saved before payment.', false);
+          var next = firstMissingSlot();
+          if (next) {
+            activeSlot = next;
+            uploadArea.querySelector('.pc-drop-title').textContent = 'Add photo ' + activeSlot + ' →';
+          } else {
+            uploadArea.querySelector('.pc-drop-title').textContent = 'All designs approved ✓';
+          }
+        }).finally(function () { setCutBusy(false); });
+      }
+      function startPhotoSlot(slot) {
+        activeSlot = Math.max(1, Math.min(neededDesigns(), slot));
+        fileInput.value = '';
+        fileInput.click();
+      }
+      if (designSlots) designSlots.addEventListener('click', function (event) {
+        var button = event.target.closest('[data-design-slot]');
+        if (button) startPhotoSlot(parseInt(button.dataset.designSlot, 10));
+      });
+      window.addEventListener('mbc:quotechange', function () { renderDesignSlots(); invalidateSavedOrder(); });
+      window.__mbcDesignStudio = {
+        getDesigns: function () {
+          return Array.from({ length: neededDesigns() }, function (_, index) {
+            var design = designs[index];
+            if (!design) return null;
+            return Object.assign({}, design, { slot: index + 1, quantity: cookiesForSlot(index + 1) });
+          });
+        },
+        requiredCount: neededDesigns,
+        openMissing: function () {
+          startPhotoSlot(firstMissingSlot() || 1);
+        }
+      };
 
       function coverRect(img, w, h) {
         var scale = Math.max(w / img.width, h / img.height);
@@ -1361,6 +1522,27 @@
         }
         return map;
       }
+      function drawPrintArtwork(canvas, shapeName, source, fitMode) {
+        var size = 800; canvas.width = size; canvas.height = size;
+        var ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, size, size);
+        var box;
+        if (shapeName === 'square') {
+          var inset = SQUARE.inset * size;
+          var x = inset, y = inset + SQUARE.dy * size, w = size - inset * 2, h = size - inset * 2;
+          var radius = SQUARE.radius * size;
+          ctx.save(); ctx.beginPath(); ctx.moveTo(x + radius, y);
+          ctx.arcTo(x + w, y, x + w, y + h, radius); ctx.arcTo(x + w, y + h, x, y + h, radius);
+          ctx.arcTo(x, y + h, x, y, radius); ctx.arcTo(x, y, x + w, y, radius); ctx.closePath(); ctx.clip();
+          box = fitMode === 'contain' ? containRect(source, w, h) : coverRect(source, w, h);
+          ctx.drawImage(source, x + box.x, y + box.y, box.w, box.h); ctx.restore();
+        } else {
+          var diameter = ROUND.r * 2 * size;
+          var left = ROUND.cx * size - diameter / 2, top = ROUND.cy * size - diameter / 2;
+          ctx.save(); ctx.beginPath(); ctx.arc(ROUND.cx * size, ROUND.cy * size, ROUND.r * size, 0, Math.PI * 2); ctx.clip();
+          box = fitMode === 'contain' ? containRect(source, diameter, diameter) : coverRect(source, diameter, diameter);
+          ctx.drawImage(source, left + box.x, top + box.y, box.w, box.h); ctx.restore();
+        }
+      }
       function drawShapeChoices() {
         if (!origPhoto) return;
         cutoutShapeRound.width = 400; cutoutShapeRound.height = 400;
@@ -1382,9 +1564,10 @@
         dlRound.hidden = !round; dlSquare.hidden = round;
       }
       function drawCutoutResult() {
-        if (!cutoutResultCanvas || !cutPhoto || !cutoutShape) return;
+        var source = bgMode === 'white' ? cutPhoto : origPhoto;
+        if (!cutoutResultCanvas || !source || !cutoutShape) return;
         cutoutResultCanvas.width = 800; cutoutResultCanvas.height = 800;
-        drawGuidedCookie(cutoutResultCanvas, cutoutShape, cutPhoto, 'contain');
+        drawGuidedCookie(cutoutResultCanvas, cutoutShape, source, bgMode === 'white' ? 'contain' : 'cover');
       }
 
       function render() {
@@ -1398,10 +1581,10 @@
         if (stageStamp) stageStamp.hidden = true;
         if (captionTitle) captionTitle.textContent = 'Your preview';
         if (captionText) captionText.textContent = 'Made on this phone · checked before baking';
-        tabs.hidden = false;
+        tabs.hidden = true;
         actions.hidden = false;
         uploadArea.querySelector('.pc-drop-title').textContent = 'Use a different photo →';
-        if (bgBox) bgBox.hidden = false;
+        if (bgBox) bgBox.hidden = true;
       }
 
       /* ── Guided background cut-out, on the customer's own phone ───────────
@@ -1426,6 +1609,9 @@
       var cutoutTapLabel = document.getElementById('cutoutTapLabel');
       var cutoutReview = document.getElementById('cutoutReview');
       var cutoutShapeStep = document.getElementById('cutoutShapeStep');
+      var cutoutBackgroundStep = document.getElementById('cutoutBackgroundStep');
+      var cutoutKeepBackground = document.getElementById('cutoutKeepBackground');
+      var cutoutRemoveBackground = document.getElementById('cutoutRemoveBackground');
       var cutoutShapeRound = document.getElementById('cutoutShapeRound');
       var cutoutShapeSquare = document.getElementById('cutoutShapeSquare');
       var cutoutShapeNext = document.getElementById('cutoutShapeNext');
@@ -1467,7 +1653,7 @@
         if (cutoutPicker) cutoutPicker.setAttribute('aria-busy', String(value));
         if (!value && cutoutLoadProgress) cutoutLoadProgress.hidden = true;
       }
-      function setCutStep(step, cleanup) {
+      function setCutStep(step, cleanup, choosingBackground) {
         if (cutoutStepLabel) cutoutStepLabel.textContent = 'Step ' + step + ' of 3' + (cleanup ? ' · optional cleanup' : '');
         if (cutoutProgressOne) cutoutProgressOne.classList.toggle('is-active', step >= 1);
         if (cutoutProgressTwo) cutoutProgressTwo.classList.toggle('is-active', step >= 2);
@@ -1475,15 +1661,21 @@
         if (step === 1) {
           cutoutGuideTitle.textContent = 'Round or square?';
           cutoutGuideText.textContent = 'Choose the cookie shape before we touch the background.';
+        } else if (step === 2 && choosingBackground) {
+          cutoutGuideTitle.textContent = 'What should stay?';
+          cutoutGuideText.textContent = 'Keep the whole picture, or cut it down to only the person, pet, or thing.';
         } else if (step === 2) {
           cutoutGuideTitle.textContent = 'Tap what stays.';
           cutoutGuideText.textContent = 'Your photo is already on the ' + cutoutShape + ' cookie. Tap the person, pet, or thing to keep.';
         } else if (cleanup) {
           cutoutGuideTitle.textContent = 'Tap the bad spot.';
           cutoutGuideText.textContent = 'Touch one piece that should disappear. We will cut again and bring you back to the check screen.';
+        } else if (bgMode === 'keep') {
+          cutoutGuideTitle.textContent = 'Is this exact cookie right?';
+          cutoutGuideText.textContent = 'Check the crop and the whole picture, then approve this exact design.';
         } else {
           cutoutGuideTitle.textContent = 'Does every edge look right?';
-          cutoutGuideText.textContent = 'Tap Next to use it, or clean one bad spot first.';
+          cutoutGuideText.textContent = 'Approve this exact cookie, or clean one bad spot first.';
         }
       }
       function openCutoutScreen() {
@@ -1725,6 +1917,7 @@
         if (!origPhoto || !cutoutShapeStep || !cutoutScreen) return;
         openCutoutScreen(); setCutStep(1, false);
         cutoutShapeStep.hidden = false;
+        if (cutoutBackgroundStep) cutoutBackgroundStep.hidden = true;
         cutoutGuide.hidden = true; cutoutGuide.classList.remove('is-awaiting');
         if (cutoutReview) cutoutReview.hidden = true;
         if (cutoutLoading) cutoutLoading.hidden = true;
@@ -1739,11 +1932,23 @@
           if (cutoutShell) cutoutShell.scrollTop = 0;
         });
       }
+      function showBackgroundStep() {
+        if (!origPhoto || !cutoutBackgroundStep || !cutoutScreen) return;
+        openCutoutScreen(); setCutStep(2, false, true);
+        if (cutoutShapeStep) cutoutShapeStep.hidden = true;
+        cutoutBackgroundStep.hidden = false;
+        if (cutoutGuide) { cutoutGuide.hidden = true; cutoutGuide.classList.remove('is-awaiting'); }
+        if (cutoutReview) cutoutReview.hidden = true;
+        if (cutoutLoading) cutoutLoading.hidden = true;
+        if (cutoutShell) cutoutShell.scrollTop = 0;
+        requestAnimationFrame(function () { if (cutoutKeepBackground) cutoutKeepBackground.focus({ preventScroll: true }); });
+      }
       function showCutGuide(mode) {
         if (!origPhoto || !cutoutGuide || !cutoutScreen) return;
         cutMode = mode;
         openCutoutScreen();
         if (cutoutShapeStep) cutoutShapeStep.hidden = true;
+        if (cutoutBackgroundStep) cutoutBackgroundStep.hidden = true;
         cutoutGuide.hidden = false;
         cutoutGuide.classList.add('is-awaiting');
         if (cutoutReview) cutoutReview.hidden = true;
@@ -1768,26 +1973,33 @@
         });
       }
       function showCutReview() {
-        if (!cutoutScreen || !cutoutReview || !cutPhoto) return;
+        if (!cutoutScreen || !cutoutReview || !(bgMode === 'white' ? cutPhoto : origPhoto)) return;
         openCutoutScreen(); setCutStep(3, false);
         if (cutoutShapeStep) cutoutShapeStep.hidden = true;
+        if (cutoutBackgroundStep) cutoutBackgroundStep.hidden = true;
         cutoutGuide.hidden = true; cutoutGuide.classList.remove('is-awaiting');
         cutoutReview.hidden = false;
+        if (cutoutClean) cutoutClean.hidden = bgMode !== 'white';
+        if (cutoutRetry) cutoutRetry.hidden = bgMode !== 'white';
+        if (cutoutOriginal) cutoutOriginal.hidden = bgMode !== 'white';
         drawCutoutResult();
         if (cutoutShell) cutoutShell.scrollTop = 0;
         requestAnimationFrame(function () { if (cutoutConfirm) cutoutConfirm.focus({ preventScroll: true }); });
       }
-      function useOriginalPhoto(fromHistory) {
+      function showOriginalReview() {
         photoVersion++; segmenterPhotoVersion = -1;
         setCutBusy(false);
         setBg('keep'); window.__mbcCutConfirmed = true; photo = origPhoto;
-        if (cutoutShapeStep) cutoutShapeStep.hidden = true;
-        if (cutoutGuide) { cutoutGuide.hidden = true; cutoutGuide.classList.remove('is-awaiting'); }
-        if (cutoutTapLabel) cutoutTapLabel.hidden = true;
-        if (cutoutReview) cutoutReview.hidden = true;
-        closeCutoutScreen(!!fromHistory);
         if (origPhoto) render();
-        note('Full photo selected. You can open the guided cutout again any time.', false);
+        showCutReview();
+        note('Check the whole cookie, then approve this exact design.', false);
+      }
+      function cancelCurrentDesign(fromHistory) {
+        setCutBusy(false);
+        closeCutoutScreen(!!fromHistory);
+        window.__mbcCutConfirmed = false;
+        note('This photo is not approved yet.', false);
+        renderDesignSlots();
       }
       function runGuidedCut(point, displayPoint) {
         if (!origPhoto || busy) return;
@@ -1834,13 +2046,13 @@
             cutPhoto = result.cropped; cutFullPhoto = result.full; photo = cutPhoto;
             setBg('white'); render();
             showCutReview();
-            note('Check every edge. Tap Next to use the cutout.', false);
+            note('Check every edge, then approve this exact design.', false);
             window.__mbcCutOk = true; window.__mbcCutRatio = result.ratio;
           }).catch(function (error) {
             if (version !== photoVersion) return;
             window.__mbcCutErr = String(error && error.message || error);
-            useOriginalPhoto(false);
-            note('That cut was not clean enough, so we kept your full photo. Try another spot or we will cut it by hand after your order.', false);
+            showOriginalReview();
+            note('That cut was not clean enough. Check the full-photo cookie, or go back and try the cut again.', false);
           }).finally(function () { setCutBusy(false); });
         }, 60);
       }
@@ -1852,12 +2064,12 @@
       if (bgTabs) bgTabs.addEventListener('click', function (e) {
         var btn = e.target.closest('.pc-shape-tab'); if (!btn || !origPhoto || busy) return;
         var mode = btn.dataset.bg; setBg(mode);
-        if (mode === 'keep') return useOriginalPhoto();
+        if (mode === 'keep') return showOriginalReview();
         window.__mbcCutConfirmed = false;
         if (cutPhoto) {
           photo = cutPhoto; render();
           showCutReview();
-          note('Check every edge. Tap Next to use the cutout.', false);
+          note('Check every edge, then approve this exact design.', false);
           return;
         }
         if (!cutoutShapeChosen) return showShapeStep();
@@ -1868,9 +2080,15 @@
       });
       if (cutoutShapeNext) cutoutShapeNext.addEventListener('click', function () {
         if (!cutoutShapeChosen) return;
-        setBg('white'); window.__mbcCutConfirmed = false; showCutGuide('positive');
+        showBackgroundStep();
       });
-      if (cutoutShapeCancel) cutoutShapeCancel.addEventListener('click', function () { useOriginalPhoto(false); });
+      if (cutoutShapeCancel) cutoutShapeCancel.addEventListener('click', function () { cancelCurrentDesign(false); });
+      if (cutoutKeepBackground) cutoutKeepBackground.addEventListener('click', function () { showOriginalReview(); });
+      if (cutoutRemoveBackground) cutoutRemoveBackground.addEventListener('click', function () {
+        setBg('white'); window.__mbcCutConfirmed = false;
+        if (cutPhoto) { photo = cutPhoto; render(); showCutReview(); }
+        else showCutGuide('positive');
+      });
       if (cutoutPicker) {
         cutoutPicker.addEventListener('pointerup', function (event) {
           var point = pointFromCutPicker(event);
@@ -1886,21 +2104,20 @@
         });
       }
       if (cutoutConfirm) cutoutConfirm.addEventListener('click', function () {
-        if (!cutPhoto) return;
-        window.__mbcCutConfirmed = true; setBg('white'); photo = cutPhoto; render();
-        cutoutReview.hidden = true; closeCutoutScreen(false);
-        note('Cutout selected. You will approve our final proof again before baking.', false);
+        approveCurrentDesign().catch(function () {
+          note('The preview did not save. Tap approve once more.', false);
+        });
       });
       if (cutoutClean) cutoutClean.addEventListener('click', function () { showCutGuide('negative'); });
       if (cutoutRetry) cutoutRetry.addEventListener('click', function () { showCutGuide('positive'); });
-      if (cutoutOriginal) cutoutOriginal.addEventListener('click', function () { useOriginalPhoto(false); });
-      if (cutoutCancel) cutoutCancel.addEventListener('click', function () { useOriginalPhoto(false); });
-      if (cutoutClose) cutoutClose.addEventListener('click', function () { useOriginalPhoto(false); });
+      if (cutoutOriginal) cutoutOriginal.addEventListener('click', function () { showOriginalReview(); });
+      if (cutoutCancel) cutoutCancel.addEventListener('click', function () { showBackgroundStep(); });
+      if (cutoutClose) cutoutClose.addEventListener('click', function () { cancelCurrentDesign(false); });
       window.addEventListener('popstate', function () {
-        if (cutoutScreen && !cutoutScreen.hidden) useOriginalPhoto(true);
+        if (cutoutScreen && !cutoutScreen.hidden) cancelCurrentDesign(true);
       });
       if (cutoutScreen) cutoutScreen.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape') { event.preventDefault(); useOriginalPhoto(false); return; }
+        if (event.key === 'Escape') { event.preventDefault(); cancelCurrentDesign(false); return; }
         if (event.key !== 'Tab') return;
         var controls = Array.from(cutoutScreen.querySelectorAll('button:not([disabled]), [tabindex]:not([tabindex="-1"])')).filter(function (node) {
           return !node.hidden && node.offsetParent !== null;
@@ -1913,6 +2130,10 @@
 
       function accept(file) {
         if (!file || !file.type || file.type.indexOf('image/') !== 0) return;
+        var priorDesign = designs[activeSlot - 1];
+        if (priorDesign && priorDesign.previewUrl) URL.revokeObjectURL(priorDesign.previewUrl);
+        designs[activeSlot - 1] = null; currentFile = file;
+        invalidateSavedOrder(); renderDesignSlots();
         var reader = new FileReader();
         reader.onload = function (e) {
           var img = new Image();
@@ -1921,11 +2142,12 @@
             cutStrokes = []; positivePoint = null; segmenterPhotoVersion = -1;
             cutoutShape = null; cutoutShapeChosen = false;
             window.__mbcCutOk = false; window.__mbcCutErr = null;
-            prepareCutInput(img); setBg('keep'); window.__mbcCutConfirmed = true;
+            prepareCutInput(img); setBg('keep'); window.__mbcCutConfirmed = false;
             if (cutoutGuide) { cutoutGuide.hidden = true; cutoutGuide.classList.remove('is-awaiting'); }
             if (cutoutTapLabel) cutoutTapLabel.hidden = true;
             if (cutoutReview) cutoutReview.hidden = true;
-            note('Cut-out lets you tap the exact person, pet, or thing to keep.');
+            if (cutoutBackgroundStep) cutoutBackgroundStep.hidden = true;
+            note('Photo ' + activeSlot + ' needs your shape, background, and approval.');
             window.__mbcPhoto = file; window.__mbcPhotoImg = img; render();
             showShapeStep();
           };
@@ -1934,9 +2156,11 @@
         reader.readAsDataURL(file);
       }
 
-      uploadArea.addEventListener('click', function () { fileInput.click(); });
+      uploadArea.addEventListener('click', function () {
+        startPhotoSlot(firstMissingSlot() || 1);
+      });
       uploadArea.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); }
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); uploadArea.click(); }
       });
       ['dragenter', 'dragover'].forEach(function (t) {
         uploadArea.addEventListener(t, function (e) { e.preventDefault(); uploadArea.classList.add('dragover'); });
@@ -1968,7 +2192,11 @@
         cutStrokes = []; positivePoint = null; segmenterPhotoVersion = -1;
         cutoutShape = null; cutoutShapeChosen = false;
         window.__mbcCutOk = false; window.__mbcCutErr = null;
-        setBg('keep'); window.__mbcCutConfirmed = true;
+        var oldDesign = designs[activeSlot - 1];
+        if (oldDesign && oldDesign.previewUrl) URL.revokeObjectURL(oldDesign.previewUrl);
+        designs[activeSlot - 1] = null; currentFile = null;
+        invalidateSavedOrder(); renderDesignSlots();
+        setBg('keep'); window.__mbcCutConfirmed = false;
         if (bgBox) bgBox.hidden = true;
         if (cutoutGuide) { cutoutGuide.hidden = true; cutoutGuide.classList.remove('is-awaiting'); }
         if (cutoutReview) cutoutReview.hidden = true;
@@ -1997,6 +2225,7 @@
           if (photo) resetBtn.click();
         });
       });
+      renderDesignSlots();
     })();
 
     /* Card payment only announces itself once it has actually rendered. */
@@ -2112,6 +2341,7 @@
           shippingBox.hidden = true; state.shipping = 0; state.total = state.subtotal; state.ready = true;
           shippingPrice.textContent = 'Free pickup'; orderTotal.textContent = money(state.total);
           payLabel.textContent = 'Pay ' + money(state.total) + ' — card or PayPal';
+          window.dispatchEvent(new CustomEvent('mbc:quotechange', { detail: Object.assign({}, state) }));
           return;
         }
 
@@ -2119,18 +2349,21 @@
         if (state.zip.length !== 5) {
           shippingOptions.hidden = true; shippingPrice.textContent = 'Enter ZIP';
           orderTotal.textContent = money(state.subtotal) + ' + shipping'; payLabel.textContent = 'Enter ZIP to see your total';
-          setShippingMessage('Enter five numbers to see your FedEx choices.', false); return;
+          setShippingMessage('Enter five numbers to see your FedEx choices.', false);
+          window.dispatchEvent(new CustomEvent('mbc:quotechange', { detail: Object.assign({}, state) })); return;
         }
         state.zone = zoneForZip(state.zip);
         if (state.zone === 'remote') {
           shippingOptions.hidden = true; shippingPrice.textContent = 'We confirm it';
           orderTotal.textContent = money(state.subtotal) + ' + shipping'; payLabel.textContent = 'Ask us for the FedEx price';
-          setShippingMessage('We ship to Alaska, Hawaii, and Puerto Rico. Send an order request so we can price that box correctly.', true); return;
+          setShippingMessage('We ship to Alaska, Hawaii, and Puerto Rico. Send an order request so we can price that box correctly.', true);
+          window.dispatchEvent(new CustomEvent('mbc:quotechange', { detail: Object.assign({}, state) })); return;
         }
         if (!state.zone || state.weight > 50) {
           shippingOptions.hidden = true; shippingPrice.textContent = 'We confirm it';
           orderTotal.textContent = money(state.subtotal) + ' + shipping'; payLabel.textContent = 'Ask us for the FedEx price';
-          setShippingMessage(state.weight > 50 ? 'This is a large shipment. Send an order request so we can price the boxes correctly.' : 'That ZIP needs a manual FedEx check.', true); return;
+          setShippingMessage(state.weight > 50 ? 'This is a large shipment. Send an order request so we can price the boxes correctly.' : 'That ZIP needs a manual FedEx check.', true);
+          window.dispatchEvent(new CustomEvent('mbc:quotechange', { detail: Object.assign({}, state) })); return;
         }
 
         ['ground', 'twoDay', 'overnight'].forEach(function (name) {
@@ -2143,6 +2376,7 @@
         shippingPrice.textContent = money(state.shipping); orderTotal.textContent = money(state.total);
         payLabel.textContent = 'Pay ' + money(state.total) + ' — card or PayPal';
         setShippingMessage('FedEx price for this ZIP and about ' + state.weight + ' lb packed. No shipping markup.', false);
+        window.dispatchEvent(new CustomEvent('mbc:quotechange', { detail: Object.assign({}, state) }));
       }
       function updateQuantity(next) {
         qtyInput.value = String(Math.max(12, Math.round(next || 12)));
@@ -2198,134 +2432,7 @@
     <link rel="stylesheet" href="chatbot.css">
     <script src="chatbot.js" defer></script>
     <script src="https://www.paypal.com/sdk/js?client-id=BAAWrqUBSYrM5GuFpN43KZHxZAJvb_39F9mt1SIA4TX2tYQVOo0N9Hmfw-BbC55szL-UoAlsXCOPaW3_fE&currency=USD&intent=capture&enable-funding=card&disable-funding=paylater&components=buttons"></script>
-    <script>
-    if (window.paypal && document.getElementById('paypal-button-container')) {
-      var W3_KEY = 'bb1321a2-591e-405f-afb6-d93a8e4f721d';
-      function $id(id) { return document.getElementById(id); }
-      function fulfil() { var r = document.querySelector('input[name="fulfil"]:checked'); return r ? r.value : 'ship'; }
-      function shape() { var t = document.querySelector('.pc-shape-tab[aria-pressed="true"]'); return (t && t.dataset.shape) ? t.dataset.shape : 'round'; }
-      function say(msg, bad) { var n = $id('paypal-paid-note'); n.style.display = 'block'; n.style.color = bad ? '#b00020' : ''; n.innerHTML = msg; }
-      /* phone photos can be 10 MB; the mail relay takes 5. Shrink big ones to a 2000px JPEG. */
-      function photoForMail() {
-        var f = window.__mbcPhoto, img = window.__mbcPhotoImg;
-        if (!f) return Promise.resolve(null);
-        if (f.size <= 4000000 || !img) return Promise.resolve(f);
-        return new Promise(function (res) {
-          var max = 2000, s = Math.min(1, max / Math.max(img.width, img.height));
-          var c = document.createElement('canvas'); c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
-          c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-          c.toBlob(function (b) { res(b ? new File([b], 'photo.jpg', { type: 'image/jpeg' }) : f); }, 'image/jpeg', 0.9);
-        });
-      }
-      paypal.Buttons({
-        style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'pay' },
-        onClick: function (data, actions) {
-          if (!window.__mbcPhoto) {
-            say('Add your photo first &mdash; tap &ldquo;Add a photo&rdquo; at the top of the page. We print exactly what you send.', true);
-            var ua = $id('uploadArea');
-            if (ua) { ua.scrollIntoView({ behavior: 'smooth', block: 'center' }); ua.classList.add('dragover'); setTimeout(function () { ua.classList.remove('dragover'); }, 1800); }
-            return actions.reject();
-          }
-          if (window.__mbcBg === 'white' && !window.__mbcCutConfirmed) {
-            say('Finish the cutout screen and tap Next before you pay.', true);
-            var cutButton = document.querySelector('[data-bg="white"]');
-            if (cutButton) cutButton.click();
-            return actions.reject();
-          }
-          var quote = window.__mbcOrderPricing && window.__mbcOrderPricing.getState();
-          if (!quote || !quote.ready) {
-            say('Enter the delivery ZIP and choose a FedEx speed before you pay.', true);
-            var calculator = $id('shippingCalculator');
-            if (calculator && quote && quote.fulfil === 'ship') calculator.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            return actions.reject();
-          }
-          return actions.resolve();
-        },
-        createOrder: function (data, actions) {
-          var quote = window.__mbcOrderPricing.getState();
-          var f = quote.fulfil, subtotal = quote.subtotal.toFixed(2), shipping = quote.shipping.toFixed(2), total = quote.total.toFixed(2);
-          return actions.order.create({
-            purchase_units: [{
-              description: 'Printed photo cookies — ' + quote.quantity + ' cookies — ' + quote.photos + (quote.photos === 1 ? ' photo' : ' photos'),
-              items: [{
-                name: 'Printed photo cookie',
-                description: 'Gift box and individual wrapping included',
-                unit_amount: { currency_code: 'USD', value: '5.00' },
-                quantity: String(quote.quantity),
-                category: 'PHYSICAL_GOODS'
-              }],
-              amount: {
-                currency_code: 'USD', value: total,
-                breakdown: {
-                  item_total: { currency_code: 'USD', value: subtotal },
-                  shipping: { currency_code: 'USD', value: shipping }
-                }
-              }
-            }],
-            application_context: { shipping_preference: f === 'pickup' ? 'NO_SHIPPING' : 'GET_FROM_FILE' }
-          });
-        },
-        onShippingAddressChange: function (data, actions) {
-          var quote = window.__mbcOrderPricing.getState();
-          if (quote.fulfil !== 'ship') return;
-          var address = data.shippingAddress || {};
-          if (address.countryCode && address.countryCode !== 'US') return actions.reject(data.errors.COUNTRY_ERROR);
-          var paypalZip = String(address.postalCode || '').slice(0, 5);
-          if (paypalZip && paypalZip !== quote.zip) return actions.reject(data.errors.ZIP_ERROR);
-        },
-        onApprove: function (data, actions) {
-          return actions.order.capture().then(function (d) {
-            var quote = window.__mbcOrderPricing.getState();
-            var qty = quote.quantity, f = quote.fulfil;
-            var payer = d.payer || {};
-            var nm = payer.name ? [payer.name.given_name, payer.name.surname].filter(Boolean).join(' ') : '';
-            var pu = (d.purchase_units && d.purchase_units[0]) || {};
-            var sh = pu.shipping || {};
-            var a = sh.address || {};
-            var addr = [a.address_line_1, a.address_line_2, a.admin_area_2, a.admin_area_1, a.postal_code, a.country_code].filter(Boolean).join(', ');
-            var shipTo = (sh.name && sh.name.full_name) ? sh.name.full_name : nm;
-            var cap = (pu.payments && pu.payments.captures && pu.payments.captures[0]) || {};
-            var amount = (cap.amount && cap.amount.value) ? cap.amount.value : quote.total.toFixed(2);
-            var lines = [
-              'PAID ORDER — printed photo cookies',
-              'Quantity: ' + qty + ' cookies at $5 each',
-              'Different photos: ' + quote.photos + ' (minimum 12 cookies per photo)',
-              'Shape: ' + shape(),
-              'Background: ' + (window.__mbcBg === 'white' ? 'CUT OUT — print subject on white' : 'keep as in the photo'),
-              'Cookies: $' + quote.subtotal.toFixed(2),
-              'Shipping: ' + (f === 'pickup' ? '$0.00 — pickup' : '$' + quote.shipping.toFixed(2) + ' — FedEx ' + quote.serviceLabel + ' — ZIP ' + quote.zip + ' — estimated ' + quote.weight + ' lb'),
-              'Paid: $' + amount + ' USD via PayPal',
-              'PayPal order: ' + d.id + (cap.id ? ' / capture ' + cap.id : ''),
-              (f === 'pickup') ? 'Fulfilment: PICKUP at 1096 Wildwood Ave, Daly City' : 'Fulfilment: SHIP to ' + shipTo + ' — ' + addr,
-              'Photos: customer emails ' + quote.photos + ' to info@ (subject: Photo for order ' + d.id + ')'
-            ].join('\n');
-            ['.pc-ship', '#paypal-button-container', '#payLabel', '#payHint'].forEach(function (sel) { var el = document.querySelector(sel); if (el) el.style.display = 'none'; });
-            say('Payment received &mdash; order <b>' + d.id + '</b>. Sending us your photo&hellip;');
-            var mailto = 'mailto:info@mybakingcreations.com?subject=' + encodeURIComponent('Photo for order ' + d.id) + '&body=' + encodeURIComponent('Order ' + d.id + ' — ' + qty + ' ' + shape() + ' photo cookies — ' + quote.photos + (quote.photos === 1 ? ' photo' : ' photos') + ' — ' + (f === 'pickup' ? 'pickup Daly City' : 'FedEx ' + quote.serviceLabel + ' to ' + quote.zip) + ' — background: ' + (window.__mbcBg === 'white' ? 'cut out, white' : 'keep') + '. Photos attached.');
-            var ok = 'Payment received &mdash; order <b>' + d.id + '</b>. One last step: send us ' + (quote.photos === 1 ? 'the photo' : 'your ' + quote.photos + ' photos') + '.<br><a class="pc-mail-btn" href="' + mailto + '">Email my ' + (quote.photos === 1 ? 'photo' : 'photos') + ' &rarr;</a><br><span style="font-size:.86rem;color:var(--ink-40)">Attach the picture' + (quote.photos === 1 ? '' : 's') + ' to that email. We reply with a design proof before baking. Your PayPal receipt is in your inbox.</span>';
-            var fallback = ok;
-            photoForMail().then(function (file) {
-              var fd = new FormData();
-              fd.append('access_key', W3_KEY);
-              fd.append('subject', 'PAID ORDER — ' + qty + ' photo cookies — $' + amount + ' — ' + (f === 'pickup' ? 'pickup' : 'FedEx ' + quote.serviceLabel));
-              fd.append('from_name', 'My Baking Creations Website');
-              fd.append('name', nm || shipTo || 'PayPal buyer');
-              fd.append('email', payer.email_address || '');
-              fd.append('phone', (payer.phone && payer.phone.phone_number && payer.phone.phone_number.national_number) || '');
-              fd.append('product_type', 'Printed photo cookies (paid online)');
-              fd.append('delivery_method', f === 'pickup' ? 'Pickup — Daly City' : 'FedEx ' + quote.serviceLabel + ' — $' + quote.shipping.toFixed(2) + ' — ZIP ' + quote.zip);
-              fd.append('delivery_address', addr);
-              fd.append('order_details', lines);
-              return fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd }).then(function (r) { return r.json(); });
-            }).then(function (j) { say((j && j.success) ? ok : fallback, !(j && j.success)); })
-              .catch(function () { say(fallback, true); });
-          });
-        },
-        onError: function (err) {
-          say('Checkout did not load. Email <a href="mailto:info@mybakingcreations.com">info@mybakingcreations.com</a> or <a href="order-form">send an order request</a> and we invoice you.', true);
-        }
-      }).render('#paypal-button-container');
-    }
-    </script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=mbcTurnstileLoaded&amp;render=explicit" defer></script>
+    <script src="buy-now-order.js"></script>
 </body>
 </html>
