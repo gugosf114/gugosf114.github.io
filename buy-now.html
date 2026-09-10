@@ -367,6 +367,29 @@
       border-top-color: var(--pink); animation: pc-spin .8s linear infinite;
     }
     @keyframes pc-spin { to { transform: rotate(360deg); } }
+    .pc-cutout-load-progress { width: min(280px, 82%); margin-top: 8px; }
+    .pc-cutout-load-progress[hidden] { display: none !important; }
+    .pc-cutout-load-track {
+      height: 10px; overflow: hidden; border-radius: 999px;
+      background: rgba(87,36,38,.11); box-shadow: inset 0 1px 2px rgba(53,19,22,.1);
+    }
+    .pc-cutout-load-track span {
+      display: block; width: 0; height: 100%; border-radius: inherit;
+      background: linear-gradient(90deg, var(--pink), #FF72B9 68%, var(--yellow));
+      transition: width .16s ease;
+    }
+    .pc-cutout-load-progress.is-indeterminate .pc-cutout-load-track span {
+      width: 42%; animation: pc-load-wait 1.1s ease-in-out infinite alternate;
+    }
+    @keyframes pc-load-wait {
+      from { transform: translateX(-90%); }
+      to { transform: translateX(235%); }
+    }
+    .pc-cutout-load-meta {
+      display: flex; justify-content: space-between; gap: 12px; margin-top: 7px;
+      color: var(--ink-40); font-size: .76rem; line-height: 1.2;
+    }
+    .pc-cutout-load-meta strong { color: var(--ink-deep); font-size: .8rem; }
     .pc-cutout-touch {
       position: absolute; width: 28px; height: 28px; margin: -14px 0 0 -14px;
       border-radius: 50%; border: 3px solid #fff; background: var(--pink);
@@ -748,7 +771,8 @@
       .pc-drop, .thumb-row img, .pc-stage, .pc-way, .pc-maker-links a { transition: none; }
       .pc-drop:hover, .thumb-row img:hover, .pc-stage:hover, .pc-way:hover, .pc-maker-links a:hover { transform: none; }
       .pc-motion .pc-reveal, .pc-motion .pc-reveal.is-visible { opacity: 1; transform: none; transition: none; }
-      .pc-cutout-screen, .pc-cutout-touch, .pc-cutout-spinner { animation: none; }
+      .pc-cutout-screen, .pc-cutout-touch, .pc-cutout-spinner,
+      .pc-cutout-load-progress.is-indeterminate .pc-cutout-load-track span { animation: none; }
     }
 </style>
 </head>
@@ -923,6 +947,10 @@
                 <span class="pc-cutout-spinner" aria-hidden="true"></span>
                 <strong id="cutoutLoadingTitle">Setting up the cutout tool…</strong>
                 <small id="cutoutLoadingDetail">The first time takes a moment.</small>
+                <div class="pc-cutout-load-progress" id="cutoutLoadProgress" role="progressbar" aria-label="Cutout model download" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden>
+                  <div class="pc-cutout-load-track"><span id="cutoutLoadFill"></span></div>
+                  <div class="pc-cutout-load-meta"><strong id="cutoutLoadPercent">0%</strong><span id="cutoutLoadBytes">Starting…</span></div>
+                </div>
               </div>
             </div>
             <div class="pc-cutout-guide-actions">
@@ -1286,7 +1314,9 @@
       var MP_CDN = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@1.0.1/vision_bundle.mjs';
       var MP_WASM = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@1.0.1/wasm';
       var MP_MODEL = 'https://storage.googleapis.com/mediapipe-models/interactive_segmenter_v2/magic_touch/int8/1/interactive_segmentation.task';
+      var MP_MODEL_BYTES = 30525312;
       var segmenter = null, segmenterPromise = null, segmenterPhotoVersion = -1;
+      var modelDownloadPromise = null;
       var photoVersion = 0, cutInputCanvas = document.createElement('canvas');
       var cutStrokes = [], positivePoint = null, cutMode = 'positive', cutFullPhoto = null;
       var cutoutGuide = document.getElementById('cutoutGuide');
@@ -1304,6 +1334,10 @@
       var cutoutLoading = document.getElementById('cutoutLoading');
       var cutoutLoadingTitle = document.getElementById('cutoutLoadingTitle');
       var cutoutLoadingDetail = document.getElementById('cutoutLoadingDetail');
+      var cutoutLoadProgress = document.getElementById('cutoutLoadProgress');
+      var cutoutLoadFill = document.getElementById('cutoutLoadFill');
+      var cutoutLoadPercent = document.getElementById('cutoutLoadPercent');
+      var cutoutLoadBytes = document.getElementById('cutoutLoadBytes');
       var cutoutResultImage = document.getElementById('cutoutResultImage');
       var cutoutConfirm = document.getElementById('cutoutConfirm');
       var cutoutClean = document.getElementById('cutoutClean');
@@ -1323,6 +1357,7 @@
         if (cutoutLoadingTitle && title) cutoutLoadingTitle.textContent = title;
         if (cutoutLoadingDetail && detail) cutoutLoadingDetail.textContent = detail;
         if (cutoutPicker) cutoutPicker.setAttribute('aria-busy', String(value));
+        if (!value && cutoutLoadProgress) cutoutLoadProgress.hidden = true;
       }
       function setCutStep(step, cleanup) {
         if (cutoutStepLabel) cutoutStepLabel.textContent = step === 1 ? 'Step 1 of 2' : (cleanup ? 'Step 2 of 2 · optional cleanup' : 'Step 2 of 2');
@@ -1363,20 +1398,103 @@
         }
         if (cutoutLastFocus && cutoutLastFocus.focus) setTimeout(function () { cutoutLastFocus.focus(); }, 0);
       }
+      function showModelProgressWaiting() {
+        if (!cutoutLoadProgress) return;
+        cutoutLoadProgress.hidden = false;
+        cutoutLoadProgress.classList.add('is-indeterminate');
+        cutoutLoadProgress.removeAttribute('aria-valuenow');
+        cutoutLoadPercent.textContent = 'Starting';
+        cutoutLoadBytes.textContent = 'Loading tools';
+        window.__mbcModelProgress = null;
+        window.__mbcModelProgressHistory = ['starting'];
+      }
+      function updateModelProgress(received, total) {
+        if (!cutoutLoadProgress) return;
+        var percent = Math.max(0, Math.min(100, Math.round(received / total * 100)));
+        if (window.__mbcModelProgress === percent) return;
+        var firstNumber = typeof window.__mbcModelProgress !== 'number';
+        cutoutLoadProgress.hidden = false;
+        cutoutLoadProgress.classList.remove('is-indeterminate');
+        cutoutLoadProgress.setAttribute('aria-valuenow', String(percent));
+        cutoutLoadProgress.setAttribute('aria-valuetext', percent + '% — ' + (received / 1000000).toFixed(1) + ' of ' + (total / 1000000).toFixed(1) + ' MB');
+        if (firstNumber) {
+          cutoutLoadFill.style.transition = 'none';
+          cutoutLoadFill.style.width = percent + '%';
+          cutoutLoadFill.offsetWidth;
+          cutoutLoadFill.style.transition = '';
+        } else {
+          cutoutLoadFill.style.width = percent + '%';
+        }
+        cutoutLoadPercent.textContent = percent + '%';
+        cutoutLoadBytes.textContent = (received / 1000000).toFixed(1) + ' of ' + (total / 1000000).toFixed(1) + ' MB';
+        if (cutoutLoadingTitle) cutoutLoadingTitle.textContent = percent < 100 ? 'Downloading the cutout model…' : 'Model downloaded.';
+        if (cutoutLoadingDetail) cutoutLoadingDetail.textContent = percent < 100 ? 'It stays in this browser for later cuts.' : 'Starting the cutout AI.';
+        window.__mbcModelProgress = percent;
+        window.__mbcModelProgressHistory = window.__mbcModelProgressHistory || [];
+        window.__mbcModelProgressHistory.push(percent);
+      }
+      function downloadModelWithProgress() {
+        if (modelDownloadPromise) return modelDownloadPromise;
+        modelDownloadPromise = fetch(MP_MODEL, { cache: 'force-cache' }).then(function (response) {
+          if (!response.ok) throw new Error('Cutout model download failed');
+          var total = parseInt(response.headers.get('content-length'), 10) || MP_MODEL_BYTES;
+          updateModelProgress(0, total);
+          if (!response.body || !response.body.getReader) {
+            return response.arrayBuffer().then(function (buffer) {
+              updateModelProgress(buffer.byteLength, total);
+              return new Uint8Array(buffer);
+            });
+          }
+          var reader = response.body.getReader(), chunks = [], received = 0;
+          function read() {
+            return reader.read().then(function (part) {
+              if (part.done) return;
+              chunks.push(part.value); received += part.value.byteLength;
+              updateModelProgress(received, total);
+              return read();
+            });
+          }
+          return read().then(function () {
+            var bytes = new Uint8Array(received), offset = 0;
+            chunks.forEach(function (chunk) { bytes.set(chunk, offset); offset += chunk.byteLength; });
+            updateModelProgress(received, total);
+            window.__mbcModelDownloadedBytes = received;
+            return bytes;
+          });
+        }).catch(function (error) {
+          modelDownloadPromise = null; throw error;
+        });
+        return modelDownloadPromise;
+      }
       function getSegmenter() {
         if (segmenter) return Promise.resolve(segmenter);
         if (segmenterPromise) return segmenterPromise;
-        segmenterPromise = import(MP_CDN).then(function (mp) {
-          window.__mbcCutRuntime = 'loading';
+        window.__mbcCutRuntime = 'loading';
+        showModelProgressWaiting();
+        var toolsPromise = import(MP_CDN).then(function (mp) {
           return mp.FilesetResolver.forVisionTasks(MP_WASM).then(function (vision) {
-            return mp.InteractiveSegmenter.createFromOptions(vision, {
-              baseOptions: { modelAssetPath: MP_MODEL, delegate: 'CPU' }
-            });
+            return { mp: mp, vision: vision };
           });
-        }).then(function (ready) {
-          segmenter = ready; window.__mbcCutRuntime = 'ready'; return ready;
+        });
+        var bytesPromise = downloadModelWithProgress().then(function (bytes) {
+          return { bytes: bytes, error: null };
         }).catch(function (error) {
-          segmenterPromise = null; window.__mbcCutRuntime = 'failed'; throw error;
+          return { bytes: null, error: error };
+        });
+        segmenterPromise = Promise.all([toolsPromise, bytesPromise]).then(function (parts) {
+          var tools = parts[0], model = parts[1];
+          if (cutoutLoadingTitle) cutoutLoadingTitle.textContent = 'Starting the cutout AI…';
+          if (cutoutLoadingDetail) cutoutLoadingDetail.textContent = model.bytes ? 'Model downloaded. Getting the scissors ready.' : 'Using the backup model loader.';
+          var baseOptions = { delegate: 'CPU' };
+          if (model.bytes) baseOptions.modelAssetBuffer = model.bytes;
+          else baseOptions.modelAssetPath = MP_MODEL;
+          return tools.mp.InteractiveSegmenter.createFromOptions(tools.vision, { baseOptions: baseOptions });
+        }).then(function (ready) {
+          segmenter = ready; modelDownloadPromise = null;
+          window.__mbcCutRuntime = 'ready'; return ready;
+        }).catch(function (error) {
+          segmenterPromise = null; modelDownloadPromise = null;
+          window.__mbcCutRuntime = 'failed'; throw error;
         });
         return segmenterPromise;
       }
