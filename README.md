@@ -14,6 +14,7 @@ Built by George Abrahamyan. Baked by Yana.
 - **Analytics**: Google Analytics (GA4) + Google Tag Manager
 - **Forms**: Web3Forms + Google reCAPTCHA
 - **Chatbot**: Cloudflare Worker backend
+- **Printed-cookie checkout**: Cloudflare Worker + private R2 + Queues + server-side PayPal + Resend
 - **Internal Dashboard**: Firebase Realtime Database + Firebase Storage (thursday/)
 - **Images**: All WebP format (converted via `convert-to-webp.py`, quality 82)
 - **SEO**: Schema.org structured data, Open Graph, Twitter Cards, sitemap.xml
@@ -44,7 +45,7 @@ Built by George Abrahamyan. Baked by Yana.
 ### Ordering & Conversion
 | Page | File | Description |
 |------|------|-------------|
-| Buy Now | `buy-now.html` | Fast checkout for printed image cookies, 48-hour nationwide shipping |
+| Buy Now | `buy-now.html` + `buy-now-order.js` | Guided design approval, private file upload, and fast checkout for printed image cookies |
 | Order Printed | `order-printed.html` | Photo cookie ordering |
 | Corporate Order | `corporate-order.html` | Corporate quote request, 24-hour turnaround, invoice/PO accepted |
 
@@ -215,6 +216,12 @@ node .github/scripts/validate-site.js
 - CSS conflicts in the same selector are blocking (prevents cascade regressions in `style.css`)
 
 The GitHub Actions workflow (`.github/workflows/validate-and-deploy.yml`) runs validate first, then deploys to Pages only if validation passes.
+
+## Printed Cookie Checkout
+
+`buy-now.html` owns the guided shape, background, and exact-design approval flow. `buy-now-order.js` uploads the original photo, clean print artwork, and approved cookie preview before opening PayPal.
+
+The private backend is `gugosf114/mbc-order-backend`. Its live Cloudflare Worker uses private R2 storage, a retry queue, server-side PayPal capture, Turnstile, and Resend. Never place its secret values in this public repository.
 
 ## Thursday Dashboard (Internal)
 
