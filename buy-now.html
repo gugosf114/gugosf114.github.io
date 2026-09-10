@@ -1770,6 +1770,8 @@
             if (cutoutReview) cutoutReview.hidden = true;
             note('Cut-out lets you tap the exact person, pet, or thing to keep.');
             window.__mbcPhoto = file; window.__mbcPhotoImg = img; render();
+            setBg('white'); window.__mbcCutConfirmed = false;
+            showCutGuide('positive');
           };
           img.src = e.target.result;
         };
