@@ -244,6 +244,7 @@
         });
         hideProgress();
         say('Payment received. Order ' + receipt.orderId + ' is complete. Your approved pictures and print files are with the bakery.', false);
+        window.dispatchEvent(new CustomEvent('mbc:orderpaid', { detail: receipt }));
       }).catch(function (error) {
         hideProgress();
         say(error.message + ' Your saved order is still here. Tap PayPal once more so we can check it.', true);

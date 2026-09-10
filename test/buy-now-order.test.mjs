@@ -26,6 +26,7 @@ test('browser checkout saves every required file before PayPal and captures on t
     designTray: element(),
   };
   const selected = new Map();
+  const dispatched = [];
   ['.pc-ship', '#payLabel', '#payHint', '#orderSecurity'].forEach((selector) => selected.set(selector, element()));
 
   let paypalConfig;
@@ -33,6 +34,7 @@ test('browser checkout saves every required file before PayPal and captures on t
   const artwork = new Blob([new Uint8Array([4, 5])], { type: 'image/png' });
   const approved = new Blob([new Uint8Array([6, 7])], { type: 'image/png' });
   const window = {
+    dispatchEvent(event) { dispatched.push(event); },
     __mbcOrderPricing: { getState: () => ({ quantity: 12, photos: 1, fulfil: 'pickup', zip: '', service: 'ground', ready: true }) },
     __mbcDesignStudio: { getDesigns: () => [{ slot: 1, quantity: 12, shape: 'round', background: 'cut', approvedAt: '2026-09-10T12:00:00Z', file: original, artworkBlob: artwork, approvedBlob: approved }] },
     turnstile: {
@@ -70,6 +72,7 @@ test('browser checkout saves every required file before PayPal and captures on t
     File,
     Headers,
     Response,
+    CustomEvent,
     setTimeout,
     clearTimeout,
     console,
@@ -94,12 +97,14 @@ test('browser checkout saves every required file before PayPal and captures on t
   assert.equal(calls[6].path, '/v1/paypal/orders/PAYPAL-ONE/capture');
   assert.match(elements['paypal-paid-note'].textContent, /Payment received/);
   assert.match(elements['paypal-paid-note'].textContent, /design-one/);
+  assert.equal(dispatched.at(-1).type, 'mbc:orderpaid');
 });
 
 test('browser checkout rejects payment when a design is missing', async () => {
   const paidNote = element();
   let paypalConfig;
   const window = {
+    dispatchEvent() {},
     __mbcOrderPricing: { getState: () => ({ photos: 2, ready: true }) },
     __mbcDesignStudio: { getDesigns: () => [{ slot: 1 }, null] },
     paypal: { Buttons(config) { paypalConfig = config; return { render() {} }; } },
@@ -114,7 +119,7 @@ test('browser checkout rejects payment when a design is missing', async () => {
     querySelector() { return null; },
   };
   const source = await readFile(new URL('../buy-now-order.js', import.meta.url), 'utf8');
-  vm.runInNewContext(source, { window, document, fetch() { throw new Error('fetch must not run'); }, crypto: webcrypto, URL, Blob, File, Headers, Response, setTimeout, clearTimeout, console });
+  vm.runInNewContext(source, { window, document, fetch() { throw new Error('fetch must not run'); }, crypto: webcrypto, URL, Blob, File, Headers, Response, CustomEvent, setTimeout, clearTimeout, console });
   let rejected = false;
   await paypalConfig.onClick({}, { resolve() {}, reject() { rejected = true; } });
   assert.equal(rejected, true);
