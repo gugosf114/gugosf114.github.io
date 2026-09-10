@@ -272,13 +272,59 @@
     .pc-bg-tabs { margin-top: 0; }
     .pc-bg-note { font-size: .86rem; line-height: 1.5; color: var(--ink-40); margin: 9px 0 0; }
     .pc-bg-note.is-busy { color: var(--ink); font-weight: 700; }
-    .pc-cutout-guide,
-    .pc-cutout-review {
-      margin-top: 14px; padding: 15px; border-radius: 18px;
-      background: rgba(255,255,255,.72); border: 1px solid var(--rule);
+    body.pc-cutout-open { overflow: hidden !important; }
+    .pc-cutout-screen {
+      position: fixed; inset: 0; z-index: 20000; display: grid; place-items: center;
+      padding: clamp(18px, 4vw, 48px); background: rgba(36, 10, 13, .74);
+      backdrop-filter: blur(16px); animation: pc-screen-in .24s ease both;
     }
-    .pc-cutout-guide-head { margin: 0 0 11px; color: var(--ink-60); font-size: .86rem; line-height: 1.45; }
-    .pc-cutout-guide-head strong { display: block; color: var(--ink-deep); font-size: .98rem; }
+    .pc-cutout-screen[hidden] { display: none !important; }
+    @keyframes pc-screen-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .pc-cutout-shell {
+      width: min(900px, 100%); max-height: calc(100dvh - clamp(36px, 8vw, 96px));
+      overflow-y: auto; overscroll-behavior: contain; border-radius: 32px;
+      background: #FBF6EE; border: 1px solid rgba(255,255,255,.35);
+      box-shadow: 0 36px 110px rgba(17,3,5,.42);
+    }
+    .pc-cutout-header {
+      position: sticky; top: 0; z-index: 5; display: grid;
+      grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px;
+      min-height: 76px; padding: 14px 22px; background: rgba(255,253,249,.94);
+      border-bottom: 1px solid var(--rule); backdrop-filter: blur(15px);
+    }
+    .pc-cutout-brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink-deep); font-weight: 900; }
+    .pc-cutout-brand img { width: 44px; height: 40px; object-fit: contain; }
+    .pc-cutout-progress { display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .pc-cutout-progress span {
+      display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%;
+      border: 2px solid var(--rule); color: var(--ink-40); background: #fff;
+      font-size: .78rem; font-weight: 900; transition: all .2s ease;
+    }
+    .pc-cutout-progress span.is-active { border-color: var(--pink); color: #fff; background: var(--pink); }
+    .pc-cutout-progress i { display: block; width: 38px; height: 2px; background: var(--rule); }
+    .pc-cutout-close {
+      justify-self: end; display: grid; place-items: center; width: 44px; height: 44px;
+      border: 1px solid var(--rule); border-radius: 50%; background: #fff; color: var(--ink-deep);
+      font: 400 1.8rem/1 'Nunito', sans-serif; cursor: pointer;
+    }
+    .pc-cutout-close:hover { color: #fff; background: var(--ink-deep); }
+    .pc-cutout-close:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
+    .pc-cutout-body { width: min(700px, 100%); margin: 0 auto; padding: clamp(26px, 5vw, 52px); }
+    .pc-cutout-copy { text-align: center; margin-bottom: 20px; }
+    .pc-cutout-step-label {
+      display: inline-block; color: var(--pink-deep); font-size: .75rem;
+      font-weight: 900; letter-spacing: .13em; text-transform: uppercase;
+    }
+    .pc-cutout-copy h2 {
+      margin: 8px 0 7px; color: var(--ink-deep);
+      font: 400 clamp(2rem, 5vw, 3rem)/1.05 'Fredoka One', 'Fredoka Fallback', cursive;
+    }
+    .pc-cutout-copy p { margin: 0; color: var(--ink-60); font-size: 1rem; line-height: 1.5; }
+    .pc-cutout-guide,
+    .pc-cutout-review { padding: 0; border: 0; background: transparent; }
     .pc-cutout-canvas-wrap {
       position: relative; overflow: hidden; border-radius: 14px;
       background-color: #fff;
@@ -289,15 +335,17 @@
         linear-gradient(-45deg, transparent 75%, rgba(87,36,38,.05) 75%);
       background-position: 0 0, 0 8px, 8px -8px, -8px 0;
       background-size: 16px 16px;
-      border: 1px solid rgba(87,36,38,.1);
+      border: 2px solid rgba(87,36,38,.12); box-shadow: 0 18px 44px rgba(73,33,28,.12);
     }
     #cutoutPicker {
-      display: block; width: 100%; height: auto; max-height: 390px;
+      display: block; width: 100%; height: auto; max-height: min(52dvh, 520px);
       object-fit: contain; cursor: crosshair; touch-action: manipulation;
     }
     .pc-cutout-guide.is-awaiting {
-      border-color: var(--pink);
-      box-shadow: 0 0 0 4px rgba(236,38,143,.13), 0 14px 32px rgba(73,33,28,.12);
+      filter: drop-shadow(0 0 12px rgba(236,38,143,.17));
+    }
+    .pc-cutout-guide.is-awaiting .pc-cutout-canvas-wrap {
+      border-color: var(--pink); box-shadow: 0 0 0 5px rgba(236,38,143,.1), 0 20px 48px rgba(73,33,28,.15);
     }
     .pc-cutout-tap-label {
       position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%);
@@ -306,6 +354,19 @@
       box-shadow: 0 8px 22px rgba(0,0,0,.2);
       font: 900 .82rem/1.2 'Nunito', sans-serif; pointer-events: none;
     }
+    .pc-cutout-loading {
+      position: absolute; inset: 0; z-index: 4; display: grid; place-content: center;
+      justify-items: center; gap: 9px; padding: 28px; text-align: center;
+      color: var(--ink-deep); background: rgba(255,253,249,.94); backdrop-filter: blur(9px);
+    }
+    .pc-cutout-loading[hidden] { display: none !important; }
+    .pc-cutout-loading strong { font-size: 1.05rem; }
+    .pc-cutout-loading small { color: var(--ink-60); font-size: .86rem; }
+    .pc-cutout-spinner {
+      width: 42px; height: 42px; border-radius: 50%; border: 4px solid rgba(236,38,143,.17);
+      border-top-color: var(--pink); animation: pc-spin .8s linear infinite;
+    }
+    @keyframes pc-spin { to { transform: rotate(360deg); } }
     .pc-cutout-touch {
       position: absolute; width: 28px; height: 28px; margin: -14px 0 0 -14px;
       border-radius: 50%; border: 3px solid #fff; background: var(--pink);
@@ -316,18 +377,35 @@
       from { opacity: 0; transform: scale(1.8); }
       to { opacity: 1; transform: scale(1); }
     }
-    .pc-cutout-guide-actions,
-    .pc-cutout-review-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 11px; }
+    .pc-cutout-guide-actions { display: flex; justify-content: center; margin-top: 18px; }
+    .pc-cutout-review-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
     .pc-cutout-action {
-      min-height: 42px; padding: 9px 13px; border-radius: 999px;
+      min-height: 50px; padding: 12px 18px; border-radius: 999px;
       border: 1px solid var(--rule); background: #fff; color: var(--ink);
-      font: 800 .82rem/1.2 'Nunito', sans-serif; cursor: pointer;
+      font: 900 .9rem/1.2 'Nunito', sans-serif; cursor: pointer;
     }
-    .pc-cutout-action--primary { background: var(--pink); border-color: var(--pink); color: #fff; }
+    .pc-cutout-action--primary {
+      grid-column: 1 / -1; min-height: 58px; background: var(--pink);
+      border-color: var(--pink); color: #fff; font-size: 1rem;
+      box-shadow: 0 12px 30px rgba(236,38,143,.24);
+    }
     .pc-cutout-action:hover { transform: translateY(-1px); box-shadow: 0 7px 16px rgba(73,33,28,.09); }
     .pc-cutout-action:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
-    .pc-cutout-review p { margin: 0; color: var(--ink-60); font-size: .86rem; line-height: 1.5; }
+    .pc-cutout-result {
+      display: grid; place-items: center; min-height: 280px; max-height: min(48dvh, 470px);
+      padding: 18px; overflow: hidden; border-radius: 20px; border: 2px solid var(--rule);
+      background-color: #fff;
+      background-image:
+        linear-gradient(45deg, rgba(87,36,38,.05) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(87,36,38,.05) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(87,36,38,.05) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(87,36,38,.05) 75%);
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0; background-size: 20px 20px;
+    }
+    .pc-cutout-result img { display: block; max-width: 100%; max-height: min(44dvh, 430px); object-fit: contain; }
+    .pc-cutout-review p { margin: 16px 0 0; color: var(--ink-60); font-size: .95rem; line-height: 1.55; text-align: center; }
     .pc-cutout-review strong { color: var(--ink-deep); }
+    .pc-cutout-privacy { margin: 22px 0 0; color: var(--ink-40); font-size: .8rem; line-height: 1.4; text-align: center; }
     .pc-stage-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
     .pc-mini {
       border: 1.5px solid var(--rule); background: rgba(255,255,255,.55); color: var(--ink-60);
@@ -638,7 +716,25 @@
       }
       .pc-order-step span { grid-row: auto; width: 29px; height: 29px; }
       .pc-pay { padding: 17px 15px; }
-      .pc-cutout-review-actions { display: grid; }
+      .pc-cutout-screen { display: block; padding: 0; background: #FBF6EE; backdrop-filter: none; animation: none; }
+      .pc-cutout-shell { width: 100%; height: 100dvh; max-height: none; border: 0; border-radius: 0; box-shadow: none; }
+      .pc-cutout-header {
+        min-height: 68px; padding: max(10px, env(safe-area-inset-top)) 16px 10px;
+        grid-template-columns: 1fr auto 1fr; gap: 10px;
+      }
+      .pc-cutout-brand { gap: 6px; font-size: .82rem; }
+      .pc-cutout-brand img { width: 36px; height: 34px; }
+      .pc-cutout-progress span { width: 27px; height: 27px; }
+      .pc-cutout-progress i { width: 24px; }
+      .pc-cutout-close { width: 40px; height: 40px; }
+      .pc-cutout-body { padding: 22px 18px calc(28px + env(safe-area-inset-bottom)); }
+      .pc-cutout-copy { margin-bottom: 16px; }
+      .pc-cutout-copy h2 { font-size: 2.15rem; }
+      #cutoutPicker { max-height: 45dvh; }
+      .pc-cutout-result { min-height: 230px; max-height: 43dvh; padding: 14px; }
+      .pc-cutout-result img { max-height: 39dvh; }
+      .pc-cutout-review-actions { display: grid; grid-template-columns: 1fr; }
+      .pc-cutout-action--primary { grid-column: auto; }
       .pc-cutout-action { width: 100%; }
       .pc-way { padding-left: 51px; }
       .pc-maker-photo { max-width: 260px; }
@@ -652,6 +748,7 @@
       .pc-drop, .thumb-row img, .pc-stage, .pc-way, .pc-maker-links a { transition: none; }
       .pc-drop:hover, .thumb-row img:hover, .pc-stage:hover, .pc-way:hover, .pc-maker-links a:hover { transform: none; }
       .pc-motion .pc-reveal, .pc-motion .pc-reveal.is-visible { opacity: 1; transform: none; transition: none; }
+      .pc-cutout-screen, .pc-cutout-touch, .pc-cutout-spinner { animation: none; }
     }
 </style>
 </head>
@@ -771,30 +868,7 @@
               <button type="button" class="pc-shape-tab" data-bg="keep" aria-pressed="true">Keep it</button>
               <button type="button" class="pc-shape-tab" data-bg="white" aria-pressed="false">Cut it out</button>
             </div>
-            <p class="pc-bg-note" id="bgNote">Cut-out puts just your subject on the white icing. Works best with one clear subject.</p>
-            <div class="pc-cutout-guide" id="cutoutGuide" hidden>
-              <p class="pc-cutout-guide-head">
-                <strong id="cutoutGuideTitle">Tap what stays.</strong>
-                <span id="cutoutGuideText">Touch the person, pet, or thing you want on the cookie.</span>
-              </p>
-              <div class="pc-cutout-canvas-wrap">
-                <canvas id="cutoutPicker" width="1" height="1" role="button" tabindex="0" aria-label="Tap the subject to keep"></canvas>
-                <span class="pc-cutout-tap-label" id="cutoutTapLabel">Tap the person, pet, or thing to keep</span>
-                <span class="pc-cutout-touch" id="cutoutTouch" hidden></span>
-              </div>
-              <div class="pc-cutout-guide-actions">
-                <button type="button" class="pc-cutout-action" id="cutoutCancel">Keep the full photo</button>
-              </div>
-            </div>
-            <div class="pc-cutout-review" id="cutoutReview" hidden>
-              <p><strong>Check every edge.</strong> Use this cut only when it looks right. You still approve our final proof before baking.</p>
-              <div class="pc-cutout-review-actions">
-                <button type="button" class="pc-cutout-action pc-cutout-action--primary" id="cutoutConfirm">Looks good — use it</button>
-                <button type="button" class="pc-cutout-action" id="cutoutClean">Remove one bad spot</button>
-                <button type="button" class="pc-cutout-action" id="cutoutRetry">Choose the subject again</button>
-                <button type="button" class="pc-cutout-action" id="cutoutOriginal">Keep the full photo</button>
-              </div>
-            </div>
+            <p class="pc-bg-note" id="bgNote">Cut It Out opens a guided screen. Your photo stays on this phone.</p>
           </div>
 
           <div class="pc-stage-actions" id="stageActions" hidden>
@@ -816,6 +890,63 @@
         </div>
       </div>
     </section>
+
+    <!-- ── Full-screen guided cutout ─────────────────────────────────────── -->
+    <div class="pc-cutout-screen" id="cutoutScreen" role="dialog" aria-modal="true" aria-labelledby="cutoutGuideTitle" hidden>
+      <div class="pc-cutout-shell">
+        <header class="pc-cutout-header">
+          <div class="pc-cutout-brand">
+            <img src="logo_icon.png" alt="" width="44" height="40">
+            <span>Photo cutout</span>
+          </div>
+          <div class="pc-cutout-progress" aria-label="Two-step cutout">
+            <span class="is-active" id="cutoutProgressOne">1</span>
+            <i></i>
+            <span id="cutoutProgressTwo">2</span>
+          </div>
+          <button type="button" class="pc-cutout-close" id="cutoutClose" aria-label="Close and use the full photo">&times;</button>
+        </header>
+
+        <div class="pc-cutout-body">
+          <div class="pc-cutout-copy">
+            <span class="pc-cutout-step-label" id="cutoutStepLabel">Step 1 of 2</span>
+            <h2 id="cutoutGuideTitle">Tap what stays.</h2>
+            <p id="cutoutGuideText">Touch the person, pet, or thing you want on the cookie.</p>
+          </div>
+
+          <section class="pc-cutout-guide" id="cutoutGuide">
+            <div class="pc-cutout-canvas-wrap">
+              <canvas id="cutoutPicker" width="1" height="1" role="button" tabindex="0" aria-label="Tap the subject to keep"></canvas>
+              <span class="pc-cutout-tap-label" id="cutoutTapLabel">Tap the person, pet, or thing to keep</span>
+              <span class="pc-cutout-touch" id="cutoutTouch" hidden></span>
+              <div class="pc-cutout-loading" id="cutoutLoading" role="status" aria-live="polite" hidden>
+                <span class="pc-cutout-spinner" aria-hidden="true"></span>
+                <strong id="cutoutLoadingTitle">Setting up the cutout tool…</strong>
+                <small id="cutoutLoadingDetail">The first time takes a moment.</small>
+              </div>
+            </div>
+            <div class="pc-cutout-guide-actions">
+              <button type="button" class="pc-cutout-action" id="cutoutCancel">Use the full photo instead</button>
+            </div>
+          </section>
+
+          <section class="pc-cutout-review" id="cutoutReview" hidden>
+            <div class="pc-cutout-result">
+              <img id="cutoutResultImage" alt="Your background-free preview">
+            </div>
+            <p><strong>Look around the whole edge.</strong> If it is clean, tap Next. You still approve our final cookie proof before baking.</p>
+            <div class="pc-cutout-review-actions">
+              <button type="button" class="pc-cutout-action pc-cutout-action--primary" id="cutoutConfirm">Next</button>
+              <button type="button" class="pc-cutout-action" id="cutoutClean">Remove one bad spot</button>
+              <button type="button" class="pc-cutout-action" id="cutoutRetry">Choose the subject again</button>
+              <button type="button" class="pc-cutout-action" id="cutoutOriginal">Use the full photo instead</button>
+            </div>
+          </section>
+
+          <p class="pc-cutout-privacy">The picture stays on this device. Only the cutout model downloads.</p>
+        </div>
+      </div>
+    </div>
 
     <!-- ── Real work. Tap one to put it on the stage. ──────────────────────── -->
     <section class="pc-rail pc-reveal">
@@ -1163,20 +1294,74 @@
       var cutoutTouch = document.getElementById('cutoutTouch');
       var cutoutTapLabel = document.getElementById('cutoutTapLabel');
       var cutoutReview = document.getElementById('cutoutReview');
+      var cutoutScreen = document.getElementById('cutoutScreen');
+      var cutoutShell = cutoutScreen && cutoutScreen.querySelector('.pc-cutout-shell');
       var cutoutGuideTitle = document.getElementById('cutoutGuideTitle');
       var cutoutGuideText = document.getElementById('cutoutGuideText');
+      var cutoutStepLabel = document.getElementById('cutoutStepLabel');
+      var cutoutProgressOne = document.getElementById('cutoutProgressOne');
+      var cutoutProgressTwo = document.getElementById('cutoutProgressTwo');
+      var cutoutLoading = document.getElementById('cutoutLoading');
+      var cutoutLoadingTitle = document.getElementById('cutoutLoadingTitle');
+      var cutoutLoadingDetail = document.getElementById('cutoutLoadingDetail');
+      var cutoutResultImage = document.getElementById('cutoutResultImage');
       var cutoutConfirm = document.getElementById('cutoutConfirm');
       var cutoutClean = document.getElementById('cutoutClean');
       var cutoutRetry = document.getElementById('cutoutRetry');
       var cutoutOriginal = document.getElementById('cutoutOriginal');
       var cutoutCancel = document.getElementById('cutoutCancel');
+      var cutoutClose = document.getElementById('cutoutClose');
+      var cutoutLastFocus = null, cutoutHistoryOpen = false;
       window.__mbcCutConfirmed = true;
 
-      function setCutBusy(value) {
+      function setCutBusy(value, title, detail) {
         busy = value;
-        document.querySelectorAll('.pc-bg-tabs button, .pc-cutout-action').forEach(function (button) {
+        document.querySelectorAll('.pc-bg-tabs button, .pc-cutout-action:not(#cutoutCancel):not(#cutoutOriginal)').forEach(function (button) {
           button.disabled = value;
         });
+        if (cutoutLoading) cutoutLoading.hidden = !value;
+        if (cutoutLoadingTitle && title) cutoutLoadingTitle.textContent = title;
+        if (cutoutLoadingDetail && detail) cutoutLoadingDetail.textContent = detail;
+        if (cutoutPicker) cutoutPicker.setAttribute('aria-busy', String(value));
+      }
+      function setCutStep(step, cleanup) {
+        if (cutoutStepLabel) cutoutStepLabel.textContent = step === 1 ? 'Step 1 of 2' : (cleanup ? 'Step 2 of 2 · optional cleanup' : 'Step 2 of 2');
+        if (cutoutProgressOne) cutoutProgressOne.classList.add('is-active');
+        if (cutoutProgressTwo) cutoutProgressTwo.classList.toggle('is-active', step === 2);
+        if (step === 1) {
+          cutoutGuideTitle.textContent = 'Tap what stays.';
+          cutoutGuideText.textContent = 'Touch the person, pet, or thing you want on the cookie.';
+        } else if (cleanup) {
+          cutoutGuideTitle.textContent = 'Tap the bad spot.';
+          cutoutGuideText.textContent = 'Touch one piece that should disappear. We will cut again and bring you back to the check screen.';
+        } else {
+          cutoutGuideTitle.textContent = 'Does every edge look right?';
+          cutoutGuideText.textContent = 'Tap Next to use it, or clean one bad spot first.';
+        }
+      }
+      function openCutoutScreen() {
+        if (!cutoutScreen) return;
+        if (cutoutScreen.hidden) {
+          cutoutLastFocus = document.activeElement;
+          cutoutScreen.hidden = false;
+          document.body.classList.add('pc-cutout-open');
+          if (!(history.state && history.state.mbcCutout)) {
+            history.pushState(Object.assign({}, history.state || {}, { mbcCutout: true }), '');
+            cutoutHistoryOpen = true;
+          }
+        }
+        if (cutoutShell) cutoutShell.scrollTop = 0;
+      }
+      function closeCutoutScreen(fromHistory) {
+        if (!cutoutScreen || cutoutScreen.hidden) return;
+        cutoutScreen.hidden = true;
+        document.body.classList.remove('pc-cutout-open');
+        if (!fromHistory && cutoutHistoryOpen && history.state && history.state.mbcCutout) {
+          cutoutHistoryOpen = false; history.back();
+        } else {
+          cutoutHistoryOpen = false;
+        }
+        if (cutoutLastFocus && cutoutLastFocus.focus) setTimeout(function () { cutoutLastFocus.focus(); }, 0);
       }
       function getSegmenter() {
         if (segmenter) return Promise.resolve(segmenter);
@@ -1294,39 +1479,55 @@
         });
       }
       function showCutGuide(mode) {
-        if (!origPhoto || !cutoutGuide) return;
+        if (!origPhoto || !cutoutGuide || !cutoutScreen) return;
         cutMode = mode;
+        openCutoutScreen();
         cutoutGuide.hidden = false;
         cutoutGuide.classList.add('is-awaiting');
         if (cutoutReview) cutoutReview.hidden = true;
+        if (cutoutLoading) cutoutLoading.hidden = true;
         if (cutoutTouch) cutoutTouch.hidden = true;
         if (cutoutTapLabel) cutoutTapLabel.hidden = false;
         if (mode === 'positive') {
           cutStrokes = []; positivePoint = null;
-          cutoutGuideTitle.textContent = 'Tap what stays.';
-          cutoutGuideText.textContent = 'Touch the person, pet, or thing you want on the cookie.';
+          setCutStep(1, false);
+          cutoutTapLabel.textContent = 'Tap the person, pet, or thing to keep';
           drawCutPicker(origPhoto);
-          note('Choose the exact subject. The better model loads after you tap.', false);
+          note('Guided cutout opened. Choose the exact subject.', false);
         } else {
-          cutoutGuideTitle.textContent = 'Tap the bad piece.';
-          cutoutGuideText.textContent = 'Touch one bit the cutout should remove.';
+          setCutStep(2, true);
+          cutoutTapLabel.textContent = 'Tap one bad spot to remove';
           drawCutPicker(cutFullPhoto || origPhoto);
-          note('Touch the one piece that should disappear.', false);
+          note('Guided cleanup opened. Touch one bad spot.', false);
         }
         requestAnimationFrame(function () {
-          cutoutGuide.scrollIntoView({ behavior: 'smooth', block: 'center' });
           if (cutoutPicker) cutoutPicker.focus({ preventScroll: true });
+          if (cutoutShell) cutoutShell.scrollTop = 0;
         });
       }
-      function useOriginalPhoto() {
+      function showCutReview() {
+        if (!cutoutScreen || !cutoutReview || !cutPhoto) return;
+        openCutoutScreen(); setCutStep(2, false);
+        cutoutGuide.hidden = true; cutoutGuide.classList.remove('is-awaiting');
+        cutoutReview.hidden = false;
+        if (cutoutResultImage) cutoutResultImage.src = cutPhoto.src;
+        if (cutoutShell) cutoutShell.scrollTop = 0;
+        requestAnimationFrame(function () { if (cutoutConfirm) cutoutConfirm.focus({ preventScroll: true }); });
+      }
+      function useOriginalPhoto(fromHistory) {
+        photoVersion++; segmenterPhotoVersion = -1;
+        setCutBusy(false);
         setBg('keep'); window.__mbcCutConfirmed = true; photo = origPhoto;
         if (cutoutGuide) { cutoutGuide.hidden = true; cutoutGuide.classList.remove('is-awaiting'); }
         if (cutoutTapLabel) cutoutTapLabel.hidden = true;
         if (cutoutReview) cutoutReview.hidden = true;
-        render(); note('Full photo selected. You can try the guided cutout again any time.', false);
+        closeCutoutScreen(!!fromHistory);
+        if (origPhoto) render();
+        note('Full photo selected. You can open the guided cutout again any time.', false);
       }
       function runGuidedCut(point) {
         if (!origPhoto || busy) return;
+        window.__mbcCutOk = false; window.__mbcCutErr = null;
         if (cutMode === 'positive') {
           positivePoint = point;
           cutStrokes = [{ brushMode: 1, point: [point], isCompleted: true }];
@@ -1340,10 +1541,14 @@
           cutoutTouch.hidden = false;
         }
         var version = photoVersion;
-        setCutBusy(true); window.__mbcCutConfirmed = false;
+        var firstLoad = !segmenter;
+        setCutBusy(true,
+          firstLoad ? 'Setting up the cutout tool…' : 'Cutting around your subject…',
+          firstLoad ? 'The first time takes a moment.' : 'Keeping only the thing you chose.');
+        window.__mbcCutConfirmed = false;
         if (cutoutGuide) cutoutGuide.classList.remove('is-awaiting');
         if (cutoutTapLabel) cutoutTapLabel.hidden = true;
-        note('Loading the clean cutout tool… about 40 MB the first time.', true);
+        note(firstLoad ? 'Setting up the cutout tool…' : 'Cutting around your subject…', true);
         setTimeout(function () {
           getSegmenter().then(function (ready) {
             if (version !== photoVersion) throw new Error('Photo changed');
@@ -1351,6 +1556,8 @@
               ready.setImage(cutInputCanvas);
               segmenterPhotoVersion = version;
             }
+            if (cutoutLoadingTitle) cutoutLoadingTitle.textContent = 'Cutting around your subject…';
+            if (cutoutLoadingDetail) cutoutLoadingDetail.textContent = 'Keeping only the thing you chose.';
             note('Cutting around the thing you chose…', true);
             var mask = ready.segment(cutStrokes);
             try {
@@ -1362,13 +1569,13 @@
             if (version !== photoVersion) return;
             cutPhoto = result.cropped; cutFullPhoto = result.full; photo = cutPhoto;
             setBg('white'); render();
-            if (cutoutGuide) { cutoutGuide.hidden = true; cutoutGuide.classList.remove('is-awaiting'); }
-            if (cutoutReview) cutoutReview.hidden = false;
-            note('Check every edge. Tap “Looks good” before you pay.', false);
+            showCutReview();
+            note('Check every edge. Tap Next to use the cutout.', false);
             window.__mbcCutOk = true; window.__mbcCutRatio = result.ratio;
           }).catch(function (error) {
+            if (version !== photoVersion) return;
             window.__mbcCutErr = String(error && error.message || error);
-            useOriginalPhoto();
+            useOriginalPhoto(false);
             note('That cut was not clean enough, so we kept your full photo. Try another spot or we will cut it by hand after your order.', false);
           }).finally(function () { setCutBusy(false); });
         }, 60);
@@ -1385,8 +1592,8 @@
         window.__mbcCutConfirmed = false;
         if (cutPhoto) {
           photo = cutPhoto; render();
-          if (cutoutReview) cutoutReview.hidden = false;
-          note('Check every edge. Tap “Looks good” before you pay.', false);
+          showCutReview();
+          note('Check every edge. Tap Next to use the cutout.', false);
           return;
         }
         showCutGuide('positive');
@@ -1407,12 +1614,28 @@
       if (cutoutConfirm) cutoutConfirm.addEventListener('click', function () {
         if (!cutPhoto) return;
         window.__mbcCutConfirmed = true; setBg('white'); photo = cutPhoto; render();
-        cutoutReview.hidden = true; note('Cutout selected. You will approve our final proof again before baking.', false);
+        cutoutReview.hidden = true; closeCutoutScreen(false);
+        note('Cutout selected. You will approve our final proof again before baking.', false);
       });
       if (cutoutClean) cutoutClean.addEventListener('click', function () { showCutGuide('negative'); });
       if (cutoutRetry) cutoutRetry.addEventListener('click', function () { showCutGuide('positive'); });
-      if (cutoutOriginal) cutoutOriginal.addEventListener('click', useOriginalPhoto);
-      if (cutoutCancel) cutoutCancel.addEventListener('click', useOriginalPhoto);
+      if (cutoutOriginal) cutoutOriginal.addEventListener('click', function () { useOriginalPhoto(false); });
+      if (cutoutCancel) cutoutCancel.addEventListener('click', function () { useOriginalPhoto(false); });
+      if (cutoutClose) cutoutClose.addEventListener('click', function () { useOriginalPhoto(false); });
+      window.addEventListener('popstate', function () {
+        if (cutoutScreen && !cutoutScreen.hidden) useOriginalPhoto(true);
+      });
+      if (cutoutScreen) cutoutScreen.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') { event.preventDefault(); useOriginalPhoto(false); return; }
+        if (event.key !== 'Tab') return;
+        var controls = Array.from(cutoutScreen.querySelectorAll('button:not([disabled]), [tabindex]:not([tabindex="-1"])')).filter(function (node) {
+          return !node.hidden && node.offsetParent !== null;
+        });
+        if (!controls.length) return;
+        var first = controls[0], last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      });
 
       function accept(file) {
         if (!file || !file.type || file.type.indexOf('image/') !== 0) return;
@@ -1422,6 +1645,7 @@
           img.onload = function () {
             photoVersion++; photo = img; origPhoto = img; cutPhoto = null; cutFullPhoto = null;
             cutStrokes = []; positivePoint = null; segmenterPhotoVersion = -1;
+            window.__mbcCutOk = false; window.__mbcCutErr = null;
             prepareCutInput(img); setBg('keep'); window.__mbcCutConfirmed = true;
             if (cutoutGuide) { cutoutGuide.hidden = true; cutoutGuide.classList.remove('is-awaiting'); }
             if (cutoutTapLabel) cutoutTapLabel.hidden = true;
@@ -1471,6 +1695,7 @@
       resetBtn.addEventListener('click', function () {
         photoVersion++; photo = null; origPhoto = null; cutPhoto = null; cutFullPhoto = null;
         cutStrokes = []; positivePoint = null; segmenterPhotoVersion = -1;
+        window.__mbcCutOk = false; window.__mbcCutErr = null;
         setBg('keep'); window.__mbcCutConfirmed = true;
         if (bgBox) bgBox.hidden = true;
         if (cutoutGuide) { cutoutGuide.hidden = true; cutoutGuide.classList.remove('is-awaiting'); }
@@ -1729,9 +1954,9 @@
             return actions.reject();
           }
           if (window.__mbcBg === 'white' && !window.__mbcCutConfirmed) {
-            say('Check the cutout and tap &ldquo;Looks good &mdash; use it&rdquo; before you pay.', true);
-            var review = $id('cutoutReview');
-            if (review) review.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            say('Finish the cutout screen and tap Next before you pay.', true);
+            var cutButton = document.querySelector('[data-bg="white"]');
+            if (cutButton) cutButton.click();
             return actions.reject();
           }
           var quote = window.__mbcOrderPricing && window.__mbcOrderPricing.getState();
