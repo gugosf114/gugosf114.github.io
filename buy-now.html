@@ -1016,7 +1016,7 @@
     /* The order engine stays mounted, but checkout only appears after approval. */
     .order-app-v3 #order {
       position: absolute !important; left: -10000px !important; top: 0 !important;
-      width: 640px !important; margin: 0 !important; pointer-events: none;
+      width: 640px !important; margin: 0 !important; visibility: hidden; pointer-events: none;
     }
     .order-app-v3 #guidedCheckoutMount #orderColumn { width: 100%; visibility: visible; pointer-events: auto; }
     .order-app-v3 #guidedCheckoutMount .pc-eyebrow { display: none; }
@@ -2041,6 +2041,7 @@
         if (cutoutClose) cutoutClose.setAttribute('aria-label', 'Close checkout and return to the page');
         if (cutoutShell) cutoutShell.scrollTop = 0;
         requestAnimationFrame(function () {
+          if (window.mbcTurnstileLoaded) window.mbcTurnstileLoaded();
           var quantityInput = document.getElementById('cookieQty');
           if (quantityInput) quantityInput.focus({ preventScroll: true });
           if (cutoutShell) cutoutShell.scrollTop = 0;
