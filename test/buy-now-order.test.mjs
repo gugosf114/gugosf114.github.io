@@ -125,3 +125,30 @@ test('browser checkout rejects payment when a design is missing', async () => {
   assert.equal(rejected, true);
   assert.match(paidNote.textContent, /Approve every cookie design/);
 });
+
+test('secure order check waits until checkout leaves its inert holder', async () => {
+  let insideInertHolder = true;
+  let renders = 0;
+  const security = element({
+    dataset: { sitekey: 'site-key' },
+    closest(selector) { return selector === '[inert]' && insideInertHolder ? {} : null; },
+  });
+  const window = {
+    turnstile: {
+      render() { renders++; return 'widget-one'; },
+      reset() {},
+    },
+  };
+  const document = {
+    documentElement: { dataset: {} },
+    getElementById(id) { return id === 'orderSecurity' ? security : null; },
+    querySelector() { return null; },
+  };
+  const source = await readFile(new URL('../buy-now-order.js', import.meta.url), 'utf8');
+  vm.runInNewContext(source, { window, document, fetch, crypto: webcrypto, URL, Blob, File, Headers, Response, setTimeout, clearTimeout, console });
+
+  assert.equal(renders, 0, 'hidden checkout must not start Turnstile');
+  insideInertHolder = false;
+  window.mbcTurnstileLoaded();
+  assert.equal(renders, 1, 'visible checkout starts Turnstile once');
+});

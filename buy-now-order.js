@@ -73,6 +73,7 @@
 
   function renderTurnstile() {
     if (!securityNode || turnstileWidget !== null || !window.turnstile) return;
+    if (securityNode.closest && securityNode.closest('[inert]')) return;
     var sitekey = securityNode.dataset.sitekey || '';
     if (!sitekey) return;
     turnstileWidget = window.turnstile.render(securityNode, {
