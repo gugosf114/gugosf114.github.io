@@ -219,6 +219,18 @@ The GitHub Actions workflow (`.github/workflows/validate-and-deploy.yml`) runs v
 
 ## Printed Cookie Checkout
 
+### Optional packaging film
+
+`order-packaging-film.mjs` controls a silent sixteen-second H.264 MP4 in the opening preview. It is pre-rendered from the 3D scene at 1080×1080 / 30 fps: cookie close-up, clear sleeve, twelve-cookie window box, ribbon, and full turn. Visitors do not need WebGL. Desktop attempts muted autoplay once; mobile, reduced-motion, and autoplay-blocked visitors have an obvious Play control. That control is also a real link to the standalone native player at `media/packaging-preview.html`, so it works even before JavaScript initializes. Pause, scrubbing, replay, and Skip are available. Entering the editor stops playback and detaches the video source.
+
+The original authoring scene remains in `order-packaging-scene.mjs` and its deterministic camera/object choreography in `order-packaging-timeline.mjs`. Pinned MIT-licensed Three.js modules under `vendor/three` are used for rendering/export, not storefront playback. The packaging is an illustrative first pass based on the existing photos, and uses the Make a Wish design rather than the current customer design.
+
+To regenerate the MP4, serve the repo locally, connect an existing test Chrome via CDP, and run `node .github/scripts/export-packaging-video.cjs` with `PLAYWRIGHT_MODULE`, `CDP_URL`, `STUDIO_URL`, and optionally `FFMPEG_PATH`. It renders 480 deterministic frames into an H.264 MP4 with fast-start metadata and saves the first frame as the poster. The original photo assets are unchanged.
+
+Tests: `node --test test/order-packaging-film.test.mjs` covers twelve slots and the finite full turn. `node test/order-packaging-film.browser.cjs` verifies native video decoding, actual uninterrupted playback, seeking/replay, mobile/reduced-motion controls, a failed-media fallback, and editor handoff. `node test/order-packaging-lifecycle.browser.cjs` checks cancellation while media loads and deferral in background tabs. The local media server must support HTTP byte-range requests for seek tests.
+
+### Design and ordering
+
 The opening screen offers **Choose a design**, **Make my own**, and **Help me find the words (AI, optional)**. There are nine authored designs: three birthdays, three anniversaries, and three thank-yous, filtered by occasion and personality. Customers can use a design as shown, personalize it, or start with their own photo.
 
 `order-studio-designs.mjs` defines the template catalog, twelve backgrounds (including rainbow and trans Pride flags), local pattern drawing, and editable text rendering. Background, optional photo, and words are separate layers. `order-studio-compose.mjs` owns their controls, including customer background uploads, lettering, colors, size, position, and optional names/dates. Text-only designs export a PNG source along with the clean print artwork and approved cookie preview, so the existing private order service receives the same three-file contract without requiring a customer photo.
