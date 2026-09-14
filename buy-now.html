@@ -150,7 +150,12 @@
           <div id="shapePositionMount"></div>
         </div>
         <div class="step-panel" data-panel="background" hidden>
-          <div class="choice-list" role="group" aria-label="Photo background">
+          <div
+            class="choice-list"
+            id="backgroundChoices"
+            role="group"
+            aria-label="Photo background"
+          >
             <button
               class="choice"
               id="keepBackground"
@@ -177,12 +182,29 @@
             </button>
           </div>
           <p class="context-note" id="subjectHint" hidden>
-            Tap the subject in your photo. We'll cut around it. You can tidy the
-            edges next.
+            Tap what you want to keep on the cookie. We'll remove the
+            background.
           </p>
-          <button class="text-button" id="recutButton" type="button" hidden>
-            Choose the subject again
+          <div id="cutResultActions" class="cut-result-actions" hidden>
+            <button class="choice" id="cleanSpot" type="button">
+              <span class="choice-icon" aria-hidden="true">✂</span
+              ><span
+                ><strong>Clean up a spot</strong
+                ><small>Tap one more area you want removed.</small></span
+              >
+            </button>
+            <div class="position-bottom">
+              <button class="text-button" id="undoCut" type="button" disabled>
+                Undo last cut</button
+              ><button class="text-button" id="changeBackground" type="button">
+                Background options
+              </button>
+            </div>
+          </div>
+          <button class="text-button" id="cancelSelection" type="button" hidden>
+            Cancel
           </button>
+          <div id="backgroundPositionMount"></div>
         </div>
         <div class="step-panel" data-panel="finish" hidden>
           <div class="edit-tabs" role="group" aria-label="Editing tool">
@@ -240,6 +262,7 @@
           </div>
         </div>
         <div class="step-panel" data-panel="review" hidden>
+          <div id="reviewPositionMount"></div>
           <div class="review-check">
             <span aria-hidden="true">✓</span>
             <div>

@@ -3,7 +3,7 @@ import {
   cloneCanvas,
   drawArtwork,
   drawCookie,
-  photoRect,
+  cookiePoint,
   quantities,
   blobOf,
 } from "./order-studio-art.mjs";
@@ -29,21 +29,21 @@ const copy = {
     0,
   ],
   shape: [
-    "Design · 1 of 3",
+    "Design · 1 of 2",
     "Find your shape.",
     "Pick round or square. Then zoom and drag your photo until it’s just right.",
     "Continue",
     1,
   ],
   background: [
-    "Design · 2 of 3",
+    "Design · 2 of 2",
     "What stays in<br>the picture?",
     "Keep the whole moment, or let your favorite part stand on its own.",
     "Continue",
     1,
   ],
   finish: [
-    "Design · 3 of 3",
+    "Adjust your cookie",
     "Make it just right.",
     "Move it. Zoom in. Tidy an edge if you need to. This is your cookie.",
     "Review my cookie",
@@ -84,7 +84,9 @@ const blank = () => ({
   source: null,
   shape: "round",
   background: null,
-  cut: null,
+  cutPoint: null,
+  removePoints: [],
+  cutUndo: [],
   view: { zoom: 1, x: 0, y: 0, fit: "cover" },
   approved: null,
   thumbnail: null,
@@ -94,7 +96,8 @@ let designs = [blank()],
   active = 0,
   step = "upload",
   tool = "move",
-  selectingSubject = false;
+  selectingSubject = false,
+  selectionMode = null;
 let busy = false,
   paymentLocked = false,
   originalVisible = false,
@@ -145,6 +148,7 @@ function show(next, { history = true, focus = true } = {}) {
   step = next;
   error();
   selectingSubject = false;
+  selectionMode = null;
   originalVisible = false;
   tool = "move";
   if (history)
@@ -190,12 +194,19 @@ function show(next, { history = true, focus = true } = {}) {
     $("shapePositionMount").appendChild($("positionControls"));
     $("positionControls").hidden = false;
   }
-  if (step === "background") syncBackground();
+  if (step === "background") {
+    $("backgroundPositionMount").appendChild($("positionControls"));
+    syncBackground();
+  }
   if (step === "finish") {
     $("finishPositionMount").appendChild($("positionControls"));
     setTool("move");
   }
-  if (step === "review") renderDesigns();
+  if (step === "review") {
+    $("reviewPositionMount").appendChild($("positionControls"));
+    $("positionControls").hidden = false;
+    renderDesigns();
+  }
   if (step === "pay") loadPayment();
   if (focus) {
     $("stepTitle").focus({ preventScroll: true });
@@ -216,14 +227,30 @@ function render() {
       b.setAttribute("aria-pressed", String(b.dataset.shape === d.shape)),
     );
   const editingMask = step === "finish" && tool !== "move";
-  const raw = selectingSubject || editingMask || originalVisible;
+  const raw = editingMask || originalVisible;
+  $("originalChip").hidden =
+    !d.file ||
+    selectingSubject ||
+    ["pay", "delivery", "complete"].includes(step);
+  document.body.dataset.selection = selectingSubject ? selectionMode : "";
+  $("cookiePreview").setAttribute(
+    "aria-label",
+    selectingSubject
+      ? (selectionMode === "remove"
+          ? "Tap what you want removed."
+          : "Tap what you want to keep.") +
+          " Arrow keys move the selection; Enter applies it."
+      : "Your cookie preview. Drag or use arrow keys to position your photo.",
+  );
   $("photoEditor").hidden = !raw;
   $("cookiePreview").hidden = raw;
   $("blankMark").hidden = !!d.file;
   $("previewLabel").textContent = originalVisible
     ? "Your original photo"
     : selectingSubject
-      ? "Tap the person, pet, or object to keep"
+      ? selectionMode === "remove"
+        ? "Tap what you want removed"
+        : "Tap what you want to keep"
       : editingMask
         ? tool === "erase"
           ? "Brush over what you want to remove"
@@ -234,7 +261,9 @@ function render() {
   $("previewStatus").textContent = originalVisible
     ? "Original upload"
     : selectingSubject
-      ? "You choose what stays"
+      ? selectionMode === "remove"
+        ? "This tap removes an area"
+        : "This tap keeps your subject"
       : editingMask
         ? "Your changes appear on the cookie"
         : step === "review"
@@ -251,11 +280,27 @@ function render() {
     ? "Back to cookie"
     : "View original";
   if (raw && d.original)
-    drawEditor(
-      originalVisible || selectingSubject ? d.original : d.source,
-      selectingSubject || editingMask,
+    drawEditor(originalVisible ? d.original : d.source, editingMask);
+  else {
+    drawCookie(
+      $("cookiePreview"),
+      selectingSubject && selectionMode === "keep"
+        ? { ...d, source: d.original }
+        : d,
     );
-  else drawCookie($("cookiePreview"), d);
+    if (selectingSubject && document.activeElement === $("cookiePreview")) {
+      const c = $("cookiePreview"),
+        ctx = c.getContext("2d");
+      ctx.beginPath();
+      ctx.arc(cursor.x * c.width, cursor.y * c.height, 10, 0, Math.PI * 2);
+      ctx.strokeStyle = "#fff";
+      ctx.lineWidth = 5;
+      ctx.stroke();
+      ctx.strokeStyle = selectionMode === "remove" ? "#ad2844" : "#34745b";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+  }
   $("continueButton").disabled = busy || !canContinue();
   $("zoom").value = Math.round(d.view.zoom * 100);
   $("zoomValue").textContent = Math.round(d.view.zoom * 100) + "%";
@@ -277,7 +322,7 @@ function drawEditor(source, mark) {
     context.arc(
       cursor.x * c.width,
       cursor.y * c.height,
-      selectingSubject ? 8 : brushRadius(c),
+      brushRadius(c),
       0,
       Math.PI * 2,
     );
@@ -289,17 +334,45 @@ function drawEditor(source, mark) {
     context.stroke();
   }
 }
-function syncBackground() {
+function syncBackground(forceChoices = false) {
+  const d = current(),
+    result = d.background === "cut" && !forceChoices;
+  $("backgroundChoices").hidden = selectingSubject || result;
+  $("subjectHint").hidden = !selectingSubject;
+  $("cutResultActions").hidden = selectingSubject || !result;
+  $("cleanSpot").hidden = !d.cutPoint;
+  $("undoCut").disabled = !d.cutUndo.length;
+  $("cancelSelection").hidden = !selectingSubject;
+  $("positionControls").hidden = selectingSubject || !result;
   $("keepBackground").setAttribute(
     "aria-pressed",
-    String(current().background === "keep"),
+    String(d.background === "keep"),
   );
   $("removeBackground").setAttribute(
     "aria-pressed",
-    String(current().background === "cut"),
+    String(d.background === "cut"),
   );
-  $("subjectHint").hidden = !selectingSubject;
-  $("recutButton").hidden = current().background !== "cut" || selectingSubject;
+  if (selectingSubject) {
+    const removing = selectionMode === "remove";
+    $("stepTitle").textContent = removing
+      ? "Tap what you want removed."
+      : "Tap what you want to keep.";
+    $("stepDescription").textContent = removing
+      ? "Choose one unwanted area on the cookie. Your subject stays in place."
+      : "Choose the person, pet, or object on your cookie. We'll cut around it.";
+    $("subjectHint").textContent = removing
+      ? "This tap removes an area. Cancel returns to your cookie."
+      : "This tap keeps your subject and removes the background.";
+  } else {
+    $("stepTitle").innerHTML = result
+      ? "How does that look?"
+      : copy.background[1];
+    $("stepDescription").textContent = result
+      ? "Your crop is right where you left it. Keep going, or clean up an unwanted spot."
+      : copy.background[2];
+  }
+  $("continueButton").innerHTML =
+    (result ? "Looks good" : "Continue") + ' <span aria-hidden="true">→</span>';
 }
 function updatePrice() {
   const q = quote();
@@ -447,87 +520,141 @@ $("keepBackground").addEventListener("click", () => {
   d.background = "keep";
   d.source = cloneCanvas(d.original);
   d.undo = [];
+  d.cutPoint = null;
+  d.removePoints = [];
+  d.cutUndo = [];
   selectingSubject = false;
+  selectionMode = null;
   originalVisible = false;
   invalidate();
-  syncBackground();
-  error();
-  render();
+  show("review");
 });
-function selectSubject() {
+function selectSubject(mode = "keep") {
   selectingSubject = true;
+  selectionMode = mode;
   originalVisible = false;
   cursor = { x: 0.5, y: 0.5 };
   syncBackground();
   error();
   render();
-  $("editorCanvas").focus({ preventScroll: true });
+  $("cookiePreview").focus({ preventScroll: true });
+  render();
 }
-$("removeBackground").addEventListener("click", selectSubject);
-$("recutButton").addEventListener("click", selectSubject);
+$("removeBackground").addEventListener("click", () => selectSubject("keep"));
+$("cleanSpot").addEventListener("click", () => selectSubject("remove"));
+function cancelSelection() {
+  selectingSubject = false;
+  selectionMode = null;
+  syncBackground();
+  error();
+  render();
+}
+$("cancelSelection").addEventListener("click", cancelSelection);
+$("changeBackground").addEventListener("click", () => {
+  syncBackground(true);
+  render();
+});
+$("undoCut").addEventListener("click", () => {
+  const d = current(),
+    previous = d.cutUndo.pop();
+  if (!previous) return;
+  d.source = previous.source;
+  d.cutPoint = previous.point;
+  d.removePoints = previous.removals;
+  d.background = previous.background;
+  d.undo = [];
+  selectingSubject = false;
+  selectionMode = null;
+  invalidate();
+  syncBackground();
+  error();
+  render();
+});
 async function runCut(point) {
   if (busy || !selectingSubject) return;
   const d = current(),
-    stamp = version;
+    stamp = version,
+    removing = selectionMode === "remove";
+  if (removing && !d.cutPoint) return selectSubject("keep");
+  if (removing) {
+    const pixel = d.source
+      .getContext("2d")
+      .getImageData(
+        Math.min(d.source.width - 1, Math.floor(point.x * d.source.width)),
+        Math.min(d.source.height - 1, Math.floor(point.y * d.source.height)),
+        1,
+        1,
+      ).data;
+    if (pixel[3] < 12)
+      return error(
+        "That spot is already clear. Tap an area still visible on the cookie.",
+      );
+  }
+  const keep = removing ? d.cutPoint : point,
+    removals = removing ? [...d.removePoints, point] : [];
   error();
   setBusy(
     true,
-    "Removing the background…",
-    "The first cut takes a little longer. Your photo stays here.",
+    removing ? "Removing that spot…" : "Removing the background…",
+    removing
+      ? "Keeping the rest of your cookie in place."
+      : "The first cut takes a little longer. Your photo stays here.",
   );
   $("cutProgress").value = 0;
   try {
-    const result = await cutSubject(d.original, point, (percent) => {
-      $("cutProgress").value = percent;
-    });
+    const result = await cutSubject(
+      d.original,
+      keep,
+      (percent) => {
+        $("cutProgress").value = percent;
+      },
+      removals,
+    );
     if (stamp !== version) return;
+    if (removing) {
+      // Cleanup may only remove pixels. A new prediction cannot bring back an old cut.
+      const before = canvas(result.width, result.height);
+      before
+        .getContext("2d")
+        .drawImage(d.source, 0, 0, result.width, result.height);
+      const ctx = result.getContext("2d"),
+        pixels = ctx.getImageData(0, 0, result.width, result.height),
+        old = before
+          .getContext("2d")
+          .getImageData(0, 0, result.width, result.height);
+      for (let i = 3; i < pixels.data.length; i += 4)
+        pixels.data[i] = Math.min(pixels.data[i], old.data[i]);
+      ctx.putImageData(pixels, 0, 0);
+    }
+    d.cutUndo.push({
+      source: cloneCanvas(d.source),
+      point: d.cutPoint,
+      removals: [...d.removePoints],
+      background: d.background,
+    });
+    if (d.cutUndo.length > 8) d.cutUndo.shift();
     d.source = result;
-    d.cut = cloneCanvas(result);
+    d.cutPoint = keep;
+    d.removePoints = removals;
     d.background = "cut";
     d.undo = [];
-    centerSubject(d);
     selectingSubject = false;
+    selectionMode = null;
     invalidate();
-    syncBackground();
-    $("studioStatus").textContent =
-      "Background removed. Continue to adjust your cookie.";
+    $("studioStatus").textContent = removing
+      ? "Spot removed. Undo is available."
+      : "Background removed. Your crop is unchanged.";
   } catch (e) {
     error(
       e.message ||
-        "The cutout did not work. Try another spot or keep your whole photo.",
+        "The cutout did not work. Try another spot or keep the whole photo.",
     );
   } finally {
     setBusy(false);
+    syncBackground();
     render();
   }
 }
-function centerSubject(d) {
-  const { width: w, height: h } = d.source,
-    data = d.source.getContext("2d").getImageData(0, 0, w, h).data;
-  let minX = w,
-    minY = h,
-    maxX = 0,
-    maxY = 0;
-  for (let y = 0; y < h; y += 2)
-    for (let x = 0; x < w; x += 2)
-      if (data[(y * w + x) * 4 + 3] > 128) {
-        minX = Math.min(minX, x);
-        minY = Math.min(minY, y);
-        maxX = Math.max(maxX, x);
-        maxY = Math.max(maxY, y);
-      }
-  if (maxX <= minX || maxY <= minY) return;
-  const base = photoRect(w, h, { zoom: 1, x: 0, y: 0, fit: "cover" });
-  const zoom = Math.min(
-    3,
-    0.78 / Math.max(((maxX - minX) / w) * base.w, ((maxY - minY) / h) * base.h),
-  );
-  d.view = { zoom: Math.max(0.5, zoom), x: 0, y: 0, fit: "cover" };
-  const r = photoRect(w, h, d.view);
-  d.view.x = 0.5 - (r.x + ((minX + maxX) / 2 / w) * r.w);
-  d.view.y = 0.5 - (r.y + ((minY + maxY) / 2 / h) * r.h);
-}
-
 function setTool(next) {
   tool = next;
   originalVisible = false;
@@ -618,10 +745,6 @@ const editor = $("editorCanvas");
 editor.addEventListener("pointerdown", (e) => {
   if (busy || originalVisible) return;
   cursor = normalized(e, editor);
-  if (selectingSubject) {
-    runCut(cursor);
-    return;
-  }
   if (step !== "finish" || tool === "move") return;
   e.preventDefault();
   editor.setPointerCapture(e.pointerId);
@@ -668,8 +791,7 @@ editor.addEventListener("keydown", (e) => {
   }
   if (e.key === "Enter" || e.key === " ") {
     e.preventDefault();
-    if (selectingSubject) runCut(cursor);
-    else if (tool !== "move") {
+    if (tool !== "move") {
       rememberStroke();
       paint(cursor);
     }
@@ -679,13 +801,24 @@ editor.addEventListener("focus", render);
 const cookie = $("cookiePreview");
 function canPosition() {
   return (
-    (step === "shape" || step === "finish") &&
+    ["shape", "finish", "background", "review"].includes(step) &&
+    !selectingSubject &&
     tool === "move" &&
     !busy &&
     !originalVisible
   );
 }
 cookie.addEventListener("pointerdown", (e) => {
+  if (selectingSubject && !busy) {
+    e.preventDefault();
+    cursor = normalized(e, cookie);
+    const d = current(),
+      source = selectionMode === "keep" ? d.original : d.source;
+    const point = cookiePoint(cursor, { ...d, source });
+    if (point) runCut(point);
+    else error("Tap inside the photo on the cookie.");
+    return;
+  }
   if (!canPosition()) return;
   e.preventDefault();
   cookie.setPointerCapture(e.pointerId);
@@ -714,6 +847,31 @@ cookie.addEventListener("pointerup", stopPointer);
 cookie.addEventListener("pointercancel", stopPointer);
 cookie.addEventListener("lostpointercapture", stopPointer);
 cookie.addEventListener("keydown", (e) => {
+  if (selectingSubject && !busy) {
+    const moves = {
+      ArrowLeft: [-0.02, 0],
+      ArrowRight: [0.02, 0],
+      ArrowUp: [0, -0.02],
+      ArrowDown: [0, 0.02],
+    };
+    if (moves[e.key]) {
+      e.preventDefault();
+      cursor.x = Math.max(0, Math.min(1, cursor.x + moves[e.key][0]));
+      cursor.y = Math.max(0, Math.min(1, cursor.y + moves[e.key][1]));
+      render();
+    }
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      const d = current(),
+        point = cookiePoint(cursor, {
+          ...d,
+          source: selectionMode === "keep" ? d.original : d.source,
+        });
+      if (point) runCut(point);
+      else error("Move the selection inside your photo.");
+    }
+    return;
+  }
   if (!canPosition()) return;
   const arrows = {
     ArrowLeft: [-0.01, 0],
@@ -852,6 +1010,10 @@ $("continueButton").addEventListener("click", async () => {
       show("delivery");
       return;
     }
+    if (step === "background") {
+      show("review");
+      return;
+    }
     if (step === "delivery" && !quote().ready) return;
     show(steps[steps.indexOf(step) + 1]);
   } catch (e) {
@@ -860,7 +1022,19 @@ $("continueButton").addEventListener("click", async () => {
 });
 $("backButton").addEventListener("click", () => {
   if (busy) return;
-  show(steps[Math.max(0, steps.indexOf(step) - 1)]);
+  if (selectingSubject) {
+    cancelSelection();
+    return;
+  }
+  if (step === "finish") {
+    show("review");
+    return;
+  }
+  show(
+    step === "review"
+      ? "background"
+      : steps[Math.max(0, steps.indexOf(step) - 1)],
+  );
 });
 window.history.replaceState({ mbcStudio: true, step: "upload" }, "", "#upload");
 window.addEventListener("popstate", (e) => {
@@ -959,14 +1133,10 @@ $("helpDialog").addEventListener("click", (e) => {
       $("helpDialog").close();
   }
 });
-// Keep an explicit keyboard editing target only while positioning.
+// The main cookie supports keyboard framing and explicit keep/remove selection.
 new MutationObserver(() => {
-  cookie.tabIndex = step === "shape" || step === "finish" ? 0 : -1;
-  cookie.setAttribute(
-    "aria-label",
-    step === "shape" || step === "finish"
-      ? "Position your photo. Drag, or use arrow keys to move it."
-      : "Your cookie preview",
-  );
+  cookie.tabIndex = ["shape", "finish", "background", "review"].includes(step)
+    ? 0
+    : -1;
 }).observe(document.body, { attributes: true, attributeFilter: ["data-step"] });
 show("upload", { history: false, focus: false });

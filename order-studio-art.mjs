@@ -13,6 +13,26 @@ export function photoRect(width, height, view) {
 export function sourcePoint(point, rect) {
   return { x: (point.x - rect.x) / rect.w, y: (point.y - rect.y) / rect.h };
 }
+export function cookiePoint(point, design) {
+  // Match the print placement in drawCookie, including its thin icing rim.
+  const p = { x: (point.x - 0.094) / 0.812, y: (point.y - 0.089) / 0.812 };
+  if (p.x < 0 || p.x > 1 || p.y < 0 || p.y > 1) return null;
+  if (design.shape === "round" && Math.hypot(p.x - 0.5, p.y - 0.5) > 0.5)
+    return null;
+  if (design.shape === "square") {
+    const dx = Math.max(0.065 - p.x, 0, p.x - 0.935),
+      dy = Math.max(0.065 - p.y, 0, p.y - 0.935);
+    if (Math.hypot(dx, dy) > 0.065) return null;
+  }
+  const r = photoRect(design.source.width, design.source.height, {
+    ...design.view,
+    shape: design.shape,
+  });
+  const source = sourcePoint(p, r);
+  return source.x >= 0 && source.x <= 1 && source.y >= 0 && source.y <= 1
+    ? source
+    : null;
+}
 export function quantities(total, count) {
   if (total < count * 12)
     throw new Error("Each design needs at least 12 cookies.");

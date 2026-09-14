@@ -49,14 +49,22 @@ async function getSegmenter(progress) {
   });
   return loading;
 }
-export async function cutSubject(source, point, progress) {
+export function cutStrokes(point, removals = []) {
+  return [
+    { brushMode: 1, point: [point], isCompleted: true },
+    ...removals.map((point) => ({
+      brushMode: 2,
+      point: [point],
+      isCompleted: true,
+    })),
+  ];
+}
+export async function cutSubject(source, point, progress, removals = []) {
   const segmenter = await getSegmenter(progress);
   // Let the browser paint the status before synchronous inference.
   await new Promise((resolve) => setTimeout(resolve, 30));
   segmenter.setImage(source);
-  const mask = segmenter.segment([
-    { brushMode: 1, point: [point], isCompleted: true },
-  ]);
+  const mask = segmenter.segment(cutStrokes(point, removals));
   try {
     const values = mask.getAsFloat32Array(),
       w = mask.width,

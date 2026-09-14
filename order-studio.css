@@ -1309,7 +1309,6 @@ dialog a {
   .primary {
     min-width: 0;
     width: 100%;
-    max-width: 320px;
     min-height: 50px;
     padding: 15px 20px;
     font-size: 12px;
@@ -1357,11 +1356,7 @@ dialog a {
     font-size: 11px;
   }
   .shape-choice canvas {
-    width: 95px;
     margin: auto;
-  }
-  .shape-choice {
-    padding: 6px 10px 12px;
   }
   .shape-choice span {
     font-size: 12px;
@@ -1374,7 +1369,6 @@ dialog a {
     gap: 12px;
   }
   .edit-tabs {
-    margin-bottom: 18px;
     gap: 30px;
   }
   .review-check {
@@ -1424,11 +1418,6 @@ dialog a {
   body[data-step="pay"] .preview-stage,
   body[data-step="complete"] .preview-stage {
     height: 150px;
-  }
-  body[data-step="delivery"] #cookiePreview,
-  body[data-step="pay"] #cookiePreview,
-  body[data-step="complete"] #cookiePreview {
-    width: 160px;
   }
   .photo-editor #editorCanvas {
     max-height: 270px;
@@ -1582,5 +1571,70 @@ body[data-step="finish"] #cookiePreview:active {
   }
   #shapePositionMount .quiet-note {
     margin-top: 8px;
+  }
+}
+#backgroundPositionMount,
+#reviewPositionMount {
+  margin-top: 20px;
+}
+#reviewPositionMount {
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+.cut-result-actions .choice {
+  width: 100%;
+}
+body[data-step="background"] #cookiePreview,
+body[data-step="review"] #cookiePreview {
+  cursor: grab;
+}
+body[data-selection="keep"] #cookiePreview,
+body[data-selection="remove"] #cookiePreview {
+  cursor: crosshair;
+}
+body[data-selection="remove"] #subjectHint {
+  color: #ad2844;
+  background: #fbedf0;
+}
+body[data-selection="keep"] #subjectHint {
+  color: #2e5c48;
+  background: #edf3ef;
+}
+body[data-selection="keep"] .preview-status:before {
+  background: #34745b;
+}
+body[data-selection="remove"] .preview-status:before {
+  background: #ad2844;
+}
+@media (max-width: 760px) {
+  #backgroundPositionMount .quiet-note,
+  #reviewPositionMount .quiet-note {
+    margin-top: 8px;
+  }
+  #backgroundPositionMount .position-bottom,
+  #reviewPositionMount .position-bottom {
+    margin-top: 6px;
+  }
+  #backgroundPositionMount .control-label,
+  #reviewPositionMount .control-label {
+    margin-bottom: 8px;
+  }
+  body[data-step="background"] h1 {
+    font-size: 32px;
+  }
+}
+@media (max-width: 760px) {
+  .cut-result-actions .choice {
+    min-height: 58px;
+    padding: 10px 13px;
+  }
+  .cut-result-actions .choice small {
+    margin-top: 3px;
+  }
+  .cut-result-actions .position-bottom {
+    margin-top: 4px;
+  }
+  #backgroundPositionMount {
+    margin-top: 12px;
   }
 }
