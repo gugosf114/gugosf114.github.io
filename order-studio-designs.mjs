@@ -12,96 +12,841 @@ export const backgrounds = [
   { id: "sunshine", name: "Sunshine", color: "#ffe8a9", ink: "#87431f" },
   { id: "custom", name: "Your color", color: "#dceee5", ink: "#2b5747" },
 ];
-const spec = (
-  id,
-  name,
-  occasion,
-  tone,
-  bg,
-  message,
-  font = "clean",
-  color = null,
-) => ({ id, name, occasion, tone, bg, message, font, color });
-export const templates = [
-  spec(
-    "birthday-wish",
-    "Make a wish",
-    "birthday",
-    "sweet",
-    "fireworks",
-    "MAKE A\nWISH!",
-    "classic",
-  ),
-  spec(
-    "birthday-winging",
-    "Still winging it",
-    "birthday",
-    "funny",
-    "confetti",
-    "Another year.\nStill winging it.",
-  ),
-  spec(
-    "birthday-you",
-    "A very you birthday",
-    "birthday",
-    "bold",
-    "lilac",
-    "A WHOLE DAY\nABOUT YOU.",
-    "bold",
-  ),
-  spec(
-    "anniversary-choose",
-    "Still choosing you",
-    "anniversary",
-    "sweet",
-    "hearts",
-    "Still\nchoosing you.",
-    "classic",
-  ),
-  spec(
-    "anniversary-weird",
-    "My favorite weirdo",
-    "anniversary",
-    "funny",
-    "rose",
-    "You’re still\nmy favorite\nweirdo.",
-  ),
-  spec(
-    "anniversary-us",
-    "Here’s to us",
-    "anniversary",
-    "bold",
-    "midnight",
-    "HERE’S\nTO US.",
-    "classic",
-  ),
-  spec(
-    "thanks-flower",
-    "Thanks for showing up",
-    "thanks",
-    "sweet",
-    "flowers",
-    "Thank you\nfor showing up.",
-    "classic",
-  ),
-  spec(
-    "thanks-legend",
-    "Absolute legend",
-    "thanks",
-    "funny",
-    "sunshine",
-    "You absolute\nlegend.",
-  ),
-  spec(
-    "thanks-big",
-    "A very big thank you",
-    "thanks",
-    "bold",
-    "lilac",
-    "BIG\nTHANK YOU.",
-    "bold",
-  ),
+export const categories = [
+  {
+    "id": "birthday",
+    "name": "Birthday"
+  },
+  {
+    "id": "anniversary",
+    "name": "Anniversary"
+  },
+  {
+    "id": "thanks",
+    "name": "Thank You"
+  },
+  {
+    "id": "congratulations",
+    "name": "Congratulations"
+  },
+  {
+    "id": "just-because",
+    "name": "Just Because"
+  },
+  {
+    "id": "edgy",
+    "name": "Edgy"
+  }
 ];
+export const personalities = [
+  {
+    "id": "sweet",
+    "name": "Sweet"
+  },
+  {
+    "id": "funny",
+    "name": "Funny"
+  },
+  {
+    "id": "bold",
+    "name": "Bold"
+  },
+  {
+    "id": "romantic",
+    "name": "Romantic"
+  },
+  {
+    "id": "edgy",
+    "name": "Edgy"
+  }
+];
+const designCollections = {
+  "birthday": [
+    [
+      "birthday-wish",
+      "Make a wish",
+      "sweet",
+      "fireworks",
+      "MAKE A\nWISH!",
+      "classic"
+    ],
+    [
+      "birthday-winging",
+      "Still winging it",
+      "funny",
+      "confetti",
+      "Another year.\nStill winging it."
+    ],
+    [
+      "birthday-you",
+      "A very you birthday",
+      "bold",
+      "lilac",
+      "A WHOLE DAY\nABOUT YOU.",
+      "bold"
+    ],
+    [
+      "birthday-vintage",
+      "Vintage, not expired",
+      "funny",
+      "midnight",
+      "VINTAGE.\nNOT EXPIRED.",
+      "classic"
+    ],
+    [
+      "birthday-main-character",
+      "Main character day",
+      "bold",
+      "sunshine",
+      "MAIN CHARACTER\nENERGY.",
+      "bold"
+    ],
+    [
+      "birthday-favorite-person",
+      "My favorite person",
+      "romantic",
+      "hearts",
+      "Happy birthday,\nmy favorite person.",
+      "classic"
+    ],
+    [
+      "birthday-sweeter",
+      "Sweeter every year",
+      "sweet",
+      "rose",
+      "Sweeter\nevery year.",
+      "classic"
+    ],
+    [
+      "birthday-no-adulting",
+      "Adulting can wait",
+      "funny",
+      "confetti",
+      "No adulting\ntoday."
+    ],
+    [
+      "birthday-unlimited-wishes",
+      "Unlimited wishes",
+      "sweet",
+      "fireworks",
+      "One candle.\nUnlimited wishes.",
+      "classic"
+    ],
+    [
+      "birthday-icon",
+      "Birthday icon",
+      "bold",
+      "rainbow",
+      "BIRTHDAY\nICON.",
+      "bold"
+    ],
+    [
+      "birthday-candle-budget",
+      "The candle budget",
+      "funny",
+      "sunshine",
+      "You exceeded\nthe candle budget."
+    ],
+    [
+      "birthday-another-orbit",
+      "Another trip around",
+      "sweet",
+      "midnight",
+      "Another trip\naround the sun.",
+      "classic"
+    ],
+    [
+      "birthday-more-you",
+      "The world needs more you",
+      "sweet",
+      "flowers",
+      "The world needs\nmore you.",
+      "classic"
+    ],
+    [
+      "birthday-beautiful-chaos",
+      "Beautiful chaos",
+      "funny",
+      "lilac",
+      "Another year of\nbeautiful chaos."
+    ],
+    [
+      "birthday-born-extra",
+      "Born to be extra",
+      "bold",
+      "fireworks",
+      "BORN TO\nBE EXTRA.",
+      "bold"
+    ]
+  ],
+  "anniversary": [
+    [
+      "anniversary-choose",
+      "Still choosing you",
+      "sweet",
+      "hearts",
+      "Still\nchoosing you.",
+      "classic",
+      [
+        "romantic"
+      ]
+    ],
+    [
+      "anniversary-weird",
+      "My favorite weirdo",
+      "funny",
+      "rose",
+      "You’re still\nmy favorite\nweirdo.",
+      "clean",
+      [
+        "romantic"
+      ]
+    ],
+    [
+      "anniversary-us",
+      "Here’s to us",
+      "bold",
+      "midnight",
+      "HERE’S\nTO US.",
+      "classic",
+      [
+        "romantic"
+      ]
+    ],
+    [
+      "anniversary-again",
+      "You, all over again",
+      "romantic",
+      "flowers",
+      "I’d choose you\nall over again.",
+      "classic"
+    ],
+    [
+      "anniversary-last-cookie",
+      "The last cookie",
+      "romantic",
+      "hearts",
+      "I’d give you\nthe last cookie."
+    ],
+    [
+      "anniversary-netflix",
+      "Still picking a movie",
+      "funny",
+      "lilac",
+      "Another year.\nStill picking\na movie."
+    ],
+    [
+      "anniversary-good-story",
+      "Our good story",
+      "sweet",
+      "paper",
+      "My favorite story\nis ours.",
+      "classic",
+      [
+        "romantic"
+      ]
+    ],
+    [
+      "anniversary-sofa",
+      "Love, with snacks",
+      "funny",
+      "confetti",
+      "You. Me.\nThe sofa. Snacks."
+    ],
+    [
+      "anniversary-love-louder",
+      "Love, louder",
+      "bold",
+      "rainbow",
+      "LOVE.\nLOUDER.",
+      "bold",
+      [
+        "romantic"
+      ]
+    ],
+    [
+      "anniversary-home",
+      "You feel like home",
+      "romantic",
+      "rose",
+      "You feel\nlike home.",
+      "classic"
+    ],
+    [
+      "anniversary-dishes",
+      "Love you, do the dishes",
+      "funny",
+      "sunshine",
+      "Love you forever.\nYour turn\nfor dishes."
+    ],
+    [
+      "anniversary-growing",
+      "Growing together",
+      "sweet",
+      "flowers",
+      "Look at us,\nstill growing.",
+      "classic"
+    ],
+    [
+      "anniversary-best-yes",
+      "My best yes",
+      "romantic",
+      "midnight",
+      "Still my\nbest yes.",
+      "classic"
+    ],
+    [
+      "anniversary-team",
+      "The dream team",
+      "bold",
+      "confetti",
+      "TEAM US.\nUNDEFEATED.",
+      "bold"
+    ],
+    [
+      "anniversary-one-more",
+      "A thousand more",
+      "romantic",
+      "hearts",
+      "One more year.\nA thousand more\nwith you.",
+      "classic"
+    ]
+  ],
+  "thanks": [
+    [
+      "thanks-flower",
+      "Thanks for showing up",
+      "sweet",
+      "flowers",
+      "Thank you\nfor showing up.",
+      "classic"
+    ],
+    [
+      "thanks-legend",
+      "Absolute legend",
+      "funny",
+      "sunshine",
+      "You absolute\nlegend."
+    ],
+    [
+      "thanks-big",
+      "A very big thank you",
+      "bold",
+      "lilac",
+      "BIG\nTHANK YOU.",
+      "bold"
+    ],
+    [
+      "thanks-made-difference",
+      "You made a difference",
+      "sweet",
+      "paper",
+      "You made\na difference.",
+      "classic"
+    ],
+    [
+      "thanks-cookie-debt",
+      "Paid in cookies",
+      "funny",
+      "confetti",
+      "I owe you one.\nThis is a cookie."
+    ],
+    [
+      "thanks-my-corner",
+      "In my corner",
+      "sweet",
+      "rose",
+      "Thank you for\nbeing in my corner.",
+      "classic"
+    ],
+    [
+      "thanks-real-mvp",
+      "The real MVP",
+      "bold",
+      "fireworks",
+      "THE REAL\nMVP.",
+      "bold"
+    ],
+    [
+      "thanks-lifesaver",
+      "Certified lifesaver",
+      "funny",
+      "rainbow",
+      "Certified\nlifesaver."
+    ],
+    [
+      "thanks-good-human",
+      "A good human",
+      "sweet",
+      "sunshine",
+      "The world needs\nmore humans\nlike you."
+    ],
+    [
+      "thanks-emails",
+      "Thanks for the patience",
+      "funny",
+      "lilac",
+      "Thanks for not\nignoring my emails."
+    ],
+    [
+      "thanks-love-me",
+      "For loving me as I am",
+      "romantic",
+      "hearts",
+      "Thank you for\nloving me\nas I am.",
+      "classic"
+    ],
+    [
+      "thanks-kindness",
+      "Your kindness stays",
+      "sweet",
+      "flowers",
+      "Your kindness\nstays with me.",
+      "classic"
+    ],
+    [
+      "thanks-cheers",
+      "Cheers to you",
+      "bold",
+      "midnight",
+      "CHEERS\nTO YOU.",
+      "classic"
+    ],
+    [
+      "thanks-snackworthy",
+      "Snack-worthy kindness",
+      "funny",
+      "confetti",
+      "That was kind.\nThis is edible."
+    ],
+    [
+      "thanks-sweeter",
+      "You made it sweeter",
+      "sweet",
+      "rose",
+      "You made\na hard day\nsweeter.",
+      "classic"
+    ]
+  ],
+  "congratulations": [
+    [
+      "congrats-did-it",
+      "You did the thing",
+      "bold",
+      "fireworks",
+      "YOU DID\nTHE THING.",
+      "bold"
+    ],
+    [
+      "congrats-proud",
+      "Ridiculously proud",
+      "sweet",
+      "flowers",
+      "Ridiculously\nproud of you.",
+      "classic"
+    ],
+    [
+      "congrats-knew",
+      "Called it",
+      "funny",
+      "confetti",
+      "I knew you could.\nI will be\nmentioning that."
+    ],
+    [
+      "congrats-next-chapter",
+      "Your next chapter",
+      "sweet",
+      "paper",
+      "Here’s to your\nnext chapter.",
+      "classic"
+    ],
+    [
+      "congrats-big-deal",
+      "Kind of a big deal",
+      "bold",
+      "midnight",
+      "KIND OF\nA BIG DEAL.",
+      "classic"
+    ],
+    [
+      "congrats-graduate",
+      "Smart cookie",
+      "funny",
+      "sunshine",
+      "ONE SMART\nCOOKIE.",
+      "bold"
+    ],
+    [
+      "congrats-new-job",
+      "Hired and inspired",
+      "bold",
+      "lilac",
+      "NEW JOB.\nSAME LEGEND.",
+      "bold"
+    ],
+    [
+      "congrats-retirement",
+      "Out of office, forever",
+      "funny",
+      "confetti",
+      "Out of office.\nIndefinitely."
+    ],
+    [
+      "congrats-keys",
+      "Your own front door",
+      "sweet",
+      "rose",
+      "New keys.\nNew memories.",
+      "classic"
+    ],
+    [
+      "congrats-tiny-human",
+      "Tiny human, big love",
+      "sweet",
+      "hearts",
+      "Tiny human.\nEnormous love.",
+      "classic"
+    ],
+    [
+      "congrats-ring",
+      "Put a ring on it",
+      "romantic",
+      "flowers",
+      "A little sparkle.\nA lifetime of love.",
+      "classic"
+    ],
+    [
+      "congrats-earned",
+      "You earned every bit",
+      "sweet",
+      "sunshine",
+      "You earned\nevery bit of this."
+    ],
+    [
+      "congrats-fancy",
+      "Look at you, fancy",
+      "funny",
+      "midnight",
+      "LOOK AT YOU,\nALL FANCY.",
+      "classic"
+    ],
+    [
+      "congrats-onwards",
+      "Onwards and upwards",
+      "bold",
+      "rainbow",
+      "ONWARDS.\nUPWARDS.\nYOURS.",
+      "bold"
+    ],
+    [
+      "congrats-believed",
+      "I always believed",
+      "romantic",
+      "hearts",
+      "I always\nbelieved in you.",
+      "classic"
+    ]
+  ],
+  "just-because": [
+    [
+      "because-you",
+      "Because you’re you",
+      "sweet",
+      "flowers",
+      "Just because\nyou’re you.",
+      "classic"
+    ],
+    [
+      "because-thinking",
+      "Thinking of you",
+      "sweet",
+      "rose",
+      "Thinking\nof you.",
+      "classic"
+    ],
+    [
+      "because-no-reason",
+      "No occasion necessary",
+      "bold",
+      "confetti",
+      "NO OCCASION\nNECESSARY.",
+      "bold"
+    ],
+    [
+      "because-saw-this",
+      "Saw this, thought of you",
+      "sweet",
+      "paper",
+      "Saw this.\nThought of you.",
+      "classic"
+    ],
+    [
+      "because-bribe",
+      "A delicious bribe",
+      "funny",
+      "sunshine",
+      "This is\nabsolutely a bribe."
+    ],
+    [
+      "because-favorite",
+      "My favorite distraction",
+      "romantic",
+      "hearts",
+      "My favorite\ndistraction.",
+      "classic"
+    ],
+    [
+      "because-rough-day",
+      "For a rough day",
+      "sweet",
+      "lilac",
+      "Rough day?\nSoft landing."
+    ],
+    [
+      "because-text-back",
+      "Please text me back",
+      "funny",
+      "confetti",
+      "A cookie.\nNow text me back."
+    ],
+    [
+      "because-love",
+      "Love is love",
+      "bold",
+      "rainbow",
+      "LOVE\nIS LOVE.",
+      "bold",
+      [
+        "romantic"
+      ]
+    ],
+    [
+      "because-proud",
+      "Proud of who you are",
+      "sweet",
+      "trans",
+      "Proud of\nwho you are.",
+      "classic"
+    ],
+    [
+      "because-favorite-child",
+      "The favorite child",
+      "funny",
+      "sunshine",
+      "From your\nfavorite child."
+    ],
+    [
+      "because-small-joy",
+      "A small, good thing",
+      "sweet",
+      "flowers",
+      "A small,\ngood thing.",
+      "classic"
+    ],
+    [
+      "because-miss",
+      "Wish you were here",
+      "romantic",
+      "midnight",
+      "Wish you\nwere here.",
+      "classic"
+    ],
+    [
+      "because-sorry",
+      "A little apology",
+      "sweet",
+      "rose",
+      "I’m sorry.\nI brought cookies."
+    ],
+    [
+      "because-no-sharing",
+      "No sharing required",
+      "funny",
+      "lilac",
+      "For you.\nSharing is optional."
+    ]
+  ],
+  "edgy": [
+    [
+      "edgy-old",
+      "Still fabulous",
+      "edgy",
+      "midnight",
+      "Old as fuck.\nStill fabulous.",
+      "classic",
+      [
+        "funny",
+        "bold"
+      ]
+    ],
+    [
+      "edgy-patience",
+      "Excellent taste",
+      "edgy",
+      "rose",
+      "Zero patience.\nExcellent taste.",
+      "clean",
+      [
+        "funny"
+      ]
+    ],
+    [
+      "edgy-you-were-right",
+      "You were right",
+      "edgy",
+      "paper",
+      "Well, shit.\nYou were right.",
+      "classic",
+      [
+        "funny"
+      ]
+    ],
+    [
+      "edgy-meeting",
+      "Could’ve been a cookie",
+      "edgy",
+      "lilac",
+      "This meeting\ncould’ve been\na cookie.",
+      "clean",
+      [
+        "funny"
+      ]
+    ],
+    [
+      "edgy-insufferable",
+      "Try to stay humble",
+      "edgy",
+      "fireworks",
+      "Congratulations.\nTry not to be\ninsufferable.",
+      "clean",
+      [
+        "funny",
+        "bold"
+      ]
+    ],
+    [
+      "edgy-excuses",
+      "Freshly baked",
+      "edgy",
+      "sunshine",
+      "Freshly baked.\nUnlike your excuses.",
+      "clean",
+      [
+        "funny"
+      ]
+    ],
+    [
+      "edgy-dont-make-it-weird",
+      "Don’t make it weird",
+      "edgy",
+      "hearts",
+      "I like you.\nDon’t make it weird.",
+      "clean",
+      [
+        "romantic",
+        "funny"
+      ]
+    ],
+    [
+      "edgy-glam",
+      "Too glam",
+      "edgy",
+      "midnight",
+      "Too glam to\ngive a damn.",
+      "classic",
+      [
+        "bold"
+      ]
+    ],
+    [
+      "edgy-carbs",
+      "Emotional support carbs",
+      "edgy",
+      "confetti",
+      "Emotionally\nsupported by carbs.",
+      "clean",
+      [
+        "funny"
+      ]
+    ],
+    [
+      "edgy-apology",
+      "An honest apology",
+      "edgy",
+      "rose",
+      "Sorry I was an ass.\nHave a cookie.",
+      "clean",
+      [
+        "funny"
+      ]
+    ],
+    [
+      "edgy-adulting",
+      "Adulting is a scam",
+      "edgy",
+      "lilac",
+      "ADULTING\nIS A SCAM.\nEat this.",
+      "bold",
+      [
+        "funny",
+        "bold"
+      ]
+    ],
+    [
+      "edgy-sarcasm",
+      "Fluent in sarcasm",
+      "edgy",
+      "paper",
+      "Fluent in sarcasm.\nLow on patience.",
+      "classic",
+      [
+        "funny"
+      ]
+    ],
+    [
+      "edgy-not-today",
+      "Not today",
+      "edgy",
+      "rainbow",
+      "NOT TODAY,\nBULLSHIT.",
+      "bold",
+      [
+        "bold"
+      ]
+    ],
+    [
+      "edgy-participation",
+      "Participation cookie",
+      "edgy",
+      "sunshine",
+      "Here’s your\nparticipation cookie.",
+      "clean",
+      [
+        "funny"
+      ]
+    ],
+    [
+      "edgy-love-you",
+      "Love you, now go away",
+      "edgy",
+      "hearts",
+      "Love you.\nMean it.\nNow go away.",
+      "clean",
+      [
+        "romantic",
+        "funny"
+      ]
+    ]
+  ]
+};
+export const templates = Object.entries(designCollections).flatMap(([occasion, rows]) =>
+  rows.map(([id, name, tone, bg, message, font = "clean", tags = []], index) => ({
+    id, name, occasion, tone, bg, message, font, color: null,
+    tones: [...new Set([tone, ...tags])],
+    shape: index % 5 === 4 ? "square" : "round",
+  }))
+);
+export const matchesPersonality = (design, tone) => tone === "all" || (design.tones || [design.tone]).includes(tone);
 export function createTemplate(id) {
   const t = templates.find((t) => t.id === id);
   if (!t) throw new Error("Choose an available design.");
@@ -119,7 +864,7 @@ export function createTemplate(id) {
       x: 0.5,
       y: 0.5,
     },
-    shape: "round",
+    shape: t.shape || "round",
   };
 }
 export const defaultText = () => ({
@@ -133,9 +878,9 @@ export const defaultText = () => ({
 });
 export function messageSuggestions(occasion, tone) {
   const pool = templates.filter((t) => t.occasion === occasion);
-  const preferred = pool.filter((t) => t.tone === tone),
-    others = pool.filter((t) => t.tone !== tone);
-  return [...preferred, ...others].map((t) => t.message.replace(/\n/g, " "));
+  const preferred = pool.filter((t) => matchesPersonality(t, tone)),
+    others = pool.filter((t) => !matchesPersonality(t, tone));
+  return [...preferred, ...others].slice(0, 5).map((t) => t.message.replace(/\n/g, " "));
 }
 export function parseAiMessages(reply) {
   const text = String(reply || "")

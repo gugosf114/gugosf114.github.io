@@ -30,7 +30,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="order-studio.css?v=film-loop-1" />
+    <link rel="stylesheet" href="order-studio.css?v=catalog-90" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -151,35 +151,12 @@
             id="occasionFilters"
             role="group"
             aria-label="Occasion"
-          >
-            <button type="button" data-occasion="all" aria-pressed="true">
-              All designs</button
-            ><button
-              type="button"
-              data-occasion="birthday"
-              aria-pressed="false"
-            >
-              Birthday</button
-            ><button
-              type="button"
-              data-occasion="anniversary"
-              aria-pressed="false"
-            >
-              Anniversary</button
-            ><button type="button" data-occasion="thanks" aria-pressed="false">
-              Thank you
-            </button>
-          </div>
+          ><button type="button" data-occasion="all" aria-pressed="true">All designs</button><button type="button" data-occasion="birthday" aria-pressed="false">Birthday</button><button type="button" data-occasion="anniversary" aria-pressed="false">Anniversary</button><button type="button" data-occasion="thanks" aria-pressed="false">Thank You</button><button type="button" data-occasion="congratulations" aria-pressed="false">Congratulations</button><button type="button" data-occasion="just-because" aria-pressed="false">Just Because</button><button type="button" data-occasion="edgy" aria-pressed="false">Edgy</button></div>
           <div class="tone-filter">
             <label for="catalogTone">Show me</label
-            ><select id="catalogTone">
-              <option value="all">Every personality</option>
-              <option value="sweet">Something sweet</option>
-              <option value="funny">Something funny</option>
-              <option value="bold">Something bold</option>
-            </select>
+            ><select id="catalogTone"><option value="all">Every personality</option><option value="sweet">Sweet</option><option value="funny">Funny</option><option value="bold">Bold</option><option value="romantic">Romantic</option><option value="edgy">Edgy</option></select>
           </div>
-          <div class="template-grid" id="templateGrid"></div>
+          <p id="catalogSummary" class="catalog-summary" aria-live="polite"></p><p id="edgyNote" class="catalog-edgy-note" hidden>Grown-up humor: sarcasm, sharp wit, and some strong language.</p><div class="template-grid" id="templateGrid"></div><p id="catalogEmpty" class="quiet-note" hidden>No designs with that personality in this category. Choose Every personality to see the full collection.</p>
           <p class="quiet-note">
             Use any design as it is, or change every word and color. $5 per
             cookie, minimum 12.
@@ -357,19 +334,11 @@
           <div class="compose-field-row">
             <div>
               <label class="field-label" for="aiOccasion">Occasion</label
-              ><select id="aiOccasion">
-                <option value="birthday">Birthday</option>
-                <option value="anniversary">Anniversary</option>
-                <option value="thanks">Thank you</option>
-              </select>
+              ><select id="aiOccasion"><option value="birthday">Birthday</option><option value="anniversary">Anniversary</option><option value="thanks">Thank You</option><option value="congratulations">Congratulations</option><option value="just-because">Just Because</option><option value="edgy">Edgy</option></select>
             </div>
             <div>
               <label class="field-label" for="aiTone">Personality</label
-              ><select id="aiTone">
-                <option value="funny">Gently funny</option>
-                <option value="sweet">Warm & sweet</option>
-                <option value="bold">Big & celebratory</option>
-              </select>
+              ><select id="aiTone"><option value="funny">Funny</option><option value="sweet">Sweet</option><option value="bold">Bold</option><option value="romantic">Romantic</option><option value="edgy">Witty & sarcastic</option></select>
             </div>
           </div>
           <label class="field-label" for="aiAudience">Who is it for?</label
@@ -862,6 +831,6 @@
       </p></noscript
     >
     <script src="order-studio-pricing.js"></script>
-    <script type="module" src="order-studio.mjs?v=film-loop-1"></script>
+    <script type="module" src="order-studio.mjs?v=catalog-90"></script>
   </body>
 </html>

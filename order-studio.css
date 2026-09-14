@@ -2290,3 +2290,7 @@ body[data-step="ai"] .workspace-preview {
   }
   .start-paths { scroll-margin-top: 18px; }
 }
+
+.catalog-summary { margin: 12px 0; color: var(--muted); font-size: 12px; }
+.catalog-edgy-note { padding: 12px 15px; margin: 12px 0 18px; border-radius: 9px; background: #f4e7ed; color: #813454; font-size: 12px; }
+@media (max-width:760px) { .catalog-filters { gap:6px; } .catalog-filters button { padding:9px 10px; } }

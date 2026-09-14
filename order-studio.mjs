@@ -6,10 +6,10 @@ import {
   cookiePoint,
   quantities,
   blobOf,
-} from "./order-studio-art.mjs";
+} from "./order-studio-art.mjs?v=catalog-90";
 import { cutSubject } from "./order-studio-cutout.mjs";
-import { createTemplate } from "./order-studio-designs.mjs";
-import { initComposer } from "./order-studio-compose.mjs";
+import { createTemplate } from "./order-studio-designs.mjs?v=catalog-90";
+import { initComposer } from "./order-studio-compose.mjs?v=catalog-90";
 import { initPackagingFilm } from "./order-packaging-film.mjs?v=film-loop-1";
 
 const $ = (id) => document.getElementById(id);
@@ -310,7 +310,7 @@ function render() {
           : "Brush to bring your photo back"
         : hasDesign(d)
           ? "Your cookie, as you make it"
-          : "One of nine ideas. Make it yours.";
+          : "90 designs. Make one yours.";
   $("previewStatus").textContent = originalVisible
     ? "Original upload"
     : selectingSubject

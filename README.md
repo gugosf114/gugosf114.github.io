@@ -231,7 +231,7 @@ Tests: `node --test test/order-packaging-film.test.mjs` covers twelve slots and 
 
 ### Design and ordering
 
-The opening screen offers **Choose a design**, **Make my own**, and **Help me find the words (AI, optional)**. There are nine authored designs: three birthdays, three anniversaries, and three thank-yous, filtered by occasion and personality. Customers can use a design as shown, personalize it, or start with their own photo.
+The opening screen offers **Choose a design**, **Make my own**, and **Help me find the words (AI, optional)**. There are 90 authored designs: 15 each for Birthday, Anniversary, Thank You, Congratulations, Just Because, and Edgy. Personality filters are Sweet, Funny, Bold, Romantic, and Edgy; designs can carry multiple personality tags. Edgy is labeled as grown-up humor. Gallery previews render as they approach the viewport. Customers can use a design as shown, personalize it, or start with their own photo.
 
 `order-studio-designs.mjs` defines the template catalog, twelve backgrounds (including rainbow and trans Pride flags), local pattern drawing, and editable text rendering. Background, optional photo, and words are separate layers. `order-studio-compose.mjs` owns their controls, including customer background uploads, lettering, colors, size, position, and optional names/dates. Text-only designs export a PNG source along with the clean print artwork and approved cookie preview, so the existing private order service receives the same three-file contract without requiring a customer photo.
 

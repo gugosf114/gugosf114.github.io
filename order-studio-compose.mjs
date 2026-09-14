@@ -1,13 +1,16 @@
 import {
   templates,
+  categories,
+  personalities,
+  matchesPersonality,
   backgrounds,
   createTemplate,
   defaultText,
   messageSuggestions,
   suggestAiMessages,
   drawBackground,
-} from "./order-studio-designs.mjs";
-import { drawCookie, canvas } from "./order-studio-art.mjs";
+} from "./order-studio-designs.mjs?v=catalog-90";
+import { drawCookie, canvas } from "./order-studio-art.mjs?v=catalog-90";
 
 export function initComposer(api) {
   const $ = (id) => document.getElementById(id);
@@ -42,31 +45,36 @@ export function initComposer(api) {
     .forEach((b) =>
       b.addEventListener("click", () => chooseTab(b.dataset.composeTab)),
     );
+  let thumbnailObserver;
   function catalog() {
+    thumbnailObserver?.disconnect();
     $("templateGrid").replaceChildren();
-    for (const spec of templates.filter(
-      (t) =>
-        (occasion === "all" || t.occasion === occasion) &&
-        (tone === "all" || t.tone === tone),
-    )) {
+    const collection = templates.filter(t => occasion === "all" || t.occasion === occasion);
+    const results = collection.filter(t => matchesPersonality(t, tone));
+    $("catalogSummary").textContent = results.length + " designs" + (occasion === "all" ? " across 6 categories" : " · " + categories.find(c => c.id === occasion).name);
+    $("edgyNote").hidden = occasion !== "edgy" && tone !== "edgy";
+    $("catalogEmpty").hidden = results.length !== 0;
+    thumbnailObserver = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
+      for (const entry of entries) if (entry.isIntersecting) {
+        drawCookie(entry.target, createTemplate(entry.target.dataset.templateId));
+        thumbnailObserver.unobserve(entry.target);
+      }
+    }, {rootMargin:'450px'}) : null;
+    for (const spec of results) {
       const card = document.createElement("button");
       card.type = "button";
       card.className = "template-card";
       card.dataset.template = spec.id;
       const preview = canvas(420);
       preview.setAttribute("aria-hidden", "true");
-      drawCookie(preview, createTemplate(spec.id));
+      preview.dataset.templateId = spec.id;
+      if (thumbnailObserver) thumbnailObserver.observe(preview);
+      else drawCookie(preview, createTemplate(spec.id));
       const name = document.createElement("strong");
       name.textContent = spec.name;
       const label = document.createElement("span");
-      label.textContent =
-        {
-          birthday: "Birthday",
-          anniversary: "Anniversary",
-          thanks: "Thank you",
-        }[spec.occasion] +
-        " · " +
-        spec.tone;
+      label.textContent = categories.find(c => c.id === spec.occasion).name + " · " +
+        (spec.occasion === "edgy" ? "Grown-up humor" : personalities.find(p => p.id === spec.tone).name);
       const action = document.createElement("small");
       action.textContent = "Use this design";
       card.append(preview, label, name, action);
@@ -274,7 +282,7 @@ export function initComposer(api) {
         suggestion.addEventListener("click", () => {
           const spec =
             templates.find(
-              (t) => t.occasion === selectedOccasion && t.tone === selectedTone,
+              (t) => t.occasion === selectedOccasion && matchesPersonality(t, selectedTone),
             ) || templates.find((t) => t.occasion === selectedOccasion);
           const design = createTemplate(spec.id);
           design.text.message = message;
