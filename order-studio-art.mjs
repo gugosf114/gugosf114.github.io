@@ -94,7 +94,7 @@ export function drawCookie(target, design) {
   shapePath(ctx, design.shape, s * 0.083, s * 0.078, s * 0.834);
   ctx.fillStyle = "#f7eedf";
   ctx.fill();
-  const art = canvas(1000);
+  const art = canvas(s);
   drawArtwork(art, design);
   ctx.drawImage(art, s * 0.094, s * 0.089, s * 0.812, s * 0.812);
   ctx.save();

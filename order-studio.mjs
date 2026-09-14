@@ -31,7 +31,7 @@ const copy = {
   shape: [
     "Design · 1 of 3",
     "Find your shape.",
-    "Your photo, on your cookie. Pick the one that feels right.",
+    "Pick round or square. Then zoom and drag your photo until it’s just right.",
     "Continue",
     1,
   ],
@@ -187,11 +187,14 @@ function show(next, { history = true, focus = true } = {}) {
     (active + 1) +
     (designs.length > 1 ? " of " + designs.length : "");
   if (step === "shape") {
-    for (const shape of ["round", "square"])
-      drawCookie($(shape + "Option"), { ...current(), shape });
+    $("shapePositionMount").appendChild($("positionControls"));
+    $("positionControls").hidden = false;
   }
   if (step === "background") syncBackground();
-  if (step === "finish") setTool("move");
+  if (step === "finish") {
+    $("finishPositionMount").appendChild($("positionControls"));
+    setTool("move");
+  }
   if (step === "review") renderDesigns();
   if (step === "pay") loadPayment();
   if (focus) {
@@ -203,6 +206,10 @@ function show(next, { history = true, focus = true } = {}) {
 }
 function render() {
   const d = current();
+  if (step === "shape") {
+    for (const shape of ["round", "square"])
+      drawCookie($(shape + "Option"), { ...d, shape });
+  }
   document
     .querySelectorAll("[data-shape]")
     .forEach((b) =>
@@ -429,6 +436,7 @@ window.addEventListener("drop", (e) => {
 
 document.querySelectorAll("[data-shape]").forEach((button) =>
   button.addEventListener("click", () => {
+    originalVisible = false;
     current().shape = button.dataset.shape;
     invalidate();
     render();
@@ -439,7 +447,6 @@ $("keepBackground").addEventListener("click", () => {
   d.background = "keep";
   d.source = cloneCanvas(d.original);
   d.undo = [];
-  d.view = { zoom: 1, x: 0, y: 0, fit: "cover" };
   selectingSubject = false;
   originalVisible = false;
   invalidate();
@@ -539,16 +546,19 @@ document
   .forEach((b) => b.addEventListener("click", () => setTool(b.dataset.tool)));
 $("doneEdges").addEventListener("click", () => setTool("move"));
 $("zoom").addEventListener("input", () => {
+  originalVisible = false;
   current().view.zoom = Number($("zoom").value) / 100;
   invalidate();
   render();
 });
 $("fitPhoto").addEventListener("click", () => {
+  originalVisible = false;
   current().view = { zoom: 1, x: 0, y: 0, fit: "contain" };
   invalidate();
   render();
 });
 $("resetPosition").addEventListener("click", () => {
+  originalVisible = false;
   current().view = { zoom: 1, x: 0, y: 0, fit: "cover" };
   invalidate();
   render();
@@ -667,8 +677,16 @@ editor.addEventListener("keydown", (e) => {
 });
 editor.addEventListener("focus", render);
 const cookie = $("cookiePreview");
+function canPosition() {
+  return (
+    (step === "shape" || step === "finish") &&
+    tool === "move" &&
+    !busy &&
+    !originalVisible
+  );
+}
 cookie.addEventListener("pointerdown", (e) => {
-  if (step !== "finish" || tool !== "move" || busy) return;
+  if (!canPosition()) return;
   e.preventDefault();
   cookie.setPointerCapture(e.pointerId);
   pointer = {
@@ -696,7 +714,7 @@ cookie.addEventListener("pointerup", stopPointer);
 cookie.addEventListener("pointercancel", stopPointer);
 cookie.addEventListener("lostpointercapture", stopPointer);
 cookie.addEventListener("keydown", (e) => {
-  if (step !== "finish" || busy) return;
+  if (!canPosition()) return;
   const arrows = {
     ArrowLeft: [-0.01, 0],
     ArrowRight: [0.01, 0],
@@ -943,10 +961,10 @@ $("helpDialog").addEventListener("click", (e) => {
 });
 // Keep an explicit keyboard editing target only while positioning.
 new MutationObserver(() => {
-  cookie.tabIndex = step === "finish" ? 0 : -1;
+  cookie.tabIndex = step === "shape" || step === "finish" ? 0 : -1;
   cookie.setAttribute(
     "aria-label",
-    step === "finish"
+    step === "shape" || step === "finish"
       ? "Position your photo. Drag, or use arrow keys to move it."
       : "Your cookie preview",
   );

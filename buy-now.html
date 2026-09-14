@@ -147,7 +147,7 @@
               ><span>Square</span><i aria-hidden="true">✓</i>
             </button>
           </div>
-          <p class="quiet-note">Same cookie. Same price. Your call.</p>
+          <div id="shapePositionMount"></div>
         </div>
         <div class="step-panel" data-panel="background" hidden>
           <div class="choice-list" role="group" aria-label="Photo background">
@@ -194,30 +194,31 @@
               Restore
             </button>
           </div>
-          <div id="positionControls">
-            <div class="control-label">
-              <label for="zoom">Photo size</label
-              ><output id="zoomValue" for="zoom">100%</output>
+          <div id="finishPositionMount">
+            <div id="positionControls">
+              <div class="control-label">
+                <label for="zoom">Photo size</label
+                ><output id="zoomValue" for="zoom">100%</output>
+              </div>
+              <input
+                id="zoom"
+                type="range"
+                min="50"
+                max="300"
+                value="100"
+                step="1"
+              />
+              <div class="position-bottom">
+                <button type="button" class="text-button" id="fitPhoto">
+                  Fit whole photo</button
+                ><button type="button" class="text-button" id="resetPosition">
+                  Reset position
+                </button>
+              </div>
+              <p class="quiet-note">
+                Drag the photo to move it. Arrow keys work too.
+              </p>
             </div>
-            <input
-              id="zoom"
-              type="range"
-              min="50"
-              max="300"
-              value="100"
-              step="1"
-            />
-            <div class="position-bottom">
-              <button type="button" class="text-button" id="fitPhoto">
-                Fit whole photo</button
-              ><button type="button" class="text-button" id="resetPosition">
-                Reset position
-              </button>
-            </div>
-            <p class="quiet-note">
-              Drag the photo to position it. Use the arrow keys for small
-              adjustments.
-            </p>
           </div>
           <div id="brushControls" hidden>
             <div class="control-label">

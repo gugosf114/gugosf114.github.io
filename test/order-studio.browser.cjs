@@ -18,7 +18,13 @@ fs.mkdirSync(OUT, { recursive: true });
     errors = [],
     calls = [];
   page.setDefaultTimeout(15000);
-  page.on("pageerror", (e) => errors.push(e.message));
+  page.on("pageerror", (e) => {
+    errors.push(e.message);
+    console.error("Page error: " + e.message);
+  });
+  page.on("console", (message) => {
+    if (message.type() === "error") console.error("Browser: " + message.text());
+  });
   page.on("dialog", (d) => d.accept());
   await page.route("**/googletagmanager.com/**", (r) =>
     r.fulfill({ body: "" }),
@@ -68,6 +74,7 @@ fs.mkdirSync(OUT, { recursive: true });
   try {
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.goto(BASE);
+    await page.waitForFunction(() => !!window.__mbcDesignStudio);
     await shot("01-desktop-upload");
     await page.locator("#logoUpload").setInputFiles({
       name: "not-a-photo.txt",
@@ -81,16 +88,84 @@ fs.mkdirSync(OUT, { recursive: true });
       .setInputFiles(path.join(__dirname, "../images/yana-about.webp"));
     await step("shape");
     assert.equal(
+      await page.locator("#zoom").isVisible(),
+      true,
+      "zoom is available while choosing the cookie shape",
+    );
+    const initialShape = await page
+      .locator("#cookiePreview")
+      .evaluate((c) => c.toDataURL());
+    await page.locator("#zoom").fill("175");
+    await page.locator("#zoom").dispatchEvent("input");
+    assert.ok(
+      (await page.locator("#cookiePreview").evaluate((c) => c.toDataURL())) !==
+        initialShape,
+      "shape-screen zoom changes the print",
+    );
+    const roundChoice = await page
+      .locator("#roundOption")
+      .evaluate((c) => c.toDataURL());
+    const cropBox = await page.locator("#cookiePreview").boundingBox();
+    const zoomedShape = await page
+      .locator("#cookiePreview")
+      .evaluate((c) => c.toDataURL());
+    await page.mouse.move(
+      cropBox.x + cropBox.width / 2,
+      cropBox.y + cropBox.height / 2,
+    );
+    await page.mouse.down();
+    await page.mouse.move(
+      cropBox.x + cropBox.width / 2 + 36,
+      cropBox.y + cropBox.height / 2 - 24,
+      { steps: 5 },
+    );
+    await page.mouse.up();
+    const movedShape = await page
+      .locator("#cookiePreview")
+      .evaluate((c) => c.toDataURL());
+    assert.ok(
+      movedShape !== zoomedShape,
+      "dragging on the shape screen repositions the photo",
+    );
+    assert.ok(
+      (await page.locator("#roundOption").evaluate((c) => c.toDataURL())) !==
+        roundChoice,
+      "shape choices reflect the adjusted crop",
+    );
+    await page.locator("#cookiePreview").focus();
+    await page.keyboard.press("ArrowRight");
+    assert.ok(
+      (await page.locator("#cookiePreview").evaluate((c) => c.toDataURL())) !==
+        movedShape,
+      "keyboard positioning works on the shape screen",
+    );
+    assert.equal(
       await page.locator("[data-shape=round]").getAttribute("aria-pressed"),
       "true",
     );
     await page.locator("[data-shape=square]").click();
+    const squareCrop = await page
+      .locator("#cookiePreview")
+      .evaluate((c) => c.toDataURL());
+    await page.locator("[data-shape=round]").click();
+    await page.locator("[data-shape=square]").click();
+    assert.ok(
+      (await page.locator("#cookiePreview").evaluate((c) => c.toDataURL())) ===
+        squareCrop,
+      "changing shape preserves zoom and position",
+    );
     await next();
     await step("background");
     assert.equal(await page.locator("#continueButton").isDisabled(), true);
     await page.locator("#keepBackground").click();
     await next();
     await step("finish");
+    assert.equal(await page.locator("#zoom").inputValue(), "175");
+    assert.ok(
+      (await page.locator("#cookiePreview").evaluate((c) => c.toDataURL())) ===
+        squareCrop,
+      "keeping the photo preserves the shape-screen crop",
+    );
     await page.locator("#zoom").fill("150");
     await page.locator("#zoom").dispatchEvent("input");
     await page.locator("#cookiePreview").focus();
