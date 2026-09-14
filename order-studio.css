@@ -2231,11 +2231,35 @@ body[data-step="ai"] .workspace-preview {
 }
 @media (max-width: 760px) {
   body[data-step="upload"] .workspace-preview {
-    display: flex;
+    display: block;
+    width: calc(100% - 32px);
+    margin: 0 16px 18px;
     min-height: 0;
+    flex: none;
+    overflow: hidden;
+    border-radius: 16px;
+  }
+  body[data-step="upload"] .preview-topline,
+  body[data-step="upload"] .preview-bottomline,
+  body[data-step="upload"] .stage-orbit {
+    display: none;
   }
   body[data-step="upload"] .preview-stage {
-    height: 280px;
-    min-height: 280px;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 1 / 1;
+    padding: 0;
+    flex: none;
+    overflow: hidden;
+  }
+  body[data-step="upload"] .packaging-film {
+    border-radius: 0;
+  }
+  body[data-step="upload"] .packaging-video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 }
