@@ -13,3 +13,10 @@ test('design approval continues inside the guide through checkout', async () => 
   assert.match(html, /id="guidedCheckoutMount"/);
   assert.match(html, /<div class="pc-order-grid">\s*<div id="orderColumn">/, 'the real order form moves into Step 4');
 });
+
+test('wide desktop layout fills the monitor and preserves the photo shape', async () => {
+  const html = await readFile(new URL('../buy-now.html', import.meta.url), 'utf8');
+  assert.match(html, /@media \(min-width: 1500px\)/);
+  assert.match(html, /width: min\(2200px, calc\(100% - 80px\)\)/);
+  assert.match(html, /aspect-ratio: 4 \/ 3/);
+});

@@ -1084,6 +1084,37 @@
       .order-app-v3 .pc-cutout-shell { width: 100%; height: 100dvh; max-height: none; border-radius: 0; box-shadow: none; }
       .order-app-v3 .pc-cutout-header { min-height: 66px; }
     }
+    @media (min-width: 1500px) {
+      .v3-bar { width: min(2200px, calc(100% - 80px)); }
+      .order-app-v3 .v3-workspace { padding-left: 40px; padding-right: 40px; }
+      .order-app-v3 .pc-wrap { max-width: 2200px; }
+      .order-app-v3 .pc-hero-grid {
+        grid-template-columns: minmax(0, 1.05fr) minmax(700px, .95fr);
+      }
+      .order-app-v3 .pc-hero-copy {
+        padding-left: clamp(60px, 4vw, 96px);
+        padding-right: clamp(60px, 4vw, 96px);
+      }
+      .order-app-v3 .pc-hero h1 {
+        max-width: 10ch;
+        font-size: clamp(5.2rem, 5vw, 6.2rem);
+      }
+      .order-app-v3 .pc-lede { font-size: 1.1rem; }
+      .order-app-v3 .v3-progress span { font-size: .75rem; }
+      .order-app-v3 .pc-stage { justify-content: center; }
+      .order-app-v3 .pc-stage-inner {
+        flex: 0 1 auto;
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        max-height: calc(100svh - 190px);
+      }
+      .order-app-v3 .pc-stage-inner canvas {
+        object-fit: contain;
+        background: #ddd6d1;
+      }
+      .order-app-v3 .pc-stage-caption { flex: none; }
+      .order-app-v3 .pc-assurances { font-size: .78rem; }
+    }
 </style>
 </head>
 <body class="order-page order-app-v3">
