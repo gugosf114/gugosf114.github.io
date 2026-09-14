@@ -39,13 +39,11 @@ const assert = require("node:assert/strict"),
       () => window.__mbcPackagingFilm?.state === "playing",
     );
     await p.waitForFunction(() => window.__mbcPackagingFilm.time > 0.4);
-    const info = await p
-      .locator("#packagingVideo")
-      .evaluate((v) => ({
-        duration: v.duration,
-        width: v.videoWidth,
-        height: v.videoHeight,
-      }));
+    const info = await p.locator("#packagingVideo").evaluate((v) => ({
+      duration: v.duration,
+      width: v.videoWidth,
+      height: v.videoHeight,
+    }));
     assert.equal(info.duration, 16);
     assert.equal(info.width, 1080);
     assert.equal(info.height, 1080);
@@ -63,7 +61,18 @@ const assert = require("node:assert/strict"),
       await seek(t);
       await shot(n);
     }
-    console.log("End seek state",await p.locator("#packagingVideo").evaluate(v=>({time:v.currentTime,duration:v.duration,paused:v.paused,ended:v.ended,state:window.__mbcPackagingFilm.state})));
+    console.log(
+      "End seek state",
+      await p
+        .locator("#packagingVideo")
+        .evaluate((v) => ({
+          time: v.currentTime,
+          duration: v.duration,
+          paused: v.paused,
+          ended: v.ended,
+          state: window.__mbcPackagingFilm.state,
+        })),
+    );
     assert.equal(
       await p.evaluate(() => window.__mbcPackagingFilm.state),
       "ended",
@@ -124,7 +133,7 @@ const assert = require("node:assert/strict"),
     await fail.locator("#packagingError").waitFor();
     assert.equal(
       await fail.locator("#packagingError a").getAttribute("href"),
-      "media/cookie-packaging.mp4",
+      "media/packaging-preview.html",
     );
     await fail.locator("#browseDesigns").click();
     await fail.waitForFunction(
