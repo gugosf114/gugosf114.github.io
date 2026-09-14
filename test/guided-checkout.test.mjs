@@ -44,4 +44,5 @@ test('showcase slideshow keeps the approved four-image order', async () => {
   assert.equal((html.match(/data-showcase-slide=/g) || []).length, 4);
   assert.match(html, /Pause cookie slideshow/);
   assert.match(html, /prefers-reduced-motion: reduce/);
+  assert.match(html, /setInterval\(function \(\) \{ showSlide\(current \+ 1, false\); \}, 3000\)/);
 });
