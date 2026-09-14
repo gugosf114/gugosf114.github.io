@@ -1115,6 +1115,42 @@
       .order-app-v3 .pc-stage-caption { flex: none; }
       .order-app-v3 .pc-assurances { font-size: .78rem; }
     }
+    @media (min-width: 721px) and (max-width: 1100px) and (orientation: portrait) {
+      .order-app-v3 .v3-workspace { min-height: 0; padding: 0 20px 20px; }
+      .order-app-v3 .pc-hero-grid {
+        width: min(900px, 100%);
+        min-height: 0;
+        margin: 0 auto;
+        grid-template-columns: 1fr;
+        grid-template-areas: "copy" "stage" "promises";
+        border-radius: 30px;
+      }
+      .order-app-v3 .pc-hero-copy { padding: 44px 48px 26px; }
+      .order-app-v3 .pc-hero h1 {
+        max-width: 10ch;
+        font-size: clamp(4rem, 10vw, 5.2rem);
+      }
+      .order-app-v3 .pc-stage {
+        min-height: 0;
+        margin: 0 28px 22px;
+        padding: 14px;
+      }
+      .order-app-v3 .pc-stage-inner {
+        flex: 0 1 auto;
+        min-height: 0;
+        width: 100%;
+        aspect-ratio: 4 / 3;
+      }
+      .order-app-v3 .pc-stage-inner canvas {
+        object-fit: contain;
+        background: #ddd6d1;
+      }
+      .order-app-v3 .pc-stage-caption { flex: none; }
+      .order-app-v3 .pc-assurances {
+        grid-template-columns: repeat(3, 1fr);
+        padding: 0 48px 40px;
+      }
+    }
 </style>
 </head>
 <body class="order-page order-app-v3">

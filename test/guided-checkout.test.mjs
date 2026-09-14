@@ -20,3 +20,9 @@ test('wide desktop layout fills the monitor and preserves the photo shape', asyn
   assert.match(html, /width: min\(2200px, calc\(100% - 80px\)\)/);
   assert.match(html, /aspect-ratio: 4 \/ 3/);
 });
+
+test('portrait tablets stack instead of crushing the photo column', async () => {
+  const html = await readFile(new URL('../buy-now.html', import.meta.url), 'utf8');
+  assert.match(html, /@media \(min-width: 721px\) and \(max-width: 1100px\) and \(orientation: portrait\)/);
+  assert.match(html, /grid-template-areas: "copy" "stage" "promises"/);
+});
