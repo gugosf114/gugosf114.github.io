@@ -10,6 +10,21 @@ export const backgrounds = [
   { id: "rainbow", name: "Rainbow Pride", color: "#e40303", ink: "#ffffff" },
   { id: "trans", name: "Trans Pride", color: "#5bcefa", ink: "#3a2846" },
   { id: "sunshine", name: "Sunshine", color: "#ffe8a9", ink: "#87431f" },
+  {"id": "checkerboard", "name": "Retro Checkers", "color": "#fbf4df", "ink": "#284f49", "description": "Playful teal checks with a quiet center.", "suggestedMessage": "Good taste.\nQuestionable decisions."},
+  {"id": "disco", "name": "Disco Nights", "color": "#302344", "ink": "#fff0bf", "description": "Mirror-ball sparkle for people who never do subtle.", "suggestedMessage": "A little extra.\nAs usual."},
+  {"id": "cosmic", "name": "Cosmic Chaos", "color": "#202740", "ink": "#f7e9ff", "description": "Stars, planets, and a very convenient excuse.", "suggestedMessage": "Mercury made me do it."},
+  {"id": "leopard", "name": "Leopard Energy", "color": "#f3dfb6", "ink": "#553021", "description": "A wild spotted border with room for your words.", "suggestedMessage": "Not everyone\ncan handle this much."},
+  {"id": "comic", "name": "Comic Pop", "color": "#ffe6a3", "ink": "#862946", "description": "Bright comic-book bursts and bold color.", "suggestedMessage": "Subtle was\nnever the plan."},
+  {"id": "garden", "name": "Garden Party", "color": "#e7efdf", "ink": "#355746", "description": "Sage leaves and tiny blooms.", "suggestedMessage": "Thriving.\nOut of spite."},
+  {"id": "golden-hour", "name": "Golden Hour", "color": "#ffe7b1", "ink": "#72393b", "description": "A warm sunset with an optimistic glow.", "suggestedMessage": "Less hustle.\nMore sunsets."},
+  {"id": "electric", "name": "Electric Love", "color": "#39214b", "ink": "#fff2fb", "description": "Neon pink lightning and electric hearts.", "suggestedMessage": "Great chemistry.\nTerrible influence."},
+  {"id": "money", "name": "Money Talks", "color": "#e8efdd", "ink": "#315844", "description": "A ring of coins for expensive tastes.", "suggestedMessage": "I accept apologies\nin cash."},
+  {"id": "office-politics", "name": "Office Politics", "color": "#e8edf5", "ink": "#3b4565", "description": "Sticky notes, speech bubbles, and corporate nonsense.", "suggestedMessage": "This meeting\ncould’ve been a cookie."},
+  {"id": "tax-season", "name": "Tax Season", "color": "#f8eedc", "ink": "#8f3939", "description": "Receipts, calculators, and diminishing patience.", "suggestedMessage": "Taxing my patience."},
+  {"id": "campaign", "name": "Campaign Promises", "color": "#f5f0e7", "ink": "#3d405d", "description": "Red, white, and blue bunting. Nonpartisan sarcasm.", "suggestedMessage": "Vote for cookies.\nThey deliver."},
+  {"id": "red-tape", "name": "Red Tape", "color": "#f5e9e6", "ink": "#9a343b", "description": "Bureaucratic red ribbons and rubber-stamp energy.", "suggestedMessage": "Approved by\nabsolutely no one."},
+  {"id": "main-character", "name": "Main Character", "color": "#f7e7d1", "ink": "#842d41", "description": "Theater curtains, gold stars, and your spotlight.", "suggestedMessage": "The plot revolves\naround me."},
+  {"id": "zero-filter", "name": "Zero Filter", "color": "#282632", "ink": "#ffffff", "description": "Grown-up humor with caution stripes and unapologetic pink.", "suggestedMessage": "Fresh out\nof fucks."},
   { id: "custom", name: "Your color", color: "#dceee5", ink: "#2b5747" },
 ];
 export const categories = [
@@ -945,6 +960,7 @@ export function drawBackground(ctx, size, backdrop) {
     );
     return;
   }
+  if (drawExtraBackground(ctx, size, id)) return;
   if (id === "rainbow" || id === "trans") {
     const colors =
       id === "rainbow"
@@ -1065,6 +1081,71 @@ export function drawBackground(ctx, size, backdrop) {
     }
   }
 }
+
+// Borders and motifs are drawn separately from the customer's editable words.
+function drawExtraBackground(ctx, size, id) {
+  const added = new Set(['checkerboard','disco','cosmic','leopard','comic','garden','golden-hour','electric','money','office-politics','tax-season','campaign','red-tape','main-character','zero-filter']);
+  if (!added.has(id)) return false;
+  ctx.save();ctx.scale(size,size);
+  const line=(points,color,width=.004)=>{ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.strokeStyle=color;ctx.lineWidth=width;ctx.lineCap='round';ctx.lineJoin='round';ctx.stroke();};
+  const disc=(x,y,r,color)=>{ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();};
+  const star=(x,y,r,color,points=5)=>{ctx.beginPath();for(let i=0;i<points*2;i++){const a=i*Math.PI/points-Math.PI/2,d=i%2?r*.43:r;const px=x+Math.cos(a)*d,py=y+Math.sin(a)*d;i?ctx.lineTo(px,py):ctx.moveTo(px,py);}ctx.closePath();ctx.fillStyle=color;ctx.fill();};
+  const ring=(count,draw,radius=.405)=>{for(let i=0;i<count;i++){const a=i*Math.PI*2/count;draw(.5+Math.cos(a)*radius,.5+Math.sin(a)*radius,i,a);}};
+  const paper=(x,y,w,h,color,angle=0)=>{ctx.save();ctx.translate(x,y);ctx.rotate(angle);ctx.fillStyle=color;ctx.fillRect(-w/2,-h/2,w,h);ctx.restore();};
+  if(id==='checkerboard'){
+    for(let y=0;y<10;y++)for(let x=0;x<10;x++)if((x+y)%2===0){ctx.fillStyle='#7aaca0';ctx.fillRect(x/10,y/10,.1,.1);}
+    disc(.5,.5,.34,'#fbf4df');
+  }else if(id==='disco'){
+    ring(20,(x,y,i)=>star(x,y,i%3?.012:.022,i%2?'#e9ba70':'#e4a8da'));
+    ctx.save();ctx.beginPath();ctx.arc(.5,.17,.105,0,7);ctx.clip();
+    for(let y=0;y<7;y++)for(let x=0;x<7;x++){ctx.fillStyle=['#fceccc','#ae95c5','#e2b0d7'][(x+y)%3];ctx.fillRect(.395+x*.03,.065+y*.03,.027,.027);}ctx.restore();
+    line([[.5,0],[.5,.065]],'#d6bfdc',.003);
+  }else if(id==='cosmic'){
+    ring(22,(x,y,i)=>star(x,y,i%4?.008:.018,i%2?'#c4b4e7':'#f1d789'));
+    disc(.23,.23,.055,'#bb9ed4');ctx.beginPath();ctx.ellipse(.23,.23,.09,.024,-.45,0,7);ctx.strokeStyle='#e8c689';ctx.lineWidth=.009;ctx.stroke();
+    disc(.78,.77,.04,'#92b4c9');disc(.79,.758,.032,'#202740');
+  }else if(id==='leopard'){
+    ring(22,(x,y,i,a)=>{ctx.save();ctx.translate(x,y);ctx.rotate(a);ctx.beginPath();ctx.ellipse(0,0,.029,.02,.3,0,7);ctx.fillStyle='#b98247';ctx.fill();ctx.beginPath();ctx.arc(0,0,.027,.4,2.9);ctx.strokeStyle='#69462f';ctx.lineWidth=.009;ctx.stroke();ctx.restore();},.405);
+    ring(14,(x,y)=>disc(x,y,.008,'#69462f'),.48);
+  }else if(id==='comic'){
+    for(let i=0;i<26;i++){const a=i*Math.PI/13;ctx.beginPath();ctx.moveTo(.5+Math.cos(a)*.35,.5+Math.sin(a)*.35);ctx.lineTo(.5+Math.cos(a-.07)*.75,.5+Math.sin(a-.07)*.75);ctx.lineTo(.5+Math.cos(a+.07)*.75,.5+Math.sin(a+.07)*.75);ctx.closePath();ctx.fillStyle=i%2?'#eb7990':'#f2c14b';ctx.fill();}
+    disc(.5,.5,.325,'#fff3d5');ring(20,(x,y)=>disc(x,y,.005,'#962f50'),.34);
+  }else if(id==='garden'){
+    ring(20,(x,y,i,a)=>{ctx.beginPath();ctx.ellipse(x,y,.047,.016,a+.75,0,7);ctx.fillStyle=i%2?'#92ac84':'#658963';ctx.fill();});
+    ring(7,(x,y)=>{for(let j=0;j<5;j++){const a=j*Math.PI*2/5;disc(x+Math.cos(a)*.016,y+Math.sin(a)*.016,.014,'#e4a9b0');}disc(x,y,.008,'#e9c777');},.40);
+  }else if(id==='golden-hour'){
+    const gradient=ctx.createLinearGradient(0,0,0,1);gradient.addColorStop(0,'#ffe9ad');gradient.addColorStop(.55,'#f5c491');gradient.addColorStop(1,'#de97a6');ctx.fillStyle=gradient;ctx.fillRect(0,0,1,1);
+    disc(.5,.24,.105,'#fff2bb');for(let i=0;i<4;i++)line([[0,.78+i*.045],[1,.78+i*.045]],'#f9d5b5',.008);
+  }else if(id==='electric'){
+    const bolts=[[.19,.24],[.79,.24],[.2,.76],[.8,.76]];
+    bolts.forEach(([x,y],i)=>{ctx.beginPath();ctx.moveTo(x+.02,y-.075);ctx.lineTo(x-.04,y+.012);ctx.lineTo(x+.006,y+.002);ctx.lineTo(x-.012,y+.075);ctx.lineTo(x+.054,y-.024);ctx.lineTo(x+.014,y-.015);ctx.closePath();ctx.fillStyle=i%2?'#ea73bb':'#c3a5ef';ctx.fill();});
+    ring(12,(x,y,i)=>{if(i%3===0){ctx.save();ctx.translate(x,y);ctx.scale(.021,.021);ctx.beginPath();ctx.moveTo(0,.8);ctx.bezierCurveTo(-2,-.5,-1,-1.7,0,-.7);ctx.bezierCurveTo(1,-1.7,2,-.5,0,.8);ctx.fillStyle='#f285c8';ctx.fill();ctx.restore();}});
+  }else if(id==='money'){
+    ring(14,(x,y,i)=>{disc(x,y,.031,i%2?'#c7a758':'#b5c48c');ctx.beginPath();ctx.arc(x,y,.024,0,7);ctx.strokeStyle='#62815b';ctx.lineWidth=.002;ctx.stroke();ctx.fillStyle='#466545';ctx.font='bold .036px Georgia';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('$',x,y+.002);});
+  }else if(id==='office-politics'){
+    ring(10,(x,y,i,a)=>{paper(x,y,.079,.072,['#f6d88d','#d2b9df','#afcbd8'][i%3],a*.2);line([[x-.024,y-.012],[x+.024,y-.012]],'#8b87a0',.003);line([[x-.024,y+.005],[x+.012,y+.005]],'#8b87a0',.003);});
+    line([[.22,.23],[.31,.29],[.27,.33]],'#9f8daf',.006);line([[.77,.75],[.69,.69],[.72,.65]],'#9f8daf',.006);
+  }else if(id==='tax-season'){
+    ring(9,(x,y,i,a)=>{ctx.save();ctx.translate(x,y);ctx.rotate(a+.4);ctx.fillStyle=i%2?'#e8d8ba':'#fef8e9';ctx.fillRect(-.037,-.052,.074,.104);for(let j=0;j<4;j++)line([[-.025,-.03+j*.018],[.02,-.03+j*.018]],'#bcaa8b',.003);ctx.restore();});
+    paper(.79,.27,.11,.075,'#bc6a60',-.4);line([[.75,.25],[.81,.23]],'#fff1da',.006);
+  }else if(id==='campaign'){
+    line([[.02,.17],[.25,.27],[.5,.3],[.75,.27],[.98,.17]],'#a7a0a0',.004);
+    for(let i=0;i<9;i++){const x=.1+i*.1,y=.22+Math.sin(i*Math.PI/8)*.065;ctx.beginPath();ctx.moveTo(x-.035,y);ctx.lineTo(x+.035,y);ctx.lineTo(x,y+.065);ctx.closePath();ctx.fillStyle=i%2?'#59769e':'#bd626c';ctx.fill();}
+    ring(12,(x,y,i)=>{if(y>.62||x<.17||x>.83)star(x,y,.02,i%2?'#59769e':'#bd626c');});
+  }else if(id==='red-tape'){
+    for(const [x,y,a]of [[.14,.26,-.55],[.84,.29,.6],[.17,.78,.6],[.81,.77,-.6]]){ctx.save();ctx.translate(x,y);ctx.rotate(a);ctx.fillStyle='#b94d56';ctx.fillRect(-.23,-.019,.46,.038);ctx.fillStyle='#d38889';ctx.fillRect(-.23,-.011,.46,.007);ctx.restore();}
+    ring(8,(x,y,i,a)=>{ctx.save();ctx.translate(x,y);ctx.rotate(a);ctx.strokeStyle='#b76b70';ctx.lineWidth=.003;ctx.strokeRect(-.024,-.019,.048,.038);ctx.restore();},.46);
+  }else if(id==='main-character'){
+    for(let i=0;i<5;i++){ctx.fillStyle=i%2?'#a84153':'#bd5a67';ctx.fillRect(i*.029,0,.03,1);ctx.fillRect(1-(i+1)*.029,0,.03,1);}
+    ctx.beginPath();ctx.moveTo(.34,0);ctx.lineTo(.66,0);ctx.lineTo(.86,1);ctx.lineTo(.14,1);ctx.closePath();ctx.fillStyle='#ffefc880';ctx.fill();
+    star(.5,.17,.045,'#c7a155');ring(10,(x,y)=>star(x,y,.011,'#c7a155'),.43);
+  }else if(id==='zero-filter'){
+    for(let i=-2;i<14;i++){ctx.save();ctx.translate(i*.095,0);ctx.rotate(.6);ctx.fillStyle=i%2?'#ed609e':'#f5d8e4';ctx.fillRect(0,-.1,.04,.27);ctx.restore();ctx.save();ctx.translate(i*.095,1);ctx.rotate(.6);ctx.fillStyle=i%2?'#ed609e':'#f5d8e4';ctx.fillRect(0,-.16,.04,.27);ctx.restore();}
+    line([[.16,.29],[.21,.24]],'#ed609e',.014);line([[.16,.24],[.21,.29]],'#ed609e',.014);line([[.79,.76],[.84,.71]],'#ed609e',.014);line([[.79,.71],[.84,.76]],'#ed609e',.014);
+  }
+  ctx.restore();return true;
+}
+
 const faces = {
   clean: '"DM Sans", Arial, sans-serif',
   classic: "Georgia, serif",

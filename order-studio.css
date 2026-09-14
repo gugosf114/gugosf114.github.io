@@ -2294,3 +2294,7 @@ body[data-step="ai"] .workspace-preview {
 .catalog-summary { margin: 12px 0; color: var(--muted); font-size: 12px; }
 .catalog-edgy-note { padding: 12px 15px; margin: 12px 0 18px; border-radius: 9px; background: #f4e7ed; color: #813454; font-size: 12px; }
 @media (max-width:760px) { .catalog-filters { gap:6px; } .catalog-filters button { padding:9px 10px; } }
+
+.background-mood { font-size:12px;line-height:1.6;color:var(--muted);margin:15px 0 9px; }
+.background-message { width:100%;padding:12px 14px;border:1px solid #dfc9d5;border-radius:9px;background:#fff5f9;color:#813454;text-align:left;font-family:inherit;font-weight:500;font-size:12px;line-height:1.5; }
+.background-message:hover { border-color:var(--accent); }

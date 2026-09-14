@@ -6,10 +6,10 @@ import {
   cookiePoint,
   quantities,
   blobOf,
-} from "./order-studio-art.mjs?v=catalog-90";
+} from "./order-studio-art.mjs?v=backgrounds-15";
 import { cutSubject } from "./order-studio-cutout.mjs";
-import { createTemplate } from "./order-studio-designs.mjs?v=catalog-90";
-import { initComposer } from "./order-studio-compose.mjs?v=catalog-90";
+import { createTemplate } from "./order-studio-designs.mjs?v=backgrounds-15";
+import { initComposer } from "./order-studio-compose.mjs?v=backgrounds-15";
 import { initPackagingFilm } from "./order-packaging-film.mjs?v=film-loop-1";
 
 const $ = (id) => document.getElementById(id);

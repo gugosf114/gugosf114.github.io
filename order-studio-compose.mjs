@@ -9,8 +9,8 @@ import {
   messageSuggestions,
   suggestAiMessages,
   drawBackground,
-} from "./order-studio-designs.mjs?v=catalog-90";
-import { drawCookie, canvas } from "./order-studio-art.mjs?v=catalog-90";
+} from "./order-studio-designs.mjs?v=backgrounds-15";
+import { drawCookie, canvas } from "./order-studio-art.mjs?v=backgrounds-15";
 
 export function initComposer(api) {
   const $ = (id) => document.getElementById(id);
@@ -168,6 +168,12 @@ export function initComposer(api) {
     });
     $("backgroundGrid").append(button);
   }
+  $("useBackgroundMessage").addEventListener("click", () => {
+    const choice = backgrounds.find(background => background.id === draft().backdrop.id);
+    if (!choice?.suggestedMessage) return;
+    change(d => { d.text.message = choice.suggestedMessage; });
+    chooseTab('words'); refresh();
+  });
   $("designBackgroundColor").addEventListener("input", () => {
     change((d) => {
       d.backdrop = {
@@ -314,6 +320,12 @@ export function initComposer(api) {
         ? Math.round(d.text[key] * 100)
         : d.text[key];
     $("designBackgroundColor").value = d.backdrop.color;
+    const backgroundInfo = backgrounds.find(background => background.id === d.backdrop.id);
+    $("backgroundMood").hidden = !backgroundInfo?.description;
+    $("backgroundMood").textContent = backgroundInfo?.description || '';
+    $("useBackgroundMessage").hidden = !backgroundInfo?.suggestedMessage;
+    $("useBackgroundMessage").textContent = backgroundInfo?.suggestedMessage ? 'Use this line: “' + backgroundInfo.suggestedMessage.replace(/\n/g, ' ') + '”' : '';
+
     $("backgroundUploadStatus").textContent = d.backdrop.file
       ? "Using " + d.backdrop.file.name
       : "JPG, PNG or WebP · up to 20 MB. Fills the cookie behind your photo and words.";
