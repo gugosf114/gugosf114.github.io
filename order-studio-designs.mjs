@@ -25,6 +25,14 @@ export const backgrounds = [
   {"id": "red-tape", "name": "Red Tape", "color": "#f5e9e6", "ink": "#9a343b", "description": "Bureaucratic red ribbons and rubber-stamp energy.", "suggestedMessage": "Approved by\nabsolutely no one."},
   {"id": "main-character", "name": "Main Character", "color": "#f7e7d1", "ink": "#842d41", "description": "Theater curtains, gold stars, and your spotlight.", "suggestedMessage": "The plot revolves\naround me."},
   {"id": "zero-filter", "name": "Zero Filter", "color": "#282632", "ink": "#ffffff", "description": "Grown-up humor with caution stripes and unapologetic pink.", "suggestedMessage": "Fresh out\nof fucks."},
+  {"id": "tech-circuit", "name": "Circuit Board", "color": "#111d32", "ink": "#f3fbff", "accent": "#55ddd0", "description": "Crisp circuit traces and a deep navy canvas."},
+  {"id": "tech-blueprint", "name": "Blueprint", "color": "#e6f0f8", "ink": "#173a5c", "accent": "#4c8fbb", "description": "Fine engineering grids with clean technical corners."},
+  {"id": "tech-network", "name": "Neural Network", "color": "#241b3d", "ink": "#faf1ff", "accent": "#b98afa", "description": "Connected nodes and violet network lines."},
+  {"id": "tech-signal", "name": "Signal Flow", "color": "#103433", "ink": "#eafff5", "accent": "#6bebbc", "description": "Quiet signal waves and precision data points."},
+  {"id": "tech-prism", "name": "Prism", "color": "#edf1fa", "ink": "#324968", "accent": "#87a9dc", "description": "Layered geometric panels with a clean enterprise feel."},
+  {"id": "tech-orbit", "name": "Launch Orbit", "color": "#14233b", "ink": "#fff1c9", "accent": "#edc878", "description": "Orbital arcs and a restrained gold launch motif."},
+  {"id": "tech-terminal", "name": "Terminal", "color": "#122923", "ink": "#e1ffe9", "accent": "#7fdb9b", "description": "Green scan lines and code-bracket details."},
+  {"id": "tech-horizon", "name": "Digital Horizon", "color": "#173756", "ink": "#eaf5ff", "accent": "#74c7ea", "description": "Cool horizon curves and a bright forward-looking edge."},
   { id: "custom", name: "Your color", color: "#dceee5", ink: "#2b5747" },
 ];
 export const categories = [
@@ -854,11 +862,232 @@ const designCollections = {
     ]
   ]
 };
+categories.push({id:"corporate",name:"Corporate"});
+personalities.push({id:"professional",name:"Professional"});
+designCollections.corporate = [
+  [
+    "corporate-interns",
+    "Welcome interns",
+    "professional",
+    "tech-circuit",
+    "WELCOME,\nINTERNS.",
+    "bold",
+    [
+      "sweet"
+    ]
+  ],
+  [
+    "corporate-onboarding",
+    "Welcome aboard",
+    "professional",
+    "tech-prism",
+    "WELCOME\nABOARD.",
+    "clean",
+    [
+      "sweet"
+    ]
+  ],
+  [
+    "corporate-new-rules",
+    "New rules, same great team",
+    "professional",
+    "tech-blueprint",
+    "NEW RULES.\nSAME GREAT TEAM.",
+    "bold"
+  ],
+  [
+    "corporate-project-done",
+    "Project complete",
+    "professional",
+    "tech-signal",
+    "PROJECT\nCOMPLETE.",
+    "bold",
+    [
+      "bold"
+    ]
+  ],
+  [
+    "corporate-shipped",
+    "We shipped it",
+    "professional",
+    "tech-terminal",
+    "WE\nSHIPPED IT.",
+    "bold",
+    [
+      "bold"
+    ]
+  ],
+  [
+    "corporate-launch",
+    "Launch day",
+    "professional",
+    "tech-orbit",
+    "READY. SET.\nLAUNCH.",
+    "bold",
+    [
+      "bold"
+    ]
+  ],
+  [
+    "corporate-teamwork",
+    "Built together",
+    "professional",
+    "tech-network",
+    "BUILT\nTOGETHER.",
+    "clean",
+    [
+      "sweet"
+    ]
+  ],
+  [
+    "corporate-impact",
+    "You made an impact",
+    "professional",
+    "tech-prism",
+    "YOU MADE\nAN IMPACT.",
+    "clean",
+    [
+      "sweet"
+    ]
+  ],
+  [
+    "corporate-anniversary",
+    "Work anniversary",
+    "professional",
+    "tech-orbit",
+    "ANOTHER YEAR.\nA LASTING IMPACT.",
+    "classic",
+    [
+      "sweet"
+    ]
+  ],
+  [
+    "corporate-promotion",
+    "Promotion unlocked",
+    "professional",
+    "tech-circuit",
+    "PROMOTION\nUNLOCKED.",
+    "bold",
+    [
+      "bold"
+    ]
+  ],
+  [
+    "corporate-retirement",
+    "Out of office forever",
+    "professional",
+    "tech-horizon",
+    "OUT OF OFFICE.\nFOREVER.",
+    "clean",
+    [
+      "funny"
+    ]
+  ],
+  [
+    "corporate-legacy",
+    "Thank you for the legacy",
+    "professional",
+    "tech-orbit",
+    "YOUR LEGACY\nCONTINUES.",
+    "classic",
+    [
+      "sweet"
+    ]
+  ],
+  [
+    "corporate-office",
+    "A new place to build",
+    "professional",
+    "tech-blueprint",
+    "NEW OFFICE.\nNEW POSSIBILITIES.",
+    "clean",
+    [
+      "bold"
+    ]
+  ],
+  [
+    "corporate-hackathon",
+    "Hackathon fuel",
+    "professional",
+    "tech-terminal",
+    "BUILD. BREAK.\nSNACK. REPEAT.",
+    "bold",
+    [
+      "funny"
+    ]
+  ],
+  [
+    "corporate-offsite",
+    "Connect and recharge",
+    "professional",
+    "tech-horizon",
+    "CONNECT.\nRECHARGE.",
+    "clean",
+    [
+      "sweet"
+    ]
+  ],
+  [
+    "corporate-partners",
+    "Stronger together",
+    "professional",
+    "tech-network",
+    "STRONGER\nTOGETHER.",
+    "classic",
+    [
+      "sweet"
+    ]
+  ],
+  [
+    "corporate-milestone",
+    "Next milestone",
+    "professional",
+    "tech-signal",
+    "NEXT LEVEL.\nUNLOCKED.",
+    "bold",
+    [
+      "bold"
+    ]
+  ],
+  [
+    "corporate-quarter",
+    "Quarter closed",
+    "professional",
+    "tech-terminal",
+    "QUARTER CLOSED.\nCOOKIES OPEN.",
+    "clean",
+    [
+      "funny"
+    ]
+  ],
+  [
+    "corporate-holidays",
+    "Season’s greetings",
+    "professional",
+    "tech-prism",
+    "SEASON’S\nGREETINGS.",
+    "classic",
+    [
+      "sweet"
+    ]
+  ],
+  [
+    "corporate-leadership",
+    "Leading the way",
+    "professional",
+    "tech-circuit",
+    "LEADING\nTHE WAY.",
+    "bold",
+    [
+      "bold"
+    ]
+  ]
+];
 export const templates = Object.entries(designCollections).flatMap(([occasion, rows]) =>
   rows.map(([id, name, tone, bg, message, font = "clean", tags = []], index) => ({
     id, name, occasion, tone, bg, message, font, color: null,
     tones: [...new Set([tone, ...tags])],
-    shape: index % 5 === 4 ? "square" : "round",
+    shape: occasion === "corporate" ? (index % 3 === 0 ? "round" : "square") : (index % 5 === 4 ? "square" : "round"),
   }))
 );
 export const matchesPersonality = (design, tone) => tone === "all" || (design.tones || [design.tone]).includes(tone);
@@ -869,15 +1098,17 @@ export function createTemplate(id) {
   return {
     templateId: t.id,
     occasion: t.occasion,
-    backdrop: { id: b.id, color: b.color, image: null },
+    logoRequired: t.occasion === "corporate",
+    view: {zoom: t.occasion === "corporate" ? .4 : 1, x:0, y:t.occasion === "corporate" ? -.21 : 0, fit:t.occasion === "corporate" ? "contain" : "cover"},
+    backdrop: { id: b.id, color: b.color, accent: b.accent || null, image: null },
     text: {
       message: t.message,
       personalization: "",
       font: t.font,
       color: t.color || b.ink,
-      size: 0.095,
+      size: t.occasion === "corporate" ? .072 : .095,
       x: 0.5,
-      y: 0.5,
+      y: t.occasion === "corporate" ? .71 : .5,
     },
     shape: t.shape || "round",
   };
@@ -960,6 +1191,7 @@ export function drawBackground(ctx, size, backdrop) {
     );
     return;
   }
+  if (drawCorporateBackground(ctx, size, backdrop)) return;
   if (drawExtraBackground(ctx, size, id)) return;
   if (id === "rainbow" || id === "trans") {
     const colors =
@@ -1080,6 +1312,41 @@ export function drawBackground(ctx, size, backdrop) {
       ctx.stroke();
     }
   }
+}
+
+
+function drawCorporateBackground(ctx, size, backdrop) {
+  if (!backdrop?.id?.startsWith('tech-')) return false;
+  const id=backdrop.id,accent=backdrop.accent || backgrounds.find(b=>b.id===id)?.accent || '#74c7ea';
+  ctx.save();ctx.scale(size,size);
+  const line=(points,width=.003,alpha=1)=>{ctx.save();ctx.globalAlpha=alpha;ctx.strokeStyle=accent;ctx.lineWidth=width;ctx.lineCap='round';ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.stroke();ctx.restore();};
+  const node=(x,y,r=.009)=>{ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fillStyle=accent;ctx.fill();};
+  if(id==='tech-circuit'){
+    for(let i=0;i<7;i++){const y=.12+i*.125;line([[0,y],[.08,y],[.15,y+.04],[.2,y+.04]],.003,.7);node(.2,y+.04,.005);line([[1,y+.03],[.91,y+.03],[.84,y-.02],[.79,y-.02]],.003,.7);node(.79,y-.02,.005);}
+    line([[.18,1],[.18,.92],[.3,.92],[.33,.88]],.004,.7);line([[.8,0],[.8,.06],[.69,.06]],.004,.7);
+  }else if(id==='tech-blueprint'){
+    for(let i=0;i<=20;i++){line([[i/20,0],[i/20,1]],i%5?.001:.002,i%5?.18:.4);line([[0,i/20],[1,i/20]],i%5?.001:.002,i%5?.18:.4);}
+    line([[.06,.27],[.06,.07],[.26,.07]],.008);line([[.94,.73],[.94,.93],[.74,.93]],.008);
+  }else if(id==='tech-network'){
+    const points=[[.05,.18],[.18,.08],[.2,.36],[.07,.53],[.18,.78],[.06,.91],[.38,.94],[.62,.95],[.83,.83],[.96,.64],[.8,.41],[.95,.18],[.72,.08]];
+    for(let i=0;i<points.length;i++){line([points[i],points[(i+1)%points.length]],.003,.55);if(i%2===0)line([points[i],points[(i+2)%points.length]],.002,.25);node(...points[i],i%3?.008:.012);}
+  }else if(id==='tech-signal'){
+    for(let j=0;j<4;j++){const pts=[];for(let i=0;i<=100;i++){const x=i/100;pts.push([x,.86+j*.025+Math.sin(x*22+j)*.016]);}line(pts,.002,.35+j*.12);}
+    line([[.07,.4],[.07,.3],[.11,.3],[.11,.2],[.15,.2],[.15,.08]],.006,.8);line([[.85,.12],[.85,.22],[.89,.22],[.89,.32],[.93,.32],[.93,.42]],.006,.8);
+  }else if(id==='tech-prism'){
+    const triangles=[[[0,0],[.38,0],[0,.48]],[[1,0],[.69,0],[1,.42]],[[0,1],[.28,1],[0,.68]],[[1,1],[.63,1],[1,.58]]];
+    triangles.forEach((points,i)=>{ctx.save();ctx.globalAlpha=.15+i*.07;ctx.fillStyle=accent;ctx.beginPath();points.forEach(([x,y],j)=>j?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.fill();ctx.restore();});line([[0,.21],[.2,0]],.008,.7);line([[.76,1],[1,.76]],.008,.7);
+  }else if(id==='tech-orbit'){
+    for(let i=0;i<4;i++){ctx.beginPath();ctx.ellipse(.5,.5,.42+i*.025,.44+i*.012,-.45,Math.PI*.02,Math.PI*1.95);ctx.strokeStyle=accent;ctx.globalAlpha=.18+i*.09;ctx.lineWidth=.002;ctx.stroke();}ctx.globalAlpha=1;node(.16,.19,.014);node(.82,.82,.009);node(.76,.09,.006);
+  }else if(id==='tech-terminal'){
+    for(let i=0;i<35;i++)line([[0,i/35],[1,i/35]],.001,.12);
+    line([[.14,.11],[.08,.11],[.08,.3],[.14,.3]],.008,.8);line([[.86,.7],[.92,.7],[.92,.89],[.86,.89]],.008,.8);
+    for(let i=0;i<6;i++){line([[.12+i*.07,.93],[.15+i*.07,.93]],.01,i%2?.45:.8);}
+  }else if(id==='tech-horizon'){
+    for(let i=0;i<8;i++){const pts=[];for(let j=0;j<=40;j++){const x=j/40;pts.push([x,.87+i*.015-Math.sin(x*Math.PI)*(.06+i*.009)]);}line(pts,.002,.2+i*.065);}
+    line([[.08,.2],[.18,.1],[.31,.1]],.005,.7);line([[.68,.09],[.84,.09],[.94,.19]],.005,.7);
+  }
+  ctx.restore();return true;
 }
 
 // Borders and motifs are drawn separately from the customer's editable words.

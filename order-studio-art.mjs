@@ -1,4 +1,4 @@
-import { drawBackground, drawWords } from "./order-studio-designs.mjs?v=backgrounds-15";
+import { drawBackground, drawWords } from "./order-studio-designs.mjs?v=corporate-20";
 // All positions use the same normalized print square for preview and saved artwork.
 export function photoRect(width, height, view) {
   const scale =
@@ -65,6 +65,10 @@ export function drawArtwork(target, design) {
   shapePath(ctx, design.shape, 0, 0, size);
   ctx.clip();
   drawBackground(ctx, size, design.backdrop);
+  if (design.logoRequired) {
+    ctx.beginPath();ctx.roundRect(.24*size,.10*size,.52*size,.38*size,.035*size);
+    ctx.fillStyle='#ffffff';ctx.fill();
+  }
   if (design.source) {
     const r = photoRect(design.source.width, design.source.height, {
       ...design.view,
@@ -124,6 +128,10 @@ export function drawCookie(target, design) {
   ctx.lineWidth = s * 0.003;
   ctx.stroke();
   ctx.restore();
+  if (design.logoRequired && !design.source) {
+    ctx.save();ctx.fillStyle='#7e8da0';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.font='600 '+(.038*s)+'px Arial';ctx.fillText('YOUR LOGO',.5*s,(.089+.812*.29)*s);ctx.restore();
+  }
 }
 export function blobOf(target) {
   return new Promise((resolve, reject) =>

@@ -9,8 +9,8 @@ import {
   messageSuggestions,
   suggestAiMessages,
   drawBackground,
-} from "./order-studio-designs.mjs?v=backgrounds-15";
-import { drawCookie, canvas } from "./order-studio-art.mjs?v=backgrounds-15";
+} from "./order-studio-designs.mjs?v=corporate-20";
+import { drawCookie, canvas } from "./order-studio-art.mjs?v=corporate-20";
 
 export function initComposer(api) {
   const $ = (id) => document.getElementById(id);
@@ -51,7 +51,7 @@ export function initComposer(api) {
     $("templateGrid").replaceChildren();
     const collection = templates.filter(t => occasion === "all" || t.occasion === occasion);
     const results = collection.filter(t => matchesPersonality(t, tone));
-    $("catalogSummary").textContent = results.length + " designs" + (occasion === "all" ? " across 6 categories" : " · " + categories.find(c => c.id === occasion).name);
+    $("catalogSummary").textContent = results.length + " designs" + (occasion === "all" ? " across " + categories.length + " categories" : " · " + categories.find(c => c.id === occasion).name);
     $("edgyNote").hidden = occasion !== "edgy" && tone !== "edgy";
     $("catalogEmpty").hidden = results.length !== 0;
     thumbnailObserver = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
@@ -160,6 +160,7 @@ export function initComposer(api) {
         d.backdrop = {
           id: background.id,
           color: background.color,
+          accent: background.accent || null,
           image: null,
         };
         d.text.color = background.ink;
@@ -223,6 +224,8 @@ export function initComposer(api) {
       api.setBusy(false);
     }
   });
+  $("corporateUploadLogo").addEventListener('click',()=>api.addPhoto());
+  $("corporateBrandColor").addEventListener('input',()=>change(d=>{d.backdrop.accent=$('corporateBrandColor').value;}));
   $("composeAddPhoto").addEventListener("click", () => api.addPhoto());
   $("composeEditPhoto").addEventListener("click", () => api.open("shape"));
   $("composeRemovePhoto").addEventListener("click", () => {
@@ -315,6 +318,10 @@ export function initComposer(api) {
   });
   function refresh() {
     const d = draft();
+    $("corporateLogoTools").hidden = d.occasion !== 'corporate';
+    $("corporateUploadLogo").textContent = d.original ? 'Replace company logo' : 'Upload company logo';
+    $("corporateLogoStatus").textContent = d.original ? 'Your logo is in place. All wording stays editable.' : 'Add your logo to continue. PNG, JPG or WebP.';
+    $("corporateBrandColor").value = d.backdrop.accent || '#55ddd0';
     for (const [id, [key]] of Object.entries(bindings))
       $(id).value = ["size", "x", "y"].includes(key)
         ? Math.round(d.text[key] * 100)
@@ -330,7 +337,7 @@ export function initComposer(api) {
       ? "Using " + d.backdrop.file.name
       : "JPG, PNG or WebP · up to 20 MB. Fills the cookie behind your photo and words.";
     $("personalizationLabel").textContent =
-      d.occasion === "anniversary"
+      d.occasion === "corporate" ? "Company, team, date, or milestone" : d.occasion === "anniversary"
         ? "Names, a date, or your own little extra"
         : d.occasion === "birthday"
           ? "A name, age, or your own little extra"
@@ -351,6 +358,12 @@ export function initComposer(api) {
     $("composePhotoHint").textContent = d.original
       ? "Your photo is part of this design. Crop it, remove its background, or try another."
       : "A picture is optional. A face, a pet, or a favorite moment makes it personal.";
+    if (d.occasion === 'corporate') {
+      $("composeAddPhoto").textContent = d.original ? 'Replace company logo' : 'Upload company logo';
+      $("composePhotoHint").textContent = 'Add your company logo. It starts fitted above the message, and you can resize or reposition it.';
+    }
+    $("composeEditPhoto").textContent = d.occasion === 'corporate' ? 'Resize or clean up logo' : 'Crop or remove its background';
+    $("composeRemovePhoto").textContent = d.occasion === 'corporate' ? 'Remove logo' : 'Remove photo from design';
     chooseTab(tab);
   }
   return {

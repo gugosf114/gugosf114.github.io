@@ -6,10 +6,10 @@ import {
   cookiePoint,
   quantities,
   blobOf,
-} from "./order-studio-art.mjs?v=backgrounds-15";
+} from "./order-studio-art.mjs?v=corporate-20";
 import { cutSubject } from "./order-studio-cutout.mjs";
-import { createTemplate } from "./order-studio-designs.mjs?v=backgrounds-15";
-import { initComposer } from "./order-studio-compose.mjs?v=backgrounds-15";
+import { createTemplate } from "./order-studio-designs.mjs?v=corporate-20";
+import { initComposer } from "./order-studio-compose.mjs?v=corporate-20";
 import { initPackagingFilm } from "./order-packaging-film.mjs?v=film-loop-1";
 
 const $ = (id) => document.getElementById(id);
@@ -171,6 +171,7 @@ function setBusy(value, title = "Preparing your photo…", detail = "") {
 function canContinue() {
   if (step === "upload") return true;
   if (!hasDesign()) return false;
+  if (step === "personalize" && current().logoRequired && !current().original) return false;
   if (step === "background") return !!current().background && !selectingSubject;
   if (step === "delivery")
     return quote().ready && designs.every((d) => d.approved);
@@ -310,7 +311,7 @@ function render() {
           : "Brush to bring your photo back"
         : hasDesign(d)
           ? "Your cookie, as you make it"
-          : "90 designs. Make one yours.";
+          : "110 designs. Make one yours.";
   $("previewStatus").textContent = originalVisible
     ? "Original upload"
     : selectingSubject
@@ -521,6 +522,11 @@ async function readPhoto(file) {
       d.text = old.text;
       d.templateId = old.templateId;
       d.occasion = old.occasion;
+      d.logoRequired = old.logoRequired;
+      if (d.occasion === 'corporate') {
+        d.shape = old.shape;
+        d.view = {zoom:.4,x:0,y:-.21,fit:'contain'};
+      }
     }
     preserveComposition = false;
     if (old.thumbnail) URL.revokeObjectURL(old.thumbnail);
@@ -746,13 +752,13 @@ $("zoom").addEventListener("input", () => {
 });
 $("fitPhoto").addEventListener("click", () => {
   originalVisible = false;
-  current().view = { zoom: 1, x: 0, y: 0, fit: "contain" };
+  current().view = current().logoRequired ? {zoom:.4,x:0,y:-.21,fit:"contain"} : { zoom: 1, x: 0, y: 0, fit: "contain" };
   invalidate();
   render();
 });
 $("resetPosition").addEventListener("click", () => {
   originalVisible = false;
-  current().view = { zoom: 1, x: 0, y: 0, fit: "cover" };
+  current().view = current().logoRequired ? {zoom:.4,x:0,y:-.21,fit:"contain"} : { zoom: 1, x: 0, y: 0, fit: "cover" };
   invalidate();
   render();
 });
@@ -960,6 +966,7 @@ window.addEventListener("resize", render);
 
 async function approve() {
   const d = current();
+  if (d.logoRequired && !d.original) throw new Error("Add your company logo before approving this corporate design.");
   if (!hasDesign(d) || (d.original && !d.background))
     throw new Error("Finish your photo design first.");
   if (d.approved) return;
