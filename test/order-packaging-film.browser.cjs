@@ -13,7 +13,7 @@ const assert = require("node:assert/strict"),
   p.on("request", (r) => requests.push(r.url()));
   await p.route("**/googletagmanager.com/**", (r) => r.fulfill({ body: "" }));
   const url = process.env.STUDIO_URL,
-    out = path.join(require("node:os").tmpdir(), "mbc-native-film");
+    out = path.join(require("node:os").tmpdir(), "mbc-autoplay-film");
   fs.mkdirSync(out, { recursive: true });
   const shot = (n) =>
     p.screenshot({
@@ -21,120 +21,86 @@ const assert = require("node:assert/strict"),
       fullPage: true,
       animations: "disabled",
     });
-  const seek = async (t) =>
-    p.evaluate(
-      (t) =>
-        new Promise((resolve) => {
-          const v = document.getElementById("packagingVideo");
-          v.addEventListener("seeked", resolve, { once: true });
-          window.__mbcPackagingFilm.seek(t);
-          if (!v.seeking) resolve();
-        }),
-      t,
-    );
   try {
     await p.setViewportSize({ width: 1440, height: 1000 });
     await p.goto(url);
-    await p.waitForFunction(
-      () => window.__mbcPackagingFilm?.state === "playing",
+    await p.waitForFunction(() => window.__mbcPackagingFilm?.time > 0.5);
+    assert.equal(
+      await p
+        .locator(
+          "#packagingLaunch,#packagingWatch,#packagingPlay,#packagingSkip,#packagingSeek,.packaging-controls",
+        )
+        .count(),
+      0,
     );
-    await p.waitForFunction(() => window.__mbcPackagingFilm.time > 0.4);
-    const info = await p.locator("#packagingVideo").evaluate((v) => ({
-      duration: v.duration,
-      width: v.videoWidth,
-      height: v.videoHeight,
-    }));
+    const info = await p
+      .locator("#packagingVideo")
+      .evaluate((v) => ({
+        duration: v.duration,
+        width: v.videoWidth,
+        controls: v.controls,
+        muted: v.muted,
+        loop: v.loop,
+      }));
     assert.equal(info.duration, 16);
     assert.equal(info.width, 1080);
-    assert.equal(info.height, 1080);
+    assert.equal(info.controls, false);
+    assert.equal(info.muted, true);
+    assert.equal(info.loop, false);
     assert.equal(
       requests.some((x) => x.includes("/vendor/three/")),
       false,
-      "video playback never loads WebGL",
     );
-    for (const [n, t] of [
-      ["01-cookie", 1],
-      ["02-wrapped", 5.5],
-      ["03-box", 11.8],
-      ["04-end", 16],
-    ]) {
-      await seek(t);
-      await shot(n);
-    }
-    console.log(
-      "End seek state",
-      await p
-        .locator("#packagingVideo")
-        .evaluate((v) => ({
-          time: v.currentTime,
-          duration: v.duration,
-          paused: v.paused,
-          ended: v.ended,
-          state: window.__mbcPackagingFilm.state,
-        })),
-    );
-    assert.equal(
-      await p.evaluate(() => window.__mbcPackagingFilm.state),
-      "ended",
-    );
-    await p.locator("#packagingPlay").click();
+    await shot("01-desktop-autoplay");
     await p.waitForFunction(
       () => window.__mbcPackagingFilm.state === "ended",
       null,
-      { timeout: 24000 },
+      { timeout: 23000 },
     );
+    await p.waitForTimeout(700);
+    assert.ok(
+      (await p.locator("#packagingVideo").evaluate((v) => v.currentTime)) >
+        15.9,
+    );
+    await shot("02-final-frame");
     console.log(
-      "Native playback:",
+      "Full autoplay:",
       await p.evaluate(() => window.__mbcPackagingFilm.stats),
     );
-    await seek(8);
-    await p.locator("#packagingPlay").click();
-    await p.waitForFunction(() => window.__mbcPackagingFilm.time > 8.1);
-    assert.ok((await p.evaluate(() => window.__mbcPackagingFilm.time)) < 10);
     await p.locator("#browseDesigns").click();
     await p.waitForFunction(() => document.body.dataset.step === "templates");
-    assert.equal(await p.locator("#packagingFilm").isVisible(), false);
     assert.equal(await p.locator("#packagingVideo").getAttribute("src"), null);
+    await p.locator("#backButton").click();
+    await p.waitForFunction(() => document.body.dataset.step === "upload");
+    await p.waitForTimeout(500);
+    assert.equal(
+      await p.locator("#packagingFilm").isVisible(),
+      false,
+      "returning to Start does not replay",
+    );
+    await p.setViewportSize({ width: 390, height: 844 });
     await p.emulateMedia({ reducedMotion: "reduce" });
     await p.goto(url);
-    await p.waitForFunction(() => !!window.__mbcPackagingFilm);
-    await p.waitForTimeout(900);
-    assert.equal(await p.locator("#packagingVideo").getAttribute("src"), null);
-    assert.equal(await p.locator("#packagingWatch").isVisible(), true);
-    await shot("05-obvious-play");
-    await p.locator("#packagingWatch").click();
-    await p.waitForFunction(
-      () => window.__mbcPackagingFilm.state === "playing",
-    );
-    await p.locator("#packagingSkip").click();
-    await p.setViewportSize({ width: 390, height: 844 });
-    await p.goto(url);
-    await p.waitForFunction(() => !!window.__mbcPackagingFilm);
-    await p.locator("#packagingLaunch").click();
-    await p.waitForFunction(
-      () => window.__mbcPackagingFilm.state === "playing",
-    );
-    await seek(11.8);
-    await shot("06-mobile");
-    await p.locator("#packagingSkip").click();
+    await p.waitForFunction(() => window.__mbcPackagingFilm.time > 0.5);
+    assert.equal(await p.locator("#packagingFilm").isVisible(), true);
+    await shot("03-mobile-autoplay");
     assert.equal(
       await p.evaluate(
         () => document.documentElement.scrollWidth <= innerWidth,
       ),
       true,
     );
+    await p.locator("#makeOwn").click();
+    await p.waitForFunction(() => document.body.dataset.step === "personalize");
+    assert.equal(await p.locator("#packagingVideo").getAttribute("src"), null);
     const fail = await b.contexts()[0].newPage();
     await fail.setViewportSize({ width: 1440, height: 1000 });
-    await fail.emulateMedia({ reducedMotion: "reduce" });
     await fail.route("**/cookie-packaging.mp4", (r) => r.abort());
     await fail.goto(url);
-    await fail.waitForFunction(() => !!window.__mbcPackagingFilm);
-    await fail.locator("#packagingWatch").click();
-    await fail.locator("#packagingError").waitFor();
-    assert.equal(
-      await fail.locator("#packagingError a").getAttribute("href"),
-      "media/packaging-preview.html",
+    await fail.waitForFunction(
+      () => window.__mbcPackagingFilm?.state === "unavailable",
     );
+    assert.equal(await fail.locator("#packagingFilm").isVisible(), false);
     await fail.locator("#browseDesigns").click();
     await fail.waitForFunction(
       () => document.body.dataset.step === "templates",
@@ -144,16 +110,18 @@ const assert = require("node:assert/strict"),
     console.log(
       JSON.stringify({
         passed: true,
-        format: "H.264 MP4",
-        seconds: 16,
-        dimensions: "1080x1080",
+        checks: [
+          "desktop autoplay without controls",
+          "full silent playback",
+          "last frame holds",
+          "no replay on return",
+          "mobile autoplay",
+          "editor handoff",
+          "failed video leaves ordering usable",
+        ],
         screenshots: out,
       }),
     );
-  } catch (e) {
-    await shot("failure").catch(() => {});
-    console.log("Errors", errors);
-    throw e;
   } finally {
     await p.close({ runBeforeUnload: false });
     await b.close();

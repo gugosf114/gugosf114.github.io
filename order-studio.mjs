@@ -10,7 +10,7 @@ import {
 import { cutSubject } from "./order-studio-cutout.mjs";
 import { createTemplate } from "./order-studio-designs.mjs";
 import { initComposer } from "./order-studio-compose.mjs";
-import { initPackagingFilm } from "./order-packaging-film.mjs";
+import { initPackagingFilm } from "./order-packaging-film.mjs?v=autoplay-1";
 
 const $ = (id) => document.getElementById(id);
 const panels = [...document.querySelectorAll("[data-panel]")];
