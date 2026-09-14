@@ -26,3 +26,22 @@ test('portrait tablets stack instead of crushing the photo column', async () => 
   assert.match(html, /@media \(min-width: 721px\) and \(max-width: 1100px\) and \(orientation: portrait\)/);
   assert.match(html, /grid-template-areas: "copy" "stage" "promises"/);
 });
+
+test('showcase slideshow keeps the approved four-image order', async () => {
+  const html = await readFile(new URL('../buy-now.html', import.meta.url), 'utf8');
+  const paths = [
+    'baby-photo-birthday-cookies-san-francisco.webp',
+    'Mario cookies.jpeg',
+    'owl-birthday-photo-cookies-bay-area.webp',
+    'custom-portrait-photo-cookies-celebration.webp',
+  ];
+  let last = -1;
+  for (const path of paths) {
+    const next = html.indexOf("src: 'images/gallery/printed/" + path + "'");
+    assert.ok(next > last, `${path} is present in the chosen order`);
+    last = next;
+  }
+  assert.equal((html.match(/data-showcase-slide=/g) || []).length, 4);
+  assert.match(html, /Pause cookie slideshow/);
+  assert.match(html, /prefers-reduced-motion: reduce/);
+});
