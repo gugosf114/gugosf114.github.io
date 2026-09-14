@@ -24,7 +24,8 @@ export function initPackagingFilm({ getArtwork, canPlay }) {
     paintedAt = 0,
     hasPlayed = false,
     unavailable = false,
-    framesRendered = 0;
+    framesRendered = 0,
+    autoPending = false;
   const words = {
     cookie: ["A little cookie.", "Your idea, printed on icing."],
     wrap: ["Wrapped one by one.", "A clear sleeve for every cookie."],
@@ -100,7 +101,12 @@ export function initPackagingFilm({ getArtwork, canPlay }) {
   async function start(manual = true) {
     if (!canPlay() || unavailable) return;
     if (!manual && (reduced.matches || mobile.matches || hasPlayed)) return;
+    if (!manual && (document.hidden || !visible)) {
+      autoPending = true;
+      return;
+    }
     if (loading) return;
+    autoPending = false;
     clearTimeout(autoTimer);
     cancelAnimationFrame(raf);
     raf = 0;
@@ -156,6 +162,7 @@ export function initPackagingFilm({ getArtwork, canPlay }) {
     document.body.classList.remove("packaging-mobile");
     launch.disabled = false;
     ui(unavailable ? "unavailable" : "idle");
+    autoPending = false;
   }
   play.addEventListener("click", () => {
     if (state === "playing") pause();
@@ -188,6 +195,8 @@ export function initPackagingFilm({ getArtwork, canPlay }) {
         wasPlaying = true;
         pause();
       }
+    } else if (autoPending && canPlay()) {
+      start(false);
     } else if (wasPlaying && state === "paused" && scene && canPlay()) {
       wasPlaying = false;
       last = 0;

@@ -2281,7 +2281,8 @@ body[data-step="ai"] .workspace-preview {
   margin: 0;
   accent-color: #cb2366;
 }
-.packaging-film[data-state="loading"] .packaging-controls {
+.packaging-film[data-state="loading"] #packagingPlay,
+.packaging-film[data-state="loading"] #packagingSeek {
   visibility: hidden;
 }
 .packaging-film[data-state="loading"] .packaging-caption {
