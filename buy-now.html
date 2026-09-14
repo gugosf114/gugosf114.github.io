@@ -7,15 +7,15 @@
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
     <meta name="theme-color" content="#f8f9fc" />
-    <title>Your photo. Your cookie. | My Baking Creations</title>
+    <title>Say it on a cookie. | My Baking Creations</title>
     <meta
       name="description"
-      content="Make your own photo cookies, one easy step at a time. Upload, shape, edit and approve your design before you pay. From $60 for 12 cookies."
+      content="Choose a ready-made cookie design or make your own with backgrounds, photos and editable words. Approve your exact print before you pay. From $60 for 12."
     />
     <link rel="canonical" href="https://mybakingcreations.com/buy-now" />
     <meta
       property="og:title"
-      content="Your photo. Your cookie. | My Baking Creations"
+      content="Say it on a cookie. | My Baking Creations"
     />
     <meta
       property="og:description"
@@ -35,7 +35,7 @@
       {
         "@context": "https://schema.org",
         "@type": "Product",
-        "name": "Custom printed photo cookies",
+        "name": "Custom printed cookies",
         "description": "Your photo printed on freshly baked butter cookies with white royal icing. Gift box and individual wrapping included. Minimum 12 cookies.",
         "brand": { "@type": "Brand", "name": "My Baking Creations" },
         "offers": {
@@ -69,7 +69,7 @@
       >
       <nav class="journey" aria-label="Your order progress">
         <ol>
-          <li aria-current="step"><span>1</span>Photo</li>
+          <li aria-current="step"><span>1</span>Start</li>
           <li><span>2</span>Design</li>
           <li><span>3</span>Review</li>
           <li><span>4</span>Delivery</li>
@@ -93,6 +93,35 @@
           Let's make yours.
         </p>
         <div class="step-panel" data-panel="upload">
+          <div class="start-paths">
+            <button class="start-path" id="browseDesigns" type="button">
+              <span class="path-symbol" aria-hidden="true">✳</span
+              ><span
+                ><strong>Choose a design</strong
+                ><small>A good idea, already made. Make it yours.</small></span
+              ><b aria-hidden="true">↗</b>
+            </button>
+            <button class="start-path" id="makeOwn" type="button">
+              <span class="path-symbol" aria-hidden="true">＋</span
+              ><span
+                ><strong>Make my own</strong
+                ><small>Your background. Your words. Your cookie.</small></span
+              ><b aria-hidden="true">↗</b>
+            </button>
+            <button class="start-path ai-path" id="startAi" type="button">
+              <span class="path-symbol" aria-hidden="true">✧</span
+              ><span
+                ><strong>Help me find the words <em>AI · optional</em></strong
+                ><small
+                  >Tell us about them. Get three message ideas.</small
+                ></span
+              ><b aria-hidden="true">↗</b>
+            </button>
+          </div>
+          <button class="text-button" id="resumeDesign" type="button" hidden>
+            Continue my design
+          </button>
+          <p class="upload-divider">Already have a picture?</p>
           <button class="upload-zone" id="uploadButton" type="button">
             <span class="upload-icon" aria-hidden="true"
               ><svg
@@ -116,8 +145,259 @@
             </p>
           </div>
         </div>
+        <div class="step-panel" data-panel="templates" hidden>
+          <div
+            class="catalog-filters"
+            id="occasionFilters"
+            role="group"
+            aria-label="Occasion"
+          >
+            <button type="button" data-occasion="all" aria-pressed="true">
+              All designs</button
+            ><button
+              type="button"
+              data-occasion="birthday"
+              aria-pressed="false"
+            >
+              Birthday</button
+            ><button
+              type="button"
+              data-occasion="anniversary"
+              aria-pressed="false"
+            >
+              Anniversary</button
+            ><button type="button" data-occasion="thanks" aria-pressed="false">
+              Thank you
+            </button>
+          </div>
+          <div class="tone-filter">
+            <label for="catalogTone">Show me</label
+            ><select id="catalogTone">
+              <option value="all">Every personality</option>
+              <option value="sweet">Something sweet</option>
+              <option value="funny">Something funny</option>
+              <option value="bold">Something bold</option>
+            </select>
+          </div>
+          <div class="template-grid" id="templateGrid"></div>
+          <p class="quiet-note">
+            Use any design as it is, or change every word and color. $5 per
+            cookie, minimum 12.
+          </p>
+        </div>
+        <div class="step-panel" data-panel="personalize" hidden>
+          <div class="compose-shapes" id="composeShapeMount"></div>
+          <div
+            class="compose-tabs"
+            role="group"
+            aria-label="What would you like to change?"
+          >
+            <button type="button" data-compose-tab="words" aria-pressed="true">
+              Words</button
+            ><button
+              type="button"
+              data-compose-tab="backdrop"
+              aria-pressed="false"
+            >
+              Background</button
+            ><button
+              type="button"
+              data-compose-tab="photo"
+              aria-pressed="false"
+            >
+              Photo
+            </button>
+          </div>
+          <div data-compose-panel="words">
+            <label class="field-label" for="designMessage"
+              >What should it say?</label
+            ><textarea
+              id="designMessage"
+              rows="3"
+              maxlength="120"
+              placeholder="Say it on a cookie."
+              aria-describedby="textFitNote"
+            ></textarea>
+            <label
+              class="field-label"
+              id="personalizationLabel"
+              for="designPersonalization"
+              >Add a name or a little extra</label
+            ><input
+              id="designPersonalization"
+              type="text"
+              maxlength="50"
+              placeholder="Alex · 8, or something only they’d get"
+            />
+            <div class="compose-field-row">
+              <div>
+                <label class="field-label" for="designFont">Lettering</label
+                ><select id="designFont">
+                  <option value="clean">Clean</option>
+                  <option value="classic">Classic</option>
+                  <option value="bold">Bold</option>
+                </select>
+              </div>
+              <div>
+                <label class="field-label" for="designTextColor"
+                  >Text color</label
+                ><input id="designTextColor" type="color" value="#382b42" />
+              </div>
+            </div>
+            <label class="field-label" for="designTextSize">Text size</label
+            ><input
+              id="designTextSize"
+              type="range"
+              min="4"
+              max="14"
+              step=".5"
+              value="9"
+            />
+            <div class="text-placement">
+              <span>Position</span
+              ><button type="button" data-text-place="top">Top</button
+              ><button type="button" data-text-place="middle">Middle</button
+              ><button type="button" data-text-place="bottom">Bottom</button>
+            </div>
+            <details class="fine-position">
+              <summary>Fine-tune position</summary>
+              <label for="designTextX">Left / right</label
+              ><input
+                id="designTextX"
+                type="range"
+                min="22"
+                max="78"
+                value="50"
+              /><label for="designTextY">Up / down</label
+              ><input
+                id="designTextY"
+                type="range"
+                min="17"
+                max="83"
+                value="50"
+              />
+            </details>
+            <p class="file-note" id="textFitNote">
+              Long messages automatically fit inside the cookie. Every word
+              stays editable.
+            </p>
+            <button class="text-button" id="showMessageIdeas" type="button">
+              Show me a few ready-made lines
+            </button>
+            <div id="messageIdeas" class="message-ideas" hidden></div>
+          </div>
+          <div data-compose-panel="backdrop" hidden>
+            <p class="quiet-note">
+              A color, a pattern, or a little bit of who you are.
+            </p>
+            <div
+              class="background-grid"
+              id="backgroundGrid"
+              role="group"
+              aria-label="Cookie backgrounds"
+            ></div>
+            <div class="compose-field-row">
+              <div>
+                <label class="field-label" for="designBackgroundColor"
+                  >Your color</label
+                ><input
+                  id="designBackgroundColor"
+                  type="color"
+                  value="#fffdf8"
+                />
+              </div>
+              <button class="text-button" type="button" id="uploadBackground">
+                Upload my own background
+              </button>
+            </div>
+            <p class="file-note" id="backgroundUploadStatus">
+              JPG, PNG or WebP · up to 20 MB. The picture fills the cookie
+              behind your photo and words.
+            </p>
+          </div>
+          <div data-compose-panel="photo" hidden>
+            <p class="quiet-note" id="composePhotoHint">
+              A picture is optional. A face, a pet, or a favorite moment makes
+              it personal.
+            </p>
+            <div class="photo-compose-actions">
+              <button class="choice" type="button" id="composeAddPhoto">
+                Add a photo</button
+              ><button
+                class="text-button"
+                type="button"
+                id="composeEditPhoto"
+                hidden
+              >
+                Crop or remove its background</button
+              ><button
+                class="text-button"
+                type="button"
+                id="composeRemovePhoto"
+                hidden
+              >
+                Remove photo from design
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="step-panel" data-panel="ai" hidden>
+          <p class="ai-disclosure">
+            Optional AI writing help. Only the words you enter here are sent to
+            our AI service. Your photos are not sent.
+          </p>
+          <label class="field-label" for="aiBrief"
+            >Tell us about the person or occasion</label
+          ><textarea
+            id="aiBrief"
+            maxlength="500"
+            rows="3"
+            placeholder="My friend’s birthday. She loves gardening and terrible puns."
+          ></textarea>
+          <div class="compose-field-row">
+            <div>
+              <label class="field-label" for="aiOccasion">Occasion</label
+              ><select id="aiOccasion">
+                <option value="birthday">Birthday</option>
+                <option value="anniversary">Anniversary</option>
+                <option value="thanks">Thank you</option>
+              </select>
+            </div>
+            <div>
+              <label class="field-label" for="aiTone">Personality</label
+              ><select id="aiTone">
+                <option value="funny">Gently funny</option>
+                <option value="sweet">Warm & sweet</option>
+                <option value="bold">Big & celebratory</option>
+              </select>
+            </div>
+          </div>
+          <label class="field-label" for="aiAudience">Who is it for?</label
+          ><select id="aiAudience">
+            <option value="all ages">All ages</option>
+            <option value="child">A child</option>
+            <option value="teen">A teenager</option>
+            <option value="adult">An adult</option>
+          </select>
+          <button
+            class="primary ai-generate"
+            id="generateAiWords"
+            type="button"
+          >
+            Suggest three messages
+          </button>
+          <p class="file-note" id="aiStatus" role="status">
+            Choose a suggestion to start a design. You can rewrite every word.
+          </p>
+          <div id="aiSuggestions" class="ai-suggestions"></div>
+        </div>
         <div class="step-panel" data-panel="shape" hidden>
-          <div class="shape-options" role="group" aria-label="Cookie shape">
+          <div
+            class="shape-options"
+            id="shapeChoices"
+            role="group"
+            aria-label="Cookie shape"
+          >
             <button
               class="shape-choice"
               data-shape="round"
@@ -273,6 +553,9 @@
               </p>
             </div>
           </div>
+          <button class="text-button" id="editComposition" type="button">
+            Change words or background
+          </button>
           <button class="text-button" id="editDesign" type="button">
             Make an adjustment
           </button>
@@ -526,6 +809,12 @@
         </button>
       </div>
     </footer>
+    <input
+      id="backgroundUpload"
+      type="file"
+      accept="image/jpeg,image/png,image/webp"
+      hidden
+    />
     <input
       id="logoUpload"
       type="file"

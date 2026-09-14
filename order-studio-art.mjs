@@ -1,3 +1,4 @@
+import { drawBackground, drawWords } from "./order-studio-designs.mjs";
 // All positions use the same normalized print square for preview and saved artwork.
 export function photoRect(width, height, view) {
   const scale =
@@ -63,8 +64,7 @@ export function drawArtwork(target, design) {
   ctx.save();
   shapePath(ctx, design.shape, 0, 0, size);
   ctx.clip();
-  ctx.fillStyle = "#fffdf8";
-  ctx.fillRect(0, 0, size, size);
+  drawBackground(ctx, size, design.backdrop);
   if (design.source) {
     const r = photoRect(design.source.width, design.source.height, {
       ...design.view,
@@ -78,6 +78,7 @@ export function drawArtwork(target, design) {
       r.h * size,
     );
   }
+  drawWords(ctx, size, design.text, design.shape);
   ctx.restore();
 }
 export function drawCookie(target, design) {

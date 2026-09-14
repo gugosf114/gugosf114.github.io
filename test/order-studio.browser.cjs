@@ -69,6 +69,7 @@ fs.mkdirSync(OUT, { recursive: true });
     await page.screenshot({
       path: path.join(OUT, name + ".png"),
       fullPage: true,
+      animations: "disabled",
     });
   };
   try {

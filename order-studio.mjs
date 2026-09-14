@@ -8,11 +8,16 @@ import {
   blobOf,
 } from "./order-studio-art.mjs";
 import { cutSubject } from "./order-studio-cutout.mjs";
+import { createTemplate } from "./order-studio-designs.mjs";
+import { initComposer } from "./order-studio-compose.mjs";
 
 const $ = (id) => document.getElementById(id);
 const panels = [...document.querySelectorAll("[data-panel]")];
 const steps = [
   "upload",
+  "templates",
+  "personalize",
+  "ai",
   "shape",
   "background",
   "finish",
@@ -23,9 +28,30 @@ const steps = [
 const copy = {
   upload: [
     "Made by you. Baked by us.",
-    "A little cookie.<br>A lot of you.",
-    "Turn a favorite photo into something they can hold, share, and eat. Let's make yours.",
-    "Choose your photo",
+    "Say it on<br>a cookie.",
+    "A celebration. An inside joke. A little thank-you. Find a design that says it, or make your own.",
+    "Explore designs",
+    0,
+  ],
+  templates: [
+    "A good place to start",
+    "Something very them.",
+    "Pick a cookie you love. Keep it as it is, or make it personal.",
+    "",
+    0,
+  ],
+  personalize: [
+    "Make it personal",
+    "Make it yours.",
+    "Change the background. Find the words. Add a picture if you like.",
+    "Review my cookie",
+    1,
+  ],
+  ai: [
+    "AI writing help · optional",
+    "Let’s find the words.",
+    "A little context is all we need. Your design stays completely in your hands.",
+    "",
     0,
   ],
   shape: [
@@ -80,6 +106,8 @@ const copy = {
 };
 const blank = () => ({
   file: null,
+  backdrop: null,
+  text: null,
   original: null,
   source: null,
   shape: "round",
@@ -109,7 +137,10 @@ let pointer = null,
   cursor = { x: 0.5, y: 0.5 },
   version = 0,
   loadVersion = 0;
+let preserveComposition = false;
+let composer;
 const current = () => designs[active];
+const hasDesign = (d = current()) => !!(d.file || d.backdrop);
 const quote = () => window.__mbcOrderPricing.getState();
 const money = (n) => "$" + Math.round(n);
 
@@ -137,7 +168,7 @@ function setBusy(value, title = "Preparing your photo…", detail = "") {
 }
 function canContinue() {
   if (step === "upload") return true;
-  if (!current().file) return false;
+  if (!hasDesign()) return false;
   if (step === "background") return !!current().background && !selectingSubject;
   if (step === "delivery")
     return quote().ready && designs.every((d) => d.approved);
@@ -145,6 +176,13 @@ function canContinue() {
 }
 function show(next, { history = true, focus = true } = {}) {
   if (busy || paymentLocked || (paid && next !== "complete")) return;
+  if (
+    next === "upload" &&
+    hasDesign() &&
+    ["shape", "background", "finish", "review", "personalize"].includes(step)
+  )
+    current().resumeStep = step;
+  if (step === "ai" && next !== "ai") composer?.cancelAi();
   step = next;
   error();
   selectingSubject = false;
@@ -169,7 +207,9 @@ function show(next, { history = true, focus = true } = {}) {
     li.querySelector("span").textContent = i < info[4] || paid ? "✓" : i + 1;
   });
   $("backButton").hidden = step === "upload" || step === "complete";
-  $("continueButton").hidden = step === "pay" || step === "complete";
+  $("continueButton").hidden = ["pay", "complete", "templates", "ai"].includes(
+    step,
+  );
   $("continueButton").innerHTML =
     info[3] +
     ' <span aria-hidden="true">' +
@@ -181,19 +221,29 @@ function show(next, { history = true, focus = true } = {}) {
       : step === "pay"
         ? "Secure payment. Your exact design goes to our bakery."
         : "Your changes stay here as you go.";
-  $("footerPrice").hidden = !current().file || paid;
+  $("footerPrice").hidden = !hasDesign() || paid;
+  $("resumeDesign").hidden = !hasDesign() || paid;
   $("originalChip").hidden =
     !current().file || step === "pay" || step === "delivery" || paid;
-  $("blankMark").hidden = !!current().file;
-  $("designNumber").hidden = !current().file;
+  $("blankMark").hidden = true;
+  $("designNumber").hidden = !hasDesign();
   $("designNumber").textContent =
-    "Photo " +
+    "Design " +
     (active + 1) +
     (designs.length > 1 ? " of " + designs.length : "");
   if (step === "shape") {
+    document
+      .querySelector('[data-panel="shape"]')
+      .insertBefore($("shapeChoices"), $("shapePositionMount"));
     $("shapePositionMount").appendChild($("positionControls"));
     $("positionControls").hidden = false;
   }
+  if (step === "templates") composer?.catalog();
+  if (step === "personalize") {
+    $("composeShapeMount").appendChild($("shapeChoices"));
+    composer?.refresh();
+  }
+  if (step === "review") $("editDesign").hidden = !current().original;
   if (step === "background") {
     $("backgroundPositionMount").appendChild($("positionControls"));
     syncBackground();
@@ -217,7 +267,7 @@ function show(next, { history = true, focus = true } = {}) {
 }
 function render() {
   const d = current();
-  if (step === "shape") {
+  if (step === "shape" || step === "personalize") {
     for (const shape of ["round", "square"])
       drawCookie($(shape + "Option"), { ...d, shape });
   }
@@ -244,7 +294,7 @@ function render() {
   );
   $("photoEditor").hidden = !raw;
   $("cookiePreview").hidden = raw;
-  $("blankMark").hidden = !!d.file;
+  $("blankMark").hidden = true;
   $("previewLabel").textContent = originalVisible
     ? "Your original photo"
     : selectingSubject
@@ -255,9 +305,9 @@ function render() {
         ? tool === "erase"
           ? "Brush over what you want to remove"
           : "Brush to bring your photo back"
-        : d.file
+        : hasDesign(d)
           ? "Your cookie, as you make it"
-          : "A blank cookie. Endless possibilities.";
+          : "One of nine ideas. Make it yours.";
   $("previewStatus").textContent = originalVisible
     ? "Original upload"
     : selectingSubject
@@ -268,10 +318,10 @@ function render() {
         ? "Your changes appear on the cookie"
         : step === "review"
           ? "This is the artwork you’re approving"
-          : d.file
+          : hasDesign(d)
             ? "Live preview"
-            : "Made from your favorite moment";
-  $("previewShape").textContent = d.file
+            : "Ready-made. Ready to make your own.";
+  $("previewShape").textContent = hasDesign(d)
     ? d.shape === "round"
       ? "Round cookie"
       : "Square cookie"
@@ -286,7 +336,9 @@ function render() {
       $("cookiePreview"),
       selectingSubject && selectionMode === "keep"
         ? { ...d, source: d.original }
-        : d,
+        : step === "upload" && !hasDesign(d)
+          ? createTemplate("birthday-wish")
+          : d,
     );
     if (selectingSubject && document.activeElement === $("cookiePreview")) {
       const c = $("cookiePreview"),
@@ -378,7 +430,7 @@ function updatePrice() {
   const q = quote();
   $("footerPrice").innerHTML =
     q.quantity + " cookies <strong>" + money(q.subtotal) + "</strong>";
-  $("receiptCookies").textContent = q.quantity + " photo cookies";
+  $("receiptCookies").textContent = q.quantity + " custom cookies";
   $("fulfilLabel").textContent =
     q.fulfil === "pickup" ? "Daly City pickup" : "FedEx " + q.serviceLabel;
   $("pickupNote").hidden = q.fulfil !== "pickup";
@@ -390,7 +442,7 @@ function updatePrice() {
     "$5 each · " +
     designs.length * 12 +
     "-cookie minimum" +
-    (designs.length > 1 ? " for " + designs.length + " photos" : "");
+    (designs.length > 1 ? " for " + designs.length + " designs" : "");
   $("continueButton").disabled = busy || !canContinue();
 }
 function syncQuantity() {
@@ -405,7 +457,7 @@ function syncQuantity() {
       (o) => Number(o.value) !== designs.length,
     )
   ) {
-    const option = new Option(designs.length + " photos", designs.length);
+    const option = new Option(designs.length + " designs", designs.length);
     $("photoCount").add(option);
   }
   $("photoCount").value = designs.length;
@@ -460,6 +512,13 @@ async function readPhoto(file) {
     d.source = cloneCanvas(d.original);
     d.file = file;
     const old = current();
+    if (preserveComposition) {
+      d.backdrop = old.backdrop;
+      d.text = old.text;
+      d.templateId = old.templateId;
+      d.occasion = old.occasion;
+    }
+    preserveComposition = false;
     if (old.thumbnail) URL.revokeObjectURL(old.thumbnail);
     if (old.approved?.previewUrl) URL.revokeObjectURL(old.approved.previewUrl);
     designs[active] = d;
@@ -476,14 +535,16 @@ async function readPhoto(file) {
     setBusy(false);
   }
 }
-function choosePhoto(adding = false) {
+function choosePhoto(adding = false, withComposition = false) {
   pendingAdd = adding;
+  preserveComposition = withComposition;
   $("logoUpload").value = "";
   $("logoUpload").click();
 }
 $("logoUpload").addEventListener("change", (e) => readPhoto(e.target.files[0]));
 $("logoUpload").addEventListener("cancel", () => {
   pendingAdd = false;
+  preserveComposition = false;
 });
 $("uploadButton").addEventListener("click", () => choosePhoto());
 for (const type of ["dragenter", "dragover"])
@@ -630,7 +691,7 @@ async function runCut(point) {
       source: cloneCanvas(d.source),
       point: d.cutPoint,
       removals: [...d.removePoints],
-      background: d.background,
+      background: d.background || "keep",
     });
     if (d.cutUndo.length > 8) d.cutUndo.shift();
     d.source = result;
@@ -894,7 +955,7 @@ window.addEventListener("resize", render);
 
 async function approve() {
   const d = current();
-  if (!d.file || !d.background)
+  if (!hasDesign(d) || (d.original && !d.background))
     throw new Error("Finish your photo design first.");
   if (d.approved) return;
   setBusy(
@@ -913,11 +974,16 @@ async function approve() {
     ]);
     d.approved = {
       slot: active + 1,
-      file: d.file,
+      file:
+        d.file ||
+        d.backdrop?.file ||
+        new File([artworkBlob], "custom-cookie-design.png", {
+          type: "image/png",
+        }),
       artworkBlob,
       approvedBlob,
       shape: d.shape,
-      background: d.background,
+      background: d.background || "keep",
       approvedAt: new Date().toISOString(),
       previewUrl: URL.createObjectURL(approvedBlob),
     };
@@ -933,17 +999,25 @@ function renderDesigns() {
     const item = document.createElement("div");
     item.className = "design-item";
     const img = document.createElement("img");
-    img.src = d.approved?.previewUrl || d.thumbnail;
-    img.alt = "Photo " + (i + 1);
-    item.append(img);
+    if (d.approved?.previewUrl || d.thumbnail) {
+      img.src = d.approved?.previewUrl || d.thumbnail;
+      img.alt = "Design " + (i + 1);
+      item.append(img);
+    } else {
+      const preview = canvas(80);
+      drawCookie(preview, d);
+      preview.style.width = "38px";
+      preview.style.height = "38px";
+      item.append(preview);
+    }
     const button = document.createElement("button");
     button.type = "button";
     button.textContent = i === active ? "Editing" : "Edit";
     button.disabled = i === active;
     button.addEventListener("click", () => {
       active = i;
-      $("originalThumb").src = current().thumbnail;
-      show("shape");
+      if (current().thumbnail) $("originalThumb").src = current().thumbnail;
+      show(current().original ? "shape" : "personalize");
     });
     item.append(button);
     if (designs.length > 1) {
@@ -956,7 +1030,7 @@ function renderDesigns() {
         URL.revokeObjectURL(d.thumbnail);
         designs.splice(i, 1);
         active = Math.min(i < active ? active - 1 : active, designs.length - 1);
-        $("originalThumb").src = current().thumbnail;
+        if (current().thumbnail) $("originalThumb").src = current().thumbnail;
         syncQuantity();
         renderDesigns();
         render();
@@ -990,20 +1064,23 @@ window.__mbcDesignStudio = {
       0,
       designs.findIndex((d) => !d.approved),
     );
-    show(current().file ? "review" : "upload");
+    show(hasDesign() ? "review" : "upload");
   },
 };
 $("continueButton").addEventListener("click", async () => {
   if (busy || !canContinue()) return;
   try {
-    if (step === "upload") return choosePhoto();
+    if (step === "upload") return show("templates");
+    if (step === "personalize") return show("review");
+    if (step === "shape")
+      return show(current().original ? "background" : "personalize");
     if (step === "review") {
       await approve();
       const missing = designs.findIndex((d) => !d.approved);
       if (missing >= 0) {
         active = missing;
-        $("originalThumb").src = current().thumbnail;
-        show(current().file ? "review" : "upload");
+        if (current().thumbnail) $("originalThumb").src = current().thumbnail;
+        show(hasDesign() ? "review" : "upload");
         return;
       }
       syncQuantity();
@@ -1022,6 +1099,14 @@ $("continueButton").addEventListener("click", async () => {
 });
 $("backButton").addEventListener("click", () => {
   if (busy) return;
+  if (["templates", "ai", "personalize"].includes(step)) {
+    show("upload");
+    return;
+  }
+  if (step === "shape") {
+    show(hasDesign() && !current().original ? "personalize" : "upload");
+    return;
+  }
   if (selectingSubject) {
     cancelSelection();
     return;
@@ -1032,7 +1117,9 @@ $("backButton").addEventListener("click", () => {
   }
   show(
     step === "review"
-      ? "background"
+      ? current().original
+        ? "background"
+        : "personalize"
       : steps[Math.max(0, steps.indexOf(step) - 1)],
   );
 });
@@ -1044,14 +1131,14 @@ window.addEventListener("popstate", (e) => {
   }
   let next = e.state?.mbcStudio ? e.state.step : "upload";
   if (!steps.includes(next)) next = "upload";
-  if (!current().file) next = "upload";
+  if (!hasDesign() && !["templates", "ai"].includes(next)) next = "upload";
   if (["delivery", "pay"].includes(next) && !designs.every((d) => d.approved))
     next = "review";
   if (next === "pay" && !quote().ready) next = "delivery";
   show(next, { history: false });
 });
 window.addEventListener("beforeunload", (e) => {
-  if (!paid && designs.some((d) => d.file)) {
+  if (!paid && designs.some((d) => hasDesign(d))) {
     e.preventDefault();
     e.returnValue = "";
   }
@@ -1139,4 +1226,46 @@ new MutationObserver(() => {
     ? 0
     : -1;
 }).observe(document.body, { attributes: true, attributeFilter: ["data-step"] });
+composer = initComposer({
+  current,
+  open: show,
+  changed() {
+    invalidate();
+    render();
+  },
+  error,
+  setBusy,
+  start(spec) {
+    const old = current();
+    if (old.thumbnail) URL.revokeObjectURL(old.thumbnail);
+    if (old.approved?.previewUrl) URL.revokeObjectURL(old.approved.previewUrl);
+    designs[active] = Object.assign(blank(), spec);
+    version++;
+    invalidate();
+    show("personalize");
+  },
+  addPhoto() {
+    choosePhoto(false, true);
+  },
+  removePhoto() {
+    const d = current();
+    if (d.thumbnail) URL.revokeObjectURL(d.thumbnail);
+    d.file = null;
+    d.original = null;
+    d.source = null;
+    d.thumbnail = null;
+    d.background = null;
+    d.cutPoint = null;
+    d.cutUndo = [];
+    d.removePoints = [];
+    d.undo = [];
+    version++;
+    invalidate();
+    render();
+  },
+});
 show("upload", { history: false, focus: false });
+document.fonts.ready.then(() => {
+  render();
+  if (step === "templates") composer.catalog();
+});

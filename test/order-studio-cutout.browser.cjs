@@ -40,6 +40,7 @@ const real = process.env.REAL_CUT === "1";
     page.screenshot({
       path: path.join(shots, (real ? "real-" : "mock-") + n + ".png"),
       fullPage: true,
+      animations: "disabled",
     });
   const tapSource = async (x, y) => {
     const box = await page.locator("#cookiePreview").boundingBox();
