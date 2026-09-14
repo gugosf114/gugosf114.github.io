@@ -1,24 +1,19 @@
 const assert = require("node:assert/strict"),
   path = require("node:path"),
-  fs = require("node:fs");
-const pw = require(process.env.PLAYWRIGHT_MODULE || "playwright-core");
+  fs = require("node:fs"),
+  pw = require(process.env.PLAYWRIGHT_MODULE || "playwright-core");
 (async () => {
-  const b = await pw.chromium.connectOverCDP(
-    process.env.CDP_URL || "http://127.0.0.1:9224",
-  );
-  const p = await b.contexts()[0].newPage();
+  const b = await pw.chromium.connectOverCDP(process.env.CDP_URL),
+    p = await b.contexts()[0].newPage();
   p.setDefaultTimeout(20000);
   p.on("dialog", (d) => d.accept());
   const errors = [],
-    logs = [];
+    requests = [];
   p.on("pageerror", (e) => errors.push(e.message));
-  p.on("console", (m) => {
-    if (["error", "warning"].includes(m.type()))
-      logs.push(m.text().slice(0, 220));
-  });
+  p.on("request", (r) => requests.push(r.url()));
   await p.route("**/googletagmanager.com/**", (r) => r.fulfill({ body: "" }));
-  const url = process.env.STUDIO_URL || "http://127.0.0.1:8765/buy-now.html",
-    out = path.join(require("node:os").tmpdir(), "mbc-packaging-film");
+  const url = process.env.STUDIO_URL,
+    out = path.join(require("node:os").tmpdir(), "mbc-native-film");
   fs.mkdirSync(out, { recursive: true });
   const shot = (n) =>
     p.screenshot({
@@ -26,132 +21,129 @@ const pw = require(process.env.PLAYWRIGHT_MODULE || "playwright-core");
       fullPage: true,
       animations: "disabled",
     });
+  const seek = async (t) =>
+    p.evaluate(
+      (t) =>
+        new Promise((resolve) => {
+          const v = document.getElementById("packagingVideo");
+          v.addEventListener("seeked", resolve, { once: true });
+          window.__mbcPackagingFilm.seek(t);
+          if (!v.seeking) resolve();
+        }),
+      t,
+    );
   try {
     await p.setViewportSize({ width: 1440, height: 1000 });
     await p.goto(url);
     await p.waitForFunction(
       () => window.__mbcPackagingFilm?.state === "playing",
-      null,
-      { timeout: 45000 },
     );
-    for (const [name, time] of [
-      ["01-cookie", 0],
-      ["02-closeup", 2.6],
-      ["03-wrapped", 5.5],
-      ["04-pack", 9.8],
-      ["05-box", 11.8],
-      ["06-turn", 13.7],
-      ["07-finish", 16],
+    await p.waitForFunction(() => window.__mbcPackagingFilm.time > 0.4);
+    const info = await p
+      .locator("#packagingVideo")
+      .evaluate((v) => ({
+        duration: v.duration,
+        width: v.videoWidth,
+        height: v.videoHeight,
+      }));
+    assert.equal(info.duration, 16);
+    assert.equal(info.width, 1080);
+    assert.equal(info.height, 1080);
+    assert.equal(
+      requests.some((x) => x.includes("/vendor/three/")),
+      false,
+      "video playback never loads WebGL",
+    );
+    for (const [n, t] of [
+      ["01-cookie", 1],
+      ["02-wrapped", 5.5],
+      ["03-box", 11.8],
+      ["04-end", 16],
     ]) {
-      await p.evaluate((t) => window.__mbcPackagingFilm.seek(t), time);
-      await shot(name);
-      console.log(
-        name,
-        await p.evaluate(() => ({
-          time: window.__mbcPackagingFilm.time,
-          state: window.__mbcPackagingFilm.state,
-          stats: window.__mbcPackagingFilm.stats,
-        })),
-      );
+      await seek(t);
+      await shot(n);
     }
+    console.log("End seek state",await p.locator("#packagingVideo").evaluate(v=>({time:v.currentTime,duration:v.duration,paused:v.paused,ended:v.ended,state:window.__mbcPackagingFilm.state})));
     assert.equal(
       await p.evaluate(() => window.__mbcPackagingFilm.state),
       "ended",
-    );
-    assert.equal(
-      await p.locator("#packagingScene").getAttribute("data-cookie-count"),
-      "12",
     );
     await p.locator("#packagingPlay").click();
     await p.waitForFunction(
       () => window.__mbcPackagingFilm.state === "ended",
       null,
-      { timeout: 26000 },
+      { timeout: 24000 },
     );
-    const playback = await p.evaluate(() => window.__mbcPackagingFilm.stats);
-    console.log("Full playback:", playback);
-    assert.ok(
-      playback.framesRendered > 100,
-      "full playback renders a moving sequence",
+    console.log(
+      "Native playback:",
+      await p.evaluate(() => window.__mbcPackagingFilm.stats),
     );
-    await p.evaluate(() => window.__mbcPackagingFilm.seek(8));
-    assert.equal(
-      await p.evaluate(() => window.__mbcPackagingFilm.state),
-      "paused",
-    );
+    await seek(8);
     await p.locator("#packagingPlay").click();
     await p.waitForFunction(() => window.__mbcPackagingFilm.time > 8.1);
-    assert.ok(
-      (await p.evaluate(() => window.__mbcPackagingFilm.time)) < 10,
-      "Play resumes at the scrubbed position",
-    );
-    await p.evaluate(() => window.__mbcPackagingFilm.seek(16));
-    await p.locator("#packagingPlay").click();
-    await p.waitForFunction(() => window.__mbcPackagingFilm.time > 0);
+    assert.ok((await p.evaluate(() => window.__mbcPackagingFilm.time)) < 10);
     await p.locator("#browseDesigns").click();
     await p.waitForFunction(() => document.body.dataset.step === "templates");
     assert.equal(await p.locator("#packagingFilm").isVisible(), false);
-    assert.equal(
-      await p.locator(".packaging-webgl").count(),
-      0,
-      "editor handoff releases WebGL",
-    );
+    assert.equal(await p.locator("#packagingVideo").getAttribute("src"), null);
     await p.emulateMedia({ reducedMotion: "reduce" });
     await p.goto(url);
     await p.waitForFunction(() => !!window.__mbcPackagingFilm);
     await p.waitForTimeout(900);
-    assert.equal(
-      await p.locator(".packaging-webgl").count(),
-      0,
-      "reduced motion does not load a 3D scene",
-    );
-    assert.equal(await p.locator("#packagingFilm").isVisible(), false);
-    await p.locator("#packagingLaunch").click();
+    assert.equal(await p.locator("#packagingVideo").getAttribute("src"), null);
+    assert.equal(await p.locator("#packagingWatch").isVisible(), true);
+    await shot("05-obvious-play");
+    await p.locator("#packagingWatch").click();
     await p.waitForFunction(
       () => window.__mbcPackagingFilm.state === "playing",
     );
     await p.locator("#packagingSkip").click();
-    assert.equal(await p.locator(".packaging-webgl").count(), 0);
     await p.setViewportSize({ width: 390, height: 844 });
     await p.goto(url);
     await p.waitForFunction(() => !!window.__mbcPackagingFilm);
-    await p.waitForTimeout(900);
-    assert.equal(await p.locator("#packagingFilm").isVisible(), false);
     await p.locator("#packagingLaunch").click();
     await p.waitForFunction(
       () => window.__mbcPackagingFilm.state === "playing",
     );
-    await p.evaluate(() => window.__mbcPackagingFilm.seek(16));
-    await shot("08-mobile");
+    await seek(11.8);
+    await shot("06-mobile");
+    await p.locator("#packagingSkip").click();
     assert.equal(
       await p.evaluate(
         () => document.documentElement.scrollWidth <= innerWidth,
       ),
       true,
     );
-    await p.locator("#packagingSkip").click();
-    const fallback = await b.contexts()[0].newPage();
-    await fallback.emulateMedia({ reducedMotion: "reduce" });
-    await fallback.route("**/order-packaging-scene.mjs", (r) => r.abort());
-    await fallback.goto(url);
-    await fallback.waitForFunction(() => !!window.__mbcPackagingFilm);
-    await fallback.locator("#packagingLaunch").click();
-    await fallback.waitForFunction(
-      () => window.__mbcPackagingFilm.state === "unavailable",
+    const fail = await b.contexts()[0].newPage();
+    await fail.setViewportSize({ width: 1440, height: 1000 });
+    await fail.emulateMedia({ reducedMotion: "reduce" });
+    await fail.route("**/cookie-packaging.mp4", (r) => r.abort());
+    await fail.goto(url);
+    await fail.waitForFunction(() => !!window.__mbcPackagingFilm);
+    await fail.locator("#packagingWatch").click();
+    await fail.locator("#packagingError").waitFor();
+    assert.equal(
+      await fail.locator("#packagingError a").getAttribute("href"),
+      "media/cookie-packaging.mp4",
     );
-    assert.equal(await fallback.locator("#packagingFilm").isVisible(), false);
-    await fallback.locator("#browseDesigns").click();
-    await fallback.waitForFunction(
+    await fail.locator("#browseDesigns").click();
+    await fail.waitForFunction(
       () => document.body.dataset.step === "templates",
     );
-    await fallback.close();
+    await fail.close();
     assert.deepEqual(errors, []);
-    assert.deepEqual(logs, []);
-    console.log(JSON.stringify({ passed: true, screenshots: out, logs }));
+    console.log(
+      JSON.stringify({
+        passed: true,
+        format: "H.264 MP4",
+        seconds: 16,
+        dimensions: "1080x1080",
+        screenshots: out,
+      }),
+    );
   } catch (e) {
-    console.error("Browser logs:", logs);
-    console.error("Page errors:", errors);
     await shot("failure").catch(() => {});
+    console.log("Errors", errors);
     throw e;
   } finally {
     await p.close({ runBeforeUnload: false });

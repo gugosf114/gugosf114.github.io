@@ -2203,7 +2203,6 @@ body[data-step="ai"] .workspace-preview {
 .packaging-launch {
   display: block;
   margin: 5px 0 14px;
-  font-size: 11px;
 }
 .packaging-film {
   position: absolute;
@@ -2328,5 +2327,99 @@ body[data-step="ai"] .workspace-preview {
   .packaging-launch {
     font-size: 10px;
     margin: 2px 0 12px;
+  }
+}
+.packaging-watch {
+  text-decoration: none;
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  transform: translate(-50%, -50%);
+  z-index: 7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  min-width: 205px;
+  border: 1px solid #ffffffcc;
+  border-radius: 16px;
+  background: #ffffffed;
+  padding: 17px 24px;
+  color: #32283f;
+  box-shadow: 0 8px 32px #32283f25;
+  backdrop-filter: blur(10px);
+}
+.packaging-watch > span {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  background: #cb2366;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 19px;
+  padding-left: 3px;
+}
+.packaging-watch strong {
+  font-size: 14px;
+  font-weight: 600;
+}
+.packaging-watch small {
+  font-size: 10px;
+  color: #71637d;
+}
+.packaging-watch:active:not(:disabled) {
+  transform: translate(-50%, -50%);
+}
+.packaging-video {
+  position: absolute;
+  inset: 0 0 62px;
+  width: 100%;
+  height: calc(100% - 62px);
+  object-fit: contain;
+  pointer-events: none;
+}
+.packaging-film .packaging-caption {
+  display: none;
+}
+.packaging-error {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  right: 20px;
+  z-index: 2;
+  background: #fff;
+  border-radius: 8px;
+  padding: 13px;
+  font-size: 12px;
+  text-align: center;
+  pointer-events: auto;
+}
+.packaging-error a {
+  color: #cb2366;
+}
+.packaging-launch {
+  border: 1px solid #cbbdd4;
+  border-radius: 9px;
+  padding: 12px 16px;
+  text-decoration: none;
+  background: #f0ebf7;
+  font-size: 12px !important;
+  text-align: center;
+  width: 100%;
+}
+@media (max-width: 760px) {
+  .packaging-watch {
+    top: 50%;
+    padding: 12px 18px;
+    min-width: 175px;
+  }
+  .packaging-watch > span {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+  .packaging-watch strong {
+    font-size: 12px;
   }
 }

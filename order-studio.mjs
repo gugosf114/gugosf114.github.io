@@ -1277,10 +1277,5 @@ document.fonts.ready.then(() => {
 
 packagingFilm = initPackagingFilm({
   canPlay: () => step === "upload" && !busy,
-  getArtwork() {
-    const art = canvas(1024);
-    drawArtwork(art, createTemplate("birthday-wish"));
-    return art;
-  },
 });
 window.__mbcPackagingFilm = packagingFilm;

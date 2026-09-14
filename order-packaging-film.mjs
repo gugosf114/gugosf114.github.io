@@ -1,38 +1,26 @@
-import { DURATION } from "./order-packaging-timeline.mjs";
+import { DURATION, filmFrame } from "./order-packaging-timeline.mjs";
 
-export function initPackagingFilm({ getArtwork, canPlay }) {
+// The fixed introduction is rendered from order-packaging-scene.mjs and served
+// as H.264 video so playback does not depend on WebGL or graphics settings.
+export function initPackagingFilm({ canPlay }) {
   const $ = (id) => document.getElementById(id),
     host = $("packagingFilm"),
-    mount = $("packagingScene"),
+    video = $("packagingVideo"),
     launch = $("packagingLaunch"),
+    watch = $("packagingWatch"),
     play = $("packagingPlay"),
     skip = $("packagingSkip"),
-    seek = $("packagingSeek"),
-    caption = $("packagingCaption");
+    seek = $("packagingSeek");
   const reduced = matchMedia("(prefers-reduced-motion: reduce)"),
     mobile = matchMedia("(max-width: 760px)");
-  let scene = null,
-    loading = null,
-    generation = 0,
-    raf = 0,
-    last = 0,
-    time = 0,
-    state = "idle",
-    autoTimer = 0,
-    wasPlaying = false,
-    visible = true,
-    paintedAt = 0,
+  let state = "idle",
     hasPlayed = false,
-    unavailable = false,
-    framesRendered = 0,
-    autoPending = false;
-  const words = {
-    cookie: ["A little cookie.", "Your idea, printed on icing."],
-    wrap: ["Wrapped one by one.", "A clear sleeve for every cookie."],
-    pack: ["Twelve little moments.", "Packed together in a gift box."],
-    finish: ["Ready to make their day.", "A window box, finished with a bow."],
-    turn: ["A gift worth giving.", "Made by us. Made for your person."],
-  };
+    visible = true,
+    autoPending = false,
+    wasPlaying = false,
+    timer = 0,
+    revision = 0;
+  video.muted = true;
   function ui(next) {
     state = next;
     host.dataset.state = next;
@@ -42,152 +30,114 @@ export function initPackagingFilm({ getArtwork, canPlay }) {
       "aria-label",
       next === "playing"
         ? "Pause packaging animation"
-        : next === "ended"
-          ? "Replay packaging animation"
-          : "Play packaging animation",
+        : "Play packaging animation",
     );
-    launch.textContent =
-      next === "unavailable"
-        ? "See the gift-box photo"
-        : hasPlayed
-          ? "Replay the gift-box animation"
-          : "See how your cookies are packed · 16 sec";
+    launch.textContent = hasPlayed
+      ? "Replay packaging video · 16 sec"
+      : "Play packaging video · 16 sec";
+    watch.hidden =
+      !canPlay() ||
+      next === "playing" ||
+      next === "loading" ||
+      next === "ended";
+    watch.querySelector("strong").textContent =
+      next === "ended" ? "Replay animation" : "Play animation";
   }
-  function display(t) {
-    if (!scene) return;
-    const frame = scene.render(t);
-    seek.value = String(t);
-    const text = words[frame.phase];
-    caption.querySelector("strong").textContent = text[0];
-    caption.querySelector("span").textContent = text[1];
-    host.dataset.phase = frame.phase;
+  function update() {
+    seek.value = String(video.currentTime || 0);
+    host.dataset.phase = filmFrame(video.currentTime).phase;
+    host.dataset.time = String(video.currentTime || 0);
   }
-  function tick(stamp) {
-    if (state !== "playing" || !scene) return;
-    if (!last) last = stamp;
-    time = Math.min(DURATION, time + (stamp - last) / 1000);
-    last = stamp;
-    if (stamp - paintedAt >= 1000 / 30 || time === DURATION) {
-      display(time);
-      framesRendered++;
-      paintedAt = stamp;
-    }
-    if (time >= DURATION) {
-      raf = 0;
-      ui("ended");
-      return;
-    }
-    raf = requestAnimationFrame(tick);
+  function stop() {
+    clearTimeout(timer);
+    revision++;
+    autoPending = false;
+    wasPlaying = false;
+    video.pause();
+    host.hidden = true;
+    document.body.classList.remove("packaging-mobile");
+    video.removeAttribute("src");
+    video.load();
+    ui("idle");
   }
   function pause() {
     if (state !== "playing") return;
-    cancelAnimationFrame(raf);
-    raf = 0;
-    last = 0;
+    video.pause();
     ui("paused");
   }
-  function fail() {
-    unavailable = true;
-    cancelAnimationFrame(raf);
-    raf = 0;
-    generation++;
-    scene?.dispose();
-    scene = null;
-    host.hidden = true;
-    document.body.classList.remove("packaging-mobile");
-    ui("unavailable");
-    launch.textContent = "See the gift-box photo";
-  }
   async function start(manual = true) {
-    if (!canPlay() || unavailable) return;
+    if (!canPlay() || state === "loading") return;
     if (!manual && (reduced.matches || mobile.matches || hasPlayed)) return;
     if (!manual && (document.hidden || !visible)) {
       autoPending = true;
       return;
     }
-    if (loading) return;
+    clearTimeout(timer);
     autoPending = false;
-    clearTimeout(autoTimer);
-    cancelAnimationFrame(raf);
-    raf = 0;
-    last = 0;
-    framesRendered = 0;
     wasPlaying = false;
     hasPlayed = true;
+    const current = ++revision;
     host.hidden = false;
     document.body.classList.toggle("packaging-mobile", mobile.matches);
+    $("packagingError").hidden = true;
+    if (state === "unavailable") {
+      video.removeAttribute("src");
+      video.load();
+    }
+    if (!video.getAttribute("src")) video.src = "media/cookie-packaging.mp4";
+    if (video.ended || state === "ended") video.currentTime = 0;
+    ui("loading");
     if (manual && mobile.matches)
       document.querySelector(".workspace-preview").scrollIntoView({
         block: "start",
         behavior: reduced.matches ? "instant" : "smooth",
       });
-    launch.disabled = true;
-    ui("loading");
-    caption.querySelector("strong").textContent = "Your cookie, gift-ready.";
-    caption.querySelector("span").textContent = "Preparing the preview…";
-    const revision = ++generation;
-    if (!scene) {
-      loading = import("./order-packaging-scene.mjs")
-        .then(({ createPackagingScene }) => {
-          if (revision !== generation || !canPlay()) return;
-          scene = createPackagingScene(mount, getArtwork(), fail);
-        })
-        .catch(() => {
-          if (revision === generation) fail();
-        })
-        .finally(() => {
-          loading = null;
-          launch.disabled = false;
-        });
-      await loading;
-    } else launch.disabled = false;
-    if (revision !== generation || !canPlay() || !scene) return;
-    time = 0;
-    last = 0;
-    paintedAt = 0;
-    display(0);
-    ui("playing");
-    raf = requestAnimationFrame(tick);
+    try {
+      await video.play();
+      if (current === revision && canPlay()) ui("playing");
+      else video.pause();
+    } catch (e) {
+      if (current !== revision) return;
+      ui("paused");
+      if (e.name !== "NotAllowedError" && e.name !== "AbortError")
+        $("packagingError").hidden = false;
+    }
   }
-  function stop() {
-    clearTimeout(autoTimer);
-    generation++;
-    cancelAnimationFrame(raf);
-    raf = 0;
-    last = 0;
-    wasPlaying = false;
-    scene?.dispose();
-    scene = null;
-    host.hidden = true;
-    document.body.classList.remove("packaging-mobile");
-    launch.disabled = false;
-    ui(unavailable ? "unavailable" : "idle");
-    autoPending = false;
-  }
+  video.addEventListener("timeupdate", update);
+  video.addEventListener("playing", () => {
+    if (!host.hidden && canPlay()) ui("playing");
+  });
+  video.addEventListener("ended", () => {
+    update();
+    ui("ended");
+  });
+  video.addEventListener("error", () => {
+    if (host.hidden) return;
+    ui("unavailable");
+    $("packagingError").hidden = false;
+  });
+  video.addEventListener("pause", () => {
+    if (state === "playing" && !video.ended) ui("paused");
+  });
   play.addEventListener("click", () => {
     if (state === "playing") pause();
-    else if (state === "paused" && scene) {
-      last = 0;
-      ui("playing");
-      raf = requestAnimationFrame(tick);
-    } else start(true);
-  });
-  skip.addEventListener("click", stop);
-  launch.addEventListener("click", () => {
-    if (unavailable)
-      window.open(
-        "images/gallery/printed/wrapped-cookies-shipping-box.webp",
-        "_blank",
-        "noopener",
-      );
     else start(true);
   });
+  launch.addEventListener("click", () => {
+    if (video.getAttribute("src")) video.currentTime = 0;
+    start(true);
+  });
+  watch.addEventListener("click", (event) => {
+    event.preventDefault();
+    start(true);
+  });
+  skip.addEventListener("click", stop);
   seek.addEventListener("input", () => {
-    if (!scene) return;
+    if (!video.getAttribute("src")) return;
     pause();
-    time = Number(seek.value);
-    display(time);
-    ui(time >= DURATION ? "ended" : "paused");
+    video.currentTime = Number(seek.value);
+    update();
+    ui(video.currentTime >= DURATION ? "ended" : "paused");
   });
   const visibility = () => {
     if (document.hidden || !visible) {
@@ -195,13 +145,10 @@ export function initPackagingFilm({ getArtwork, canPlay }) {
         wasPlaying = true;
         pause();
       }
-    } else if (autoPending && canPlay()) {
-      start(false);
-    } else if (wasPlaying && state === "paused" && scene && canPlay()) {
+    } else if (autoPending && canPlay()) start(false);
+    else if (wasPlaying && state === "paused" && canPlay()) {
       wasPlaying = false;
-      last = 0;
-      ui("playing");
-      raf = requestAnimationFrame(tick);
+      start(true);
     }
   };
   document.addEventListener("visibilitychange", visibility);
@@ -216,30 +163,37 @@ export function initPackagingFilm({ getArtwork, canPlay }) {
   reduced.addEventListener("change", () => {
     if (reduced.matches) stop();
   });
-  autoTimer = setTimeout(() => start(false), 650);
-  const controller = {
+  timer = setTimeout(() => start(false), 650);
+  ui("idle");
+  return {
     start,
     stop,
     pause,
     onStep(step) {
       if (step !== "upload") stop();
+      else ui("idle");
     },
     seek(seconds) {
-      if (!scene) return;
+      if (!video.getAttribute("src")) return;
       pause();
-      time = Math.max(0, Math.min(DURATION, seconds));
-      display(time);
-      ui(time === DURATION ? "ended" : "paused");
+      video.currentTime = Math.max(0, Math.min(DURATION, seconds));
+      update();
+      ui(video.currentTime >= DURATION ? "ended" : "paused");
     },
     get state() {
       return state;
     },
     get time() {
-      return time;
+      return video.currentTime || 0;
     },
     get stats() {
-      return scene ? { ...scene.stats, framesRendered } : null;
+      const q = video.getVideoPlaybackQuality?.();
+      return {
+        framesRendered: q?.totalVideoFrames || 0,
+        droppedFrames: q?.droppedVideoFrames || 0,
+        width: video.videoWidth,
+        height: video.videoHeight,
+      };
     },
   };
-  return controller;
 }

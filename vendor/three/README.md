@@ -9,4 +9,4 @@ Source downloads:
 - https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.core.min.js
 - https://cdn.jsdelivr.net/npm/three@0.180.0/LICENSE
 
-These files are loaded only when the film starts, not by the editor itself. Update both modules together and retain the license.
+These files are used by the 3D authoring/export scene. Storefront playback uses the pre-rendered MP4 and does not load them. Update both modules together and retain the license.

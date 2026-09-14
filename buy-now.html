@@ -747,13 +747,42 @@
           ><span id="designNumber" hidden>Photo 1</span>
         </div>
         <div class="preview-stage" id="previewStage">
+          <a
+            class="packaging-watch"
+            id="packagingWatch"
+            role="button"
+            href="media/cookie-packaging.mp4"
+            target="_blank"
+            rel="noopener"
+          >
+            <span aria-hidden="true">▶</span><strong>Play animation</strong
+            ><small>Cookie to gift box · 16 seconds</small>
+          </a>
           <div
             class="packaging-film"
             id="packagingFilm"
             hidden
             aria-label="A cookie being wrapped and packed into a twelve-cookie gift box"
           >
-            <div class="packaging-scene" id="packagingScene"></div>
+            <video
+              id="packagingVideo"
+              class="packaging-video"
+              playsinline
+              muted
+              preload="none"
+              poster="media/cookie-packaging-poster.png"
+              aria-label="Cookie wrapping and gift box animation"
+            ></video>
+            <p id="packagingError" class="packaging-error" hidden>
+              Video not playing?
+              <a
+                href="media/cookie-packaging.mp4"
+                target="_blank"
+                rel="noopener"
+                >Open the video directly</a
+              >.
+            </p>
+            <div class="packaging-scene" id="packagingScene" hidden></div>
             <div class="packaging-caption" id="packagingCaption">
               <strong>Your cookie, gift-ready.</strong
               ><span>From your idea to their doorstep.</span>
