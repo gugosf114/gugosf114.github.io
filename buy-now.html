@@ -2791,7 +2791,7 @@
       function startTimer() {
         stopTimer();
         if (!autoEnabled || hoverPaused || controls.hidden || document.hidden) return;
-        interval = setInterval(function () { showSlide(current + 1, false); }, 5200);
+        interval = setInterval(function () { showSlide(current + 1, false); }, 3000);
       }
 
       dots.forEach(function (dot) {
