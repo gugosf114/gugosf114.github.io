@@ -2263,3 +2263,30 @@ body[data-step="ai"] .workspace-preview {
     object-fit: contain;
   }
 }
+
+@media (max-width: 760px) {
+  body[data-step="upload"] .packaging-film {
+    pointer-events: auto;
+    touch-action: pan-y;
+    cursor: pointer;
+  }
+  body[data-step="upload"] .preview-stage,
+  body[data-step="upload"] #cookiePreview {
+    touch-action: pan-y;
+  }
+  body[data-step="upload"] .packaging-film::after {
+    content: "Tap to explore designs ↓";
+    position: absolute;
+    left: 50%;
+    bottom: 8px;
+    transform: translateX(-50%);
+    padding: 7px 12px;
+    border-radius: 20px;
+    background: #fffffff0;
+    color: #813454;
+    font: 500 11px system-ui, sans-serif;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .start-paths { scroll-margin-top: 18px; }
+}

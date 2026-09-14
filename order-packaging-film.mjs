@@ -11,11 +11,35 @@ export function initPackagingFilm({ canPlay }) {
     pending = false,
     resumeWhenVisible = false,
     revision = 0;
+  const phoneLayout = matchMedia('(max-width: 760px)');
+  function mobileInteraction() {
+    if (phoneLayout.matches) {
+      host.setAttribute('role', 'button');
+      host.setAttribute('tabindex', '0');
+      host.setAttribute('aria-label', 'Explore cookie designs below');
+    } else {
+      host.removeAttribute('role');
+      host.removeAttribute('tabindex');
+      host.setAttribute('aria-label', 'A cookie being wrapped and packed into a twelve-cookie gift box');
+    }
+  }
+  function exploreDesigns() {
+    if (!phoneLayout.matches || !canPlay()) return;
+    document.querySelector('.start-paths').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  host.addEventListener('click', exploreDesigns);
+  host.addEventListener('keydown', event => {
+    if (phoneLayout.matches && (event.key === 'Enter' || event.key === ' ')) {
+      event.preventDefault(); exploreDesigns();
+    }
+  });
+  phoneLayout.addEventListener('change', mobileInteraction);
+  mobileInteraction();
   video.muted = true;
   video.defaultMuted = true;
   video.autoplay = true;
   video.controls = false;
-  video.loop = false;
+  video.loop = true;
   const ui = (next) => {
     state = next;
     host.dataset.state = next;
