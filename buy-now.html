@@ -1003,6 +1003,53 @@
     }
     .order-app-v3 .pc-stage-inner img,
     .order-app-v3 .pc-stage-inner canvas { object-fit: cover; }
+    .v3-showcase-backdrop {
+      position: absolute; z-index: 0; inset: -24px;
+      background-image: url('images/gallery/printed/baby-photo-birthday-cookies-san-francisco.webp');
+      background-size: cover; background-position: center;
+      filter: blur(22px) saturate(.82); opacity: .42; transform: scale(1.04);
+      transition: opacity .28s ease;
+    }
+    .v3-showcase-backdrop[hidden] { display: none !important; }
+    .order-app-v3 #mainImg {
+      position: relative; z-index: 1;
+      transition: opacity .28s ease, transform .28s ease;
+    }
+    .order-app-v3 #mainImg.v3-slide-contain { object-fit: contain !important; }
+    .order-app-v3 #mainImg.v3-slide-changing {
+      opacity: .18;
+      transform: scale(1.01);
+    }
+    .order-app-v3 #mainImg.v3-slide-changing + .pc-preview,
+    .order-app-v3 #mainImg.v3-slide-changing ~ .v3-showcase-controls { opacity: 1; }
+    .order-app-v3 .pc-preview { position: relative; z-index: 2; width: 100%; height: 100%; }
+    .v3-showcase-controls {
+      position: absolute; z-index: 4; left: 14px; bottom: 14px;
+      display: flex; align-items: center; gap: 4px; padding: 4px;
+      border: 1px solid rgba(46,17,21,.12); border-radius: 999px;
+      background: rgba(255,255,255,.9); box-shadow: 0 8px 24px rgba(46,17,21,.14);
+      backdrop-filter: blur(12px);
+    }
+    .v3-showcase-controls[hidden] { display: none !important; }
+    .v3-showcase-dot,
+    .v3-showcase-toggle {
+      height: 40px; border: 0; border-radius: 999px; cursor: pointer;
+      color: var(--app-ink); background: transparent; font-family: 'Nunito', sans-serif;
+    }
+    .v3-showcase-dot { width: 40px; padding: 0; display: grid; place-items: center; }
+    .v3-showcase-dot::before {
+      content: ""; width: 8px; height: 8px; border-radius: 999px;
+      background: rgba(46,17,21,.28); transition: width .2s ease, background .2s ease;
+    }
+    .v3-showcase-dot[aria-pressed="true"]::before { width: 22px; background: var(--app-pink); }
+    .v3-showcase-toggle {
+      min-width: 58px; padding: 0 12px; border-left: 1px solid rgba(46,17,21,.1);
+      border-radius: 0 999px 999px 0; font-size: .72rem; font-weight: 800;
+    }
+    .v3-showcase-dot:hover,
+    .v3-showcase-toggle:hover { background: rgba(237,29,131,.08); }
+    .v3-showcase-dot:focus-visible,
+    .v3-showcase-toggle:focus-visible { outline: 3px solid var(--app-yellow); outline-offset: 2px; }
     .order-app-v3 .pc-stage-stamp {
       top: 34px; right: 34px; padding: 8px 11px; background: rgba(255,255,255,.92);
       color: var(--app-ink); font-family: 'Nunito', sans-serif; font-size: .62rem;
@@ -1077,6 +1124,7 @@
       .order-app-v3 .pc-stage-inner { min-height: 330px; border-radius: 14px; }
       .order-app-v3 .pc-stage-stamp { top: 23px; right: 23px; font-size: .54rem; }
       .order-app-v3 .pc-stage-caption { min-height: 42px; padding-top: 10px; font-size: .7rem; }
+      .v3-showcase-controls { left: 9px; bottom: 9px; }
       .order-app-v3 .pc-assurances {
         grid-template-columns: 1fr; gap: 7px; padding: 6px 18px 26px; font-size: .72rem;
       }
@@ -1150,6 +1198,9 @@
         grid-template-columns: repeat(3, 1fr);
         padding: 0 48px 40px;
       }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .order-app-v3 #mainImg { transition: none; }
     }
 </style>
 </head>
@@ -1269,6 +1320,7 @@
 
         <div class="pc-stage pc-reveal">
           <div class="pc-stage-inner">
+            <div class="v3-showcase-backdrop" id="showcaseBackdrop" aria-hidden="true"></div>
             <img id="mainImg"
                  src="images/gallery/printed/baby-photo-birthday-cookies-san-francisco.webp"
                  alt="Printed photo cookies with a baby's face on a pink background, Happy Birthday Iris">
@@ -1277,6 +1329,13 @@
                       aria-label="Your photo on a round cookie"></canvas>
               <canvas id="cookieCanvasSquare" width="400" height="400" hidden
                       aria-label="Your photo on a square cookie"></canvas>
+            </div>
+            <div class="v3-showcase-controls" id="showcaseControls" aria-label="Cookie photo slideshow">
+              <button type="button" class="v3-showcase-dot" data-showcase-slide="0" aria-label="Show baby birthday cookies" aria-pressed="true"></button>
+              <button type="button" class="v3-showcase-dot" data-showcase-slide="1" aria-label="Show Super Mario cookies" aria-pressed="false"></button>
+              <button type="button" class="v3-showcase-dot" data-showcase-slide="2" aria-label="Show owl birthday cookies" aria-pressed="false"></button>
+              <button type="button" class="v3-showcase-dot" data-showcase-slide="3" aria-label="Show celebration portrait cookies" aria-pressed="false"></button>
+              <button type="button" class="v3-showcase-toggle" id="showcaseToggle" aria-label="Pause cookie slideshow" aria-pressed="false">Pause</button>
             </div>
           </div>
           <span class="pc-stage-stamp" id="stageStamp">Real customer order</span>
@@ -2647,6 +2706,135 @@
         });
       });
       renderDesignSlots();
+    })();
+
+    /* Four real orders rotate in the product window until a buyer adds a photo. */
+    (function () {
+      var image = document.getElementById('mainImg');
+      var backdrop = document.getElementById('showcaseBackdrop');
+      var controls = document.getElementById('showcaseControls');
+      var toggle = document.getElementById('showcaseToggle');
+      var dots = Array.from(document.querySelectorAll('[data-showcase-slide]'));
+      var fileInput = document.getElementById('logoUpload');
+      var reset = document.getElementById('resetBtn');
+      var stage = image && image.closest('.pc-stage');
+      var captionTitle = document.getElementById('stageCaptionTitle');
+      var captionText = document.getElementById('stageCaptionText');
+      if (!image || !backdrop || !controls || !toggle || dots.length !== 4) return;
+
+      var slides = [
+        {
+          src: 'images/gallery/printed/baby-photo-birthday-cookies-san-francisco.webp',
+          alt: "Baby photo printed on pink birthday cookies, Happy Birthday Iris",
+          fit: 'cover'
+        },
+        {
+          src: 'images/gallery/printed/Mario cookies.jpeg',
+          alt: 'Super Mario characters printed on birthday cookies',
+          fit: 'contain'
+        },
+        {
+          src: 'images/gallery/printed/owl-birthday-photo-cookies-bay-area.webp',
+          alt: 'Owl birthday artwork printed on cookies',
+          fit: 'contain'
+        },
+        {
+          src: 'images/gallery/printed/custom-portrait-photo-cookies-celebration.webp',
+          alt: 'Celebration portrait printed on custom cookies',
+          fit: 'cover'
+        }
+      ];
+      var current = 0;
+      var interval = null;
+      var swapTimer = null;
+      var hoverPaused = false;
+      var autoEnabled = !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+      slides.slice(1).forEach(function (slide) {
+        var preload = new Image();
+        preload.src = slide.src;
+      });
+
+      function updateControls() {
+        dots.forEach(function (dot, index) {
+          dot.setAttribute('aria-pressed', String(index === current));
+        });
+        toggle.textContent = autoEnabled ? 'Pause' : 'Play';
+        toggle.setAttribute('aria-label', autoEnabled ? 'Pause cookie slideshow' : 'Play cookie slideshow');
+        toggle.setAttribute('aria-pressed', String(!autoEnabled));
+      }
+
+      function applySlide(index) {
+        current = (index + slides.length) % slides.length;
+        var slide = slides[current];
+        image.src = slide.src;
+        image.alt = slide.alt;
+        image.classList.toggle('v3-slide-contain', slide.fit === 'contain');
+        backdrop.style.backgroundImage = 'url("' + slide.src.replace(/"/g, '\\"') + '")';
+        updateControls();
+        requestAnimationFrame(function () { image.classList.remove('v3-slide-changing'); });
+      }
+
+      function showSlide(index, immediate) {
+        if (controls.hidden || image.style.display === 'none') return;
+        clearTimeout(swapTimer);
+        if (immediate) return applySlide(index);
+        image.classList.add('v3-slide-changing');
+        swapTimer = setTimeout(function () { applySlide(index); }, 180);
+      }
+
+      function stopTimer() {
+        if (interval) clearInterval(interval);
+        interval = null;
+      }
+
+      function startTimer() {
+        stopTimer();
+        if (!autoEnabled || hoverPaused || controls.hidden || document.hidden) return;
+        interval = setInterval(function () { showSlide(current + 1, false); }, 5200);
+      }
+
+      dots.forEach(function (dot) {
+        dot.addEventListener('click', function () {
+          showSlide(parseInt(dot.dataset.showcaseSlide, 10), false);
+          startTimer();
+        });
+      });
+
+      toggle.addEventListener('click', function () {
+        autoEnabled = !autoEnabled;
+        updateControls();
+        startTimer();
+      });
+
+      if (stage && window.matchMedia && window.matchMedia('(hover: hover)').matches) {
+        stage.addEventListener('mouseenter', function () { hoverPaused = true; stopTimer(); });
+        stage.addEventListener('mouseleave', function () { hoverPaused = false; startTimer(); });
+      }
+
+      if (fileInput) fileInput.addEventListener('change', function () {
+        stopTimer();
+        clearTimeout(swapTimer);
+        image.classList.remove('v3-slide-changing');
+        backdrop.hidden = true;
+        controls.hidden = true;
+      });
+
+      if (reset) reset.addEventListener('click', function () {
+        setTimeout(function () {
+          controls.hidden = false;
+          backdrop.hidden = false;
+          showSlide(0, true);
+          if (captionTitle) captionTitle.textContent = 'What you approve';
+          if (captionText) captionText.textContent = 'is what we print';
+          startTimer();
+        }, 0);
+      });
+
+      document.addEventListener('visibilitychange', startTimer);
+      window.__mbcShowcase = { slides: slides.slice(), show: showSlide };
+      updateControls();
+      startTimer();
     })();
 
     /* Card payment only announces itself once it has actually rendered. */
