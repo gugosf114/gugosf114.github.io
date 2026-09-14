@@ -4,6 +4,40 @@ import { readFile } from 'node:fs/promises';
 import vm from 'node:vm';
 import { webcrypto } from 'node:crypto';
 
+async function interruptedUploadFixture() {
+  const calls = [];
+  let failed = false;
+  const security = element({ dataset: { sitekey: 'test-key' } });
+  let securityCallback;
+  const window = {
+    __mbcOrderPricing: { getState: () => ({ quantity: 12, photos: 1, fulfil: 'pickup', ready: true }) },
+    __mbcDesignStudio: { getDesigns: () => [{ slot: 1, quantity: 12, shape: 'round', background: 'keep', approvedAt: 'today', file: new File(['photo'], 'photo.jpg', { type: 'image/jpeg' }), artworkBlob: new Blob(['art']), approvedBlob: new Blob(['preview']) }] },
+    turnstile: { render(node, config) { securityCallback = config.callback; config.callback('token'); return 'widget'; }, reset() { securityCallback('fresh-token'); } }
+  };
+  const document = {
+    documentElement: { dataset: { orderApi: 'https://orders.test' } },
+    getElementById(id) { return id === 'orderSecurity' ? security : null; },
+    querySelector() { return null; }
+  };
+  const fetch = async (url, options = {}) => {
+    const path = new URL(url).pathname; calls.push(path);
+    if (path === '/v1/designs') return Response.json({ id: 'session-' + calls.length, token: 'session-token' });
+    if (path.endsWith('/original') && !failed) { failed = true; return Response.json({ message: 'Connection interrupted' }, { status: 503 }); }
+    return Response.json({ approved: true });
+  };
+  const source = await readFile(new URL('../buy-now-order.js', import.meta.url), 'utf8');
+  vm.runInNewContext(source, { window, document, fetch, crypto: webcrypto, URL, Blob, File, Headers, Response, CustomEvent, setTimeout, clearTimeout, console });
+  return { calls, window };
+}
+
+test('a failed original upload cannot be reused as a finalized design session', async () => {
+  const { calls, window } = await interruptedUploadFixture();
+  await assert.rejects(window.__mbcOrderUpload.prepare(), /Connection interrupted/);
+  const session = await window.__mbcOrderUpload.prepare();
+  assert.ok(calls.some(path => path.endsWith('/finalize')), 'retry must save and finalize the files');
+  assert.equal(session.ready, true);
+});
+
 function element(extra = {}) {
   return Object.assign({
     dataset: {},
