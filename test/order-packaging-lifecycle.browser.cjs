@@ -5,25 +5,21 @@ const assert = require("node:assert/strict"),
     p = await b.contexts()[0].newPage();
   await p.setViewportSize({ width: 1440, height: 1000 });
   try {
-    await p.emulateMedia({ reducedMotion: "reduce" });
     await p.route("**/cookie-packaging.mp4", async (r) => {
       await new Promise((resolve) => setTimeout(resolve, 1200));
       await r.continue().catch(() => {});
     });
-    await p.goto(process.env.STUDIO_URL);
-    await p.waitForFunction(() => !!window.__mbcPackagingFilm);
-    await p.locator("#packagingWatch").click();
+    await p.goto(process.env.STUDIO_URL, { waitUntil: "domcontentloaded" });
     await p.waitForFunction(
-      () => window.__mbcPackagingFilm.state === "loading",
+      () => window.__mbcPackagingFilm?.state === "loading",
     );
-    assert.equal(await p.locator("#packagingSkip").isVisible(), true);
-    await p.locator("#packagingSkip").click();
+    await p.locator("#browseDesigns").click();
+    await p.waitForFunction(() => document.body.dataset.step === "templates");
     await p.waitForTimeout(1700);
     assert.equal(await p.locator("#packagingVideo").getAttribute("src"), null);
     assert.equal(await p.locator("#packagingFilm").isVisible(), false);
-    console.log("Slow video load cancels cleanly.");
+    console.log("Starting a design cancels the loading video.");
     await p.unroute("**/cookie-packaging.mp4");
-    await p.emulateMedia({ reducedMotion: "no-preference" });
     await p.addInitScript(() => {
       window.testHidden = true;
       Object.defineProperty(document, "hidden", {
@@ -33,17 +29,38 @@ const assert = require("node:assert/strict"),
     });
     await p.goto(process.env.STUDIO_URL);
     await p.waitForFunction(() => !!window.__mbcPackagingFilm);
-    await p.waitForTimeout(900);
+    await p.waitForTimeout(700);
     assert.equal(await p.locator("#packagingVideo").getAttribute("src"), null);
     await p.evaluate(() => {
       window.testHidden = false;
       document.dispatchEvent(new Event("visibilitychange"));
     });
-    await p.waitForFunction(
-      () => window.__mbcPackagingFilm.state === "playing",
+    await p.waitForFunction(() => window.__mbcPackagingFilm.time > 0.5);
+    await p.evaluate(() => {
+      window.testHidden = true;
+      document.dispatchEvent(new Event("visibilitychange"));
+    });
+    const paused = await p
+      .locator("#packagingVideo")
+      .evaluate((v) => v.currentTime);
+    await p.waitForTimeout(400);
+    assert.ok(
+      Math.abs(
+        (await p.locator("#packagingVideo").evaluate((v) => v.currentTime)) -
+          paused,
+      ) < 0.1,
     );
-    await p.locator("#packagingSkip").click();
-    console.log("Background tab waits before loading and playing video.");
+    await p.evaluate(() => {
+      window.testHidden = false;
+      document.dispatchEvent(new Event("visibilitychange"));
+    });
+    await p.waitForFunction(
+      (t) => window.__mbcPackagingFilm.time > t + 0.2,
+      paused,
+    );
+    console.log(
+      "Hidden tabs defer autoplay, pause, and resume without controls.",
+    );
   } finally {
     await p.close();
     await b.close();

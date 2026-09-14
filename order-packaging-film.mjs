@@ -1,156 +1,123 @@
-import { DURATION, filmFrame } from "./order-packaging-timeline.mjs";
+import { filmFrame } from "./order-packaging-timeline.mjs";
 
-// The fixed introduction is rendered from order-packaging-scene.mjs and served
-// as H.264 video so playback does not depend on WebGL or graphics settings.
+// A silent, once-per-visit introduction. Ordering always takes priority.
 export function initPackagingFilm({ canPlay }) {
-  const $ = (id) => document.getElementById(id),
-    host = $("packagingFilm"),
-    video = $("packagingVideo"),
-    launch = $("packagingLaunch"),
-    watch = $("packagingWatch"),
-    play = $("packagingPlay"),
-    skip = $("packagingSkip"),
-    seek = $("packagingSeek");
-  const reduced = matchMedia("(prefers-reduced-motion: reduce)"),
-    mobile = matchMedia("(max-width: 760px)");
+  const host = document.getElementById("packagingFilm"),
+    video = document.getElementById("packagingVideo");
   let state = "idle",
-    hasPlayed = false,
+    started = false,
+    stopped = false,
     visible = true,
-    autoPending = false,
-    wasPlaying = false,
-    timer = 0,
+    pending = false,
+    resumeWhenVisible = false,
     revision = 0;
   video.muted = true;
-  function ui(next) {
+  video.defaultMuted = true;
+  video.autoplay = true;
+  video.controls = false;
+  video.loop = false;
+  const ui = (next) => {
     state = next;
     host.dataset.state = next;
-    play.textContent =
-      next === "playing" ? "Pause" : next === "ended" ? "Replay" : "Play";
-    play.setAttribute(
-      "aria-label",
-      next === "playing"
-        ? "Pause packaging animation"
-        : "Play packaging animation",
-    );
-    launch.textContent = hasPlayed
-      ? "Replay packaging video · 16 sec"
-      : "Play packaging video · 16 sec";
-    watch.hidden =
-      !canPlay() ||
-      next === "playing" ||
-      next === "loading" ||
-      next === "ended";
-    watch.querySelector("strong").textContent =
-      next === "ended" ? "Replay animation" : "Play animation";
-  }
+  };
+  const removeRetry = () => {
+    document.removeEventListener("pointerdown", retry);
+    document.removeEventListener("keydown", retry);
+  };
   function update() {
-    seek.value = String(video.currentTime || 0);
-    host.dataset.phase = filmFrame(video.currentTime).phase;
+    host.dataset.phase = filmFrame(video.currentTime || 0).phase;
     host.dataset.time = String(video.currentTime || 0);
   }
   function stop() {
-    clearTimeout(timer);
+    stopped = true;
     revision++;
-    autoPending = false;
-    wasPlaying = false;
+    pending = false;
+    resumeWhenVisible = false;
+    removeRetry();
     video.pause();
     host.hidden = true;
-    document.body.classList.remove("packaging-mobile");
     video.removeAttribute("src");
     video.load();
     ui("idle");
   }
-  function pause() {
-    if (state !== "playing") return;
+  function fallback() {
+    if (stopped) return;
+    revision++;
+    pending = false;
+    resumeWhenVisible = false;
+    removeRetry();
     video.pause();
-    ui("paused");
+    host.hidden = true;
+    ui("unavailable");
   }
-  async function start(manual = true) {
-    if (!canPlay() || state === "loading") return;
-    if (!manual && (reduced.matches || mobile.matches || hasPlayed)) return;
-    if (!manual && (document.hidden || !visible)) {
-      autoPending = true;
+  async function start(resume = false) {
+    if (
+      stopped ||
+      !canPlay() ||
+      state === "loading" ||
+      state === "ended" ||
+      (started && !resume)
+    )
+      return;
+    if (document.hidden || !visible) {
+      pending = true;
       return;
     }
-    clearTimeout(timer);
-    autoPending = false;
-    wasPlaying = false;
-    hasPlayed = true;
-    const current = ++revision;
+    pending = false;
+    resumeWhenVisible = false;
+    started = true;
     host.hidden = false;
-    document.body.classList.toggle("packaging-mobile", mobile.matches);
-    $("packagingError").hidden = true;
-    if (state === "unavailable") {
-      video.removeAttribute("src");
-      video.load();
-    }
+    const attempt = ++revision;
     if (!video.getAttribute("src")) video.src = "media/cookie-packaging.mp4";
-    if (video.ended || state === "ended") video.currentTime = 0;
     ui("loading");
-    if (manual && mobile.matches)
-      document.querySelector(".workspace-preview").scrollIntoView({
-        block: "start",
-        behavior: reduced.matches ? "instant" : "smooth",
-      });
     try {
       await video.play();
-      if (current === revision && canPlay()) ui("playing");
-      else video.pause();
-    } catch (e) {
-      if (current !== revision) return;
-      ui("paused");
-      if (e.name !== "NotAllowedError" && e.name !== "AbortError")
-        $("packagingError").hidden = false;
+      if (attempt !== revision || stopped || !canPlay()) {
+        video.pause();
+        return;
+      }
+      removeRetry();
+      if (document.hidden || !visible) {
+        resumeWhenVisible = true;
+        video.pause();
+        ui("paused");
+      } else ui("playing");
+    } catch (error) {
+      if (attempt !== revision || stopped) return;
+      if (error.name === "NotAllowedError") {
+        ui("blocked");
+        document.addEventListener("pointerdown", retry, { passive: true });
+        document.addEventListener("keydown", retry);
+      } else if (error.name === "AbortError") ui("paused");
+      else fallback();
     }
+  }
+  function retry() {
+    if (state === "blocked" && canPlay() && !stopped) start(true);
+  }
+  function visibility() {
+    if (document.hidden || !visible) {
+      if (state === "playing") {
+        resumeWhenVisible = true;
+        video.pause();
+        ui("paused");
+      }
+    } else if (pending && !started) start();
+    else if (resumeWhenVisible && state === "paused") start(true);
   }
   video.addEventListener("timeupdate", update);
   video.addEventListener("playing", () => {
-    if (!host.hidden && canPlay()) ui("playing");
+    if (!stopped && !host.hidden && canPlay() && !video.paused) ui("playing");
   });
   video.addEventListener("ended", () => {
     update();
+    resumeWhenVisible = false;
+    removeRetry();
     ui("ended");
   });
   video.addEventListener("error", () => {
-    if (host.hidden) return;
-    ui("unavailable");
-    $("packagingError").hidden = false;
+    if (!host.hidden) fallback();
   });
-  video.addEventListener("pause", () => {
-    if (state === "playing" && !video.ended) ui("paused");
-  });
-  play.addEventListener("click", () => {
-    if (state === "playing") pause();
-    else start(true);
-  });
-  launch.addEventListener("click", () => {
-    if (video.getAttribute("src")) video.currentTime = 0;
-    start(true);
-  });
-  watch.addEventListener("click", (event) => {
-    event.preventDefault();
-    start(true);
-  });
-  skip.addEventListener("click", stop);
-  seek.addEventListener("input", () => {
-    if (!video.getAttribute("src")) return;
-    pause();
-    video.currentTime = Number(seek.value);
-    update();
-    ui(video.currentTime >= DURATION ? "ended" : "paused");
-  });
-  const visibility = () => {
-    if (document.hidden || !visible) {
-      if (state === "playing") {
-        wasPlaying = true;
-        pause();
-      }
-    } else if (autoPending && canPlay()) start(false);
-    else if (wasPlaying && state === "paused" && canPlay()) {
-      wasPlaying = false;
-      start(true);
-    }
-  };
   document.addEventListener("visibilitychange", visibility);
   const observer = new IntersectionObserver(
     (entries) => {
@@ -159,26 +126,12 @@ export function initPackagingFilm({ canPlay }) {
     },
     { threshold: 0.05 },
   );
-  observer.observe($("previewStage"));
-  reduced.addEventListener("change", () => {
-    if (reduced.matches) stop();
-  });
-  timer = setTimeout(() => start(false), 650);
-  ui("idle");
+  observer.observe(document.getElementById("previewStage"));
+  queueMicrotask(() => start());
   return {
-    start,
     stop,
-    pause,
     onStep(step) {
       if (step !== "upload") stop();
-      else ui("idle");
-    },
-    seek(seconds) {
-      if (!video.getAttribute("src")) return;
-      pause();
-      video.currentTime = Math.max(0, Math.min(DURATION, seconds));
-      update();
-      ui(video.currentTime >= DURATION ? "ended" : "paused");
     },
     get state() {
       return state;

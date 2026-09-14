@@ -30,7 +30,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="order-studio.css" />
+    <link rel="stylesheet" href="order-studio.css?v=autoplay-1" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -120,13 +120,6 @@
           </div>
           <button class="text-button" id="resumeDesign" type="button" hidden>
             Continue my design
-          </button>
-          <button
-            class="text-button packaging-launch"
-            id="packagingLaunch"
-            type="button"
-          >
-            See how your cookies are packed · 16 sec
           </button>
           <p class="upload-divider">Already have a picture?</p>
           <button class="upload-zone" id="uploadButton" type="button">
@@ -747,17 +740,6 @@
           ><span id="designNumber" hidden>Photo 1</span>
         </div>
         <div class="preview-stage" id="previewStage">
-          <a
-            class="packaging-watch"
-            id="packagingWatch"
-            role="button"
-            href="media/packaging-preview.html"
-            target="_blank"
-            rel="noopener"
-          >
-            <span aria-hidden="true">▶</span><strong>Play animation</strong
-            ><small>Cookie to gift box · 16 seconds</small>
-          </a>
           <div
             class="packaging-film"
             id="packagingFilm"
@@ -767,43 +749,14 @@
             <video
               id="packagingVideo"
               class="packaging-video"
+              autoplay
               playsinline
               muted
               preload="none"
               poster="media/cookie-packaging-poster.png"
               aria-label="Cookie wrapping and gift box animation"
+              tabindex="-1"
             ></video>
-            <p id="packagingError" class="packaging-error" hidden>
-              Video not playing?
-              <a
-                href="media/packaging-preview.html"
-                target="_blank"
-                rel="noopener"
-                >Open the video directly</a
-              >.
-            </p>
-            <div class="packaging-scene" id="packagingScene" hidden></div>
-            <div class="packaging-caption" id="packagingCaption">
-              <strong>Your cookie, gift-ready.</strong
-              ><span>From your idea to their doorstep.</span>
-            </div>
-            <div class="packaging-controls">
-              <button
-                id="packagingPlay"
-                type="button"
-                aria-label="Pause packaging animation"
-              >
-                Pause</button
-              ><input
-                id="packagingSeek"
-                type="range"
-                min="0"
-                max="16"
-                step="0.02"
-                value="0"
-                aria-label="Animation position"
-              /><button id="packagingSkip" type="button">Skip</button>
-            </div>
           </div>
           <div class="stage-orbit" aria-hidden="true"></div>
           <canvas
@@ -908,6 +861,6 @@
       </p></noscript
     >
     <script src="order-studio-pricing.js"></script>
-    <script type="module" src="order-studio.mjs"></script>
+    <script type="module" src="order-studio.mjs?v=autoplay-1"></script>
   </body>
 </html>
