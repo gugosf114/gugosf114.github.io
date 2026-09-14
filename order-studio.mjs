@@ -10,6 +10,7 @@ import {
 import { cutSubject } from "./order-studio-cutout.mjs";
 import { createTemplate } from "./order-studio-designs.mjs";
 import { initComposer } from "./order-studio-compose.mjs";
+import { initPackagingFilm } from "./order-packaging-film.mjs";
 
 const $ = (id) => document.getElementById(id);
 const panels = [...document.querySelectorAll("[data-panel]")];
@@ -139,6 +140,7 @@ let pointer = null,
   loadVersion = 0;
 let preserveComposition = false;
 let composer;
+let packagingFilm;
 const current = () => designs[active];
 const hasDesign = (d = current()) => !!(d.file || d.backdrop);
 const quote = () => window.__mbcOrderPricing.getState();
@@ -184,6 +186,7 @@ function show(next, { history = true, focus = true } = {}) {
     current().resumeStep = step;
   if (step === "ai" && next !== "ai") composer?.cancelAi();
   step = next;
+  packagingFilm?.onStep(next);
   error();
   selectingSubject = false;
   selectionMode = null;
@@ -480,6 +483,7 @@ window.addEventListener("mbc:quotechange", () => {
 async function readPhoto(file) {
   if (!file) return;
   if (busy) return;
+  packagingFilm?.stop();
   error();
   if (!["image/jpeg", "image/png", "image/webp"].includes(file.type))
     return error(
@@ -536,6 +540,7 @@ async function readPhoto(file) {
   }
 }
 function choosePhoto(adding = false, withComposition = false) {
+  packagingFilm?.stop();
   pendingAdd = adding;
   preserveComposition = withComposition;
   $("logoUpload").value = "";
@@ -1269,3 +1274,13 @@ document.fonts.ready.then(() => {
   render();
   if (step === "templates") composer.catalog();
 });
+
+packagingFilm = initPackagingFilm({
+  canPlay: () => step === "upload" && !busy,
+  getArtwork() {
+    const art = canvas(1024);
+    drawArtwork(art, createTemplate("birthday-wish"));
+    return art;
+  },
+});
+window.__mbcPackagingFilm = packagingFilm;

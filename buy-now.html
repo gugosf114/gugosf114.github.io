@@ -121,6 +121,13 @@
           <button class="text-button" id="resumeDesign" type="button" hidden>
             Continue my design
           </button>
+          <button
+            class="text-button packaging-launch"
+            id="packagingLaunch"
+            type="button"
+          >
+            See how your cookies are packed · 16 sec
+          </button>
           <p class="upload-divider">Already have a picture?</p>
           <button class="upload-zone" id="uploadButton" type="button">
             <span class="upload-icon" aria-hidden="true"
@@ -740,6 +747,35 @@
           ><span id="designNumber" hidden>Photo 1</span>
         </div>
         <div class="preview-stage" id="previewStage">
+          <div
+            class="packaging-film"
+            id="packagingFilm"
+            hidden
+            aria-label="A cookie being wrapped and packed into a twelve-cookie gift box"
+          >
+            <div class="packaging-scene" id="packagingScene"></div>
+            <div class="packaging-caption" id="packagingCaption">
+              <strong>Your cookie, gift-ready.</strong
+              ><span>From your idea to their doorstep.</span>
+            </div>
+            <div class="packaging-controls">
+              <button
+                id="packagingPlay"
+                type="button"
+                aria-label="Pause packaging animation"
+              >
+                Pause</button
+              ><input
+                id="packagingSeek"
+                type="range"
+                min="0"
+                max="16"
+                step="0.02"
+                value="0"
+                aria-label="Animation position"
+              /><button id="packagingSkip" type="button">Skip</button>
+            </div>
+          </div>
           <div class="stage-orbit" aria-hidden="true"></div>
           <canvas
             id="cookiePreview"

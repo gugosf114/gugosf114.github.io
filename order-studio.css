@@ -2200,3 +2200,132 @@ body[data-step="ai"] .workspace-preview {
     scroll-margin-top: 210px;
   }
 }
+.packaging-launch {
+  display: block;
+  margin: 5px 0 14px;
+  font-size: 11px;
+}
+.packaging-film {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: #eeedf6;
+  border-radius: 15px;
+  overflow: hidden;
+  pointer-events: none;
+  animation: packaging-reveal 0.45s ease both;
+}
+.packaging-scene {
+  position: absolute;
+  inset: 0 0 105px;
+}
+.packaging-webgl {
+  display: block;
+  width: 100%;
+  height: 100%;
+  outline: none;
+}
+.packaging-caption {
+  position: absolute;
+  left: 30px;
+  right: 30px;
+  bottom: 65px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  align-items: center;
+  text-align: center;
+  pointer-events: none;
+  text-shadow: 0 1px 8px #eeedf6;
+}
+.packaging-caption strong {
+  font-size: 23px;
+  line-height: 1.15;
+  letter-spacing: -0.7px;
+  font-weight: 500;
+  color: #32283f;
+}
+.packaging-caption span {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #71637d;
+}
+.packaging-controls {
+  position: absolute;
+  bottom: 14px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 13px;
+  background: #ffffffc9;
+  border: 1px solid #ffffffa8;
+  border-radius: 30px;
+  backdrop-filter: blur(12px);
+  pointer-events: auto;
+}
+.packaging-controls button {
+  border: 0;
+  background: none;
+  font-size: 10px;
+  padding: 6px 5px;
+  min-width: 42px;
+  color: #51425e;
+}
+.packaging-controls input[type="range"] {
+  min-width: 0;
+  flex: 1;
+  height: 12px;
+  width: auto;
+  margin: 0;
+  accent-color: #cb2366;
+}
+.packaging-film[data-state="loading"] .packaging-controls {
+  visibility: hidden;
+}
+.packaging-film[data-state="loading"] .packaging-caption {
+  bottom: 44%;
+}
+@keyframes packaging-reveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (max-width: 760px) {
+  body[data-step="upload"].packaging-mobile .workspace-preview {
+    display: flex;
+    min-height: 350px;
+  }
+  body[data-step="upload"].packaging-mobile .preview-stage {
+    height: 350px;
+    min-height: 350px;
+  }
+  .packaging-caption {
+    left: 15px;
+    right: 15px;
+    bottom: 62px;
+    gap: 6px;
+  }
+  .packaging-caption strong {
+    font-size: 19px;
+    letter-spacing: -0.5px;
+  }
+  .packaging-caption span {
+    font-size: 10px;
+  }
+  .packaging-controls {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    gap: 9px;
+    padding: 7px 9px;
+  }
+  .packaging-launch {
+    font-size: 10px;
+    margin: 2px 0 12px;
+  }
+}

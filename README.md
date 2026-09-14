@@ -219,6 +219,16 @@ The GitHub Actions workflow (`.github/workflows/validate-and-deploy.yml`) runs v
 
 ## Printed Cookie Checkout
 
+### Optional packaging film
+
+`order-packaging-film.mjs` controls a silent, sixteen-second 3D introduction in the opening preview: close up on the Make a Wish cookie, slide it into a clear sleeve, pack twelve separate cookies, close the window box, and rotate the ribboned box through 360 degrees. Desktop plays once. Mobile and reduced-motion visitors choose Play. Pause, scrubbing, replay, and Skip are available; selecting a design or uploading a photo cancels the film and releases its WebGL resources. Unsupported/failed 3D loading falls back to the existing packaging photograph without blocking ordering.
+
+`order-packaging-scene.mjs` owns the procedural cookie, sleeve, window box, ribbon, lighting, and shadows. `order-packaging-timeline.mjs` owns the deterministic camera and object choreography. The pinned, MIT-licensed Three.js modules live under `vendor/three` and load on demand. Drawing is capped at 30 frames per second and pauses offscreen or in a hidden tab. The scene follows `images/gallery/printed/wrapped-cookies-shipping-box.webp` and the existing gift-box reference; it is an illustrative first 3D pass, not a scan or dimensionally certified packaging model. This version uses the Make a Wish design, not the customer's current artwork.
+
+Tests: `node --test test/order-packaging-film.test.mjs` covers twelve unique slots, wrapping before packing, and the finite full turn. `node test/order-packaging-film.browser.cjs` uses the same browser/URL environment variables as the other walkthroughs and checks all key frames, uninterrupted playback, replay, editor handoff, reduced motion, mobile layout, and an unavailable-renderer fallback.
+
+### Design and ordering
+
 The opening screen offers **Choose a design**, **Make my own**, and **Help me find the words (AI, optional)**. There are nine authored designs: three birthdays, three anniversaries, and three thank-yous, filtered by occasion and personality. Customers can use a design as shown, personalize it, or start with their own photo.
 
 `order-studio-designs.mjs` defines the template catalog, twelve backgrounds (including rainbow and trans Pride flags), local pattern drawing, and editable text rendering. Background, optional photo, and words are separate layers. `order-studio-compose.mjs` owns their controls, including customer background uploads, lettering, colors, size, position, and optional names/dates. Text-only designs export a PNG source along with the clean print artwork and approved cookie preview, so the existing private order service receives the same three-file contract without requiring a customer photo.
