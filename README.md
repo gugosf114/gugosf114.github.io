@@ -219,7 +219,13 @@ The GitHub Actions workflow (`.github/workflows/validate-and-deploy.yml`) runs v
 
 ## Printed Cookie Checkout
 
-`buy-now.html` owns the guided shape, background, and exact-design approval flow. `buy-now-order.js` uploads the original photo, clean print artwork, and approved cookie preview before opening PayPal.
+`buy-now.html` is a single guided photo-cookie studio: upload → shape → background → position/edge correction → review → delivery → payment. It uses the customer's upload throughout, with no gallery or slideshow. `order-studio.css` owns its isolated layout and responsive styles; sitewide navigation and marketing styles do not load here.
+
+`order-studio.mjs` owns navigation, browser history, image edits, multi-photo orders, approval, and lazy payment loading. `order-studio-art.mjs` uses one normalized crop transform for the live cookie and saved print artwork. `order-studio-cutout.mjs` loads the pinned MediaPipe MagicTouch model only when a customer selects a subject; manual erase, restore, and undo work locally. The editor downsizes its working copy to a maximum 1600-pixel edge and retains the original file for the bakery.
+
+`order-studio-pricing.js` retains the existing $5 price, twelve-per-photo minimum, and FedEx estimate rules. `buy-now-order.js` uploads the original photo, clean print artwork, and approved cookie preview before opening PayPal. A failed upload must be retried and finalized; it cannot be reused as a ready session. Going back and editing a design revokes that design's approval. Order navigation is locked during the payment window and unlocked on cancel or error.
+
+Validation: `node --test test/*.test.mjs`. The real-browser walkthrough is `node test/order-studio.browser.cjs` (set `PLAYWRIGHT_MODULE` to an installed `playwright-core`, `CDP_URL` to an existing Chrome endpoint, and `STUDIO_URL` to the local page). It tests upload validation, crop and brush pixels, approval invalidation, multiple photos, quantity minimums, shipping, responsive layouts, and mocked checkout. All order API calls in that test are intercepted; it never places a real order. Preview locally with `python -m http.server 8765 --bind 127.0.0.1`, then open `/buy-now.html`.
 
 The private backend is `gugosf114/mbc-order-backend`. Its live Cloudflare Worker uses private R2 storage, a retry queue, server-side PayPal capture, Turnstile, and Resend. Never place its secret values in this public repository.
 

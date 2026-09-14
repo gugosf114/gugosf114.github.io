@@ -2,13 +2,17 @@
   'use strict';
 
   var API_BASE = (document.documentElement.dataset.orderApi || 'https://mbc-order-backend.summer-lake-b6ea.workers.dev').replace(/\/$/, '');
-  var session = null, preparing = null, turnstileWidget = null;
+  var session = null, preparing = null, turnstileWidget = null, revision = 0, paymentSession = null;
   var securityToken = '';
   var paidNote = document.getElementById('paypal-paid-note');
   var progress = document.getElementById('saveProgress');
   var progressText = document.getElementById('saveProgressText');
   var progressFill = document.getElementById('saveProgressFill');
   var securityNode = document.getElementById('orderSecurity');
+
+  function paymentState(locked) {
+    if (window.dispatchEvent) window.dispatchEvent(new CustomEvent('mbc:paymentstate', { detail: { locked: locked } }));
+  }
 
   function say(message, bad) {
     if (!paidNote) return;
@@ -113,8 +117,12 @@
       throw new Error('Approve every cookie design before you pay.');
     }
     var mark = fingerprint(currentQuote, designs);
-    if (session && session.fingerprint === mark) return session;
+    if (session && session.ready && session.fingerprint === mark) return session;
     if (!securityToken) throw new Error('Finish the secure order check above the PayPal button.');
+    var startedRevision = revision;
+    function assertCurrent() {
+      if (startedRevision !== revision) throw new Error('Your design changed. Approve it again before payment.');
+    }
 
     preparing = (async function () {
       showProgress('Opening your private order folder…', 4);
@@ -130,27 +138,33 @@
           turnstileToken: securityToken
         })
       });
-      session = { id: created.id, token: created.token, fingerprint: mark };
+      assertCurrent();
+      var uploadingSession = { id: created.id, token: created.token, fingerprint: mark, ready: false };
+      session = uploadingSession;
       turnstileReset();
 
       var completed = 0, fileCount = designs.length * 3;
       for (var index = 0; index < designs.length; index++) {
         var design = designs[index];
         showProgress('Saving original photo ' + design.slot + ' of ' + designs.length + '…', 8 + completed / fileCount * 74);
-        await upload(session, design, 'original', design.file, design.file.name || ('photo-' + design.slot));
+        assertCurrent();
+        await upload(uploadingSession, design, 'original', design.file, design.file.name || ('photo-' + design.slot));
         completed++;
         showProgress('Saving clean print art ' + design.slot + ' of ' + designs.length + '…', 8 + completed / fileCount * 74);
-        await upload(session, design, 'artwork', design.artworkBlob, 'design-' + design.slot + '-print-art.png');
+        assertCurrent();
+        await upload(uploadingSession, design, 'artwork', design.artworkBlob, 'design-' + design.slot + '-print-art.png');
         completed++;
         showProgress('Saving approved cookie ' + design.slot + ' of ' + designs.length + '…', 8 + completed / fileCount * 74);
-        await upload(session, design, 'approved', design.approvedBlob, 'design-' + design.slot + '-approved-cookie.png');
+        assertCurrent();
+        await upload(uploadingSession, design, 'approved', design.approvedBlob, 'design-' + design.slot + '-approved-cookie.png');
         completed++;
       }
 
       showProgress('Locking the exact designs you approved…', 88);
-      await api('/v1/designs/' + session.id + '/finalize', {
+      assertCurrent();
+      await api('/v1/designs/' + uploadingSession.id + '/finalize', {
         method: 'POST',
-        headers: { authorization: 'Bearer ' + session.token, 'content-type': 'application/json' },
+        headers: { authorization: 'Bearer ' + uploadingSession.token, 'content-type': 'application/json' },
         body: JSON.stringify({ designs: designs.map(function (design) {
           return {
             slot: design.slot,
@@ -161,10 +175,13 @@
           };
         }) })
       });
+      assertCurrent();
+      uploadingSession.ready = true;
       showProgress('Saved. Opening PayPal…', 100);
-      return session;
+      return uploadingSession;
     })().catch(function (error) {
-      if (!session) turnstileReset();
+      session = null;
+      turnstileReset();
       hideProgress();
       throw error;
     }).finally(function () { preparing = null; });
@@ -172,7 +189,7 @@
   }
 
   window.__mbcOrderUpload = {
-    invalidate: function () { session = null; preparing = null; hideProgress(); turnstileReset(); },
+    invalidate: function () { revision++; session = null; hideProgress(); turnstileReset(); },
     prepare: prepareOrder
   };
 
@@ -181,7 +198,7 @@
     var designs = approvedDesigns();
     if (!designs || !designs.length || designs.some(function (design) { return !design; })) return 'Approve every cookie design before you pay.';
     if (!currentQuote || !currentQuote.ready) return 'Enter the delivery ZIP and choose a FedEx speed before you pay.';
-    if (!securityToken && !session) return 'Finish the secure order check above the PayPal button.';
+    if (!securityToken && !(session && session.ready)) return 'Finish the secure order check above the PayPal button.';
     return '';
   }
 
@@ -191,7 +208,7 @@
       try {
         return await api('/v1/paypal/orders/' + encodeURIComponent(paypalOrderId) + '/capture', {
           method: 'POST',
-          headers: { authorization: 'Bearer ' + session.token, 'content-type': 'application/json' },
+          headers: { authorization: 'Bearer ' + (paymentSession || session).token, 'content-type': 'application/json' },
           body: '{}'
         });
       } catch (error) {
@@ -210,24 +227,28 @@
       if (problem) {
         say(problem, true);
         if (problem.indexOf('cookie design') >= 0 && window.__mbcDesignStudio) {
-          document.getElementById('designTray').scrollIntoView({ behavior: 'smooth', block: 'center' });
+          if (window.__mbcDesignStudio.openMissing) window.__mbcDesignStudio.openMissing();
+          else document.getElementById('designTray').scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
         return actions.reject();
       }
+      paymentState(true);
       say('Saving your approved files before PayPal opens…', false);
       return prepareOrder().then(function () { return actions.resolve(); }).catch(function (error) {
+        paymentState(false);
         say(error.message, true);
         return actions.reject();
       });
     },
     createOrder: function () {
       return prepareOrder().then(function (ready) {
+        paymentSession = ready;
         return api('/v1/paypal/orders', {
           method: 'POST',
           headers: { authorization: 'Bearer ' + ready.token, 'content-type': 'application/json' },
           body: '{}'
         });
-      }).then(function (data) { return data.id; });
+      }).then(function (data) { return data.id; }).catch(function (error) { paymentState(false); throw error; });
     },
     onShippingAddressChange: function (data, actions) {
       var currentQuote = quote();
@@ -244,20 +265,24 @@
           var element = document.querySelector(selector); if (element) element.style.display = 'none';
         });
         hideProgress();
+        paymentState(false);
         say('Payment received. Order ' + receipt.orderId + ' is complete. Your approved pictures and print files are with the bakery.', false);
         window.dispatchEvent(new CustomEvent('mbc:orderpaid', { detail: receipt }));
       }).catch(function (error) {
         hideProgress();
+        paymentState(false);
         say(error.message + ' Your saved order is still here. Tap PayPal once more so we can check it.', true);
       });
     },
     onCancel: function () {
       hideProgress();
+      paymentState(false);
       say('Payment was not made. Your approved design is still ready.', false);
     },
     onError: function () {
       hideProgress();
-      say('PayPal could not open. Your approved design is saved. Tap PayPal once more.', true);
+      paymentState(false);
+      say('PayPal could not open. Your design is still here. Try payment again.', true);
     }
   }).render('#paypal-button-container');
 })();
