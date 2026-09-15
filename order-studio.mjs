@@ -6,11 +6,11 @@ import {
   cookiePoint,
   quantities,
   blobOf,
-} from "./order-studio-art.mjs?v=thin-sleeve-2";
+} from "./order-studio-art.mjs?v=spherical-pops-1";
 import { cutSubject } from "./order-studio-cutout.mjs";
-import { createTemplate } from "./order-studio-designs.mjs?v=thin-sleeve-2";
-import { initComposer } from "./order-studio-compose.mjs?v=thin-sleeve-2";
-import { initPackagingFilm } from "./order-packaging-film.mjs?v=thin-sleeve-2";
+import { createTemplate } from "./order-studio-designs.mjs?v=spherical-pops-1";
+import { initComposer } from "./order-studio-compose.mjs?v=spherical-pops-1";
+import { initPackagingFilm } from "./order-packaging-film.mjs?v=spherical-pops-1";
 
 const $ = (id) => document.getElementById(id);
 const panels = [...document.querySelectorAll("[data-panel]")];

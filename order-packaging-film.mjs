@@ -1,4 +1,4 @@
-import { filmFrame } from "./order-packaging-timeline.mjs?v=thin-sleeve-2";
+import { filmFrame } from "./order-packaging-timeline.mjs?v=spherical-pops-1";
 
 // A silent, once-per-visit introduction. Ordering always takes priority.
 export function initPackagingFilm({ canPlay }) {
@@ -92,7 +92,7 @@ export function initPackagingFilm({ canPlay }) {
     started = true;
     host.hidden = false;
     const attempt = ++revision;
-    if (!video.getAttribute("src")) video.src = "media/cookie-packaging.mp4?v=thin-sleeve-2";
+    if (!video.getAttribute("src")) video.src = "media/cookie-packaging.mp4?v=spherical-pops-1";
     ui("loading");
     try {
       await video.play();

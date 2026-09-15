@@ -53,10 +53,7 @@ const pw = require(process.env.PLAYWRIGHT_MODULE || "playwright-core");
         family: ["Keep a little memory.", "Your favorite faces, printed on icing."],
         baby: ["Celebrate a first.", "A face. A name. A moment to remember."],
         business: ["Make your brand memorable.", "Company logos, beautifully baked."],
-        wrap: ["A little sleeve of its own.", "Each cookie slides into a clear pouch."],
-        peel: ["Peel back the liner.", "Reveal the self-adhesive strip."],
-        seal: ["Fold. Press. Sealed.", "The clear flap closes over the opening."],
-        sealed: ["Ready to tuck inside.", "Individually sealed in a resealable sleeve."],
+        wrap: ["Wrapped one by one.", "A clear sleeve for every cookie."],
         pack: ["So many ways to make their day.", "Your moments. Your message. Your brand."],
         finish: [
           "Ready to make their day.",
