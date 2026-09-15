@@ -1,4 +1,4 @@
-// Render the saved 3D scene to a portable 1080p, 30 fps MP4. Requires FFmpeg and an existing test Chrome.
+// Render the saved 3D scene to a portable 1080p, 30 fps MP4. Requires FFmpeg and a rendering Chrome session.
 const fs = require("node:fs"),
   path = require("node:path"),
   { spawn } = require("node:child_process");
@@ -20,12 +20,12 @@ const pw = require(process.env.PLAYWRIGHT_MODULE || "playwright-core");
       const [
         { createPackagingScene },
         { drawArtwork, canvas },
-        { createTemplate },
-        { filmFrame },
+        { createFilmArtwork },
+        { filmFrame, DURATION, progress },
       ] = await Promise.all([
         import("./order-packaging-scene.mjs"),
         import("./order-studio-art.mjs"),
-        import("./order-studio-designs.mjs"),
+        import("./order-packaging-art.mjs"),
         import("./order-packaging-timeline.mjs"),
       ]);
       await Promise.all([
@@ -41,15 +41,19 @@ const pw = require(process.env.PLAYWRIGHT_MODULE || "playwright-core");
       mount.style.cssText =
         "position:fixed;left:-2000px;top:0;width:1080px;height:900px;";
       document.body.append(mount);
-      const art = canvas(1024);
-      drawArtwork(art, createTemplate("birthday-wish"));
+      const art = await createFilmArtwork();
+      window.packagingExportFrames = DURATION * 30;
       const scene = createPackagingScene(mount, art, undefined, brandLogo),
         output = canvas(1080);
       const ctx = output.getContext("2d");
+      const opening = canvas(1080);
       const words = {
-        cookie: ["A little cookie.", "Your idea, printed on icing."],
+        cookie: ["Make a little wish.", "Start with a design. Make it yours."],
+        family: ["Keep a little memory.", "Your favorite faces, printed on icing."],
+        baby: ["Celebrate a first.", "A face. A name. A moment to remember."],
+        business: ["Make your brand memorable.", "Company logos, beautifully baked."],
         wrap: ["Wrapped one by one.", "A clear sleeve for every cookie."],
-        pack: ["Twelve little moments.", "Packed together in a gift box."],
+        pack: ["So many ways to make their day.", "Your moments. Your message. Your brand."],
         finish: [
           "Ready to make their day.",
           "A window box, finished with a bow.",
@@ -69,6 +73,11 @@ const pw = require(process.env.PLAYWRIGHT_MODULE || "playwright-core");
         ctx.fillStyle = "#82665b";
         ctx.font = '600 23px "Nunito", Arial';
         ctx.fillText(text[1], 540, 1020);
+        if (t === 0) opening.getContext("2d").drawImage(output,0,0);
+        if (t >= 19.35) {
+          ctx.globalAlpha = progress(t,19.35,19.97);
+          ctx.drawImage(opening,0,0); ctx.globalAlpha = 1;
+        }
         return output.toDataURL("image/png").split(",")[1];
       };
       window.disposePackagingExport = () => {
@@ -111,7 +120,8 @@ const pw = require(process.env.PLAYWRIGHT_MODULE || "playwright-core");
         code === 0 ? resolve() : reject(new Error("Encoder exit " + code)),
       ),
     );
-    for (let i = 0; i < 480; i++) {
+    const frames = await page.evaluate(() => window.packagingExportFrames);
+    for (let i = 0; i < frames; i++) {
       const frame = Buffer.from(
         await page.evaluate((t) => window.exportPackagingFrame(t), i / 30),
         "base64",
@@ -119,7 +129,7 @@ const pw = require(process.env.PLAYWRIGHT_MODULE || "playwright-core");
       if (!encoder.stdin.write(frame))
         await new Promise((r) => encoder.stdin.once("drain", r));
       if (i === 0) fs.writeFileSync("media/cookie-packaging-poster.png", frame);
-      if (i % 60 === 0) console.log("Rendered " + i + "/480 frames");
+      if (i % 60 === 0) console.log("Rendered " + i + "/" + frames + " frames");
     }
     encoder.stdin.end();
     await completion;

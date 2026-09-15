@@ -1,5 +1,5 @@
 import * as T from "./vendor/three/three.module.min.js";
-import { filmFrame, DURATION } from "./order-packaging-timeline.mjs";
+import { filmFrame, DURATION, HERO_COOKIE } from "./order-packaging-timeline.mjs";
 
 function noiseTexture(color = false) {
   const c = document.createElement("canvas");
@@ -163,9 +163,15 @@ export function createPackagingScene(mount, artwork, onContextLost, brandLogo) {
   const bump = trackTexture(noiseTexture()),
     crumb = trackTexture(noiseTexture(true)),
     label = trackTexture(labelTexture(brandLogo)),
-    print = trackTexture(new T.CanvasTexture(artwork));
+    print = trackTexture(new T.CanvasTexture(artwork.hero || artwork));
   print.colorSpace = T.SRGBColorSpace;
   print.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+  const rowPrints = (artwork.rows || [artwork,artwork,artwork]).map(source => {
+    const texture = trackTexture(new T.CanvasTexture(source));
+    texture.colorSpace = T.SRGBColorSpace;
+    texture.anisotropy = print.anisotropy;
+    return texture;
+  });
   // Large studio softboxes produce broad reflections in the wrapper and lid.
   const room = new T.Scene();
   room.background = new T.Color("#dfd7ca");
@@ -255,6 +261,9 @@ export function createPackagingScene(mount, artwork, onContextLost, brandLogo) {
       bumpScale: 0.002,
     }),
   );
+  const rowMaterials = rowPrints.map(map => mat(new T.MeshStandardMaterial({
+    map, roughness:.62, bumpMap:bump, bumpScale:.002,
+  })));
   const bagHeroMat = mat(
     new T.MeshPhysicalMaterial({
       color: "#ffffff",
@@ -306,13 +315,13 @@ export function createPackagingScene(mount, artwork, onContextLost, brandLogo) {
     icing.position.y = 0.137;
     icing.castShadow = true;
     group.add(icing);
-    const face = new T.Mesh(printGeo, printMat);
+    const face = new T.Mesh(printGeo, i === HERO_COOKIE ? printMat : rowMaterials[Math.floor(i/4)]);
     face.rotation.x = -Math.PI / 2;
     face.position.y = 0.172;
     face.receiveShadow = true;
     group.add(face);
     const bag = new T.Group();
-    bag.add(new T.Mesh(topBagGeo, i === 0 ? bagHeroMat : bagMat));
+    bag.add(new T.Mesh(topBagGeo, i === HERO_COOKIE ? bagHeroMat : bagMat));
     bag.add(new T.Mesh(bottomBagGeo, bagMat));
     for (const z of [-1.44, 1.44]) {
       const seam = new T.Mesh(seamGeo, seamMat);
@@ -468,13 +477,14 @@ export function createPackagingScene(mount, artwork, onContextLost, brandLogo) {
     if (disposed) return;
     const frame = filmFrame(seconds);
     lastFrame = frame;
+    if (artwork.update?.(seconds)) print.needsUpdate = true;
     camera.position.set(...frame.camera);
     camera.lookAt(...frame.target);
     root.rotation.y = frame.rotation;
     box.visible = frame.box > 0;
     box.position.y = -(1 - frame.box) * 1.2;
     box.scale.setScalar(0.94 + frame.box * 0.06);
-    lid.visible = seconds >= 10.4;
+    lid.visible = frame.lid > 0;
     lid.position.set(0, 0.71 + (1 - frame.lid) * 4.8, -(1 - frame.lid) * 0.5);
     lid.rotation.x = -(1 - frame.lid) * 0.22;
     gift.visible = frame.lid > 0.55;
@@ -484,8 +494,8 @@ export function createPackagingScene(mount, artwork, onContextLost, brandLogo) {
       group.visible = state.visible;
       group.position.set(...state.position);
       group.rotation.set(...state.rotation);
-      bag.visible = i > 0 || frame.wrapper > 0;
-      bag.position.z = i === 0 ? -(1 - frame.wrapper) * 3.45 : 0;
+      bag.visible = i !== HERO_COOKIE || frame.wrapper > 0;
+      bag.position.z = i === HERO_COOKIE ? -(1 - frame.wrapper) * 3.45 : 0;
     });
     renderer.render(scene, camera);
     mount.dataset.phase = frame.phase;
