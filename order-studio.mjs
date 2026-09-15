@@ -6,11 +6,11 @@ import {
   cookiePoint,
   quantities,
   blobOf,
-} from "./order-studio-art.mjs?v=square-default-1";
+} from "./order-studio-art.mjs?v=mbc-brand-1";
 import { cutSubject } from "./order-studio-cutout.mjs";
-import { createTemplate } from "./order-studio-designs.mjs?v=square-default-1";
-import { initComposer } from "./order-studio-compose.mjs?v=square-default-1";
-import { initPackagingFilm } from "./order-packaging-film.mjs?v=square-default-1";
+import { createTemplate } from "./order-studio-designs.mjs?v=mbc-brand-1";
+import { initComposer } from "./order-studio-compose.mjs?v=mbc-brand-1";
+import { initPackagingFilm } from "./order-packaging-film.mjs?v=mbc-brand-1";
 
 const $ = (id) => document.getElementById(id);
 const panels = [...document.querySelectorAll("[data-panel]")];

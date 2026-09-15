@@ -108,27 +108,28 @@ function ribbonStrip(points, width, twist = 0) {
   g.computeVertexNormals();
   return g;
 }
-function labelTexture() {
+function labelTexture(brandLogo) {
   const c = document.createElement("canvas");
   c.width = c.height = 512;
   const ctx = c.getContext("2d");
   ctx.fillStyle = "#fffdf7";
   ctx.fillRect(0, 0, 512, 512);
-  ctx.fillStyle = "#cb2366";
+  if (brandLogo) ctx.drawImage(brandLogo, 144, 54, 224, 206);
   ctx.textAlign = "center";
-  ctx.font = "700 108px Georgia";
-  ctx.fillText("m", 256, 210);
-  ctx.fillStyle = "#39253f";
-  ctx.font = "500 41px Arial";
-  ctx.fillText("my baking", 256, 282);
-  ctx.font = "700 47px Arial";
-  ctx.fillText("creations", 256, 337);
+  ctx.font = '400 51px "Fredoka One", Arial';
+  ctx.fillStyle = "#EC268F";
+  ctx.fillText("my", 167, 330);
+  ctx.fillStyle = "#FFC532";
+  ctx.fillText("baking", 289, 330);
+  ctx.fillStyle = "#EC268F";
+  ctx.font = '800 35px "Nunito", Arial';
+  ctx.fillText("C R E A T I O N S", 256, 382);
   const texture = new T.CanvasTexture(c);
   texture.colorSpace = T.SRGBColorSpace;
   return texture;
 }
 
-export function createPackagingScene(mount, artwork, onContextLost) {
+export function createPackagingScene(mount, artwork, onContextLost, brandLogo) {
   const renderer = new T.WebGLRenderer({
     antialias: true,
     alpha: false,
@@ -150,8 +151,8 @@ export function createPackagingScene(mount, artwork, onContextLost) {
   };
   renderer.domElement.addEventListener("webglcontextlost", contextLost);
   const scene = new T.Scene();
-  scene.background = new T.Color("#eeedf6");
-  scene.fog = new T.Fog("#eeedf6", 35, 80);
+  scene.background = new T.Color("#efe9dc");
+  scene.fog = new T.Fog("#efe9dc", 35, 80);
   const camera = new T.PerspectiveCamera(34, 1, 0.1, 100);
   const textures = [],
     materials = [],
@@ -161,15 +162,15 @@ export function createPackagingScene(mount, artwork, onContextLost) {
     geom = (x) => (geometries.push(x), x);
   const bump = trackTexture(noiseTexture()),
     crumb = trackTexture(noiseTexture(true)),
-    label = trackTexture(labelTexture()),
+    label = trackTexture(labelTexture(brandLogo)),
     print = trackTexture(new T.CanvasTexture(artwork));
   print.colorSpace = T.SRGBColorSpace;
   print.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
   // Large studio softboxes produce broad reflections in the wrapper and lid.
   const room = new T.Scene();
-  room.background = new T.Color("#d5d0d9");
+  room.background = new T.Color("#dfd7ca");
   const roomGeo = new T.BoxGeometry(40, 30, 40),
-    roomMat = new T.MeshBasicMaterial({ color: "#b9b3c1", side: T.BackSide });
+    roomMat = new T.MeshBasicMaterial({ color: "#c7bca9", side: T.BackSide });
   room.add(new T.Mesh(roomGeo, roomMat));
   const lightPlanes = [];
   for (const [position, scale, intensity] of [
@@ -217,7 +218,7 @@ export function createPackagingScene(mount, artwork, onContextLost) {
     geom(new T.PlaneGeometry(160, 160)),
     mat(
       new T.MeshStandardMaterial({
-        color: "#eeedf6",
+        color: "#efe9dc",
         roughness: 1,
         metalness: 0,
       }),
@@ -342,7 +343,7 @@ export function createPackagingScene(mount, artwork, onContextLost) {
     );
   const ribbonMat = mat(
     new T.MeshPhysicalMaterial({
-      color: "#de197b",
+      color: "#ec268f",
       roughness: 0.34,
       metalness: 0.08,
       sheen: 0.7,

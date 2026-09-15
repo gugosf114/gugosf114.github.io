@@ -9,8 +9,8 @@ import {
   messageSuggestions,
   suggestAiMessages,
   drawBackground,
-} from "./order-studio-designs.mjs?v=square-default-1";
-import { drawCookie, canvas } from "./order-studio-art.mjs?v=square-default-1";
+} from "./order-studio-designs.mjs?v=mbc-brand-1";
+import { drawCookie, canvas } from "./order-studio-art.mjs?v=mbc-brand-1";
 
 export function initComposer(api) {
   const $ = (id) => document.getElementById(id);

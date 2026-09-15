@@ -92,7 +92,7 @@ export function initPackagingFilm({ canPlay }) {
     started = true;
     host.hidden = false;
     const attempt = ++revision;
-    if (!video.getAttribute("src")) video.src = "media/cookie-packaging.mp4?v=square-1";
+    if (!video.getAttribute("src")) video.src = "media/cookie-packaging.mp4?v=mbc-brand-1";
     ui("loading");
     try {
       await video.play();

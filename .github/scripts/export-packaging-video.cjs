@@ -28,14 +28,22 @@ const pw = require(process.env.PLAYWRIGHT_MODULE || "playwright-core");
         import("./order-studio-designs.mjs"),
         import("./order-packaging-timeline.mjs"),
       ]);
+      await Promise.all([
+        document.fonts.load('400 39px "Fredoka One"'),
+        document.fonts.load('600 23px "Nunito"'),
+        document.fonts.load('500 39px "DM Sans"'),
+      ]);
       await document.fonts.ready;
+      const brandLogo = new Image();
+      brandLogo.src = "logo_icon.png";
+      await brandLogo.decode();
       const mount = document.createElement("div");
       mount.style.cssText =
         "position:fixed;left:-2000px;top:0;width:1080px;height:900px;";
       document.body.append(mount);
       const art = canvas(1024);
       drawArtwork(art, createTemplate("birthday-wish"));
-      const scene = createPackagingScene(mount, art),
+      const scene = createPackagingScene(mount, art, undefined, brandLogo),
         output = canvas(1080);
       const ctx = output.getContext("2d");
       const words = {
@@ -50,16 +58,16 @@ const pw = require(process.env.PLAYWRIGHT_MODULE || "playwright-core");
       };
       window.exportPackagingFrame = (t) => {
         scene.render(t);
-        ctx.fillStyle = "#eeedf6";
+        ctx.fillStyle = "#efe9dc";
         ctx.fillRect(0, 0, 1080, 1080);
         ctx.drawImage(mount.querySelector("canvas"), 0, 0, 1080, 900);
         const text = words[filmFrame(t).phase];
         ctx.textAlign = "center";
-        ctx.fillStyle = "#32283f";
-        ctx.font = '500 39px "DM Sans", Arial';
+        ctx.fillStyle = "#622d2b";
+        ctx.font = '400 39px "Fredoka One", Arial';
         ctx.fillText(text[0], 540, 973);
-        ctx.fillStyle = "#71637d";
-        ctx.font = '400 23px "DM Sans", Arial';
+        ctx.fillStyle = "#82665b";
+        ctx.font = '600 23px "Nunito", Arial';
         ctx.fillText(text[1], 540, 1020);
         return output.toDataURL("image/png").split(",")[1];
       };

@@ -1,16 +1,16 @@
 :root {
-  --paper: #f8f9fc;
+  --paper: #fdfbf8;
   --white: #fff;
-  --ink: #292237;
-  --muted: #716c7d;
-  --line: #e2e1e9;
-  --accent: #cb2366;
-  --accent-hover: #aa1852;
-  --lavender: #eeedf6;
-  --violet: #655381;
+  --ink: #622d2b;
+  --muted: #82665b;
+  --line: #e6dbcd;
+  --accent: #ec268f;
+  --accent-hover: #d11f7e;
+  --lavender: #efe9dc;
+  --violet: #a6446b;
   --green: #34745b;
   --error: #ad2844;
-  font-family: "DM Sans", sans-serif;
+  font-family: "Nunito", sans-serif;
   color: var(--ink);
   background: var(--paper);
   font-synthesis: none;
@@ -108,30 +108,6 @@ svg {
   letter-spacing: -0.3px;
   flex-shrink: 0;
 }
-.wordmark strong {
-  font-weight: 700;
-  font-size: 18px;
-}
-.brand-mark {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  color: var(--accent);
-  font-size: 45px;
-  font-weight: 700;
-  letter-spacing: -4px;
-  line-height: 1;
-  padding-bottom: 8px;
-}
-.brand-mark span {
-  font-size: 28px;
-  position: absolute;
-  top: -7px;
-  right: 0;
-  letter-spacing: 0;
-}
 .journey ol {
   display: flex;
   align-items: center;
@@ -186,7 +162,7 @@ svg {
   height: 19px;
   display: grid;
   place-items: center;
-  border: 1px solid #aaa5b5;
+  border: 1px solid #b59c89;
   border-radius: 50%;
   font-size: 11px;
 }
@@ -240,7 +216,7 @@ h1:focus {
   animation: step-in 0.23s ease-out;
 }
 .upload-zone {
-  border: 1px dashed #b9afc9;
+  border: 1px dashed #cbb9a4;
   background: #fff;
   width: 100%;
   padding: 25px 18px 23px;
@@ -260,7 +236,7 @@ h1:focus {
   display: grid;
   place-items: center;
   border-radius: 12px;
-  background: #f4f0f9;
+  background: #f6f0e6;
   color: var(--violet);
   width: 44px;
   height: 44px;
@@ -350,21 +326,21 @@ h1:focus {
   width: 72%;
   aspect-ratio: 1;
   border-radius: 50%;
-  border: 1px solid #dcd9e8;
+  border: 1px solid #e6dbcd;
   z-index: -1;
 }
 .stage-orbit:before {
   content: "";
   position: absolute;
   inset: -25px;
-  border: 1px solid #e2dfed;
+  border: 1px solid #e6dbcd;
   border-radius: 50%;
 }
 .stage-orbit:after {
   content: "";
   position: absolute;
   inset: -51px;
-  border: 1px solid #e5e2ef;
+  border: 1px solid #e8ded1;
   border-radius: 50%;
 }
 #cookiePreview {
@@ -419,7 +395,7 @@ body:not([data-step="upload"]) #cookiePreview {
   align-items: center;
   gap: 9px;
   padding: 6px 11px 6px 6px;
-  box-shadow: 0 4px 18px #29223709;
+  box-shadow: 0 4px 18px #622d2b09;
   z-index: 3;
   backdrop-filter: blur(8px);
 }
@@ -465,7 +441,7 @@ body:not([data-step="upload"]) #cookiePreview {
   align-items: center;
   justify-content: center;
   gap: 13px;
-  background: #eeedf6e8;
+  background: #efe9dce8;
   backdrop-filter: blur(7px);
   border-radius: 18px;
   z-index: 5;
@@ -483,7 +459,7 @@ body:not([data-step="upload"]) #cookiePreview {
 .spinner {
   width: 28px;
   height: 28px;
-  border: 2px solid #cdc6da;
+  border: 2px solid #d7c5ae;
   border-top-color: var(--accent);
   border-radius: 50%;
   animation: spin 0.85s linear infinite;
@@ -496,7 +472,7 @@ progress {
   accent-color: var(--accent);
 }
 progress::-webkit-progress-bar {
-  background: #ddd5e4;
+  background: #e4d4c0;
   border-radius: 8px;
 }
 progress::-webkit-progress-value {
@@ -514,7 +490,7 @@ progress::-webkit-progress-value {
   min-height: 92px;
   padding: 16px 4.5%;
   border-top: 1px solid var(--line);
-  background: #f8f9fcf5;
+  background: #fdfbf8f5;
   backdrop-filter: blur(14px);
 }
 .footer-left,
@@ -661,7 +637,7 @@ progress::-webkit-progress-value {
   font-size: 13px;
   line-height: 1.6;
   color: var(--violet);
-  background: #efedf5;
+  background: #f3ebde;
   border-radius: 9px;
   padding: 13px 15px;
   margin: 18px 0 0;
@@ -1017,10 +993,10 @@ dialog {
   max-width: 430px;
   width: calc(100% - 32px);
   color: var(--ink);
-  box-shadow: 0 25px 100px #29223722;
+  box-shadow: 0 25px 100px #622d2b22;
 }
 dialog::backdrop {
-  background: #29223766;
+  background: #622d2b66;
   backdrop-filter: blur(5px);
 }
 dialog h2 {
@@ -1669,7 +1645,7 @@ body[data-selection="remove"] .preview-status:before {
   font-style: normal;
   font-size: 9px;
   color: var(--violet);
-  background: #f0ebf7;
+  background: #f6eddf;
   padding: 3px 5px;
   border-radius: 4px;
   margin-left: 4px;
@@ -1785,7 +1761,7 @@ body[data-step="templates"] .step-description {
   display: block;
   width: 100%;
   height: auto;
-  background: #f4f3f8;
+  background: #f6f1e8;
   border-radius: 10px;
   margin-bottom: 17px;
 }
@@ -1968,7 +1944,7 @@ input[type="color"] {
   color: var(--violet);
   font-size: 11px;
   line-height: 1.65;
-  background: #eeedf6;
+  background: #efe9dc;
   border-radius: 9px;
   padding: 14px;
   margin: 0 0 20px;
@@ -2201,7 +2177,7 @@ body[data-step="ai"] .workspace-preview {
   position: absolute;
   inset: 0;
   z-index: 5;
-  background: #eeedf6;
+  background: #efe9dc;
   border-radius: 15px;
   overflow: hidden;
   pointer-events: none;
@@ -2303,3 +2279,23 @@ body[data-step="ai"] .workspace-preview {
 .corporate-logo-upload { border:0;border-radius:8px;background:#263b57;color:#fff;padding:13px 10px;font-family:inherit;font-size:12px;font-weight:600; }
 .corporate-logo-tools label { display:block;font-size:10px;color:#45617e;margin-bottom:5px; }
 .corporate-logo-tools p { grid-column:1 / -1;margin:0;color:#536b83;font-size:11px;line-height:1.5; }
+
+/* Match the established MBC identity while retaining the studio layout. */
+:root { --brand-yellow: #ffc532; --brand-brown: #622d2b; }
+.wordmark { gap: 10px; letter-spacing: 0; }
+.brand-logo-icon { display: block; width: 54px; height: auto; flex-shrink: 0; }
+.brand-logo-type { font-family: "Fredoka One", cursive; font-size: 27px; line-height: 1.1; white-space: nowrap; }
+.brand-my { color: var(--accent); }
+.brand-baking { color: var(--brand-yellow); }
+.brand-creations { display: block; margin-top: 3px; font-family: "Nunito", sans-serif; font-weight: 800; font-size: 12px; letter-spacing: 3px; color: var(--accent); }
+h1, dialog h2 { font-family: "Fredoka One", cursive; font-weight: 400; letter-spacing: -.025em; line-height: 1.12; }
+.primary { background: var(--brand-yellow); color: var(--brand-brown); font-weight: 800; box-shadow: 0 3px 8px #ffc53225; }
+.primary:hover:not(:disabled) { background: #e5af2d; }
+textarea { font-family: inherit; }
+@media (max-width: 760px) {
+  .wordmark { gap: 8px; }
+  .brand-logo-icon { width: 43px; }
+  .brand-logo-type { font-size: 23px; }
+  .brand-creations { font-size: 10px; letter-spacing: 2.5px; }
+  h1 { letter-spacing: -.025em; }
+}
