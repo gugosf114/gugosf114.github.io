@@ -26,8 +26,8 @@ export function filmFrame(value) {
   }
   if(t>=19.2) {
     const p=progress(t,19.2,22.5);
-    camera=vector([7.7,18.7,18],[10.8,18.3,20],p);
-    target=vector([0,1.2,-.8],[.6,1.4,-.65],p);
+    camera=vector([7.7,18.7,18],[10.5,21,25],p);
+    target=vector([0,1.2,-.8],[-.4,1.5,.3],p);
   }
   const heroRotation = t<8
     ? [.78+.065*Math.sin(t*Math.PI/4),-.14*Math.sin(t*Math.PI/4),-.055]

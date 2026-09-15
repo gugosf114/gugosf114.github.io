@@ -312,7 +312,7 @@ export function createPackagingScene(mount, artwork, onContextLost, brandLogo, q
     root.add(group);
     cookies.push({ group, bag });
   }
-  const packaging = createRealPackaging({root,scene,geom,mat,trackTexture,bump,label,qrImage});
+  const packaging = createRealPackaging({root,scene,geom,mat,trackTexture,bump,label,qrImage,artwork});
   let disposed = false,
     lastFrame = filmFrame(0);
   function resize() {

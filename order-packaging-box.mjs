@@ -1,8 +1,9 @@
 import * as T from './vendor/three/three.module.min.js';
+import { addServingProducts } from './order-packaging-serving.mjs';
 
 // Built from George's September 14 box photos: white folding board,
 // shaped window, attached rear hinge, corner labels and crinkle fill.
-export function createRealPackaging({ root, scene, geom, mat, trackTexture, bump, label, qrImage }) {
+export function createRealPackaging({ root, scene, geom, mat, trackTexture, bump, label, qrImage, artwork }) {
   const white = mat(new T.MeshStandardMaterial({color:'#fffdf9',roughness:.86,bumpMap:bump,bumpScale:.004,side:T.DoubleSide}));
   const foldInk = mat(new T.LineBasicMaterial({color:'#d1cbc2',transparent:true,opacity:.62}));
   const box = new T.Group(); root.add(box);
@@ -30,8 +31,12 @@ export function createRealPackaging({ root, scene, geom, mat, trackTexture, bump
   const random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
   const positions=[], colors=[];
   for(let strip=0;strip<1350;strip++) {
-    const x=(random()-.5)*10.15,z=(random()-.5)*7.8,angle=random()*Math.PI*2;
+    const angle=random()*Math.PI*2;
     const length=.3+random()*.9,width=.023+random()*.026,level=.22+random()*.35;
+    const inset=length/2+.13;
+    const x=(random()-.5)*(10.4-2*inset),z=(random()-.5)*(8.0-2*inset);
+    const insideX=v=>Math.max(-5.20,Math.min(5.20,v));
+    const insideZ=v=>Math.max(-4.00,Math.min(4.00,v));
     const shade=.84+random()*.16;
     const points=[];
     for(let j=0;j<=12;j++) {
@@ -39,7 +44,7 @@ export function createRealPackaging({ root, scene, geom, mat, trackTexture, bump
       const px=x+Math.cos(angle)*along-Math.sin(angle)*bend;
       const pz=z+Math.sin(angle)*along+Math.cos(angle)*bend;
       const y=level+(j%2?.052:-.017)+Math.sin(j/12*Math.PI)*.035;
-      points.push([px-Math.sin(angle)*width,y,pz+Math.cos(angle)*width],[px+Math.sin(angle)*width,y+.007,pz-Math.cos(angle)*width]);
+      points.push([insideX(px-Math.sin(angle)*width),y,insideZ(pz+Math.cos(angle)*width)],[insideX(px+Math.sin(angle)*width),y+.007,insideZ(pz-Math.cos(angle)*width)]);
     }
     for(let j=0;j<12;j++) for(const k of [j*2,j*2+1,j*2+2,j*2+1,j*2+3,j*2+2]) {
       positions.push(...points[k]); colors.push(shade,shade,shade*.99);
@@ -103,6 +108,7 @@ export function createRealPackaging({ root, scene, geom, mat, trackTexture, bump
   const plateGeo=geom(new T.LatheGeometry([new T.Vector2(0,0),new T.Vector2(.9,0),new T.Vector2(1.24,.07),new T.Vector2(1.53,.19),new T.Vector2(1.55,.24),new T.Vector2(1.49,.27),new T.Vector2(1.17,.15),new T.Vector2(.9,.08),new T.Vector2(0,.08)],64));
   for(let i=0;i<3;i++){const plate=new T.Mesh(plateGeo,ceramic);plate.position.set(8,.08+i*.13,1);plate.castShadow=true;plate.receiveShadow=true;table.add(plate);}
   for(const x of [-11,11])block(table,[.8,6,.8],[x,-3.55,6],oak);
+  addServingProducts({table,geom,mat,trackTexture,bump,artwork});
   return {box,update(frame) {
     box.visible=frame.box>0;box.position.y=-(1-frame.box)*1.7;
     lid.rotation.x=-1.93*(1-frame.lid);
