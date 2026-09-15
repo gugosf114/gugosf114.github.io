@@ -11,3 +11,5 @@ Packaging geometry follows the white hinged box in local reference photos 100000
 Serving additions: the nine cake pops on the gold stand follow the disc-and-stick presentation in Downloads/2703.webp, with all three film designs repeated by column. One bitten Make-a-wish cookie sits on the stacked dessert plates. Every crinkle-paper vertex is bounded inside the white box walls.
 
 Cake-pop correction: the three photos in Downloads/cake pops for astra (Alaska Airlines, DocuSign, Flying Princess) establish rounded dipped bodies, glossy red/yellow/pink coatings, smaller circular print wafers and long white sticks. The film retains its wish/baby/Google artwork, with yellow/pink/red coatings respectively.
+
+Final cake-pop construction correction: heads are complete spheres. Thin circular fondant patches conform to the sphere and carry circularly cropped wish, baby and Google prints. There is no flattened cake-ball face or square print inset.

@@ -1,7 +1,7 @@
 import * as T from './vendor/three/three.module.min.js';
 
 // Reference: Alaska Airlines, DocuSign and Flying Princess cake-pop photos.
-// Rounded dipped bodies with a flattened face and a smaller edible print wafer.
+// Fully spherical cake balls with thin circular fondant patches following the ball surface.
 export function addServingProducts({table,geom,mat,trackTexture,bump,artwork}) {
   const mesh=(parent,geometry,material,position)=>{
     const m=new T.Mesh(geom(geometry),material);m.position.set(...position);
@@ -14,21 +14,44 @@ export function addServingProducts({table,geom,mat,trackTexture,bump,artwork}) {
   mesh(pops,new T.BoxGeometry(4.8,.53,4.0),gold,[0,.15,0]);
   const textures=artwork.rows.map(source=>{
     const c=document.createElement('canvas');c.width=c.height=1024;const x=c.getContext('2d');
-    x.fillStyle='#fffaf0';x.fillRect(0,0,1024,1024);x.drawImage(source,123,123,778,778);
+    x.beginPath();x.arc(512,512,512,0,Math.PI*2);x.clip();
+    x.fillStyle='#fffaf0';x.fillRect(0,0,1024,1024);x.drawImage(source,0,0,1024,1024);
     const t=trackTexture(new T.CanvasTexture(c));t.colorSpace=T.SRGBColorSpace;t.anisotropy=8;return t;
   });
   const printed=textures.map(map=>mat(new T.MeshStandardMaterial({map,roughness:.56,bumpMap:bump,bumpScale:.001})));
   const coatings=['#f5d614','#ed4d98','#cf1730'].map(color=>mat(new T.MeshPhysicalMaterial({
     color,roughness:.27,clearcoat:.46,clearcoatRoughness:.22,bumpMap:bump,bumpScale:.002,
   })));
-  // The front is a flat cap; the rest stays round, so coating cannot poke through the print.
-  const popProfile=[
-    [0,-.65],[.20,-.625],[.37,-.55],[.52,-.42],[.63,-.23],
-    [.68,0],[.663,.16],[.61,.32],[.54,.46],[.52,.49],[0,.49],
-  ].map(([r,y])=>new T.Vector2(r,y));
-  const popGeometry=geom(new T.LatheGeometry(popProfile,64));popGeometry.rotateX(Math.PI/2);
-  const waferGeometry=geom(new T.CylinderGeometry(.505,.505,.018,64));waferGeometry.rotateX(Math.PI/2);
-  const printGeometry=geom(new T.CircleGeometry(.493,64));
+  const popGeometry=geom(new T.SphereGeometry(.68,64,40));
+  // Spherical caps retain a round perimeter while draping the fondant onto the ball.
+  const fondantCap=(radius,maxAngle)=>{
+    const positions=[],uvs=[],indices=[],rings=24,segments=64;
+    const projectedRadius=radius*Math.sin(maxAngle);
+    for(let ring=0;ring<=rings;ring++)for(let segment=0;segment<=segments;segment++) {
+      const theta=maxAngle*ring/rings,phi=Math.PI*2*segment/segments;
+      const x=radius*Math.sin(theta)*Math.cos(phi),y=radius*Math.sin(theta)*Math.sin(phi);
+      positions.push(x,y,radius*Math.cos(theta));
+      uvs.push(.5+x/(2*projectedRadius),.5+y/(2*projectedRadius));
+    }
+    for(let ring=0;ring<rings;ring++)for(let segment=0;segment<segments;segment++) {
+      const a=ring*(segments+1)+segment,b=a+segments+1;
+      indices.push(a,b,a+1,b,b+1,a+1);
+    }
+    const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(positions,3));
+    g.setAttribute('uv',new T.Float32BufferAttribute(uvs,2));g.setIndex(indices);g.computeVertexNormals();return g;
+  };
+  const fondantGeometry=geom(fondantCap(.705,.88));
+  const printGeometry=geom(fondantCap(.707,.855));
+  const edgePositions=[],edgeIndices=[];
+  for(let i=0;i<=64;i++)for(const r of [.705,.6805]) {
+    const phi=i/64*Math.PI*2;
+    edgePositions.push(r*Math.sin(.88)*Math.cos(phi),r*Math.sin(.88)*Math.sin(phi),r*Math.cos(.88));
+  }
+  for(let i=0;i<64;i++){const a=i*2;edgeIndices.push(a,a+1,a+2,a+1,a+3,a+2);}
+  const edgeGeometry=geom(new T.BufferGeometry());
+  edgeGeometry.setAttribute('position',new T.Float32BufferAttribute(edgePositions,3));
+  edgeGeometry.setIndex(edgeIndices);edgeGeometry.computeVertexNormals();
+  const fondantMat=mat(new T.MeshStandardMaterial({color:'#fffaf0',roughness:.8,bumpMap:bump,bumpScale:.001}));
   const collarGeometry=geom(new T.SphereGeometry(.082,16,12));
   for(let row=0;row<3;row++)for(let column=0;column<3;column++) {
     const x=(column-1)*1.48,z=(row-1)*1.28;
@@ -37,8 +60,9 @@ export function addServingProducts({table,geom,mat,trackTexture,bump,artwork}) {
     const pop=new T.Group();pop.position.set(x,.4+height,z);
     pop.rotation.y=.33+(column-1)*.055;pop.rotation.z=(column-1)*.022;pops.add(pop);
     const body=new T.Mesh(popGeometry,coatings[column]);body.castShadow=true;body.receiveShadow=true;pop.add(body);
-    const wafer=new T.Mesh(waferGeometry,chocolate);wafer.position.z=.503;pop.add(wafer);
-    const face=new T.Mesh(printGeometry,printed[column]);face.position.z=.514;pop.add(face);
+    pop.add(new T.Mesh(fondantGeometry,fondantMat));
+    pop.add(new T.Mesh(edgeGeometry,fondantMat));
+    const face=new T.Mesh(printGeometry,printed[column]);pop.add(face);
     const collar=new T.Mesh(collarGeometry,coatings[column]);collar.position.y=-.67;collar.scale.set(.8,1.6,.8);pop.add(collar);
   }
 
