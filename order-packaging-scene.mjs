@@ -273,12 +273,12 @@ export function createPackagingScene(mount, artwork, onContextLost, brandLogo, q
     packaging.update(frame);
     frame.cookies.forEach((state, i) => {
       const { group, bag, sleeve } = cookies[i];
-      sleeve.update(frame);
+      sleeve.update(frame,state.packed);
       group.visible = state.visible;
       group.position.set(...state.position);
       group.rotation.set(...state.rotation);
       bag.visible = i !== HERO_COOKIE || frame.wrapper > 0;
-      bag.position.z = i === HERO_COOKIE ? -(1 - frame.wrapper) * 3.45 : 0;
+      bag.position.z = i === HERO_COOKIE ? (1 - frame.wrapper) * 3.45 : 0;
     });
     renderer.render(scene, camera);
     mount.dataset.phase = frame.phase;

@@ -15,3 +15,5 @@ Cake-pop correction: the three photos in Downloads/cake pops for astra (Alaska A
 Final cake-pop construction correction: heads are complete spheres. Thin circular fondant patches conform to the sphere and carry circularly cropped wish, baby and Google prints. There is no flattened cake-ball face or square print inset.
 
 Resealable sleeve sequence: a three-sided clear pouch remains open at its mouth for insertion. Its extended back flap carries an adhesive band covered by a curling release liner; the liner peels away before the flap folds and seals. Every subsequent boxed cookie has a closed flap. The packaging and serving scenes move four seconds later; total duration is 31 seconds.
+
+Thin sleeve correction: film closely follows the cookie surface, with gently rippled loose edges and flat welds instead of solid perimeter bars. Reduced opacity and clearcoat avoid a rigid-case appearance. The opening and adhesive flap sit above the printed image. Adhesive disappears after sealing; flap detail is omitted once packed, leaving only fine transparent wrapping in the box.
