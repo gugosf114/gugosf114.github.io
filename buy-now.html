@@ -30,7 +30,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Fredoka+One&family=Nunito:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="order-studio.css?v=cookie-details-1" />
+    <link rel="stylesheet" href="order-studio.css?v=ai-original-1" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -111,9 +111,9 @@
             <button class="start-path ai-path" id="startAi" type="button">
               <span class="path-symbol" aria-hidden="true">✧</span
               ><span
-                ><strong>Help me find the words <em>AI · optional</em></strong
+                ><strong>Help me create a design <em>AI · optional</em></strong
                 ><small
-                  >Tell us about them. Get three message ideas.</small
+                  >Describe your idea. Get original artwork and words.</small
                 ></span
               ><b aria-hidden="true">↗</b>
             </button>
@@ -292,6 +292,12 @@
                 Upload my own background
               </button>
             </div>
+            <div id="aiBackgroundTools" class="ai-background-tools" hidden>
+              <label class="field-label" for="aiBackgroundRefinement">Want a different background?</label>
+              <input id="aiBackgroundRefinement" type="text" maxlength="400" placeholder="More flowers, softer colors, a moonlit sky…" />
+              <button type="button" class="text-button" id="regenerateAiBackground">Create a new background</button>
+              <p class="file-note" id="aiBackgroundStatus">Keep your words and photo. Explore fresh artwork.</p>
+            </div>
             <p class="background-mood" id="backgroundMood" hidden></p><button class="background-message" id="useBackgroundMessage" type="button" hidden></button>
             <p class="file-note" id="backgroundUploadStatus">
               JPG, PNG or WebP · up to 20 MB. The picture fills the cookie
@@ -326,14 +332,13 @@
         </div>
         <div class="step-panel" data-panel="ai" hidden>
           <p class="ai-disclosure">
-            Optional AI writing help. Only the words you enter here are sent to
-            our AI service. Your photos are not sent.
+            Optional AI design help. We send your description to our AI service to create original artwork and wording. Your uploaded photos are not sent.
           </p>
           <label class="field-label" for="aiBrief"
             >Tell us about the person or occasion</label
           ><textarea
             id="aiBrief"
-            maxlength="500"
+            maxlength="1200"
             rows="3"
             placeholder="My friend’s birthday. She loves gardening and terrible puns."
           ></textarea>
@@ -347,6 +352,8 @@
               ><select id="aiTone"><option value="funny">Funny</option><option value="sweet">Sweet</option><option value="bold">Bold</option><option value="romantic">Romantic</option><option value="edgy">Witty & sarcastic</option><option value="professional">Professional</option></select>
             </div>
           </div>
+          <label class="field-label" for="aiStyle">How should it look?</label>
+          <select id="aiStyle"><option value="surprise">Surprise me</option><option value="illustration">Playful illustration</option><option value="photorealistic">Realistic imagery</option><option value="watercolor">Soft watercolor</option><option value="graphic">Bold graphic art</option><option value="vintage">Vintage charm</option></select>
           <label class="field-label" for="aiAudience">Who is it for?</label
           ><select id="aiAudience">
             <option value="all ages">All ages</option>
@@ -359,10 +366,10 @@
             id="generateAiWords"
             type="button"
           >
-            Suggest three messages
+            Create three original designs
           </button>
           <p class="file-note" id="aiStatus" role="status">
-            Choose a suggestion to start a design. You can rewrite every word.
+            Three original backgrounds with matching words. Everything stays editable.
           </p>
           <div id="aiSuggestions" class="ai-suggestions"></div>
         </div>
@@ -842,6 +849,6 @@
       </p></noscript
     >
     <script src="order-studio-pricing.js"></script>
-    <script type="module" src="order-studio.mjs?v=cookie-details-1"></script>
+    <script type="module" src="order-studio.mjs?v=ai-original-1"></script>
   </body>
 </html>

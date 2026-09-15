@@ -2311,3 +2311,16 @@ textarea { font-family: inherit; }
   .preview-product-details { padding: 5px 12px 10px; font-size: 12px; }
   body[data-step="upload"] .preview-product-details { padding: 12px 10px 14px; }
 }
+
+.ai-suggestions { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
+.ai-design-card { display: flex; flex-direction: column; padding: 12px; background: var(--white); border: 1px solid var(--line); border-radius: 14px; min-width: 0; }
+.ai-design-card > strong { font-size: 14px; line-height: 1.4; }
+.ai-design-card > p { font-size: 12px; line-height: 1.5; color: var(--muted); margin: 8px 0 12px; overflow-wrap: anywhere; }
+.ai-generated-preview { width: 100%; height: auto; display: block; margin-bottom: 10px; }
+.ai-design-placeholder { aspect-ratio: 1; border-radius: 12px; margin-bottom: 12px; background: linear-gradient(110deg,#efe9dc 30%,#fdfbf8 50%,#efe9dc 70%); background-size: 220% 100%; animation: ai-art-shimmer 2.5s linear infinite; }
+.ai-use-design { width: 100%; margin-top: auto; border: 0; border-radius: 8px; padding: 12px 8px; background: var(--brand-yellow); color: var(--ink); font: 800 12px "Nunito",sans-serif; }
+.ai-background-tools { margin: 16px 0; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper); }
+.ai-background-tools input { width: 100%; margin-bottom: 12px; }
+@keyframes ai-art-shimmer { to { background-position: -220% 0; } }
+@media (max-width: 1100px) { .ai-suggestions { grid-template-columns: 1fr; } .ai-generated-preview,.ai-design-placeholder { max-width: 260px; width: 100%; align-self: center; } }
+@media (prefers-reduced-motion: reduce) { .ai-design-placeholder { animation: none; } }

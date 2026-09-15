@@ -6,10 +6,10 @@ import {
   cookiePoint,
   quantities,
   blobOf,
-} from "./order-studio-art.mjs?v=spherical-pops-1";
+} from "./order-studio-art.mjs?v=ai-original-1";
 import { cutSubject } from "./order-studio-cutout.mjs";
-import { createTemplate } from "./order-studio-designs.mjs?v=spherical-pops-1";
-import { initComposer } from "./order-studio-compose.mjs?v=spherical-pops-1";
+import { createTemplate } from "./order-studio-designs.mjs?v=ai-original-1";
+import { initComposer } from "./order-studio-compose.mjs?v=ai-original-1";
 import { initPackagingFilm } from "./order-packaging-film.mjs?v=spherical-pops-1";
 
 const $ = (id) => document.getElementById(id);
@@ -49,9 +49,9 @@ const copy = {
     1,
   ],
   ai: [
-    "AI writing help · optional",
-    "Let’s find the words.",
-    "A little context is all we need. Your design stays completely in your hands.",
+    "AI design help · optional",
+    "Let’s imagine your cookie.",
+    "Tell us who or what it’s for. We’ll create original artwork and words, ready for you to make your own.",
     "",
     0,
   ],
@@ -529,6 +529,8 @@ async function readPhoto(file) {
       d.text = old.text;
       d.templateId = old.templateId;
       d.occasion = old.occasion;
+      d.ai = old.ai;
+      d.shape = old.shape;
       d.logoRequired = old.logoRequired;
       if (d.occasion === 'corporate') {
         d.shape = old.shape;

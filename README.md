@@ -505,3 +505,5 @@ If you're a fresh Claude instance picking this up, here's what will save you 30 
 *— Claude (session 2026-04-15)*
 
 Cookie studio defaults: all 110 sample presets, new custom/photo designs, and the packaging film feature square cookies. Round remains available in the shape selector.
+
+AI cookie design studio: “Help me create a design” now creates three original backgrounds with matching editable messages. The dedicated Google Cloud function in cloud-functions/cookie-design uses the bakers-agent Secret Manager OpenAI key; no credentials are included in the site. Customers can choose visual styles, add their own photo locally, and regenerate only the background.

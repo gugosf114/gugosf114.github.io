@@ -1,3 +1,4 @@
+import { generateAiDesigns, makeAiDesign } from './order-studio-ai.mjs?v=ai-original-1';
 import {
   templates,
   categories,
@@ -7,10 +8,9 @@ import {
   createTemplate,
   defaultText,
   messageSuggestions,
-  suggestAiMessages,
   drawBackground,
-} from "./order-studio-designs.mjs?v=mbc-brand-1";
-import { drawCookie, canvas } from "./order-studio-art.mjs?v=mbc-brand-1";
+} from "./order-studio-designs.mjs?v=ai-original-1";
+import { drawCookie, canvas } from "./order-studio-art.mjs?v=ai-original-1";
 
 export function initComposer(api) {
   const $ = (id) => document.getElementById(id);
@@ -256,68 +256,97 @@ export function initComposer(api) {
   });
   $("generateAiWords").addEventListener("click", async () => {
     const brief = $("aiBrief").value.trim();
-    if (brief.length < 10)
-      return api.error(
-        "Tell us a little more—at least a few words about the person or occasion.",
-      );
-    const button = $("generateAiWords");
-    button.disabled = true;
-    $("aiSuggestions").replaceChildren();
-    $("aiStatus").textContent = "Finding a few ways to say it…";
-    api.error();
-    aiController = new AbortController();
-    const timer = setTimeout(() => aiController.abort(), 30000);
+    if (brief.length < 10) return api.error("Tell us a little more about the person or occasion.");
+    aiController?.abort();
+    const controller = new AbortController(); aiController=controller;
+    const request = {brief,occasion:$("aiOccasion").value,tone:$("aiTone").value,
+      audience:$("aiAudience").value,style:$("aiStyle").value};
+    const button=$("generateAiWords"),grid=$("aiSuggestions");
+    button.disabled=true;button.textContent="Creating your designs…";
+    grid.replaceChildren();grid.setAttribute('aria-busy','true');api.error();
+    $("aiStatus").textContent="Imagining three original designs, then painting each background. This can take a minute or two.";
+    const cards = Array.from({length:3},(_,index)=>{
+      const card=document.createElement('div');card.className='ai-design-card ai-design-pending';
+      const art=document.createElement('div');art.className='ai-design-placeholder';art.setAttribute('aria-hidden','true');
+      const title=document.createElement('strong');title.textContent='Imagining design '+(index+1)+'…';
+      const status=document.createElement('p');status.textContent='Original artwork is on its way.';
+      card.append(art,title,status);grid.append(card);return {card,art,title,status};
+    });
+    let ready=0;
+    const timer=setTimeout(()=>controller.abort('timeout'),250000);
     try {
-      const selectedOccasion = $("aiOccasion").value,
-        selectedTone = $("aiTone").value;
-      const results = await suggestAiMessages(
-        {
-          brief,
-          occasion: selectedOccasion,
-          tone: selectedTone,
-          audience: $("aiAudience").value,
-        },
-        aiController.signal,
-      );
-      for (const message of results) {
-        const suggestion = document.createElement("button");
-        suggestion.type = "button";
-        suggestion.className = "ai-suggestion";
-        const quote = document.createElement("strong");
-        quote.textContent = message;
-        const hint = document.createElement("span");
-        hint.textContent = "Start with this";
-        suggestion.append(quote, hint);
-        suggestion.addEventListener("click", () => {
-          const spec =
-            templates.find(
-              (t) => t.occasion === selectedOccasion && matchesPersonality(t, selectedTone),
-            ) || templates.find((t) => t.occasion === selectedOccasion);
-          const design = createTemplate(spec.id);
-          design.text.message = message;
-          api.start(design);
-          chooseTab("words");
-        });
-        $("aiSuggestions").append(suggestion);
-      }
-      $("aiStatus").textContent =
-        "Three ideas, ready to make your own. Review the wording before using it.";
-    } catch (e) {
-      $("aiStatus").textContent =
-        "You can still choose a ready-made design or write your own message.";
-      api.error(
-        e.name === "AbortError"
-          ? "The writing assistant took too long. Please try again."
-          : e.message,
-      );
+      await generateAiDesigns(request,controller.signal,async event=>{
+        if(aiController!==controller || controller.signal.aborted)return;
+        if(event.type==='status')$("aiStatus").textContent=event.message;
+        if(event.type==='concept') {
+          const card=cards[event.index];card.title.textContent=event.concept.title;
+          card.status.textContent='Painting an original background…';
+        }
+        if(event.type==='design_error') {
+          const card=cards[event.index];card.card.classList.remove('ai-design-pending');
+          card.art.remove();card.status.textContent=event.message;
+        }
+        if(event.type==='design') {
+          const design=await makeAiDesign(event,request);
+          if(aiController!==controller || controller.signal.aborted)return;
+          const {card,art,title,status}=cards[event.index];
+          const preview=canvas(440);preview.className='ai-generated-preview';
+          drawCookie(preview,design);preview.setAttribute('aria-label','Cookie design: '+design.text.message);
+          art.replaceWith(preview);title.textContent=event.concept.title;status.textContent=design.text.message;
+          card.classList.remove('ai-design-pending');
+          const use=document.createElement('button');use.type='button';use.className='ai-use-design';use.textContent='Make this mine';
+          use.addEventListener('click',()=>{api.start(design);chooseTab('words');});card.append(use);
+          ready++;$("aiStatus").textContent=ready+' of 3 designs ready. You can choose one now.';
+        }
+        if(event.type==='done') {
+          if(!ready)throw new Error('No artwork finished this time. Please try again.');
+          $("aiStatus").textContent=ready+' original designs ready. Choose one, edit the words, or try another background.';
+        }
+      });
+    } catch(e) {
+      if(aiController!==controller)return;
+      if(e.name==='AbortError' && controller.signal.reason!=='timeout')return;
+      api.error(e.name==='AbortError'?'The artist took too long. Try again; any finished designs are still here.':e.message);
+      $("aiStatus").textContent=ready?'You can still use any completed design.':'You can try again or continue with your own design.';
     } finally {
       clearTimeout(timer);
-      aiController = null;
-      button.disabled = false;
+      if(aiController===controller){
+        aiController=null;button.disabled=false;button.textContent='Create three original designs';grid.setAttribute('aria-busy','false');
+        for(const item of cards)if(item.card.classList.contains('ai-design-pending')){
+          item.card.classList.remove('ai-design-pending');item.art.remove();item.status.textContent='This concept did not finish. You can try again.';
+        }
+      }
+    }
+  });
+  $("regenerateAiBackground").addEventListener('click',async()=>{
+    const active=draft();if(!active.ai?.token)return;
+    aiController?.abort();const controller=new AbortController();aiController=controller;
+    const button=$("regenerateAiBackground");button.disabled=true;
+    $("aiBackgroundStatus").textContent='Painting a new background. Your current design stays here until it is ready.';api.error();
+    const timer=setTimeout(()=>controller.abort('timeout'),210000);
+    let replaced=false;
+    try {
+      await generateAiDesigns({mode:'background',token:active.ai.token,refinement:$("aiBackgroundRefinement").value.trim()},controller.signal,async event=>{
+        if(event.type==='design_error')throw new Error(event.message);
+        if(event.type==='design') {
+          const replacement=await makeAiDesign(event,active.ai.request);
+          if(api.current()!==active || controller.signal.aborted)return;
+          change(d=>{d.backdrop=replacement.backdrop;d.ai={...d.ai,token:replacement.ai.token};});
+          replaced=true;refresh();$("aiBackgroundStatus").textContent='New background ready. Your words, photo, and positioning are unchanged.';
+        }
+      });
+      if(!replaced && api.current()===active)throw new Error('No new background arrived. Please try again.');
+    } catch(e) {
+      if(api.current()!==active || (e.name==='AbortError' && controller.signal.reason!=='timeout'))return;
+      api.error(e.name==='AbortError'?'The new background took too long. Your current design is still here.':e.message);
+      $("aiBackgroundStatus").textContent='Your current background is unchanged.';
+    } finally {
+      clearTimeout(timer);if(aiController===controller)aiController=null;button.disabled=false;
     }
   });
   function refresh() {
     const d = draft();
+    $("aiBackgroundTools").hidden = !d.ai?.token;
     $("corporateLogoTools").hidden = d.occasion !== 'corporate';
     $("corporateUploadLogo").textContent = d.original ? 'Replace company logo' : 'Upload company logo';
     $("corporateLogoStatus").textContent = d.original ? 'Your logo is in place. All wording stays editable.' : 'Add your logo to continue. PNG, JPG or WebP.';
@@ -333,7 +362,7 @@ export function initComposer(api) {
     $("useBackgroundMessage").hidden = !backgroundInfo?.suggestedMessage;
     $("useBackgroundMessage").textContent = backgroundInfo?.suggestedMessage ? 'Use this line: “' + backgroundInfo.suggestedMessage.replace(/\n/g, ' ') + '”' : '';
 
-    $("backgroundUploadStatus").textContent = d.backdrop.file
+    $("backgroundUploadStatus").textContent = d.backdrop.id === "ai-generated" ? "Original AI artwork. Your wording and photos remain separate and editable." : d.backdrop.file
       ? "Using " + d.backdrop.file.name
       : "JPG, PNG or WebP · up to 20 MB. Fills the cookie behind your photo and words.";
     $("personalizationLabel").textContent =
