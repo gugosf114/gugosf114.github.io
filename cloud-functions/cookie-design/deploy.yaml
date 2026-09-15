@@ -1,0 +1,17 @@
+--gen2: true
+--project: bakers-agent
+--region: us-central1
+--runtime: python312
+--source: cloud-functions/cookie-design
+--entry-point: cookie_design
+--trigger-http: true
+--allow-unauthenticated: true
+--service-account: mbc-cookie-design@bakers-agent.iam.gserviceaccount.com
+--set-secrets: "ANTHROPIC_API_KEY=anthropic-api-key:latest,GEMINI_API_KEY=gemini-api-key:latest,DESIGN_SIGNING_KEY=openai-api-key:latest"
+--env-vars-file: cloud-functions/cookie-design/env.yaml
+--timeout: 300s
+--memory: 512Mi
+--cpu: '1'
+--max-instances: '3'
+--concurrency: '4'
+--quiet: true
