@@ -2299,3 +2299,15 @@ textarea { font-family: inherit; }
   .brand-creations { font-size: 10px; letter-spacing: 2.5px; }
   h1 { letter-spacing: -.025em; }
 }
+
+/* Size and flavor stay readable alongside the existing design flow. */
+.product-details { color: var(--muted); font-size: 13px; font-weight: 600; line-height: 1.5; }
+.preview-product-details { margin: 0; padding: 8px 18px 12px; text-align: center; flex: none; }
+.review-product-details { margin: 0 0 16px; }
+.receipt-product-details { margin: 0 0 16px; }
+.shape-choice .shape-dimensions { display: block; margin-top: 3px; color: var(--muted); font-size: 12px; font-weight: 500; line-height: 1.4; white-space: nowrap; }
+.shape-flavor { grid-column: 1 / -1; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; text-align: center; }
+@media (max-width: 760px) {
+  .preview-product-details { padding: 5px 12px 10px; font-size: 12px; }
+  body[data-step="upload"] .preview-product-details { padding: 12px 10px 14px; }
+}

@@ -269,8 +269,12 @@ function show(next, { history = true, focus = true } = {}) {
   updatePrice();
   render();
 }
+const cookieSizeLabel = shape => shape === "round" ? "3″ diameter" : "3″ × 3″ square";
 function render() {
   const d = current();
+  const productDetails = cookieSizeLabel(d.shape) + " · Vanilla flavor";
+  $("previewProductDetails").textContent = productDetails;
+  $("reviewProductDetails").textContent = productDetails;
   if (step === "shape" || step === "personalize") {
     for (const shape of ["round", "square"])
       drawCookie($(shape + "Option"), { ...d, shape });
@@ -435,6 +439,9 @@ function updatePrice() {
   $("footerPrice").innerHTML =
     q.quantity + " cookies <strong>" + money(q.subtotal) + "</strong>";
   $("receiptCookies").textContent = q.quantity + " custom cookies";
+  const orderDetails = [...new Set(designs.map(d => cookieSizeLabel(d.shape)))].join(" / ") + " · Vanilla flavor";
+  $("receiptProductDetails").textContent = orderDetails;
+  $("quantityProductDetails").textContent = orderDetails;
   $("fulfilLabel").textContent =
     q.fulfil === "pickup" ? "Daly City pickup" : "FedEx " + q.serviceLabel;
   $("pickupNote").hidden = q.fulfil !== "pickup";

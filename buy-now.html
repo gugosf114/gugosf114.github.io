@@ -30,7 +30,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Fredoka+One&family=Nunito:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="order-studio.css?v=spherical-pops-1" />
+    <link rel="stylesheet" href="order-studio.css?v=cookie-details-1" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -385,7 +385,7 @@
                 height="260"
                 aria-hidden="true"
               ></canvas
-              ><span>Square</span><i aria-hidden="true">✓</i>
+              ><span>Square<small class="shape-dimensions">3″ × 3″</small></span><i aria-hidden="true">✓</i>
             </button>
             <button
               class="shape-choice"
@@ -399,8 +399,9 @@
                 height="260"
                 aria-hidden="true"
               ></canvas
-              ><span>Round</span><i aria-hidden="true">✓</i>
+              ><span>Round<small class="shape-dimensions">3″ diameter</small></span><i aria-hidden="true">✓</i>
             </button>
+            <p class="shape-flavor">Both shapes are vanilla flavored.</p>
           </div>
           <div id="shapePositionMount"></div>
         </div>
@@ -517,6 +518,7 @@
           </div>
         </div>
         <div class="step-panel" data-panel="review" hidden>
+          <p class="product-details review-product-details" id="reviewProductDetails">3″ × 3″ square · Vanilla flavor</p>
           <div id="reviewPositionMount"></div>
           <div class="review-check">
             <span aria-hidden="true">✓</span>
@@ -564,6 +566,7 @@
             </div>
           </div>
           <p class="file-note" id="quantityNote">$5 each · 12-cookie minimum</p>
+          <p class="product-details" id="quantityProductDetails">3″ × 3″ square · Vanilla flavor</p>
           <select
             id="photoCount"
             hidden
@@ -651,6 +654,7 @@
               <span id="receiptCookies">12 photo cookies</span
               ><strong id="cookieSubtotal">$60</strong>
             </div>
+            <p class="product-details receipt-product-details" id="receiptProductDetails">3″ × 3″ square · Vanilla flavor</p>
             <div><span>Gift box & wrapping</span><span>Included</span></div>
             <div>
               <span id="fulfilLabel">FedEx shipping</span
@@ -781,6 +785,7 @@
             >
           </button>
         </div>
+        <p class="product-details preview-product-details" id="previewProductDetails">3″ × 3″ square · Vanilla flavor</p>
         <div class="preview-bottomline">
           <span class="preview-status" id="previewStatus"
             >Made from your favorite moment</span
@@ -837,6 +842,6 @@
       </p></noscript
     >
     <script src="order-studio-pricing.js"></script>
-    <script type="module" src="order-studio.mjs?v=spherical-pops-1"></script>
+    <script type="module" src="order-studio.mjs?v=cookie-details-1"></script>
   </body>
 </html>
