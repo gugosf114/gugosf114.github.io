@@ -25,19 +25,39 @@ function noiseTexture(color = false) {
   if (color) texture.colorSpace = T.SRGBColorSpace;
   return texture;
 }
-function lathe(radius, height) {
-  return new T.LatheGeometry(
-    [
-      new T.Vector2(0, -height / 2),
-      new T.Vector2(radius - 0.055, -height / 2),
-      new T.Vector2(radius - 0.012, -height / 2 + 0.02),
-      new T.Vector2(radius, 0),
-      new T.Vector2(radius - 0.012, height / 2 - 0.018),
-      new T.Vector2(radius - 0.05, height / 2),
-      new T.Vector2(0, height / 2),
-    ],
-    72,
-  );
+function squareOutline(half, radius) {
+  const s = new T.Shape();
+  s.moveTo(-half + radius, -half);
+  s.lineTo(half - radius, -half);
+  s.quadraticCurveTo(half, -half, half, -half + radius);
+  s.lineTo(half, half - radius);
+  s.quadraticCurveTo(half, half, half - radius, half);
+  s.lineTo(-half + radius, half);
+  s.quadraticCurveTo(-half, half, -half, half - radius);
+  s.lineTo(-half, -half + radius);
+  s.quadraticCurveTo(-half, -half, -half + radius, -half);
+  return s;
+}
+function squareCookie(half, height, bevel) {
+  const g = new T.ExtrudeGeometry(squareOutline(half - bevel, half * 0.13), {
+    depth: height - bevel * 2,
+    bevelEnabled: true,
+    bevelThickness: bevel,
+    bevelSize: bevel,
+    bevelSegments: 3,
+    steps: 1,
+    curveSegments: 12,
+  });
+  g.translate(0, 0, -(height - bevel * 2) / 2);
+  g.rotateX(-Math.PI / 2);
+  return g;
+}
+function squarePrint(half) {
+  const g = new T.ShapeGeometry(squareOutline(half, half * 0.13), 12);
+  const p = g.attributes.position, uv = g.attributes.uv;
+  for (let i = 0; i < p.count; i++)
+    uv.setXY(i, (p.getX(i) + half) / (half * 2), (p.getY(i) + half) / (half * 2));
+  return g;
 }
 function filmSurface(top = true) {
   const g = new T.PlaneGeometry(2.56, 2.95, 24, 24),
@@ -268,9 +288,9 @@ export function createPackagingScene(mount, artwork, onContextLost) {
       depthWrite: false,
     }),
   );
-  const bodyGeo = geom(lathe(1.1, 0.24)),
-    icingGeo = geom(lathe(1.045, 0.067)),
-    printGeo = geom(new T.CircleGeometry(1.012, 72)),
+  const bodyGeo = geom(squareCookie(1.1, 0.24, 0.025)),
+    icingGeo = geom(squareCookie(1.045, 0.067, 0.012)),
+    printGeo = geom(squarePrint(1.012)),
     topBagGeo = geom(filmSurface()),
     bottomBagGeo = geom(filmSurface(false)),
     seamGeo = geom(new T.BoxGeometry(2.53, 0.008, 0.035));

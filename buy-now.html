@@ -30,7 +30,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="order-studio.css?v=corporate-20" />
+    <link rel="stylesheet" href="order-studio.css?v=square-default-1" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -375,23 +375,9 @@
           >
             <button
               class="shape-choice"
-              data-shape="round"
-              type="button"
-              aria-pressed="true"
-            >
-              <canvas
-                id="roundOption"
-                width="260"
-                height="260"
-                aria-hidden="true"
-              ></canvas
-              ><span>Round</span><i aria-hidden="true">✓</i>
-            </button>
-            <button
-              class="shape-choice"
               data-shape="square"
               type="button"
-              aria-pressed="false"
+              aria-pressed="true"
             >
               <canvas
                 id="squareOption"
@@ -400,6 +386,20 @@
                 aria-hidden="true"
               ></canvas
               ><span>Square</span><i aria-hidden="true">✓</i>
+            </button>
+            <button
+              class="shape-choice"
+              data-shape="round"
+              type="button"
+              aria-pressed="false"
+            >
+              <canvas
+                id="roundOption"
+                width="260"
+                height="260"
+                aria-hidden="true"
+              ></canvas
+              ><span>Round</span><i aria-hidden="true">✓</i>
             </button>
           </div>
           <div id="shapePositionMount"></div>
@@ -729,7 +729,7 @@
               playsinline
               muted
               preload="none"
-              poster="media/cookie-packaging-poster.png"
+              poster="media/cookie-packaging-poster.png?v=square-1"
               aria-label="Cookie wrapping and gift box animation"
               tabindex="-1"
             ></video>
@@ -837,6 +837,6 @@
       </p></noscript
     >
     <script src="order-studio-pricing.js"></script>
-    <script type="module" src="order-studio.mjs?v=corporate-20"></script>
+    <script type="module" src="order-studio.mjs?v=square-default-1"></script>
   </body>
 </html>

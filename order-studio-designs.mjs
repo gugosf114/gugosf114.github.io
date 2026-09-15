@@ -1087,7 +1087,7 @@ export const templates = Object.entries(designCollections).flatMap(([occasion, r
   rows.map(([id, name, tone, bg, message, font = "clean", tags = []], index) => ({
     id, name, occasion, tone, bg, message, font, color: null,
     tones: [...new Set([tone, ...tags])],
-    shape: occasion === "corporate" ? (index % 3 === 0 ? "round" : "square") : (index % 5 === 4 ? "square" : "round"),
+    shape: "square",
   }))
 );
 export const matchesPersonality = (design, tone) => tone === "all" || (design.tones || [design.tone]).includes(tone);
@@ -1110,7 +1110,7 @@ export function createTemplate(id) {
       x: 0.5,
       y: t.occasion === "corporate" ? .71 : .5,
     },
-    shape: t.shape || "round",
+    shape: t.shape || "square",
   };
 }
 export const defaultText = () => ({

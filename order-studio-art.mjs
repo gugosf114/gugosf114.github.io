@@ -1,4 +1,4 @@
-import { drawBackground, drawWords } from "./order-studio-designs.mjs?v=corporate-20";
+import { drawBackground, drawWords } from "./order-studio-designs.mjs?v=square-default-1";
 // All positions use the same normalized print square for preview and saved artwork.
 export function photoRect(width, height, view) {
   const scale =

@@ -503,3 +503,5 @@ If you're a fresh Claude instance picking this up, here's what will save you 30 
 ---
 
 *— Claude (session 2026-04-15)*
+
+Cookie studio defaults: all 110 sample presets, new custom/photo designs, and the packaging film feature square cookies. Round remains available in the shape selector.

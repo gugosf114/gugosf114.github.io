@@ -6,11 +6,11 @@ import {
   cookiePoint,
   quantities,
   blobOf,
-} from "./order-studio-art.mjs?v=corporate-20";
+} from "./order-studio-art.mjs?v=square-default-1";
 import { cutSubject } from "./order-studio-cutout.mjs";
-import { createTemplate } from "./order-studio-designs.mjs?v=corporate-20";
-import { initComposer } from "./order-studio-compose.mjs?v=corporate-20";
-import { initPackagingFilm } from "./order-packaging-film.mjs?v=film-loop-1";
+import { createTemplate } from "./order-studio-designs.mjs?v=square-default-1";
+import { initComposer } from "./order-studio-compose.mjs?v=square-default-1";
+import { initPackagingFilm } from "./order-packaging-film.mjs?v=square-default-1";
 
 const $ = (id) => document.getElementById(id);
 const panels = [...document.querySelectorAll("[data-panel]")];
@@ -58,7 +58,7 @@ const copy = {
   shape: [
     "Design · 1 of 2",
     "Find your shape.",
-    "Pick round or square. Then zoom and drag your photo until it’s just right.",
+    "Pick square or round. Then zoom and drag your photo until it’s just right.",
     "Continue",
     1,
   ],
@@ -111,7 +111,7 @@ const blank = () => ({
   text: null,
   original: null,
   source: null,
-  shape: "round",
+  shape: "square",
   background: null,
   cutPoint: null,
   removePoints: [],
