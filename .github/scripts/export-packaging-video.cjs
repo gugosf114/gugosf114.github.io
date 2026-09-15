@@ -37,13 +37,14 @@ const pw = require(process.env.PLAYWRIGHT_MODULE || "playwright-core");
       const brandLogo = new Image();
       brandLogo.src = "logo_icon.png";
       await brandLogo.decode();
+      const qrImage = new Image(); qrImage.src = "media/film-art/website-qr.png"; await qrImage.decode();
       const mount = document.createElement("div");
       mount.style.cssText =
         "position:fixed;left:-2000px;top:0;width:1080px;height:900px;";
       document.body.append(mount);
       const art = await createFilmArtwork();
       window.packagingExportFrames = DURATION * 30;
-      const scene = createPackagingScene(mount, art, undefined, brandLogo),
+      const scene = createPackagingScene(mount, art, undefined, brandLogo, qrImage),
         output = canvas(1080);
       const ctx = output.getContext("2d");
       const opening = canvas(1080);
@@ -56,9 +57,11 @@ const pw = require(process.env.PLAYWRIGHT_MODULE || "playwright-core");
         pack: ["So many ways to make their day.", "Your moments. Your message. Your brand."],
         finish: [
           "Ready to make their day.",
-          "A window box, finished with a bow.",
+          "Your cookies, nestled in our signature box.",
         ],
         turn: ["A gift worth giving.", "Made by us. Made for your person."],
+        table: ["From our bakery to your table.", "Beautifully packed. Ready to share."],
+        serve: ["Just open. And serve.", "The box is the presentation."],
       };
       window.exportPackagingFrame = (t) => {
         scene.render(t);
@@ -74,8 +77,8 @@ const pw = require(process.env.PLAYWRIGHT_MODULE || "playwright-core");
         ctx.font = '600 23px "Nunito", Arial';
         ctx.fillText(text[1], 540, 1020);
         if (t === 0) opening.getContext("2d").drawImage(output,0,0);
-        if (t >= 19.35) {
-          ctx.globalAlpha = progress(t,19.35,19.97);
+        if (t >= DURATION - .8) {
+          ctx.globalAlpha = progress(t,DURATION-.8,DURATION-.03);
           ctx.drawImage(opening,0,0); ctx.globalAlpha = 1;
         }
         return output.toDataURL("image/png").split(",")[1];

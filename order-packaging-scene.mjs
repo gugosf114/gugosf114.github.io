@@ -1,4 +1,5 @@
 import * as T from "./vendor/three/three.module.min.js";
+import { createRealPackaging } from "./order-packaging-box.mjs";
 import { filmFrame, DURATION, HERO_COOKIE } from "./order-packaging-timeline.mjs";
 
 function noiseTexture(color = false) {
@@ -80,34 +81,6 @@ function filmSurface(top = true) {
   g.computeVertexNormals();
   return g;
 }
-function ribbonStrip(points, width, twist = 0) {
-  const curve = new T.CatmullRomCurve3(points.map((p) => new T.Vector3(...p))),
-    positions = [],
-    uv = [],
-    indices = [];
-  for (let i = 0; i <= 48; i++) {
-    const t = i / 48,
-      point = curve.getPoint(t),
-      tangent = curve.getTangent(t).normalize(),
-      side = new T.Vector3(0, 0, 1).cross(tangent).normalize();
-    side.applyAxisAngle(tangent, Math.sin(t * Math.PI) * twist);
-    for (const sign of [-1, 1]) {
-      const q = point.clone().addScaledVector(side, (sign * width) / 2);
-      positions.push(q.x, q.y, q.z);
-      uv.push(sign < 0 ? 0 : 1, t);
-    }
-    if (i < 48) {
-      const a = i * 2;
-      indices.push(a, a + 1, a + 2, a + 1, a + 3, a + 2);
-    }
-  }
-  const g = new T.BufferGeometry();
-  g.setAttribute("position", new T.Float32BufferAttribute(positions, 3));
-  g.setAttribute("uv", new T.Float32BufferAttribute(uv, 2));
-  g.setIndex(indices);
-  g.computeVertexNormals();
-  return g;
-}
 function labelTexture(brandLogo) {
   const c = document.createElement("canvas");
   c.width = c.height = 512;
@@ -129,7 +102,7 @@ function labelTexture(brandLogo) {
   return texture;
 }
 
-export function createPackagingScene(mount, artwork, onContextLost, brandLogo) {
+export function createPackagingScene(mount, artwork, onContextLost, brandLogo, qrImage) {
   const renderer = new T.WebGLRenderer({
     antialias: true,
     alpha: false,
@@ -339,123 +312,7 @@ export function createPackagingScene(mount, artwork, onContextLost, brandLogo) {
     root.add(group);
     cookies.push({ group, bag });
   }
-  const paperMat = mat(
-      new T.MeshStandardMaterial({
-        color: "#faf6ee",
-        roughness: 0.92,
-        bumpMap: bump,
-        bumpScale: 0.005,
-      }),
-    ),
-    innerMat = mat(
-      new T.MeshStandardMaterial({ color: "#fffaf1", roughness: 1 }),
-    );
-  const ribbonMat = mat(
-    new T.MeshPhysicalMaterial({
-      color: "#ec268f",
-      roughness: 0.34,
-      metalness: 0.08,
-      sheen: 0.7,
-      sheenColor: "#f988bc",
-      side: T.DoubleSide,
-    }),
-  );
-  const box = new T.Group();
-  root.add(box);
-  const block = (parent, size, pos, material) => {
-    const mesh = new T.Mesh(geom(new T.BoxGeometry(...size)), material);
-    mesh.position.set(...pos);
-    mesh.castShadow = true;
-    mesh.receiveShadow = true;
-    parent.add(mesh);
-    return mesh;
-  };
-  block(box, [10.8, 0.13, 8.4], [0, 0, 0], paperMat);
-  block(box, [10.5, 0.035, 8.1], [0, 0.085, 0], innerMat);
-  block(box, [10.8, 0.62, 0.14], [0, 0.3, -4.13], paperMat);
-  block(box, [10.8, 0.62, 0.14], [0, 0.3, 4.13], paperMat);
-  block(box, [0.14, 0.62, 8.15], [-5.33, 0.3, 0], paperMat);
-  block(box, [0.14, 0.62, 8.15], [5.33, 0.3, 0], paperMat);
-  // The shallow white window box follows the existing twelve-cookie packaging photo.
-  const lid = new T.Group();
-  box.add(lid);
-  block(lid, [10.96, 0.13, 0.52], [0, 0, -4.04], paperMat);
-  block(lid, [10.96, 0.13, 0.52], [0, 0, 4.04], paperMat);
-  block(lid, [0.52, 0.13, 7.58], [-5.22, 0, 0], paperMat);
-  block(lid, [0.52, 0.13, 7.58], [5.22, 0, 0], paperMat);
-  const windowMat = mat(
-    new T.MeshPhysicalMaterial({
-      color: "#fff",
-      roughness: 0.025,
-      transparent: true,
-      opacity: 0.075,
-      clearcoat: 1,
-      side: T.DoubleSide,
-      depthWrite: false,
-    }),
-  );
-  const windowMesh = new T.Mesh(geom(new T.PlaneGeometry(10, 7.65)), windowMat);
-  windowMesh.rotation.x = -Math.PI / 2;
-  windowMesh.position.y = 0.015;
-  lid.add(windowMesh);
-  const gift = new T.Group();
-  lid.add(gift);
-  block(gift, [10.95, 0.023, 0.26], [0, 0.11, -0.85], ribbonMat);
-  block(gift, [0.26, 0.023, 8.6], [-2.7, 0.113, 0], ribbonMat);
-  const bow = new T.Group();
-  bow.position.set(-2.7, 0.13, -0.85);
-  gift.add(bow);
-  for (const sign of [-1, 1]) {
-    const ribbon = new T.Mesh(
-      geom(
-        ribbonStrip(
-          [
-            [0, 0.02, 0],
-            [sign * 0.58, 0.2, -0.18],
-            [sign * 0.95, 0.6, -0.05],
-            [sign * 0.67, 0.74, 0.16],
-            [sign * 0.22, 0.24, 0.11],
-            [0, 0.05, 0],
-          ],
-          0.26,
-          0.9,
-        ),
-      ),
-      ribbonMat,
-    );
-    ribbon.castShadow = true;
-    bow.add(ribbon);
-    const tail = new T.Mesh(
-      geom(
-        ribbonStrip(
-          [
-            [0, 0.02, 0],
-            [sign * 0.18, 0.12, 0.27],
-            [sign * 0.34, 0.045, 0.75],
-            [sign * 0.5, 0.01, 1.25],
-          ],
-          0.23,
-          0.4,
-        ),
-      ),
-      ribbonMat,
-    );
-    bow.add(tail);
-  }
-  block(bow, [0.38, 0.23, 0.35], [0, 0.12, 0.02], ribbonMat);
-  const sticker = new T.Mesh(
-    geom(new T.CircleGeometry(0.43, 48)),
-    mat(new T.MeshStandardMaterial({ map: label, roughness: 0.65 })),
-  );
-  sticker.rotation.x = -Math.PI / 2;
-  sticker.position.set(3.1, 0.11, 2.65);
-  gift.add(sticker);
-  const sideBands = new T.Group();
-  box.add(sideBands);
-  for (const x of [-5.415, 5.415])
-    block(sideBands, [0.014, 0.7, 0.26], [x, 0.35, -0.85], ribbonMat);
-  for (const z of [-4.215, 4.215])
-    block(sideBands, [0.26, 0.7, 0.014], [-2.7, 0.35, z], ribbonMat);
+  const packaging = createRealPackaging({root,scene,geom,mat,trackTexture,bump,label,qrImage});
   let disposed = false,
     lastFrame = filmFrame(0);
   function resize() {
@@ -481,14 +338,9 @@ export function createPackagingScene(mount, artwork, onContextLost, brandLogo) {
     camera.position.set(...frame.camera);
     camera.lookAt(...frame.target);
     root.rotation.y = frame.rotation;
-    box.visible = frame.box > 0;
-    box.position.y = -(1 - frame.box) * 1.2;
-    box.scale.setScalar(0.94 + frame.box * 0.06);
-    lid.visible = frame.lid > 0;
-    lid.position.set(0, 0.71 + (1 - frame.lid) * 4.8, -(1 - frame.lid) * 0.5);
-    lid.rotation.x = -(1 - frame.lid) * 0.22;
-    gift.visible = frame.lid > 0.55;
-    sideBands.visible = frame.lid > 0.92;
+    root.position.y = Math.sin(frame.table * Math.PI) * .24;
+    floor.position.y = -.14 - frame.table * 6;
+    packaging.update(frame);
     frame.cookies.forEach((state, i) => {
       const { group, bag } = cookies[i];
       group.visible = state.visible;
