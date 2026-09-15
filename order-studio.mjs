@@ -6,11 +6,11 @@ import {
   cookiePoint,
   quantities,
   blobOf,
-} from "./order-studio-art.mjs?v=table-products-1";
+} from "./order-studio-art.mjs?v=rounded-pops-1";
 import { cutSubject } from "./order-studio-cutout.mjs";
-import { createTemplate } from "./order-studio-designs.mjs?v=table-products-1";
-import { initComposer } from "./order-studio-compose.mjs?v=table-products-1";
-import { initPackagingFilm } from "./order-packaging-film.mjs?v=table-products-1";
+import { createTemplate } from "./order-studio-designs.mjs?v=rounded-pops-1";
+import { initComposer } from "./order-studio-compose.mjs?v=rounded-pops-1";
+import { initPackagingFilm } from "./order-packaging-film.mjs?v=rounded-pops-1";
 
 const $ = (id) => document.getElementById(id);
 const panels = [...document.querySelectorAll("[data-panel]")];

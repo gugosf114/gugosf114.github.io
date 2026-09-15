@@ -1,7 +1,7 @@
 import * as T from './vendor/three/three.module.min.js';
 
-// Cake-pop geometry follows George's 2703.webp: white chocolate discs,
-// slender white sticks and a shallow gold presentation stand.
+// Reference: Alaska Airlines, DocuSign and Flying Princess cake-pop photos.
+// Rounded dipped bodies with a flattened face and a smaller edible print wafer.
 export function addServingProducts({table,geom,mat,trackTexture,bump,artwork}) {
   const mesh=(parent,geometry,material,position)=>{
     const m=new T.Mesh(geom(geometry),material);m.position.set(...position);
@@ -17,14 +17,29 @@ export function addServingProducts({table,geom,mat,trackTexture,bump,artwork}) {
     x.fillStyle='#fffaf0';x.fillRect(0,0,1024,1024);x.drawImage(source,123,123,778,778);
     const t=trackTexture(new T.CanvasTexture(c));t.colorSpace=T.SRGBColorSpace;t.anisotropy=8;return t;
   });
-  const printed=textures.map(map=>mat(new T.MeshStandardMaterial({map,roughness:.53,bumpMap:bump,bumpScale:.002})));
+  const printed=textures.map(map=>mat(new T.MeshStandardMaterial({map,roughness:.56,bumpMap:bump,bumpScale:.001})));
+  const coatings=['#f5d614','#ed4d98','#cf1730'].map(color=>mat(new T.MeshPhysicalMaterial({
+    color,roughness:.27,clearcoat:.46,clearcoatRoughness:.22,bumpMap:bump,bumpScale:.002,
+  })));
+  // The front is a flat cap; the rest stays round, so coating cannot poke through the print.
+  const popProfile=[
+    [0,-.65],[.20,-.625],[.37,-.55],[.52,-.42],[.63,-.23],
+    [.68,0],[.663,.16],[.61,.32],[.54,.46],[.52,.49],[0,.49],
+  ].map(([r,y])=>new T.Vector2(r,y));
+  const popGeometry=geom(new T.LatheGeometry(popProfile,64));popGeometry.rotateX(Math.PI/2);
+  const waferGeometry=geom(new T.CylinderGeometry(.505,.505,.018,64));waferGeometry.rotateX(Math.PI/2);
+  const printGeometry=geom(new T.CircleGeometry(.493,64));
+  const collarGeometry=geom(new T.SphereGeometry(.082,16,12));
   for(let row=0;row<3;row++)for(let column=0;column<3;column++) {
-    const x=(column-1)*1.48,z=(row-1)*1.12;
-    const height=2.25+(2-row)*.22;
-    mesh(pops,new T.CylinderGeometry(.038,.038,height,10),stickMat,[x,.4+height/2,z]);
-    const pop=new T.Group();pop.position.set(x,.4+height,z);pop.rotation.y=.33+(column-1)*.055;pops.add(pop);
-    const body=mesh(pop,new T.CylinderGeometry(.67,.67,.28,56,1),chocolate,[0,0,0]);body.rotation.x=Math.PI/2;
-    mesh(pop,new T.CircleGeometry(.617,64),printed[column],[0,0,.147]);
+    const x=(column-1)*1.48,z=(row-1)*1.28;
+    const height=2.6+(2-row)*.24;
+    mesh(pops,new T.CylinderGeometry(.041,.041,height,12),stickMat,[x,.4+height/2,z]);
+    const pop=new T.Group();pop.position.set(x,.4+height,z);
+    pop.rotation.y=.33+(column-1)*.055;pop.rotation.z=(column-1)*.022;pops.add(pop);
+    const body=new T.Mesh(popGeometry,coatings[column]);body.castShadow=true;body.receiveShadow=true;pop.add(body);
+    const wafer=new T.Mesh(waferGeometry,chocolate);wafer.position.z=.503;pop.add(wafer);
+    const face=new T.Mesh(printGeometry,printed[column]);face.position.z=.514;pop.add(face);
+    const collar=new T.Mesh(collarGeometry,coatings[column]);collar.position.y=-.67;collar.scale.set(.8,1.6,.8);pop.add(collar);
   }
 
   // A real concave outline removes the bitten corner from biscuit, icing and print.
