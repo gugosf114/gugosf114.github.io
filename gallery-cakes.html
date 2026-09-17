@@ -209,7 +209,7 @@
     .tile-name.is-out{opacity:0;transform:translateY(4px)}
     .tile-progress{position:absolute;left:0;right:0;bottom:0;height:3px;background:#ffffff66;z-index:2}
     .tile-progress i{display:block;height:100%;width:0;background:#ffc532}
-    @media (prefers-reduced-motion:reduce){.tile-progress{display:none}#gallery-content .tile-grid-3 .service-card,#gallery-content .tile-grid-3 .service-card:hover{transition:none;transform:none}}
+    @media (prefers-reduced-motion:reduce){#gallery-content .tile-grid-3 .service-card,#gallery-content .tile-grid-3 .service-card:hover{transition:none;transform:none}}
     </style>
 </head>
 <body>
@@ -522,8 +522,9 @@
         if(!slides||slides.length<2) return;
         var layers=stage.querySelectorAll('.tile-slide'), name=stage.querySelector('.tile-name'), bar=stage.querySelector('.tile-progress i');
         var front=0, index=0, timer=null, visible=false, held=false, busy=false;
-        function runBar(){ if(!bar||CALM) return; bar.style.transition='none'; bar.style.width='0'; void bar.offsetWidth; bar.style.transition='width '+HOLD+'ms linear'; bar.style.width='100%'; }
-        function stopBar(){ if(!bar) return; var w=getComputedStyle(bar).width; bar.style.transition='none'; bar.style.width=w; }
+        var barFrame=null;
+        function runBar(){ if(!bar) return; cancelAnimationFrame(barFrame); var t0=performance.now(); bar.style.transition='none'; bar.style.width='0'; (function tick(now){ var p=Math.min(1,(now-t0)/HOLD); bar.style.width=(p*100)+'%'; if(p<1) barFrame=requestAnimationFrame(tick); })(t0); }
+        function stopBar(){ cancelAnimationFrame(barFrame); }
         function schedule(){ clearTimeout(timer); if(!visible||held||document.hidden) return; runBar(); timer=setTimeout(next,HOLD); }
         function next(){
           if(busy) return; busy=true;
