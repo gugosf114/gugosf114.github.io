@@ -904,6 +904,9 @@ input[type="radio"] {
   font-size: 10px;
   margin-top: 4px;
 }
+.shipping-options small.arrival {
+  color: var(--accent);
+}
 .shipping-options b {
   font-size: 12px;
   font-weight: 550;

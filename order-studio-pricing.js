@@ -158,6 +158,7 @@
     shipWhen: "soon",
     shipDate: "",
     shipDateLabel: "Within 48 hours",
+    arrival: "",
     ready: false,
   };
 
@@ -210,6 +211,62 @@
       month: "short",
       day: "numeric",
     }).format(new Date(Date.UTC(+parts[0], +parts[1] - 1, +parts[2])));
+  }
+  // FedEx moves boxes Monday to Friday and rests on these days.
+  var FEDEX_HOLIDAYS = [
+    "2026-11-26", "2026-12-25", "2027-01-01", "2027-05-31", "2027-07-05",
+    "2027-09-06", "2027-11-25", "2027-12-24",
+  ];
+  // Typical FedEx Ground business days from Daly City, by zone.
+  var GROUND_DAYS = { 2: [1, 2], 3: [2, 3], 4: [2, 3], 5: [3, 4], 6: [3, 4], 7: [4, 5], 8: [4, 5] };
+  function weekday(iso) {
+    var parts = iso.split("-");
+    return new Date(Date.UTC(+parts[0], +parts[1] - 1, +parts[2])).getUTCDay();
+  }
+  function isTravelDay(iso) {
+    var day = weekday(iso);
+    return day !== 0 && day !== 6 && FEDEX_HOLIDAYS.indexOf(iso) < 0;
+  }
+  function addTravelDays(iso, count) {
+    var day = iso;
+    while (count > 0) {
+      day = addDays(day, 1);
+      if (isTravelDay(day)) count--;
+    }
+    return day;
+  }
+  // The day the box leaves: the buyer's date, or the end of the 48-hour promise.
+  function shipDay() {
+    if (state.shipDate) return state.shipDate;
+    var day = addDays(bakeryToday(), SHIP_DATE_MIN_DAYS);
+    while (weekday(day) === 0) day = addDays(day, 1);
+    return day;
+  }
+  function arrivalText(name) {
+    var from = shipDay(),
+      by = state.shipDate ? "Arrives " : "Arrives by ";
+    if (name === "overnight") return by + readableDay(addTravelDays(from, 1));
+    if (name === "twoDay") return by + readableDay(addTravelDays(from, 2));
+    var range = GROUND_DAYS[state.zone] || [1, 5];
+    return (
+      "Arrives about " +
+      readableDay(addTravelDays(from, range[0])) +
+      " to " +
+      readableDay(addTravelDays(from, range[1]))
+    );
+  }
+  function updateArrivals(show) {
+    ["ground", "twoDay", "overnight"].forEach(function (name) {
+      var node = document.querySelector('[data-arrival="' + name + '"]');
+      if (!node) return;
+      node.hidden = !show;
+      node.textContent = show ? arrivalText(name) : "";
+    });
+    state.arrival = show ? arrivalText(state.service).replace(/^Arrives /, "") : "";
+    document.getElementById("arrivalReceiptRow").hidden = !show;
+    document.getElementById("arrivalReceipt").textContent = state.arrival
+      ? state.arrival.charAt(0).toUpperCase() + state.arrival.slice(1)
+      : "";
   }
   function shipDateProblem(value, pickup) {
     var today = bakeryToday(),
@@ -327,6 +384,7 @@
     state.total = null;
     state.ready = false;
     var dateProblem = updateShipDate();
+    updateArrivals(false);
     qtyInput.value = String(state.quantity);
     zipInput.value = state.zip;
     cookieSubtotal.textContent = money(state.subtotal);
@@ -411,6 +469,7 @@
     state.shipping = rateFor(state.zone, state.service, state.weight);
     state.total = state.subtotal + state.shipping;
     state.ready = !dateProblem;
+    updateArrivals(!dateProblem);
     shippingPrice.textContent = money(state.shipping);
     orderTotal.textContent = money(state.total);
     payLabel.textContent = dateProblem
