@@ -31,3 +31,10 @@
 ul.nav-links li.li-ordernow a.nav-cta.nav-cta--pink{background:linear-gradient(135deg,var(--pink),var(--pink-dark)) !important;background-image:linear-gradient(135deg,var(--pink),var(--pink-dark)) !important;color:#fff !important}
 
 .hero-text-box .hero-description,.hero-text-box .hero-subtitle,.hero-text-box .hero-seo-note{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:normal;border:0}
+/* Related pages: small, quiet link row near the footer (search-engine links, kept low-key) */
+.related-pages{display:block;max-width:900px;margin:2.5rem auto 3rem;padding:1.25rem 1.5rem 0;border-top:1px solid #e6dbcd;text-align:center}
+.related-pages-label{font-size:.78rem;font-weight:700;color:#a08c80;margin:0 0 .5rem}
+.related-pages ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:.35rem 1.25rem}
+.related-pages a{font-size:.9rem;color:#82665b;text-decoration:none;border-bottom:1px solid #e6dbcd}
+.related-pages a:hover{color:#622d2b;border-bottom-color:#622d2b}
+.related-pages a:focus-visible{outline:3px solid #ec268f;outline-offset:2px}
