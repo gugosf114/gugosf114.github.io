@@ -21,6 +21,7 @@
       property="og:description"
       content="Corporate logo cookies for company events. Photo cookies for birthdays and parties. Design it online. See the exact print. We ship across the US. $60 a dozen."
     />
+    <meta property="og:image" content="https://mybakingcreations.com/images/order-creations/docusign-photo.webp" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://mybakingcreations.com/buy-now" />
     <link rel="icon" type="image/png" href="logo_icon.png" />
@@ -33,19 +34,49 @@
     <link rel="stylesheet" href="order-studio.css?v=about-1" />
     <script type="application/ld+json">
       {
-        "@context": "https://schema.org",
-        "@type": "Product",
-        "name": "Custom printed cookies",
-        "description": "Your photo printed on freshly baked butter cookies with white royal icing. Gift box and individual wrapping included. Minimum 12 cookies.",
-        "brand": { "@type": "Brand", "name": "My Baking Creations" },
-        "offers": {
-          "@type": "Offer",
-          "price": "5.00",
-          "priceCurrency": "USD",
-          "availability": "https://schema.org/InStock",
-          "url": "https://mybakingcreations.com/buy-now"
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Custom photo cookies and corporate logo cookies",
+  "description": "Your photo printed on freshly baked butter cookies with white royal icing. Gift box and individual wrapping included. Minimum 12 cookies.",
+  "brand": {
+    "@type": "Brand",
+    "name": "My Baking Creations"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "5.00",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "url": "https://mybakingcreations.com/buy-now",
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingDestination": {
+        "@type": "DefinedRegion",
+        "addressCountry": "US"
+      },
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "handlingTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 0,
+          "maxValue": 2,
+          "unitCode": "DAY"
+        },
+        "transitTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 1,
+          "maxValue": 5,
+          "unitCode": "DAY"
         }
       }
+    }
+  },
+  "image": [
+    "https://mybakingcreations.com/images/order-creations/docusign-photo.webp",
+    "https://mybakingcreations.com/images/order-creations/birthday-photo.webp",
+    "https://mybakingcreations.com/images/order-creations/prism-photo.webp"
+  ]
+}
     </script>
     <script
       async
