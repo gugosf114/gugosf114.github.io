@@ -188,6 +188,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
     <link rel="stylesheet" href="style.css">
+    <style>
+    /* Bakery story band: the page's search text, given a designed home under the cakes */
+    .story-band{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:clamp(20px,4vw,64px);align-items:start;text-align:left;margin:3.5rem 0 0;padding:clamp(28px,4.5vw,60px);background:#fdfbf8;border-radius:32px;box-shadow:0 1px 0 #e6dbcd,0 18px 40px -28px #622d2b55}
+    .story-band h2{font-family:"Fredoka One",cursive;font-weight:400;color:#622d2b;font-size:clamp(2rem,3.6vw,3.2rem);line-height:1.04;letter-spacing:-.03em;margin:0;text-align:left}
+    .story-band p{color:#5c463d;font-size:1.06rem;line-height:1.75;margin:0 0 1rem;max-width:58ch;text-align:left}
+    .story-band .story-where{color:#82665b;padding-left:1rem;border-left:3px solid #ffc532}
+    @media (max-width:820px){.story-band{grid-template-columns:1fr;border-radius:24px}.story-band p{font-size:1rem}}
+    </style>
 </head>
 <body>
 
@@ -309,7 +317,6 @@
 
     <section class="page-content" id="gallery-content">
         <div class="section-wrapper section-beige reveal">
-            <p class="section-description">My Baking Creations is a Daly City bakery specializing in custom cakes for birthdays, weddings, and events across the Bay Area. Every cake is designed from scratch — sculpted 3D characters, realistic illusion cakes, and elegant tiered wedding cakes. Serving 30+ cities from San Francisco to San Jose, with pickup available at our Wildwood Avenue kitchen.</p>
             <div class="tile-grid-3">
                 <a href="gallery-cakes-sculpted" class="service-card">
                     <img width="1200" height="1384" src="images/gallery/cakes/Sculpted Baby Yoda Cake.jpg" alt="Sculpted Baby Yoda custom cake" style="width: 100%; height: 150px; object-fit: contain; border-radius: 15px; margin-bottom: 1rem;" loading="lazy">
@@ -337,17 +344,14 @@
                 <p>Ready to order your custom cake? Learn <a href="blog-how-to-order-custom-birthday-cake" style="color: var(--pink);">how to order a custom birthday cake</a> or explore <a href="blog-best-wedding-cake-flavors" style="color: var(--pink);">wedding cake flavors</a>.</p>
                 <a href="order-form" class="btn btn-primary">Request an Order</a>
             </div>
-            <div style="text-align: center; margin-top: 1.75rem;">
-                <p style="font-size: 1.05rem; margin-bottom: 0.5rem;"><a href="anniversary-cakes" style="color: var(--dark-brown); text-decoration: underline; font-weight: 600;">Anniversary cakes — milestone celebration designs</a></p>
-                <p style="font-size: 1.05rem; margin-bottom: 0.5rem;"><a href="baby-shower-cakes" style="color: var(--dark-brown); text-decoration: underline; font-weight: 600;">Baby shower cakes and dessert tables</a></p>
-                <p style="font-size: 1.05rem; margin-bottom: 0.5rem;"><a href="bridal-shower-cakes" style="color: var(--dark-brown); text-decoration: underline; font-weight: 600;">Bridal shower cakes and dessert tables</a></p>
-                <p style="font-size: 1.05rem; margin-bottom: 0.5rem;"><a href="first-birthday-cakes" style="color: var(--dark-brown); text-decoration: underline; font-weight: 600;">First birthday and smash cakes</a></p>
-                <p style="font-size: 1.05rem; margin-bottom: 0.5rem;"><a href="gender-reveal-cakes" style="color: var(--dark-brown); text-decoration: underline; font-weight: 600;">Gender reveal cakes — pink or blue inside</a></p>
-                <p style="font-size: 1.05rem; margin-bottom: 0.5rem;"><a href="graduation-cakes" style="color: var(--dark-brown); text-decoration: underline; font-weight: 600;">Graduation cakes in your school colors</a></p>
-                <p style="font-size: 1.05rem; margin-bottom: 0.5rem;"><a href="quinceanera-cakes" style="color: var(--dark-brown); text-decoration: underline; font-weight: 600;">Quincea&ntilde;era cakes for the big 15th</a></p>
-                <p style="font-size: 1.05rem; margin-bottom: 0.5rem;"><a href="retirement-party-cakes" style="color: var(--dark-brown); text-decoration: underline; font-weight: 600;">Retirement party cakes — career celebrations</a></p>
-                <p style="font-size: 1.05rem; margin-bottom: 0.5rem;"><a href="sweet-sixteen-cakes" style="color: var(--dark-brown); text-decoration: underline; font-weight: 600;">Sweet 16 custom party cakes</a></p>
-                <p style="font-size: 1.05rem; margin-bottom: 0;"><a href="custom-birthday-cakes-san-francisco" style="color: var(--dark-brown); text-decoration: underline; font-weight: 600;">Custom birthday cakes in San Francisco</a></p>
+            <div class="story-band">
+                <div class="story-lead">
+                    <h2>Every cake starts from scratch.</h2>
+                </div>
+                <div class="story-body">
+                    <p>My Baking Creations is a Daly City bakery specializing in custom cakes for birthdays, weddings, and events across the Bay Area. Every cake is designed from scratch — sculpted 3D characters, realistic illusion cakes, and elegant tiered wedding cakes.</p>
+                    <p class="story-where">Serving 30+ cities from San Francisco to San Jose, with pickup available at our Wildwood Avenue kitchen.</p>
+                </div>
             </div>
         </div>
     </section>
