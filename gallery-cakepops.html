@@ -171,6 +171,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
     <link rel="stylesheet" href="style.css">
+    <style>
+    /* Bakery story band: the page's search text, given a designed home under the goods */
+    .story-band{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:clamp(20px,4vw,64px);align-items:start;text-align:left;margin:3.5rem 0 0;padding:clamp(28px,4.5vw,60px);background:#fdfbf8;border-radius:32px;box-shadow:0 1px 0 #e6dbcd,0 18px 40px -28px #622d2b55}
+    .story-band h2{font-family:"Fredoka One",cursive;font-weight:400;color:#622d2b;font-size:clamp(2rem,3.6vw,3.2rem);line-height:1.04;letter-spacing:-.03em;margin:0;text-align:left}
+    .story-band p{color:#5c463d;font-size:1.06rem;line-height:1.75;margin:0 0 1rem;max-width:58ch;text-align:left}
+    .story-band .story-where{color:#82665b;padding-left:1rem;border-left:3px solid #ffc532;margin-bottom:0}
+    @media (max-width:820px){.story-band{grid-template-columns:1fr;border-radius:24px}.story-band p{font-size:1rem}}
+    </style>
 </head>
 <body>
 
@@ -294,9 +302,6 @@
             <div class="section-header">
                 <h2><span class="highlight">Custom Cake Pops</span></h2>
             </div>
-            <p class="section-description">
-                My Baking Creations handcrafts custom cake pops at our Daly City bakery for birthdays, corporate events, and celebrations across the Bay Area. Each cake pop is hand-rolled, dipped in chocolate, and decorated to match any theme — from character designs and sports teams to branded corporate gifts. Available for pickup or delivery to 30+ cities.
-            </p>
             <div class="cake-gallery-grid">
                 <div class="cake-thumb" onclick="openLightbox(0)">
                     <img width="1200" height="1388" src="images/gallery/cakepops/01 Giraffe Cake Pops.jpg" alt="Custom giraffe themed cake pops San Francisco Bay Area bakery" loading="lazy">
@@ -481,6 +486,15 @@
                 <h3>Ready to Order Cake Pops?</h3>
                 <p>Perfect for parties, favors, and corporate events</p>
                 <a href="order-form" class="btn btn-primary">Request an Order</a>
+            </div>
+            <div class="story-band">
+                <div class="story-lead">
+                    <h2>Every cake pop is rolled by hand.</h2>
+                </div>
+                <div class="story-body">
+                    <p>My Baking Creations handcrafts custom cake pops at our Daly City bakery for birthdays, corporate events, and celebrations across the Bay Area. Each cake pop is hand-rolled, dipped in chocolate, and decorated to match any theme — from character designs and sports teams to branded corporate gifts.</p>
+                    <p class="story-where">Available for pickup or delivery to 30+ cities.</p>
+                </div>
             </div>
         </div>
     </section>
