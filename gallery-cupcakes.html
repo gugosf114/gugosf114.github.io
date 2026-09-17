@@ -127,6 +127,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
     <link rel="stylesheet" href="style.css">
+    <style>
+    /* Bakery story band: the page's search text, given a designed home under the goods */
+    .story-band{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:clamp(20px,4vw,64px);align-items:start;text-align:left;margin:3.5rem 0 0;padding:clamp(28px,4.5vw,60px);background:#fdfbf8;border-radius:32px;box-shadow:0 1px 0 #e6dbcd,0 18px 40px -28px #622d2b55}
+    .story-band h2{font-family:"Fredoka One",cursive;font-weight:400;color:#622d2b;font-size:clamp(2rem,3.6vw,3.2rem);line-height:1.04;letter-spacing:-.03em;margin:0;text-align:left}
+    .story-band p{color:#5c463d;font-size:1.06rem;line-height:1.75;margin:0 0 1rem;max-width:58ch;text-align:left}
+    .story-band .story-where{color:#82665b;padding-left:1rem;border-left:3px solid #ffc532;margin-bottom:0}
+    @media (max-width:820px){.story-band{grid-template-columns:1fr;border-radius:24px}.story-band p{font-size:1rem}}
+    </style>
 </head>
 <body>
 
@@ -250,9 +258,6 @@
             <div class="section-header">
                 <h2><span class="highlight">Custom Cupcakes</span></h2>
             </div>
-            <p class="section-description">
-                My Baking Creations creates custom cupcakes at our Daly City bakery for parties, weddings, and corporate events throughout the Bay Area. Flavors include vanilla, chocolate, strawberry, lemon, and red velvet, topped with buttercream or fondant decorations matched to your event theme. Available individually or as part of a dessert table package with cakes and cookies.
-            </p>
             <div class="cupcakes-gallery-grid">
                 <div class="gallery-item blur-up-container" onclick="openLightbox(0)">
                     <img class="blur-up-placeholder" width="1200" height="947" src="images/gallery/cupcakes/01 Star Wars theme cupcakes three.jpg" alt="" aria-hidden="true" loading="lazy">
@@ -403,6 +408,15 @@
                 <h3>Ready to Order Cupcakes?</h3>
                 <p>Perfect for any celebration or corporate event</p>
                 <a href="order-form" class="btn btn-primary">Request an Order</a>
+            </div>
+            <div class="story-band">
+                <div class="story-lead">
+                    <h2>Decorated to match your event.</h2>
+                </div>
+                <div class="story-body">
+                    <p>My Baking Creations creates custom cupcakes at our Daly City bakery for parties, weddings, and corporate events throughout the Bay Area. Flavors include vanilla, chocolate, strawberry, lemon, and red velvet, topped with buttercream or fondant decorations matched to your event theme.</p>
+                    <p class="story-where">Available individually or as part of a dessert table package with cakes and cookies.</p>
+                </div>
             </div>
         </div>
     </section>
