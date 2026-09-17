@@ -209,7 +209,7 @@
     .tile-name.is-out{opacity:0;transform:translateY(4px)}
     .tile-progress{position:absolute;left:0;right:0;bottom:0;height:3px;background:#ffffff66;z-index:2}
     .tile-progress i{display:block;height:100%;width:0;background:#ffc532}
-    @media (prefers-reduced-motion:reduce){.tile-progress,.tile-name{display:none}#gallery-content .tile-grid-3 .service-card,#gallery-content .tile-grid-3 .service-card:hover{transition:none;transform:none}}
+    @media (prefers-reduced-motion:reduce){.tile-progress{display:none}#gallery-content .tile-grid-3 .service-card,#gallery-content .tile-grid-3 .service-card:hover{transition:none;transform:none}}
     </style>
 </head>
 <body>
@@ -505,32 +505,39 @@
     <script>
     /* Tile slideshow: crossfades through a gallery's own photos inside its tile. Loads each photo fully before showing it. */
     (function(){
-      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      var HOLD=4200;
+      // Animations-off systems still get the slideshow: a plain fade, with no drift and no moving progress line.
+      var CALM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var HOLD=CALM?5200:4200;
+      // Resolves once the photo is loaded (and decoded when the browser allows), but can never hang: every path has a time limit.
+      function ready(src){
+        return new Promise(function(res){
+          var im=new Image(), done=false;
+          function ok(){ if(!done){ done=true; res(); } }
+          im.onload=function(){ if(im.decode){ im.decode().then(ok,ok); setTimeout(ok,1200); } else ok(); };
+          im.onerror=ok; im.src=src; setTimeout(ok,8000);
+        });
+      }
       document.querySelectorAll('.tile-stage[data-slides]').forEach(function(stage,order){
         var slides; try{slides=JSON.parse(stage.dataset.slides);}catch(e){return;}
         if(!slides||slides.length<2) return;
         var layers=stage.querySelectorAll('.tile-slide'), name=stage.querySelector('.tile-name'), bar=stage.querySelector('.tile-progress i');
-        var card=stage.closest('a')||stage, front=0, index=0, timer=null, visible=false, held=false, busy=false;
-        function runBar(){ if(!bar) return; bar.style.transition='none'; bar.style.width='0'; void bar.offsetWidth; bar.style.transition='width '+HOLD+'ms linear'; bar.style.width='100%'; }
+        var front=0, index=0, timer=null, visible=false, held=false, busy=false;
+        function runBar(){ if(!bar||CALM) return; bar.style.transition='none'; bar.style.width='0'; void bar.offsetWidth; bar.style.transition='width '+HOLD+'ms linear'; bar.style.width='100%'; }
         function stopBar(){ if(!bar) return; var w=getComputedStyle(bar).width; bar.style.transition='none'; bar.style.width=w; }
         function schedule(){ clearTimeout(timer); if(!visible||held||document.hidden) return; runBar(); timer=setTimeout(next,HOLD); }
         function next(){
           if(busy) return; busy=true;
           var s=slides[(index+1)%slides.length], back=layers[1-front], shown=layers[front];
-          var probe=new Image(); probe.src=s.src;
-          (probe.decode?probe.decode():Promise.resolve()).catch(function(){}).then(function(){
+          ready(s.src).then(function(){
             back.src=s.src; back.classList.remove('is-drift'); void back.offsetWidth;
             if(name) name.classList.add('is-out');
-            back.classList.add('is-on','is-drift'); shown.classList.remove('is-on');
+            back.classList.add('is-on'); if(!CALM) back.classList.add('is-drift'); shown.classList.remove('is-on');
             back.alt=s.alt; back.removeAttribute('aria-hidden'); shown.setAttribute('aria-hidden','true');
             setTimeout(function(){ if(name){name.textContent=s.name||'';name.classList.remove('is-out');} shown.classList.remove('is-drift'); },500);
             front=1-front; index=(index+1)%slides.length; busy=false; schedule();
           });
         }
-        layers[0].classList.add('is-drift');
-        ['pointerenter','focusin'].forEach(function(e){card.addEventListener(e,function(){held=true;clearTimeout(timer);stopBar();});});
-        ['pointerleave','focusout'].forEach(function(e){card.addEventListener(e,function(){held=false;schedule();});});
+        if(!CALM) layers[0].classList.add('is-drift');
         document.addEventListener('visibilitychange',schedule);
         if('IntersectionObserver' in window){ new IntersectionObserver(function(es){visible=es[0].isIntersecting; if(visible) setTimeout(schedule,order*1300); else {clearTimeout(timer);stopBar();}},{threshold:.35}).observe(stage); }
         else { visible=true; setTimeout(schedule,order*1300); }
