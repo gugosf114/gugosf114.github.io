@@ -862,6 +862,22 @@ input[type="radio"] {
   padding: 12px 13px;
   font-size: 13px;
 }
+.ship-when {
+  margin: 24px 0 0;
+}
+.date-input {
+  font-family: inherit;
+  color: inherit;
+  min-height: 44px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.date-input.is-error {
+  border-color: var(--error);
+}
+#shipDateMessage.is-error {
+  color: var(--error);
+}
 .shipping-options {
   border: 0;
   padding: 0;

@@ -446,7 +446,7 @@ function updatePrice() {
     q.fulfil === "pickup" ? "Daly City pickup" : "FedEx " + q.serviceLabel;
   $("pickupNote").hidden = q.fulfil !== "pickup";
   $("manualQuote").hidden =
-    q.fulfil !== "ship" || q.zip.length !== 5 || q.ready;
+    q.fulfil !== "ship" || q.zip.length !== 5 || q.shipping !== null;
   $("qtyDown").disabled = q.quantity <= designs.length * 12;
   $("cookieQty").min = designs.length * 12;
   $("quantityNote").textContent =
@@ -1193,7 +1193,7 @@ async function loadPayment() {
       await script(
         "https://www.paypal.com/sdk/js?client-id=BAAWrqUBSYrM5GuFpN43KZHxZAJvb_39F9mt1SIA4TX2tYQVOo0N9Hmfw-BbC55szL-UoAlsXCOPaW3_fE&currency=USD&intent=capture&enable-funding=card&disable-funding=paylater&components=buttons",
       );
-    if (!window.__mbcOrderUpload) await script("buy-now-order.js");
+    if (!window.__mbcOrderUpload) await script("buy-now-order.js?v=ship-date-1");
     if (!window.turnstile)
       await script(
         "https://challenges.cloudflare.com/turnstile/v0/api.js?onload=mbcTurnstileLoaded&render=explicit",
