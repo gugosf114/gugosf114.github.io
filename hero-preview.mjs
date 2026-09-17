@@ -1,19 +1,21 @@
 const assets={
+  characters:['character-original.webp','Character birthday cakes'],
+  social:['social-original.webp','Social-media logo cookies'],
   sculpted:['sculpted.webp','Sculpted handbag and puzzle-cube cakes'],
   celebration:['celebration.webp','Custom celebration cakes'],
   wedding:['wedding.webp','Wedding cake with pink sugar flowers'],
   pops:['pops.webp','Branded and unicorn cake pops'],
   corporatePops:['corporate-pops.webp','Branded cake-pop display'],
-  meta:['meta-nestle.svg','Meta and Nestlé printed logo cookie'],
-  prism:['prism.svg','Prism corporate celebration cookie'],
-  structure:['structure.svg','Structure Therapeutics milestone cookie'],
+  meta:['meta-nestle-group.svg','Meta and Nestlé printed logo cookie'],
+  prism:['prism-group.svg','Prism corporate celebration cookie'],
+  structure:['structure-group.svg','Structure Therapeutics milestone cookie'],
   baby:['baby.svg','Personalized baby birthday photo cookie'],
 };
 const pages={
-  home:{title:'Custom Cakes, Cookies & Cake Pops',description:'Made by hand. Made for your moment.',items:['sculpted','baby','pops','celebration','meta','wedding','prism'],primary:['Create your cookies','buy-now.html'],secondary:['Request a custom order','order-form.html'],section:'Made for your moments.',detail:'From a favorite face on a cookie to a cake they’ll never forget.'},
-  about:{title:'About My Baking Creations',description:'A family bakery. A personal touch. Since 2012.',items:['wedding','sculpted','baby','pops','celebration'],primary:['Meet our bakery','about.html'],secondary:['View our work','gallery.html'],section:'Meet Yana.',detail:'The baker and cake artist behind My Baking Creations.'},
-  gallery:{title:'Our Gallery',description:'A little inspiration for your next celebration.',items:['sculpted','meta','pops','wedding','baby','celebration','prism','structure'],primary:['Explore the gallery','gallery.html'],secondary:['Create your cookies','buy-now.html'],section:'Explore our work.',detail:'Cakes, cookies and cake pops, each made for someone’s occasion.'},
-  cakes:{title:'Custom Cakes',description:'Your idea, brought to life in cake.',items:['sculpted','wedding','celebration'],primary:['Plan your cake','order-form.html'],secondary:['Browse cakes','gallery-cakes.html'],section:'Find your cake.',detail:'Sculpted celebrations, beautiful wedding cakes and personal favorites.'},
+  home:{title:'Custom Cakes, Cookies & Cake Pops',description:'Made by hand. Made for your moment.',items:['characters','social','celebration','sculpted','pops','wedding','prism'],primary:['Request an Order','order-form.html'],secondary:['View Our Work','gallery.html'],section:'Made for your moments.',detail:'From a favorite face on a cookie to a cake they’ll never forget.'},
+  about:{title:'About My Baking Creations',description:'A family bakery. A personal touch. Since 2012.',items:['characters','social','sculpted','pops','celebration'],primary:['Meet our bakery','about.html'],secondary:['View our work','gallery.html'],section:'Meet Yana.',detail:'The baker and cake artist behind My Baking Creations.'},
+  gallery:{title:'Our Gallery',description:'A little inspiration for your next celebration.',items:['characters','social','celebration','pops','sculpted','wedding','prism','structure'],primary:['Explore the gallery','gallery.html'],secondary:['Create your cookies','buy-now.html'],section:'Explore our work.',detail:'Cakes, cookies and cake pops, each made for someone’s occasion.'},
+  cakes:{title:'Custom Cakes',description:'Your idea, brought to life in cake.',items:['characters','celebration','sculpted','wedding'],primary:['Plan your cake','order-form.html'],secondary:['Browse cakes','gallery-cakes.html'],section:'Find your cake.',detail:'Sculpted celebrations, beautiful wedding cakes and personal favorites.'},
   corporate:{title:'Made for Your Company',description:'Your brand. Your team. A memorable way to celebrate.',items:['meta','corporatePops','structure','prism'],primary:['Plan a corporate order','corporate-order.html'],secondary:['Design logo cookies','buy-now.html'],section:'Made for your team.',detail:'For welcomes, milestones, launches and a well-earned thank you.'},
 };
 const $=id=>document.getElementById(id);
@@ -90,9 +92,9 @@ $('heroPause').addEventListener('click',()=>{paused=!paused;if(!paused)hovered=f
 root.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse')hovered=true;});
 root.addEventListener('pointerleave',()=>{hovered=false;});
 let touchStart=null;
-viewport.addEventListener('pointerdown',event=>{touchStart={x:event.clientX,y:event.clientY};resumeAfter=Date.now()+8000;},{passive:true});
-viewport.addEventListener('pointerup',event=>{if(!touchStart)return;const dx=event.clientX-touchStart.x,dy=event.clientY-touchStart.y;touchStart=null;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.3)move(index+(dx<0?1:-1),true);},{passive:true});
-viewport.addEventListener('pointercancel',()=>{touchStart=null;},{passive:true});
+root.addEventListener('pointerdown',event=>{if(event.target.closest('a,button,select'))return;touchStart={x:event.clientX,y:event.clientY};resumeAfter=Date.now()+8000;},{passive:true});
+root.addEventListener('pointerup',event=>{if(!touchStart)return;const dx=event.clientX-touchStart.x,dy=event.clientY-touchStart.y;touchStart=null;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.3)move(index+(dx<0?1:-1),true);},{passive:true});
+root.addEventListener('pointercancel',()=>{touchStart=null;},{passive:true});
 new ResizeObserver(()=>{if(items.length){index=modulo(index);build();}}).observe(viewport);
 document.addEventListener('visibilitychange',()=>{if(document.hidden)clearTimeout(timer);else schedule();});
 reduced.addEventListener('change',()=>{paused=reduced.matches;pauseLabel();settle();schedule();});

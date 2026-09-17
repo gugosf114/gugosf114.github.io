@@ -7,18 +7,19 @@
   <link rel="icon" href="logo_icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="hero-preview.css?v=1">
+  <link rel="stylesheet" href="hero-preview.css?v=2">
 </head>
 <body>
   <aside class="preview-tools" aria-label="Mockup controls">
-    <span><strong>Hero mockup</strong><span class="preview-detail"> · Same layout. Different collections.</span></span>
+    <span><strong>Hero mockup</strong><span class="preview-detail"> · Revision 2 · Original scale and composition.</span></span>
     <label for="pagePreview">Preview page <select id="pagePreview"><option value="home">Home</option><option value="about">About Us</option><option value="gallery">Gallery</option><option value="cakes">Gallery Cakes</option><option value="corporate">Corporate Orders</option></select></label>
   </aside>
-  <header class="mock-header">
+  <header class="mock-header"><div class="mock-header-inner">
     <a class="mock-brand" href="hero-preview.html?page=home" aria-label="My Baking Creations home preview"><img src="logo_icon.png" width="1330" height="1222" alt=""><span><span class="my">my</span><span class="baking">baking</span><small>CREATIONS</small></span></a>
     <nav class="mock-nav" aria-label="Preview pages"><button data-page="home">Home</button><button data-page="about">About Us</button><button data-page="gallery">Gallery</button><button data-page="cakes">Cakes</button><button data-page="corporate">Corporate Orders</button></nav>
     <a class="mock-order" href="buy-now.html">Order Now</a>
-  </header>
+    <a class="mock-quote" href="order-form.html">Get a Quote</a>
+  </div></header>
   <main>
     <section class="standard-hero" id="standardHero" aria-labelledby="heroTitle" aria-roledescription="carousel">
       <div class="hero-viewport" id="heroViewport"><div class="hero-track" id="heroTrack"></div></div>
@@ -30,6 +31,8 @@
         <span class="hero-count" id="heroCount" aria-hidden="true"></span>
       </div>
       <div class="hero-intro">
+        <img class="hero-brand-icon" src="logo_icon.png" width="1330" height="1222" alt="My Baking Creations">
+        <span class="hero-family-badge">Family-Owned Since 2012</span>
         <h1 id="heroTitle">Custom Cakes, Cookies & Cake Pops</h1>
         <p id="heroDescription">Made by hand. Made for your moment.</p>
         <div class="hero-actions"><a id="heroPrimary" class="hero-primary" href="buy-now.html">Create your cookies</a><a id="heroSecondary" class="hero-secondary" href="order-form.html">Request a custom order</a></div>
@@ -44,6 +47,6 @@
     </section>
   </main>
   <footer class="mock-footer">Layout preview only · Sample photography prepared for this concept · Live pages unchanged</footer>
-  <script type="module" src="hero-preview.mjs?v=1"></script>
+  <script type="module" src="hero-preview.mjs?v=2"></script>
 </body>
 </html>

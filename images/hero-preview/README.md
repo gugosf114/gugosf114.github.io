@@ -28,3 +28,7 @@ No new products, added text, borders, vignettes, reflections or shadow underneat
 The mockup uses one controller with page-specific data. It measures responsive visible-slot count, derives
 pagination from actual images, and repeats end/start images for continuous wrapping in both directions.
 Hero heights are fixed per responsive breakpoint and remain the same across all five page configurations.
+
+## Revision 2
+
+Restores the live site's large full-width presentation and central overlay panel. All five page variants use a 600px desktop hero with a 432px title panel and a 480px mobile hero with a 340px title panel. The opening collection uses fuller arrangements, including the existing character-cake and social-cookie collages, rather than isolated single cookies. Header content is centered at the original site scale. Corporate group SVGs repeat the original masked photo cutouts into full arrangements. Production pages remain untouched.
