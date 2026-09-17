@@ -196,6 +196,21 @@
     .story-band .story-where{color:#82665b;padding-left:1rem;border-left:3px solid #ffc532}
     @media (max-width:820px){.story-band{grid-template-columns:1fr;border-radius:24px}.story-band p{font-size:1rem}}
     </style>
+    <style>
+    /* Sub-category tiles: a photo stage that slowly walks through that gallery's own cakes. Inline on purpose (no shared file to go stale). */
+    #gallery-content .tile-grid-3 .service-card{background:#fdfbf8;border-radius:30px;padding:14px 14px 30px;box-shadow:0 1px 0 #e6dbcd,0 24px 48px -30px #622d2b66;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+    #gallery-content .tile-grid-3 .service-card:hover{transform:translateY(-4px);box-shadow:0 1px 0 #e6dbcd,0 34px 56px -30px #622d2b80}
+    #gallery-content .tile-grid-3 .service-card h2{margin-top:.25rem}
+    .tile-stage{position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:#f1ebe1;margin:0 0 1.35rem;isolation:isolate}
+    #gallery-content .tile-stage img.tile-slide{position:absolute !important;inset:0;width:100% !important;min-width:100% !important;height:100% !important;max-width:none !important;max-height:none !important;margin:0 !important;border-radius:0 !important;object-fit:cover;opacity:0;transform:scale(1);transition:opacity 1.4s ease}
+    #gallery-content .tile-stage img.tile-slide.is-on{opacity:1}
+    #gallery-content .tile-stage img.tile-slide.is-drift{transform:scale(1.06);transition:opacity 1.4s ease,transform 7s linear}
+    .tile-name{position:absolute;left:12px;bottom:16px;z-index:2;background:#fdfbf8ee;color:#622d2b;font-family:"Nunito",sans-serif;font-weight:800;font-size:.82rem;line-height:1;padding:.5rem .8rem;border-radius:999px;box-shadow:0 6px 16px -8px #0006;transition:opacity .45s ease,transform .45s ease}
+    .tile-name.is-out{opacity:0;transform:translateY(4px)}
+    .tile-progress{position:absolute;left:0;right:0;bottom:0;height:3px;background:#ffffff66;z-index:2}
+    .tile-progress i{display:block;height:100%;width:0;background:#ffc532}
+    @media (prefers-reduced-motion:reduce){.tile-progress,.tile-name{display:none}#gallery-content .tile-grid-3 .service-card,#gallery-content .tile-grid-3 .service-card:hover{transition:none;transform:none}}
+    </style>
 </head>
 <body>
 
@@ -322,21 +337,30 @@
             </div>
             <div class="tile-grid-3">
                 <a href="gallery-cakes-sculpted" class="service-card">
-                    <img width="800" height="1000" src="images/gallery/cakes/minion cake.jpg" alt="Sculpted Minion custom birthday cake" style="width: 100%; height: 150px; object-fit: contain; border-radius: 15px; margin-bottom: 1rem;" loading="lazy">
+                    <div class="tile-stage" data-slides='[{"src": "images/gallery/cakes/minion cake.jpg", "alt": "Custom Minion character sculpted cake San Francisco bakery", "name": "Minion"}, {"src": "images/gallery/cakes/Sculpted Baby Yoda Cake.jpg", "alt": "Custom Baby Yoda Grogu Star Wars sculpted cake Bay Area", "name": "Baby Yoda"}, {"src": "images/gallery/cakes/Pikachu Pokemon Sculpted Cake.webp", "alt": "Custom Pikachu Pokemon sculpted birthday cake San Francisco Bay Area", "name": "Pikachu"}, {"src": "images/gallery/cakes/Sculpted Nike Shoe Cake.jpg", "alt": "Custom Nike sneaker shoe sculpted cake San Francisco", "name": "Sneaker"}, {"src": "images/gallery/cakes/Hermes cake.jpg", "alt": "Custom Hermes designer sculpted cake San Francisco", "name": "Designer gift box"}, {"src": "images/gallery/cakes/Basketball themed custom sculpted cake.jpg", "alt": "Custom basketball themed sculpted cake by Bay Area bakery", "name": "Basketball"}, {"src": "images/gallery/cakes/Sculpted Cake_Dancer.jpg", "alt": "Custom dancer ballerina sculpted cake San Francisco bakery", "name": "Dancer"}, {"src": "images/gallery/cakes/racoon cake.jpg", "alt": "Custom raccoon animal sculpted cake Bay Area bakery", "name": "Raccoon"}, {"src": "images/gallery/cakes/Mushroom House Sculpted Cake.jpg", "alt": "Custom mushroom house sculpted cake Bay Area bakery", "name": "Mushroom house"}]'>
+                        <img class="tile-slide is-on" width="800" height="1000" src="images/gallery/cakes/minion cake.jpg" alt="Sculpted Minion custom birthday cake" loading="lazy">
+                        <img class="tile-slide" alt="" aria-hidden="true">
+                        <span class="tile-name" aria-hidden="true">Minion</span>
+                        <span class="tile-progress" aria-hidden="true"><i></i></span>
+                    </div>
                     <h2>Sculpted Cakes</h2>
                     <p>Custom sculpted cakes for birthdays, themed parties, and special celebrations</p>
                     <span class="btn btn-secondary">View Sculpted Cakes</span>
                 </a>
 
                 <a href="gallery-cakes-realistic" class="service-card">
-                    <img width="1200" height="1083" src="images/gallery/realist/Realistic Sushi Cake.jpg" alt="Ultra-realistic sushi cake design" style="width: 100%; height: 150px; object-fit: contain; border-radius: 15px; margin-bottom: 1rem;" loading="lazy">
+                    <div class="tile-stage">
+                        <img class="tile-slide is-on" width="1200" height="1083" src="images/gallery/realist/Realistic Sushi Cake.jpg" alt="Ultra-realistic sushi cake design" loading="lazy">
+                    </div>
                     <h2>Realistic Cakes</h2>
                     <p>Ultra-realistic cake designs that look too good to eat</p>
                     <span class="btn btn-secondary">View Realistic Cakes</span>
                 </a>
 
                 <a href="gallery-cakes-wedding" class="service-card">
-                    <img width="587" height="643" src="images/gallery/wedding/3 tier white wedding cake with gold accents.png" alt="Elegant 3-tier white wedding cake with gold accents" style="width: 100%; height: 150px; object-fit: contain; border-radius: 15px; margin-bottom: 1rem;" loading="lazy">
+                    <div class="tile-stage">
+                        <img class="tile-slide is-on" width="587" height="643" src="images/gallery/wedding/3 tier white wedding cake with gold accents.png" alt="Elegant 3-tier white wedding cake with gold accents" loading="lazy">
+                    </div>
                     <h2>Wedding Cakes</h2>
                     <p>Elegant wedding cakes and anniversary celebration designs</p>
                     <span class="btn btn-secondary">View Wedding Cakes</span>
@@ -478,5 +502,40 @@
     <script src="chatbot.js?v=2" defer></script>
     <script src="/js/bakers-agent-gallery.js" defer></script>
     <script src="hero-lens.js" defer></script>
+    <script>
+    /* Tile slideshow: crossfades through a gallery's own photos inside its tile. Loads each photo fully before showing it. */
+    (function(){
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var HOLD=4200;
+      document.querySelectorAll('.tile-stage[data-slides]').forEach(function(stage,order){
+        var slides; try{slides=JSON.parse(stage.dataset.slides);}catch(e){return;}
+        if(!slides||slides.length<2) return;
+        var layers=stage.querySelectorAll('.tile-slide'), name=stage.querySelector('.tile-name'), bar=stage.querySelector('.tile-progress i');
+        var card=stage.closest('a')||stage, front=0, index=0, timer=null, visible=false, held=false, busy=false;
+        function runBar(){ if(!bar) return; bar.style.transition='none'; bar.style.width='0'; void bar.offsetWidth; bar.style.transition='width '+HOLD+'ms linear'; bar.style.width='100%'; }
+        function stopBar(){ if(!bar) return; var w=getComputedStyle(bar).width; bar.style.transition='none'; bar.style.width=w; }
+        function schedule(){ clearTimeout(timer); if(!visible||held||document.hidden) return; runBar(); timer=setTimeout(next,HOLD); }
+        function next(){
+          if(busy) return; busy=true;
+          var s=slides[(index+1)%slides.length], back=layers[1-front], shown=layers[front];
+          var probe=new Image(); probe.src=s.src;
+          (probe.decode?probe.decode():Promise.resolve()).catch(function(){}).then(function(){
+            back.src=s.src; back.classList.remove('is-drift'); void back.offsetWidth;
+            if(name) name.classList.add('is-out');
+            back.classList.add('is-on','is-drift'); shown.classList.remove('is-on');
+            back.alt=s.alt; back.removeAttribute('aria-hidden'); shown.setAttribute('aria-hidden','true');
+            setTimeout(function(){ if(name){name.textContent=s.name||'';name.classList.remove('is-out');} shown.classList.remove('is-drift'); },500);
+            front=1-front; index=(index+1)%slides.length; busy=false; schedule();
+          });
+        }
+        layers[0].classList.add('is-drift');
+        ['pointerenter','focusin'].forEach(function(e){card.addEventListener(e,function(){held=true;clearTimeout(timer);stopBar();});});
+        ['pointerleave','focusout'].forEach(function(e){card.addEventListener(e,function(){held=false;schedule();});});
+        document.addEventListener('visibilitychange',schedule);
+        if('IntersectionObserver' in window){ new IntersectionObserver(function(es){visible=es[0].isIntersecting; if(visible) setTimeout(schedule,order*1300); else {clearTimeout(timer);stopBar();}},{threshold:.35}).observe(stage); }
+        else { visible=true; setTimeout(schedule,order*1300); }
+      });
+    })();
+    </script>
 </body>
 </html>
