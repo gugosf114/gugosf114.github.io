@@ -2387,3 +2387,92 @@ body[data-step="upload"] .studio-header > .journey { display:none; }
   #creationViewerPhoto { height:50svh; }
 }
 @media (prefers-reduced-motion:reduce) { .creation-silhouette { transition:none; } }
+
+/* Plain-words section under the design tool (start screen only). */
+.about-cookies {
+  border-top: 1px solid var(--line);
+  background: var(--paper);
+}
+body[data-step]:not([data-step="upload"]) .about-cookies {
+  display: none;
+}
+.about-inner {
+  max-width: 1080px;
+  margin: auto;
+  padding: clamp(44px, 7vw, 88px) clamp(20px, 5.1vw, 86px);
+}
+.about-cookies h2 {
+  font-family: "Fredoka One", cursive;
+  font-weight: 400;
+  font-size: clamp(28px, 3.2vw, 44px);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  margin: 0 0 16px;
+  max-width: 640px;
+}
+.about-lead {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 620px;
+  margin: 0 0 36px;
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.about-grid article {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px 22px 20px;
+}
+.about-cookies h3 {
+  font-size: 15px;
+  font-weight: 650;
+  margin: 0 0 10px;
+}
+.about-grid p,
+.about-grid li,
+.about-cookies details p,
+.about-more {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin: 0;
+}
+.about-grid ul {
+  margin: 0;
+  padding-left: 18px;
+}
+.about-faq-title {
+  margin: 44px 0 6px !important;
+}
+.about-cookies details {
+  border-bottom: 1px solid var(--line);
+  padding: 15px 0;
+}
+.about-cookies summary {
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 550;
+}
+.about-cookies summary::marker {
+  color: var(--accent);
+}
+.about-cookies details p {
+  margin-top: 10px;
+  max-width: 720px;
+}
+.about-more {
+  margin-top: 28px;
+}
+.about-cookies a {
+  color: var(--accent);
+}
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+}
