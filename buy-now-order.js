@@ -64,6 +64,7 @@
       fulfil: currentQuote.fulfil,
       zip: currentQuote.zip,
       service: currentQuote.service,
+      shipDate: currentQuote.shipDate || '',
       designs: designs.map(function (design) {
         return design && [design.slot, design.quantity, design.shape, design.background, design.approvedAt];
       })
@@ -112,6 +113,7 @@
     if (preparing) return preparing;
     var currentQuote = quote();
     var designs = approvedDesigns();
+    if (currentQuote && currentQuote.shipWhen === 'date' && !currentQuote.shipDate) throw new Error('Choose your date before you pay.');
     if (!currentQuote || !currentQuote.ready) throw new Error('Enter the delivery ZIP and choose a FedEx speed before you pay.');
     if (!designs || designs.length !== currentQuote.photos || designs.some(function (design) { return !design; })) {
       throw new Error('Approve every cookie design before you pay.');
@@ -135,6 +137,7 @@
           fulfilment: currentQuote.fulfil,
           postalCode: currentQuote.zip,
           shippingService: currentQuote.service,
+          shipDate: currentQuote.shipDate || null,
           turnstileToken: securityToken
         })
       });
@@ -197,6 +200,7 @@
     var currentQuote = quote();
     var designs = approvedDesigns();
     if (!designs || !designs.length || designs.some(function (design) { return !design; })) return 'Approve every cookie design before you pay.';
+    if (currentQuote && currentQuote.shipWhen === 'date' && !currentQuote.shipDate) return 'Choose your date before you pay.';
     if (!currentQuote || !currentQuote.ready) return 'Enter the delivery ZIP and choose a FedEx speed before you pay.';
     if (!securityToken && !(session && session.ready)) return 'Finish the secure order check above the PayPal button.';
     return '';

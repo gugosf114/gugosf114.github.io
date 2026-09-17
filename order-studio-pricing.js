@@ -12,6 +12,11 @@
   var shippingPrice = document.getElementById("shippingPrice");
   var orderTotal = document.getElementById("orderTotal");
   var payLabel = document.getElementById("payLabel");
+  var shipDateBox = document.getElementById("shipDateBox");
+  var shipDateInput = document.getElementById("shipDate");
+  var shipDateMessage = document.getElementById("shipDateMessage");
+  var SHIP_DATE_MIN_DAYS = 2,
+    SHIP_DATE_MAX_DAYS = 90;
   if (!qtyInput || !zipInput) return;
 
   var RATE_WEIGHTS = [4, 15, 50];
@@ -150,6 +155,9 @@
     shipping: null,
     subtotal: 60,
     total: null,
+    shipWhen: "soon",
+    shipDate: "",
+    shipDateLabel: "Within 48 hours",
     ready: false,
   };
 
@@ -168,6 +176,96 @@
       'input[name="shippingService"]:checked',
     );
     return checked ? checked.value : "ground";
+  }
+  function shipWhen() {
+    var checked = document.querySelector('input[name="shipWhen"]:checked');
+    return checked ? checked.value : "soon";
+  }
+  function isoDay(date) {
+    return date.toISOString().slice(0, 10);
+  }
+  // The bakery's day decides "today", the same way the order backend checks it.
+  function bakeryToday() {
+    try {
+      var text = new Intl.DateTimeFormat("en-CA", {
+        timeZone: "America/Los_Angeles",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      }).format(new Date());
+      if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+    } catch (error) {}
+    var now = new Date();
+    return isoDay(new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())));
+  }
+  function addDays(iso, days) {
+    var parts = iso.split("-");
+    return isoDay(new Date(Date.UTC(+parts[0], +parts[1] - 1, +parts[2] + days)));
+  }
+  function readableDay(iso) {
+    var parts = iso.split("-");
+    return new Intl.DateTimeFormat("en-US", {
+      timeZone: "UTC",
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+    }).format(new Date(Date.UTC(+parts[0], +parts[1] - 1, +parts[2])));
+  }
+  function shipDateProblem(value, pickup) {
+    var today = bakeryToday(),
+      first = addDays(today, SHIP_DATE_MIN_DAYS),
+      last = addDays(today, SHIP_DATE_MAX_DAYS);
+    shipDateInput.min = first;
+    shipDateInput.max = last;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(value))
+      return pickup ? "Choose your pickup day." : "Choose your ship day.";
+    if (value < first)
+      return "We need 48 hours to bake. The first open day is " + readableDay(first) + ".";
+    if (value > last) return "Choose a day within the next " + SHIP_DATE_MAX_DAYS + " days.";
+    var parts = value.split("-");
+    if (!pickup && new Date(Date.UTC(+parts[0], +parts[1] - 1, +parts[2])).getUTCDay() === 0)
+      return "FedEx does not pick up on Sundays. Choose another day.";
+    return "";
+  }
+  function updateShipDate() {
+    var pickup = state.fulfil === "pickup";
+    state.shipWhen = shipWhen();
+    state.shipDate = "";
+    state.shipDateLabel = "Within 48 hours";
+    document.getElementById("shipWhenLegend").textContent = pickup
+      ? "When will you pick up?"
+      : "When should we ship?";
+    document.getElementById("shipWhenDateTitle").textContent = pickup
+      ? "Choose a pickup date"
+      : "Choose a ship date";
+    document.getElementById("shipDateLabel").textContent = pickup ? "Pickup date" : "Ship date";
+    document.getElementById("shipDateReceiptLabel").textContent = pickup ? "Ready for pickup" : "Ships";
+    shipDateBox.hidden = state.shipWhen !== "date";
+    var problem = "";
+    if (state.shipWhen === "date") {
+      problem = shipDateProblem(shipDateInput.value, pickup);
+      var touched = !!shipDateInput.value;
+      shipDateInput.classList.toggle("is-error", !!problem && touched);
+      shipDateMessage.classList.toggle("is-error", !!problem && touched);
+      if (problem) {
+        shipDateMessage.textContent = problem;
+      } else {
+        state.shipDate = shipDateInput.value;
+        state.shipDateLabel = readableDay(state.shipDate);
+        shipDateMessage.textContent = pickup
+          ? "We'll have your cookies ready on " + state.shipDateLabel + "."
+          : "Your box ships on " + state.shipDateLabel + ". Travel time starts that day.";
+      }
+    }
+    document.getElementById("shipDateReceipt").textContent = problem
+      ? "Choose a date"
+      : state.shipDateLabel;
+    var timing = document.getElementById("shippingTiming");
+    if (timing)
+      timing.textContent = state.shipDate
+        ? "Baked fresh for your date. Travel time starts after shipping."
+        : "Baked and shipped within 48 hours. Travel time starts after shipping.";
+    return problem;
   }
   function zoneForZip(zip) {
     var number = parseInt(zip, 10);
@@ -228,6 +326,7 @@
     state.shipping = null;
     state.total = null;
     state.ready = false;
+    var dateProblem = updateShipDate();
     qtyInput.value = String(state.quantity);
     zipInput.value = state.zip;
     cookieSubtotal.textContent = money(state.subtotal);
@@ -236,10 +335,12 @@
       shippingBox.hidden = true;
       state.shipping = 0;
       state.total = state.subtotal;
-      state.ready = true;
+      state.ready = !dateProblem;
       shippingPrice.textContent = "Free pickup";
       orderTotal.textContent = money(state.total);
-      payLabel.textContent = "Pay " + money(state.total) + " — card or PayPal";
+      payLabel.textContent = dateProblem
+        ? "Choose your pickup date"
+        : "Pay " + money(state.total) + " — card or PayPal";
       window.dispatchEvent(
         new CustomEvent("mbc:quotechange", {
           detail: Object.assign({}, state),
@@ -309,10 +410,12 @@
     shippingOptions.hidden = false;
     state.shipping = rateFor(state.zone, state.service, state.weight);
     state.total = state.subtotal + state.shipping;
-    state.ready = true;
+    state.ready = !dateProblem;
     shippingPrice.textContent = money(state.shipping);
     orderTotal.textContent = money(state.total);
-    payLabel.textContent = "Pay " + money(state.total) + " — card or PayPal";
+    payLabel.textContent = dateProblem
+      ? "Choose your ship date"
+      : "Pay " + money(state.total) + " — card or PayPal";
     setShippingMessage(
       "FedEx price for this ZIP and about " +
         state.weight +
@@ -347,10 +450,14 @@
     update();
   });
   document
-    .querySelectorAll('input[name="fulfil"], input[name="shippingService"]')
+    .querySelectorAll(
+      'input[name="fulfil"], input[name="shippingService"], input[name="shipWhen"]',
+    )
     .forEach(function (input) {
       input.addEventListener("change", update);
     });
+  shipDateInput.addEventListener("input", update);
+  shipDateInput.addEventListener("change", update);
   rebuildPhotoChoices(12);
   update();
   window.__mbcOrderPricing = {
