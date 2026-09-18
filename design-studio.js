@@ -137,15 +137,18 @@
             swatch.addEventListener('mouseenter', function () { swatch.style.transform = 'scale(1.1)'; });
             swatch.addEventListener('mouseleave', function () { swatch.style.transform = 'scale(1)'; });
             swatch.addEventListener('click', function () {
-                navigator.clipboard.writeText(hex).then(function () {
-                    var orig = label.textContent;
-                    label.textContent = 'Copied!';
+                var orig = label.textContent;
+                function flash(text) {
+                    label.textContent = text;
                     label.style.color = 'var(--pink)';
-                    setTimeout(function () {
-                        label.textContent = orig;
-                        label.style.color = '#666';
-                    }, 1500);
-                });
+                    setTimeout(function () { label.textContent = orig; label.style.color = '#666'; }, 1500);
+                }
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(hex).then(function () { flash('Copied!'); },
+                                                            function () { flash(hex); });
+                } else {
+                    flash(hex);
+                }
             });
 
             container.appendChild(swatch);
@@ -156,16 +159,25 @@
     // SHARED UTILITIES — PDF Generation helpers
     // =========================================================
 
-    function ensureJsPDF(callback) {
-        var lib = window.jspdf;
-        if (lib && lib.jsPDF) {
-            callback();
-        } else {
+    var pdfLoading = null;
+    function ensureJsPDF(callback, onFail) {
+        if (window.jspdf && window.jspdf.jsPDF) { callback(); return; }
+        if (pdfLoading) { pdfLoading.then(callback, onFail || function () {}); return; }
+        pdfLoading = new Promise(function (resolve, reject) {
             var script = document.createElement('script');
             script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
-            script.onload = callback;
+            var timer = setTimeout(function () { reject(new Error('timeout')); }, 15000);
+            script.onload = function () {
+                clearTimeout(timer);
+                if (window.jspdf && window.jspdf.jsPDF) resolve(); else reject(new Error('missing'));
+            };
+            script.onerror = function () { clearTimeout(timer); reject(new Error('blocked')); };
             document.head.appendChild(script);
-        }
+        });
+        pdfLoading.catch(function () { pdfLoading = null; });
+        pdfLoading.then(callback, onFail || function () {
+            alert('The PDF tool could not load. Use the image download instead.');
+        });
     }
 
     // =========================================================
@@ -635,7 +647,10 @@
             try {
                 var imgWidth = pageWidth - 2 * margin;
                 var imgHeight = imgWidth * 0.75;
-                doc.addImage(imgSrc, 'PNG', margin, yPos, imgWidth, imgHeight);
+                var ph = doc.internal.pageSize.getHeight();
+                if (yPos + imgHeight > ph - 30) { doc.addPage(); yPos = 25; }
+                var sfmt = imgSrc.indexOf('image/jpeg') !== -1 ? 'JPEG' : 'PNG';
+                doc.addImage(imgSrc, sfmt, margin, yPos, imgWidth, imgHeight);
                 yPos += imgHeight + 10;
             } catch (e) {
                 console.error('Could not add image to PDF:', e);
@@ -755,7 +770,7 @@
             },
             tier2: {
                 icon: '\uD83C\uDF82',
-                title: 'Design Tier 2 (Middle)',
+                title: 'Design Tier 2',
                 description: 'Describe the middle tier of your cake.',
                 placeholder: 'e.g., Soft pink with cascading sugar flowers...',
                 loadingText: 'Adding tier 2...'
@@ -1014,7 +1029,8 @@
                 line.classList.toggle('completed', i < currentStepIndex);
             });
 
-            var percent = (currentStepIndex / currentSteps.length) * 100;
+            var span = Math.max(1, currentSteps.length - 1);
+            var percent = (currentStepIndex / span) * 100;
             if (progressFill) progressFill.style.width = percent + '%';
             if (progressLabel) progressLabel.textContent = 'Step ' + (currentStepIndex + 1) + ' of ' + currentSteps.length;
         }
@@ -1022,17 +1038,33 @@
         function renderCurrentStep() {
             var stepKey = currentSteps[currentStepIndex];
             var def = stepDefinitions[stepKey];
+            var totalTiers = builderTiers ? (parseInt(builderTiers.value, 10) || 1) : 1;
 
             if (stepIcon) stepIcon.textContent = def.icon;
-            if (stepTitle) stepTitle.textContent = def.title;
+            if (stepTitle) {
+                var t = def.title;
+                if (stepKey.indexOf('tier') === 0 && stepKey.length === 5) {
+                    var n = parseInt(stepKey.slice(4), 10);
+                    t = 'Design ' + tierLabel(n, totalTiers).replace('The ', '').replace(/^./, function (c) { return c.toUpperCase(); });
+                }
+                stepTitle.textContent = t;
+            }
             if (stepDescription) stepDescription.textContent = def.description;
             if (stepPrompt) { stepPrompt.placeholder = def.placeholder; stepPrompt.value = stepData[stepKey] || ''; }
             if (stepBackBtn) stepBackBtn.style.display = currentStepIndex > 0 ? 'flex' : 'none';
 
             if (currentStepContent) currentStepContent.style.display = 'block';
             if (stepLoading) stepLoading.style.display = 'none';
-            if (stepResult) stepResult.style.display = 'none';
             if (stepError) stepError.style.display = 'none';
+
+            // if this step was already drawn, show that cake again instead of a blank
+            var already = generatedImages[currentStepIndex];
+            if (already && already.image && stepResult && stepResultImage) {
+                stepResultImage.src = already.image;
+                stepResult.style.display = 'block';
+            } else if (stepResult) {
+                stepResult.style.display = 'none';
+            }
 
             updateProgress();
         }
@@ -1088,6 +1120,8 @@
                             prompt: prompt,
                             image: data.image
                         };
+                        // the cake just changed, so every later picture is out of date
+                        generatedImages.length = currentStepIndex + 1;
                     }
                 } catch (err) {
                     console.error('Builder step error:', err);
@@ -1176,12 +1210,12 @@
                 finalColorSwatches.querySelectorAll('.color-swatch').forEach(function (swatch) {
                     swatch.addEventListener('click', function () {
                         var c = swatch.dataset.color;
-                        navigator.clipboard.writeText(c).then(function () {
-                            var lbl = swatch.querySelector('.swatch-label');
-                            var orig = lbl.textContent;
-                            lbl.textContent = 'Copied!';
-                            setTimeout(function () { lbl.textContent = orig; }, 1500);
-                        });
+                        var lbl = swatch.querySelector('.swatch-label');
+                        var orig0 = lbl.textContent;
+                        var show = function (t) { lbl.textContent = t; setTimeout(function () { lbl.textContent = orig0; }, 1500); };
+                        if (navigator.clipboard && navigator.clipboard.writeText) {
+                            navigator.clipboard.writeText(c).then(function () { show('Copied!'); }, function () { show(c); });
+                        } else { show(c); }
                     });
                 });
             }
@@ -1224,16 +1258,19 @@
 
         // --- Builder particles ---
 
+        var particlesRunning = false;
         function initBuilderParticles() {
             var canvas = document.getElementById('builderParticles');
-            if (!canvas) return;
+            if (!canvas || particlesRunning) return;
+            if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            particlesRunning = true;
 
             var ctx = canvas.getContext('2d');
             var container = canvas.parentElement;
 
             function resize() {
-                canvas.width = container.offsetWidth;
-                canvas.height = container.offsetHeight;
+                canvas.width = container.offsetWidth || canvas.clientWidth || window.innerWidth;
+                canvas.height = container.offsetHeight || canvas.clientHeight || window.innerHeight;
             }
             resize();
             window.addEventListener('resize', resize);
@@ -1270,6 +1307,12 @@
             }
 
             function animate() {
+                // stop burning battery once the builder is closed
+                if (!document.body.classList.contains('builder-overlay-open') || document.hidden) {
+                    requestAnimationFrame(animate);
+                    return;
+                }
+                if (!canvas.width || !canvas.height) resize();
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 particles.forEach(function (p) { p.update(); p.draw(); });
 
@@ -1334,31 +1377,61 @@
 
         doc.setTextColor(0, 0, 0);
         var yPos = 50;
+        var pageHeight = doc.internal.pageSize.getHeight();
+
+        function room(need) {
+            if (yPos + need > pageHeight - 25) { doc.addPage(); yPos = 25; }
+        }
+
+        // The cake itself, so the PDF is worth keeping
+        var last = null;
+        for (var i = generatedImages.length - 1; i >= 0; i--) {
+            if (generatedImages[i] && generatedImages[i].image) { last = generatedImages[i].image; break; }
+        }
+        if (last) {
+            try {
+                var fmt = last.indexOf('image/jpeg') !== -1 ? 'JPEG' : 'PNG';
+                var w = pageWidth - 2 * margin;
+                var h = w * 0.75;
+                room(h + 12);
+                doc.addImage(last, fmt, margin, yPos, w, h);
+                yPos += h + 12;
+            } catch (e) {
+                console.error('Could not add cake image to PDF:', e);
+            }
+        }
 
         // Specs
+        room(18);
         doc.setFontSize(14);
         doc.setFont('helvetica', 'bold');
         doc.text('Design Specifications', margin, yPos);
         yPos += 10;
 
         doc.setFontSize(10);
-        doc.setFont('helvetica', 'normal');
         generatedImages.forEach(function (item) {
+            if (!item) return;
             var def = stepDefinitions[item.stepKey];
+            if (!def) return;
             var label = def.title.replace('Design ', '').replace('Your ', '').replace('Add ', '');
+            var splitText = doc.splitTextToSize(item.prompt || '', pageWidth - 2 * margin - 10);
+            room(12 + splitText.length * 5);
             doc.setFont('helvetica', 'bold');
-            doc.text(def.icon + ' ' + label + ':', margin, yPos);
+            doc.text(label + ':', margin, yPos);
             doc.setFont('helvetica', 'normal');
-            var splitText = doc.splitTextToSize(item.prompt, pageWidth - 2 * margin - 10);
             doc.text(splitText, margin + 5, yPos + 5);
             yPos += 10 + (splitText.length * 5);
         });
 
-        // Footer
-        doc.setFontSize(9);
-        doc.setTextColor(150, 150, 150);
-        doc.text('Design generated with Cake Builder by My Baking Creations', margin, 280);
-        doc.text('mybakingcreations.com | (415) 568-8060', margin, 286);
+        // Footer on every page
+        var pages = doc.internal.getNumberOfPages();
+        for (var pg = 1; pg <= pages; pg++) {
+            doc.setPage(pg);
+            doc.setFontSize(9);
+            doc.setTextColor(150, 150, 150);
+            doc.text('Design generated with Cake Builder by My Baking Creations', margin, pageHeight - 17);
+            doc.text('mybakingcreations.com | (415) 568-8060', margin, pageHeight - 11);
+        }
 
         doc.save('my-custom-cake-design.pdf');
     }
