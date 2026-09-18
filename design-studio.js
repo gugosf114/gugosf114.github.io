@@ -28,6 +28,10 @@
         var containerId = swatchContainerId || 'colorSwatches';
         var img = new Image();
         img.crossOrigin = 'Anonymous';
+        img.onerror = function () {
+            var hide = document.getElementById(containerId);
+            if (hide) hide.innerHTML = '';
+        };
         img.onload = function () {
             var canvas = document.createElement('canvas');
             var ctx = canvas.getContext('2d');
@@ -35,7 +39,15 @@
             canvas.height = img.height;
             ctx.drawImage(img, 0, 0);
 
-            var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+            var imageData;
+            try {
+                imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+            } catch (e) {
+                // cross-origin image: we cannot read it, so show nothing rather than a guess
+                var hide = document.getElementById(containerId);
+                if (hide) hide.innerHTML = '';
+                return;
+            }
             var colors = [];
             var step = Math.max(1, Math.floor(imageData.length / 4 / 1000));
 
@@ -160,13 +172,81 @@
     // SHARED — Worker call helper
     // =========================================================
 
-    async function callWorker(description, productType) {
-        var response = await fetch(WORKER_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ description: description, productType: productType || 'cake' })
-        });
-        return response.json();
+    var CALL_TIMEOUT = 45000;
+    var CALLS_PER_DAY = 30;
+
+    function callsToday() {
+        try {
+            var raw = JSON.parse(localStorage.getItem('mbcStudioCalls') || '{}');
+            var today = new Date().toISOString().slice(0, 10);
+            return raw.day === today ? (raw.n || 0) : 0;
+        } catch (e) { return 0; }
+    }
+    function noteCall() {
+        try {
+            var today = new Date().toISOString().slice(0, 10);
+            localStorage.setItem('mbcStudioCalls', JSON.stringify({ day: today, n: callsToday() + 1 }));
+        } catch (e) { /* private mode: just let it through */ }
+    }
+
+    // Never show a customer a raw API string. Keep short plain sentences, swap the rest.
+    function friendlyError(msg) {
+        if (!msg || typeof msg !== 'string') return 'Could not draw that just now. Try again.';
+        var m = msg.trim();
+        var looksTechnical =
+            m.length > 160 ||
+            m.indexOf(' ') === -1 ||
+            /^[A-Z0-9_\.\-]+$/.test(m) ||
+            /\b(SAFETY|BLOCK|RECITATION|quota|token|api[_ ]?key|status code|traceback|exception)\b/i.test(m);
+        if (!looksTechnical) return m;
+        if (/SAFETY|BLOCK|RECITATION|policy/i.test(m)) {
+            return 'That description was turned down. Try describing the look rather than naming a character or brand.';
+        }
+        if (/quota|rate|limit|billing/i.test(m)) {
+            return 'The drawing service is at its limit right now. Try again a little later.';
+        }
+        return 'Could not draw that just now. Try again.';
+    }
+
+    async function callWorker(description, productType, attempt) {
+        attempt = attempt || 0;
+
+        if (attempt === 0 && callsToday() >= CALLS_PER_DAY) {
+            return { error: 'You have used up today\'s previews. Send us what you have and we will draw the rest with you.' };
+        }
+        var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+        var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, CALL_TIMEOUT) : null;
+
+        try {
+            var opts = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ description: description, productType: productType || 'cake' })
+            };
+            if (ctrl) opts.signal = ctrl.signal;
+
+            var response = await fetch(WORKER_URL, opts);
+            if (timer) clearTimeout(timer);
+
+            if (!response.ok) {
+                if (response.status >= 500 && attempt < 1) return callWorker(description, productType, attempt + 1);
+                return { error: 'The drawing service is busy. Give it a moment and try again.' };
+            }
+            var data = await response.json();
+            if (data && data.image) noteCall();
+            if (data && data.error) data.error = friendlyError(data.error);
+            return data;
+        } catch (e) {
+            if (timer) clearTimeout(timer);
+            if (e && e.name === 'AbortError') {
+                return { error: 'That one took too long. Try again.' };
+            }
+            if (attempt < 1) return callWorker(description, productType, attempt + 1);
+            if (navigator.onLine === false) {
+                return { error: 'You look offline. Check your connection, then try again.' };
+            }
+            return { error: 'Could not draw that just now. Try again.' };
+        }
     }
 
     // =========================================================
@@ -738,10 +818,10 @@
             builderOverlay.offsetHeight; // force reflow
             builderOverlay.classList.add('open');
             document.body.classList.add('builder-overlay-open');
-            cakeBuilderMode.classList.add('active');
-            quickSketchMode.classList.remove('active');
-            cakeBuilderSection.classList.add('active');
-            quickSketchSection.classList.remove('active');
+            if (cakeBuilderMode) cakeBuilderMode.classList.add('active');
+            if (quickSketchMode) quickSketchMode.classList.remove('active');
+            if (cakeBuilderSection) cakeBuilderSection.classList.add('active');
+            if (quickSketchSection) quickSketchSection.classList.remove('active');
             updateStepsPreview();
         }
 
@@ -754,10 +834,10 @@
                     builderOverlay.style.display = 'none';
                 }
             }, 350);
-            quickSketchMode.classList.add('active');
-            cakeBuilderMode.classList.remove('active');
-            quickSketchSection.classList.add('active');
-            cakeBuilderSection.classList.remove('active');
+            if (quickSketchMode) quickSketchMode.classList.add('active');
+            if (cakeBuilderMode) cakeBuilderMode.classList.remove('active');
+            if (quickSketchSection) quickSketchSection.classList.add('active');
+            if (cakeBuilderSection) cakeBuilderSection.classList.remove('active');
         }
 
         quickSketchMode.addEventListener('click', function () { closeBuilderOverlay(); });
@@ -811,6 +891,47 @@
                     stepDefinitions[step].title.replace('Design ', '').replace('Your ', '').replace('Add ', '') +
                     '</div>';
             }).join('');
+        }
+
+        // Every step redraws the WHOLE cake from everything said so far,
+        // so the customer watches one cake grow instead of six separate pictures.
+        function tierLabel(n, total) {
+            if (total <= 1) return 'The cake';
+            if (n === 1) return 'The bottom tier';
+            if (n === total) return 'The top tier';
+            return 'The middle tier';
+        }
+        function writingWhere(where, total) {
+            if (where === 'board') return 'cakeboard';
+            var n = parseInt(where.replace('tier', ''), 10);
+            return tierLabel(n, total).replace('The ', '');
+        }
+        function buildCumulativePrompt(uptoIndex) {
+            var total = builderTiers ? (parseInt(builderTiers.value, 10) || 1) : 1;
+            var board = null, topper = null, tiers = [], writing = [];
+
+            for (var i = 0; i <= uptoIndex; i++) {
+                var key = currentSteps[i];
+                var txt = (stepData[key] || '').trim();
+                if (!txt) continue;
+                if (key === 'cakeboard') board = txt;
+                else if (key === 'topper') topper = txt;
+                else if (key.indexOf('writing_') === 0) writing.push({ where: key.slice(8), txt: txt });
+                else if (key.indexOf('tier') === 0) tiers.push({ n: parseInt(key.slice(4), 10) || 1, txt: txt });
+            }
+
+            var out = 'One custom celebration cake, shown whole, photographed straight on against a plain light background. ';
+            if (total > 1) out += 'It has ' + total + ' round tiers stacked one on top of the other. ';
+
+            tiers.sort(function (a, b) { return a.n - b.n; });
+            tiers.forEach(function (t) { out += tierLabel(t.n, total) + ': ' + t.txt + '. '; });
+
+            if (topper) out += 'Sitting on the very top: ' + topper + '. ';
+            if (board) out += 'The cakeboard underneath: ' + board + '. ';
+            writing.forEach(function (w) { out += 'Written on the ' + writingWhere(w.where, total) + ': ' + w.txt + '. '; });
+
+            out += 'Show the finished cake complete, in one photograph.';
+            return out;
         }
 
         function buildStepSequence() {
@@ -937,8 +1058,13 @@
                 if (stepLoading) stepLoading.style.display = 'block';
                 if (loadingText) loadingText.textContent = stepDefinitions[stepKey].loadingText;
 
+                var lastGood = null;
+                for (var g = generatedImages.length - 1; g >= 0; g--) {
+                    if (generatedImages[g] && generatedImages[g].image) { lastGood = generatedImages[g].image; break; }
+                }
+
                 try {
-                    var data = await callWorker(prompt, 'cake');
+                    var data = await callWorker(buildCumulativePrompt(currentStepIndex), 'cake');
 
                     if (stepLoading) stepLoading.style.display = 'none';
 
@@ -946,6 +1072,11 @@
                         if (stepError) {
                             stepError.textContent = data.error;
                             stepError.style.display = 'block';
+                        }
+                        // keep the cake they already have on screen
+                        if (lastGood && stepResultImage && stepResult) {
+                            stepResultImage.src = lastGood;
+                            stepResult.style.display = 'block';
                         }
                         if (currentStepContent) currentStepContent.style.display = 'block';
                     } else if (data.image) {
@@ -962,8 +1093,12 @@
                     console.error('Builder step error:', err);
                     if (stepLoading) stepLoading.style.display = 'none';
                     if (stepError) {
-                        stepError.textContent = 'Could not generate this element. Please try again!';
+                        stepError.textContent = 'Could not draw that just now. Try again.';
                         stepError.style.display = 'block';
+                    }
+                    if (lastGood && stepResultImage && stepResult) {
+                        stepResultImage.src = lastGood;
+                        stepResult.style.display = 'block';
                     }
                     if (currentStepContent) currentStepContent.style.display = 'block';
                 }
@@ -1006,7 +1141,10 @@
             if (builderSteps) builderSteps.classList.remove('active');
             if (builderResult) builderResult.classList.add('active');
 
-            var lastImage = generatedImages[generatedImages.length - 1];
+            var lastImage = null;
+            for (var i = generatedImages.length - 1; i >= 0; i--) {
+                if (generatedImages[i] && generatedImages[i].image) { lastImage = generatedImages[i]; break; }
+            }
             if (lastImage) {
                 if (finalCakeImage) finalCakeImage.src = lastImage.image;
                 if (builderDownloadImg) builderDownloadImg.href = lastImage.image;
@@ -1018,11 +1156,17 @@
 
         function displayFinalPalette() {
             if (!finalColorSwatches) return;
-            // If we have a real image, extract palette from it; otherwise use brand colors
-            var lastImage = generatedImages[generatedImages.length - 1];
-            if (lastImage && lastImage.image && lastImage.image.startsWith('data:image/png')) {
+            // Only ever show colours taken from their actual cake. Never a stand-in.
+            var lastImage = null;
+            for (var i = generatedImages.length - 1; i >= 0; i--) {
+                if (generatedImages[i] && generatedImages[i].image) { lastImage = generatedImages[i]; break; }
+            }
+            if (lastImage && lastImage.image) {
                 extractColorPalette(lastImage.image, 'finalColorSwatches');
             } else {
+                finalColorSwatches.innerHTML = '';
+            }
+            if (false) {
                 var mockColors = ['#EC268F', '#FFC532', '#FFB6C1', '#DDA0DD', '#87CEEB'];
                 finalColorSwatches.innerHTML = mockColors.map(function (color) {
                     return '<div class="color-swatch" style="background:' + color + '" title="Click to copy: ' + color + '" data-color="' + color + '">' +
@@ -1058,10 +1202,16 @@
         if (builderStartOver) {
             builderStartOver.addEventListener('click', function () {
                 if (builderResult) builderResult.classList.remove('active');
+                if (builderSteps) builderSteps.classList.remove('active');
                 if (builderConfig) builderConfig.classList.add('active');
                 currentStepIndex = 0;
                 stepData = {};
                 generatedImages = [];
+                if (specList) specList.innerHTML = '';
+                if (finalColorSwatches) finalColorSwatches.innerHTML = '';
+                if (finalCakeImage) finalCakeImage.removeAttribute('src');
+                document.querySelectorAll('.writing-text-input').forEach(function (inp) { inp.value = ''; });
+                updateStepsPreview();
             });
         }
 
