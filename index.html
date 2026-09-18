@@ -627,6 +627,11 @@
         ]
     }
     </script>
+    <style>
+    /* Category cards: the photo fills the card. A phone rule in style.css caps these images at 180px wide and 120px tall, and two of them used object-fit:contain, which left bars on both sides. Inline on purpose (no shared file to go stale). */
+    #services .tile-grid-4 .service-card img{width:100% !important;max-width:none !important;object-fit:cover !important;background:none !important}
+    @media (max-width:768px){#services .tile-grid-4 .service-card img{height:200px !important}}
+    </style>
 </head>
 <body>
 
