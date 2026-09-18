@@ -550,281 +550,210 @@
 
         </div>
 
-        <!-- Our Process (Animated) -->
-        <div class="section-wrapper section-beige reveal" style="margin-bottom: 3rem;">
-            <div class="section-header">
-                <h2>Our <span class="highlight">Process</span></h2>
-                <p>From your idea to your table — watch it happen as you scroll</p>
-            </div>
-
+        <!-- How it happens -->
+        <section class="pn" id="how-it-works" aria-label="How a custom cake happens">
             <style>
-            /* ── Process scrollytelling (pcs) ─────────────────────────── */
-            .pcs-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:2.5rem;align-items:start}
-            .pcs-stagewrap{position:sticky;top:110px}
-            .pcs-stagecard{background:var(--white);border-radius:24px;padding:1.25rem 1.25rem 1rem;box-shadow:0 10px 34px rgba(98,45,43,0.14),0 2px 8px rgba(98,45,43,0.08)}
-            .pcs-stagecard svg{width:100%;height:auto;display:block}
-            .pcs-stagefoot{display:flex;align-items:center;justify-content:space-between;margin-top:.6rem;gap:.75rem}
-            .pcs-caption{font-family:'Nunito',sans-serif;font-weight:800;font-size:.85rem;color:var(--dark-brown);letter-spacing:.02em}
-            .pcs-dots{display:flex;gap:6px}
-            .pcs-dots i{width:8px;height:8px;border-radius:50%;background:rgba(98,45,43,0.18);transition:background .3s ease,transform .3s ease}
-            .pcs-dots i.on{background:var(--pink);transform:scale(1.25)}
+            /* The page pins and you drive it. Every layer moves at its own rate.
+               Inline on purpose (no shared file to go stale). */
+            .pn{position:relative;width:100vw;margin-left:calc(50% - 50vw);background:#F2ECE2;color:#5E2C2A}
+            .pn-track{height:620vh}
+            .pn-pin{position:sticky;top:0;height:100vh;overflow:hidden;display:grid;place-items:center}
+            .pn-shot{margin-bottom:12vh}
+            .pn-grain{position:absolute;inset:0;pointer-events:none;z-index:1;opacity:.10;mix-blend-mode:multiply;
+                background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+            .pn-vig{position:absolute;inset:0;pointer-events:none;z-index:1;
+                background:radial-gradient(112% 80% at 50% 42%,rgba(255,253,249,.55) 0%,rgba(255,253,249,0) 58%,rgba(120,84,70,.13) 100%)}
+            .pn-panel{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;z-index:2}
 
-            .pcs-steps{position:relative;padding-left:2rem}
-            .pcs-rail{position:absolute;left:6px;top:12px;bottom:12px;width:4px;border-radius:2px;background:rgba(98,45,43,0.12)}
-            .pcs-rail-fill{position:absolute;left:0;top:0;width:100%;height:0;border-radius:2px;background:linear-gradient(180deg,var(--pink),var(--yellow));transition:height .5s ease}
-            .pcs-step{opacity:.42;transition:opacity .45s ease;padding:1.4rem 0 1.6rem;min-height:300px;display:flex;flex-direction:column;justify-content:center}
-            .pcs-step.is-active{opacity:1}
-            .pcs-num{font-family:'Fredoka One',cursive;font-size:2.9rem;line-height:1;color:transparent;-webkit-text-stroke:2px var(--pink);display:block;margin-bottom:.4rem;transition:color .4s ease,transform .4s cubic-bezier(.34,1.56,.64,1);transform-origin:left bottom}
-            .pcs-step:nth-child(even) .pcs-num{-webkit-text-stroke-color:var(--yellow-dark)}
-            .pcs-step.is-active .pcs-num{color:var(--pink);transform:scale(1.06)}
-            .pcs-step.is-active:nth-child(even) .pcs-num{color:var(--yellow-dark)}
-            .pcs-step h3{font-family:'Fredoka One',cursive;font-size:1.35rem;color:var(--dark-brown);margin:0 0 .5rem}
-            .pcs-step p{font-size:1.02rem;line-height:1.7;color:var(--brown);font-weight:600;margin:0}
-            .pcs-step p a{color:var(--pink);font-weight:700}
+            .pn-ghost{position:absolute;z-index:0;font-family:'Nunito',sans-serif;font-weight:800;
+                font-size:min(62vh,50vw);line-height:.78;color:rgba(98,45,43,.075);letter-spacing:-.04em;
+                will-change:transform,opacity}
+            .pn-shot{position:absolute;z-index:1;width:min(54vh,72vw);aspect-ratio:4/5;will-change:transform}
+            .pn-mask{position:absolute;inset:0;overflow:hidden;clip-path:inset(0 0 100% 0);background:#E8E0D4}
+            .pn .pn-mask img{position:absolute !important;inset:0;width:100% !important;height:100% !important;
+                max-width:none !important;max-height:none !important;margin:0 !important;border-radius:0 !important;
+                object-fit:cover;will-change:transform}
+            .pn-shot::after{content:"";position:absolute;inset:0;pointer-events:none;
+                box-shadow:0 46px 90px -44px rgba(98,45,43,.55),0 0 0 1px rgba(98,45,43,.07)}
 
-            .pcs-ctas{display:flex;flex-direction:column;gap:.6rem;margin-top:1.1rem;max-width:430px}
-            .pcs-cta{display:flex;align-items:center;gap:.8rem;padding:.75rem 1.1rem;border-radius:14px;text-decoration:none;font-family:'Nunito',sans-serif;font-weight:800;transition:transform .2s ease,box-shadow .2s ease}
-            .pcs-cta:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(98,45,43,0.22)}
-            .pcs-cta small{display:block;font-weight:600;font-size:.8rem;opacity:.85}
-            .pcs-cta-pink{background:var(--pink-dark);color:#fff}
-            .pcs-cta-yellow{background:var(--yellow);color:var(--dark-brown)}
-            .pcs-cta-brown{background:var(--dark-brown);color:#fff}
-            .pcs-cta .pcs-ico{font-size:1.3rem}
+            .pn-words{position:absolute;z-index:3;left:clamp(1.5rem,6vw,7rem);bottom:clamp(6rem,14vh,7rem);
+                max-width:min(30rem,78vw);text-align:left}
+            .pn-eyebrow{display:flex;align-items:center;gap:.7rem;font-family:'Nunito',sans-serif;
+                font-size:.68rem;font-weight:700;letter-spacing:.24em;color:#B0842A;margin:0 0 1rem}
+            .pn-eyebrow i{display:block;height:1px;width:2.4rem;background:#B0842A;transform-origin:left;will-change:transform}
+            .pn-title{font-family:'Nunito',sans-serif;font-weight:300;font-size:clamp(2.1rem,6vw,4.1rem);
+                line-height:1;letter-spacing:-.025em;margin:0 0 .85rem;overflow:hidden;color:#5E2C2A}
+            .pn-title span,.pn-body span{display:block;will-change:transform,opacity}
+            .pn-body{font-family:'Nunito',sans-serif;font-size:clamp(.95rem,1.5vw,1.1rem);line-height:1.6;
+                color:rgba(94,44,42,.72);margin:0;overflow:hidden}
 
-            /* ── Stage states ──────────────────────────────────────────
-               Every group hidden by default; each stage lights its cast. */
-            .pcs-stage g{opacity:0;transition:opacity .55s ease,transform .65s cubic-bezier(.34,1.56,.64,1)}
-            .pcs-stage .pcs-dream{transform:translateY(6px)}
-            .pcs-stage[data-stage="1"] .pcs-dream{opacity:1;transform:none}
-            .pcs-stage .pcs-sketch path,.pcs-stage .pcs-sketch ellipse{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);transition:stroke-dashoffset 1.1s ease .15s}
-            .pcs-stage[data-stage="2"] .pcs-sketch,.pcs-stage[data-stage="3"] .pcs-sketch,.pcs-stage[data-stage="4"] .pcs-sketch,.pcs-stage[data-stage="5"] .pcs-sketch,.pcs-stage[data-stage="6"] .pcs-sketch{opacity:1}
-            .pcs-stage[data-stage="2"] .pcs-sketch path,.pcs-stage[data-stage="2"] .pcs-sketch ellipse,.pcs-stage[data-stage="3"] .pcs-sketch path,.pcs-stage[data-stage="3"] .pcs-sketch ellipse,.pcs-stage[data-stage="4"] .pcs-sketch path,.pcs-stage[data-stage="4"] .pcs-sketch ellipse,.pcs-stage[data-stage="5"] .pcs-sketch path,.pcs-stage[data-stage="5"] .pcs-sketch ellipse,.pcs-stage[data-stage="6"] .pcs-sketch path,.pcs-stage[data-stage="6"] .pcs-sketch ellipse{stroke-dashoffset:0}
-            .pcs-stage .pcs-alt{transform:translateY(10px) scale(.92)}
-            .pcs-stage[data-stage="2"] .pcs-alt{opacity:1;transform:none}
-            .pcs-stage .pcs-price{transform:rotate(-14deg);transform-origin:236px 34px}
-            .pcs-stage[data-stage="2"] .pcs-price{opacity:1;transform:rotate(0deg)}
-            .pcs-stage .pcs-approve{transform:scale(.4);transform-origin:250px 70px}
-            .pcs-stage[data-stage="3"] .pcs-approve{opacity:1;transform:scale(1)}
-            .pcs-stage .pcs-schedule{transform:translateX(26px)}
-            .pcs-stage[data-stage="4"] .pcs-schedule{opacity:1;transform:none}
-            .pcs-stage .pcs-fill *{opacity:0;transition:opacity .5s ease}
-            .pcs-stage[data-stage="5"] .pcs-fill,.pcs-stage[data-stage="6"] .pcs-fill{opacity:1}
-            .pcs-stage[data-stage="5"] .pcs-fill *,.pcs-stage[data-stage="6"] .pcs-fill *{opacity:1}
-            .pcs-stage[data-stage="5"] .pcs-fill .f1{transition-delay:.1s}
-            .pcs-stage[data-stage="5"] .pcs-fill .f2{transition-delay:.3s}
-            .pcs-stage[data-stage="5"] .pcs-fill .f3{transition-delay:.5s}
-            .pcs-stage[data-stage="5"] .pcs-fill .f4{transition-delay:.7s}
-            .pcs-stage[data-stage="5"] .pcs-fill .f5{transition-delay:.9s}
-            .pcs-stage .pcs-magic{transform:scale(.6);transform-origin:170px 150px}
-            .pcs-stage[data-stage="5"] .pcs-magic{opacity:1;transform:scale(1)}
-            .pcs-stage .pcs-box{transform:translateY(18px)}
-            .pcs-stage[data-stage="6"] .pcs-box{opacity:1;transform:none}
+            .pn-rail{position:absolute;z-index:3;right:clamp(1.1rem,3vw,2.6rem);top:50%;transform:translateY(-50%);
+                display:flex;flex-direction:column;gap:.75rem}
+            .pn-rail i{display:block;width:1px;height:2.6rem;background:rgba(98,45,43,.18);position:relative}
+            .pn-rail i b{position:absolute;inset:0 0 auto 0;height:0;background:#D14C96;display:block}
+            .pn-hint{position:absolute;z-index:3;left:50%;bottom:2.6rem;transform:translateX(-50%);
+                font-family:'Nunito',sans-serif;font-size:.62rem;letter-spacing:.24em;color:rgba(94,44,42,.38);
+                transition:opacity .5s ease}
 
-            @media (prefers-reduced-motion: reduce){
-                .pcs-stage g,.pcs-stage .pcs-fill *,.pcs-step,.pcs-num,.pcs-rail-fill{transition:none!important}
-                .pcs-stage .pcs-sketch path,.pcs-stage .pcs-sketch ellipse{stroke-dasharray:none!important;stroke-dashoffset:0!important}
+            @media (max-width:820px){
+                .pn-shot{width:min(46vh,86vw)}
+                .pn-words{left:1.35rem;right:1.35rem;bottom:6.2rem;max-width:none}
+                .pn-shot{width:min(40vh,80vw)}
+                .pn-rail{right:.7rem}
             }
-            @media (max-width: 900px){
-                .pcs-grid{grid-template-columns:1fr;gap:1.25rem}
-                .pcs-stagewrap{top:86px;z-index:2}
-                .pcs-stagecard{padding:.75rem .9rem .6rem;max-width:340px;margin:0 auto}
-                .pcs-stagecard svg{max-height:180px}
-                .pcs-step{min-height:0;padding:1.5rem 0}
-                .pcs-num{font-size:2.3rem}
+            @media (prefers-reduced-motion:reduce){
+                .pn-track{height:auto}
+                .pn-pin{position:static;height:auto;display:block;padding:3rem 0}
+                .pn-panel{position:static;display:block;padding:2rem 1.25rem}
+                .pn-mask{clip-path:none !important}
+                .pn-shot{position:static;width:min(420px,86vw);margin:0 auto 1.5rem;transform:none !important}
+                .pn-words{position:static;max-width:none}
+                .pn-ghost{display:none}.pn-hint{display:none}
+                .pn-title span,.pn-body span{transform:none !important;opacity:1 !important}
             }
             </style>
 
-            <div class="pcs-grid">
-                <div class="pcs-stagewrap">
-                    <div class="pcs-stagecard">
-                        <div class="pcs-stage" id="pcsStage" data-stage="1">
-                            <svg viewBox="0 0 340 290" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <!-- plate (always) -->
-                                <g style="opacity:1">
-                                    <ellipse cx="170" cy="253" rx="98" ry="11" stroke="#622D2B" stroke-width="2.5" fill="#FDFBF8"/>
-                                </g>
-                                <!-- STAGE 1: the dream — dashed cake -->
-                                <g class="pcs-dream">
-                                    <path d="M100 250 v-42 a6 6 0 0 1 6-6 h128 a6 6 0 0 1 6 6 v42" stroke="#C36239" stroke-width="2.5" stroke-dasharray="7 7" stroke-linecap="round"/>
-                                    <path d="M118 202 v-40 a6 6 0 0 1 6-6 h92 a6 6 0 0 1 6 6 v40" stroke="#C36239" stroke-width="2.5" stroke-dasharray="7 7" stroke-linecap="round"/>
-                                    <path d="M136 156 v-36 a6 6 0 0 1 6-6 h56 a6 6 0 0 1 6 6 v36" stroke="#C36239" stroke-width="2.5" stroke-dasharray="7 7" stroke-linecap="round"/>
-                                    <circle cx="170" cy="100" r="8" stroke="#EC268F" stroke-width="2.5" stroke-dasharray="5 5"/>
-                                    <path d="M258 92 l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#FFC532" opacity=".8"/>
-                                    <path d="M78 120 l2.5 6 6 2.5-6 2.5-2.5 6-2.5-6-6-2.5 6-2.5z" fill="#EC268F" opacity=".55"/>
-                                    <path d="M262 170 l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#EC268F" opacity=".4"/>
-                                    <text x="252" y="60" font-family="Fredoka One, cursive" font-size="30" fill="#C36239" opacity=".5">?</text>
-                                </g>
-                                <!-- STAGES 2-6: the confident line work -->
-                                <g class="pcs-sketch">
-                                    <path style="--len:280" d="M100 250 v-42 a6 6 0 0 1 6-6 h128 a6 6 0 0 1 6 6 v42" stroke="#622D2B" stroke-width="2.5" stroke-linecap="round"/>
-                                    <path style="--len:220" d="M118 202 v-40 a6 6 0 0 1 6-6 h92 a6 6 0 0 1 6 6 v40" stroke="#622D2B" stroke-width="2.5" stroke-linecap="round"/>
-                                    <path style="--len:160" d="M136 156 v-36 a6 6 0 0 1 6-6 h56 a6 6 0 0 1 6 6 v36" stroke="#622D2B" stroke-width="2.5" stroke-linecap="round"/>
-                                    <path style="--len:170" d="M100 216 q10 10 20 0 q10 10 20 0 q10 10 20 0 q10 10 20 0 q10 10 20 0 q10 10 20 0 q10 10 20 0" stroke="#622D2B" stroke-width="2" stroke-linecap="round"/>
-                                    <path style="--len:130" d="M118 175 q9 9 18 0 q9 9 18 0 q9 9 18 0 q9 9 18 0 q9 9 18 0 q9 9 14 0" stroke="#622D2B" stroke-width="2" stroke-linecap="round"/>
-                                    <path style="--len:90" d="M136 133 q8.5 8 17 0 q8.5 8 17 0 q8.5 8 17 0 q8.5 8 17 0" stroke="#622D2B" stroke-width="2" stroke-linecap="round"/>
-                                    <circle class="pcs-cherryline" cx="170" cy="100" r="8" stroke="#622D2B" stroke-width="2.5" fill="none"/>
-                                    <path style="--len:14" d="M170 92 q2 -8 8 -10" stroke="#622D2B" stroke-width="2" stroke-linecap="round"/>
-                                </g>
-                                <!-- STAGE 2: alternates + price tag -->
-                                <g class="pcs-alt">
-                                    <rect x="18" y="150" width="62" height="78" rx="8" stroke="#C36239" stroke-width="2" fill="#FDFBF8" transform="rotate(-7 49 189)"/>
-                                    <path d="M32 208 v-16 h34 v16 M38 192 v-13 h22 v13" stroke="#C36239" stroke-width="1.8" fill="none" transform="rotate(-7 49 189)"/>
-                                    <circle cx="49" cy="172" r="3.5" stroke="#C36239" stroke-width="1.5" transform="rotate(-7 49 189)"/>
-                                    <rect x="262" y="150" width="62" height="78" rx="8" stroke="#C36239" stroke-width="2" fill="#FDFBF8" transform="rotate(7 293 189)"/>
-                                    <path d="M274 208 v-14 h38 v14 M282 194 v-12 h22 v12 M288 182 v-9 h10 v9" stroke="#C36239" stroke-width="1.8" fill="none" transform="rotate(7 293 189)"/>
-                                </g>
-                                <g class="pcs-price">
-                                    <path d="M236 34 l14 20" stroke="#622D2B" stroke-width="1.8"/>
-                                    <rect x="236" y="52" width="62" height="36" rx="8" fill="#FFC532" stroke="#622D2B" stroke-width="2"/>
-                                    <circle cx="245" cy="61" r="3" fill="#FDFBF8" stroke="#622D2B" stroke-width="1.5"/>
-                                    <text x="272" y="76" text-anchor="middle" font-family="Fredoka One, cursive" font-size="17" fill="#622D2B">$—</text>
-                                </g>
-                                <!-- STAGE 3: approval rosette -->
-                                <g class="pcs-approve">
-                                    <path d="M242 96 l-8 26 10-6 6 10z" fill="#EC268F" opacity=".85"/>
-                                    <path d="M262 96 l8 26-10-6-6 10z" fill="#EC268F" opacity=".85"/>
-                                    <circle cx="252" cy="72" r="26" fill="#EC268F"/>
-                                    <circle cx="252" cy="72" r="20" fill="#FDFBF8"/>
-                                    <path d="M243 72 l7 7 12-14" stroke="#EC268F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                                </g>
-                                <!-- STAGE 4: calendar chip + lock -->
-                                <g class="pcs-schedule">
-                                    <rect x="238" y="60" width="76" height="66" rx="10" fill="#FDFBF8" stroke="#622D2B" stroke-width="2.5"/>
-                                    <path d="M238 82 h76" stroke="#622D2B" stroke-width="2"/>
-                                    <rect x="238" y="60" width="76" height="22" rx="10" fill="#EC268F" opacity=".16"/>
-                                    <line x1="256" y1="54" x2="256" y2="68" stroke="#622D2B" stroke-width="3" stroke-linecap="round"/>
-                                    <line x1="296" y1="54" x2="296" y2="68" stroke="#622D2B" stroke-width="3" stroke-linecap="round"/>
-                                    <circle cx="256" cy="96" r="3" fill="#622D2B" opacity=".3"/>
-                                    <circle cx="272" cy="96" r="3" fill="#622D2B" opacity=".3"/>
-                                    <circle cx="288" cy="96" r="3" fill="#622D2B" opacity=".3"/>
-                                    <circle cx="304" cy="96" r="3" fill="#622D2B" opacity=".3"/>
-                                    <circle cx="256" cy="112" r="3" fill="#622D2B" opacity=".3"/>
-                                    <circle cx="272" cy="112" r="8" fill="none" stroke="#EC268F" stroke-width="2.5"/>
-                                    <circle cx="272" cy="112" r="3" fill="#EC268F"/>
-                                    <path d="M296 116 v-5 a7 7 0 0 1 14 0 v5" stroke="#FFC532" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                                    <rect x="293" y="116" width="20" height="15" rx="4" fill="#FFC532" opacity=".9"/>
-                                </g>
-                                <!-- STAGES 5-6: the real cake (fills under the line work) -->
-                                <g class="pcs-fill">
-                                    <path class="f1" d="M100 250 v-42 a6 6 0 0 1 6-6 h128 a6 6 0 0 1 6 6 v42 z" fill="#FFF3E4"/>
-                                    <path class="f2" d="M118 202 v-40 a6 6 0 0 1 6-6 h92 a6 6 0 0 1 6 6 v40 z" fill="#FFF3E4"/>
-                                    <path class="f3" d="M136 156 v-36 a6 6 0 0 1 6-6 h56 a6 6 0 0 1 6 6 v36 z" fill="#FFF3E4"/>
-                                    <path class="f1" d="M100 202 h140 v14 q-10 10 -20 0 q-10 10 -20 0 q-10 10 -20 0 q-10 10 -20 0 q-10 10 -20 0 q-10 10 -20 0 q-10 10 -20 0 z" fill="#EC268F" opacity=".82"/>
-                                    <path class="f2" d="M118 156 h104 v19 q-9 9 -18 0 q-9 9 -18 0 q-9 9 -18 0 q-9 9 -18 0 q-9 9 -18 0 q-9 9 -14 0 z" fill="#EC268F" opacity=".82"/>
-                                    <path class="f3" d="M136 114 h68 v19 q-8.5 8 -17 0 q-8.5 8 -17 0 q-8.5 8 -17 0 q-8.5 8 -17 0 z" fill="#EC268F" opacity=".82"/>
-                                    <circle class="f4" cx="115" cy="236" r="4" fill="#FFC532"/>
-                                    <circle class="f4" cx="137" cy="236" r="4" fill="#EC268F"/>
-                                    <circle class="f4" cx="159" cy="236" r="4" fill="#FFC532"/>
-                                    <circle class="f4" cx="181" cy="236" r="4" fill="#EC268F"/>
-                                    <circle class="f4" cx="203" cy="236" r="4" fill="#FFC532"/>
-                                    <circle class="f4" cx="225" cy="236" r="4" fill="#EC268F"/>
-                                    <circle class="f5" cx="170" cy="100" r="8" fill="#EC268F"/>
-                                    <circle class="f5" cx="167" cy="97" r="2.5" fill="#FDFBF8" opacity=".8"/>
-                                </g>
-                                <g class="pcs-magic">
-                                    <path d="M92 78 l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#FFC532"/>
-                                    <path d="M255 130 l2.5 6.5 6.5 2.5-6.5 2.5-2.5 6.5-2.5-6.5-6.5-2.5 6.5-2.5z" fill="#EC268F" opacity=".8"/>
-                                    <path d="M70 190 l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#EC268F" opacity=".6"/>
-                                </g>
-                                <!-- STAGE 6: boxed, ribboned, ready -->
-                                <g class="pcs-box">
-                                    <path d="M92 160 h156 v88 a6 6 0 0 1 -6 6 h-144 a6 6 0 0 1 -6-6 z" fill="#FBF0E1" opacity=".97" stroke="#622D2B" stroke-width="2.5"/>
-                                    <rect x="86" y="150" width="168" height="14" rx="5" fill="#F3E3CE" stroke="#622D2B" stroke-width="2.5"/>
-                                    <rect x="163" y="150" width="14" height="104" fill="#EC268F"/>
-                                    <path d="M170 150 c-14 -12 -26 -4 -16 4 c-8 8 8 14 16 -4z M170 150 c14 -12 26 -4 16 4 c8 8 -8 14 -16 -4z" fill="#EC268F" stroke="#D11F7E" stroke-width="1.5"/>
-                                    <text x="128" y="212" text-anchor="middle" font-family="Fredoka One, cursive" font-size="16" fill="#EC268F">MBC</text>
-                                    <line x1="48" y1="185" x2="70" y2="185" stroke="#C36239" stroke-width="2.5" stroke-linecap="round" opacity=".55"/>
-                                    <line x1="40" y1="205" x2="66" y2="205" stroke="#C36239" stroke-width="2.5" stroke-linecap="round" opacity=".4"/>
-                                    <line x1="50" y1="225" x2="68" y2="225" stroke="#C36239" stroke-width="2.5" stroke-linecap="round" opacity=".3"/>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="pcs-stagefoot">
-                            <span class="pcs-caption" id="pcsCaption">Step 1 of 6 — Tell Us Your Vision</span>
-                            <span class="pcs-dots" id="pcsDots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span>
-                        </div>
+            <div class="pn-track" id="pnTrack">
+              <div class="pn-pin">
+                <article class="pn-panel" data-i="0">
+                    <span class="pn-ghost" aria-hidden="true">01</span>
+                    <div class="pn-shot"><div class="pn-mask"><img src="images/gallery/cakes/Hermes cake.jpg" alt="Sculpted designer gift box cake"></div></div>
+                    <div class="pn-words">
+                        <p class="pn-eyebrow"><i></i><span>Step 1 of 6</span></p>
+                        <h3 class="pn-title"><span>The brief</span></h3>
+                        <p class="pn-body"><span>Your date, your room, the person it is for.</span></p>
                     </div>
-                </div>
-
-                <div class="pcs-steps">
-                    <div class="pcs-rail"><div class="pcs-rail-fill" id="pcsRailFill"></div></div>
-                    <article class="pcs-step is-active" data-step="1">
-                        <span class="pcs-num">01</span>
-                        <h3>Tell Us Your Vision</h3>
-                        <p>Reach out by phone, email, or our website. Share your event date, guest count, theme ideas, and any inspiration photos. Want to get started right away? Try our <a href="order-form#ai-sketch">Sketch Your Cake AI</a> to visualize your dream cake, or <a href="corporate#cookiePreviewSection">see how your logo looks on a cookie</a> — before you even contact us.</p>
-                        <div class="pcs-ctas">
-                            <a href="order-form" class="pcs-cta pcs-cta-pink">
-                                <span class="pcs-ico">🎂</span>
-                                <span>Get a Quote <small>Birthdays, weddings &amp; celebrations</small></span>
-                            </a>
-                            <a href="corporate-order" class="pcs-cta pcs-cta-yellow">
-                                <span class="pcs-ico">🏢</span>
-                                <span>Corporate Quote <small>Company events &amp; branded treats</small></span>
-                            </a>
-                            <a href="contact" class="pcs-cta pcs-cta-brown" onclick="if(typeof openChatbot==='function'){event.preventDefault();openChatbot();}">
-                                <span class="pcs-ico">💬</span>
-                                <span>Quick Question? <small>Chat with us or send a message</small></span>
-                            </a>
-                        </div>
-                    </article>
-                    <article class="pcs-step" data-step="2">
-                        <span class="pcs-num">02</span>
-                        <h3>Custom Sketches &amp; Pricing</h3>
-                        <p>Yana creates multiple design options with pricing — typically within 24–48 hours. No commitment required. This is how every project starts.</p>
-                    </article>
-                    <article class="pcs-step" data-step="3">
-                        <span class="pcs-num">03</span>
-                        <h3>Revisions &amp; Approval</h3>
-                        <p>Review the sketches, pick your favorites, request changes. We go back and forth until the design is exactly what you want.</p>
-                    </article>
-                    <article class="pcs-step" data-step="4">
-                        <span class="pcs-num">04</span>
-                        <h3>Payment &amp; Scheduling</h3>
-                        <p>Once you approve, we send a simple invoice. Pay by credit/debit card, PayPal, or Venmo. Your spot on our calendar is locked in.</p>
-                    </article>
-                    <article class="pcs-step" data-step="5">
-                        <span class="pcs-num">05</span>
-                        <h3>Handcrafted Creation</h3>
-                        <p>Every item is made from scratch by hand using the freshest ingredients. No shortcuts, no templates — just Yana's artistry and attention to detail.</p>
-                    </article>
-                    <article class="pcs-step" data-step="6">
-                        <span class="pcs-num">06</span>
-                        <h3>Pickup or Delivery</h3>
-                        <p>Pick up at our Daly City kitchen (9 AM–6 PM), or we deliver anywhere in the San Francisco Bay Area.</p>
-                    </article>
-                </div>
+                </article>
+                <article class="pn-panel" data-i="1">
+                    <span class="pn-ghost" aria-hidden="true">02</span>
+                    <div class="pn-shot"><div class="pn-mask"><img src="images/gallery/realist/Realistic Nike Shoe Cake.jpg" alt="Ultra-realistic sculpted sneaker cake" loading="lazy"></div></div>
+                    <div class="pn-words">
+                        <p class="pn-eyebrow"><i></i><span>Step 2 of 6</span></p>
+                        <h3 class="pn-title"><span>The drawings</span></h3>
+                        <p class="pn-body"><span>Designs and prices, usually inside a day.</span></p>
+                    </div>
+                </article>
+                <article class="pn-panel" data-i="2">
+                    <span class="pn-ghost" aria-hidden="true">03</span>
+                    <div class="pn-shot"><div class="pn-mask"><img src="images/gallery/corporatecakes/Levis-Jean-Corporate-Business-Cake-San-Francisco.webp" alt="Sculpted denim jeans cake" loading="lazy"></div></div>
+                    <div class="pn-words">
+                        <p class="pn-eyebrow"><i></i><span>Step 3 of 6</span></p>
+                        <h3 class="pn-title"><span>Your changes</span></h3>
+                        <p class="pn-body"><span>We redraw until it is exactly right.</span></p>
+                    </div>
+                </article>
+                <article class="pn-panel" data-i="3">
+                    <span class="pn-ghost" aria-hidden="true">04</span>
+                    <div class="pn-shot"><div class="pn-mask"><img src="images/gallery/cakes/faberge egg 2 cake.jpg" alt="Gold Faberge egg sculpted cake" loading="lazy"></div></div>
+                    <div class="pn-words">
+                        <p class="pn-eyebrow"><i></i><span>Step 4 of 6</span></p>
+                        <h3 class="pn-title"><span>The date</span></h3>
+                        <p class="pn-body"><span>Approved, invoiced, held on the calendar.</span></p>
+                    </div>
+                </article>
+                <article class="pn-panel" data-i="4">
+                    <span class="pn-ghost" aria-hidden="true">05</span>
+                    <div class="pn-shot"><div class="pn-mask"><img src="images/gallery/realist/Realistic Snake Cake.jpg" alt="Ultra-realistic sculpted snake cake" loading="lazy"></div></div>
+                    <div class="pn-words">
+                        <p class="pn-eyebrow"><i></i><span>Step 5 of 6</span></p>
+                        <h3 class="pn-title"><span>By hand</span></h3>
+                        <p class="pn-body"><span>Every piece made from scratch, by Yana.</span></p>
+                    </div>
+                </article>
+                <article class="pn-panel" data-i="5">
+                    <span class="pn-ghost" aria-hidden="true">06</span>
+                    <div class="pn-shot"><div class="pn-mask"><img src="images/gallery/realist/Realistic Sushi Cake.jpg" alt="Ultra-realistic sushi platter cake" loading="lazy"></div></div>
+                    <div class="pn-words">
+                        <p class="pn-eyebrow"><i></i><span>Step 6 of 6</span></p>
+                        <h3 class="pn-title"><span>To your table</span></h3>
+                        <p class="pn-body"><span>Daly City pickup, or delivered across the Bay.</span></p>
+                    </div>
+                </article>
+                <div class="pn-rail" id="pnRail"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
+                <div class="pn-vig"></div>
+                <div class="pn-grain"></div>
+                <p class="pn-hint" id="pnHint">SCROLL</p>
+              </div>
             </div>
-
-            <p style="text-align: center; margin-top: 2rem; font-weight: 600; color: var(--dark-brown); font-size: 1.05rem;">We take pride in accommodating budgetary concerns — flexible solutions for every budget. Learn more about <a href="blog-how-to-order-custom-birthday-cake" style="color: var(--pink);">how to order a custom cake</a>.</p>
-        </div>
+        </section>
 
         <script>
-        (function() {
-            var stage = document.getElementById('pcsStage');
-            var steps = Array.prototype.slice.call(document.querySelectorAll('.pcs-step'));
-            var fill = document.getElementById('pcsRailFill');
-            var caption = document.getElementById('pcsCaption');
-            var dots = document.getElementById('pcsDots');
-            if (!stage || !steps.length) return;
-            var titles = ['Tell Us Your Vision', 'Custom Sketches & Pricing', 'Revisions & Approval', 'Payment & Scheduling', 'Handcrafted Creation', 'Pickup or Delivery'];
-            var current = 1;
+        (function () {
+            var track = document.getElementById('pnTrack');
+            if (!track) return;
+            var panels = [].slice.call(track.querySelectorAll('.pn-panel'));
+            var rail = [].slice.call(track.querySelectorAll('.pn-rail b'));
+            var hint = document.getElementById('pnHint');
+            if (!panels.length) return;
+            if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-            function setStage(n) {
-                if (n === current) return;
-                current = n;
-                stage.setAttribute('data-stage', String(n));
-                steps.forEach(function(s, i) { s.classList.toggle('is-active', i === n - 1); });
-                if (fill) fill.style.height = (((n - 1) / (steps.length - 1)) * 100) + '%';
-                if (caption) caption.textContent = 'Step ' + n + ' of ' + steps.length + ' — ' + titles[n - 1];
-                if (dots) Array.prototype.forEach.call(dots.children, function(d, i) { d.classList.toggle('on', i < n); });
+            var P = panels.map(function (el) {
+                return { el: el,
+                    ghost: el.querySelector('.pn-ghost'),
+                    shot: el.querySelector('.pn-shot'),
+                    mask: el.querySelector('.pn-mask'),
+                    img: el.querySelector('img'),
+                    line: el.querySelector('.pn-eyebrow i'),
+                    eye: el.querySelector('.pn-eyebrow span'),
+                    title: el.querySelector('.pn-title span'),
+                    body: el.querySelector('.pn-body span') };
+            });
+            var N = P.length;
+            var cl = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
+            var eo = function (p) { return 1 - Math.pow(1 - p, 3); };
+            var es = function (p) { return p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; };
+            var lp = function (a, b, p) { return a + (b - a) * p; };
+
+            var want = 0, cur = 0, running = false;
+            function target() {
+                var r = track.getBoundingClientRect();
+                var span = track.offsetHeight - window.innerHeight;
+                return span <= 0 ? 0 : cl(-r.top / span);
             }
+            function draw(t) {
+                var f = t * (N - 1);                 // 0 = first centred, N-1 = last centred
+                for (var i = 0; i < N; i++) {
+                    var p = P[i], d = f - i;         // -inf .. +inf, 0 = fully in
+                    var vis = d > -1.0 && d < 1.0;
+                    p.el.style.visibility = vis ? 'visible' : 'hidden';
+                    if (!vis) continue;
+                    var inn = cl(d + 1);             // 0 entering -> 1 centred
+                    var out = cl(d);                 // 0 centred  -> 1 leaving
+                    var eIn = eo(inn), eOut = es(out);
 
-            var io = new IntersectionObserver(function(entries) {
-                entries.forEach(function(entry) {
-                    if (entry.isIntersecting) setStage(steps.indexOf(entry.target) + 1);
-                });
-            }, { rootMargin: '-38% 0px -42% 0px' });
-            steps.forEach(function(s) { io.observe(s); });
+                    // the photograph is uncovered by a mask, and drifts
+                    var mIn = eo(cl((inn - .52) / .48)), mOut = es(cl(out / .40));
+                    p.mask.style.clipPath = 'inset(' + ((1 - mIn) * 100).toFixed(2) + '% 0 ' + (mOut * 100).toFixed(2) + '% 0)';
+                    p.shot.style.transform = 'translate3d(0,' + lp(4, -4, es(cl((d + 1) / 2))).toFixed(2) + 'vh,0) scale(' + lp(1.06, 0.98, es(cl((d + 1) / 2))).toFixed(4) + ')';
+                    p.img.style.transform = 'translate3d(0,' + lp(-7, 7, es(cl((d + 1) / 2))).toFixed(2) + '%' + ',0) scale(1.16)';
+
+                    // the numeral behind, on its own slower rail
+                    p.ghost.style.transform = 'translate3d(' + lp(16, -16, cl((d + 1) / 2)).toFixed(2) + 'vw,0,0)';
+                    p.ghost.style.opacity = (eo(cl((inn - .5) / .5)) * (1 - eo(cl(out / .30)))).toFixed(3);
+
+                    // the words are uncovered line by line, each a beat behind
+                    var w1 = eo(cl((inn - .58) / .42)), w2 = eo(cl((inn - .64) / .36)), w3 = eo(cl((inn - .70) / .30));
+                    var go = eo(cl(out / .22));
+                    p.line.style.transform = 'scaleX(' + (w1 * (1 - go)).toFixed(3) + ')';
+                    p.eye.style.opacity = (w1 * (1 - go)).toFixed(3);
+                    p.title.style.transform = 'translate3d(0,' + lp(112, 0, w2).toFixed(1) + '%' + ',0)';
+                    p.title.style.opacity = (1 - go).toFixed(3);
+                    p.body.style.transform = 'translate3d(0,' + lp(112, 0, w3).toFixed(1) + '%' + ',0)';
+                    p.body.style.opacity = ((1 - go) * 0.98).toFixed(3);
+                }
+                for (var k = 0; k < rail.length; k++) rail[k].style.height = (cl(f - k) * 100).toFixed(1) + '%';
+                if (hint) hint.style.opacity = (1 - cl(t * 10)).toFixed(2);
+            }
+            function frame() {
+                cur += (want - cur) * .16;
+                if (Math.abs(want - cur) < .00025) cur = want;
+                draw(cur);
+                if (cur !== want) requestAnimationFrame(frame); else running = false;
+            }
+            function kick() { want = target(); if (!running) { running = true; requestAnimationFrame(frame); } }
+            addEventListener('scroll', kick, { passive: true });
+            addEventListener('resize', kick);
+            cur = want = target(); draw(cur);
         })();
         </script>
 
