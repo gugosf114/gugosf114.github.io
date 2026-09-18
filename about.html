@@ -590,13 +590,13 @@
             </style>
 
             <h2 class="mk-h">From your idea to your table</h2>
-            <p class="mk-lede">You see the design and the price before you pay anything. Watch how a cake gets made.</p>
+            <p class="mk-lede">You see the design and the price before you pay anything. Watch one get made.</p>
 
             <div class="mk-stage">
                 <figure class="mk-film">
                     <video id="mkFilm" width="720" height="720" autoplay loop muted playsinline preload="metadata"
                            poster="media/cake-process-poster.jpg"
-                           aria-label="A cake being designed, approved, baked by hand and boxed">
+                           aria-label="A pineapple cake being designed, approved, made by hand, then cut open to show the sponge inside">
                         <source src="media/cake-process.mp4" type="video/mp4">
                     </video>
                 </figure>
@@ -604,7 +604,7 @@
                     <strong class="mk-now" id="mkNow">Tell us the day.</strong>
                     <span class="mk-sub">Custom cakes, baked in Daly City</span>
                 </figcaption>
-                <div class="mk-bar" id="mkBar" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
+                <div class="mk-bar" id="mkBar" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
             </div>
 
             <a href="order-form" class="mk-go">Start your cake</a>
@@ -619,12 +619,13 @@
             var CALM = matchMedia('(prefers-reduced-motion: reduce)').matches;
             // start, end, line — the seconds match the cuts in the film
             var BEATS = [
-                [0.00,  3.96, 'Tell us the day.'],
-                [3.96,  7.80, 'We draw the options.'],
-                [7.80, 10.92, 'You pick the one.'],
-                [10.92,13.80, 'Your date is held.'],
-                [13.80,19.08, 'Then we make it. By hand.'],
-                [19.08,24.00, 'And it comes to you.']
+                [0.00,  3.64, 'Tell us the day.'],
+                [3.64,  7.56, 'We draw the options.'],
+                [7.56, 10.78, 'You pick the one.'],
+                [10.78,13.44, 'Your date is held.'],
+                [13.44,20.58, 'Then we make it. By hand.'],
+                [20.58,24.08, 'Wait \u2014 that is cake.'],
+                [24.08,28.00, 'And it comes to you.']
             ];
             var bars = bar ? [].slice.call(bar.querySelectorAll('b')) : [];
             var at = -1;
