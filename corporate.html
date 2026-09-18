@@ -359,6 +359,21 @@
     }
     </script>
     
+    <style>
+    /* Sub-category tiles: a photo stage that slowly walks through that gallery's own cakes. Inline on purpose (no shared file to go stale). */
+    #corporate-content .corporate-treats-grid .service-card{background:#fdfbf8;border-radius:30px;padding:14px 14px 30px;box-shadow:0 1px 0 #e6dbcd,0 24px 48px -30px #622d2b66;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+    #corporate-content .corporate-treats-grid .service-card:hover{transform:translateY(-4px);box-shadow:0 1px 0 #e6dbcd,0 34px 56px -30px #622d2b80}
+    #corporate-content .corporate-treats-grid .service-card h2,#corporate-content .corporate-treats-grid .service-card h3{margin-top:.25rem}
+    .tile-stage{position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;background:#f1ebe1;margin:0 0 1.35rem;isolation:isolate}
+    #corporate-content .tile-stage img.tile-slide{position:absolute !important;inset:0;width:100% !important;min-width:100% !important;height:100% !important;max-width:none !important;max-height:none !important;margin:0 !important;border-radius:0 !important;object-fit:cover;opacity:0;transform:scale(1);transition:opacity 1.4s ease}
+    #corporate-content .tile-stage img.tile-slide.is-on{opacity:1}
+    #corporate-content .tile-stage img.tile-slide.is-drift{transform:scale(1.06);transition:opacity 1.4s ease,transform 7s linear}
+    .tile-name{position:absolute;left:12px;bottom:16px;z-index:2;background:#fdfbf8ee;color:#622d2b;font-family:"Nunito",sans-serif;font-weight:800;font-size:.82rem;line-height:1;padding:.5rem .8rem;border-radius:999px;box-shadow:0 6px 16px -8px #0006;transition:opacity .45s ease,transform .45s ease}
+    .tile-name.is-out{opacity:0;transform:translateY(4px)}
+    .tile-progress{position:absolute;left:0;right:0;bottom:0;height:3px;background:#ffffff66;z-index:2}
+    .tile-progress i{display:block;height:100%;width:0;background:#ffc532}
+    @media (prefers-reduced-motion:reduce){#corporate-content .corporate-treats-grid .service-card,#corporate-content .corporate-treats-grid .service-card:hover{transition:none;transform:none}}
+    </style>
 </head>
 <body>
 
@@ -605,19 +620,34 @@
             </div>
             <div class="tile-grid-3 corporate-treats-grid">
                 <a href="gallery-corporate-cakepops" class="service-card">
-                    <img width="982" height="684" src="images/gallery/categoryplaceholder/corporatecakepops.webp" alt="Corporate cake pops by My Baking Creations" style="width: 100%; height: 150px; object-fit: cover; border-radius: 15px; margin-bottom: 1rem;" loading="lazy">
+                    <div class="tile-stage" data-slides='[{"src": "images/gallery/corporatecakepops/DocuSign-Custom-Corporate-Cake-Pops-Bay-Area.webp", "alt": "DocuSign custom corporate cake pops Bay Area San Francisco", "name": "DocuSign"}, {"src": "images/gallery/corporatecakepops/PayPal-Logo-Corporate-Cake-Pops-San-Francisco.webp", "alt": "PayPal logo corporate cake pops San Francisco Bay Area", "name": "PayPal"}, {"src": "images/gallery/corporatecakepops/Kneat-Logo-Corporate-Cake-Pops-Bay-Area.webp", "alt": "Kneat logo corporate cake pops Bay Area San Francisco", "name": "Kneat"}, {"src": "images/gallery/corporatecakepops/Golden-State-Warriors-Curry-Corporate-Cake-Pops-Bay-Area.webp", "alt": "Golden State Warriors Curry corporate cake pops Bay Area", "name": "Warriors"}, {"src": "images/gallery/corporatecakepops/Y-Logo-Corporate-Cake-Pops-San-Francisco.webp", "alt": "Y logo corporate cake pops San Francisco Bay Area", "name": "Y logo"}, {"src": "images/gallery/corporatecakepops/Google-Logo-Corporate-Cake-Pops-Bay-Area.webp", "alt": "Google logo corporate cake pops Bay Area San Francisco", "name": "Google"}, {"src": "images/gallery/corporatecakepops/Alaska-Airlines-Logo-Corporate-Cake-Pops-San-Francisco.webp", "alt": "Alaska Airlines logo corporate cake pops San Francisco", "name": "Alaska Airlines"}, {"src": "images/gallery/corporatecakepops/Dropbox-Logo-Corporate-Cake-Pops-San-Francisco.webp", "alt": "Dropbox logo corporate cake pops San Francisco Bay Area", "name": "Wrapped favors"}, {"src": "images/gallery/corporatecakepops/Earth-Day-Custom-Corporate-Cake-Pops-Bay-Area.webp", "alt": "Earth Day custom corporate cake pops Bay Area San Francisco", "name": "Earth Day"}, {"src": "images/gallery/corporatecakepops/H-Logo-Corporate-Cake-Pops-San-Francisco.webp", "alt": "H logo corporate cake pops San Francisco Bay Area", "name": "H logo"}]'>
+                        <img class="tile-slide is-on" width="1200" height="1216" src="images/gallery/corporatecakepops/DocuSign-Custom-Corporate-Cake-Pops-Bay-Area.webp" alt="DocuSign custom corporate cake pops Bay Area San Francisco" loading="lazy">
+                        <img class="tile-slide" alt="" aria-hidden="true">
+                        <span class="tile-name" aria-hidden="true">DocuSign</span>
+                        <span class="tile-progress" aria-hidden="true"><i></i></span>
+                    </div>
                     <h3><span style="color: var(--yellow);">Corporate</span> <span style="color: var(--pink);">Cake Pops</span></h3>
                     <p>Bite-sized branding — presentation-ready and individually wrapped. Great for trade show giveaways, conferences, and dessert tables.</p>
                     <span class="btn btn-secondary">View Cake Pops</span>
                 </a>
                 <a href="gallery-corporate-cakes" class="service-card">
-                    <img width="1200" height="1465" src="images/gallery/corporatecakes/Levis-Jean-Corporate-Business-Cake-San-Francisco.webp" alt="Corporate cakes by My Baking Creations" style="width: 100%; height: 150px; object-fit: cover; border-radius: 15px; margin-bottom: 1rem;" loading="lazy">
+                    <div class="tile-stage" data-slides='[{"src": "images/gallery/corporatecakes/Levis-Jean-Corporate-Business-Cake-San-Francisco.webp", "alt": "Levis Jean corporate business cake San Francisco Bay Area", "name": "Jeans cake"}, {"src": "images/gallery/corporatecakes/Wine-Themed-Corporate-Business-Cake-Bay-Area.webp", "alt": "Wine themed corporate business cake Bay Area San Francisco", "name": "Wine bottle"}, {"src": "images/gallery/corporatecakes/Joshua-Landy-Book-Corporate-Cake-Bay-Area.webp", "alt": "Joshua Landy book corporate cake Bay Area San Francisco", "name": "Book cake"}, {"src": "images/gallery/corporatecakes/Gura-Themed-Corporate-Business-Cake-San-Francisco.webp", "alt": "Gura themed corporate business cake San Francisco Bay Area", "name": "Character cake"}, {"src": "images/gallery/corporatecakes/Blue-Themed-Corporate-Business-Cake-Bay-Area.JPEG", "alt": "Blue themed corporate business cake Bay Area San Francisco", "name": "Science cake"}, {"src": "images/gallery/corporatecakes/Goodwill-Logo-Corporate-Business-Cake-Bay-Area.webp", "alt": "Goodwill logo corporate business cake Bay Area San Francisco", "name": "Goodwill"}, {"src": "images/gallery/corporatecakes/Levis-Logo-Corporate-Business-Cake-San-Francisco.webp", "alt": "Levis logo corporate business cake San Francisco Bay Area", "name": "Denim cake"}, {"src": "images/gallery/corporatecakes/Solitaire-Themed-Corporate-Cake-San-Francisco.webp", "alt": "Solitaire themed corporate cake San Francisco Bay Area", "name": "Tiki party"}, {"src": "images/gallery/corporatecakes/TRex-Bio-Logo-Corporate-Cake-San-Francisco.webp", "alt": "TRex Bio logo corporate cake San Francisco Bay Area", "name": "Dinosaur cake"}, {"src": "images/gallery/corporatecakes/YouTube-300K-Subscribers-Corporate-Cake-Bay-Area.webp", "alt": "YouTube 300K subscribers corporate cake Bay Area San Francisco", "name": "300K subscribers"}]'>
+                        <img class="tile-slide is-on" width="1200" height="1465" src="images/gallery/corporatecakes/Levis-Jean-Corporate-Business-Cake-San-Francisco.webp" alt="Levis Jean corporate business cake San Francisco Bay Area" loading="lazy">
+                        <img class="tile-slide" alt="" aria-hidden="true">
+                        <span class="tile-name" aria-hidden="true">Jeans cake</span>
+                        <span class="tile-progress" aria-hidden="true"><i></i></span>
+                    </div>
                     <h3><span style="color: var(--yellow);">Corporate</span> <span style="color: var(--pink);">Cakes</span></h3>
                     <p>Corporate event cakes for company milestones, product launches, and special events.</p>
                     <span class="btn btn-secondary">View Cakes</span>
                 </a>
                 <a href="cupcakes-for-corporate-event" class="service-card">
-                    <img width="778" height="668" src="images/gallery/categoryplaceholder/corporatelogocupcake.webp" alt="Corporate cupcakes by My Baking Creations" style="width: 100%; height: 150px; object-fit: cover; border-radius: 15px; margin-bottom: 1rem;" loading="lazy">
+                    <div class="tile-stage" data-slides='[{"src": "images/gallery/corporatecupcakes/Gap-Inc-Smiley-Face-Corporate-Cupcakes-San-Francisco.webp", "alt": "Gap Inc smiley face corporate cupcakes San Francisco Bay Area", "name": "Smiley faces"}, {"src": "images/gallery/corporatecupcakes/Gap-Inc-Rainbow-Logo-Corporate-Cupcakes-Bay-Area.webp", "alt": "Gap Inc rainbow logo corporate cupcakes Bay Area San Francisco", "name": "Rainbow arcs"}, {"src": "images/gallery/corporatecupcakes/Gap-Inc-Star-Logo-Corporate-Cupcakes-Bay-Area.webp", "alt": "Gap Inc star logo corporate cupcakes Bay Area San Francisco", "name": "Silver stars"}, {"src": "images/gallery/corporatecupcakes/One-Size-Cosmetics-Themed-Corporate-Cupcakes-San-Francisco.webp", "alt": "One Size Cosmetics themed corporate cupcakes San Francisco", "name": "Heart eyes"}, {"src": "images/gallery/corporatecupcakes/One-Market-60th-Birthday-Corporate-Cupcakes-Bay-Area.webp", "alt": "One Market 60th birthday corporate cupcakes Bay Area", "name": "60th birthday"}, {"src": "images/gallery/corporatecupcakes/One-Size-Cosmetics-Corporate-Cupcakes-San-Francisco.webp", "alt": "One Size Cosmetics corporate cupcakes San Francisco Bay Area", "name": "Pink swirl"}, {"src": "images/gallery/corporatecupcakes/Dual-Brand-Logo-Corporate-Cupcakes-Bay-Area.webp", "alt": "Dual brand logo corporate cupcakes Bay Area company event", "name": "Two logos"}, {"src": "images/gallery/corporatecupcakes/New-Rules-Branded-Corporate-Cupcakes-San-Francisco.webp", "alt": "New Rules branded corporate cupcakes San Francisco launch event", "name": "Launch event"}, {"src": "images/gallery/corporatecupcakes/Custom-Logo-Corporate-Cupcakes-San-Francisco.webp", "alt": "Custom logo corporate cupcakes San Francisco Bay Area", "name": "Yellow and green"}, {"src": "images/gallery/corporatecupcakes/Supergirl-Premiere-Corporate-Cupcakes-Bay-Area.webp", "alt": "Supergirl movie premiere corporate cupcakes Bay Area studio event", "name": "Movie premiere"}]'>
+                        <img class="tile-slide is-on" width="1200" height="900" src="images/gallery/corporatecupcakes/Gap-Inc-Smiley-Face-Corporate-Cupcakes-San-Francisco.webp" alt="Gap Inc smiley face corporate cupcakes San Francisco Bay Area" loading="lazy">
+                        <img class="tile-slide" alt="" aria-hidden="true">
+                        <span class="tile-name" aria-hidden="true">Smiley faces</span>
+                        <span class="tile-progress" aria-hidden="true"><i></i></span>
+                    </div>
                     <h3><span style="color: var(--yellow);">Corporate</span> <span style="color: var(--pink);">Cupcakes</span></h3>
                     <p>Office party cupcakes for team celebrations, client meetings, and employee recognition. No plates, no mess — just grab and go.</p>
                     <span class="btn btn-secondary">View Cupcakes</span>
@@ -1842,5 +1872,48 @@
     <script src="chatbot.js?v=2" defer></script>
     <script src="hero-lens.js" defer></script>
     <script src="/js/bakers-agent-gallery.js" defer></script>
+    <script>
+    /* Tile slideshow: crossfades through a gallery's own photos inside its tile. Loads each photo fully before showing it. */
+    (function(){
+      // Animations-off systems still get the slideshow: a plain fade, with no drift and no moving progress line.
+      var CALM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var HOLD=CALM?5200:4200;
+      // Resolves once the photo is loaded (and decoded when the browser allows), but can never hang: every path has a time limit.
+      function ready(src){
+        return new Promise(function(res){
+          var im=new Image(), done=false;
+          function ok(){ if(!done){ done=true; res(); } }
+          im.onload=function(){ if(im.decode){ im.decode().then(ok,ok); setTimeout(ok,1200); } else ok(); };
+          im.onerror=ok; im.src=src; setTimeout(ok,8000);
+        });
+      }
+      document.querySelectorAll('.tile-stage[data-slides]').forEach(function(stage,order){
+        var slides; try{slides=JSON.parse(stage.dataset.slides);}catch(e){return;}
+        if(!slides||slides.length<2) return;
+        var layers=stage.querySelectorAll('.tile-slide'), name=stage.querySelector('.tile-name'), bar=stage.querySelector('.tile-progress i');
+        var front=0, index=0, timer=null, visible=false, held=false, busy=false;
+        var barFrame=null;
+        function runBar(){ if(!bar) return; cancelAnimationFrame(barFrame); var t0=performance.now(); bar.style.transition='none'; bar.style.width='0'; (function tick(now){ var p=Math.min(1,(now-t0)/HOLD); bar.style.width=(p*100)+'%'; if(p<1) barFrame=requestAnimationFrame(tick); })(t0); }
+        function stopBar(){ cancelAnimationFrame(barFrame); }
+        function schedule(){ clearTimeout(timer); if(!visible||held||document.hidden) return; runBar(); timer=setTimeout(next,HOLD); }
+        function next(){
+          if(busy) return; busy=true;
+          var s=slides[(index+1)%slides.length], back=layers[1-front], shown=layers[front];
+          ready(s.src).then(function(){
+            back.src=s.src; back.classList.remove('is-drift'); void back.offsetWidth;
+            if(name) name.classList.add('is-out');
+            back.classList.add('is-on'); if(!CALM) back.classList.add('is-drift'); shown.classList.remove('is-on');
+            back.alt=s.alt; back.removeAttribute('aria-hidden'); shown.setAttribute('aria-hidden','true');
+            setTimeout(function(){ if(name){name.textContent=s.name||'';name.classList.remove('is-out');} shown.classList.remove('is-drift'); },500);
+            front=1-front; index=(index+1)%slides.length; busy=false; schedule();
+          });
+        }
+        if(!CALM) layers[0].classList.add('is-drift');
+        document.addEventListener('visibilitychange',schedule);
+        if('IntersectionObserver' in window){ new IntersectionObserver(function(es){visible=es[0].isIntersecting; if(visible) setTimeout(schedule,order*1300); else {clearTimeout(timer);stopBar();}},{threshold:.35}).observe(stage); }
+        else { visible=true; setTimeout(schedule,order*1300); }
+      });
+    })();
+    </script>
 </body>
 </html>
