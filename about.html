@@ -550,109 +550,281 @@
 
         </div>
 
-        <!-- How a cake gets made -->
-        <section class="mk" id="how-it-works">
-            <style>
-            /* The film runs the story; the words stay out of its way.
-               Inline on purpose (no shared file to go stale). */
-            .mk{max-width:1200px;margin:0 auto 3rem;padding:4rem 3rem;border-radius:30px;
-                background:var(--cream);box-shadow:var(--shadow-section);text-align:center}
-            .mk-h{font-family:'Fredoka One','Fredoka Fallback',cursive;font-size:clamp(1.9rem,3.6vw,2.9rem);
-                line-height:1.12;color:var(--dark-brown);margin:0 auto .85rem;max-width:18ch;text-shadow:none}
-            .mk-lede{font-family:'Nunito',sans-serif;font-size:1.06rem;line-height:1.65;color:var(--brown);
-                font-weight:600;margin:0 auto 2.4rem;max-width:44ch}
-            .mk-stage{margin:0 auto;max-width:520px}
-            .mk-film{position:relative;border-radius:26px;overflow:hidden;background:#EFE9E1;
-                box-shadow:0 34px 60px -34px rgba(98,45,43,.45),0 0 0 1px rgba(98,45,43,.08)}
-            .mk-film video{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover}
-            .mk-cap{margin:1.35rem auto 0;min-height:3.9rem}
-            .mk-now{display:block;font-family:'Fredoka One','Fredoka Fallback',cursive;font-size:1.22rem;
-                line-height:1.3;color:var(--dark-brown);margin:0 0 .3rem;transition:opacity .45s ease,transform .45s ease}
-            .mk-now.is-out{opacity:0;transform:translateY(5px)}
-            .mk-sub{display:block;font-family:'Nunito',sans-serif;font-size:.92rem;color:var(--brown);font-weight:600;opacity:.82}
-            .mk-bar{display:flex;gap:5px;max-width:300px;margin:1.15rem auto 0}
-            .mk-bar i{flex:1;height:3px;border-radius:2px;background:rgba(98,45,43,.14);overflow:hidden}
-            .mk-bar i b{display:block;height:100%;width:0;background:var(--pink);border-radius:2px}
-            .mk-go{display:inline-block;margin-top:2.1rem;padding:.95rem 2.1rem;border-radius:999px;
-                background:var(--yellow);color:var(--dark-brown);text-decoration:none;
-                font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;
-                box-shadow:0 12px 24px -14px rgba(98,45,43,.6);transition:transform .25s ease}
-            .mk-go:hover{transform:translateY(-2px)}
-            .mk-note{font-family:'Nunito',sans-serif;font-size:.95rem;line-height:1.65;color:var(--brown);
-                font-weight:600;margin:2.2rem auto 0;max-width:52ch}
-            .mk-note a{color:var(--pink)}
-            @media (max-width:768px){
-                .mk{padding:2.4rem 1.25rem;margin:0 -0.5rem 2rem;border-radius:18px}
-                .mk-lede{margin-bottom:1.7rem;font-size:1rem}
-                .mk-now{font-size:1.1rem}
-            }
-            @media (prefers-reduced-motion:reduce){.mk-now{transition:none}.mk-go:hover{transform:none}}
-            </style>
-
-            <h2 class="mk-h">From your idea to your table</h2>
-            <p class="mk-lede">You see the design and the price before you pay anything. Watch one get made.</p>
-
-            <div class="mk-stage">
-                <figure class="mk-film">
-                    <video id="mkFilm" width="720" height="720" autoplay loop muted playsinline preload="metadata"
-                           poster="media/cake-process-poster.jpg"
-                           aria-label="A pineapple cake being designed, approved, made by hand, then cut open to show the sponge inside">
-                        <source src="media/cake-process.mp4" type="video/mp4">
-                    </video>
-                </figure>
-                <figcaption class="mk-cap">
-                    <strong class="mk-now" id="mkNow">Tell us the day.</strong>
-                    <span class="mk-sub">Custom cakes, baked in Daly City</span>
-                </figcaption>
-                <div class="mk-bar" id="mkBar" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
+        <!-- Our Process (Animated) -->
+        <div class="section-wrapper section-beige reveal" style="margin-bottom: 3rem;">
+            <div class="section-header">
+                <h2>Our <span class="highlight">Process</span></h2>
+                <p>From your idea to your table — watch it happen as you scroll</p>
             </div>
 
-            <a href="order-form" class="mk-go">Start your cake</a>
+            <style>
+            /* ── Process scrollytelling (pcs) ─────────────────────────── */
+            .pcs-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:2.5rem;align-items:start}
+            .pcs-stagewrap{position:sticky;top:110px}
+            .pcs-stagecard{background:var(--white);border-radius:24px;padding:1.25rem 1.25rem 1rem;box-shadow:0 10px 34px rgba(98,45,43,0.14),0 2px 8px rgba(98,45,43,0.08)}
+            .pcs-stagecard svg{width:100%;height:auto;display:block}
+            .pcs-stagefoot{display:flex;align-items:center;justify-content:space-between;margin-top:.6rem;gap:.75rem}
+            .pcs-caption{font-family:'Nunito',sans-serif;font-weight:800;font-size:.85rem;color:var(--dark-brown);letter-spacing:.02em}
+            .pcs-dots{display:flex;gap:6px}
+            .pcs-dots i{width:8px;height:8px;border-radius:50%;background:rgba(98,45,43,0.18);transition:background .3s ease,transform .3s ease}
+            .pcs-dots i.on{background:var(--pink);transform:scale(1.25)}
 
-            <p class="mk-note">Flexible solutions for every budget. Learn more about <a href="blog-how-to-order-custom-birthday-cake">how to order a custom cake</a>.</p>
-        </section>
+            .pcs-steps{position:relative;padding-left:2rem}
+            .pcs-rail{position:absolute;left:6px;top:12px;bottom:12px;width:4px;border-radius:2px;background:rgba(98,45,43,0.12)}
+            .pcs-rail-fill{position:absolute;left:0;top:0;width:100%;height:0;border-radius:2px;background:linear-gradient(180deg,var(--pink),var(--yellow));transition:height .5s ease}
+            .pcs-step{opacity:.42;transition:opacity .45s ease;padding:1.4rem 0 1.6rem;min-height:300px;display:flex;flex-direction:column;justify-content:center}
+            .pcs-step.is-active{opacity:1}
+            .pcs-num{font-family:'Fredoka One',cursive;font-size:2.9rem;line-height:1;color:transparent;-webkit-text-stroke:2px var(--pink);display:block;margin-bottom:.4rem;transition:color .4s ease,transform .4s cubic-bezier(.34,1.56,.64,1);transform-origin:left bottom}
+            .pcs-step:nth-child(even) .pcs-num{-webkit-text-stroke-color:var(--yellow-dark)}
+            .pcs-step.is-active .pcs-num{color:var(--pink);transform:scale(1.06)}
+            .pcs-step.is-active:nth-child(even) .pcs-num{color:var(--yellow-dark)}
+            .pcs-step h3{font-family:'Fredoka One',cursive;font-size:1.35rem;color:var(--dark-brown);margin:0 0 .5rem}
+            .pcs-step p{font-size:1.02rem;line-height:1.7;color:var(--brown);font-weight:600;margin:0}
+            .pcs-step p a{color:var(--pink);font-weight:700}
+
+            .pcs-ctas{display:flex;flex-direction:column;gap:.6rem;margin-top:1.1rem;max-width:430px}
+            .pcs-cta{display:flex;align-items:center;gap:.8rem;padding:.75rem 1.1rem;border-radius:14px;text-decoration:none;font-family:'Nunito',sans-serif;font-weight:800;transition:transform .2s ease,box-shadow .2s ease}
+            .pcs-cta:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(98,45,43,0.22)}
+            .pcs-cta small{display:block;font-weight:600;font-size:.8rem;opacity:.85}
+            .pcs-cta-pink{background:var(--pink-dark);color:#fff}
+            .pcs-cta-yellow{background:var(--yellow);color:var(--dark-brown)}
+            .pcs-cta-brown{background:var(--dark-brown);color:#fff}
+            .pcs-cta .pcs-ico{font-size:1.3rem}
+
+            /* ── Stage states ──────────────────────────────────────────
+               Every group hidden by default; each stage lights its cast. */
+            .pcs-stage g{opacity:0;transition:opacity .55s ease,transform .65s cubic-bezier(.34,1.56,.64,1)}
+            .pcs-stage .pcs-dream{transform:translateY(6px)}
+            .pcs-stage[data-stage="1"] .pcs-dream{opacity:1;transform:none}
+            .pcs-stage .pcs-sketch path,.pcs-stage .pcs-sketch ellipse{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);transition:stroke-dashoffset 1.1s ease .15s}
+            .pcs-stage[data-stage="2"] .pcs-sketch,.pcs-stage[data-stage="3"] .pcs-sketch,.pcs-stage[data-stage="4"] .pcs-sketch,.pcs-stage[data-stage="5"] .pcs-sketch,.pcs-stage[data-stage="6"] .pcs-sketch{opacity:1}
+            .pcs-stage[data-stage="2"] .pcs-sketch path,.pcs-stage[data-stage="2"] .pcs-sketch ellipse,.pcs-stage[data-stage="3"] .pcs-sketch path,.pcs-stage[data-stage="3"] .pcs-sketch ellipse,.pcs-stage[data-stage="4"] .pcs-sketch path,.pcs-stage[data-stage="4"] .pcs-sketch ellipse,.pcs-stage[data-stage="5"] .pcs-sketch path,.pcs-stage[data-stage="5"] .pcs-sketch ellipse,.pcs-stage[data-stage="6"] .pcs-sketch path,.pcs-stage[data-stage="6"] .pcs-sketch ellipse{stroke-dashoffset:0}
+            .pcs-stage .pcs-alt{transform:translateY(10px) scale(.92)}
+            .pcs-stage[data-stage="2"] .pcs-alt{opacity:1;transform:none}
+            .pcs-stage .pcs-price{transform:rotate(-14deg);transform-origin:236px 34px}
+            .pcs-stage[data-stage="2"] .pcs-price{opacity:1;transform:rotate(0deg)}
+            .pcs-stage .pcs-approve{transform:scale(.4);transform-origin:250px 70px}
+            .pcs-stage[data-stage="3"] .pcs-approve{opacity:1;transform:scale(1)}
+            .pcs-stage .pcs-schedule{transform:translateX(26px)}
+            .pcs-stage[data-stage="4"] .pcs-schedule{opacity:1;transform:none}
+            .pcs-stage .pcs-fill *{opacity:0;transition:opacity .5s ease}
+            .pcs-stage[data-stage="5"] .pcs-fill,.pcs-stage[data-stage="6"] .pcs-fill{opacity:1}
+            .pcs-stage[data-stage="5"] .pcs-fill *,.pcs-stage[data-stage="6"] .pcs-fill *{opacity:1}
+            .pcs-stage[data-stage="5"] .pcs-fill .f1{transition-delay:.1s}
+            .pcs-stage[data-stage="5"] .pcs-fill .f2{transition-delay:.3s}
+            .pcs-stage[data-stage="5"] .pcs-fill .f3{transition-delay:.5s}
+            .pcs-stage[data-stage="5"] .pcs-fill .f4{transition-delay:.7s}
+            .pcs-stage[data-stage="5"] .pcs-fill .f5{transition-delay:.9s}
+            .pcs-stage .pcs-magic{transform:scale(.6);transform-origin:170px 150px}
+            .pcs-stage[data-stage="5"] .pcs-magic{opacity:1;transform:scale(1)}
+            .pcs-stage .pcs-box{transform:translateY(18px)}
+            .pcs-stage[data-stage="6"] .pcs-box{opacity:1;transform:none}
+
+            @media (prefers-reduced-motion: reduce){
+                .pcs-stage g,.pcs-stage .pcs-fill *,.pcs-step,.pcs-num,.pcs-rail-fill{transition:none!important}
+                .pcs-stage .pcs-sketch path,.pcs-stage .pcs-sketch ellipse{stroke-dasharray:none!important;stroke-dashoffset:0!important}
+            }
+            @media (max-width: 900px){
+                .pcs-grid{grid-template-columns:1fr;gap:1.25rem}
+                .pcs-stagewrap{top:86px;z-index:2}
+                .pcs-stagecard{padding:.75rem .9rem .6rem;max-width:340px;margin:0 auto}
+                .pcs-stagecard svg{max-height:180px}
+                .pcs-step{min-height:0;padding:1.5rem 0}
+                .pcs-num{font-size:2.3rem}
+            }
+            </style>
+
+            <div class="pcs-grid">
+                <div class="pcs-stagewrap">
+                    <div class="pcs-stagecard">
+                        <div class="pcs-stage" id="pcsStage" data-stage="1">
+                            <svg viewBox="0 0 340 290" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <!-- plate (always) -->
+                                <g style="opacity:1">
+                                    <ellipse cx="170" cy="253" rx="98" ry="11" stroke="#622D2B" stroke-width="2.5" fill="#FDFBF8"/>
+                                </g>
+                                <!-- STAGE 1: the dream — dashed cake -->
+                                <g class="pcs-dream">
+                                    <path d="M100 250 v-42 a6 6 0 0 1 6-6 h128 a6 6 0 0 1 6 6 v42" stroke="#C36239" stroke-width="2.5" stroke-dasharray="7 7" stroke-linecap="round"/>
+                                    <path d="M118 202 v-40 a6 6 0 0 1 6-6 h92 a6 6 0 0 1 6 6 v40" stroke="#C36239" stroke-width="2.5" stroke-dasharray="7 7" stroke-linecap="round"/>
+                                    <path d="M136 156 v-36 a6 6 0 0 1 6-6 h56 a6 6 0 0 1 6 6 v36" stroke="#C36239" stroke-width="2.5" stroke-dasharray="7 7" stroke-linecap="round"/>
+                                    <circle cx="170" cy="100" r="8" stroke="#EC268F" stroke-width="2.5" stroke-dasharray="5 5"/>
+                                    <path d="M258 92 l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#FFC532" opacity=".8"/>
+                                    <path d="M78 120 l2.5 6 6 2.5-6 2.5-2.5 6-2.5-6-6-2.5 6-2.5z" fill="#EC268F" opacity=".55"/>
+                                    <path d="M262 170 l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#EC268F" opacity=".4"/>
+                                    <text x="252" y="60" font-family="Fredoka One, cursive" font-size="30" fill="#C36239" opacity=".5">?</text>
+                                </g>
+                                <!-- STAGES 2-6: the confident line work -->
+                                <g class="pcs-sketch">
+                                    <path style="--len:280" d="M100 250 v-42 a6 6 0 0 1 6-6 h128 a6 6 0 0 1 6 6 v42" stroke="#622D2B" stroke-width="2.5" stroke-linecap="round"/>
+                                    <path style="--len:220" d="M118 202 v-40 a6 6 0 0 1 6-6 h92 a6 6 0 0 1 6 6 v40" stroke="#622D2B" stroke-width="2.5" stroke-linecap="round"/>
+                                    <path style="--len:160" d="M136 156 v-36 a6 6 0 0 1 6-6 h56 a6 6 0 0 1 6 6 v36" stroke="#622D2B" stroke-width="2.5" stroke-linecap="round"/>
+                                    <path style="--len:170" d="M100 216 q10 10 20 0 q10 10 20 0 q10 10 20 0 q10 10 20 0 q10 10 20 0 q10 10 20 0 q10 10 20 0" stroke="#622D2B" stroke-width="2" stroke-linecap="round"/>
+                                    <path style="--len:130" d="M118 175 q9 9 18 0 q9 9 18 0 q9 9 18 0 q9 9 18 0 q9 9 18 0 q9 9 14 0" stroke="#622D2B" stroke-width="2" stroke-linecap="round"/>
+                                    <path style="--len:90" d="M136 133 q8.5 8 17 0 q8.5 8 17 0 q8.5 8 17 0 q8.5 8 17 0" stroke="#622D2B" stroke-width="2" stroke-linecap="round"/>
+                                    <circle class="pcs-cherryline" cx="170" cy="100" r="8" stroke="#622D2B" stroke-width="2.5" fill="none"/>
+                                    <path style="--len:14" d="M170 92 q2 -8 8 -10" stroke="#622D2B" stroke-width="2" stroke-linecap="round"/>
+                                </g>
+                                <!-- STAGE 2: alternates + price tag -->
+                                <g class="pcs-alt">
+                                    <rect x="18" y="150" width="62" height="78" rx="8" stroke="#C36239" stroke-width="2" fill="#FDFBF8" transform="rotate(-7 49 189)"/>
+                                    <path d="M32 208 v-16 h34 v16 M38 192 v-13 h22 v13" stroke="#C36239" stroke-width="1.8" fill="none" transform="rotate(-7 49 189)"/>
+                                    <circle cx="49" cy="172" r="3.5" stroke="#C36239" stroke-width="1.5" transform="rotate(-7 49 189)"/>
+                                    <rect x="262" y="150" width="62" height="78" rx="8" stroke="#C36239" stroke-width="2" fill="#FDFBF8" transform="rotate(7 293 189)"/>
+                                    <path d="M274 208 v-14 h38 v14 M282 194 v-12 h22 v12 M288 182 v-9 h10 v9" stroke="#C36239" stroke-width="1.8" fill="none" transform="rotate(7 293 189)"/>
+                                </g>
+                                <g class="pcs-price">
+                                    <path d="M236 34 l14 20" stroke="#622D2B" stroke-width="1.8"/>
+                                    <rect x="236" y="52" width="62" height="36" rx="8" fill="#FFC532" stroke="#622D2B" stroke-width="2"/>
+                                    <circle cx="245" cy="61" r="3" fill="#FDFBF8" stroke="#622D2B" stroke-width="1.5"/>
+                                    <text x="272" y="76" text-anchor="middle" font-family="Fredoka One, cursive" font-size="17" fill="#622D2B">$—</text>
+                                </g>
+                                <!-- STAGE 3: approval rosette -->
+                                <g class="pcs-approve">
+                                    <path d="M242 96 l-8 26 10-6 6 10z" fill="#EC268F" opacity=".85"/>
+                                    <path d="M262 96 l8 26-10-6-6 10z" fill="#EC268F" opacity=".85"/>
+                                    <circle cx="252" cy="72" r="26" fill="#EC268F"/>
+                                    <circle cx="252" cy="72" r="20" fill="#FDFBF8"/>
+                                    <path d="M243 72 l7 7 12-14" stroke="#EC268F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                </g>
+                                <!-- STAGE 4: calendar chip + lock -->
+                                <g class="pcs-schedule">
+                                    <rect x="238" y="60" width="76" height="66" rx="10" fill="#FDFBF8" stroke="#622D2B" stroke-width="2.5"/>
+                                    <path d="M238 82 h76" stroke="#622D2B" stroke-width="2"/>
+                                    <rect x="238" y="60" width="76" height="22" rx="10" fill="#EC268F" opacity=".16"/>
+                                    <line x1="256" y1="54" x2="256" y2="68" stroke="#622D2B" stroke-width="3" stroke-linecap="round"/>
+                                    <line x1="296" y1="54" x2="296" y2="68" stroke="#622D2B" stroke-width="3" stroke-linecap="round"/>
+                                    <circle cx="256" cy="96" r="3" fill="#622D2B" opacity=".3"/>
+                                    <circle cx="272" cy="96" r="3" fill="#622D2B" opacity=".3"/>
+                                    <circle cx="288" cy="96" r="3" fill="#622D2B" opacity=".3"/>
+                                    <circle cx="304" cy="96" r="3" fill="#622D2B" opacity=".3"/>
+                                    <circle cx="256" cy="112" r="3" fill="#622D2B" opacity=".3"/>
+                                    <circle cx="272" cy="112" r="8" fill="none" stroke="#EC268F" stroke-width="2.5"/>
+                                    <circle cx="272" cy="112" r="3" fill="#EC268F"/>
+                                    <path d="M296 116 v-5 a7 7 0 0 1 14 0 v5" stroke="#FFC532" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                                    <rect x="293" y="116" width="20" height="15" rx="4" fill="#FFC532" opacity=".9"/>
+                                </g>
+                                <!-- STAGES 5-6: the real cake (fills under the line work) -->
+                                <g class="pcs-fill">
+                                    <path class="f1" d="M100 250 v-42 a6 6 0 0 1 6-6 h128 a6 6 0 0 1 6 6 v42 z" fill="#FFF3E4"/>
+                                    <path class="f2" d="M118 202 v-40 a6 6 0 0 1 6-6 h92 a6 6 0 0 1 6 6 v40 z" fill="#FFF3E4"/>
+                                    <path class="f3" d="M136 156 v-36 a6 6 0 0 1 6-6 h56 a6 6 0 0 1 6 6 v36 z" fill="#FFF3E4"/>
+                                    <path class="f1" d="M100 202 h140 v14 q-10 10 -20 0 q-10 10 -20 0 q-10 10 -20 0 q-10 10 -20 0 q-10 10 -20 0 q-10 10 -20 0 q-10 10 -20 0 z" fill="#EC268F" opacity=".82"/>
+                                    <path class="f2" d="M118 156 h104 v19 q-9 9 -18 0 q-9 9 -18 0 q-9 9 -18 0 q-9 9 -18 0 q-9 9 -18 0 q-9 9 -14 0 z" fill="#EC268F" opacity=".82"/>
+                                    <path class="f3" d="M136 114 h68 v19 q-8.5 8 -17 0 q-8.5 8 -17 0 q-8.5 8 -17 0 q-8.5 8 -17 0 z" fill="#EC268F" opacity=".82"/>
+                                    <circle class="f4" cx="115" cy="236" r="4" fill="#FFC532"/>
+                                    <circle class="f4" cx="137" cy="236" r="4" fill="#EC268F"/>
+                                    <circle class="f4" cx="159" cy="236" r="4" fill="#FFC532"/>
+                                    <circle class="f4" cx="181" cy="236" r="4" fill="#EC268F"/>
+                                    <circle class="f4" cx="203" cy="236" r="4" fill="#FFC532"/>
+                                    <circle class="f4" cx="225" cy="236" r="4" fill="#EC268F"/>
+                                    <circle class="f5" cx="170" cy="100" r="8" fill="#EC268F"/>
+                                    <circle class="f5" cx="167" cy="97" r="2.5" fill="#FDFBF8" opacity=".8"/>
+                                </g>
+                                <g class="pcs-magic">
+                                    <path d="M92 78 l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#FFC532"/>
+                                    <path d="M255 130 l2.5 6.5 6.5 2.5-6.5 2.5-2.5 6.5-2.5-6.5-6.5-2.5 6.5-2.5z" fill="#EC268F" opacity=".8"/>
+                                    <path d="M70 190 l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#EC268F" opacity=".6"/>
+                                </g>
+                                <!-- STAGE 6: boxed, ribboned, ready -->
+                                <g class="pcs-box">
+                                    <path d="M92 160 h156 v88 a6 6 0 0 1 -6 6 h-144 a6 6 0 0 1 -6-6 z" fill="#FBF0E1" opacity=".97" stroke="#622D2B" stroke-width="2.5"/>
+                                    <rect x="86" y="150" width="168" height="14" rx="5" fill="#F3E3CE" stroke="#622D2B" stroke-width="2.5"/>
+                                    <rect x="163" y="150" width="14" height="104" fill="#EC268F"/>
+                                    <path d="M170 150 c-14 -12 -26 -4 -16 4 c-8 8 8 14 16 -4z M170 150 c14 -12 26 -4 16 4 c8 8 -8 14 -16 -4z" fill="#EC268F" stroke="#D11F7E" stroke-width="1.5"/>
+                                    <text x="128" y="212" text-anchor="middle" font-family="Fredoka One, cursive" font-size="16" fill="#EC268F">MBC</text>
+                                    <line x1="48" y1="185" x2="70" y2="185" stroke="#C36239" stroke-width="2.5" stroke-linecap="round" opacity=".55"/>
+                                    <line x1="40" y1="205" x2="66" y2="205" stroke="#C36239" stroke-width="2.5" stroke-linecap="round" opacity=".4"/>
+                                    <line x1="50" y1="225" x2="68" y2="225" stroke="#C36239" stroke-width="2.5" stroke-linecap="round" opacity=".3"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="pcs-stagefoot">
+                            <span class="pcs-caption" id="pcsCaption">Step 1 of 6 — Tell Us Your Vision</span>
+                            <span class="pcs-dots" id="pcsDots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pcs-steps">
+                    <div class="pcs-rail"><div class="pcs-rail-fill" id="pcsRailFill"></div></div>
+                    <article class="pcs-step is-active" data-step="1">
+                        <span class="pcs-num">01</span>
+                        <h3>Tell Us Your Vision</h3>
+                        <p>Reach out by phone, email, or our website. Share your event date, guest count, theme ideas, and any inspiration photos. Want to get started right away? Try our <a href="order-form#ai-sketch">Sketch Your Cake AI</a> to visualize your dream cake, or <a href="corporate#cookiePreviewSection">see how your logo looks on a cookie</a> — before you even contact us.</p>
+                        <div class="pcs-ctas">
+                            <a href="order-form" class="pcs-cta pcs-cta-pink">
+                                <span class="pcs-ico">🎂</span>
+                                <span>Get a Quote <small>Birthdays, weddings &amp; celebrations</small></span>
+                            </a>
+                            <a href="corporate-order" class="pcs-cta pcs-cta-yellow">
+                                <span class="pcs-ico">🏢</span>
+                                <span>Corporate Quote <small>Company events &amp; branded treats</small></span>
+                            </a>
+                            <a href="contact" class="pcs-cta pcs-cta-brown" onclick="if(typeof openChatbot==='function'){event.preventDefault();openChatbot();}">
+                                <span class="pcs-ico">💬</span>
+                                <span>Quick Question? <small>Chat with us or send a message</small></span>
+                            </a>
+                        </div>
+                    </article>
+                    <article class="pcs-step" data-step="2">
+                        <span class="pcs-num">02</span>
+                        <h3>Custom Sketches &amp; Pricing</h3>
+                        <p>Yana creates multiple design options with pricing — typically within 24–48 hours. No commitment required. This is how every project starts.</p>
+                    </article>
+                    <article class="pcs-step" data-step="3">
+                        <span class="pcs-num">03</span>
+                        <h3>Revisions &amp; Approval</h3>
+                        <p>Review the sketches, pick your favorites, request changes. We go back and forth until the design is exactly what you want.</p>
+                    </article>
+                    <article class="pcs-step" data-step="4">
+                        <span class="pcs-num">04</span>
+                        <h3>Payment &amp; Scheduling</h3>
+                        <p>Once you approve, we send a simple invoice. Pay by credit/debit card, PayPal, or Venmo. Your spot on our calendar is locked in.</p>
+                    </article>
+                    <article class="pcs-step" data-step="5">
+                        <span class="pcs-num">05</span>
+                        <h3>Handcrafted Creation</h3>
+                        <p>Every item is made from scratch by hand using the freshest ingredients. No shortcuts, no templates — just Yana's artistry and attention to detail.</p>
+                    </article>
+                    <article class="pcs-step" data-step="6">
+                        <span class="pcs-num">06</span>
+                        <h3>Pickup or Delivery</h3>
+                        <p>Pick up at our Daly City kitchen (9 AM–6 PM), or we deliver anywhere in the San Francisco Bay Area.</p>
+                    </article>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 2rem; font-weight: 600; color: var(--dark-brown); font-size: 1.05rem;">We take pride in accommodating budgetary concerns — flexible solutions for every budget. Learn more about <a href="blog-how-to-order-custom-birthday-cake" style="color: var(--pink);">how to order a custom cake</a>.</p>
+        </div>
 
         <script>
-        (function () {
-            var v = document.getElementById('mkFilm'), now = document.getElementById('mkNow'), bar = document.getElementById('mkBar');
-            if (!v || !now) return;
-            var CALM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-            // start, end, line — the seconds match the cuts in the film
-            var BEATS = [
-                [0.00,  3.64, 'Tell us the day.'],
-                [3.64,  7.56, 'We draw the options.'],
-                [7.56, 10.78, 'You pick the one.'],
-                [10.78,13.44, 'Your date is held.'],
-                [13.44,20.58, 'Then we make it. By hand.'],
-                [20.58,24.08, 'Wait \u2014 that is cake.'],
-                [24.08,28.00, 'And it comes to you.']
-            ];
-            var bars = bar ? [].slice.call(bar.querySelectorAll('b')) : [];
-            var at = -1;
+        (function() {
+            var stage = document.getElementById('pcsStage');
+            var steps = Array.prototype.slice.call(document.querySelectorAll('.pcs-step'));
+            var fill = document.getElementById('pcsRailFill');
+            var caption = document.getElementById('pcsCaption');
+            var dots = document.getElementById('pcsDots');
+            if (!stage || !steps.length) return;
+            var titles = ['Tell Us Your Vision', 'Custom Sketches & Pricing', 'Revisions & Approval', 'Payment & Scheduling', 'Handcrafted Creation', 'Pickup or Delivery'];
+            var current = 1;
 
-            function tick() {
-                var t = v.currentTime || 0, i = 0;
-                for (var k = 0; k < BEATS.length; k++) if (t >= BEATS[k][0]) i = k;
-                for (var b = 0; b < bars.length; b++)
-                    bars[b].style.width = (b < i ? 100 : b > i ? 0 : Math.min(100, ((t - BEATS[i][0]) / (BEATS[i][1] - BEATS[i][0])) * 100)).toFixed(1) + '%';
-                if (i !== at) {
-                    at = i;
-                    if (CALM) { now.textContent = BEATS[i][2]; }
-                    else {
-                        now.classList.add('is-out');
-                        setTimeout(function () { now.textContent = BEATS[at][2]; now.classList.remove('is-out'); }, 240);
-                    }
-                }
+            function setStage(n) {
+                if (n === current) return;
+                current = n;
+                stage.setAttribute('data-stage', String(n));
+                steps.forEach(function(s, i) { s.classList.toggle('is-active', i === n - 1); });
+                if (fill) fill.style.height = (((n - 1) / (steps.length - 1)) * 100) + '%';
+                if (caption) caption.textContent = 'Step ' + n + ' of ' + steps.length + ' — ' + titles[n - 1];
+                if (dots) Array.prototype.forEach.call(dots.children, function(d, i) { d.classList.toggle('on', i < n); });
             }
-            v.addEventListener('timeupdate', tick);
-            // the film only runs while it is on screen
-            if ('IntersectionObserver' in window) {
-                new IntersectionObserver(function (es) {
-                    if (es[0].isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
-                    else v.pause();
-                }, { threshold: .2 }).observe(v);
-            }
-            tick();
+
+            var io = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) setStage(steps.indexOf(entry.target) + 1);
+                });
+            }, { rootMargin: '-38% 0px -42% 0px' });
+            steps.forEach(function(s) { io.observe(s); });
         })();
         </script>
 
