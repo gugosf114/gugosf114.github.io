@@ -602,14 +602,8 @@
                 .pn-rail{right:.7rem}
             }
             @media (prefers-reduced-motion:reduce){
-                .pn-track{height:auto}
-                .pn-pin{position:static;height:auto;display:block;padding:3rem 0}
-                .pn-panel{position:static;display:block;padding:2rem 1.25rem}
-                .pn-mask{clip-path:none !important}
-                .pn-shot{position:static;width:min(420px,86vw);margin:0 auto 1.5rem;transform:none !important}
-                .pn-words{position:static;max-width:none}
-                .pn-ghost{display:none}.pn-hint{display:none}
-                .pn-title span,.pn-body span{transform:none !important;opacity:1 !important}
+                .pn-shot,.pn-ghost,.pn .pn-mask img{transition:none !important}
+                .pn-eyebrow i{transition:none !important}
             }
             </style>
 
@@ -685,7 +679,7 @@
             var rail = [].slice.call(track.querySelectorAll('.pn-rail b'));
             var hint = document.getElementById('pnHint');
             if (!panels.length) return;
-            if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            var CALM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
             var P = panels.map(function (el) {
                 return { el: el,
@@ -723,29 +717,36 @@
 
                     // the photograph is uncovered by a mask, and drifts
                     var mIn = eo(cl((inn - .52) / .48)), mOut = es(cl(out / .40));
-                    p.mask.style.clipPath = 'inset(' + ((1 - mIn) * 100).toFixed(2) + '% 0 ' + (mOut * 100).toFixed(2) + '% 0)';
-                    p.shot.style.transform = 'translate3d(0,' + lp(4, -4, es(cl((d + 1) / 2))).toFixed(2) + 'vh,0) scale(' + lp(1.06, 0.98, es(cl((d + 1) / 2))).toFixed(4) + ')';
-                    p.img.style.transform = 'translate3d(0,' + lp(-7, 7, es(cl((d + 1) / 2))).toFixed(2) + '%' + ',0) scale(1.16)';
+                    if (CALM) {
+                        var here = d > -.5 && d <= .5;
+                        p.mask.style.clipPath = here ? 'inset(0 0 0 0)' : 'inset(0 0 100% 0)';
+                        p.shot.style.transform = 'none';
+                        p.img.style.transform = 'scale(1.02)';
+                    } else {
+                        p.mask.style.clipPath = 'inset(' + ((1 - mIn) * 100).toFixed(2) + '% 0 ' + (mOut * 100).toFixed(2) + '% 0)';
+                        p.shot.style.transform = 'translate3d(0,' + lp(4, -4, es(cl((d + 1) / 2))).toFixed(2) + 'vh,0) scale(' + lp(1.06, 0.98, es(cl((d + 1) / 2))).toFixed(4) + ')';
+                        p.img.style.transform = 'translate3d(0,' + lp(-7, 7, es(cl((d + 1) / 2))).toFixed(2) + '%' + ',0) scale(1.16)';
+                    }
 
                     // the numeral behind, on its own slower rail
-                    p.ghost.style.transform = 'translate3d(' + lp(16, -16, cl((d + 1) / 2)).toFixed(2) + 'vw,0,0)';
-                    p.ghost.style.opacity = (eo(cl((inn - .5) / .5)) * (1 - eo(cl(out / .30)))).toFixed(3);
+                    p.ghost.style.transform = CALM ? 'none' : 'translate3d(' + lp(16, -16, cl((d + 1) / 2)).toFixed(2) + 'vw,0,0)';
+                    p.ghost.style.opacity = CALM ? ((d > -.5 && d <= .5) ? 1 : 0) : (eo(cl((inn - .5) / .5)) * (1 - eo(cl(out / .30)))).toFixed(3);
 
                     // the words are uncovered line by line, each a beat behind
                     var w1 = eo(cl((inn - .58) / .42)), w2 = eo(cl((inn - .64) / .36)), w3 = eo(cl((inn - .70) / .30));
                     var go = eo(cl(out / .22));
-                    p.line.style.transform = 'scaleX(' + (w1 * (1 - go)).toFixed(3) + ')';
-                    p.eye.style.opacity = (w1 * (1 - go)).toFixed(3);
-                    p.title.style.transform = 'translate3d(0,' + lp(112, 0, w2).toFixed(1) + '%' + ',0)';
-                    p.title.style.opacity = (1 - go).toFixed(3);
-                    p.body.style.transform = 'translate3d(0,' + lp(112, 0, w3).toFixed(1) + '%' + ',0)';
-                    p.body.style.opacity = ((1 - go) * 0.98).toFixed(3);
+                    p.line.style.transform = CALM ? ((d > -.5 && d <= .5) ? 'scaleX(1)' : 'scaleX(0)') : 'scaleX(' + (w1 * (1 - go)).toFixed(3) + ')';
+                    p.eye.style.opacity = CALM ? ((d > -.5 && d <= .5) ? 1 : 0) : (w1 * (1 - go)).toFixed(3);
+                    p.title.style.transform = CALM ? 'none' : 'translate3d(0,' + lp(112, 0, w2).toFixed(1) + '%' + ',0)';
+                    p.title.style.opacity = CALM ? ((d > -.5 && d <= .5) ? 1 : 0) : (1 - go).toFixed(3);
+                    p.body.style.transform = CALM ? 'none' : 'translate3d(0,' + lp(112, 0, w3).toFixed(1) + '%' + ',0)';
+                    p.body.style.opacity = CALM ? ((d > -.5 && d <= .5) ? 1 : 0) : ((1 - go) * 0.98).toFixed(3);
                 }
                 for (var k = 0; k < rail.length; k++) rail[k].style.height = (cl(f - k) * 100).toFixed(1) + '%';
                 if (hint) hint.style.opacity = (1 - cl(t * 10)).toFixed(2);
             }
             function frame() {
-                cur += (want - cur) * .16;
+                cur += (want - cur) * (CALM ? 1 : .16);
                 if (Math.abs(want - cur) < .00025) cur = want;
                 draw(cur);
                 if (cur !== want) requestAnimationFrame(frame); else running = false;
