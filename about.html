@@ -591,34 +591,25 @@
             .pcs-cta-brown{background:var(--dark-brown);color:#fff}
             .pcs-cta .pcs-ico{font-size:1.3rem}
 
-            /* ── Stage states ──────────────────────────────────────────
-               Every group hidden by default; each stage lights its cast. */
-            .pcs-stage g{opacity:0;transition:opacity .55s ease,transform .65s cubic-bezier(.34,1.56,.64,1)}
-            .pcs-stage .pcs-dream{transform:translateY(6px)}
-            .pcs-stage[data-stage="1"] .pcs-dream{opacity:1;transform:none}
-            .pcs-stage .pcs-sketch path,.pcs-stage .pcs-sketch ellipse{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);transition:stroke-dashoffset 1.1s ease .15s}
-            .pcs-stage[data-stage="2"] .pcs-sketch,.pcs-stage[data-stage="3"] .pcs-sketch,.pcs-stage[data-stage="4"] .pcs-sketch,.pcs-stage[data-stage="5"] .pcs-sketch,.pcs-stage[data-stage="6"] .pcs-sketch{opacity:1}
-            .pcs-stage[data-stage="2"] .pcs-sketch path,.pcs-stage[data-stage="2"] .pcs-sketch ellipse,.pcs-stage[data-stage="3"] .pcs-sketch path,.pcs-stage[data-stage="3"] .pcs-sketch ellipse,.pcs-stage[data-stage="4"] .pcs-sketch path,.pcs-stage[data-stage="4"] .pcs-sketch ellipse,.pcs-stage[data-stage="5"] .pcs-sketch path,.pcs-stage[data-stage="5"] .pcs-sketch ellipse,.pcs-stage[data-stage="6"] .pcs-sketch path,.pcs-stage[data-stage="6"] .pcs-sketch ellipse{stroke-dashoffset:0}
-            .pcs-stage .pcs-alt{transform:translateY(10px) scale(.92)}
-            .pcs-stage[data-stage="2"] .pcs-alt{opacity:1;transform:none}
-            .pcs-stage .pcs-price{transform:rotate(-14deg);transform-origin:236px 34px}
-            .pcs-stage[data-stage="2"] .pcs-price{opacity:1;transform:rotate(0deg)}
-            .pcs-stage .pcs-approve{transform:scale(.4);transform-origin:250px 70px}
-            .pcs-stage[data-stage="3"] .pcs-approve{opacity:1;transform:scale(1)}
-            .pcs-stage .pcs-schedule{transform:translateX(26px)}
-            .pcs-stage[data-stage="4"] .pcs-schedule{opacity:1;transform:none}
-            .pcs-stage .pcs-fill *{opacity:0;transition:opacity .5s ease}
-            .pcs-stage[data-stage="5"] .pcs-fill,.pcs-stage[data-stage="6"] .pcs-fill{opacity:1}
-            .pcs-stage[data-stage="5"] .pcs-fill *,.pcs-stage[data-stage="6"] .pcs-fill *{opacity:1}
-            .pcs-stage[data-stage="5"] .pcs-fill .f1{transition-delay:.1s}
-            .pcs-stage[data-stage="5"] .pcs-fill .f2{transition-delay:.3s}
-            .pcs-stage[data-stage="5"] .pcs-fill .f3{transition-delay:.5s}
-            .pcs-stage[data-stage="5"] .pcs-fill .f4{transition-delay:.7s}
-            .pcs-stage[data-stage="5"] .pcs-fill .f5{transition-delay:.9s}
-            .pcs-stage .pcs-magic{transform:scale(.6);transform-origin:170px 150px}
-            .pcs-stage[data-stage="5"] .pcs-magic{opacity:1;transform:scale(1)}
-            .pcs-stage .pcs-box{transform:translateY(18px)}
-            .pcs-stage[data-stage="6"] .pcs-box{opacity:1;transform:none}
+            /* ── The stage ─────────────────────────────────────────────
+               One cake, drawn in code, scrubbed by the scroll. Dark plate
+               so the sugar and the gold carry their own light. */
+            .pcs-stagecard{background:linear-gradient(168deg,#2A1E20 0%,#191113 58%,#120C0E 100%) !important;
+                padding:0 !important;border-radius:22px !important;overflow:hidden;
+                box-shadow:0 38px 70px -40px rgba(0,0,0,.85),0 0 0 1px rgba(247,230,210,.09) inset !important}
+            #pcsArt{display:block;width:100%;height:auto}
+            #pcsArt .wire{stroke:#F2DCC6;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;opacity:.7}
+            .pcs-stagefoot{margin:0 !important;padding:.15rem 1.1rem 1.05rem;align-items:flex-end}
+            .pcs-caption{color:#F7EFE4 !important;font-size:.9rem !important;font-weight:800;letter-spacing:0}
+            .pcs-dots i{background:rgba(247,239,228,.22) !important}
+            .pcs-dots i.on{background:var(--yellow) !important}
+            .pcs-dots i.live{background:var(--pink) !important;transform:scale(1.35)}
+            @media (max-width:900px){
+                .pcs-stagecard svg{max-height:none !important}
+                .pcs-stagecard{max-width:330px !important;padding:0 !important}
+                .pcs-stagefoot{padding:.1rem .85rem .9rem}
+                .pcs-caption{font-size:.82rem !important}
+            }
 
             @media (prefers-reduced-motion: reduce){
                 .pcs-stage g,.pcs-stage .pcs-fill *,.pcs-step,.pcs-num,.pcs-rail-fill{transition:none!important}
@@ -637,106 +628,281 @@
             <div class="pcs-grid">
                 <div class="pcs-stagewrap">
                     <div class="pcs-stagecard">
-                        <div class="pcs-stage" id="pcsStage" data-stage="1">
-                            <svg viewBox="0 0 340 290" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <!-- plate (always) -->
-                                <g style="opacity:1">
-                                    <ellipse cx="170" cy="253" rx="98" ry="11" stroke="#622D2B" stroke-width="2.5" fill="#FDFBF8"/>
-                                </g>
-                                <!-- STAGE 1: the dream — dashed cake -->
-                                <g class="pcs-dream">
-                                    <path d="M100 250 v-42 a6 6 0 0 1 6-6 h128 a6 6 0 0 1 6 6 v42" stroke="#C36239" stroke-width="2.5" stroke-dasharray="7 7" stroke-linecap="round"/>
-                                    <path d="M118 202 v-40 a6 6 0 0 1 6-6 h92 a6 6 0 0 1 6 6 v40" stroke="#C36239" stroke-width="2.5" stroke-dasharray="7 7" stroke-linecap="round"/>
-                                    <path d="M136 156 v-36 a6 6 0 0 1 6-6 h56 a6 6 0 0 1 6 6 v36" stroke="#C36239" stroke-width="2.5" stroke-dasharray="7 7" stroke-linecap="round"/>
-                                    <circle cx="170" cy="100" r="8" stroke="#EC268F" stroke-width="2.5" stroke-dasharray="5 5"/>
-                                    <path d="M258 92 l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#FFC532" opacity=".8"/>
-                                    <path d="M78 120 l2.5 6 6 2.5-6 2.5-2.5 6-2.5-6-6-2.5 6-2.5z" fill="#EC268F" opacity=".55"/>
-                                    <path d="M262 170 l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#EC268F" opacity=".4"/>
-                                    <text x="252" y="60" font-family="Fredoka One, cursive" font-size="30" fill="#C36239" opacity=".5">?</text>
-                                </g>
-                                <!-- STAGES 2-6: the confident line work -->
-                                <g class="pcs-sketch">
-                                    <path style="--len:280" d="M100 250 v-42 a6 6 0 0 1 6-6 h128 a6 6 0 0 1 6 6 v42" stroke="#622D2B" stroke-width="2.5" stroke-linecap="round"/>
-                                    <path style="--len:220" d="M118 202 v-40 a6 6 0 0 1 6-6 h92 a6 6 0 0 1 6 6 v40" stroke="#622D2B" stroke-width="2.5" stroke-linecap="round"/>
-                                    <path style="--len:160" d="M136 156 v-36 a6 6 0 0 1 6-6 h56 a6 6 0 0 1 6 6 v36" stroke="#622D2B" stroke-width="2.5" stroke-linecap="round"/>
-                                    <path style="--len:170" d="M100 216 q10 10 20 0 q10 10 20 0 q10 10 20 0 q10 10 20 0 q10 10 20 0 q10 10 20 0 q10 10 20 0" stroke="#622D2B" stroke-width="2" stroke-linecap="round"/>
-                                    <path style="--len:130" d="M118 175 q9 9 18 0 q9 9 18 0 q9 9 18 0 q9 9 18 0 q9 9 18 0 q9 9 14 0" stroke="#622D2B" stroke-width="2" stroke-linecap="round"/>
-                                    <path style="--len:90" d="M136 133 q8.5 8 17 0 q8.5 8 17 0 q8.5 8 17 0 q8.5 8 17 0" stroke="#622D2B" stroke-width="2" stroke-linecap="round"/>
-                                    <circle class="pcs-cherryline" cx="170" cy="100" r="8" stroke="#622D2B" stroke-width="2.5" fill="none"/>
-                                    <path style="--len:14" d="M170 92 q2 -8 8 -10" stroke="#622D2B" stroke-width="2" stroke-linecap="round"/>
-                                </g>
-                                <!-- STAGE 2: alternates + price tag -->
-                                <g class="pcs-alt">
-                                    <rect x="18" y="150" width="62" height="78" rx="8" stroke="#C36239" stroke-width="2" fill="#FDFBF8" transform="rotate(-7 49 189)"/>
-                                    <path d="M32 208 v-16 h34 v16 M38 192 v-13 h22 v13" stroke="#C36239" stroke-width="1.8" fill="none" transform="rotate(-7 49 189)"/>
-                                    <circle cx="49" cy="172" r="3.5" stroke="#C36239" stroke-width="1.5" transform="rotate(-7 49 189)"/>
-                                    <rect x="262" y="150" width="62" height="78" rx="8" stroke="#C36239" stroke-width="2" fill="#FDFBF8" transform="rotate(7 293 189)"/>
-                                    <path d="M274 208 v-14 h38 v14 M282 194 v-12 h22 v12 M288 182 v-9 h10 v9" stroke="#C36239" stroke-width="1.8" fill="none" transform="rotate(7 293 189)"/>
-                                </g>
-                                <g class="pcs-price">
-                                    <path d="M236 34 l14 20" stroke="#622D2B" stroke-width="1.8"/>
-                                    <rect x="236" y="52" width="62" height="36" rx="8" fill="#FFC532" stroke="#622D2B" stroke-width="2"/>
-                                    <circle cx="245" cy="61" r="3" fill="#FDFBF8" stroke="#622D2B" stroke-width="1.5"/>
-                                    <text x="272" y="76" text-anchor="middle" font-family="Fredoka One, cursive" font-size="17" fill="#622D2B">$—</text>
-                                </g>
-                                <!-- STAGE 3: approval rosette -->
-                                <g class="pcs-approve">
-                                    <path d="M242 96 l-8 26 10-6 6 10z" fill="#EC268F" opacity=".85"/>
-                                    <path d="M262 96 l8 26-10-6-6 10z" fill="#EC268F" opacity=".85"/>
-                                    <circle cx="252" cy="72" r="26" fill="#EC268F"/>
-                                    <circle cx="252" cy="72" r="20" fill="#FDFBF8"/>
-                                    <path d="M243 72 l7 7 12-14" stroke="#EC268F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                                </g>
-                                <!-- STAGE 4: calendar chip + lock -->
-                                <g class="pcs-schedule">
-                                    <rect x="238" y="60" width="76" height="66" rx="10" fill="#FDFBF8" stroke="#622D2B" stroke-width="2.5"/>
-                                    <path d="M238 82 h76" stroke="#622D2B" stroke-width="2"/>
-                                    <rect x="238" y="60" width="76" height="22" rx="10" fill="#EC268F" opacity=".16"/>
-                                    <line x1="256" y1="54" x2="256" y2="68" stroke="#622D2B" stroke-width="3" stroke-linecap="round"/>
-                                    <line x1="296" y1="54" x2="296" y2="68" stroke="#622D2B" stroke-width="3" stroke-linecap="round"/>
-                                    <circle cx="256" cy="96" r="3" fill="#622D2B" opacity=".3"/>
-                                    <circle cx="272" cy="96" r="3" fill="#622D2B" opacity=".3"/>
-                                    <circle cx="288" cy="96" r="3" fill="#622D2B" opacity=".3"/>
-                                    <circle cx="304" cy="96" r="3" fill="#622D2B" opacity=".3"/>
-                                    <circle cx="256" cy="112" r="3" fill="#622D2B" opacity=".3"/>
-                                    <circle cx="272" cy="112" r="8" fill="none" stroke="#EC268F" stroke-width="2.5"/>
-                                    <circle cx="272" cy="112" r="3" fill="#EC268F"/>
-                                    <path d="M296 116 v-5 a7 7 0 0 1 14 0 v5" stroke="#FFC532" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                                    <rect x="293" y="116" width="20" height="15" rx="4" fill="#FFC532" opacity=".9"/>
-                                </g>
-                                <!-- STAGES 5-6: the real cake (fills under the line work) -->
-                                <g class="pcs-fill">
-                                    <path class="f1" d="M100 250 v-42 a6 6 0 0 1 6-6 h128 a6 6 0 0 1 6 6 v42 z" fill="#FFF3E4"/>
-                                    <path class="f2" d="M118 202 v-40 a6 6 0 0 1 6-6 h92 a6 6 0 0 1 6 6 v40 z" fill="#FFF3E4"/>
-                                    <path class="f3" d="M136 156 v-36 a6 6 0 0 1 6-6 h56 a6 6 0 0 1 6 6 v36 z" fill="#FFF3E4"/>
-                                    <path class="f1" d="M100 202 h140 v14 q-10 10 -20 0 q-10 10 -20 0 q-10 10 -20 0 q-10 10 -20 0 q-10 10 -20 0 q-10 10 -20 0 q-10 10 -20 0 z" fill="#EC268F" opacity=".82"/>
-                                    <path class="f2" d="M118 156 h104 v19 q-9 9 -18 0 q-9 9 -18 0 q-9 9 -18 0 q-9 9 -18 0 q-9 9 -18 0 q-9 9 -14 0 z" fill="#EC268F" opacity=".82"/>
-                                    <path class="f3" d="M136 114 h68 v19 q-8.5 8 -17 0 q-8.5 8 -17 0 q-8.5 8 -17 0 q-8.5 8 -17 0 z" fill="#EC268F" opacity=".82"/>
-                                    <circle class="f4" cx="115" cy="236" r="4" fill="#FFC532"/>
-                                    <circle class="f4" cx="137" cy="236" r="4" fill="#EC268F"/>
-                                    <circle class="f4" cx="159" cy="236" r="4" fill="#FFC532"/>
-                                    <circle class="f4" cx="181" cy="236" r="4" fill="#EC268F"/>
-                                    <circle class="f4" cx="203" cy="236" r="4" fill="#FFC532"/>
-                                    <circle class="f4" cx="225" cy="236" r="4" fill="#EC268F"/>
-                                    <circle class="f5" cx="170" cy="100" r="8" fill="#EC268F"/>
-                                    <circle class="f5" cx="167" cy="97" r="2.5" fill="#FDFBF8" opacity=".8"/>
-                                </g>
-                                <g class="pcs-magic">
-                                    <path d="M92 78 l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#FFC532"/>
-                                    <path d="M255 130 l2.5 6.5 6.5 2.5-6.5 2.5-2.5 6.5-2.5-6.5-6.5-2.5 6.5-2.5z" fill="#EC268F" opacity=".8"/>
-                                    <path d="M70 190 l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#EC268F" opacity=".6"/>
-                                </g>
-                                <!-- STAGE 6: boxed, ribboned, ready -->
-                                <g class="pcs-box">
-                                    <path d="M92 160 h156 v88 a6 6 0 0 1 -6 6 h-144 a6 6 0 0 1 -6-6 z" fill="#FBF0E1" opacity=".97" stroke="#622D2B" stroke-width="2.5"/>
-                                    <rect x="86" y="150" width="168" height="14" rx="5" fill="#F3E3CE" stroke="#622D2B" stroke-width="2.5"/>
-                                    <rect x="163" y="150" width="14" height="104" fill="#EC268F"/>
-                                    <path d="M170 150 c-14 -12 -26 -4 -16 4 c-8 8 8 14 16 -4z M170 150 c14 -12 26 -4 16 4 c8 8 -8 14 -16 -4z" fill="#EC268F" stroke="#D11F7E" stroke-width="1.5"/>
-                                    <text x="128" y="212" text-anchor="middle" font-family="Fredoka One, cursive" font-size="16" fill="#EC268F">MBC</text>
-                                    <line x1="48" y1="185" x2="70" y2="185" stroke="#C36239" stroke-width="2.5" stroke-linecap="round" opacity=".55"/>
-                                    <line x1="40" y1="205" x2="66" y2="205" stroke="#C36239" stroke-width="2.5" stroke-linecap="round" opacity=".4"/>
-                                    <line x1="50" y1="225" x2="68" y2="225" stroke="#C36239" stroke-width="2.5" stroke-linecap="round" opacity=".3"/>
-                                </g>
+                        <div class="pcs-stage" id="pcsStage">
+                            <svg id="pcsArt" viewBox="0 104 420 356" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A custom cake taking shape, from first idea to boxed and ready">
+                            <defs>
+                            <linearGradient id="pIvory" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0" stop-color="#FFFEFB"/><stop offset=".34" stop-color="#F7EADC"/>
+                            <stop offset=".72" stop-color="#E7CDB6"/><stop offset="1" stop-color="#CFAE95"/></linearGradient>
+                            <linearGradient id="pBlush" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0" stop-color="#FDEFF4"/><stop offset=".34" stop-color="#F6D3E0"/>
+                            <stop offset=".72" stop-color="#E7A9C1"/><stop offset="1" stop-color="#CE83A2"/></linearGradient>
+                            <linearGradient id="pGold" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0" stop-color="#FBE9B4"/><stop offset=".3" stop-color="#F0C75C"/>
+                            <stop offset=".62" stop-color="#D79F22"/><stop offset="1" stop-color="#A97913"/></linearGradient>
+                            <linearGradient id="pBoard" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0" stop-color="#7A5241"/><stop offset=".5" stop-color="#513227"/><stop offset="1" stop-color="#31201A"/></linearGradient>
+                            <linearGradient id="pTop" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0" stop-color="#FFFFFF" stop-opacity=".95"/><stop offset="1" stop-color="#EBD7C4" stop-opacity=".9"/></linearGradient>
+                            <radialGradient id="pGlow" cx=".5" cy=".46" r=".62">
+                            <stop offset="0" stop-color="#FFD9A0" stop-opacity=".30"/><stop offset=".55" stop-color="#C77A4E" stop-opacity=".10"/>
+                            <stop offset="1" stop-color="#000000" stop-opacity="0"/></radialGradient>
+                            <radialGradient id="pFloor" cx=".5" cy=".5" r=".5">
+                            <stop offset="0" stop-color="#000000" stop-opacity=".62"/><stop offset="1" stop-color="#000000" stop-opacity="0"/></radialGradient>
+                            <linearGradient id="pRib" gradientUnits="userSpaceOnUse" x1="150" y1="0" x2="272" y2="0">
+                            <stop offset="0" stop-color="#C98F18"/><stop offset=".26" stop-color="#F3CE66"/>
+                            <stop offset=".58" stop-color="#E0AC30"/><stop offset="1" stop-color="#B9820F"/></linearGradient>
+                            <linearGradient id="pRibH" gradientUnits="userSpaceOnUse" x1="0" y1="300" x2="0" y2="360">
+                            <stop offset="0" stop-color="#F3CE66"/><stop offset=".5" stop-color="#DFA92C"/><stop offset="1" stop-color="#B9820F"/></linearGradient>
+                            <linearGradient id="pSheen" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".55"/>
+                            <stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+                            <clipPath id="pRise"><rect id="pRiseRect" x="0" y="420" width="420" height="480"/></clipPath>
+                            <clipPath id="pCakeClip">
+                            <path d="M94.0 308.0 L94.0 400.0 A116.0 16.0 0 0 0 326.0 400.0 L326.0 308.0 A116.0 16.0 0 0 1 94.0 308.0 Z"/>
+                            <path d="M124.0 218.0 L124.0 308.0 A86.0 12.0 0 0 0 296.0 308.0 L296.0 218.0 A86.0 12.0 0 0 1 124.0 218.0 Z"/>
+                            <path d="M152.0 146.0 L152.0 218.0 A58.0 9.0 0 0 0 268.0 218.0 L268.0 146.0 A58.0 9.0 0 0 1 152.0 146.0 Z"/>
+                            </clipPath>
+                            </defs>
+                            
+                            <g id="pStage">
+                            <ellipse id="pGlowE" cx="210" cy="272" rx="230" ry="215" fill="url(#pGlow)" opacity="0"/>
+                            <ellipse id="pFloorE" cx="210" cy="418" rx="165" ry="30" fill="url(#pFloor)" opacity="0"/>
+                            <g id="pDust">
+                            <circle class="pd" r="0.90" cx="251.4" cy="272.0" data-x0="251.4" data-y0="272.0" data-x1="326.0" data-y1="308.0" data-d="0.000" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.22" cx="175.0" cy="299.6" data-x0="175.0" data-y0="299.6" data-x1="244.5" data-y1="229.0" data-d="0.067" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.54" cx="214.6" cy="227.0" data-x0="214.6" data-y0="227.0" data-x1="170.7" data-y1="152.6" data-d="0.133" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.86" cx="244.6" cy="310.8" data-x0="244.6" data-y0="310.8" data-x1="324.4" data-y1="310.6" data-d="0.200" fill="#FFE6C4"/>
+                            <circle class="pd" r="2.18" cx="150.1" cy="262.9" data-x0="150.1" data-y0="262.9" data-x1="231.1" data-y1="229.6" data-d="0.267" fill="#FFE6C4"/>
+                            <circle class="pd" r="0.90" cx="264.5" cy="242.2" data-x0="264.5" data-y0="242.2" data-x1="164.2" data-y1="151.5" data-d="0.333" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.22" cx="192.3" cy="328.5" data-x0="192.3" data-y0="328.5" data-x1="319.7" data-y1="313.2" data-d="0.400" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.54" cx="177.1" cy="217.6" data-x0="177.1" data-y0="217.6" data-x1="217.1" data-y1="230.0" data-d="0.467" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.86" cx="279.9" cy="294.0" data-x0="279.9" data-y0="294.0" data-x1="159.0" data-y1="150.3" data-d="0.533" fill="#FFE6C4"/>
+                            <circle class="pd" r="2.18" cx="138.4" cy="297.4" data-x0="138.4" data-y0="297.4" data-x1="312.0" data-y1="315.6" data-d="0.600" fill="#FFE6C4"/>
+                            <circle class="pd" r="0.90" cx="244.1" cy="209.4" data-x0="244.1" data-y0="209.4" data-x1="202.9" data-y1="230.0" data-d="0.667" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.22" cx="234.9" cy="340.2" data-x0="234.9" data-y0="340.2" data-x1="155.1" data-y1="148.9" data-d="0.733" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.54" cx="135.7" cy="235.0" data-x0="135.7" data-y0="235.0" data-x1="301.5" data-y1="317.8" data-d="0.800" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.86" cx="296.4" cy="255.7" data-x0="296.4" data-y0="255.7" data-x1="188.9" data-y1="229.6" data-d="0.867" fill="#FFE6C4"/>
+                            <circle class="pd" r="2.18" cx="157.7" cy="336.0" data-x0="157.7" data-y0="336.0" data-x1="152.8" data-y1="147.5" data-d="0.933" fill="#FFE6C4"/>
+                            <circle class="pd" r="0.90" cx="198.0" cy="192.3" data-x0="198.0" data-y0="192.3" data-x1="288.6" data-y1="319.8" data-d="1.000" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.22" cx="283.4" cy="325.2" data-x0="283.4" data-y0="325.2" data-x1="175.5" data-y1="229.0" data-d="0.000" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.54" cx="111.8" cy="275.5" data-x0="111.8" data-y0="275.5" data-x1="152.0" data-y1="146.0" data-d="0.067" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.86" cx="281.3" cy="210.9" data-x0="281.3" data-y0="210.9" data-x1="273.4" data-y1="321.4" data-d="0.133" fill="#FFE6C4"/>
+                            <circle class="pd" r="2.18" cx="205.2" cy="360.4" data-x0="205.2" data-y0="360.4" data-x1="163.0" data-y1="228.0" data-d="0.200" fill="#FFE6C4"/>
+                            <circle class="pd" r="0.90" cx="142.6" cy="202.6" data-x0="142.6" data-y0="202.6" data-x1="268.0" data-y1="146.0" data-d="0.267" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.22" cx="316.4" cy="284.3" data-x0="316.4" data-y0="284.3" data-x1="256.6" data-y1="322.7" data-d="0.333" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.54" cx="120.1" cy="325.8" data-x0="120.1" data-y0="325.8" data-x1="151.8" data-y1="226.8" data-d="0.400" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.86" cx="234.5" cy="178.3" data-x0="234.5" data-y0="178.3" data-x1="267.2" data-y1="147.5" data-d="0.467" fill="#FFE6C4"/>
+                            <circle class="pd" r="2.18" cx="266.6" cy="356.9" data-x0="266.6" data-y0="356.9" data-x1="238.5" data-y1="323.5" data-d="0.533" fill="#FFE6C4"/>
+                            <circle class="pd" r="0.90" cx="99.7" cy="241.7" data-x0="99.7" data-y0="241.7" data-x1="142.1" data-y1="225.4" data-d="0.600" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.22" cx="317.0" cy="229.5" data-x0="317.0" data-y0="229.5" data-x1="264.9" data-y1="148.9" data-d="0.667" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.54" cx="163.7" cy="367.1" data-x0="163.7" data-y0="367.1" data-x1="219.6" data-y1="323.9" data-d="0.733" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.86" cx="168.8" cy="173.4" data-x0="168.8" data-y0="173.4" data-x1="134.4" data-y1="223.7" data-d="0.800" fill="#FFE6C4"/>
+                            <circle class="pd" r="2.18" cx="319.6" cy="321.5" data-x0="319.6" data-y0="321.5" data-x1="261.0" data-y1="150.3" data-d="0.867" fill="#FFE6C4"/>
+                            <circle class="pd" r="0.90" cx="88.5" cy="299.6" data-x0="88.5" data-y0="299.6" data-x1="200.4" data-y1="323.9" data-d="0.933" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.22" cx="279.0" cy="179.7" data-x0="279.0" data-y0="179.7" data-x1="128.7" data-y1="221.9" data-d="1.000" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.54" cx="231.9" cy="381.7" data-x0="231.9" data-y0="381.7" data-x1="255.8" data-y1="151.5" data-d="0.000" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.86" cx="106.2" cy="202.8" data-x0="106.2" data-y0="202.8" data-x1="181.5" data-y1="323.5" data-d="0.067" fill="#FFE6C4"/>
+                            <circle class="pd" r="2.18" cx="342.7" cy="262.5" data-x0="342.7" data-y0="262.5" data-x1="125.2" data-y1="220.0" data-d="0.133" fill="#FFE6C4"/>
+                            <circle class="pd" r="0.90" cx="118.3" cy="357.2" data-x0="118.3" data-y0="357.2" data-x1="249.3" data-y1="152.6" data-d="0.200" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.22" cx="210.7" cy="154.4" data-x0="210.7" data-y0="154.4" data-x1="163.4" data-y1="322.7" data-d="0.267" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.54" cx="303.1" cy="360.3" data-x0="303.1" data-y0="360.3" data-x1="124.0" data-y1="218.0" data-d="0.333" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.86" cx="70.3" cy="260.9" data-x0="70.3" data-y0="260.9" data-x1="241.7" data-y1="153.5" data-d="0.400" fill="#FFE6C4"/>
+                            <circle class="pd" r="2.18" cx="323.2" cy="198.1" data-x0="323.2" data-y0="198.1" data-x1="146.6" data-y1="321.4" data-d="0.467" fill="#FFE6C4"/>
+                            <circle class="pd" r="0.90" cx="184.3" cy="393.7" data-x0="184.3" data-y0="393.7" data-x1="296.0" data-y1="218.0" data-d="0.533" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.22" cx="132.5" cy="166.1" data-x0="132.5" data-y0="166.1" data-x1="233.3" data-y1="154.2" data-d="0.600" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.54" cx="352.0" cy="305.5" data-x0="352.0" data-y0="305.5" data-x1="131.4" data-y1="319.8" data-d="0.667" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.86" cx="77.5" cy="330.5" data-x0="77.5" data-y0="330.5" data-x1="294.8" data-y1="220.0" data-d="0.733" fill="#FFE6C4"/>
+                            <circle class="pd" r="2.18" cx="262.3" cy="150.6" data-x0="262.3" data-y0="150.6" data-x1="224.2" data-y1="154.7" data-d="0.800" fill="#FFE6C4"/>
+                            <circle class="pd" r="0.90" cx="267.4" cy="393.3" data-x0="267.4" data-y0="393.3" data-x1="118.5" data-y1="317.8" data-d="0.867" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.22" cx="71.0" cy="215.3" data-x0="71.0" data-y0="215.3" data-x1="291.3" data-y1="221.9" data-d="0.933" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.54" cx="358.6" cy="232.6" data-x0="358.6" data-y0="232.6" data-x1="214.8" data-y1="155.0" data-d="1.000" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.86" cx="130.6" cy="388.6" data-x0="130.6" data-y0="388.6" data-x1="108.0" data-y1="315.6" data-d="0.000" fill="#FFE6C4"/>
+                            <circle class="pd" r="2.18" cx="176.7" cy="138.5" data-x0="176.7" data-y0="138.5" data-x1="285.6" data-y1="223.7" data-d="0.067" fill="#FFE6C4"/>
+                            <circle class="pd" r="0.90" cx="340.7" cy="351.8" data-x0="340.7" data-y0="351.8" data-x1="205.2" data-y1="155.0" data-d="0.133" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.22" cx="49.4" cy="289.2" data-x0="49.4" data-y0="289.2" data-x1="100.3" data-y1="313.2" data-d="0.200" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.54" cx="315.9" cy="165.0" data-x0="315.9" data-y0="165.0" data-x1="277.9" data-y1="225.4" data-d="0.267" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.86" cx="216.0" cy="413.8" data-x0="216.0" data-y0="413.8" data-x1="195.8" data-y1="154.7" data-d="0.333" fill="#FFE6C4"/>
+                            <circle class="pd" r="2.18" cx="93.1" cy="170.0" data-x0="93.1" data-y0="170.0" data-x1="95.6" data-y1="310.6" data-d="0.400" fill="#FFE6C4"/>
+                            <circle class="pd" r="0.90" cx="377.9" cy="279.4" data-x0="377.9" data-y0="279.4" data-x1="268.2" data-y1="226.8" data-d="0.467" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.22" cx="79.3" cy="364.9" data-x0="79.3" data-y0="364.9" data-x1="186.7" data-y1="154.2" data-d="0.533" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.54" cx="233.6" cy="126.2" data-x0="233.6" data-y0="126.2" data-x1="94.0" data-y1="308.0" data-d="0.600" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.86" cx="307.9" cy="394.3" data-x0="307.9" data-y0="394.3" data-x1="257.0" data-y1="228.0" data-d="0.667" fill="#FFE6C4"/>
+                            <circle class="pd" r="2.18" cx="40.3" cy="238.4" data-x0="40.3" data-y0="238.4" data-x1="178.3" data-y1="153.5" data-d="0.733" fill="#FFE6C4"/>
+                            <circle class="pd" r="0.90" cx="362.8" cy="197.6" data-x0="362.8" data-y0="197.6" data-x1="326.0" data-y1="308.0" data-d="0.800" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.22" cx="155.4" cy="416.9" data-x0="155.4" data-y0="416.9" data-x1="244.5" data-y1="229.0" data-d="0.867" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.54" cx="135.9" cy="132.3" data-x0="135.9" data-y0="132.3" data-x1="170.7" data-y1="152.6" data-d="0.933" fill="#FFE6C4"/>
+                            <circle class="pd" r="1.86" cx="375.7" cy="332.5" data-x0="375.7" data-y0="332.5" data-x1="324.4" data-y1="310.6" data-d="1.000" fill="#FFE6C4"/>
+                            </g>
+                            <g id="pCake">
+                            <ellipse id="pBoardWire" class="wire" cx="210" cy="408" rx="140" ry="18" fill="none"/>
+                            <g id="pWire" class="wire-g">
+                            <path class="wire" d="M94.0 308.0 L94.0 400.0 A116.0 16.0 0 0 0 326.0 400.0 L326.0 308.0 A116.0 16.0 0 0 1 94.0 308.0 Z" fill="none"/>
+                            <ellipse class="wire" cx="210.0" cy="308.0" rx="116.0" ry="16.0" fill="none"/>
+                            <path class="wire" d="M124.0 218.0 L124.0 308.0 A86.0 12.0 0 0 0 296.0 308.0 L296.0 218.0 A86.0 12.0 0 0 1 124.0 218.0 Z" fill="none"/>
+                            <ellipse class="wire" cx="210.0" cy="218.0" rx="86.0" ry="12.0" fill="none"/>
+                            <path class="wire" d="M152.0 146.0 L152.0 218.0 A58.0 9.0 0 0 0 268.0 218.0 L268.0 146.0 A58.0 9.0 0 0 1 152.0 146.0 Z" fill="none"/>
+                            <ellipse class="wire" cx="210.0" cy="146.0" rx="58.0" ry="9.0" fill="none"/>
+                            </g>
+                            <g id="pMeasure" opacity="0">
+                            <path d="M152.0 132 L268.0 132 M152.0 128 L152.0 136 M268.0 128 L268.0 136" stroke="#8FC7D8" stroke-width="1" fill="none" opacity=".8"/>
+                            <path d="M348 308 L348 400 M344 308 L352 308 M344 400 L352 400" stroke="#8FC7D8" stroke-width="1" fill="none" opacity=".8"/>
+                            <circle cx="348" cy="354" r="13" fill="#0E1B20" stroke="#8FC7D8" stroke-width="1" opacity=".9"/>
+                            <path d="M344 354 h8 M348 350 v8" stroke="#8FC7D8" stroke-width="1.4"/>
+                            </g>
+                            <g id="pFill" clip-path="url(#pRise)" opacity="0">
+                            <ellipse cx="210" cy="408" rx="140" ry="18" fill="url(#pBoard)"/>
+                            <path d="M94.0 308.0 L94.0 400.0 A116.0 16.0 0 0 0 326.0 400.0 L326.0 308.0 A116.0 16.0 0 0 1 94.0 308.0 Z" fill="url(#pIvory)"/>
+                            <ellipse cx="210.0" cy="308.0" rx="116.0" ry="16.0" fill="url(#pTop)"/>
+                            <path d="M124.0 218.0 L124.0 308.0 A86.0 12.0 0 0 0 296.0 308.0 L296.0 218.0 A86.0 12.0 0 0 1 124.0 218.0 Z" fill="url(#pBlush)"/>
+                            <ellipse cx="210.0" cy="218.0" rx="86.0" ry="12.0" fill="url(#pTop)"/>
+                            <path d="M152.0 146.0 L152.0 218.0 A58.0 9.0 0 0 0 268.0 218.0 L268.0 146.0 A58.0 9.0 0 0 1 152.0 146.0 Z" fill="url(#pIvory)"/>
+                            <ellipse cx="210.0" cy="146.0" rx="58.0" ry="9.0" fill="url(#pTop)"/>
+                            <path d="M94.0 391.0 L94.0 400.0 A116.0 16.0 0 0 0 326.0 400.0 L326.0 391.0 A116.0 16.0 0 0 1 94.0 391.0 Z" fill="url(#pGold)" opacity=".92"/>
+                            <path d="M124.0 299.0 L124.0 308.0 A86.0 12.0 0 0 0 296.0 308.0 L296.0 299.0 A86.0 12.0 0 0 1 124.0 299.0 Z" fill="url(#pGold)" opacity=".92"/>
+                            <path d="M152.0 209.0 L152.0 218.0 A58.0 9.0 0 0 0 268.0 218.0 L268.0 209.0 A58.0 9.0 0 0 1 152.0 209.0 Z" fill="url(#pGold)" opacity=".92"/>
+                            </g>
+                            <path id="pDrip" d="M94.0 308.0 Q103.6 334.3 110.6 312.0 Q120.1 330.0 127.1 312.0 Q136.7 329.2 143.7 312.0 Q153.3 334.6 160.3 312.0 Q169.9 323.0 176.9 312.0 Q186.4 334.0 193.4 312.0 Q203.0 330.7 210.0 312.0 Q219.6 328.3 226.6 312.0 Q236.1 334.8 243.1 312.0 Q252.7 323.9 259.7 312.0 Q269.3 333.5 276.3 312.0 Q285.9 331.4 292.9 312.0 Q302.4 327.5 309.4 312.0 Q319.0 334.9 326.0 312.0 L326.0 298.0 L94.0 298.0 Z" fill="url(#pGold)" opacity="0" clip-path="url(#pCakeClip)"/>
+                            <g id="pPearls">
+                            <circle class="pp" cx="325.8" cy="310.5" r="3.4" fill="#F6DFA8" data-d="0.000" opacity="0"/>
+                            <circle class="pp" cx="324.1" cy="312.4" r="3.4" fill="#FFFBF4" data-d="0.021" opacity="0"/>
+                            <circle class="pp" cx="320.7" cy="314.3" r="3.4" fill="#FFFBF4" data-d="0.042" opacity="0"/>
+                            <circle class="pp" cx="315.8" cy="316.1" r="3.4" fill="#F6DFA8" data-d="0.063" opacity="0"/>
+                            <circle class="pp" cx="309.3" cy="317.8" r="3.4" fill="#FFFBF4" data-d="0.085" opacity="0"/>
+                            <circle class="pp" cx="301.3" cy="319.4" r="3.4" fill="#FFFBF4" data-d="0.106" opacity="0"/>
+                            <circle class="pp" cx="292.0" cy="320.8" r="3.4" fill="#F6DFA8" data-d="0.127" opacity="0"/>
+                            <circle class="pp" cx="281.5" cy="322.1" r="3.4" fill="#FFFBF4" data-d="0.148" opacity="0"/>
+                            <circle class="pp" cx="270.0" cy="323.2" r="3.4" fill="#FFFBF4" data-d="0.169" opacity="0"/>
+                            <circle class="pp" cx="257.6" cy="324.1" r="3.4" fill="#F6DFA8" data-d="0.190" opacity="0"/>
+                            <circle class="pp" cx="244.5" cy="324.8" r="3.4" fill="#FFFBF4" data-d="0.212" opacity="0"/>
+                            <circle class="pp" cx="230.9" cy="325.2" r="3.4" fill="#FFFBF4" data-d="0.233" opacity="0"/>
+                            <circle class="pp" cx="217.0" cy="325.5" r="3.4" fill="#F6DFA8" data-d="0.254" opacity="0"/>
+                            <circle class="pp" cx="203.0" cy="325.5" r="3.4" fill="#FFFBF4" data-d="0.275" opacity="0"/>
+                            <circle class="pp" cx="189.1" cy="325.2" r="3.4" fill="#FFFBF4" data-d="0.296" opacity="0"/>
+                            <circle class="pp" cx="175.5" cy="324.8" r="3.4" fill="#F6DFA8" data-d="0.317" opacity="0"/>
+                            <circle class="pp" cx="162.4" cy="324.1" r="3.4" fill="#FFFBF4" data-d="0.338" opacity="0"/>
+                            <circle class="pp" cx="150.0" cy="323.2" r="3.4" fill="#FFFBF4" data-d="0.360" opacity="0"/>
+                            <circle class="pp" cx="138.5" cy="322.1" r="3.4" fill="#F6DFA8" data-d="0.381" opacity="0"/>
+                            <circle class="pp" cx="128.0" cy="320.8" r="3.4" fill="#FFFBF4" data-d="0.402" opacity="0"/>
+                            <circle class="pp" cx="118.7" cy="319.4" r="3.4" fill="#FFFBF4" data-d="0.423" opacity="0"/>
+                            <circle class="pp" cx="110.7" cy="317.8" r="3.4" fill="#F6DFA8" data-d="0.444" opacity="0"/>
+                            <circle class="pp" cx="104.2" cy="316.1" r="3.4" fill="#FFFBF4" data-d="0.465" opacity="0"/>
+                            <circle class="pp" cx="99.3" cy="314.3" r="3.4" fill="#FFFBF4" data-d="0.487" opacity="0"/>
+                            <circle class="pp" cx="95.9" cy="312.4" r="3.4" fill="#F6DFA8" data-d="0.508" opacity="0"/>
+                            <circle class="pp" cx="94.2" cy="310.5" r="3.4" fill="#FFFBF4" data-d="0.529" opacity="0"/>
+                            <circle class="pp" cx="295.7" cy="220.4" r="2.9" fill="#F6DFA8" data-d="0.140" opacity="0"/>
+                            <circle class="pp" cx="293.6" cy="222.3" r="2.9" fill="#FFFBF4" data-d="0.168" opacity="0"/>
+                            <circle class="pp" cx="289.5" cy="224.1" r="2.9" fill="#FFFBF4" data-d="0.195" opacity="0"/>
+                            <circle class="pp" cx="283.3" cy="225.8" r="2.9" fill="#F6DFA8" data-d="0.223" opacity="0"/>
+                            <circle class="pp" cx="275.4" cy="227.3" r="2.9" fill="#FFFBF4" data-d="0.250" opacity="0"/>
+                            <circle class="pp" cx="265.9" cy="228.6" r="2.9" fill="#FFFBF4" data-d="0.278" opacity="0"/>
+                            <circle class="pp" cx="254.9" cy="229.7" r="2.9" fill="#F6DFA8" data-d="0.305" opacity="0"/>
+                            <circle class="pp" cx="242.9" cy="230.6" r="2.9" fill="#FFFBF4" data-d="0.333" opacity="0"/>
+                            <circle class="pp" cx="230.1" cy="231.2" r="2.9" fill="#FFFBF4" data-d="0.360" opacity="0"/>
+                            <circle class="pp" cx="216.7" cy="231.5" r="2.9" fill="#F6DFA8" data-d="0.388" opacity="0"/>
+                            <circle class="pp" cx="203.3" cy="231.5" r="2.9" fill="#FFFBF4" data-d="0.415" opacity="0"/>
+                            <circle class="pp" cx="189.9" cy="231.2" r="2.9" fill="#FFFBF4" data-d="0.443" opacity="0"/>
+                            <circle class="pp" cx="177.1" cy="230.6" r="2.9" fill="#F6DFA8" data-d="0.470" opacity="0"/>
+                            <circle class="pp" cx="165.1" cy="229.7" r="2.9" fill="#FFFBF4" data-d="0.498" opacity="0"/>
+                            <circle class="pp" cx="154.1" cy="228.6" r="2.9" fill="#FFFBF4" data-d="0.525" opacity="0"/>
+                            <circle class="pp" cx="144.6" cy="227.3" r="2.9" fill="#F6DFA8" data-d="0.552" opacity="0"/>
+                            <circle class="pp" cx="136.7" cy="225.8" r="2.9" fill="#FFFBF4" data-d="0.580" opacity="0"/>
+                            <circle class="pp" cx="130.5" cy="224.1" r="2.9" fill="#FFFBF4" data-d="0.608" opacity="0"/>
+                            <circle class="pp" cx="126.4" cy="222.3" r="2.9" fill="#F6DFA8" data-d="0.635" opacity="0"/>
+                            <circle class="pp" cx="124.3" cy="220.4" r="2.9" fill="#FFFBF4" data-d="0.662" opacity="0"/>
+                            <circle class="pp" cx="267.6" cy="148.5" r="2.4" fill="#F6DFA8" data-d="0.280" opacity="0"/>
+                            <circle class="pp" cx="264.7" cy="150.5" r="2.4" fill="#FFFBF4" data-d="0.319" opacity="0"/>
+                            <circle class="pp" cx="259.1" cy="152.3" r="2.4" fill="#FFFBF4" data-d="0.359" opacity="0"/>
+                            <circle class="pp" cx="251.0" cy="153.9" r="2.4" fill="#F6DFA8" data-d="0.398" opacity="0"/>
+                            <circle class="pp" cx="240.9" cy="155.1" r="2.4" fill="#FFFBF4" data-d="0.437" opacity="0"/>
+                            <circle class="pp" cx="229.2" cy="156.0" r="2.4" fill="#FFFBF4" data-d="0.476" opacity="0"/>
+                            <circle class="pp" cx="216.5" cy="156.4" r="2.4" fill="#F6DFA8" data-d="0.516" opacity="0"/>
+                            <circle class="pp" cx="203.5" cy="156.4" r="2.4" fill="#FFFBF4" data-d="0.555" opacity="0"/>
+                            <circle class="pp" cx="190.8" cy="156.0" r="2.4" fill="#FFFBF4" data-d="0.594" opacity="0"/>
+                            <circle class="pp" cx="179.1" cy="155.1" r="2.4" fill="#F6DFA8" data-d="0.634" opacity="0"/>
+                            <circle class="pp" cx="169.0" cy="153.9" r="2.4" fill="#FFFBF4" data-d="0.673" opacity="0"/>
+                            <circle class="pp" cx="160.9" cy="152.3" r="2.4" fill="#FFFBF4" data-d="0.712" opacity="0"/>
+                            <circle class="pp" cx="155.3" cy="150.5" r="2.4" fill="#F6DFA8" data-d="0.751" opacity="0"/>
+                            <circle class="pp" cx="152.4" cy="148.5" r="2.4" fill="#FFFBF4" data-d="0.791" opacity="0"/>
+                            </g>
+                            <g id="pRoses">
+                            <g class="pr" data-d="0.00" opacity="0" style="transform-origin:152.0px 300.0px">
+                            <circle cx="152.0" cy="300.0" r="15.0" fill="#F7CBDC"/>
+                            <circle cx="152.0" cy="300.0" r="9.9" fill="#FBE0EA"/>
+                            <path d="M142.7 300.0 a9.3 9.3 0 1 1 18.6 0" fill="none" stroke="#E79CBB" stroke-width="1.5" stroke-linecap="round"/>
+                            <circle cx="152.0" cy="300.0" r="3.6" fill="#EFAF47"/>
+                            </g>
+                            <g class="pr" data-d="0.20" opacity="0" style="transform-origin:262.0px 292.0px">
+                            <circle cx="262.0" cy="292.0" r="13.0" fill="#F7CBDC"/>
+                            <circle cx="262.0" cy="292.0" r="8.6" fill="#FBE0EA"/>
+                            <path d="M253.9 292.0 a8.1 8.1 0 1 1 16.1 0" fill="none" stroke="#E79CBB" stroke-width="1.5" stroke-linecap="round"/>
+                            <circle cx="262.0" cy="292.0" r="3.1" fill="#EFAF47"/>
+                            </g>
+                            <g class="pr" data-d="0.40" opacity="0" style="transform-origin:180.0px 212.0px">
+                            <circle cx="180.0" cy="212.0" r="11.0" fill="#F7CBDC"/>
+                            <circle cx="180.0" cy="212.0" r="7.3" fill="#FBE0EA"/>
+                            <path d="M173.2 212.0 a6.8 6.8 0 1 1 13.6 0" fill="none" stroke="#E79CBB" stroke-width="1.5" stroke-linecap="round"/>
+                            <circle cx="180.0" cy="212.0" r="2.6" fill="#EFAF47"/>
+                            </g>
+                            <g class="pr" data-d="0.60" opacity="0" style="transform-origin:248.0px 206.0px">
+                            <circle cx="248.0" cy="206.0" r="10.0" fill="#F7CBDC"/>
+                            <circle cx="248.0" cy="206.0" r="6.6" fill="#FBE0EA"/>
+                            <path d="M241.8 206.0 a6.2 6.2 0 1 1 12.4 0" fill="none" stroke="#E79CBB" stroke-width="1.5" stroke-linecap="round"/>
+                            <circle cx="248.0" cy="206.0" r="2.4" fill="#EFAF47"/>
+                            </g>
+                            <g class="pr" data-d="0.80" opacity="0" style="transform-origin:210.0px 140.0px">
+                            <circle cx="210.0" cy="140.0" r="12.0" fill="#F7CBDC"/>
+                            <circle cx="210.0" cy="140.0" r="7.9" fill="#FBE0EA"/>
+                            <path d="M202.6 140.0 a7.4 7.4 0 1 1 14.9 0" fill="none" stroke="#E79CBB" stroke-width="1.5" stroke-linecap="round"/>
+                            <circle cx="210.0" cy="140.0" r="2.9" fill="#EFAF47"/>
+                            </g>
+                            <g class="pr" data-d="1.00" opacity="0" style="transform-origin:124.0px 330.0px">
+                            <circle cx="124.0" cy="330.0" r="11.0" fill="#F7CBDC"/>
+                            <circle cx="124.0" cy="330.0" r="7.3" fill="#FBE0EA"/>
+                            <path d="M117.2 330.0 a6.8 6.8 0 1 1 13.6 0" fill="none" stroke="#E79CBB" stroke-width="1.5" stroke-linecap="round"/>
+                            <circle cx="124.0" cy="330.0" r="2.6" fill="#EFAF47"/>
+                            </g>
+                            </g>
+                            <rect id="pSheenR" x="-190" y="120" width="150" height="300" fill="url(#pSheen)" opacity="0" clip-path="url(#pCakeClip)" transform="skewX(-14)"/>
+                            </g>
+                            <g id="pSeal" opacity="0" style="transform-origin:210px 268px">
+                            <circle cx="210" cy="268" r="46" fill="#141014" opacity=".55"/>
+                            <circle id="pSealRing" cx="210" cy="268" r="46" fill="none" stroke="url(#pGold)" stroke-width="3"/>
+                            <circle cx="210" cy="268" r="38" fill="none" stroke="#F0C75C" stroke-width="1" opacity=".6"/>
+                            <path id="pTick" d="M190 268 l13 14 l27 -30" fill="none" stroke="#FBE9B4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </g>
+                            <g id="pDate" opacity="0" style="transform-origin:210px 268px">
+                            <rect x="166" y="232" width="88" height="74" rx="12" fill="#141014" opacity=".62" stroke="url(#pGold)" stroke-width="2"/>
+                            <path d="M166 254 h88" stroke="url(#pGold)" stroke-width="2"/>
+                            <path d="M186 226 v14 M234 226 v14" stroke="url(#pGold)" stroke-width="4" stroke-linecap="round"/>
+                            <circle class="pdot" data-d="0.00" cx="180.0" cy="268.0" r="3.1" fill="#F0C75C" opacity=".38"/>
+                            <circle class="pdot" data-d="0.09" cx="198.0" cy="268.0" r="3.1" fill="#F0C75C" opacity=".38"/>
+                            <circle class="pdot" data-d="0.18" cx="216.0" cy="268.0" r="3.1" fill="#F0C75C" opacity=".38"/>
+                            <circle class="pdot" data-d="0.27" cx="234.0" cy="268.0" r="3.1" fill="#F0C75C" opacity=".38"/>
+                            <circle class="pdot" data-d="0.36" cx="180.0" cy="283.0" r="3.1" fill="#F0C75C" opacity=".38"/>
+                            <circle class="pdot" data-d="0.45" cx="198.0" cy="283.0" r="3.1" fill="#F0C75C" opacity=".38"/>
+                            <circle class="pdot" data-d="0.55" cx="216.0" cy="283.0" r="3.1" fill="#F0C75C" opacity=".38"/>
+                            <circle class="pdot" data-d="0.64" cx="234.0" cy="283.0" r="3.1" fill="#F0C75C" opacity=".38"/>
+                            <circle class="pdot" data-d="0.73" cx="180.0" cy="298.0" r="3.1" fill="#F0C75C" opacity=".38"/>
+                            <circle class="pdot" data-d="0.82" cx="198.0" cy="298.0" r="3.1" fill="#F0C75C" opacity=".38"/>
+                            <circle class="pdot" data-d="0.91" cx="216.0" cy="298.0" r="3.1" fill="#F0C75C" opacity=".38"/>
+                            <circle class="pdot" data-d="1.00" cx="234.0" cy="298.0" r="3.1" fill="#F0C75C" opacity=".38"/>
+                            <circle id="pDateHit" cx="234" cy="283" r="8.5" fill="#EC268F" opacity="0"/>
+                            </g>
+                            <g id="pBox" opacity="0">
+                            <path id="pBoxBody" d="M66 178 h288 v248 a14 14 0 0 1 -14 14 h-260 a14 14 0 0 1 -14 -14 Z"
+                              fill="#FBF3E6" fill-opacity=".14" stroke="#F0DCC2" stroke-width="2.2" stroke-linejoin="round"/>
+                            <path id="pBoxLid" d="M50 136 h320 a14 14 0 0 1 14 14 v30 a14 14 0 0 1 -14 14 h-320 a14 14 0 0 1 -14 -14 v-30 a14 14 0 0 1 14 -14 Z"
+                              fill="#FDF8EF" fill-opacity=".22" stroke="#F0DCC2" stroke-width="2.2" stroke-linejoin="round"/>
+                            <path id="pRibbonV" d="M210 136 v304" stroke="url(#pRib)" stroke-width="17" stroke-linecap="butt" opacity=".96"/>
+                            <path id="pRibbonH" d="M36 330 h348" stroke="url(#pRibH)" stroke-width="17" opacity=".96"/>
+                            <g id="pBow">
+                            <path d="M210 150 c-36 -32 -68 -23 -68 0 c0 21 36 21 68 0 Z" fill="url(#pRib)"/>
+                            <path d="M210 150 c36 -32 68 -23 68 0 c0 21 -36 21 -68 0 Z" fill="url(#pRib)"/>
+                            <path d="M202 150 l-20 42 M218 150 l20 42" stroke="url(#pRib)" stroke-width="9" stroke-linecap="round" fill="none"/>
+                            <circle cx="210" cy="150" r="12" fill="#F9E2A8"/>
+                            </g></g>
+                            </g>
                             </svg>
                         </div>
                         <div class="pcs-stagefoot">
@@ -799,32 +965,158 @@
         </div>
 
         <script>
-        (function() {
-            var stage = document.getElementById('pcsStage');
+        (function () {
+            var art = document.getElementById('pcsArt');
             var steps = Array.prototype.slice.call(document.querySelectorAll('.pcs-step'));
-            var fill = document.getElementById('pcsRailFill');
             var caption = document.getElementById('pcsCaption');
             var dots = document.getElementById('pcsDots');
-            if (!stage || !steps.length) return;
-            var titles = ['Tell Us Your Vision', 'Custom Sketches & Pricing', 'Revisions & Approval', 'Payment & Scheduling', 'Handcrafted Creation', 'Pickup or Delivery'];
-            var current = 1;
+            var fillBar = document.getElementById('pcsRailFill');
+            if (!art || !steps.length) return;
 
-            function setStage(n) {
-                if (n === current) return;
-                current = n;
-                stage.setAttribute('data-stage', String(n));
-                steps.forEach(function(s, i) { s.classList.toggle('is-active', i === n - 1); });
-                if (fill) fill.style.height = (((n - 1) / (steps.length - 1)) * 100) + '%';
-                if (caption) caption.textContent = 'Step ' + n + ' of ' + steps.length + ' — ' + titles[n - 1];
-                if (dots) Array.prototype.forEach.call(dots.children, function(d, i) { d.classList.toggle('on', i < n); });
+            var CALM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var E = function (id) { return document.getElementById(id); };
+            var glow = E('pGlowE'), floor = E('pFloorE'), cake = E('pCake'),
+                measure = E('pMeasure'), fillG = E('pFill'), rise = E('pRiseRect'),
+                drip = E('pDrip'), sheen = E('pSheenR'),
+                seal = E('pSeal'), tick = E('pTick'), ring = E('pSealRing'),
+                dateG = E('pDate'), hit = E('pDateHit'),
+                box = E('pBox'), lid = E('pBoxLid'), front = E('pBoxBody'),
+                rv = E('pRibbonV'), rh = E('pRibbonH'), bow = E('pBow');
+            var dust = [].slice.call(art.querySelectorAll('.pd')),
+                pearls = [].slice.call(art.querySelectorAll('.pp')),
+                roses = [].slice.call(art.querySelectorAll('.pr')),
+                ddots = [].slice.call(art.querySelectorAll('.pdot')),
+                wires = [].slice.call(art.querySelectorAll('.wire'));
+
+            function len(el) { try { return el.getTotalLength(); } catch (e) { return 400; } }
+            wires.forEach(function (w) { var L = len(w); w._L = L; w.style.strokeDasharray = L; w.style.strokeDashoffset = L; });
+            [tick, ring, rv, rh].forEach(function (p) { var L = len(p); p._L = L; p.style.strokeDasharray = L; p.style.strokeDashoffset = L; });
+
+            var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
+            var seg = function (t, a, b) { return clamp((t - a) / (b - a)); };
+            var outC = function (p) { return 1 - Math.pow(1 - p, 3); };
+            var inOut = function (p) { return p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; };
+            var lerp = function (a, b, p) { return a + (b - a) * p; };
+            var setT = function (el, s) { el.setAttribute('transform', s); };
+            var pop = function (el, cx, cy, sc) { setT(el, 'translate(' + cx + ' ' + cy + ') scale(' + sc.toFixed(4) + ') translate(' + (-cx) + ' ' + (-cy) + ')'); };
+
+            function target() {
+                var vh = window.innerHeight, y = window.pageYOffset;
+                var first = steps[0].getBoundingClientRect(), last = steps[steps.length - 1].getBoundingClientRect();
+                var a = first.top + y - vh * 0.58;
+                var b = last.top + y + last.height - vh * 0.72;
+                return b <= a ? 0 : clamp((y - a) / (b - a));
             }
 
-            var io = new IntersectionObserver(function(entries) {
-                entries.forEach(function(entry) {
-                    if (entry.isIntersecting) setStage(steps.indexOf(entry.target) + 1);
+            var cur = target(), want = cur, running = false;
+
+            function draw(t, now) {
+                // ── the room wakes up
+                glow.setAttribute('opacity', (0.12 + 0.88 * outC(seg(t, 0, .8))).toFixed(3));
+                floor.setAttribute('opacity', (seg(t, .05, .62) * .9).toFixed(3));
+
+                // ── sugar dust gathers into the shape
+                var g = outC(seg(t, 0, .16));
+                for (var i = 0; i < dust.length; i++) {
+                    var d = dust[i], dl = +d.dataset.d, p = outC(clamp((g - dl * .35) / .65));
+                    d.setAttribute('cx', lerp(+d.dataset.x0, +d.dataset.x1, p).toFixed(1));
+                    d.setAttribute('cy', lerp(+d.dataset.y0, +d.dataset.y1, p).toFixed(1));
+                    d.setAttribute('opacity', ((.55 + .45 * Math.sin(now / 900 + dl * 6)) * (1 - seg(t, .13, .21))).toFixed(3));
+                }
+
+                // ── the line drawing writes itself
+                var w = inOut(seg(t, .07, .32));
+                for (var j = 0; j < wires.length; j++) {
+                    var wi = wires[j], ph = clamp((w - (j / wires.length) * .28) / .72);
+                    wi.style.strokeDashoffset = (wi._L * (1 - outC(ph))).toFixed(1);
+                }
+                art.querySelector('#pWire').setAttribute('opacity', (1 - seg(t, .74, .86) * .82).toFixed(3));
+                E('pBoardWire').setAttribute('opacity', (1 - seg(t, .70, .82)).toFixed(3));
+
+                // ── measurements, then approval, then the date
+                measure.setAttribute('opacity', (seg(t, .19, .28) * (1 - seg(t, .36, .44))).toFixed(3));
+
+                var sp = seg(t, .34, .50), sOut = seg(t, .50, .56);
+                seal.setAttribute('opacity', (sp > 0 ? (1 - sOut) : 0).toFixed(3));
+                pop(seal, 210, 268, lerp(.55, 1, outC(seg(t, .34, .44))));
+                ring.style.strokeDashoffset = (ring._L * (1 - outC(seg(t, .35, .46)))).toFixed(1);
+                tick.style.strokeDashoffset = (tick._L * (1 - outC(seg(t, .40, .50)))).toFixed(1);
+
+                var dp = seg(t, .50, .66), dOut = seg(t, .66, .73);
+                dateG.setAttribute('opacity', (dp > 0 ? (1 - dOut) : 0).toFixed(3));
+                pop(dateG, 210, 268, lerp(.6, 1, outC(seg(t, .50, .59))));
+                for (var q = 0; q < ddots.length; q++) {
+                    var dd = ddots[q];
+                    dd.setAttribute('opacity', (.3 + .6 * seg(t, .54 + (+dd.dataset.d) * .06, .60 + (+dd.dataset.d) * .06)).toFixed(3));
+                }
+                hit.setAttribute('opacity', outC(seg(t, .61, .66)).toFixed(3));
+
+                // ── it becomes real: colour floods up the tiers
+                var r = inOut(seg(t, .60, .82));
+                fillG.setAttribute('opacity', (seg(t, .60, .64)).toFixed(3));
+                rise.setAttribute('y', (430 - 430 * r).toFixed(1));
+                drip.setAttribute('opacity', outC(seg(t, .66, .78)).toFixed(3));
+
+                for (var k2 = 0; k2 < pearls.length; k2++) {
+                    var pr = pearls[k2], pd = +pr.dataset.d;
+                    var pv = outC(seg(t, .67 + pd * .17, .73 + pd * .17));
+                    pr.setAttribute('opacity', pv.toFixed(3));
+                    pr.setAttribute('r', (pr.getAttribute('r') && 0) || pr.r.baseVal.value);
+                }
+                for (var k3 = 0; k3 < roses.length; k3++) {
+                    var ro = roses[k3], rd = +ro.dataset.d;
+                    var rv2 = outC(seg(t, .72 + rd * .10, .80 + rd * .10));
+                    ro.setAttribute('opacity', rv2.toFixed(3));
+                    var b = ro.getBBox ? null : null;
+                    pop(ro, ro._cx || (ro._cx = ro.getBBox().x + ro.getBBox().width / 2), ro._cy || (ro._cy = ro.getBBox().y + ro.getBBox().height / 2), lerp(.2, 1, rv2));
+                }
+
+                // ── one light sweeps across the finished cake
+                var sh = seg(t, .79, .92);
+                sheen.setAttribute('opacity', (sh > 0 && sh < 1 ? .85 : 0).toFixed(2));
+                setT(sheen, 'translate(' + (lerp(0, 700, inOut(sh))).toFixed(0) + ' 0) skewX(-14)');
+
+                // ── the box closes around it
+                var bx = seg(t, .85, 1);
+                box.setAttribute('opacity', (bx > 0 ? 1 : 0).toFixed(2));
+                setT(front, 'translate(0 ' + lerp(120, 0, outC(seg(t, .85, .93))).toFixed(1) + ')');
+                setT(lid, 'translate(0 ' + lerp(-150, 0, outC(seg(t, .90, .98))).toFixed(1) + ')');
+                rv.style.strokeDashoffset = (rv._L * (1 - outC(seg(t, .93, .99)))).toFixed(1);
+                rh.style.strokeDashoffset = (rh._L * (1 - outC(seg(t, .94, 1)))).toFixed(1);
+                pop(bow, 210, 300, outC(seg(t, .96, 1)));
+
+                // ── the cake breathes, then settles into the box
+                var fl = CALM ? 0 : Math.sin(now / 2400) * 3.2 * (1 - bx);
+                setT(cake, 'translate(0 ' + fl.toFixed(2) + ')');
+            }
+
+            function paintUI(t) {
+                var n = Math.min(steps.length, Math.max(1, Math.floor(t * steps.length) + 1));
+                steps.forEach(function (s2, i2) { s2.classList.toggle('is-active', i2 === n - 1); });
+                if (fillBar) fillBar.style.height = (t * 100).toFixed(1) + '%';
+                if (caption) caption.textContent = 'Step ' + n + ' of ' + steps.length + ' — ' + steps[n - 1].querySelector('h3').textContent;
+                if (dots) Array.prototype.forEach.call(dots.children, function (d, i3) {
+                    d.classList.toggle('on', i3 < n - 1);
+                    d.classList.toggle('live', i3 === n - 1);
                 });
-            }, { rootMargin: '-38% 0px -42% 0px' });
-            steps.forEach(function(s) { io.observe(s); });
+            }
+
+            var lastN = -1;
+            function frame(now) {
+                cur += (want - cur) * (CALM ? 1 : .11);
+                if (Math.abs(want - cur) < .0004) cur = want;
+                draw(cur, now || 0);
+                var n = Math.min(steps.length, Math.max(1, Math.floor(cur * steps.length) + 1));
+                if (n !== lastN) { lastN = n; paintUI(cur); }
+                if (Math.abs(want - cur) > .0004 || (!CALM && want > 0 && want < 1)) requestAnimationFrame(frame);
+                else running = false;
+            }
+            function kick() { want = target(); if (!running) { running = true; requestAnimationFrame(frame); } }
+
+            addEventListener('scroll', kick, { passive: true });
+            addEventListener('resize', kick);
+            kick(); paintUI(cur); draw(cur, 0);
+            if (!CALM) (function loop(ts) { if (want > 0 && want < 1) { draw(cur, ts); } requestAnimationFrame(loop); })(0);
         })();
         </script>
 
