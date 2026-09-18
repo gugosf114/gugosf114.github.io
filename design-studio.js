@@ -530,8 +530,21 @@
         var refineInput = document.getElementById('refineInput');
         var refinementHistory = document.getElementById('refinementHistory');
         var refinementCount = 0;
+        var askedSoFar = [];
 
         if (!refineBtn || !refineInput) return;
+
+        // A fresh Generate starts a new cake, so the change list starts again.
+        var freshBtn = document.getElementById('generatePreviewBtn');
+        if (freshBtn) {
+            freshBtn.addEventListener('click', function () {
+                askedSoFar = [];
+                refinementCount = 0;
+                refineBtn.textContent = 'Refine';
+                refineBtn.style.background = '';
+                refineBtn.disabled = false;
+            });
+        }
 
         refineBtn.addEventListener('click', async function () {
             var refinement = refineInput.value.trim();
@@ -543,7 +556,8 @@
             }
 
             var originalDescription = descTextarea ? descTextarea.value.trim() : '';
-            var combinedPrompt = originalDescription + '. Additional refinement: ' + refinement;
+            var pending = askedSoFar.concat([refinement]);
+            var combinedPrompt = originalDescription + '. Also: ' + pending.join('. Also: ') + '.';
 
             if (prevLoading) prevLoading.style.display = 'block';
             refineBtn.disabled = true;
@@ -561,6 +575,7 @@
                     if (prevImage) prevImage.src = data.image;
                     if (downloadBtn) downloadBtn.href = data.image;
                     extractColorPalette(data.image, 'colorSwatches');
+                    askedSoFar = pending;          // it worked, so keep it for the next change
                     refinementCount++;
 
                     if (refinementHistory) {
