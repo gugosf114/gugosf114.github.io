@@ -1,4 +1,4 @@
-/* One image-count-driven controller; used only by the home-page preview. */
+/* Shared image-count-driven controller for the standardized homepage hero. */
 (() => {
   const hero=document.querySelector('[data-standard-hero]');
   if(!hero)return;
@@ -9,13 +9,13 @@
   const box=hero.querySelector('.hero-text-box');
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   const desktopLens=matchMedia('(min-width:769px) and (hover:hover)');
-  // Three copies on either side cover every breakpoint without rebuilding the images.
-  const leading=3,total=originals.length;
+  // Four copies on either side keep the four-panel desktop loop filled.
+  const leading=4,total=originals.length;
   if(!total)return;
   let index=0,moving=false,paused=false,visible=true,ready=false;
   let timer,settleTimer,touch=null,resumeAfter=0,lens=null,lensFrame=0;
   const mod=value=>(value%total+total)%total;
-  const slots=()=>parseInt(getComputedStyle(hero).getPropertyValue('--hero-slots'))||3;
+  const slots=()=>parseInt(getComputedStyle(hero).getPropertyValue('--hero-slots'))||4;
   const copy=source=>{const node=source.cloneNode(true);node.setAttribute('aria-hidden','true');node.querySelectorAll('[id]').forEach(el=>el.removeAttribute('id'));return node;};
   const prefix=Array.from({length:leading},(_,i)=>copy(originals[mod(i-leading)]));
   const suffix=Array.from({length:leading},(_,i)=>copy(originals[i%total]));
@@ -58,7 +58,8 @@
   function updateLens(){
     if(!lens)return;
     const b=box.getBoundingClientRect(),t=track.getBoundingClientRect(),mag=1.16;
-    lens.strip.style.transform=`translate(${b.width/2-mag*((b.left+b.width/2)-t.left)}px,${b.height/2-mag*((b.top+b.height/2)-t.top)}px) scale(${mag})`;
+    const scale=hero.getBoundingClientRect().width/hero.offsetWidth||1;
+    lens.strip.style.transform=`translate(${(b.width/2-mag*((b.left+b.width/2)-t.left))/scale}px,${(b.height/2-mag*((b.top+b.height/2)-t.top))/scale}px) scale(${mag})`;
   }
   function lensLoop(){lensFrame=0;if(!lens||!visible||document.hidden)return;updateLens();lensFrame=requestAnimationFrame(lensLoop);}
   function syncLens(){
@@ -77,7 +78,7 @@
   }
   function size(){
     const header=document.querySelector('header');
-    if(header)hero.style.setProperty('--site-nav-height',header.getBoundingClientRect().height+'px');
+    if(header)hero.parentElement.style.setProperty('--site-nav-height',header.getBoundingClientRect().height+'px');
     settle();syncLens();
   }
   new ResizeObserver(size).observe(viewport);

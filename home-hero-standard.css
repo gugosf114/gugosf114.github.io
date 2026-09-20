@@ -1,12 +1,29 @@
-/* Preview-only rules: the original home page and photograph files are untouched. */
-.hero-carousel[data-standard-hero] {
-  --hero-slots:3;
+/* Keep the compact composition while the scaled viewport fills the page width. */
+.standard-hero-frame {
+  --hero-preview-scale:.8;
+  position:relative;
+  overflow:hidden;
   --standard-hero-height:640px;
+  width:100%;
+  height:calc(var(--standard-hero-height) * var(--hero-preview-scale));
+  margin-top:var(--site-nav-height,98px);
+  background:#fff;
+}
+@media(max-width:768px) {
+  .standard-hero-frame { --standard-hero-height:500px; }
+}
+/* Shared standardized hero rules, enabled per page by data-standard-hero. */
+.hero-carousel[data-standard-hero] {
+  --hero-slots:4;
   position:relative;
   height:var(--standard-hero-height);
   min-height:var(--standard-hero-height);
   max-height:var(--standard-hero-height);
-  margin-top:var(--site-nav-height,98px);
+  margin:0;
+  width:calc(100% / var(--hero-preview-scale));
+  margin-left:calc((100% - 100% / var(--hero-preview-scale)) / 2);
+  transform:scale(var(--hero-preview-scale));
+  transform-origin:top center;
   padding:0;
   background:#fff;
   box-shadow:none;
@@ -43,3 +60,10 @@
   .hero-carousel[data-standard-hero] .standard-hero-control { min-width:22px; padding:0 3px; }
   .hero-carousel[data-standard-hero] .standard-hero-pause { min-width:35px; font-size:9px; }
 }
+
+/* One moving slide with the original Levi's photo, resized without rotation or retouching. */
+.hero-carousel[data-standard-hero] .corporate-cookie-slide { display:flex; align-items:center; justify-content:center; }
+.hero-carousel[data-standard-hero] .corporate-cookie-collage { display:flex; width:100%; aspect-ratio:3 / 2; max-height:100%; overflow:hidden; background:#fff; }
+.hero-carousel[data-standard-hero] .corporate-cookie-half { position:relative; flex:0 0 50%; min-width:0; overflow:hidden; }
+.hero-carousel[data-standard-hero] .corporate-cookie-half img { width:100%; height:100%; object-fit:contain; }
+.hero-carousel[data-standard-hero] .corporate-cookie-prism img { width:200%; max-width:none; object-fit:contain; }

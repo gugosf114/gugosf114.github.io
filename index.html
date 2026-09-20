@@ -705,9 +705,16 @@
     </header>
 
     <main>
-    <section class="hero hero-carousel hero-home hero-glass">
+    <div class="standard-hero-frame">
+    <section class="hero hero-carousel hero-home hero-glass" data-standard-hero>
         <div class="carousel-track-container">
             <div class="carousel-track">
+                <div class="carousel-slide corporate-cookie-slide">
+                    <div class="corporate-cookie-collage">
+                        <div class="corporate-cookie-half corporate-cookie-prism"><img src="images/gallery/carousel/corporate-prism-levis-collage-v2.png" alt="Prism eightfold.ai rainbow corporate cookies" width="1536" height="1024" fetchpriority="high"></div>
+                        <div class="corporate-cookie-half"><img src="images/gallery/carousel/levis-original-photo.jpg" alt="Original photograph of Levi's hand-piped cookies in their original arrangement" width="949" height="1265" fetchpriority="high"></div>
+                    </div>
+                </div>
                 <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel%201.webp" type="image/webp"><img src="images/gallery/carousel/carousel 1.webp" alt="Custom sculpted birthday cake with fondant decorations" width="707" height="393" fetchpriority="high"></picture></div>
                 <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel%202.webp" type="image/webp"><img src="images/gallery/carousel/carousel 2.webp" alt="Decorated sugar cookies with royal icing designs" width="707" height="429" loading="lazy"></picture></div>
                 <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel%203.webp" type="image/webp"><img src="images/gallery/carousel/carousel 3.webp" alt="Elegant tiered wedding cake with floral accents" width="707" height="391" loading="lazy"></picture></div>
@@ -727,10 +734,10 @@
                 <img src="logo_icon.png" alt="My Baking Creations cake logo" class="hero-logo" width="120" height="110">
                 <div class="hero-badge">Family-Owned Since 2012</div>
                 <h1 class="typewriter-headline"><span class="highlight">Custom Cakes, Cookies</span> <span class="highlight-yellow">&</span> <span class="highlight">Cake Pops</span></h1>
-                                <p class="hero-description">Family-owned Bay Area bakery crafting custom cakes, logo cookies, and cake pops for birthdays, weddings, <a href="corporate-gifting">corporate gifts</a>, and employee appreciation. Trusted by Google, Meta, Salesforce, and Fortune 500 companies since 2012.</p>
+                                <p class="hero-description">Family-owned Bay Area bakery crafting custom cakes, logo cookies, and cake pops for birthdays, weddings, <a href="https://mybakingcreations.com/corporate-gifting">corporate gifts</a>, and employee appreciation. Trusted by Google, Meta, Salesforce, and Fortune 500 companies since 2012.</p>
                 <div class="hero-buttons">
-                    <a href="order-form" class="btn btn-primary">Request an Order</a>
-                    <a href="gallery" class="btn btn-secondary">View Our Work</a>
+                    <a href="https://mybakingcreations.com/order-form" class="btn btn-primary">Request an Order</a>
+                    <a href="https://mybakingcreations.com/gallery" class="btn btn-secondary">View Our Work</a>
                 </div>
             </div>
         </div>
@@ -753,6 +760,7 @@
             </div>
         </a>
     </section>
+    </div>
 
     <section id="services" class="page-content">
         <div class="section-wrapper section-beige reveal">
@@ -1530,8 +1538,8 @@
     }
     </style>
 
-    <script src="carousel.js" defer></script>
-    <script src="hero-lens.js" defer></script>
+    <link rel="stylesheet" href="home-hero-standard.css?v=7">
+    <script src="home-hero-standard.js?v=6" defer></script>
     <script src="tilt-effects.js" defer></script>
     <script src="nav-particles.js" defer></script>
 
