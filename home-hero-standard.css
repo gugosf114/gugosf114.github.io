@@ -22,8 +22,8 @@
 .hero-carousel[data-standard-hero] .hero-content { position:relative; width:min(850px,calc(100% - 48px)); max-width:none; padding:0; margin:0 auto; z-index:2; }
 .hero-carousel[data-standard-hero] .hero-text-box { width:100%; margin:0; box-sizing:border-box; }
 .hero-carousel[data-standard-hero] .hero-dots { display:flex; align-items:center; justify-content:center; gap:4px; width:max-content; max-width:calc(100% - 24px); height:38px; bottom:14px; padding:0 10px; z-index:5; box-shadow:none; }
-.hero-carousel[data-standard-hero] .hero-dot { width:17px; height:28px; margin:0; padding:0; border:0; background:transparent; transform:none; position:relative; flex:none; }
-.hero-carousel[data-standard-hero] .hero-dot::after { content:''; position:absolute; width:8px; height:8px; left:4.5px; top:10px; background:white; border-radius:50%; }
+.hero-carousel[data-standard-hero] .hero-dot { width:17px; height:28px; margin:0; padding:0; border:0; background:transparent; transform:none; position:relative; flex:none; box-shadow:none; appearance:none; transition:none; }
+.hero-carousel[data-standard-hero] .hero-dot::after { content:''; position:absolute; width:8px; height:8px; left:50%; top:50%; transform:translate(-50%,-50%); background:white; border-radius:50%; border:0; box-shadow:none; transition:none; }
 .hero-carousel[data-standard-hero] .hero-dot.active::after { background:var(--pink); }
 .hero-carousel[data-standard-hero] .hero-dot:focus-visible,.hero-carousel[data-standard-hero] .standard-hero-control:focus-visible { outline:2px solid var(--dark-brown); outline-offset:1px; }
 .hero-carousel[data-standard-hero] .standard-hero-control { flex:none; border:0; padding:0 5px; min-width:25px; height:30px; background:transparent; color:var(--dark-brown); cursor:pointer; border-radius:6px; font:800 23px/1 Nunito,sans-serif; }
@@ -39,7 +39,7 @@
   .hero-carousel[data-standard-hero] .hero-text-box { padding:1.25rem 1rem; border-radius:18px; }
   .hero-carousel[data-standard-hero] .hero-dots { bottom:12px; height:34px; padding:0 6px; gap:1px; }
   .hero-carousel[data-standard-hero] .hero-dot { width:15px; }
-  .hero-carousel[data-standard-hero] .hero-dot::after { width:6px; height:6px; left:4.5px; top:11px; }
+  .hero-carousel[data-standard-hero] .hero-dot::after { width:6px; height:6px; }
   .hero-carousel[data-standard-hero] .standard-hero-control { min-width:22px; padding:0 3px; }
   .hero-carousel[data-standard-hero] .standard-hero-pause { min-width:35px; font-size:9px; }
 }

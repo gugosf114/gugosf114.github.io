@@ -16,3 +16,5 @@ at each end, and adapts between three, two and one visible slots. It preserves t
 text panel, handles its resize/touch state, supports swipe/arrows/pause, and suspends work offscreen.
 The CSS is scoped to .hero-carousel[data-standard-hero] so the component can later be reused on other
 pages with their own existing collections. Only the home-page preview has that attribute at present.
+
+Controls revision: inherited dot-button and pseudo-element shadows are explicitly cleared, and dot circles are centered in their click targets. Autoplay starts enabled for everyone; reduced motion controls transition style only. Playback pauses through the explicit Pause button or when the page/hero is not visible. Hovering does not stop playback.
