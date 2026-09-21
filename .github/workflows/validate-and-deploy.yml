@@ -51,6 +51,12 @@ jobs:
       - name: Regenerate sitemap
         run: node generate-sitemap.js
 
+      - name: Image licensing (ImageObject JSON-LD + owner data inside image files)
+        run: |
+          sudo apt-get install -y -qq libimage-exiftool-perl >/dev/null
+          node scripts/image-license.js
+          bash scripts/stamp-images.sh
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
