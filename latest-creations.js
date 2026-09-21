@@ -202,6 +202,8 @@
        pink highlight word, same as "What We Create". */
     var section = document.createElement('section');
     section.className = 'page-content bakers-agent-latest';
+    if (slot.closest('.section-wrapper')) section.classList.add('ba-latest-inset');
+    else if (slot.closest('.page-content')) section.classList.add('ba-latest-contained');
     section.id = 'latest-creations';
 
     var wrapper = document.createElement('div');

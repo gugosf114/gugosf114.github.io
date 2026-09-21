@@ -28,3 +28,8 @@
  #latest-creations .ba-rail .bakers-agent-gallery-card { width:115px; }
  #latest-creations .ba-rail .ba-card-label { font-size:.62rem; padding:6px 8px; }
 }
+
+/* Fit the same strip into existing page sections without nesting another card. */
+#latest-creations.ba-latest-contained { padding-left:0; padding-right:0; }
+#latest-creations.ba-latest-inset { padding:28px 0; }
+#latest-creations.ba-latest-inset > .section-wrapper { margin:0; padding:0; background:transparent; border:0; box-shadow:none; }
