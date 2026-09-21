@@ -18,7 +18,7 @@
     // Bail if neither context marker is present
     if (!isStandalone && !isWidget) return;
 
-    const WORKER_URL = 'https://cakeplugin.summer-lake-b6ea.workers.dev/';
+    const WORKER_URL = 'https://us-central1-bakers-agent.cloudfunctions.net/mbc-cake-design-v1';
 
     // =========================================================
     // SHARED UTILITIES — Color Palette Extraction
@@ -184,7 +184,7 @@
     // SHARED — Worker call helper
     // =========================================================
 
-    var CALL_TIMEOUT = 45000;
+    var CALL_TIMEOUT = 150000;
     var CALLS_PER_DAY = 30;
 
     function callsToday() {
@@ -220,8 +220,12 @@
         return 'Could not draw that just now. Try again.';
     }
 
-    async function callWorker(description, productType, attempt) {
+    async function callWorker(description, productType, edit, attempt) {
+        edit = edit || {};
         attempt = attempt || 0;
+        if (edit.operation === 'edit' && !edit.referenceImage) {
+            return { error: 'Generate a design first, then tell us what to change.' };
+        }
 
         if (attempt === 0 && callsToday() >= CALLS_PER_DAY) {
             return { error: 'You have used up today\'s previews. Send us what you have and we will draw the rest with you.' };
@@ -233,7 +237,7 @@
             var opts = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ description: description, productType: productType || 'cake' })
+                body: JSON.stringify({ description: description, productType: productType || 'cake', operation: edit.operation || 'generate', referenceImage: edit.referenceImage || null, editInstruction: edit.instruction || '' })
             };
             if (ctrl) opts.signal = ctrl.signal;
 
@@ -241,8 +245,9 @@
             if (timer) clearTimeout(timer);
 
             if (!response.ok) {
-                if (response.status >= 500 && attempt < 1) return callWorker(description, productType, attempt + 1);
-                return { error: 'The drawing service is busy. Give it a moment and try again.' };
+                if (response.status >= 500 && attempt < 1) return callWorker(description, productType, edit, attempt + 1);
+                var failure = await response.json().catch(function () { return {}; });
+                return { error: friendlyError(failure.error || 'The drawing service is busy. Give it a moment and try again.') };
             }
             var data = await response.json();
             if (data && data.image) noteCall();
@@ -253,7 +258,7 @@
             if (e && e.name === 'AbortError') {
                 return { error: 'That one took too long. Try again.' };
             }
-            if (attempt < 1) return callWorker(description, productType, attempt + 1);
+            if (attempt < 1) return callWorker(description, productType, edit, attempt + 1);
             if (navigator.onLine === false) {
                 return { error: 'You look offline. Check your connection, then try again.' };
             }
@@ -564,7 +569,9 @@
             refineBtn.style.opacity = '0.6';
 
             try {
-                var data = await callWorker(combinedPrompt, getProductType());
+                var data = await callWorker(combinedPrompt, getProductType(), {
+                    operation: 'edit', referenceImage: prevImage ? prevImage.getAttribute('src') : null, instruction: refinement
+                });
 
                 if (data.error) {
                     if (prevError) {
@@ -923,8 +930,8 @@
             }).join('');
         }
 
-        // Every step redraws the WHOLE cake from everything said so far,
-        // so the customer watches one cake grow instead of six separate pictures.
+        // Keep the full written brief, but edit the previous approved picture.
+        // Text alone cannot preserve the cake's appearance across steps.
         function tierLabel(n, total) {
             if (total <= 1) return 'The cake';
             if (n === 1) return 'The bottom tier';
@@ -1074,6 +1081,7 @@
 
             // if this step was already drawn, show that cake again instead of a blank
             var already = generatedImages[currentStepIndex];
+            if (stepApproveBtn) stepApproveBtn.disabled = !already || already.prompt !== stepData[stepKey];
             if (already && already.image && stepResult && stepResultImage) {
                 stepResultImage.src = already.image;
                 stepResult.style.display = 'block';
@@ -1105,13 +1113,24 @@
                 if (stepLoading) stepLoading.style.display = 'block';
                 if (loadingText) loadingText.textContent = stepDefinitions[stepKey].loadingText;
 
+                // Going back must not use a later, now-outdated step as the reference.
                 var lastGood = null;
-                for (var g = generatedImages.length - 1; g >= 0; g--) {
+                for (var g = currentStepIndex; g >= 0; g--) {
                     if (generatedImages[g] && generatedImages[g].image) { lastGood = generatedImages[g].image; break; }
                 }
+                var totalTiers = builderTiers ? (parseInt(builderTiers.value, 10) || 1) : 1;
+                var target = stepKey === 'cakeboard' ? 'the cakeboard' : stepKey === 'topper' ? 'the topper' :
+                    stepKey.indexOf('writing_') === 0 ? 'the writing on the ' + writingWhere(stepKey.slice(8), totalTiers) :
+                    tierLabel(parseInt(stepKey.slice(4), 10), totalTiers);
+                var editRequest = lastGood ? {
+                    operation: 'edit', referenceImage: lastGood,
+                    instruction: 'Update only ' + target + ': ' + prompt + '. Keep all other approved cake details unchanged.'
+                } : {};
+                if (stepApproveBtn) stepApproveBtn.disabled = true;
+                if (stepGenerateBtn) stepGenerateBtn.disabled = true;
 
                 try {
-                    var data = await callWorker(buildCumulativePrompt(currentStepIndex), 'cake');
+                    var data = await callWorker(buildCumulativePrompt(currentStepIndex), 'cake', editRequest);
 
                     if (stepLoading) stepLoading.style.display = 'none';
 
@@ -1137,6 +1156,7 @@
                         };
                         // the cake just changed, so every later picture is out of date
                         generatedImages.length = currentStepIndex + 1;
+                        if (stepApproveBtn) stepApproveBtn.disabled = false;
                     }
                 } catch (err) {
                     console.error('Builder step error:', err);
@@ -1150,6 +1170,8 @@
                         stepResult.style.display = 'block';
                     }
                     if (currentStepContent) currentStepContent.style.display = 'block';
+                } finally {
+                    if (stepGenerateBtn) stepGenerateBtn.disabled = false;
                 }
             });
         }

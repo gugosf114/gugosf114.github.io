@@ -1,0 +1,17 @@
+--gen2: true
+--project: bakers-agent
+--region: us-central1
+--runtime: python312
+--source: cloud-functions/cake-design
+--entry-point: cake_design
+--trigger-http: true
+--allow-unauthenticated: true
+--service-account: mbc-cookie-design@bakers-agent.iam.gserviceaccount.com
+--set-secrets: "GEMINI_API_KEY=gemini-api-key:latest,DESIGN_SIGNING_KEY=openai-api-key:latest"
+--env-vars-file: cloud-functions/cake-design/env.yaml
+--timeout: 180s
+--memory: 512Mi
+--cpu: '1'
+--max-instances: '3'
+--concurrency: '4'
+--quiet: true
