@@ -1,0 +1,17 @@
+--gen2: true
+--project: bakers-agent
+--region: us-central1
+--runtime: python312
+--source: cloud-functions/quote-references
+--entry-point: quote_references
+--trigger-http: true
+--allow-unauthenticated: true
+--service-account: mbc-cookie-design@bakers-agent.iam.gserviceaccount.com
+--set-secrets: "REFERENCE_SIGNING_KEY=mbc-quote-files-signing-key:latest"
+--env-vars-file: cloud-functions/quote-references/env.yaml
+--timeout: 180s
+--memory: 512Mi
+--cpu: '1'
+--max-instances: '3'
+--concurrency: '4'
+--quiet: true
