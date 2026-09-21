@@ -234,7 +234,7 @@
 
     <!-- ABOUT HERO -->
     <div class="standard-hero-frame">
-    <section class="hero hero-carousel hero-subpage" data-standard-hero>
+    <section class="hero hero-carousel hero-home" data-standard-hero>
         <div class="carousel-track-container">
             <div class="carousel-track">
                 <div class="carousel-slide corporate-cookie-slide">
@@ -259,9 +259,14 @@
         </div>
         <div class="hero-content">
             <div class="hero-text-box">
-                <p class="hero-breadcrumb"><a href="/">Home</a> / About Us</p>
-                <h1 class="typewriter-headline"><span class="highlight-yellow">About</span><br><span class="highlight">My Baking Creations</span></h1>
-                <p class="hero-subtitle">San Francisco bakery known locally for ultra-realistic, highly artistic cake designs—serving personal celebrations and Fortune 500 companies since 2012</p>
+                <img src="logo_icon.png" alt="My Baking Creations cake logo" class="hero-logo" width="120" height="110">
+                <div class="hero-badge">Family-Owned Since 2012</div>
+                <h1 class="typewriter-headline"><span class="highlight">Meet the family</span> <span class="highlight-yellow">behind</span> <span class="highlight">the frosting.</span></h1>
+                                <p class="hero-description">Making celebrations personal since 2012.</p>
+                <div class="hero-buttons">
+                    <a href="#about-content" class="btn btn-primary">Our Story</a>
+                    <a href="https://mybakingcreations.com/order-form" class="btn btn-secondary">Request an Order</a>
+                </div>
             </div>
         </div>
         <div class="hero-dots">
@@ -965,13 +970,14 @@
         position: relative;
         overflow: hidden;
         background: #ffffff;
+        padding: 6rem 2rem 3rem;
     }
     .hero-carousel::before,
     .hero-carousel::after {
         display: none;
     }
-    /* Subpage hero - consistent smaller size */
-    .hero-subpage {
+    /* Homepage keeps larger hero */
+    .hero-home {
         min-height: 600px;
         padding: 6rem 2rem 3rem;
         margin-top: 3rem;
@@ -1010,24 +1016,33 @@
         position: relative;
         z-index: 2;
     }
+    /* Text box - semi-transparent grey background for readability */
     .hero-text-box {
-        background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.45) 100%);
-        padding: 2rem 2.5rem;
+        background: linear-gradient(180deg, rgba(0,0,0,0.40) 0%, rgba(0,0,0,0.32) 100%);
+        padding: 2.5rem 3rem;
         border-radius: 20px;
         max-width: 850px;
         margin: 0 auto;
-        min-height: 220px;
+    }
+    .hero-carousel .hero-logo {
+        filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+    }
+    .hero-carousel .hero-badge {
+        background: var(--yellow);
+        color: var(--dark-brown);
+        text-shadow: none;
     }
     .hero-carousel h1 {
         color: white;
         text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
-        min-height: 80px;
-    }
-    .hero-carousel h1.typewriter-headline {
-        min-height: 140px; /* Fixed height for 2 lines - prevents layout shift during typewriter */
+        min-height: 2.4em;
     }
     .hero-carousel h1 .highlight {
         color: var(--pink);
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    }
+    .hero-carousel h1 .highlight-yellow {
+        color: var(--yellow);
         text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
     }
     .hero-carousel .hero-subtitle {
@@ -1035,15 +1050,23 @@
         color: white;
         text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
     }
+    .hero-carousel .hero-description {
+        font-size: 1.43rem;
+        color: white;
+        font-weight: 600;
+        max-width: 700px;
+        margin: 0 auto 2rem;
+        text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+    }
     .hero-dots {
         position: absolute;
-        bottom: 20px;
+        bottom: 15px;
         left: 50%;
         transform: translateX(-50%);
         display: flex;
         gap: 8px;
         z-index: 4;
-        background: var(--yellow); /* Brand yellow #FFC532 */
+        background: var(--yellow) !important; /* Brand yellow #FFC532 */
         padding: 10px 16px;
         border-radius: 20px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.2);
@@ -1055,9 +1078,10 @@
         border: 2px solid white;
         background: white;
         cursor: pointer;
-        transition: all 0.3s ease;
+        /* Only animate compositable properties (transform, opacity) to avoid jank */
+        transition: transform 0.3s ease, opacity 0.3s ease;
         padding: 0;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.15);
     }
     .hero-dot:hover {
         background: var(--pink);
@@ -1073,24 +1097,81 @@
         .carousel-slide {
             flex: 0 0 100%;
         }
-        .hero-subpage {
-            min-height: 500px;
-            padding: 5rem 1.5rem 2.5rem;
-        }
         .hero-text-box {
-            padding: 1.5rem 1.5rem;
-            margin: 0 1rem;
+            padding: 1.25rem 1rem;
+            margin: 0 0.5rem;
+            border-radius: 15px;
+        }
+        /* CRITICAL: Fixed height container for typewriter headline to prevent layout shift */
+        .hero-text-box h1.typewriter-headline {
+            font-size: 1.5rem !important;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+            /* Fixed height to fit "Custom Cakes, Cookies & Cake Pops" on 2 lines */
+            height: 3.9rem;
+            min-height: 3.9rem;
+            max-height: 3.9rem;
+            overflow: hidden;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-start;
+            justify-content: center;
+        }
+        .hero-carousel .hero-description {
+            font-size: 0.95rem !important;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        .hero-carousel .hero-badge {
+            font-size: 0.75rem;
+            padding: 0.35rem 0.8rem;
+            margin-bottom: 0.75rem;
+        }
+        .hero-carousel .hero-logo {
+            width: 60px;
+            margin-bottom: 0.75rem;
         }
         .hero-dots {
-            bottom: 15px;
-            gap: 6px;
+            bottom: 10px;
+            gap: 5px;
+            padding: 6px 10px;
         }
         .hero-dot {
-            width: 8px;
-            height: 8px;
+            width: 7px;
+            height: 7px;
         }
-        .hero-carousel h1.typewriter-headline {
-            min-height: 120px; /* Fixed height for 2 lines on mobile */
+        .hero-home {
+            min-height: auto;
+            padding: 5rem 1rem 2.5rem;
+            margin-top: 70px;
+        }
+        .hero-buttons {
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .hero-buttons .btn {
+            width: 100%;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.9rem;
+        }
+    }
+    @media (max-width: 480px) {
+        .hero-home {
+            padding: 4.5rem 0.75rem 2rem;
+        }
+        .hero-text-box {
+            padding: 1rem 0.75rem;
+            margin: 0 0.25rem;
+        }
+        .hero-text-box h1.typewriter-headline {
+            font-size: 1.3rem !important;
+            /* Slightly smaller height for smaller screens */
+            height: 3.4rem;
+            min-height: 3.4rem;
+            max-height: 3.4rem;
+        }
+        .hero-carousel .hero-description {
+            font-size: 0.85rem !important;
         }
     }
 
@@ -1435,26 +1516,7 @@
     <!-- AI Chatbot Widget -->
     <link rel="stylesheet" href="chatbot.css?v=2">
     <script src="chatbot.js?v=2" defer></script>
-    <style>
-    .hero-carousel[data-standard-hero] .hero-text-box {
-        background:linear-gradient(180deg,rgba(0,0,0,.40),rgba(0,0,0,.32));
-        padding:2.5rem 3rem;
-        min-height:0;
-    }
-    @media(max-width:768px) {
-        .hero-carousel[data-standard-hero] h1.typewriter-headline {
-            font-size:1.5rem;
-            line-height:1.3;
-            min-height:3.9rem;
-            margin-bottom:.5rem;
-        }
-        .hero-carousel[data-standard-hero] .hero-subtitle {
-            font-size:.95rem;
-            line-height:1.5;
-            margin-bottom:0;
-        }
-    }
-    </style>
+
     <link rel="stylesheet" href="home-hero-standard.css?v=9">
     <script src="home-hero-standard.js?v=7" defer></script>
 </body>
