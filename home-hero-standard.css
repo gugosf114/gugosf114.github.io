@@ -46,7 +46,6 @@
 .hero-carousel[data-standard-hero] .standard-hero-control { flex:none; border:0; padding:0 5px; min-width:25px; height:30px; background:transparent; color:var(--dark-brown); cursor:pointer; border-radius:6px; font:800 23px/1 Nunito,sans-serif; }
 .hero-carousel[data-standard-hero] .standard-hero-pause { font-size:10px; min-width:41px; }
 .hero-carousel[data-standard-hero] .standard-hero-control:hover { background:#ffffff50; }
-.hero-carousel[data-standard-hero] .lens-strip { gap:0; }
 @media(min-width:769px) and (max-width:1100px) {
   .hero-carousel[data-standard-hero] { --hero-slots:2; }
 }
