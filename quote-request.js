@@ -3,7 +3,7 @@
   const $=id=>document.getElementById(id),form=$('quotePreviewForm');
   const products={Cake:{key:'cake',unit:'servings',hint:'How many people should the cake serve?',flavors:['Strawberry Vanilla Cream','Chocolate Mousse','Lemon Orange Cream','Blueberry Lavender Cream']},Cookies:{key:'cookies',unit:'cookies',hint:'How many individual cookies?',flavors:['Vanilla Shortbread','Chocolate Shortbread','Lemon Orange Shortbread','Gingerbread']},'Cake Pops':{key:'pops',unit:'cake pops',hint:'How many individual cake pops?',flavors:['Vanilla','Chocolate']},Cupcakes:{key:'cupcakes',unit:'cupcakes',hint:'How many individual cupcakes?',flavors:['Vanilla','Chocolate']}};
   Object.entries(products).forEach(([name,meta])=>{meta.minimum=name==='Cake'?1:12;if(meta.minimum===12)meta.hint+=' Minimum 12; add any number after that.';});
-  let step=0,furthest=0,files=[],fileUrls=[],items={},saveTimer,hydrating=false;
+  let step=2,furthest=0,files=[],fileUrls=[],items={},saveTimer,hydrating=false;
   const emptySketch=()=>({image:'',brief:'',changes:[],change:'',open:false,minimized:false,version:0,attachedVersion:-1,attachedName:'',appliedNote:''});
   let sketch=emptySketch(),sketchBusy=false,sketchUsing=false,sketchController=null,sketchRequest=0;
   let submitting=false,submissionCompleted=false,submissionId='',submissionFingerprint='',referenceCache={key:'',references:[]};
@@ -98,18 +98,19 @@
     const percent=(selection.length?25:0)+(done[0]?25:0)+(done[1]?25:0)+(done[2]?25:0);
     let message='3 quick sections. Everything is on this page.';
     if(percent===100)message='Ready to send. We’ll take it from here.';
+    else if(done[2]&&done[0])message='Almost done—just the event details.';
     else if(done[0]&&done[1])message=$('qName').value.trim()?'Almost done—just your email.':'Almost done—just your name and email.';
     else if(done[0])message=done[2]?'Just the event details left.':'Your treats are set. Two short sections left.';
     else if(selection.length)message='Good start. Add your idea or a reference.';
-    else if(done[2])message='Contact details are in. Choose your treats next.';
+    else if(done[2])message='Your details are in. Two quick sections left.';
     else if(done[1])message='Event details are in. Choose your treats next.';
     if(submitting)message='Sending your request…';
     const text=$('qProgressCopy');if(text.textContent!==message)text.textContent=message;
     const progress=root.querySelector('.q-step-progress');progress.setAttribute('aria-valuenow',String(percent));progress.setAttribute('aria-valuetext',percent+'% complete. '+message);progress.firstElementChild.style.width=percent+'%';
-    root.querySelectorAll('[data-step-link]').forEach(button=>{const index=Number(button.dataset.stepLink);button.disabled=submitting;button.classList.toggle('q-done',done[index]);button.querySelector('i').textContent=done[index]?'✓':String(index+1);});
+    root.querySelectorAll('[data-step-link]').forEach(button=>{const index=Number(button.dataset.stepLink);button.disabled=submitting;button.classList.toggle('q-done',done[index]);button.querySelector('i').textContent=done[index]?'✓':String({2:1,0:2,1:3}[index]);});
     root.querySelectorAll('[data-step]').forEach(section=>{
       const index=Number(section.dataset.step);section.dataset.complete=String(done[index]);
-      section.querySelector('.q-step-count span').textContent=done[index]?['Your treats are set.','Your event details are set.','Ready to send.'][index]:['Choose and describe.','When and where.','Your name and email—the last required details.'][index];
+      section.querySelector('.q-step-count span').textContent=done[index]?['Your treats are set.','Your event details are set.','Your contact details are set.'][index]:['Choose and describe.','The last section—then send.','Start with your name and email.'][index];
     });
     if(!submitting)$('qNextHint').textContent=percent===100?'Ready to send. No payment required.':'No payment required to request a quote.';
   }
@@ -163,7 +164,7 @@
   }
   form.addEventListener('submit',async event=>{
     event.preventDefault();if(submitting||submissionCompleted)return;
-    rememberItems();const errors=[...errorsFor(0),...errorsFor(1),...errorsFor(2)];
+    rememberItems();const errors=[...errorsFor(2),...errorsFor(0),...errorsFor(1)];
     if(errors.length){showErrors(errors);return;}
     clearErrors();
     const values={};fieldIds.forEach(id=>values[id]=$(id).type==='checkbox'?$(id).checked:$(id).value);
@@ -238,10 +239,10 @@
   async function restore(){
     hydrating=true;
     try{const db=await database();const draft=await new Promise((resolve,reject)=>{const request=db.transaction('drafts').objectStore('drafts').get('current');request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error);});
-      if(draft&&Date.now()-draft.savedAt<3*86400000){items=draft.items||{};files=draft.files||[];submissionId=draft.submissionId||'';submissionFingerprint=draft.submissionFingerprint||'';referenceCache=draft.referenceCache||{key:'',references:[]};sketch=Object.assign(emptySketch(),draft.sketch||{});$('qSketchChange').value=sketch.change||'';fieldIds.forEach(id=>{if(draft.values[id]!==undefined){if($(id).type==='checkbox')$(id).checked=!!draft.values[id];else $(id).value=draft.values[id];}});form.querySelectorAll('[name="products"]').forEach(e=>e.checked=draft.products.includes(e.value));form.querySelectorAll('[name="fulfillment"]').forEach(e=>e.checked=e.value===draft.fulfillment);furthest=draft.furthest||0;renderProducts();renderFiles();eventState();setStep(draft.step||0,false);updateSummary();$('qDraftStatus').textContent='Your saved draft is restored.';}
+      if(draft&&Date.now()-draft.savedAt<3*86400000){items=draft.items||{};files=draft.files||[];submissionId=draft.submissionId||'';submissionFingerprint=draft.submissionFingerprint||'';referenceCache=draft.referenceCache||{key:'',references:[]};sketch=Object.assign(emptySketch(),draft.sketch||{});$('qSketchChange').value=sketch.change||'';fieldIds.forEach(id=>{if(draft.values[id]!==undefined){if($(id).type==='checkbox')$(id).checked=!!draft.values[id];else $(id).value=draft.values[id];}});form.querySelectorAll('[name="products"]').forEach(e=>e.checked=draft.products.includes(e.value));form.querySelectorAll('[name="fulfillment"]').forEach(e=>e.checked=e.value===draft.fulfillment);furthest=draft.furthest||0;renderProducts();renderFiles();eventState();setStep(draft.step??2,false);updateSummary();$('qDraftStatus').textContent='Your saved draft is restored.';}
     }catch{}finally{hydrating=false;}
   }
-  $('qClearDraft').addEventListener('click',()=>{clearTimeout(saveTimer);submitting=false;submissionCompleted=false;submissionId='';submissionFingerprint='';referenceCache={key:'',references:[]};sketchRequest++;sketchController?.abort();sketchController=null;sketchBusy=false;sketchUsing=false;sketch=emptySketch();form.reset();$('qSketchChange').value='';items={};files=[];furthest=0;renderProducts();renderFiles();eventState();form.hidden=false;$('qComplete').hidden=true;setStep(0);updateSummary();saveNow();});
+  $('qClearDraft').addEventListener('click',()=>{clearTimeout(saveTimer);submitting=false;submissionCompleted=false;submissionId='';submissionFingerprint='';referenceCache={key:'',references:[]};sketchRequest++;sketchController?.abort();sketchController=null;sketchBusy=false;sketchUsing=false;sketch=emptySketch();form.reset();$('qSketchChange').value='';items={};files=[];furthest=0;renderProducts();renderFiles();eventState();form.hidden=false;$('qComplete').hidden=true;setStep(2);updateSummary();saveNow();});
   function sketchError(message){$('qSketchError').textContent=message;$('qSketchError').hidden=!message;}
   function syncSketch(){
     const cake=picked().includes('Cake'),has=!!sketch.image,attached=!!sketch.attachedName&&files.some(file=>file.name===sketch.attachedName);
@@ -385,9 +386,9 @@
   const progressDock=root.querySelector('.q-open-progress');
   const measureProgress=()=>root.style.setProperty('--q-progress-height',progressDock.getBoundingClientRect().height+'px');
   new ResizeObserver(measureProgress).observe(progressDock);measureProgress();
-  $('qJumpFinish').addEventListener('click',()=>{setStep(2,false);$('qFinish').scrollIntoView({block:'end',behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'});$('qFinish').focus({preventScroll:true});});
+  $('qJumpFinish').addEventListener('click',()=>{setStep(1,false);$('qFinish').scrollIntoView({block:'end',behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'});$('qFinish').focus({preventScroll:true});});
   form.addEventListener('focusin',event=>{const section=event.target.closest('[data-step]');if(section&&Number(section.dataset.step)!==step)setStep(Number(section.dataset.step),false);});
   let scrollFrame=0;
-  window.addEventListener('scroll',()=>{if(scrollFrame)return;scrollFrame=requestAnimationFrame(()=>{scrollFrame=0;if(form.hidden)return;const boundary=(header?.getBoundingClientRect().height||96)+progressDock.getBoundingClientRect().height+45;let visibleStep=0;root.querySelectorAll('[data-step]').forEach(section=>{if(section.getBoundingClientRect().top<=boundary)visibleStep=Number(section.dataset.step);});if(visibleStep!==step)setStep(visibleStep,false);});},{passive:true});
-  renderProducts();eventState();updateSummary();setStep(0,false);restore();
+  window.addEventListener('scroll',()=>{if(scrollFrame)return;scrollFrame=requestAnimationFrame(()=>{scrollFrame=0;if(form.hidden)return;const boundary=(header?.getBoundingClientRect().height||96)+progressDock.getBoundingClientRect().height+45;let visibleStep=2;root.querySelectorAll('[data-step]').forEach(section=>{if(section.getBoundingClientRect().top<=boundary)visibleStep=Number(section.dataset.step);});if(visibleStep!==step)setStep(visibleStep,false);});},{passive:true});
+  renderProducts();eventState();updateSummary();setStep(2,false);restore();
 })();

@@ -204,8 +204,10 @@
     </header>
 
     <main id="quotePreview" class="quote-preview quote-open">
-  <div class="q-heading"><div class="q-intro-copy"><p>Get a custom quote</p><h1>Three quick sections.<span>All on one page.</span></h1><div>Everything is on this page: your treats, your event, then your name and email. <strong>We’ll take it from there.</strong></div></div><div class="q-service-promise"><span class="q-promise-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><p><strong>Within 24 hours</strong>A personal reply from our bakery.<small>No payment to send a request.</small></p></div></div>
-  <div class="q-open-progress"><nav class="q-steps" aria-label="Quote request progress"><button type="button" data-step-link="0" aria-current="step"><i>1</i><span><strong>Your treats</strong><small>Choose &amp; describe</small></span></button><button type="button" data-step-link="1"><i>2</i><span><strong>Your event</strong><small>When &amp; where</small></span></button><button type="button" data-step-link="2"><i>3</i><span><strong>Contact &amp; send</strong><small>Name &amp; email</small></span></button></nav><div class="q-progress-message"><p id="qProgressCopy" aria-live="polite">Everything is on this page.</p><button type="button" id="qJumpFinish" aria-label="Jump to the send request button">See the finish ↓</button></div><div class="q-step-progress" role="progressbar" aria-label="Quote request completion" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div></div>
+  <div class="q-heading"><div class="q-intro-copy"><p>Get a custom quote</p><h1>Three quick sections.<span>All on one page.</span></h1><div>Everything is on this page: your contact details, your treats, then your event. <strong>We’ll take it from there.</strong></div></div><div class="q-service-promise"><span class="q-promise-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><p><strong>Within 24 hours</strong>A personal reply from our bakery.<small>No payment to send a request.</small></p></div></div>
+  <div class="q-open-progress"><nav class="q-steps" aria-label="Quote request progress"><button type="button" data-step-link="2" aria-current="step"><i>1</i><span><strong>Your details</strong><small>Name, email &amp; phone</small></span></button>
+<button type="button" data-step-link="0"><i>2</i><span><strong>Your treats</strong><small>Choose &amp; describe</small></span></button>
+<button type="button" data-step-link="1"><i>3</i><span><strong>Your event</strong><small>When &amp; where</small></span></button></nav><div class="q-progress-message"><p id="qProgressCopy" aria-live="polite">Everything is on this page.</p><button type="button" id="qJumpFinish" aria-label="Jump to the send request button">See the finish ↓</button></div><div class="q-step-progress" role="progressbar" aria-label="Quote request completion" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div></div>
   <div class="q-layout">
     <div class="q-main-card">
       
@@ -214,8 +216,15 @@
 <input type="hidden" name="from_name" value="My Baking Creations Website">
 <input type="hidden" name="redirect" value="https://mybakingcreations.com/thank-you">
 <input type="hidden" name="subject" value="New Order Inquiry - My Baking Creations">
+        <section class="q-step" data-step="2" aria-labelledby="qReviewTitle">
+          <div class="q-step-count">1 of 3<span>Start with your name and email.</span></div><h2 id="qReviewTitle" tabindex="-1">First, how can we reach you?</h2><p class="q-lead">Your name and email are all we need to get started. Phone is optional.</p>
+          
+          <div class="q-two-fields"><div><label for="qName" class="q-label">Your name</label><input id="qName" name="name" type="text" autocomplete="name" placeholder="First and last name" required><p id="qNameError" class="q-field-error" hidden></p></div><div><label for="qEmail" class="q-label">Email for your quote</label><input id="qEmail" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required><p id="qEmailError" class="q-field-error" hidden></p></div></div>
+          <label for="qPhone" class="q-label">Phone number <span>Optional</span></label><input id="qPhone" name="phone" type="tel" autocomplete="tel" placeholder="Helpful if we need to clarify a detail">
+          <p class="q-small">Your request starts a conversation. We’ll confirm the final design, price, and availability before an order is booked.</p>
+        </section>
         <section class="q-step" data-step="0" aria-labelledby="qTreatTitle">
-          <div class="q-step-count">1 of 3<span>Let’s start with the fun part.</span></div><h2 id="qTreatTitle" tabindex="-1">Choose your treats.</h2><p class="q-lead">Pick what we’re making and share your idea. An estimate or a reference photo is a good start.</p>
+          <div class="q-step-count">2 of 3<span>Choose and describe.</span></div><h2 id="qTreatTitle" tabindex="-1">Choose your treats.</h2><p class="q-lead">Pick what we’re making and share your idea. An estimate or a reference photo is a good start.</p>
           <fieldset class="q-products"><legend class="q-sr">Choose your treats</legend>
             <label class="q-product"><input type="checkbox" name="products" value="Cake"><span class="q-product-visual"><img src="images/gallery/categoryplaceholder/cakes.webp" alt="" width="280" height="280"><i aria-hidden="true">✓</i></span><strong>Cake</strong></label>
             <label class="q-product"><input type="checkbox" name="products" value="Cookies"><span class="q-product-visual"><img src="images/gallery/categoryplaceholder/cookies.webp" alt="" width="280" height="280"><i aria-hidden="true">✓</i></span><strong>Cookies</strong></label>
@@ -253,7 +262,7 @@
           </div>
         </section>
         <section class="q-step" data-step="1" aria-labelledby="qEventTitle">
-          <div class="q-step-count">2 of 3<span>When and where.</span></div><h2 id="qEventTitle" tabindex="-1">Tell us when and where.</h2><p class="q-lead">Choose your date and pickup or delivery. Still undecided? You can tell us that, too.</p>
+          <div class="q-step-count">3 of 3<span>When and where.</span></div><h2 id="qEventTitle" tabindex="-1">Tell us when and where.</h2><p class="q-lead">Choose your date and pickup or delivery. Still undecided? You can tell us that, too.</p>
           <label for="qOccasion" class="q-label">What’s the occasion? <span>Optional</span></label><input id="qOccasion" name="occasion" type="text" placeholder="Birthday, team celebration, wedding…" maxlength="200">
           <div class="q-date-heading"><label for="qDate" class="q-label">Event date</label><label class="q-check"><input id="qDateUnsure" name="dateUnsure" type="checkbox"><span>Date not set yet</span></label></div><input id="qDate" name="date" type="date"><p id="qDateError" class="q-field-error" hidden></p>
           <p class="q-rush" id="qRush" hidden>Your date is coming up. <a href="tel:+14155688060">Call</a> or <a href="sms:+14155688060">text us</a> to check availability while we review your request.</p>
@@ -261,13 +270,7 @@
           <div class="q-pickup" id="qPickup" hidden><strong>Daly City kitchen</strong><p>1096 Wildwood Ave, Daly City, CA 94015</p><span>We’ll arrange pickup details with you.</span></div>
           <div id="qDelivery" hidden><label for="qLocation" class="q-label">Delivery city or ZIP code</label><input id="qLocation" name="location" type="text" placeholder="City or ZIP code" autocomplete="address-level2"><p class="q-small">That’s enough to start. We’ll confirm the exact address and delivery details later.</p><p id="qLocationError" class="q-field-error" hidden></p></div>
         </section>
-        <section class="q-step" data-step="2" aria-labelledby="qReviewTitle">
-          <div class="q-step-count">3 of 3<span>Your name and email are the last required details.</span></div><h2 id="qReviewTitle" tabindex="-1">Where should we send your quote?</h2><p class="q-lead">Add your name and email. The Send button is right below—there are no more pages.</p>
-          
-          <div class="q-two-fields"><div><label for="qName" class="q-label">Your name</label><input id="qName" name="name" type="text" autocomplete="name" placeholder="First and last name" required><p id="qNameError" class="q-field-error" hidden></p></div><div><label for="qEmail" class="q-label">Email for your quote</label><input id="qEmail" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required><p id="qEmailError" class="q-field-error" hidden></p></div></div>
-          <label for="qPhone" class="q-label">Phone number <span>Optional</span></label><input id="qPhone" name="phone" type="tel" autocomplete="tel" placeholder="Helpful if we need to clarify a detail">
-          <p class="q-small">Your request starts a conversation. We’ll confirm the final design, price, and availability before an order is booked.</p>
-        </section>
+        
         <details class="q-final-review"><summary>Review your details</summary><div id="qReview" class="q-review"></div></details>
         <div id="qFormError" class="q-error-summary" role="alert" hidden></div>
         <p class="q-submit-intro">That’s the whole form.</p><div class="q-form-actions" id="qFinish" tabindex="-1"><button type="button" id="qBack" class="q-back" hidden>Back</button><button type="submit" id="qNext" class="q-primary">Send my quote request</button></div><p id="qNextHint" class="q-next-hint">No payment required to request a quote.</p>
@@ -356,6 +359,6 @@
 
     <!-- Event Date: "Not sure yet" toggle -->
     <script src="autoresponder.js" defer></script>
-    <script src="quote-request.js?v=2" defer></script>
+    <script src="quote-request.js?v=3" defer></script>
 </body>
 </html>
