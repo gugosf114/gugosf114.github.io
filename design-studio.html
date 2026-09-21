@@ -159,7 +159,7 @@
 
     <!-- DESIGN STUDIO HERO -->
     <div class="standard-hero-frame">
-    <section class="hero hero-carousel hero-subpage" data-standard-hero>
+    <section class="hero hero-carousel hero-home" data-standard-hero>
         <div class="carousel-track-container">
             <div class="carousel-track">
                 <div class="carousel-slide corporate-cookie-slide">
@@ -184,10 +184,14 @@
         </div>
         <div class="hero-content">
             <div class="hero-text-box">
-                <p class="hero-breadcrumb"><a href="/">Home</a> / Design Studio</p>
-                <h1 class="typewriter-headline">Design <span class="highlight">Studio</span></h1>
-                <p class="hero-subtitle">See your cake idea come to life with AI</p>
-                <a href="javascript:history.back()" class="back-link">&larr; Back</a>
+                <img src="logo_icon.png" alt="My Baking Creations cake logo" class="hero-logo" width="120" height="110">
+                <div class="hero-badge">Family-Owned Since 2012</div>
+                <h1 class="typewriter-headline"><span class="highlight">Let’s see</span> <span class="highlight-yellow">what</span> <span class="highlight">you’re imagining.</span></h1>
+                                <p class="hero-description">Explore your cake idea with AI, then make it your own.</p>
+                <div class="hero-buttons">
+                    <a href="https://mybakingcreations.com/order-form" class="btn btn-primary">Request an Order</a>
+                    <a href="https://mybakingcreations.com/buy-now" class="btn btn-secondary">Order Now</a>
+                </div>
             </div>
         </div>
         <div class="hero-dots">
@@ -882,26 +886,8 @@
 
     <!-- Nav Geometric Shapes -->
     <script src="nav-geo.js" defer></script>
-    <style>
-    .hero-carousel[data-standard-hero] .hero-text-box {
-        background:linear-gradient(180deg,rgba(0,0,0,.40),rgba(0,0,0,.32));
-        padding:2.5rem 3rem;
-        min-height:0;
-    }
-    @media(max-width:768px) {
-        .hero-carousel[data-standard-hero] h1.typewriter-headline {
-            font-size:1.5rem;
-            line-height:1.3;
-            min-height:3.9rem;
-            margin-bottom:.5rem;
-        }
-        .hero-carousel[data-standard-hero] .hero-subtitle {
-            font-size:.95rem;
-            line-height:1.5;
-            margin-bottom:0;
-        }
-    }
-    </style>
+
+    <link rel="stylesheet" href="hero-panel-standard.css?v=1">
     <link rel="stylesheet" href="home-hero-standard.css?v=9">
     <script src="home-hero-standard.js?v=7" defer></script>
 </body>
