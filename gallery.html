@@ -169,20 +169,28 @@
     <main>
 
     <!-- GALLERY HERO -->
-    <section class="hero hero-carousel hero-subpage hero-glass">
-        <!-- 3-Image Carousel Track - Starting at image 3 -->
+    <div class="standard-hero-frame">
+    <section class="hero hero-carousel hero-subpage hero-glass" data-standard-hero>
         <div class="carousel-track-container">
             <div class="carousel-track">
-                <div class="carousel-slide"><img fetchpriority="high" loading="lazy" width="1680" height="929" src="images/gallery/carousel/carousel 3.webp" alt="Elegant tiered wedding cake with floral accents"></div>
-                <div class="carousel-slide"><img loading="lazy" width="1920" height="873" src="images/gallery/carousel/carousel 4.webp" alt="Custom themed cake pops for special events"></div>
-                <div class="carousel-slide"><img loading="lazy" width="1200" height="658" src="images/gallery/carousel/carousel 5.webp" alt="Corporate logo cookies for business events"></div>
-                <div class="carousel-slide"><img loading="lazy" width="2355" height="1216" src="images/gallery/carousel/carousel 10.webp" alt="Realistic sculpted cake design by My Baking Creations"></div>
-                <div class="carousel-slide"><img loading="lazy" width="1920" height="1383" src="images/gallery/carousel/carousel 7.webp" alt="Hand-piped decorated cookies for celebrations"></div>
-                <div class="carousel-slide"><img loading="lazy" width="1920" height="792" src="images/gallery/carousel/carousel 8.webp" alt="Custom cupcakes with elegant frosting designs"></div>
-                <div class="carousel-slide"><img loading="lazy" width="1920" height="1186" src="images/gallery/carousel/carousel 9.webp" alt="Artisan baked goods from Bay Area bakery"></div>
-                <div class="carousel-slide"><img loading="lazy" width="1920" height="1066" src="images/gallery/carousel/carousel 1.webp" alt="Custom sculpted birthday cake with fondant decorations"></div>
-                <div class="carousel-slide"><img loading="lazy" width="1920" height="1166" src="images/gallery/carousel/carousel 2.webp" alt="Decorated sugar cookies with royal icing designs"></div>
-                <div class="carousel-slide"><img loading="lazy" width="1920" height="930" src="images/gallery/carousel/carousel 6.webp" alt="Custom celebration cake by My Baking Creations"></div>
+                <div class="carousel-slide corporate-cookie-slide">
+                    <div class="corporate-cookie-collage">
+                        <div class="corporate-cookie-half corporate-cookie-prism"><img src="images/gallery/carousel/corporate-prism-levis-collage-v2.png" alt="Prism eightfold.ai rainbow corporate cookies" width="1536" height="1024" fetchpriority="high"></div>
+                        <div class="corporate-cookie-half"><img src="images/gallery/carousel/levis-original-photo.jpg" alt="Original photograph of Levi's hand-piped cookies in their original arrangement" width="949" height="1265" fetchpriority="high"></div>
+                    </div>
+                </div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel%201.webp" type="image/webp"><img src="images/gallery/carousel/carousel 1.webp" alt="Custom sculpted birthday cake with fondant decorations" width="707" height="393" fetchpriority="high"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel%202.webp" type="image/webp"><img src="images/gallery/carousel/carousel 2.webp" alt="Decorated sugar cookies with royal icing designs" width="707" height="429" loading="lazy"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel%203.webp" type="image/webp"><img src="images/gallery/carousel/carousel 3.webp" alt="Elegant tiered wedding cake with floral accents" width="707" height="391" loading="lazy"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel%204.webp" type="image/webp"><img src="images/gallery/carousel/carousel 4.webp" alt="Custom themed cake pops for special events" width="707" height="321" loading="lazy"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel%205.webp" type="image/webp"><img src="images/gallery/carousel/carousel 5.webp" alt="Corporate logo cookies for business events" width="707" height="388" loading="lazy"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel%2010.webp" type="image/webp"><img src="images/gallery/carousel/carousel 10.webp" alt="Realistic sculpted cake design by My Baking Creations" width="707" height="365" loading="lazy"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel%207.webp" type="image/webp"><img src="images/gallery/carousel/carousel 7.webp" alt="Hand-piped decorated cookies for celebrations" width="707" height="509" loading="lazy"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel%208.webp" type="image/webp"><img src="images/gallery/carousel/carousel 8.webp" alt="Custom cupcakes with elegant frosting designs" width="707" height="292" loading="lazy"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel%209.webp" type="image/webp"><img src="images/gallery/carousel/carousel 9.webp" alt="Artisan baked goods from Bay Area bakery" width="707" height="437" loading="lazy"></picture></div>
+                <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel%206.webp" type="image/webp"><img src="images/gallery/carousel/carousel 6.webp" alt="Custom celebration cake by My Baking Creations" width="707" height="342" loading="lazy"></picture></div>
+                <div class="carousel-slide"><img fetchpriority="high" src="images/gallery/wedding/3 tier white wedding cake.webp" alt="Elegant three-tier white wedding cake" width="1200" height="701" loading="lazy"></div>
+                <div class="carousel-slide"><img src="images/gallery/handpiped/Baby Shower Themed Custom Cookies.webp" alt="Hand-piped baby shower themed custom cookies" width="1200" height="621" loading="lazy"></div>
             </div>
         </div>
         <div class="hero-content">
@@ -207,7 +215,6 @@
             <button class="hero-dot" onclick="goToSlide(8)" aria-label="Slide 9"></button>
             <button class="hero-dot" onclick="goToSlide(9)" aria-label="Slide 10"></button>
         </div>
-        <!-- Scroll Down Indicator -->
         <a href="#gallery-content" class="scroll-indicator" aria-label="Scroll down">
             <span class="scroll-indicator-text">Scroll</span>
             <div class="scroll-indicator-arrow">
@@ -215,6 +222,7 @@
             </div>
         </a>
     </section>
+    </div>
 
     <!-- GALLERY CATEGORIES -->
     <section id="gallery-content" class="page-content">
@@ -418,33 +426,7 @@
     }
     </style>
 
-    <script>
-    let currentSlide = 0;
-    const track = document.querySelector('.carousel-track');
-    const dots = document.querySelectorAll('.hero-dot');
-    const totalSlides = 9;
-    let autoRotate;
-    // Use matchMedia instead of innerWidth to avoid forced reflow
-    const mobileQuery = window.matchMedia('(max-width: 768px)');
-    let isMobile = mobileQuery.matches;
-    function getSlideWidth() { return isMobile ? 100 : 33.333; }
-    function goToSlide(index) {
-        dots[currentSlide].classList.remove('active');
-        currentSlide = index;
-        if (currentSlide >= totalSlides) currentSlide = 0;
-        if (currentSlide < 0) currentSlide = totalSlides - 1;
-        track.style.transform = `translateX(-${currentSlide * getSlideWidth()}%)`;
-        dots[currentSlide].classList.add('active');
-        resetAutoRotate();
-    }
-    function nextSlide() { goToSlide(currentSlide + 1); }
-    function resetAutoRotate() { clearInterval(autoRotate); autoRotate = setInterval(nextSlide, 4000); }
-    // Handle resize using matchMedia (avoids forced reflow)
-    mobileQuery.addEventListener('change', (e) => { isMobile = e.matches; goToSlide(currentSlide); });
-    autoRotate = setInterval(nextSlide, 4000);
-    </script>
-
-    <script>
+<script>
     // Load order form modal HTML first
     fetch('order-form-modal.html')
         .then(r => r.text())
@@ -514,6 +496,27 @@
     <link rel="stylesheet" href="chatbot.css?v=2">
     <script src="chatbot.js?v=2" defer></script>
     <script src="/js/bakers-agent-gallery.js" defer></script>
-    <script src="hero-lens.js" defer></script>
+    <style>
+    .hero-carousel[data-standard-hero] .hero-text-box {
+        background:linear-gradient(180deg,rgba(0,0,0,.40),rgba(0,0,0,.32));
+        padding:2.5rem 3rem;
+        min-height:0;
+    }
+    @media(max-width:768px) {
+        .hero-carousel[data-standard-hero] h1.typewriter-headline {
+            font-size:1.5rem;
+            line-height:1.3;
+            min-height:3.9rem;
+            margin-bottom:.5rem;
+        }
+        .hero-carousel[data-standard-hero] .hero-subtitle {
+            font-size:.95rem;
+            line-height:1.5;
+            margin-bottom:0;
+        }
+    }
+    </style>
+    <link rel="stylesheet" href="home-hero-standard.css?v=7">
+    <script src="home-hero-standard.js?v=6" defer></script>
 </body>
 </html>
