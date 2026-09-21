@@ -61,7 +61,7 @@
 @media(max-width:768px) {
   .hero-carousel[data-standard-hero] { --hero-slots:1; --standard-hero-height:500px; }
   .hero-carousel[data-standard-hero] .hero-content { width:calc(100% - 32px); }
-  .hero-carousel[data-standard-hero] .hero-text-box { padding:1.25rem 1rem; border-radius:18px; }
+  .hero-carousel[data-standard-hero] .hero-text-box { padding:1.25rem 1rem; border-radius:18px; background:transparent; }
   .hero-carousel[data-standard-hero] .hero-dots { bottom:12px; height:34px; padding:0 6px; gap:1px; }
   .hero-carousel[data-standard-hero] .hero-dot { width:15px; }
   .hero-carousel[data-standard-hero] .hero-dot::after { width:6px; height:6px; }
