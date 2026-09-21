@@ -42,7 +42,7 @@
     timer=setTimeout(()=>{
       if(!paused&&!moving&&Date.now()>=resumeAfter)go(index+1);
       else schedule();
-    },4000);
+    },3000);
   }
   function go(target,manual=false){
     if(!ready||moving||target===index)return;
