@@ -157,7 +157,8 @@
     data.set('flavor',selected.length===1?(items[selected[0]]?.flavor||'Not decided yet'):selected.map(p=>p+': '+(items[p]?.flavor||'Not decided yet')).join('\n'));
     data.set('budget',$('qBudget').value.trim());data.set('dietary_notes',$('qDiet').value.trim());data.set('request_reference',reference);
     data.set('reference_files',references.length?references.map((file,index)=>(index+1)+'. '+file.name+'\n'+file.url).join('\n\n'):'No reference files supplied.');
-    data.set('redirect','https://mybakingcreations.com/thank-you');
+    // AJAX handles its own success navigation; provider redirects cause CORS failures.
+    data.delete('redirect');
     return data;
   }
   form.addEventListener('submit',async event=>{
