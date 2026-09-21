@@ -17,11 +17,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#EC268F">
     <title>AI Design Studio | Visualize Your Cake | MBC</title>
-    <meta name="description" content="Use our free AI Design Studio to visualize your custom cake before ordering. Quick sketches in seconds or build layer by layer with our PRO cake builder.">
+    <meta name="description" content="Explore your custom cake idea with AI. Describe a design or build step by step, compare versions, and save your cake concept before ordering.">
     <link rel="canonical" href="https://mybakingcreations.com/design-studio">
     <!-- Open Graph -->
     <meta property="og:title" content="AI Design Studio — See Your Cake Come to Life | My Baking Creations">
-    <meta property="og:description" content="Use our free AI Design Studio to visualize your custom cake before ordering. Quick sketches in seconds or build layer by layer with our PRO cake builder.">
+    <meta property="og:description" content="Explore your custom cake idea with AI. Describe a design or build step by step, compare versions, and save your cake concept before ordering.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mybakingcreations.com/design-studio">
     <meta property="og:image" content="https://mybakingcreations.com/images/gallery/carousel/carousel%201.jpg">
@@ -32,7 +32,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="AI Design Studio — See Your Cake Come to Life | My Baking Creations">
-    <meta name="twitter:description" content="Use our free AI Design Studio to visualize your custom cake before ordering. Quick sketches in seconds or build layer by layer with our PRO cake builder.">
+    <meta name="twitter:description" content="Explore your custom cake idea with AI. Describe a design or build step by step, compare versions, and save your cake concept before ordering.">
     <meta name="twitter:image" content="https://mybakingcreations.com/images/gallery/carousel/carousel%201.jpg">
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -40,7 +40,7 @@
         "@context": "https://schema.org",
         "@type": "WebPage",
         "name": "AI Design Studio",
-        "description": "Use our free AI Design Studio to visualize your custom cake before ordering. Quick sketches in seconds or build layer by layer with our PRO cake builder.",
+        "description": "Explore your custom cake idea with AI. Describe a design or build step by step, compare versions, and save your cake concept before ordering.",
         "url": "https://mybakingcreations.com/design-studio",
         "isPartOf": {
             "@type": "WebSite",
@@ -81,6 +81,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="studio-workspace.css?v=1">
 </head>
 <body>
 
@@ -206,7 +207,7 @@
             <button class="hero-dot" onclick="goToSlide(8)" aria-label="Slide 9"></button>
             <button class="hero-dot" onclick="goToSlide(9)" aria-label="Slide 10"></button>
         </div>
-        <a href="#studio-content" class="scroll-indicator" aria-label="Scroll down">
+        <a href="#studioAtelier" class="scroll-indicator" aria-label="Scroll down">
             <span class="scroll-indicator-text">Scroll</span>
             <div class="scroll-indicator-arrow">
                 <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
@@ -216,595 +217,41 @@
     </div>
 
     <!-- MAIN CONTENT -->
-    <section id="studio-content" class="page-content">
-
-        <div id="studioStandalone">
-
-            <!-- ========== SECTION 1: MODE FORK ========== -->
-            <div class="section-wrapper section-white reveal" style="padding-top: 3rem; padding-bottom: 3rem;">
-
-                <div style="max-width: 880px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 0 1rem;">
-
-                    <!-- QUICK SKETCH CARD -->
-                    <div id="forkSketchBtn" style="position: relative; background: linear-gradient(160deg, #FFF8F0, #fff); border: 2px solid #f0e8df; border-radius: 24px; padding: 0; overflow: hidden; cursor: pointer; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);" onmouseover="this.style.transform='translateY(-8px)'; this.style.borderColor='#EC268F'; this.style.boxShadow='0 20px 60px rgba(236,38,143,0.15), 0 8px 24px rgba(0,0,0,0.08)';" onmouseout="this.style.transform=''; this.style.borderColor='#f0e8df'; this.style.boxShadow='';">
-                        <!-- Card Image -->
-                        <div style="width: 100%; height: 200px; overflow: hidden; position: relative;">
-                            <img src="images/gallery/carousel/carousel 1.webp" alt="AI-generated cake sketch" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" width="1920" height="1066">
-                            <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 40%, rgba(255,248,240,0.9) 100%);"></div>
-                            <div style="position: absolute; top: 1rem; left: 1rem; background: rgba(236,38,143,0.9); color: white; padding: 4px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.03em; backdrop-filter: blur(8px);">INSTANT</div>
-                        </div>
-                        <!-- Card Content -->
-                        <div style="padding: 1.5rem 2rem 2rem;">
-                            <h3 style="font-family: 'Fredoka One', cursive; font-size: 1.6rem; color: #622D2B; margin-bottom: 0.4rem;">Quick Sketch</h3>
-                            <p style="color: #888; font-size: 0.92rem; line-height: 1.6; margin-bottom: 1.25rem;">Describe your dream cake in a sentence. Our AI generates a realistic preview in seconds. Refine it, extract colors, download the design.</p>
-                            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
-                                <span style="background: rgba(236,38,143,0.08); color: #EC268F; padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 600;">One prompt</span>
-                                <span style="background: rgba(236,38,143,0.08); color: #EC268F; padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 600;">3 refinements</span>
-                                <span style="background: rgba(236,38,143,0.08); color: #EC268F; padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 600;">PNG + PDF</span>
-                                <span style="background: rgba(236,38,143,0.08); color: #EC268F; padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 600;">Color palette</span>
-                            </div>
-                            <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.9rem; background: linear-gradient(135deg, #EC268F, #d1226c); color: white; border-radius: 14px; font-weight: 700; font-size: 1rem; transition: all 0.25s ease;">
-                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                Start Sketching
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- CAKE BUILDER PRO CARD -->
-                    <div id="forkBuilderBtn" style="position: relative; background: linear-gradient(160deg, #FFFBF0, #fff); border: 2px solid rgba(255,197,50,0.3); border-radius: 24px; padding: 0; overflow: hidden; cursor: pointer; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);" onmouseover="this.style.transform='translateY(-8px)'; this.style.borderColor='#FFC532'; this.style.boxShadow='0 20px 60px rgba(255,197,50,0.18), 0 8px 24px rgba(0,0,0,0.08)';" onmouseout="this.style.transform=''; this.style.borderColor='rgba(255,197,50,0.3)'; this.style.boxShadow='';">
-                        <!-- PRO Badge -->
-                        <div style="position: absolute; top: 1rem; right: 1rem; z-index: 2; background: linear-gradient(135deg, #FFC532, #f0a500); color: #622D2B; padding: 4px 14px; border-radius: 20px; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">PRO</div>
-                        <!-- Card Image -->
-                        <div style="width: 100%; height: 200px; overflow: hidden; position: relative;">
-                            <img src="images/gallery/carousel/carousel 2.webp" alt="Layer-by-layer cake builder" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" width="1920" height="1166">
-                            <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 40%, rgba(255,251,240,0.9) 100%);"></div>
-                            <div style="position: absolute; top: 1rem; left: 1rem; background: rgba(255,197,50,0.9); color: #622D2B; padding: 4px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.03em; backdrop-filter: blur(8px);">ADVANCED</div>
-                        </div>
-                        <!-- Card Content -->
-                        <div style="padding: 1.5rem 2rem 2rem;">
-                            <h3 style="font-family: 'Fredoka One', cursive; font-size: 1.6rem; color: #622D2B; margin-bottom: 0.4rem;">Cake Builder</h3>
-                            <p style="color: #888; font-size: 0.92rem; line-height: 1.6; margin-bottom: 1.25rem;">Design layer by layer. Configure tiers, topper, and text placement. Generate each component individually. Get a full design spec.</p>
-                            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
-                                <span style="background: rgba(255,197,50,0.12); color: #b8860b; padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 600;">1-3 tiers</span>
-                                <span style="background: rgba(255,197,50,0.12); color: #b8860b; padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 600;">Layer design</span>
-                                <span style="background: rgba(255,197,50,0.12); color: #b8860b; padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 600;">Step-by-step AI</span>
-                                <span style="background: rgba(255,197,50,0.12); color: #b8860b; padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 600;">Design PDF</span>
-                            </div>
-                            <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.9rem; background: linear-gradient(135deg, #FFC532, #e8a800); color: #622D2B; border-radius: 14px; font-weight: 700; font-size: 1rem; transition: all 0.25s ease;">
-                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
-                                Open Builder
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- Powered by line -->
-                <p style="text-align: center; margin-top: 2rem; font-size: 0.8rem; color: #aaa;">Powered by Google Gemini &middot; For inspiration only</p>
-            </div>
-
-            <!-- Hidden trigger buttons for JS compatibility -->
-            <button type="button" id="quickSketchMode" style="display:none;"></button>
-            <button type="button" id="cakeBuilderMode" style="display:none;"></button>
-
-            <!-- ========== QUICK SKETCH OVERLAY ========== -->
-            <div id="sketcherOverlay" class="sketcher-overlay">
-                <div class="sketcher-overlay-bg">
-                    <div class="sketcher-orb sketcher-orb-1"></div>
-                    <div class="sketcher-orb sketcher-orb-2"></div>
-                    <div class="sketcher-orb sketcher-orb-3"></div>
-                </div>
-
-                <button type="button" id="sketcherCloseBtn" class="sketcher-close-btn" aria-label="Close Design Studio">
-                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-                </button>
-
-                <div class="sketcher-overlay-inner">
-                    <!-- Header -->
-                    <div class="sketcher-header">
-                        <img src="logo_icon.png" alt="My Baking Creations" class="sketcher-logo" loading="lazy" width="1330" height="1222">
-                        <h2 class="sketcher-title">Design <span class="sketcher-accent">Studio</span></h2>
-                        <p class="sketcher-subtitle">See your cake idea come to life with AI</p>
-                    </div>
-
-                    <!-- Two-column layout -->
-                    <div class="sketcher-layout">
-                        <!-- Left: Input -->
-                        <div class="sketcher-input-col">
-                            <div class="sketcher-card">
-                                <div class="sketcher-card-glow"></div>
-                                <div class="sketcher-desc-label">
-                                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-                                    <span>Your Description</span>
-                                </div>
-                                <textarea id="sketchStandaloneDesc" class="sketcher-standalone-textarea" placeholder="Describe your dream cake... e.g., 'A 2-tier pink butterfly cake with gold accents and fresh flowers'" rows="4"></textarea>
-                            </div>
-
-                            <button type="button" id="generatePreviewBtn" class="sketcher-generate-btn">
-                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                <span>Generate Sketch</span>
-                            </button>
-
-                            <div class="sketcher-divider"><span>or</span></div>
-
-                            <button type="button" id="switchToBuilderBtn" class="sketcher-builder-link">
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
-                                <span>Build layer by layer</span>
-                                <span class="sketcher-pro-tag">PRO</span>
-                            </button>
-
-                            <p class="sketcher-powered">Powered by Google Gemini &middot; For inspiration only</p>
-                        </div>
-
-                        <!-- Right: Result -->
-                        <div class="sketcher-result-col">
-                            <!-- Empty state -->
-                            <div id="sketchEmptyState" class="sketcher-empty">
-                                <div class="sketcher-empty-icon">
-                                    <svg viewBox="0 0 80 80" width="64" height="64" fill="none"><rect x="8" y="44" width="64" height="28" rx="4" stroke="rgba(236,38,143,0.25)" stroke-width="1.5" stroke-dasharray="4 3"/><rect x="16" y="24" width="48" height="24" rx="4" stroke="rgba(255,197,50,0.25)" stroke-width="1.5" stroke-dasharray="4 3"/><rect x="26" y="8" width="28" height="20" rx="4" stroke="rgba(236,38,143,0.25)" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="40" cy="4" r="4" stroke="rgba(255,197,50,0.35)" stroke-width="1.5" stroke-dasharray="3 2"/></svg>
-                                </div>
-                                <p>Your sketch will appear here</p>
-                                <span>Describe your cake, then hit Generate</span>
-                            </div>
-
-                            <!-- Loading -->
-                            <div id="previewLoading" style="display: none;" class="sketcher-loading">
-                                <div class="sketcher-spinner"></div>
-                                <p>Creating your sketch...</p>
-                                <span>This usually takes 10-15 seconds</span>
-                            </div>
-
-                            <!-- Result -->
-                            <div id="previewResult" style="display: none;">
-                                <div class="sketcher-image-wrap">
-                                    <img id="previewImage" src="" alt="AI generated cake sketch" loading="lazy">
-                                    <div id="imageWatermark" class="sketcher-watermark">
-                                        <img src="logo_icon.png" alt="My Baking Creations" style="height: 20px; width: auto;" loading="lazy" width="1330" height="1222">
-                                        <span>mybakingcreations.com</span>
-                                    </div>
-                                </div>
-
-                                <div id="colorPaletteSection" class="sketcher-palette">
-                                    <div class="sketcher-section-header">
-                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
-                                        <strong>Color Palette</strong>
-                                        <span class="sketcher-hint">Click to copy</span>
-                                    </div>
-                                    <div id="colorSwatches" class="sketcher-swatches"></div>
-                                </div>
-
-                                <div id="refineSection" class="sketcher-refine">
-                                    <div class="sketcher-section-header">
-                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                                        <strong>Refine This Design</strong>
-                                    </div>
-                                    <div class="sketcher-refine-row">
-                                        <input type="text" id="refineInput" placeholder="e.g., 'Make it more colorful' or 'Add flowers'" class="sketcher-refine-input">
-                                        <button type="button" id="refineBtn" class="sketcher-refine-btn">Refine</button>
-                                    </div>
-                                    <div id="refinementHistory" class="sketcher-refine-history"></div>
-                                </div>
-
-                                <div class="sketcher-actions">
-                                    <a id="downloadPreviewBtn" download="my-cake-design.png" class="sketcher-action-btn">
-                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                                        Download
-                                    </a>
-                                    <button type="button" id="downloadPdfBtn" class="sketcher-action-btn">
-                                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                                        PDF
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Error -->
-                            <div id="previewError" style="display: none;" class="sketcher-error"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ========== CAKE BUILDER OVERLAY ========== -->
-            <div id="cakeBuilderSection" style="display:block;">
-
-            <!-- Full-Screen Overlay (opens like consultation page) -->
-            <div id="builderFullscreenOverlay" class="builder-fullscreen-overlay">
-                <!-- Animated Background Orbs -->
-                <div class="builder-overlay-bg">
-                    <div class="overlay-orb overlay-orb-1"></div>
-                    <div class="overlay-orb overlay-orb-2"></div>
-                    <div class="overlay-orb overlay-orb-3"></div>
-                </div>
-
-                <!-- Close Button -->
-                <button type="button" id="builderCloseBtn" class="builder-close-btn" aria-label="Close Cake Builder">
-                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-                </button>
-
-                <!-- Back to form link -->
-                <a href="#" id="builderBackLink" class="builder-back-link">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-                    Back to Order Form
-                </a>
-
-                <!-- Centered Content Container -->
-                <div class="builder-overlay-content">
-                <div class="cake-builder-container">
-                    <!-- Animated Background -->
-                    <div class="builder-bg">
-                        <canvas id="builderParticles"></canvas>
-                        <div class="builder-orb orb-1"></div>
-                        <div class="builder-orb orb-2"></div>
-                    </div>
-
-                    <!-- Builder Header -->
-                    <div class="builder-header">
-                        <div class="builder-badge">
-                            <span class="badge-icon">🎂</span>
-                            Modular Cake Builder
-                        </div>
-                        <h3 class="builder-title">Build Your <span class="gradient-text">Dream Cake</span></h3>
-                        <p class="builder-subtitle">Design layer by layer. Each element generated to match Yana's signature style.</p>
-                    </div>
-
-                    <!-- PHASE 1: Configuration -->
-                    <div id="builderConfig" class="builder-phase active">
-                        <div class="phase1-layout">
-
-                        <!-- LEFT COLUMN: Config Card -->
-                        <div class="phase1-config">
-                        <div class="config-card">
-                            <div class="card-glow"></div>
-                            <h4 class="config-title">Configure Your Cake</h4>
-                            <p class="config-description">Select the components you want, then we'll guide you through designing each one.</p>
-
-                            <div class="config-grid">
-                                <!-- Cakeboard -->
-                                <div class="config-group">
-                                    <label class="config-label">
-                                        <span class="label-icon">🟫</span>
-                                        Cakeboard
-                                    </label>
-                                    <select id="builderCakeboard" class="config-select">
-                                        <option value="standard" selected>Standard board (free)</option>
-                                        <option value="premium">Premium board with fondant covering</option>
-                                    </select>
-                                </div>
-
-                                <!-- Number of Tiers -->
-                                <div class="config-group">
-                                    <label class="config-label">
-                                        <span class="label-icon">🎚️</span>
-                                        Number of Tiers
-                                    </label>
-                                    <select id="builderTiers" class="config-select">
-                                        <option value="1">1 Tier</option>
-                                        <option value="2" selected>2 Tiers</option>
-                                        <option value="3">3 Tiers</option>
-                                    </select>
-                                </div>
-
-                                <!-- Topper -->
-                                <div class="config-group">
-                                    <label class="config-label">
-                                        <span class="label-icon">👑</span>
-                                        Cake Topper
-                                    </label>
-                                    <select id="builderTopper" class="config-select">
-                                        <option value="none">No topper</option>
-                                        <option value="fondant">Fondant figure</option>
-                                        <option value="decorative">Decorative piece</option>
-                                    </select>
-                                </div>
-
-                                <!-- Writing -->
-                                <div class="config-group config-group-full">
-                                    <label class="config-label">
-                                        <span class="label-icon">✍️</span>
-                                        Writing / Text <span class="config-hint">(select all that apply)</span>
-                                    </label>
-                                    <div class="config-checkboxes config-writing-checkboxes" id="builderWritingOptions">
-                                        <div class="writing-option">
-                                            <label class="config-checkbox">
-                                                <input type="checkbox" name="builderWriting" value="board">
-                                                <span class="checkbox-mark"></span>
-                                                <span class="checkbox-label">On the cakeboard</span>
-                                            </label>
-                                            <div class="writing-text-wrapper">
-                                                <input type="text" class="writing-text-input" data-writing="board" placeholder='e.g., "Happy Birthday!" in pink cursive' disabled>
-                                            </div>
-                                        </div>
-                                        <div class="writing-option">
-                                            <label class="config-checkbox">
-                                                <input type="checkbox" name="builderWriting" value="tier1">
-                                                <span class="checkbox-mark"></span>
-                                                <span class="checkbox-label">On Tier 1 (bottom)</span>
-                                            </label>
-                                            <div class="writing-text-wrapper">
-                                                <input type="text" class="writing-text-input" data-writing="tier1" placeholder='e.g., "Alex" in bold blue fondant letters' disabled>
-                                            </div>
-                                        </div>
-                                        <div class="writing-option">
-                                            <label class="config-checkbox">
-                                                <input type="checkbox" name="builderWriting" value="tier2">
-                                                <span class="checkbox-mark"></span>
-                                                <span class="checkbox-label">On Tier 2</span>
-                                            </label>
-                                            <div class="writing-text-wrapper">
-                                                <input type="text" class="writing-text-input" data-writing="tier2" placeholder='e.g., "Happy 5th Birthday" in gold script' disabled>
-                                            </div>
-                                        </div>
-                                        <div class="writing-option">
-                                            <label class="config-checkbox">
-                                                <input type="checkbox" name="builderWriting" value="tier3">
-                                                <span class="checkbox-mark"></span>
-                                                <span class="checkbox-label">On Tier 3 (top)</span>
-                                            </label>
-                                            <div class="writing-text-wrapper">
-                                                <input type="text" class="writing-text-input" data-writing="tier3" placeholder='e.g., Number "5" in sparkly fondant' disabled>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Dynamic Steps Preview -->
-                            <div class="steps-preview">
-                                <div class="steps-preview-header">
-                                    <span class="preview-icon">📋</span>
-                                    <strong>Your Design Steps:</strong>
-                                </div>
-                                <div id="stepsPreviewList" class="steps-preview-list">
-                                    <!-- Dynamically populated -->
-                                </div>
-                            </div>
-
-                            <button type="button" id="startBuildingBtn" class="btn-start-building">
-                                <span class="btn-text">Start Building</span>
-                                <span class="btn-arrow">
-                                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
-                                </span>
-                                <div class="btn-shine"></div>
-                            </button>
-                        </div>
-                        </div><!-- end phase1-config -->
-
-                        <!-- RIGHT COLUMN: Guide Panel -->
-                        <div class="phase1-guide">
-
-                            <!-- How It Works -->
-                            <div class="guide-card">
-                                <div class="card-glow"></div>
-                                <h4 class="guide-card-title">
-                                    <span>🎯</span> How It Works
-                                </h4>
-                                <div class="workflow-steps">
-                                    <div class="workflow-step">
-                                        <div class="workflow-num">1</div>
-                                        <div class="workflow-info">
-                                            <strong>Configure</strong>
-                                            <span>Choose tiers, topper & text placement</span>
-                                        </div>
-                                    </div>
-                                    <div class="workflow-step">
-                                        <div class="workflow-num">2</div>
-                                        <div class="workflow-info">
-                                            <strong>Describe Each Layer</strong>
-                                            <span>Tell us the colors, theme & style for each part</span>
-                                        </div>
-                                    </div>
-                                    <div class="workflow-step">
-                                        <div class="workflow-num">3</div>
-                                        <div class="workflow-info">
-                                            <strong>AI Generates a Sketch</strong>
-                                            <span>See each component visualized one by one</span>
-                                        </div>
-                                    </div>
-                                    <div class="workflow-step">
-                                        <div class="workflow-num">4</div>
-                                        <div class="workflow-info">
-                                            <strong>Approve or Retry</strong>
-                                            <span>Love it? Move on. Not quite? Regenerate.</span>
-                                        </div>
-                                    </div>
-                                    <div class="workflow-step">
-                                        <div class="workflow-num">5</div>
-                                        <div class="workflow-info">
-                                            <strong>Download Your Design</strong>
-                                            <span>Get a PDF or image of your full cake concept</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Prompt Examples -->
-                            <div class="guide-card">
-                                <div class="card-glow"></div>
-                                <h4 class="guide-card-title">
-                                    <span>💡</span> Example Prompts
-                                </h4>
-                                <p class="guide-card-hint">When asked to describe each layer, try something like:</p>
-                                <div class="example-prompts">
-                                    <div class="example-prompt">
-                                        <span class="example-label">Tier</span>
-                                        <span class="example-text">"Pink buttercream with white drip and gold sprinkles"</span>
-                                    </div>
-                                    <div class="example-prompt">
-                                        <span class="example-label">Tier</span>
-                                        <span class="example-text">"Navy blue fondant with silver stars and moon"</span>
-                                    </div>
-                                    <div class="example-prompt">
-                                        <span class="example-label">Topper</span>
-                                        <span class="example-text">"Baby Yoda holding a cupcake, green fondant"</span>
-                                    </div>
-                                    <div class="example-prompt">
-                                        <span class="example-label">Board</span>
-                                        <span class="example-text">"White fondant with gold leaf border"</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Pro Tip -->
-                            <div class="guide-tip">
-                                <span class="tip-icon">✨</span>
-                                <p><strong>Pro tip:</strong> The more detail you give, the better the sketch. Include colors, textures, and references to specific styles.</p>
-                            </div>
-
-                        </div><!-- end phase1-guide -->
-
-                        </div><!-- end phase1-layout -->
-                    </div>
-
-                    <!-- PHASE 2: Step-by-Step Building -->
-                    <div id="builderSteps" class="builder-phase">
-                        <div class="steps-card">
-                            <div class="card-glow"></div>
-
-                            <!-- Progress Indicator -->
-                            <div class="builder-progress">
-                                <div id="progressSteps" class="progress-steps">
-                                    <!-- Dynamically generated step dots -->
-                                </div>
-                                <div class="progress-bar">
-                                    <div id="progressFill" class="progress-fill"></div>
-                                </div>
-                                <div id="progressLabel" class="progress-label">Step 1 of 4</div>
-                            </div>
-
-                            <!-- Current Step Content -->
-                            <div id="currentStepContent" class="step-content">
-                                <div class="step-header">
-                                    <span id="stepIcon" class="step-icon">🟫</span>
-                                    <h4 id="stepTitle" class="step-title">Design Your Cakeboard</h4>
-                                </div>
-                                <p id="stepDescription" class="step-description">Describe the color and style of your cakeboard covering.</p>
-
-                                <div class="step-input-wrapper">
-                                    <textarea id="stepPrompt" class="step-prompt" rows="3" placeholder="e.g., Elegant white fondant with silver pearl border..."></textarea>
-                                    <div class="input-glow"></div>
-                                </div>
-
-                                <div class="step-actions">
-                                    <button type="button" id="stepBackBtn" class="btn-step-back" style="display: none;">
-                                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-                                        Back
-                                    </button>
-                                    <button type="button" id="stepGenerateBtn" class="btn-step-generate">
-                                        <span class="btn-text">Generate</span>
-                                        <span class="btn-icon">✨</span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Step Loading -->
-                            <div id="stepLoading" class="step-loading" style="display: none;">
-                                <div class="loading-spinner"></div>
-                                <p id="loadingText" class="loading-text">Creating your cakeboard...</p>
-                            </div>
-
-                            <!-- Step Result Preview -->
-                            <div id="stepResult" class="step-result" style="display: none;">
-                                <div class="result-image-wrapper">
-                                    <img id="stepResultImage" src="" alt="Generated step preview" loading="lazy">
-                                    <div class="result-watermark">
-                                        <img src="logo_icon.png" alt="My Baking Creations" loading="lazy" width="1330" height="1222">
-                                        <span>mybakingcreations.com</span>
-                                    </div>
-                                </div>
-                                <div class="result-actions">
-                                    <button type="button" id="stepRetryBtn" class="btn-retry">
-                                        <span>🔄</span> Try Again
-                                    </button>
-                                    <button type="button" id="stepApproveBtn" class="btn-approve">
-                                        <span>✓</span> Approve & Continue
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Step Error -->
-                            <div id="stepError" class="step-error" style="display: none;"></div>
-                        </div>
-                    </div>
-
-                    <!-- PHASE 3: Final Result -->
-                    <div id="builderResult" class="builder-phase">
-                        <div class="result-card">
-                            <div class="card-glow"></div>
-
-                            <div class="result-header">
-                                <div class="success-icon">
-                                    <svg viewBox="0 0 24 24" width="40" height="40" fill="white"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                                </div>
-                                <h3 class="result-title">Your Cake Design is Ready!</h3>
-                                <p class="result-subtitle">Here's your complete custom cake concept.</p>
-                            </div>
-
-                            <!-- Final Image -->
-                            <div class="final-image-wrapper">
-                                <img id="finalCakeImage" src="" alt="Your custom cake design" loading="lazy">
-                                <div class="final-watermark">
-                                    <img src="logo_icon.png" alt="My Baking Creations" loading="lazy" width="1330" height="1222">
-                                    <span>mybakingcreations.com</span>
-                                </div>
-                            </div>
-
-                            <!-- Color Palette -->
-                            <div class="final-palette">
-                                <div class="palette-header">
-                                    <span>🎨</span>
-                                    <strong>Color Palette</strong>
-                                    <span class="palette-hint">Click to copy</span>
-                                </div>
-                                <div id="finalColorSwatches" class="color-swatches"></div>
-                            </div>
-
-                            <!-- Spec Breakdown -->
-                            <div class="spec-breakdown">
-                                <div class="spec-header">
-                                    <span>📋</span>
-                                    <strong>Design Specifications</strong>
-                                </div>
-                                <div id="specList" class="spec-list">
-                                    <!-- Dynamically populated -->
-                                </div>
-                            </div>
-
-                            <!-- Download Actions -->
-                            <div class="final-actions">
-                                <a id="builderDownloadImg" download="my-custom-cake.png" class="btn-download-img">
-                                    <span>⬇️</span> Download Image
-                                </a>
-                                <button type="button" id="builderDownloadPdf" class="btn-download-pdf">
-                                    <span>📄</span> Download PDF
-                                </button>
-                                <button type="button" id="builderStartOver" class="btn-start-over">
-                                    <span>🔄</span> Start Over
-                                </button>
-                            </div>
-
-                            <!-- Attribution -->
-                            <div class="builder-attribution">
-                                <span>Powered by Anthropic Claude</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div><!-- end cake-builder-container -->
-                </div><!-- end builder-overlay-content -->
-            </div><!-- end builderFullscreenOverlay -->
-
-            </div><!-- end cakeBuilderSection -->
-
-            <!-- ========== SECTION 2: CTA ========== -->
-            <div class="section-wrapper reveal" style="background: linear-gradient(135deg, var(--pink), var(--pink-dark)); text-align: center; color: var(--white); margin-bottom: 0;">
-                <h2 style="font-family: 'Fredoka One', cursive; font-size: 2rem; margin-bottom: 1rem;">Love Your Design?</h2>
-                <p style="font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.95;">Turn your AI sketch into a real cake. Start your order and we'll bring it to life.</p>
-                <a href="order-form" class="btn" style="background: var(--white); color: var(--pink); font-size: 1.2rem; padding: 1.2rem 3rem; display: inline-block;">Start Your Order &rarr;</a>
-            </div>
-
-        </div><!-- end studioStandalone -->
-
-    </section>
+<section id="studioAtelier" class="atelier" aria-labelledby="atelier-title">
+  <div class="atelier-heading"><div><p class="atelier-kicker">The Design Studio</p><h2 id="atelier-title">Your idea, taking shape.</h2></div><p>A little imagination. We’ll handle the icing.</p></div>
+  <div class="atelier-workspace">
+    <div class="atelier-preview">
+      <div class="atelier-canvas-head"><span class="atelier-status" id="atelierStatus">AI example</span><div class="atelier-image-tools"><button type="button" id="atelierBefore" disabled aria-label="Hold to compare with the previous version">Hold for before</button><button type="button" id="atelierExpand" aria-label="Enlarge cake preview"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button></div></div>
+      <div class="atelier-stage" id="atelierStage"><div class="atelier-cake-frame atelier-example" id="atelierCakeFrame"><img id="atelierCake" src="images/design-studio/yana-examples.png" width="2048" height="683" alt="AI example inspired by Yana’s sculpted mushroom-house cake"></div><div class="atelier-working" id="atelierWorking" hidden><span></span><p>Creating your cake…</p></div></div>
+      <div class="atelier-image-caption"><p id="atelierCaption">A little house. Entirely cake.</p><span id="atelierImageNote">Inspired by Yana’s actual cake work.</span></div>
+      <div class="atelier-examples" aria-label="Explore example cake designs">
+        <button type="button" data-example="0" aria-pressed="true"><span class="atelier-example-thumb" style="--example:0"><img src="images/design-studio/yana-examples.png" alt="" width="2048" height="683"></span><span>Sculpted</span></button>
+        <button type="button" data-example="1" aria-pressed="false"><span class="atelier-example-thumb" style="--example:1"><img src="images/design-studio/yana-examples.png" alt="" width="2048" height="683"></span><span>Realistic</span></button>
+        <button type="button" data-example="2" aria-pressed="false"><span class="atelier-example-thumb" style="--example:2"><img src="images/design-studio/yana-examples.png" alt="" width="2048" height="683"></span><span>Themed</span></button>
+      </div>
+      <div class="atelier-history-area" id="atelierHistoryArea" hidden><div class="atelier-history-label"><span>Your versions</span><span>Keep the one you love.</span></div><div class="atelier-history" id="atelierHistory" aria-label="Your generated cake versions"></div></div>
+      <div class="atelier-palette" id="atelierPalette" aria-label="Colors in this example"><span>Palette</span><i style="--swatch:#e33b36"></i><i style="--swatch:#9fd533"></i><i style="--swatch:#e6b854"></i></div>
+    </div>
+    <div class="atelier-controls">
+      <div class="atelier-modes" role="tablist" aria-label="How would you like to design?"><button id="atelierIdeaTab" type="button" role="tab" aria-selected="true" aria-controls="atelierIdea" data-mode="idea">Describe my idea</button><button id="atelierBuildTab" type="button" role="tab" aria-selected="false" aria-controls="atelierBuild" tabindex="-1" data-mode="build">Build step by step</button></div>
+      <div id="atelierIdea" class="atelier-mode-panel" role="tabpanel" aria-labelledby="atelierIdeaTab">
+        <h3>What are we making?</h3><p class="atelier-help">A person, a party, a wonderfully specific obsession. Start anywhere.</p>
+        <label for="atelierBrief">Your cake idea</label><textarea id="atelierBrief" rows="5" maxlength="10000" placeholder="A tiny mushroom cottage with a red roof, climbing flowers and a stone path. For someone who loves fairy tales…"></textarea>
+        <div class="atelier-prompt-tools"><button type="button" id="atelierUseExample">Use this look as a starting point</button><span>Make it yours.</span></div>
+        <div class="atelier-edit-panel" id="atelierEditPanel" hidden><label for="atelierChange">What would you like to change?</label><textarea id="atelierChange" rows="3" maxlength="3000" placeholder="Keep everything, but make the roses lavender."></textarea><div class="atelier-suggestions"><button type="button" data-change="Make the colors softer and more pastel. Keep the cake design and decorations otherwise unchanged.">Softer colors</button><button type="button" data-change="Add a few delicate sugar flowers, preserving the rest of the cake.">Add flowers</button><button type="button" data-change="Add restrained edible gold accents. Preserve the colors, shape and decorations.">A little gold</button></div></div>
+        <div class="atelier-generate-row"><button type="button" id="atelierGenerate" class="atelier-primary"><span>Create my cake</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4Z"/></svg></button><button type="button" id="atelierFresh" class="atelier-text-button" hidden>Start a fresh idea</button></div>
+      </div>
+      <div id="atelierBuild" class="atelier-mode-panel" role="tabpanel" aria-labelledby="atelierBuildTab" hidden>
+        <div id="atelierBuildSetup"><h3>Start with the shape.</h3><p class="atelier-help">We’ll work through the details together. Your cake stays in view.</p><label>How many tiers?</label><div class="atelier-options" id="atelierTierOptions"><button type="button" data-tiers="1" aria-pressed="false">One</button><button type="button" data-tiers="2" aria-pressed="true">Two</button><button type="button" data-tiers="3" aria-pressed="false">Three</button></div><label for="atelierShape">Cake shape</label><select id="atelierShape"><option value="round">Round</option><option value="square">Square</option></select><label for="atelierBoard">Cakeboard</label><select id="atelierBoard"><option value="standard">Keep it simple</option><option value="premium">Design the board, too</option></select><label class="atelier-check"><input type="checkbox" id="atelierTopper"> Add a cake topper</label><label class="atelier-check"><input type="checkbox" id="atelierWriting"> Add a personal message</label><button type="button" id="atelierStartBuild" class="atelier-primary">Let’s build it <span aria-hidden="true">+</span></button></div>
+        <div id="atelierBuildSteps" hidden><div class="atelier-step-meta"><span id="atelierStepCount"></span><button type="button" id="atelierChangeSetup" class="atelier-text-button">Cake setup</button></div><div id="atelierStepDots" class="atelier-step-dots"></div><h3 id="atelierStepTitle"></h3><p class="atelier-help" id="atelierStepHelp"></p><label for="atelierStepBrief">Make it your own</label><textarea id="atelierStepBrief" rows="5" maxlength="3000"></textarea><div class="atelier-generate-row"><button type="button" id="atelierBuildGenerate" class="atelier-primary">Show me</button><button type="button" id="atelierNextStep" class="atelier-secondary" hidden>Keep it &amp; continue</button></div></div>
+      </div>
+      <p id="atelierError" class="atelier-error" role="alert" hidden></p><p id="atelierAnnouncement" class="atelier-sr-only" role="status" aria-live="polite"></p>
+      <div class="atelier-finish" id="atelierFinish" hidden><div><h4>That’s a keeper.</h4><p>Save the picture and design notes together.</p></div><button type="button" id="atelierSave" class="atelier-save">Save design <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M4 16v5h16v-5"/></svg></button><a href="https://mybakingcreations.com/order-form" target="_blank" rel="noopener">Request an order</a></div>
+      <div class="atelier-signoff"><img src="logo_icon.png" width="1330" height="1222" alt=""><p>Your imagination. Our bakery.<span>AI concepts for inspiration. We’ll confirm the details with you.</span><button type="button" id="atelierChat" class="atelier-inline-chat">Need a hand? Chat with us</button></p></div>
+    </div>
+  </div>
+</section>
+<dialog id="atelierViewer" class="atelier-viewer"><button type="button" id="atelierViewerClose" aria-label="Close enlarged preview">×</button><div id="atelierViewerContent"></div></dialog>
 
     </main>
 
@@ -878,7 +325,7 @@
     <script src="autoresponder.js"></script>
 
     <!-- Design Studio JS -->
-    <script src="design-studio.js?v=2026-09-20-image-edit"></script>
+    <script src="studio-workspace.js?v=1" defer></script>
 
     <!-- AI Chatbot Widget -->
     <link rel="stylesheet" href="chatbot.css?v=2">
