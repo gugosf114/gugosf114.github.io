@@ -1,5 +1,34 @@
 [
   {
+    "id": "3ef14128d12935e5254c0df5a4540b63132647b451853e97febc4d931af11593",
+    "title": "Custom Nerf Birthday Cake — Sculpted Fondant",
+    "caption": "A fully custom Nerf-themed birthday cake covered in orange fondant with a hand-sculpted blaster, darts, and bullseye topper. The iconic Nerf logo is built up in 3D fondant on the side. Made to order for Bay Area birthdays.",
+    "alt_text": "Single-tier orange fondant Nerf cake with sculpted fondant blaster, darts, bullseye topper, and 3D Nerf logo, personalized for Ayan, made in Daly City.",
+    "classification": {
+      "audience": "personal",
+      "product_type": "cake",
+      "occasion": "birthday",
+      "styles": [
+        "sculpted",
+        "hand-piped"
+      ],
+      "brand_or_theme": "Nerf",
+      "gallery_targets": [
+        "all",
+        "cakes",
+        "cakes-sculpted"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cakes",
+      "cakes-sculpted"
+    ],
+    "image_path": "images/gallery/bakers-agent/cake/custom-nerf-birthday-cake-sculpted-fondant-3ef14128d1.webp",
+    "image_url": "/images/gallery/bakers-agent/cake/custom-nerf-birthday-cake-sculpted-fondant-3ef14128d1.webp",
+    "published_at": "2026-09-22T20:39:41.098649+00:00"
+  },
+  {
     "id": "bc28ed181b9ea24f6c9c824009eb1419b5cefd6295bd607aad37c3416b189da0",
     "title": "Branded Cake Pops for Corporate Events",
     "caption": "Custom cake pops printed with your company logo and brand colors, packaged and ready to distribute. A polished, on-brand treat for product launches, conferences, and employee events across the Bay Area.",
