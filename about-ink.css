@@ -1,0 +1,19 @@
+/* About-specific surfaces; shared header and showcase come from site-ink-theme.css. */
+body.mbc-ink :is(.founder-card,.testimonial-card,.rating-source,.stat-card){background:var(--mix-card);color:var(--mix-ink);border:1px solid var(--mix-line);box-shadow:0 8px 22px #10142922}
+body.mbc-ink :is(.founder-name,.founder-text-side p,.testimonial-text,.testimonial-name,.testimonial-meta,.rating-count,.stat-label){color:var(--mix-ink)}
+body.mbc-ink .founder-text-side a{color:#9e1b60}
+body.mbc-ink :is(.founder-title,.testimonial-source){color:#a01b63}
+body.mbc-ink .testimonial-header{border-color:#202c491a}
+body.mbc-ink .testimonial-nav-btn{background:var(--mix-card);color:var(--mix-ink);border:1px solid var(--mix-line)}
+body.mbc-ink .testimonial-dots button{border-color:var(--mix-line)}
+body.mbc-ink .service-card :is(p,h3){color:var(--mix-ink)!important}
+body.mbc-ink .pn{background:var(--mix-panel-end);color:var(--mix-panel-ink)}
+body.mbc-ink .pn-vig{background:radial-gradient(112% 80% at 50% 42%,#b7cfff0b,transparent 58%,#080e2426)}
+body.mbc-ink .pn-title{color:var(--mix-panel-ink)}
+body.mbc-ink .pn-body{color:var(--mix-panel-muted)}
+body.mbc-ink .pn-eyebrow,body.mbc-ink .pn-hint{color:var(--mix-accent)}
+body.mbc-ink .pn-eyebrow i{background:var(--mix-accent)}
+body.mbc-ink .pn-ghost{color:#cad9ff0c}
+body.mbc-ink .pn-rail i{background:var(--mix-line)}
+body.mbc-ink .pn-mask{background:var(--mix-card)}
+body.mbc-ink .pn-words{text-shadow:0 1px 8px #0b122766}
