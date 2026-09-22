@@ -1,5 +1,32 @@
 [
   {
+    "id": "92890793ea56b97a30924c484caf112e1a1cc52c76baf34e95450320723385f2-3",
+    "title": "Themed Character Cake Pops Set - Pokemon",
+    "caption": "Poké Balls, zebras, and teddy bears — three designs, one custom bakery. Hand-decorated cake pops built for themed birthday parties and celebrations across the Bay Area. Custom orders available for San Francisco and surrounding areas.",
+    "alt_text": "Three sets of custom cake pops: Poké Ball, zebra face, and teddy bear designs on white sticks in display stands, made for the Bay Area.",
+    "classification": {
+      "audience": "personal",
+      "product_type": "cake-pops",
+      "occasion": "birthday",
+      "styles": [
+        "sculpted",
+        "hand-piped"
+      ],
+      "brand_or_theme": "Pokémon Poké Ball, zebra, teddy bear",
+      "gallery_targets": [
+        "all",
+        "cake-pops"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cake-pops"
+    ],
+    "image_path": "images/gallery/bakers-agent/cake-pops/themed-character-cake-pops-set-pokemon-92890793ea-3.webp",
+    "image_url": "/images/gallery/bakers-agent/cake-pops/themed-character-cake-pops-set-pokemon-92890793ea-3.webp",
+    "published_at": "2026-09-22T20:44:06.509144+00:00"
+  },
+  {
     "id": "92890793ea56b97a30924c484caf112e1a1cc52c76baf34e95450320723385f2-2",
     "title": "Themed Character Cake Pops Set - Pokemon",
     "caption": "Poké Balls, zebras, and teddy bears — three designs, one custom bakery. Hand-decorated cake pops built for themed birthday parties and celebrations across the Bay Area. Custom orders available for San Francisco and surrounding areas.",
