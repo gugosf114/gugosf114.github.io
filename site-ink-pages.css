@@ -43,7 +43,7 @@ body.mbc-ink>footer :is(p,.footer-tagline){color:var(--mix-panel-muted)}
  body.mbc-ink .showcase-overlay{top:50%;bottom:auto;left:50%;transform:translate(-50%,-50%);width:calc(100% - 36px);padding:11px 12px;border-radius:15px}
  body.mbc-ink .showcase-overlay h1{font-size:clamp(17px,4.7vw,22px);line-height:1.15;margin-bottom:10px}
  body.mbc-ink .showcase-badge{font-size:8px;margin-bottom:7px;padding:2px 7px}
- body.mbc-ink .showcase-actions .btn{font-size:13.5px;min-height:36px;padding:8px 6px}
+ body.mbc-ink .showcase-actions .btn{font-size:13.5px;line-height:1.2;min-height:30px;padding:6px 6px}
  body.mbc-ink .showcase-scene .carousel-slide>picture{align-items:center}
  body.mbc-ink .showcase-scene .carousel-slide img{height:100%;object-position:center;object-fit:contain}
  body.mbc-ink .showcase-scene .corporate-cookie-slide{align-items:center}
