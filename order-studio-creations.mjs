@@ -69,13 +69,25 @@ $('creationsPause').addEventListener('click',()=>{
 });
 strip.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')hovering=true;});
 strip.addEventListener('pointerleave',()=>{hovering=false;});
-viewport.addEventListener('pointerdown',()=>{resumeAfter=Date.now()+10000;},{passive:true});
-let lastAuto=Date.now();
-setInterval(()=>{
-  if(Date.now()-lastAuto<(phone.matches?2500:4000))return;
-  if(document.body.dataset.step!=='upload'||document.hidden||dialog.open||paused||hovering||reduced.matches||Date.now()<resumeAfter||viewport.contains(document.activeElement))return;
-  lastAuto=Date.now();move(1);
-},250);
+viewport.addEventListener('pointerdown',()=>{resumeAfter=Date.now()+6000;},{passive:true});
+// Continuous "train" glide: starts on load, pauses on hover/touch/viewer, resumes after.
+const SPEED=phone.matches?34:42; // px per second
+let tabbing=false;
+addEventListener('keydown',e=>{tabbing=e.key==='Tab';},true);addEventListener('pointerdown',()=>{tabbing=false;},true);
+let pos=viewport.scrollLeft,last=performance.now(),gliding=false;
+function glide(now){
+  const dt=Math.min(64,now-last);last=now;
+  const stop=document.body.dataset.step!=='upload'||document.hidden||dialog.open||paused||hovering||reduced.matches||Date.now()<resumeAfter||(tabbing&&viewport.contains(document.activeElement));
+  if(stop){gliding=false;}
+  else{
+    if(!gliding){pos=viewport.scrollLeft;gliding=true;}
+    pos+=SPEED*dt/1000;
+    const width=loopWidth();if(width&&pos>=width)pos-=width;
+    viewport.scrollLeft=pos;
+  }
+  requestAnimationFrame(glide);
+}
+requestAnimationFrame(glide);
 
 $('creationViewerClose').addEventListener('click',()=>dialog.close());
 $('creationViewerReturn').addEventListener('click',()=>dialog.close());
