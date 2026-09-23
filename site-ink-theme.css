@@ -123,14 +123,12 @@ body.mbc-ink .showcase-actions .btn{font-size:10px;padding:9px 11px;min-height:4
 .showcase-scene .corporate-cookie-slide{align-items:flex-start}
 .showcase-scene .corporate-cookie-half img{height:100%}
 .showcase-toolbar{flex-wrap:wrap;justify-content:center;padding:8px 0;gap:6px}
-.showcase-status{order:2;font-size:9px}
-.showcase-toolbar [data-position]{order:3;font-size:9px}
+.showcase-status,.showcase-toolbar [data-position],.showcase-controls>button[data-pause],.showcase-progress{display:none!important}
 .showcase-controls{order:1;flex-basis:100%;justify-content:center;gap:4px}
 .showcase-dots{gap:1px}
 .showcase-dots button{width:13px}
 .showcase-controls>button{width:26px;height:26px}
-.showcase-controls>button[data-pause]{padding:0 9px;font-size:9px}
-.showcase-progress{margin:0 -8px}}
+.showcase-toolbar{padding-bottom:10px}}
 @media(prefers-reduced-motion:reduce){.showcase-scene{transition:opacity .15s;transform:none}
 .showcase-progress>span.is-timing{animation:none}}
 body.mbc-ink .nav-links a.nav-cta::before{display:none!important;content:none!important}
