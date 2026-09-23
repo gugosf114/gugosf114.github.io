@@ -75,3 +75,6 @@ body.mbc-ink.ink-order-studio .creations-heading strong{color:var(--mix-panel-in
 body.mbc-ink.ink-order-studio .studio-header .help-button{color:var(--mix-panel-ink)}
 body.mbc-ink.ink-order-studio .studio-footer :is(#footerNote,#footerPrice,.back-button){color:var(--mix-panel-muted)}
 @media(max-width:650px){body.mbc-ink .contact-message-column{padding:18px}}
+/* Order Now desktop landing: both panels share the same top and bottom edge. */
+@media(min-width:1101px){body.mbc-ink.ink-order-studio[data-step="upload"] .workspace-copy{align-self:stretch;margin:22px 0 22px 24px;display:flex;flex-direction:column;justify-content:center}}
+@media(min-width:1600px){body.mbc-ink.ink-order-studio[data-step="upload"] .workspace-copy{margin-top:32px;margin-bottom:32px}}
