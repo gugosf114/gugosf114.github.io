@@ -135,3 +135,9 @@ body.ink-order-studio[data-step="upload"] .start-path .path-symbol{width:40px;he
 body.ink-order-studio[data-step="upload"] .starting-price>strong{font-size:36px}}
 body.ink-order-studio[data-step="upload"] .workspace-preview:has(.packaging-film:not([hidden])) .stage-orbit{display:none}
 body.ink-order-studio[data-step="upload"] .start-path>span:nth-child(2){min-width:0}
+/* Request an Order, phone: shorter, simpler header. */
+@media(max-width:760px){body.mbc-ink .q-intro-copy>p,body.mbc-ink .q-intro-copy>div,body.mbc-ink #qReviewTitle+.q-lead{display:none}
+body.mbc-ink .q-intro-copy h1{font-size:22px;margin-bottom:10px}
+body.mbc-ink .q-heading{gap:10px;margin-bottom:14px}
+body.mbc-ink .q-service-promise{padding:9px 14px;align-items:center}
+body.mbc-ink .q-service-promise p{line-height:1.35}}
