@@ -1,0 +1,70 @@
+/* Contact page premium pass */
+.cx-hero{max-width:1080px;margin:34px auto 22px;padding:0 24px;text-align:center}
+.cx-eyebrow{display:inline-flex;align-items:center;gap:9px;margin:0 0 14px;padding:7px 14px;border-radius:999px;background:#ffffff12;border:1px solid var(--mix-line);font:800 11px/1 Nunito,sans-serif;letter-spacing:1.6px;text-transform:uppercase;color:var(--mix-accent)}
+.cx-eyebrow span{width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,#ec268f,#ffc532);animation:cx-pulse 2.6s ease-out infinite}
+@keyframes cx-pulse{0%{box-shadow:0 0 0 0 #ec268f80}70%{box-shadow:0 0 0 9px #ec268f00}100%{box-shadow:0 0 0 0 #ec268f00}}
+.cx-hero h1{margin:0 0 12px;font:400 clamp(30px,4.4vw,52px)/1.1 'Fredoka One','Fredoka Fallback',sans-serif;color:var(--mix-panel-ink)}
+.cx-hero h1 em{font-style:normal;background:linear-gradient(100deg,#ec268f,#ff8a5c 45%,#ffc532);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cx-sub{margin:0 auto 20px;max-width:560px;color:var(--mix-panel-muted);font-size:17px;line-height:1.6}
+.cx-chips{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:0;padding:0}
+.cx-chips li{display:inline-flex;align-items:center;gap:10px;padding:7px 16px 7px 7px;border-radius:999px;background:#ffffff0f;border:1px solid var(--mix-line);color:var(--mix-panel-ink);font:700 14px/1 Nunito,sans-serif}
+.cx-chips b{display:grid;place-items:center;min-width:38px;height:28px;padding:0 8px;border-radius:999px;background:linear-gradient(135deg,#ec268f,#ffc532);color:#fff;font:400 13px/1 'Fredoka One','Fredoka Fallback',sans-serif}
+/* form */
+body.mbc-ink .contact-message-column h2{font:400 26px/1.2 'Fredoka One','Fredoka Fallback',sans-serif}
+.cx-topics{border:0;margin:6px 0 18px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.cx-topics legend{width:100%;margin-bottom:9px;font:800 11px/1 Nunito,sans-serif;letter-spacing:1.3px;text-transform:uppercase;color:#56627e}
+.cx-topics label{position:relative;cursor:pointer}
+.cx-topics input{position:absolute;opacity:0;pointer-events:none}
+.cx-topics span{display:inline-block;padding:9px 16px;border-radius:999px;background:#fff;border:1px solid #c9d3e8;color:#202c49;font:700 14px/1 Nunito,sans-serif;transition:all .25s}
+.cx-topics label:hover span{border-color:#ec268f;transform:translateY(-1px)}
+.cx-topics input:checked+span{background:linear-gradient(135deg,#ec268f,#ff6a8a);border-color:transparent;color:#fff;box-shadow:0 6px 16px #ec268f40}
+.cx-topics input:focus-visible+span{outline:2px solid #ec268f;outline-offset:3px}
+body.mbc-ink .cx-float{position:relative;margin-bottom:16px}
+body.mbc-ink .cx-float :is(input,textarea){width:100%;padding:24px 16px 10px;border-radius:14px;border:1px solid #c9d3e8;background:#fff;font:600 16px/1.4 Nunito,sans-serif;color:#202c49;transition:border-color .25s,box-shadow .25s}
+body.mbc-ink .cx-float textarea{min-height:150px;resize:vertical}
+body.mbc-ink .cx-float label{position:absolute;left:17px;top:17px;margin:0;pointer-events:none;font:600 16px/1 Nunito,sans-serif;color:#6b7690;transition:all .2s ease}
+body.mbc-ink .cx-float :is(input,textarea):focus{outline:0;border-color:#ec268f;box-shadow:0 0 0 4px #ec268f24}
+body.mbc-ink .cx-float :is(input,textarea):is(:focus,:not(:placeholder-shown))+label{top:8px;font:800 10.5px/1 Nunito,sans-serif;letter-spacing:1px;text-transform:uppercase;color:#c91e70}
+body.mbc-ink .cx-send{width:100%;padding:16px;border-radius:16px;font:700 17px/1 Nunito,sans-serif;letter-spacing:.3px}
+body.mbc-ink .cx-send.is-sending{opacity:.8;pointer-events:none}
+.cx-sent{text-align:center;padding:36px 20px}
+.cx-sent svg{width:78px;height:78px;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.cx-sent circle{stroke:#ec268f;stroke-width:3;stroke-dasharray:151;stroke-dashoffset:151;animation:cx-draw .6s ease forwards}
+.cx-sent path{stroke:#ec268f;stroke-width:4;stroke-dasharray:36;stroke-dashoffset:36;animation:cx-draw .45s ease .5s forwards}
+@keyframes cx-draw{to{stroke-dashoffset:0}}
+.cx-sent h3{margin:14px 0 6px;font:400 28px/1 'Fredoka One','Fredoka Fallback',sans-serif;color:#202c49}
+.cx-sent p{margin:0 0 18px;color:#3e4c68}
+.cx-sent button{border:1px solid #c9d3e8;background:#fff;border-radius:999px;padding:9px 16px;font:700 14px Nunito,sans-serif;color:#8a2f5c;cursor:pointer}
+/* quick answers */
+.cx-faq{margin-top:26px;padding-top:20px;border-top:1px solid #8b9abb55}
+.cx-faq h3{margin:0 0 12px;font:400 20px/1 'Fredoka One','Fredoka Fallback',sans-serif;color:#202c49}
+.cx-faq details{margin-bottom:9px;border-radius:14px;background:#fff;border:1px solid #c9d3e8;transition:border-color .25s,box-shadow .25s}
+.cx-faq details[open]{border-color:#ec268f66;box-shadow:0 8px 20px #2028421a}
+.cx-faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;font:700 15px/1.3 Nunito,sans-serif;color:#202c49}
+.cx-faq summary::-webkit-details-marker{display:none}
+.cx-faq summary::after{content:'+';flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#ec268f,#ffc532);color:#fff;font:800 16px/1 Nunito,sans-serif;transition:transform .3s}
+.cx-faq details[open] summary::after{transform:rotate(45deg)}
+.cx-faq p{margin:0;padding:0 16px 14px;color:#3e4c68;font-size:15px;line-height:1.65}
+/* contact cards */
+body.mbc-ink .connect-heading{position:relative}
+.cx-open{display:inline-flex;align-items:center;gap:8px;margin:6px 0 2px;padding:6px 12px;border-radius:999px;background:#ffffff12;border:1px solid var(--mix-line);font:700 12.5px/1 Nunito,sans-serif;color:var(--mix-panel-muted)}
+.cx-open::before{content:'';width:8px;height:8px;border-radius:50%;background:#8b9abb}
+.cx-open.is-open{color:#bdf5cf;border-color:#4ade8055}
+.cx-open.is-open::before{background:#4ade80;animation:cx-live 2s ease-out infinite}
+@keyframes cx-live{0%{box-shadow:0 0 0 0 #4ade8099}70%{box-shadow:0 0 0 8px #4ade8000}100%{box-shadow:0 0 0 0 #4ade8000}}
+body.mbc-ink .connect-action{flex-direction:column;gap:9px;padding:16px 10px;border-radius:18px;background:#fff;border:1px solid #ffffffb3;box-shadow:0 8px 20px #0b10221f;transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s}
+body.mbc-ink .connect-action:hover{transform:translateY(-4px);box-shadow:0 16px 32px #0b102233}
+body.mbc-ink .connect-action svg{box-sizing:content-box;width:22px;height:22px;padding:11px;border-radius:14px;background:linear-gradient(135deg,#ec268f,#ff8a5c 55%,#ffc532);color:#fff;box-shadow:0 6px 14px #ec268f40}
+body.mbc-ink .connect-action span{font:400 16px/1 'Fredoka One','Fredoka Fallback',sans-serif;color:#202c49}
+/* map */
+.cx-map{position:relative;overflow:hidden}
+.cx-map iframe{display:block;filter:saturate(.75) hue-rotate(-8deg) contrast(1.02)}
+.cx-map::after{content:'';position:absolute;inset:0;background:linear-gradient(160deg,#6d80b033,#1b223933);mix-blend-mode:multiply;pointer-events:none}
+.cx-map-pin{position:absolute;left:50%;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:#ec268f;border:3px solid #fff;box-shadow:0 4px 12px #ec268f80;pointer-events:none;z-index:2}
+.cx-map-pin::after{content:'';position:absolute;inset:-12px;border-radius:50%;border:2px solid #ec268f;opacity:0;animation:cx-ring 2.2s ease-out infinite}
+@keyframes cx-ring{0%{transform:scale(.4);opacity:.9}100%{transform:scale(1.8);opacity:0}}
+@media(max-width:760px){.cx-hero{margin:20px auto 14px;padding:0 16px}
+.cx-sub{font-size:15.5px;margin-bottom:14px}
+.cx-chips li{font-size:12.5px;padding:5px 12px 5px 5px}
+.cx-chips b{min-width:32px;height:24px;font-size:11.5px}}
+@media(prefers-reduced-motion:reduce){.cx-eyebrow span,.cx-open::before,.cx-map-pin::after{animation:none}}
