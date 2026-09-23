@@ -49,6 +49,19 @@ function move(direction) {
 }
 $('creationsPrevious').addEventListener('click',()=>{resumeAfter=Date.now()+10000;move(-1);});
 $('creationsNext').addEventListener('click',()=>{resumeAfter=Date.now()+10000;move(1);});
+// Phone dot bar: one dot per creation, arrows at the ends.
+const dotsHost=$('creationsDots'),dots=[];
+if(dotsHost){
+  creations.forEach((item,index)=>{const d=document.createElement('button');d.type='button';d.tabIndex=-1;d.className='creations-dot';
+    d.addEventListener('click',()=>{resumeAfter=Date.now()+10000;viewport.scrollTo({left:originals[index].offsetLeft-originals[0].offsetLeft,behavior:reduced.matches?'auto':'smooth'});});
+    dots.push(d);dotsHost.append(d);});
+  const syncDots=()=>{const step=originals[1].offsetLeft-originals[0].offsetLeft;if(!step)return;
+    const i=Math.round(viewport.scrollLeft/step)%creations.length;dots.forEach((d,k)=>d.classList.toggle('is-active',k===i));};
+  viewport.addEventListener('scroll',syncDots,{passive:true});syncDots();
+  $('creationsDotPrev').addEventListener('click',()=>{resumeAfter=Date.now()+10000;move(-1);});
+  $('creationsDotNext').addEventListener('click',()=>{resumeAfter=Date.now()+10000;move(1);});
+}
+const phone=matchMedia('(max-width: 760px)');
 $('creationsPause').addEventListener('click',()=>{
   paused=!paused;$('creationsPause').textContent=paused?'Play':'Pause';
   $('creationsPause').setAttribute('aria-pressed',String(paused));
@@ -57,10 +70,12 @@ $('creationsPause').addEventListener('click',()=>{
 strip.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')hovering=true;});
 strip.addEventListener('pointerleave',()=>{hovering=false;});
 viewport.addEventListener('pointerdown',()=>{resumeAfter=Date.now()+10000;},{passive:true});
+let lastAuto=Date.now();
 setInterval(()=>{
+  if(Date.now()-lastAuto<(phone.matches?2500:4000))return;
   if(document.body.dataset.step!=='upload'||document.hidden||dialog.open||paused||hovering||reduced.matches||Date.now()<resumeAfter||viewport.contains(document.activeElement))return;
-  move(1);
-},4000);
+  lastAuto=Date.now();move(1);
+},250);
 
 $('creationViewerClose').addEventListener('click',()=>dialog.close());
 $('creationViewerReturn').addEventListener('click',()=>dialog.close());

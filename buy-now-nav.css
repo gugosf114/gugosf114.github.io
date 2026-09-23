@@ -35,3 +35,20 @@ body.ink-order-studio .creations-band .creation-silhouette{height:66px;width:88p
 body.ink-order-studio .creations-band .creation-name{font-size:10.5px}}
 @media(max-width:760px){body.ink-order-studio[data-step="upload"] .studio{padding-top:10px!important}
 body.ink-order-studio[data-step="upload"] .step-counter{margin-top:6px}}
+/* dot bar: phones only */
+body.ink-order-studio .creations-dotbar{display:none}
+@media(max-width:760px){
+body.ink-order-studio .creations-band{margin:10px auto 2px}
+body.ink-order-studio .creations-band .creations-strip{padding:10px 10px 8px}
+body.ink-order-studio .creations-band .creations-heading{margin-bottom:6px;justify-content:center}
+body.ink-order-studio .creations-band .creations-controls{display:none}
+body.ink-order-studio .creations-band .creations-viewport{padding:2px 0}
+body.ink-order-studio .creations-band .creation-card{flex-basis:96px;width:96px;padding:8px 6px 6px;gap:5px;border-radius:15px}
+body.ink-order-studio .creations-band .creation-silhouette{height:54px;width:78px}
+body.ink-order-studio .creations-band .creations-dotbar{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:6px}
+body.ink-order-studio .creations-band .creations-dotbar>button{width:28px;height:28px;border-radius:50%;border:1px solid var(--mix-line);background:#ffffff0d;color:var(--mix-panel-ink);font-size:16px;line-height:1;display:grid;place-items:center;padding:0}
+body.ink-order-studio .creations-band .creations-dots{display:flex;align-items:center;gap:1px}
+body.ink-order-studio .creations-band .creations-dot{width:13px;height:18px;padding:0;border:0;background:none;display:grid;place-items:center}
+body.ink-order-studio .creations-band .creations-dot::before{content:'';width:6px;height:6px;border-radius:50%;background:#ffffff40;transition:background .3s,transform .3s}
+body.ink-order-studio .creations-band .creations-dot.is-active::before{background:var(--mix-accent);transform:scale(1.5)}
+body.ink-order-studio[data-step="upload"] .studio{padding-top:4px!important}}
