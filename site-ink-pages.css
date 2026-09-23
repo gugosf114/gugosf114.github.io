@@ -54,3 +54,86 @@ body.mbc-ink>footer :is(p,.footer-tagline){color:var(--mix-panel-muted)}
 }
 body.mbc-ink .showcase-copy-long h1{font-size:clamp(17px,2vw,27px)}
 @media(prefers-reduced-motion:reduce){body.mbc-ink .site-atmosphere::after{animation:none}}
+/* Content blocks: FAQ cards, prose card, check tiles, step cards, link tiles. */
+body.mbc-ink .mbc-faq,body.mbc-ink .mbc-prose,body.mbc-ink .mbc-steps-wrap{max-width:880px;margin:0 auto;color:var(--mix-panel-muted)}
+body.mbc-ink .mbc-faq>h2,body.mbc-ink .mbc-prose>h2{text-align:center;margin:0 0 30px;color:var(--mix-panel-ink);font:clamp(25px,3vw,32px)/1.3 'Fredoka One','Fredoka Fallback',sans-serif}
+body.mbc-ink .mbc-faq{display:flex;flex-direction:column;gap:12px}
+body.mbc-ink .mbc-faq-item{border-radius:18px;border:1px solid var(--mix-line);background:linear-gradient(160deg,#46527a,#39445f);box-shadow:0 10px 26px #0b10221f,inset 0 1px 0 #ffffff12;transition:border-color .3s,box-shadow .3s,transform .3s}
+body.mbc-ink .mbc-faq-item:hover{border-color:#ffc53255;transform:translateY(-2px)}
+body.mbc-ink .mbc-faq-item[open]{border-color:#ec268f66;box-shadow:0 14px 34px #0b10222e,inset 0 1px 0 #ffffff18}
+body.mbc-ink .mbc-faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:16px;padding:18px 22px}
+body.mbc-ink .mbc-faq-item summary::-webkit-details-marker{display:none}
+body.mbc-ink .mbc-faq-item summary h3{flex:1;margin:0;font:18px/1.35 'Fredoka One','Fredoka Fallback',sans-serif;color:var(--mix-panel-ink)}
+body.mbc-ink .mbc-faq-icon{flex:none;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#ec268f,#ffc532);position:relative;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+body.mbc-ink .mbc-faq-icon::before,body.mbc-ink .mbc-faq-icon::after{content:'';position:absolute;left:50%;top:50%;width:12px;height:2px;background:#fff;border-radius:2px;transform:translate(-50%,-50%)}
+body.mbc-ink .mbc-faq-icon::after{transform:translate(-50%,-50%) rotate(90deg);transition:opacity .25s}
+body.mbc-ink .mbc-faq-item[open] .mbc-faq-icon{transform:rotate(180deg)}
+body.mbc-ink .mbc-faq-item[open] .mbc-faq-icon::after{opacity:0}
+body.mbc-ink .mbc-faq-a{padding:0 22px 20px 22px;animation:mbc-faq-in .35s ease}
+body.mbc-ink .mbc-faq-a p{margin:0 0 10px;line-height:1.75;font-size:16px}
+body.mbc-ink .mbc-faq-a p:last-child{margin-bottom:0}
+@keyframes mbc-faq-in{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+body.mbc-ink .mbc-prose{padding:6px 4px}
+body.mbc-ink .mbc-prose p{line-height:1.8;font-size:16.5px;margin:0 0 16px;text-align:justify;hyphens:auto}
+body.mbc-ink .mbc-prose>p:first-of-type{font-size:19px;line-height:1.7;color:var(--mix-panel-ink)}
+body.mbc-ink .mbc-prose h3{font:21px/1.3 'Fredoka One','Fredoka Fallback',sans-serif;color:var(--mix-panel-ink);margin:30px 0 14px;display:flex;align-items:center;gap:12px}
+body.mbc-ink .mbc-prose h3::before{content:'';width:26px;height:3px;border-radius:3px;background:linear-gradient(90deg,#ec268f,#ffc532)}
+body.mbc-ink :is(.mbc-prose,.mbc-faq,.mbc-steps-wrap) a{color:inherit;font-weight:700;text-decoration:underline;text-decoration-color:#ffda8366;text-decoration-thickness:1.5px;text-underline-offset:3px}
+body.mbc-ink :is(.mbc-prose,.mbc-faq,.mbc-steps-wrap) a:hover{color:#ffda83;text-decoration-color:#ffda83}
+body.mbc-ink :is(.mbc-prose,.mbc-faq,.mbc-steps-wrap) strong{color:var(--mix-panel-ink)}
+body.mbc-ink .mbc-checks{list-style:none;padding:0;margin:4px 0 22px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(max-width:620px){body.mbc-ink .mbc-checks{grid-template-columns:1fr}}
+body.mbc-ink .mbc-checks li{position:relative;padding:16px 18px 16px 52px;border-radius:16px;border:1px solid var(--mix-line);background:#ffffff0a;line-height:1.6;font-size:15.5px}
+body.mbc-ink .mbc-checks li::before{content:'';position:absolute;left:16px;top:17px;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#ec268f,#ffc532)}
+body.mbc-ink .mbc-checks li::after{content:'';position:absolute;left:23px;top:22px;width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+body.mbc-ink .mbc-steps{list-style:none;counter-reset:mbc-step;padding:0;margin:6px 0 22px;display:grid;gap:12px}
+body.mbc-ink .mbc-steps li{counter-increment:mbc-step;position:relative;padding:18px 20px 18px 74px;border-radius:18px;border:1px solid var(--mix-line);background:linear-gradient(160deg,#46527a,#39445f);line-height:1.7;font-size:16px;box-shadow:0 8px 20px #0b10221a}
+body.mbc-ink .mbc-steps li::before{content:counter(mbc-step);position:absolute;left:18px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font:18px/1 'Fredoka One','Fredoka Fallback',sans-serif;color:#fff;background:linear-gradient(135deg,#ec268f,#ffc532);box-shadow:0 6px 14px #ec268f40}
+body.mbc-ink .mbc-steps li:not(:last-child)::after{content:'';position:absolute;left:37px;bottom:-13px;width:2px;height:14px;background:linear-gradient(#ffc532,#ec268f)}
+body.mbc-ink .mbc-linktiles{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:28px}
+body.mbc-ink .mbc-linktiles>a{flex:0 1 calc(25% - 9px);min-width:230px}
+body.mbc-ink .mbc-linktiles a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;border-radius:16px;border:1px solid var(--mix-line);background:#ffffff0a;color:var(--mix-panel-ink);font-weight:700;font-size:15px;line-height:1.4;text-decoration:none;transition:transform .3s,border-color .3s,background .3s}
+body.mbc-ink .mbc-linktiles a::after{content:'\2192';flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#ec268f,#ffc532);color:#fff;font-size:15px;transition:transform .3s}
+body.mbc-ink .mbc-linktiles a:hover{transform:translateY(-3px);border-color:#ffc53266;background:#ffffff12}
+body.mbc-ink .mbc-linktiles a:hover::after{transform:translateX(3px)}
+@media(max-width:760px){body.mbc-ink .mbc-prose p{text-align:left;hyphens:manual;font-size:15.5px}
+body.mbc-ink .mbc-prose>p:first-of-type{font-size:17px}
+body.mbc-ink .mbc-faq-item summary{padding:16px 16px}
+body.mbc-ink .mbc-faq-item summary h3{font-size:16.5px}
+body.mbc-ink .mbc-faq-a{padding:0 16px 16px}
+body.mbc-ink .mbc-steps li{padding:16px 16px 16px 64px;font-size:15px}
+body.mbc-ink .mbc-steps li::before{left:14px;width:36px;height:36px}
+body.mbc-ink .mbc-steps li:not(:last-child)::after{left:31px}}
+@media(prefers-reduced-motion:reduce){body.mbc-ink .mbc-faq-a{animation:none}}
+/* Blog posts: magazine layout. */
+body.mbc-ink .blog-article{max-width:860px;margin:0 auto}
+body.mbc-ink .blog-article .blog-featured-image{display:block;width:100%;max-height:480px;object-fit:cover;border-radius:24px;box-shadow:0 24px 50px #0b102240;margin:0 0 38px;background:#fff}
+body.mbc-ink .blog-article .blog-content{max-width:740px;margin:0 auto;color:var(--mix-panel-muted);font-size:17.5px;line-height:1.85}
+body.mbc-ink .blog-article .blog-content>p{margin:0 0 20px}
+body.mbc-ink .blog-article .blog-intro{background:none!important;border:0!important;border-left:4px solid transparent!important;border-image:linear-gradient(#ec268f,#ffc532) 1!important;padding:4px 0 4px 24px!important;margin:0 0 40px!important;font-size:21px;line-height:1.7;color:var(--mix-panel-ink)!important}
+body.mbc-ink .blog-article .blog-intro::first-letter{float:left;font:64px/.9 'Fredoka One','Fredoka Fallback',sans-serif;margin:6px 12px 0 0;background:linear-gradient(135deg,#ec268f,#ffc532);-webkit-background-clip:text;background-clip:text;color:transparent}
+body.mbc-ink .blog-article .blog-content>h2{font:clamp(24px,2.6vw,30px)/1.3 'Fredoka One','Fredoka Fallback',sans-serif;color:var(--mix-panel-ink);margin:52px 0 18px;padding-bottom:14px;background:linear-gradient(90deg,#ec268f,#ffc532) left bottom/64px 3px no-repeat}
+body.mbc-ink .blog-article .blog-content>h3{font:21px/1.35 'Fredoka One','Fredoka Fallback',sans-serif;color:var(--mix-panel-ink);margin:34px 0 10px;display:flex;align-items:center;gap:12px}
+body.mbc-ink .blog-article .blog-content>h3::before{content:'';flex:none;width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,#ec268f,#ffc532);box-shadow:0 0 0 5px #ec268f1f}
+body.mbc-ink .blog-article .blog-content>p:has(>strong:first-child){padding:14px 18px;border-radius:14px;background:#ffffff0b;border:1px solid var(--mix-line);font-size:16px;line-height:1.7}
+body.mbc-ink .blog-article .blog-content>p>strong:first-child{color:#ffda83}
+body.mbc-ink .blog-article .blog-content strong{color:var(--mix-panel-ink)}
+body.mbc-ink .blog-article .blog-content a:not(.btn){color:inherit;font-weight:700;text-decoration:underline;text-decoration-color:#ffda8380;text-decoration-thickness:1.5px;text-underline-offset:3px}
+body.mbc-ink .blog-article .blog-content a:not(.btn):hover{color:#ffda83;text-decoration-color:#ffda83}
+body.mbc-ink .blog-article .blog-content :is(ul,ol){margin:0 0 24px;padding:0;list-style:none;display:grid;gap:10px}
+body.mbc-ink .blog-article .blog-content ul>li{position:relative;padding-left:30px}
+body.mbc-ink .blog-article .blog-content ul>li::before{content:'';position:absolute;left:4px;top:.72em;width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,#ec268f,#ffc532)}
+body.mbc-ink .blog-article .blog-content ol{counter-reset:bl}
+body.mbc-ink .blog-article .blog-content ol>li{counter-increment:bl;position:relative;padding-left:42px}
+body.mbc-ink .blog-article .blog-content ol>li::before{content:counter(bl);position:absolute;left:0;top:.15em;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;font:14px/1 'Fredoka One','Fredoka Fallback',sans-serif;color:#fff;background:linear-gradient(135deg,#ec268f,#ffc532)}
+body.mbc-ink .blog-article .faq-item{background:linear-gradient(160deg,#46527a,#39445f)!important;border:1px solid var(--mix-line)!important;border-radius:18px;padding:20px 22px!important;margin:0 0 12px!important;box-shadow:0 10px 24px #0b10221c}
+body.mbc-ink .blog-article .faq-item h3{font:18px/1.4 'Fredoka One','Fredoka Fallback',sans-serif;color:var(--mix-panel-ink)!important;margin:0 0 8px}
+body.mbc-ink .blog-article .faq-item p{color:var(--mix-panel-muted)!important;margin:0;font-size:16px;line-height:1.75}
+body.mbc-ink .blog-article .blog-cta{border-radius:22px!important;background:linear-gradient(110deg,#ec268f2e,#ffc53221)!important;border:1px solid #ffc53245!important}
+@supports (animation-timeline:scroll()){body.mbc-ink:has(.blog-article)::after{content:'';position:fixed;left:0;top:0;height:3px;width:100%;z-index:10001;background:linear-gradient(90deg,#ec268f,#ffc532);transform-origin:left;transform:scaleX(0);animation:mbc-read linear both;animation-timeline:scroll(root)}
+@keyframes mbc-read{to{transform:scaleX(1)}}}
+@media(max-width:760px){body.mbc-ink .blog-article .blog-content{font-size:16.5px;line-height:1.8}
+body.mbc-ink .blog-article .blog-intro{font-size:18px;padding-left:18px!important}
+body.mbc-ink .blog-article .blog-intro::first-letter{font-size:52px}
+body.mbc-ink .blog-article .blog-featured-image{border-radius:16px;margin-bottom:26px}
+body.mbc-ink .blog-article .blog-content>h2{margin-top:40px}}
