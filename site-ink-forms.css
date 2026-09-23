@@ -141,3 +141,6 @@ body.mbc-ink .q-intro-copy h1{font-size:22px;margin-bottom:10px}
 body.mbc-ink .q-heading{gap:10px;margin-bottom:14px}
 body.mbc-ink .q-service-promise{padding:9px 14px;align-items:center}
 body.mbc-ink .q-service-promise p{line-height:1.35}}
+/* Treat tiles: white inside, pink ring when chosen. */
+body.mbc-ink .q-product{background:#fff;border-color:#c9d3e8;box-shadow:0 6px 16px #2028421a}
+body.mbc-ink .q-product:has(input:checked){background:#fff;border-color:#c91e70;box-shadow:inset 0 0 0 1px #c91e70,0 8px 20px #c91e7026}
