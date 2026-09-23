@@ -115,7 +115,7 @@
     }
     </script>
 </head>
-<body>
+<body class="mbc-ink"><div class="site-atmosphere" aria-hidden="true"></div>
 
 
     <!-- FLOATING SOCIAL SIDEBAR -->
@@ -138,13 +138,7 @@
     <header>
         <nav aria-label="Main navigation">
             <a href="buy-now" class="order-now-btn">Order Now</a>
-            <a href="/" class="logo">
-                <img width="1330" height="1222" src="logo_icon.png" alt="My Baking Creations logo" class="logo-icon">
-                <div class="logo-text">
-                    <span class="my">my</span><span class="baking">baking</span>
-                    <span class="creations">CREATIONS</span>
-                </div>
-            </a>
+            <a href="/" class="logo"><img class="brand-wordmark" src="images/mbc-brand/mbc-wordmark.png" alt="My Baking Creations" width="2304" height="809"></a>
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="about">About Us</a></li>
@@ -191,11 +185,10 @@
     <main>
 
     <!-- HERO -->
-    <section class="hero hero-carousel hero-subpage hero-glass">
-        <!-- Carousel Track -->
-        <div class="carousel-track-container">
-            <div class="carousel-track">
-                <div class="carousel-slide"><img fetchpriority="high" width="1920" height="1066" src="images/gallery/carousel/carousel 1.webp" alt="Custom sculpted birthday cake with fondant decorations"></div>
+    <section class="showcase-carousel" aria-label="Our custom cakes and cookies carousel" aria-roledescription="carousel" data-showcase>
+<div class="showcase-stage"><div class="showcase-scene is-active" data-scene></div><div class="showcase-scene" data-scene aria-hidden="true"></div>
+<div class="showcase-overlay"><img src="images/mbc-brand/mbc-emblem.png" class="showcase-logo" width="1330" height="1222" alt=""><span class="showcase-badge">Family-Owned Since 2012</span><h1>Custom Logo <span class="highlight">Cookies</span></h1><div class="showcase-actions"><a class="btn btn-primary" href="https://mybakingcreations.com/order-form">Request an Order</a><a class="btn btn-secondary" href="https://mybakingcreations.com/buy-now">Order Now</a></div></div></div>
+<div class="showcase-toolbar"><span class="showcase-status"><i aria-hidden="true"></i><span data-play-status>Playing automatically</span></span><div class="showcase-controls"><button type="button" data-previous aria-label="Previous images">‹</button><div class="showcase-dots" aria-label="Choose carousel image"></div><button type="button" data-next aria-label="Next images">›</button><button type="button" data-pause aria-label="Pause carousel" aria-pressed="false">Pause</button></div><span data-position>01 / 10</span></div><div class="showcase-progress" aria-hidden="true"><span></span></div><template id="showcase-source"><div class="carousel-slide"><img fetchpriority="high" width="1920" height="1066" src="images/gallery/carousel/carousel 1.webp" alt="Custom sculpted birthday cake with fondant decorations"></div>
                 <div class="carousel-slide"><img loading="lazy" width="1920" height="1166" src="images/gallery/carousel/carousel 2.webp" alt="Decorated sugar cookies with royal icing designs"></div>
                 <div class="carousel-slide"><img loading="lazy" width="1680" height="929" src="images/gallery/carousel/carousel 3.webp" alt="Elegant tiered wedding cake with floral accents"></div>
                 <div class="carousel-slide"><img loading="lazy" width="1920" height="873" src="images/gallery/carousel/carousel 4.webp" alt="Custom themed cake pops for special events"></div>
@@ -205,35 +198,8 @@
                 <div class="carousel-slide"><img loading="lazy" width="1920" height="792" src="images/gallery/carousel/carousel 8.webp" alt="Custom cupcakes with elegant frosting designs"></div>
                 <div class="carousel-slide"><img loading="lazy" width="1920" height="1186" src="images/gallery/carousel/carousel 9.webp" alt="Artisan baked goods from Bay Area bakery"></div>
                 <div class="carousel-slide"><img loading="lazy" width="2355" height="1216" src="images/gallery/carousel/carousel 10.webp" alt="Realistic sculpted cake design by My Baking Creations"></div>
-            </div>
-        </div>
-        <div class="hero-content">
-            <div class="hero-text-box">
-                <p class="hero-breadcrumb"><a href="blog">Blog</a> / Custom Logo Cookies</p>
-                <h1 class="typewriter-headline">Custom Logo <span class="highlight">Cookies</span></h1>
-                <p class="hero-subtitle">How we print your brand on edible art</p>
-                <a href="javascript:history.back()" class="back-link">← Back</a>
-            </div>
-        </div>
-        <div class="hero-dots">
-            <button class="hero-dot active" onclick="goToSlide(0)" aria-label="Slide 1"></button>
-            <button class="hero-dot" onclick="goToSlide(1)" aria-label="Slide 2"></button>
-            <button class="hero-dot" onclick="goToSlide(2)" aria-label="Slide 3"></button>
-            <button class="hero-dot" onclick="goToSlide(3)" aria-label="Slide 4"></button>
-            <button class="hero-dot" onclick="goToSlide(4)" aria-label="Slide 5"></button>
-            <button class="hero-dot" onclick="goToSlide(5)" aria-label="Slide 6"></button>
-            <button class="hero-dot" onclick="goToSlide(6)" aria-label="Slide 7"></button>
-            <button class="hero-dot" onclick="goToSlide(7)" aria-label="Slide 8"></button>
-            <button class="hero-dot" onclick="goToSlide(8)" aria-label="Slide 9"></button>
-            <button class="hero-dot" onclick="goToSlide(9)" aria-label="Slide 10"></button>
-        </div>
-        <a href="#blog-content" class="scroll-indicator" aria-label="Scroll down">
-            <span class="scroll-indicator-text">Scroll</span>
-            <div class="scroll-indicator-arrow">
-                <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
-            </div>
-        </a>
-    </section>
+            </template></section>
+
 
     <!-- ARTICLE CONTENT -->
     <section id="blog-content" class="page-content">
@@ -399,9 +365,7 @@
     <!-- FOOTER -->
     <footer>
         <div class="footer-content">
-            <div class="footer-logo">
-                <span class="my">my</span><span class="baking">baking</span> Creations
-            </div>
+            <div class="footer-logo"><img class="footer-wordmark" src="images/mbc-brand/mbc-wordmark.png" alt="My Baking Creations" width="2304" height="809"></div>
             <p class="footer-tagline">Family-owned Bay Area bakery since 2012</p>
             <div class="footer-links">
                 <a href="/">Home</a>
@@ -674,46 +638,7 @@
     </style>
 
     <script>
-    // 3-Image Sliding Carousel
-    let currentSlide = 0;
-    const track = document.querySelector('.carousel-track');
-    const dots = document.querySelectorAll('.hero-dot');
-    const totalSlides = 9;
-    let autoRotate;
-    let isMobile = window.innerWidth <= 768;
-
-    function getSlideWidth() {
-        return isMobile ? 100 : 33.333;
-    }
-
-    function goToSlide(index) {
-        dots[currentSlide].classList.remove('active');
-        currentSlide = index;
-        if (currentSlide >= totalSlides) currentSlide = 0;
-        if (currentSlide < 0) currentSlide = totalSlides - 1;
-        const offset = currentSlide * getSlideWidth();
-        track.style.transform = `translateX(-${offset}%)`;
-        dots[currentSlide].classList.add('active');
-        resetAutoRotate();
-    }
-
-    function nextSlide() {
-        goToSlide(currentSlide + 1);
-    }
-
-    function resetAutoRotate() {
-        clearInterval(autoRotate);
-        autoRotate = setInterval(nextSlide, 4000);
-    }
-
-    window.addEventListener('resize', () => {
-        isMobile = window.innerWidth <= 768;
-        goToSlide(currentSlide);
-    });
-
-    autoRotate = setInterval(nextSlide, 4000);
-
-    // Load order form modal
+// Load order form modal
     fetch('order-form-modal.html')
         .then(r => r.text())
         .then(h => {
@@ -728,5 +653,5 @@
     <link rel="stylesheet" href="chatbot.css?v=2">
     <script src="chatbot.js?v=2" defer></script>
     <script src="hero-lens.js" defer></script>
-</body>
+<script src="site-showcase.js?v=2"></script><link rel="stylesheet" href="site-ink-theme.css?v=5"><link rel="stylesheet" href="site-ink-pages.css?v=1"></body>
 </html>

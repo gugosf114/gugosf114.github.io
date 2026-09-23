@@ -375,7 +375,7 @@
     @media (prefers-reduced-motion:reduce){#corporate-content .corporate-treats-grid .service-card,#corporate-content .corporate-treats-grid .service-card:hover{transition:none;transform:none}}
     </style>
 </head>
-<body>
+<body class="mbc-ink"><div class="site-atmosphere" aria-hidden="true"></div>
 
     <!-- FLOATING SOCIAL SIDEBAR -->
     <div class="social-sidebar">
@@ -397,13 +397,7 @@
         <canvas id="nav-particles"></canvas>
         <nav aria-label="Main navigation">
             <a href="buy-now" class="order-now-btn">Order Now</a>
-            <a href="/" class="logo">
-                <img width="1330" height="1222" src="logo_icon.png" alt="My Baking Creations logo" class="logo-icon">
-                <div class="logo-text">
-                    <span class="my">my</span><span class="baking">baking</span>
-                    <span class="creations">CREATIONS</span>
-                </div>
-            </a>
+            <a href="/" class="logo"><img class="brand-wordmark" src="images/mbc-brand/mbc-wordmark.png" alt="My Baking Creations" width="2304" height="809"></a>
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="about">About Us</a></li>
@@ -449,11 +443,10 @@
 
     <main>
 
-    <section class="hero hero-carousel hero-subpage hero-glass">
-        <!-- Corporate-specific Carousel Images -->
-        <div class="carousel-track-container">
-            <div class="carousel-track">
-                <div class="carousel-slide"><img fetchpriority="high" src="images/gallery/corporatecarousel/1 clockwork_usf_combined.jpg" alt="Clockwork and USF corporate cookies" loading="eager" width="1742" height="800"></div>
+    <section class="showcase-carousel showcase-copy-long" aria-label="Our custom cakes and cookies carousel" aria-roledescription="carousel" data-showcase>
+<div class="showcase-stage"><div class="showcase-scene is-active" data-scene></div><div class="showcase-scene" data-scene aria-hidden="true"></div>
+<div class="showcase-overlay"><img src="images/mbc-brand/mbc-emblem.png" class="showcase-logo" width="1330" height="1222" alt=""><span class="showcase-badge">Family-Owned Since 2012</span><h1><span class="highlight-yellow">Custom Corporate Cakes</span> & <span class="highlight">Branded Corporate Treats</span> in San Francisco</h1><div class="showcase-actions"><a class="btn btn-primary" href="https://mybakingcreations.com/order-form">Request an Order</a><a class="btn btn-secondary" href="https://mybakingcreations.com/buy-now">Order Now</a></div></div></div>
+<div class="showcase-toolbar"><span class="showcase-status"><i aria-hidden="true"></i><span data-play-status>Playing automatically</span></span><div class="showcase-controls"><button type="button" data-previous aria-label="Previous images">‹</button><div class="showcase-dots" aria-label="Choose carousel image"></div><button type="button" data-next aria-label="Next images">›</button><button type="button" data-pause aria-label="Pause carousel" aria-pressed="false">Pause</button></div><span data-position>01 / 8</span></div><div class="showcase-progress" aria-hidden="true"><span></span></div><template id="showcase-source"><div class="carousel-slide"><img fetchpriority="high" src="images/gallery/corporatecarousel/1 clockwork_usf_combined.jpg" alt="Clockwork and USF corporate cookies" loading="eager" width="1742" height="800"></div>
                 <div class="carousel-slide"><img src="images/gallery/corporatecarousel/2 docusign_kneat_cakepops_combined.jpg" alt="DocuSign and Kneat corporate cake pops" loading="eager" width="1389" height="800"></div>
                 <div class="carousel-slide"><img src="images/gallery/corporatecarousel/3 combined_cakes_reordered.jpg" alt="Corporate cakes collage" loading="eager" width="2020" height="800"></div>
                 <div class="carousel-slide"><img src="images/gallery/corporatecarousel/meta_twitch_combined.webp" alt="Meta and Twitch corporate cookies" loading="eager" width="1608" height="800"></div>
@@ -461,33 +454,8 @@
                 <div class="carousel-slide"><img src="images/gallery/corporatecarousel/alaska_cookies_two.webp" alt="Alaska Airlines corporate cookies" loading="eager" width="2284" height="800"></div>
                 <div class="carousel-slide"><img src="images/gallery/corporatecarousel/levis_internship_combined.webp" alt="Levi's corporate treats" loading="eager" width="1882" height="800"></div>
                 <div class="carousel-slide"><img src="images/gallery/corporatecarousel/alaska_cakepops_combined.webp" alt="Alaska Airlines corporate cake pops" loading="eager" width="1645" height="800"></div>
-            </div>
-        </div>
-        <div class="hero-content">
-            <div class="hero-text-box">
-                <p class="hero-breadcrumb"><a href="/">Home</a> / Corporate Orders</p>
-                <h1 class="typewriter-headline"><span class="highlight-yellow">Custom Corporate Cakes</span> & <span class="highlight">Branded Corporate Treats</span> in San Francisco</h1>
-                <p class="hero-subtitle">My Baking Creations hand-delivers branded cookies, logo cake pops, and desserts for corporate events to Bay Area offices</p>
-            </div>
-        </div>
-        <div class="hero-dots">
-            <button class="hero-dot active" onclick="goToSlide(0)" aria-label="Slide 1"></button>
-            <button class="hero-dot" onclick="goToSlide(1)" aria-label="Slide 2"></button>
-            <button class="hero-dot" onclick="goToSlide(2)" aria-label="Slide 3"></button>
-            <button class="hero-dot" onclick="goToSlide(3)" aria-label="Slide 4"></button>
-            <button class="hero-dot" onclick="goToSlide(4)" aria-label="Slide 5"></button>
-            <button class="hero-dot" onclick="goToSlide(5)" aria-label="Slide 6"></button>
-            <button class="hero-dot" onclick="goToSlide(6)" aria-label="Slide 7"></button>
-            <button class="hero-dot" onclick="goToSlide(7)" aria-label="Slide 8"></button>
-        </div>
-        <!-- Scroll Down Indicator -->
-        <a href="#corporate-content" class="scroll-indicator" aria-label="Scroll down">
-            <span class="scroll-indicator-text">Scroll</span>
-            <div class="scroll-indicator-arrow">
-                <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
-            </div>
-        </a>
-    </section>
+            </template></section>
+
 
     <!-- MAIN CORPORATE CONTENT -->
     <section id="corporate-content" class="page-content">
@@ -890,9 +858,7 @@
 
     <footer>
         <div class="footer-content">
-            <div class="footer-logo">
-                <span class="my">my</span><span class="baking">baking</span> Creations
-            </div>
+            <div class="footer-logo"><img class="footer-wordmark" src="images/mbc-brand/mbc-wordmark.png" alt="My Baking Creations" width="2304" height="809"></div>
             <p class="footer-tagline">Family-owned Bay Area bakery since 2012</p>
             <div class="footer-links">
                 <a href="/">Home</a>
@@ -1441,31 +1407,7 @@
     }
     </style>
 
-    <script>
-    let currentSlide = 0;
-    const track = document.querySelector('.carousel-track');
-    const dots = document.querySelectorAll('.hero-dot');
-    const totalSlides = 8;
-    let autoRotate;
-    // Use matchMedia instead of innerWidth to avoid forced reflow
-    const mobileQuery = window.matchMedia('(max-width: 768px)');
-    let isMobile = mobileQuery.matches;
-    function getSlideWidth() { return isMobile ? 100 : 33.333; }
-    function goToSlide(index) {
-        dots[currentSlide].classList.remove('active');
-        currentSlide = index;
-        if (currentSlide >= totalSlides) currentSlide = 0;
-        if (currentSlide < 0) currentSlide = totalSlides - 1;
-        track.style.transform = `translateX(-${currentSlide * getSlideWidth()}%)`;
-        dots[currentSlide].classList.add('active');
-        resetAutoRotate();
-    }
-    function nextSlide() { goToSlide(currentSlide + 1); }
-    function resetAutoRotate() { clearInterval(autoRotate); autoRotate = setInterval(nextSlide, 4000); }
-    // Handle resize using matchMedia (avoids forced reflow)
-    mobileQuery.addEventListener('change', (e) => { isMobile = e.matches; goToSlide(currentSlide); });
-    autoRotate = setInterval(nextSlide, 4000);
-    </script>
+    <!-- Hero rotation is handled by site-showcase.js. -->
 
     <!-- Logo Preview Tool Script -->
     <script>
@@ -1920,5 +1862,5 @@
       });
     })();
     </script>
-</body>
+<script src="site-showcase.js?v=2"></script><link rel="stylesheet" href="site-ink-theme.css?v=5"><link rel="stylesheet" href="site-ink-pages.css?v=1"></body>
 </html>

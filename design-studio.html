@@ -83,7 +83,7 @@
     </style>
     <link rel="stylesheet" href="studio-workspace.css?v=1">
 </head>
-<body>
+<body class="mbc-ink"><div class="site-atmosphere" aria-hidden="true"></div>
 
     <!-- FLOATING SOCIAL SIDEBAR -->
     <div class="social-sidebar">
@@ -106,13 +106,7 @@
         <canvas id="nav-particles"></canvas>
         <nav aria-label="Main navigation">
             <a href="buy-now" class="order-now-btn">Order Now</a>
-            <a href="/" class="logo">
-                <img width="1330" height="1222" src="logo_icon.png" alt="My Baking Creations logo" class="logo-icon">
-                <div class="logo-text">
-                    <span class="my">my</span><span class="baking">baking</span>
-                    <span class="creations">CREATIONS</span>
-                </div>
-            </a>
+            <a href="/" class="logo"><img class="brand-wordmark" src="images/mbc-brand/mbc-wordmark.png" alt="My Baking Creations" width="2304" height="809"></a>
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="about">About Us</a></li>
@@ -159,11 +153,10 @@
     <main>
 
     <!-- DESIGN STUDIO HERO -->
-    <div class="standard-hero-frame">
-    <section class="hero hero-carousel hero-home" data-standard-hero>
-        <div class="carousel-track-container">
-            <div class="carousel-track">
-                <div class="carousel-slide corporate-cookie-slide">
+    <section class="showcase-carousel" aria-label="Our custom cakes and cookies carousel" aria-roledescription="carousel" data-showcase>
+<div class="showcase-stage"><div class="showcase-scene is-active" data-scene></div><div class="showcase-scene" data-scene aria-hidden="true"></div>
+<div class="showcase-overlay"><img src="images/mbc-brand/mbc-emblem.png" class="showcase-logo" width="1330" height="1222" alt=""><span class="showcase-badge">Family-Owned Since 2012</span><h1><span class="highlight">Let’s see</span> <span class="highlight-yellow">what</span> <span class="highlight">you’re imagining.</span></h1><div class="showcase-actions"><a class="btn btn-primary" href="https://mybakingcreations.com/order-form">Request an Order</a><a class="btn btn-secondary" href="https://mybakingcreations.com/buy-now">Order Now</a></div></div></div>
+<div class="showcase-toolbar"><span class="showcase-status"><i aria-hidden="true"></i><span data-play-status>Playing automatically</span></span><div class="showcase-controls"><button type="button" data-previous aria-label="Previous images">‹</button><div class="showcase-dots" aria-label="Choose carousel image"></div><button type="button" data-next aria-label="Next images">›</button><button type="button" data-pause aria-label="Pause carousel" aria-pressed="false">Pause</button></div><span data-position>01 / 13</span></div><div class="showcase-progress" aria-hidden="true"><span></span></div><template id="showcase-source"><div class="carousel-slide corporate-cookie-slide">
                     <div class="corporate-cookie-collage">
                         <div class="corporate-cookie-half corporate-cookie-prism"><img src="images/gallery/carousel/corporate-prism-levis-collage-v2.png" alt="Prism eightfold.ai rainbow corporate cookies" width="1536" height="1024" fetchpriority="high"></div>
                         <div class="corporate-cookie-half"><img src="images/gallery/carousel/levis-original-photo.jpg" alt="Original photograph of Levi's hand-piped cookies in their original arrangement" width="949" height="1265" fetchpriority="high"></div>
@@ -181,40 +174,7 @@
                 <div class="carousel-slide"><picture><source srcset="images/gallery/carousel/carousel%206.webp" type="image/webp"><img src="images/gallery/carousel/carousel 6.webp" alt="Custom celebration cake by My Baking Creations" width="707" height="342" loading="lazy"></picture></div>
                 <div class="carousel-slide"><img fetchpriority="high" src="images/gallery/wedding/3 tier white wedding cake.webp" alt="Elegant three-tier white wedding cake" width="1200" height="701" loading="lazy"></div>
                 <div class="carousel-slide"><img src="images/gallery/handpiped/Baby Shower Themed Custom Cookies.webp" alt="Hand-piped baby shower themed custom cookies" width="1200" height="621" loading="lazy"></div>
-            </div>
-        </div>
-        <div class="hero-content">
-            <div class="hero-text-box">
-                <img src="logo_icon.png" alt="My Baking Creations cake logo" class="hero-logo" width="120" height="110">
-                <div class="hero-badge">Family-Owned Since 2012</div>
-                <h1 class="typewriter-headline"><span class="highlight">Let’s see</span> <span class="highlight-yellow">what</span> <span class="highlight">you’re imagining.</span></h1>
-                                <p class="hero-description">Explore your cake idea with AI, then make it your own.</p>
-                <div class="hero-buttons">
-                    <a href="https://mybakingcreations.com/order-form" class="btn btn-primary">Request an Order</a>
-                    <a href="https://mybakingcreations.com/buy-now" class="btn btn-secondary">Order Now</a>
-                </div>
-            </div>
-        </div>
-        <div class="hero-dots">
-            <button class="hero-dot active" onclick="goToSlide(0)" aria-label="Slide 1"></button>
-            <button class="hero-dot" onclick="goToSlide(1)" aria-label="Slide 2"></button>
-            <button class="hero-dot" onclick="goToSlide(2)" aria-label="Slide 3"></button>
-            <button class="hero-dot" onclick="goToSlide(3)" aria-label="Slide 4"></button>
-            <button class="hero-dot" onclick="goToSlide(4)" aria-label="Slide 5"></button>
-            <button class="hero-dot" onclick="goToSlide(5)" aria-label="Slide 6"></button>
-            <button class="hero-dot" onclick="goToSlide(6)" aria-label="Slide 7"></button>
-            <button class="hero-dot" onclick="goToSlide(7)" aria-label="Slide 8"></button>
-            <button class="hero-dot" onclick="goToSlide(8)" aria-label="Slide 9"></button>
-            <button class="hero-dot" onclick="goToSlide(9)" aria-label="Slide 10"></button>
-        </div>
-        <a href="#studioAtelier" class="scroll-indicator" aria-label="Scroll down">
-            <span class="scroll-indicator-text">Scroll</span>
-            <div class="scroll-indicator-arrow">
-                <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
-            </div>
-        </a>
-    </section>
-    </div>
+            </template></section>
 
     <!-- MAIN CONTENT -->
 <section id="studioAtelier" class="atelier" aria-labelledby="atelier-title">
@@ -258,9 +218,7 @@
     <!-- FOOTER -->
     <footer>
         <div class="footer-content">
-            <div class="footer-logo">
-                <span class="my">my</span><span class="baking">baking</span> Creations
-            </div>
+            <div class="footer-logo"><img class="footer-wordmark" src="images/mbc-brand/mbc-wordmark.png" alt="My Baking Creations" width="2304" height="809"></div>
             <p class="footer-tagline">Family-owned Bay Area bakery since 2012</p>
             <div class="footer-links">
                 <a href="/">Home</a>
@@ -336,6 +294,6 @@
 
     <link rel="stylesheet" href="hero-panel-standard.css?v=2">
     <link rel="stylesheet" href="home-hero-standard.css?v=10">
-    <script src="home-hero-standard.js?v=8" defer></script>
-</body>
+    
+<script src="site-showcase.js?v=2"></script><link rel="stylesheet" href="site-ink-theme.css?v=5"><link rel="stylesheet" href="site-ink-pages.css?v=1"><link rel="stylesheet" href="site-ink-forms.css?v=1"></body>
 </html>
