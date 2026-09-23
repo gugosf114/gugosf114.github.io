@@ -59,15 +59,59 @@ const pw = require(process.env.PLAYWRIGHT_MODULE || "playwright-core");
           "Ready to make their day.",
           "Your cookies, nestled in our signature box.",
         ],
-        turn: ["A gift worth giving.", "Made by us. Made for your person."],
+        turn: ["Twelve cookies. One gift box.", "$60 for 12 · individually wrapped · plus shipping"],
         table: ["From our bakery to your table.", "Beautifully packed. Ready to share."],
         serve: ["Just open. And serve.", "The box is the presentation."],
+      };
+      // Gold price seal: presses in once the full box closes, rides the turn, fades at the table.
+      const drawPriceSeal = (t) => {
+        const inP = progress(t, 15.6, 16.3), outP = progress(t, 18.9, 19.5);
+        const a = inP * (1 - outP);
+        if (a <= 0) return;
+        const cx = 872, cy = 176, r = 104;
+        const s = 0.6 + 0.4 * inP + 0.06 * Math.sin(Math.max(0, Math.min(1, (t - 15.6) / 0.7)) * Math.PI) ;
+        ctx.save();
+        ctx.globalAlpha = a;
+        ctx.translate(cx, cy);
+        ctx.rotate(-0.16 + 0.1 * (1 - inP));
+        ctx.scale(s, s);
+        ctx.shadowColor = "rgba(98,45,43,.28)"; ctx.shadowBlur = 26; ctx.shadowOffsetY = 10;
+        // scalloped edge
+        ctx.beginPath();
+        for (let i = 0; i <= 64; i++) {
+          const ang = (i / 64) * Math.PI * 2, rr = r + (i % 2 ? 0 : 7);
+          ctx[i ? "lineTo" : "moveTo"](Math.cos(ang) * rr, Math.sin(ang) * rr);
+        }
+        ctx.closePath();
+        const g = ctx.createLinearGradient(-r, -r, r, r);
+        g.addColorStop(0, "#f7dc8c"); g.addColorStop(0.45, "#e2ae4a"); g.addColorStop(1, "#b77a22");
+        ctx.fillStyle = g; ctx.fill();
+        ctx.shadowColor = "transparent";
+        // inner rings
+        ctx.lineWidth = 2.2; ctx.strokeStyle = "rgba(255,246,214,.85)";
+        ctx.beginPath(); ctx.arc(0, 0, r - 13, 0, Math.PI * 2); ctx.stroke();
+        ctx.lineWidth = 1; ctx.strokeStyle = "rgba(122,74,20,.55)";
+        ctx.beginPath(); ctx.arc(0, 0, r - 19, 0, Math.PI * 2); ctx.stroke();
+        // foil sweep
+        const sweep = progress(t, 16.1, 17.4);
+        if (sweep > 0 && sweep < 1) {
+          ctx.save(); ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2); ctx.clip();
+          const sx = -r * 1.6 + sweep * r * 3.2, sg = ctx.createLinearGradient(sx - 40, -r, sx + 40, r);
+          sg.addColorStop(0, "rgba(255,255,255,0)"); sg.addColorStop(0.5, "rgba(255,255,255,.55)"); sg.addColorStop(1, "rgba(255,255,255,0)");
+          ctx.fillStyle = sg; ctx.fillRect(-r, -r, r * 2, r * 2); ctx.restore();
+        }
+        ctx.textAlign = "center"; ctx.fillStyle = "#5a2a14";
+        ctx.font = '700 15px "Nunito", Arial'; ctx.fillText("12  COOKIES", 0, -38);
+        ctx.font = '400 62px "Fredoka One", Arial'; ctx.fillText("$60", 0, 22);
+        ctx.font = '700 15px "Nunito", Arial'; ctx.fillText("+ SHIPPING", 0, 52);
+        ctx.restore();
       };
       window.exportPackagingFrame = (t) => {
         scene.render(t);
         ctx.fillStyle = "#efe9dc";
         ctx.fillRect(0, 0, 1080, 1080);
         ctx.drawImage(mount.querySelector("canvas"), 0, 0, 1080, 900);
+        drawPriceSeal(t);
         const text = words[filmFrame(t).phase];
         ctx.textAlign = "center";
         ctx.fillStyle = "#622d2b";
