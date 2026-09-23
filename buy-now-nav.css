@@ -52,3 +52,14 @@ body.ink-order-studio .creations-band .creations-dot{width:13px;height:18px;padd
 body.ink-order-studio .creations-band .creations-dot::before{content:'';width:6px;height:6px;border-radius:50%;background:#ffffff40;transition:background .3s,transform .3s}
 body.ink-order-studio .creations-band .creations-dot.is-active::before{background:var(--mix-accent);transform:scale(1.5)}
 body.ink-order-studio[data-step="upload"] .studio{padding-top:4px!important}}
+/* Big back button at the top of every step after the start screen. */
+body.ink-order-studio .step-back{display:inline-flex;align-items:center;gap:10px;margin:0 0 18px;padding:7px 18px 7px 7px;border-radius:999px;border:1px solid #c9d3e8;background:#fff;color:#202c49;font:800 15px/1 Nunito,sans-serif;cursor:pointer;box-shadow:0 6px 16px #2028421f;transition:transform .25s,box-shadow .25s,border-color .25s}
+body.ink-order-studio .step-back[hidden]{display:none}
+body.ink-order-studio .step-back span{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#ec268f,#ffc532);color:#fff;font-size:18px;transition:transform .25s}
+body.ink-order-studio .step-back em{font-style:normal}
+body.ink-order-studio .step-back:hover{border-color:#ec268f;box-shadow:0 10px 24px #2028422e}
+body.ink-order-studio .step-back:hover span{transform:translateX(-3px)}
+body.ink-order-studio .step-back:disabled{opacity:.5;pointer-events:none}
+/* bottom bar back: bigger, clearly a button */
+body.ink-order-studio .studio-footer .back-button{padding:12px 20px;border-radius:999px;border:1px solid #ffffff3d;background:#ffffff14;color:#fff;font:800 15px/1 Nunito,sans-serif}
+body.ink-order-studio .studio-footer .back-button:hover{background:#ffffff26;border-color:#ffc53280}
