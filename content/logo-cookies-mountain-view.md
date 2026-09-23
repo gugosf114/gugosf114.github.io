@@ -78,10 +78,10 @@ The ordering process is straightforward and designed to work with procurement te
 **A few practical notes:**
 
 - Orders start from a minimum quantity — use the order form or contact the bakery directly to confirm the threshold for your specific order type.
-- For standard corporate orders, a 1–2 week lead time is recommended. Large-volume orders (hundreds of pieces) benefit from 3–4 weeks of lead time.
+-
 - Rush orders are available for established clients — call (415) 568-8060 to discuss timeline.
 - Both hand-piped and printed image options are available. Hand-piped is the premium artisan choice; printed is ideal for complex logos, photographic elements, or high-volume runs where per-unit consistency is the priority.
-- Invoice and purchase order (PO) payment is accepted for corporate accounts, alongside credit card, PayPal, Apple Pay, and Zelle.
+- Payment by credit card, PayPal, Apple Pay, and Zelle.
 
 ---
 
@@ -112,8 +112,7 @@ Yes. The Googleplex and other Mountain View campuses along the 94043 corridor ar
 **What is the difference between hand-piped and printed logo cookies?**
 Hand-piped cookies are decorated entirely by hand using royal icing — each one is individually crafted, with an artisan quality that recipients notice. Printed cookies use high-resolution edible ink printing for pixel-perfect logo reproduction, which is ideal for complex logos or large-volume orders where consistency across every piece is critical. Both options are available; the right choice depends on your logo's complexity and your order size.
 
-**How far in advance should I order for a Mountain View corporate event?**
-For standard orders, 1–2 weeks is the recommended lead time. For large orders (100+ pieces) or events during peak periods like May 4th, the holiday season, or graduation season, 3–4 weeks is advisable. Rush orders are sometimes available — call (415) 568-8060 to check current availability.
+**How far in advance should I order for a Mountain View corporate event?** For large orders (100+ pieces) or events during peak periods like May 4th, the holiday season, or graduation season, 3–4 weeks is advisable. Rush orders are sometimes available — call (415) 568-8060 to check current availability.
 
 **Can different teams at the same company place separate orders?**
 Absolutely. Individual departments ordering independently is a common and welcome arrangement. Each order is treated as its own project with its own design proof and delivery coordination.
