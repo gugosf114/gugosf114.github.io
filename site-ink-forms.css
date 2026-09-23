@@ -79,6 +79,6 @@ body.mbc-ink.ink-order-studio .studio-footer :is(#footerNote,#footerPrice,.back-
 @media(min-width:1101px){body.mbc-ink.ink-order-studio[data-step="upload"] .workspace-copy{align-self:stretch;margin:22px 0 22px 24px;display:flex;flex-direction:column;justify-content:center}}
 @media(min-width:1600px){body.mbc-ink.ink-order-studio[data-step="upload"] .workspace-copy{margin-top:32px;margin-bottom:32px}}
 /* Order Now phone: give "Tap to explore designs" its own strip under the packaging video so it no longer covers the video caption. */
-@media(max-width:760px){body[data-step="upload"] .preview-stage:has(.packaging-film:not([hidden])){aspect-ratio:1/1.12}
+@media(max-width:760px){body[data-step="upload"] .preview-stage:has(.packaging-film:not([hidden])){aspect-ratio:1/1.05}
 body[data-step="upload"] .packaging-film .packaging-video{inset:0 0 auto 0;height:auto;aspect-ratio:1/1}
-body[data-step="upload"] .packaging-film::after{bottom:7px}}
+body[data-step="upload"] .packaging-film::after{bottom:4px;padding:5px 12px}}
