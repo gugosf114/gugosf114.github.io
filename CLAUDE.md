@@ -14,7 +14,13 @@
 ## THE "IRON LAWS" (Forensic Audit Mode)
 1. **No Telephone Game**: Claude MUST use the `filesystem` tool to see code directly. Never ask George for screenshots. If a visual check is needed, use `puppeteer` or `playwright`.
 2. **Sequential Thinking First**: For every bug or task, start with a 5+ step `sequential_thinking` block. Map the "cascade" of the problem before suggesting a fix.
-3. **Proactive Validation**: Before declaring a task "done," you MUST run `node .github/scripts/validate-site.js`. 
+3. **Eyes Over Checkers (design/visual work)**: Don't run the validator or linters for design changes. Render the changed pages in a headless browser (phone 390px + desktop 1366px), look at the screenshots yourself, and fix what you see. The only checks that matter: the page loads, there are no JS console errors, no broken images or links, and no sideways scrolling on phone. Run `node .github/scripts/validate-site.js` only for structural changes (new pages, sitemap, SEO, nav across the site).
+
+## George's Design Workflow (cloud sessions)
+- **Push design/CSS/HTML changes straight to `main`.** No side branches, no PRs, no asking.
+- **Send George only the NEW version** (screenshots of the updated page). No before/after.
+- **Don't hand George options or settings to change.** Pick the route with the best visibility and do it. Work from the repo code, served locally: that is the exact code GitHub Pages serves, and it lets you inspect buttons, colors, hover effects and tiles directly.
+- **Images/photos are out of scope in cloud sessions**, because they live on the laptop. Do image work from the laptop or Termux.
 4. **Token Management**: If the context window feels heavy, proactively suggest the `/compact` command to summarize progress and clear "fog."
 5. **Ghost Client Isolation**: When in "Business Mode," use Gemini/Sheets integration to cross-reference 2024 corporate orders vs. current silence to isolate "ghost" leads.
 
