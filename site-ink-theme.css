@@ -117,7 +117,7 @@ body.mbc-ink .showcase-carousel.is-paused .showcase-status i{background:#b1a6b1}
 .showcase-badge{font-size:8px;padding:3px 8px;margin-bottom:9px}
 .showcase-overlay h1{font-size:24px;margin-bottom:13px}
 .showcase-actions{gap:8px}
-body.mbc-ink .showcase-actions .btn{font-size:11.5px;padding:9px 11px;min-height:40px;flex:1}
+body.mbc-ink .showcase-actions .btn{font-size:13.5px;padding:9px 11px;min-height:40px;flex:1}
 .showcase-scene .carousel-slide>picture{align-items:flex-start}
 .showcase-scene .carousel-slide img{height:230px;object-position:center top}
 .showcase-scene .corporate-cookie-slide{align-items:flex-start}
@@ -143,7 +143,7 @@ body.mbc-ink .showcase-actions .btn-secondary{background:rgba(24,32,55,.55)!impo
  body.mbc-home .showcase-overlay{top:50%;bottom:auto;left:50%;transform:translate(-50%,-50%);width:calc(100% - 36px);padding:11px 12px;border-radius:15px}
  body.mbc-home .showcase-overlay h1{font-size:clamp(17px,4.7vw,22px);line-height:1.15;margin-bottom:10px}
  body.mbc-home .showcase-badge{font-size:8px;margin-bottom:7px;padding:2px 7px}
- body.mbc-home .showcase-actions .btn{font-size:10px;min-height:36px;padding:8px 9px}
+ body.mbc-home .showcase-actions .btn{font-size:13.5px;min-height:36px;padding:8px 6px}
  body.mbc-home .showcase-scene .carousel-slide>picture{align-items:center}
  body.mbc-home .showcase-scene .carousel-slide img{height:100%;object-position:center;object-fit:contain}
  body.mbc-home .showcase-scene .corporate-cookie-slide{align-items:center}
