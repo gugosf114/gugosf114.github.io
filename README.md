@@ -47,7 +47,7 @@ Built by George Abrahamyan. Baked by Yana.
 |------|------|-------------|
 | Buy Now | `buy-now.html` + `buy-now-order.js` | Guided design approval, private file upload, and fast checkout for printed image cookies |
 | Order Printed | `order-printed.html` | Photo cookie ordering |
-| Corporate Order | `corporate-order.html` | Corporate quote request, 24-hour turnaround, invoice/PO accepted |
+| Corporate Order | `corporate-order.html` | Corporate quote request, 24-hour turnaround, credit card / PayPal |
 
 ### Gallery Pages — Cakes
 | Page | File |

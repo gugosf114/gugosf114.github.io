@@ -99,7 +99,7 @@ The order request form is the fastest path to a confirmed quote. For large or ti
 
 **Real photos of every order.** The gallery at mybakingcreations.com is searchable by keyword, so corporate buyers can look up their industry, event type, or product category and see actual completed orders — not stock photos, not AI-generated images. Every image in the gallery is a real product that left the Daly City kitchen.
 
-**B2B-capable operation.** My Baking Creations handles orders from 1 dozen to 1,000+ items per order. Corporate accounts can pay by invoice, purchase order, credit card, PayPal, Apple Pay, or Zelle. W-9s and itemized invoices are available for procurement teams. Items are individually wrapped for easy distribution at events.
+**B2B-capable operation.** My Baking Creations handles orders from 1 dozen to 1,000+ items per order. Corporate accounts can pay by credit card, PayPal, Apple Pay, or Zelle. W-9s on request. Items are individually wrapped for easy distribution at events.
 
 **Premium ingredients, artisan process.** No cookie-cutter production line. Every cookie is made from scratch, decorated by hand or printed to order, and inspected before packaging. The same quality standard applies whether the order is 24 cookies for a boardroom meeting or 500 for a company-wide celebration.
 
@@ -119,8 +119,8 @@ Yes. For hand-piped cookies, we mix icing to match your Pantone or hex color cod
 **Do you deliver to offices in San Francisco and Silicon Valley?**
 Yes. We deliver directly to offices throughout San Francisco (including SoMa 94103 and the Financial District 94105), South San Francisco (94080), San Bruno (94066), Burlingame (94010), San Mateo (94401), Palo Alto (94301), Mountain View (94043), Menlo Park, and the broader Bay Area. Items arrive individually wrapped and presentation-ready.
 
-**Do you accept purchase orders or invoices?**
-Yes. My Baking Creations accepts purchase orders, invoices, credit cards, PayPal, Apple Pay, and Zelle. W-9s and Net 30 terms are available for established corporate accounts.
+**How can I pay?**
+Yes. My Baking Creations accepts credit cards, PayPal, Apple Pay, and Zelle. W-9s are available on request.
 
 **What file formats do you need for the logo?**
 PNG, SVG, AI, or EPS files work best. Include your brand color codes (Pantone or hex) when submitting your order request.

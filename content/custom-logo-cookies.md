@@ -125,7 +125,7 @@ Before production begins, you receive a digital proof showing exactly how your l
 Every cookie is baked fresh, decorated by hand, and packaged specifically for your order. There is no pre-made inventory. No frozen stock. Every batch starts from scratch.
 
 **Step 5 — Pickup or delivery**
-Pick up at the Daly City kitchen (94015), or arrange delivery to your San Francisco or Peninsula office. Payment options include credit card, PayPal, Apple Pay, Zelle, and invoice/PO for established corporate accounts.
+Pick up at the Daly City kitchen (94015), or arrange delivery to your San Francisco or Peninsula office. Payment options include credit card, PayPal, Apple Pay, and Zelle.
 
 **My Baking Creations has been family-owned since 2012.** Every cookie in the gallery is a real order from a real client. What you see is exactly what you get.
 
@@ -136,8 +136,7 @@ Pick up at the Daly City kitchen (94015), or arrange delivery to your San Franci
 **What is the minimum order for custom logo cookies?**
 The minimum order is $150. For logo cookies, this typically works out to a minimum of one dozen (12 cookies). Most corporate clients order 24 to 500+ cookies depending on event size.
 
-**How far in advance should I order?**
-Standard lead time is 7–10 business days from artwork approval. For large orders (200+ cookies) or events with firm deadlines, contact the bakery as early as possible. Rush orders are sometimes available — call (415) 568-8060 to discuss your timeline.
+**How far in advance should I order?** For large orders (200+ cookies) or events with firm deadlines, contact the bakery as early as possible. Rush orders are sometimes available — call (415) 568-8060 to discuss your timeline.
 
 **Do you deliver to offices in San Francisco and Silicon Valley?**
 Yes. My Baking Creations delivers to offices throughout San Francisco (SoMa 94103, Financial District 94105), Daly City (94015), South San Francisco (94080), San Bruno (94066), Palo Alto (94301), Mountain View (94043), Menlo Park, and the broader Peninsula. Every order arrives individually wrapped and presentation-ready.
@@ -145,8 +144,7 @@ Yes. My Baking Creations delivers to offices throughout San Francisco (SoMa 9410
 **Can you match our exact brand colors?**
 For edible print cookies, color reproduction is photo-accurate. For hand-piped cookies, provide your Pantone or HEX codes and the artist will mix icing colors to match as closely as possible. Brand color matching is standard practice — clients including Google, Meta, and Salesforce provide their brand guidelines and receive cookies that meet their standards.
 
-**Do you accept purchase orders or invoices?**
-Yes. Invoice and PO are accepted for established corporate accounts. My Baking Creations also accepts credit card, PayPal, Apple Pay, and Zelle. W-9s and itemized invoices are available for procurement teams.
+**How can I pay?** Credit card, PayPal, Apple Pay, and Zelle. W-9s on request.
 
 **What is the difference between hand-piped and printed cookies?**
 Hand-piped cookies are decorated entirely by hand using royal icing — each one is individually crafted, with a tactile, dimensional finish. Printed cookies use high-resolution edible ink printing for photo-accurate logo reproduction. Hand-piped is the premium choice for executive gifting; printed is ideal for large quantities and complex artwork. Both are available from My Baking Creations.

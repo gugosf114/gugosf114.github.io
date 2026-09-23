@@ -126,7 +126,7 @@ Within 24 hours, we'll provide a quote and a design proof showing exactly how yo
 
 ### Step 3 — Approve and Confirm
 
-Once you approve the design, we confirm your production schedule and delivery details. Payment is accepted via credit card, PayPal, Apple Pay, Zelle, or invoice/PO for established corporate accounts.
+Once you approve the design, we confirm your production schedule and delivery details. Payment is accepted via credit card, PayPal, Apple Pay, or Zelle.
 
 ### Step 4 — Fresh Baked and Delivered
 
@@ -141,8 +141,8 @@ Your cupcakes or cakes are baked fresh to order — never frozen, never pre-made
 **What is the minimum order for corporate cupcakes?**
 Our minimum order is $150. Most corporate cupcake orders start at one dozen (12 cupcakes) and scale from there. We handle orders from a single conference room to company-wide events of 500+ pieces.
 
-**Do you accept purchase orders and invoices?**
-Yes. We accept PO/invoice for established corporate accounts, as well as credit card, PayPal, Apple Pay, and Zelle. We provide W-9s and itemized invoices for procurement teams.
+**How can I pay?**
+We accept credit card, PayPal, Apple Pay, and Zelle. W-9s on request.
 
 **Can you match our exact brand colors?**
 Yes. Provide your Pantone or hex color codes and we'll match them in the icing. A design proof is submitted for your approval before baking begins.
