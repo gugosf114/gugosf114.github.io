@@ -60,11 +60,11 @@ The process is designed to be low-friction for procurement teams, executive assi
 3. **Confirm design and quantity** — A digital proof is provided within 1–2 business days. Once approved, production is scheduled.
 4. **Delivery or pickup** — Orders are delivered directly to your Bay Area office or picked up at the Daly City kitchen (1096 Wildwood Ave, 94015). Delivery covers all major corporate campuses across San Francisco, the Peninsula, and Silicon Valley.
 
-**Lead time:** Standard orders require at least 1–2 weeks. Large orders (500+ pieces) benefit from 3–4 weeks. Rush orders are available for established clients — call (415) 568-8060 to discuss availability.
+Large orders (500+ pieces) benefit from 3–4 weeks. Rush orders are available for established clients — call (415) 568-8060 to discuss availability.
 
 **Minimum order:** $150. This is a quality threshold, not a barrier — it ensures every order receives the same level of custom design attention.
 
-**Payment:** Invoice and purchase orders (PO) accepted for corporate accounts. Credit card, PayPal, Apple Pay, and Zelle also accepted.
+**Payment:** Credit card, PayPal, Apple Pay, and Zelle accepted.
 
 **Multiple departments, no coordination required:** Different teams within the same company can order independently. There is no need to consolidate a single company-wide order — each department submits its own request.
 
@@ -92,7 +92,7 @@ Before ordering, browse the [corporate gallery](https://mybakingcreations.com/ga
 The minimum order is $150. Most corporate orders for cupcakes and cookies start at one dozen (12 pieces). Corporate event cakes start at $300.
 
 **How far in advance should I order?**
-Standard orders require 1–2 weeks. Large orders of 500+ pieces benefit from 3–4 weeks of lead time. For rush orders, call (415) 568-8060 to check availability.
+Standard orders require 1–2 weeks. For rush orders, call (415) 568-8060 to check availability.
 
 **Do you deliver to corporate campuses in San Francisco and Silicon Valley?**
 Yes. My Baking Creations delivers directly to offices and campuses across San Francisco (SoMa, Financial District), South San Francisco (Oyster Point), Menlo Park, Palo Alto, Mountain View, and throughout the Peninsula and South Bay. Delivery is coordinated with your building reception or facilities team.
@@ -100,8 +100,8 @@ Yes. My Baking Creations delivers directly to offices and campuses across San Fr
 **Can multiple departments at the same company place separate orders?**
 Yes. Different departments can order independently — there is no requirement to consolidate into a single company-wide order. Each team submits its own request and receives its own delivery.
 
-**Do you accept purchase orders and invoices?**
-Yes. Invoice and PO payment is accepted for corporate accounts. My Baking Creations also provides W-9s and itemized invoices for procurement teams.
+**How can I pay?**
+Yes. My Baking Creations also provides W-9s and itemized invoices for procurement teams.
 
 **What logo file formats do you need?**
 PNG, SVG, AI, or EPS files work best. Include your brand color codes (Pantone or hex) so colors can be matched accurately.

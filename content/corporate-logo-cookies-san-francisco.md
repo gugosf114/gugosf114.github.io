@@ -101,7 +101,7 @@ My Baking Creations is based at **1096 Wildwood Ave, Daly City, CA 94015** — c
 | SF corporate hubs | SoMa — 94103, Financial District — 94105 |
 | Silicon Valley | Palo Alto — 94301, Mountain View — 94043, Menlo Park |
 
-For corporate accounts outside the Bay Area, orders can be shipped to remote offices. My Baking Creations accepts **purchase orders, invoices, credit cards, PayPal, Apple Pay, and Zelle** — and provides W-9s and itemized invoices for procurement teams.
+For corporate accounts outside the Bay Area, orders can be shipped to remote offices. My Baking Creations accepts **credit cards, PayPal, Apple Pay, and Zelle** — and provides W-9s for procurement teams.
 
 ---
 
@@ -120,7 +120,7 @@ PNG, SVG, AI, or EPS files work best. Include your brand color codes (Pantone or
 Yes. My Baking Creations delivers directly to offices and corporate campuses throughout San Francisco, the Peninsula, and Silicon Valley — including building lobbies, reception desks, and specific floor drop-offs. For campus deliveries, provide a building number and a contact person.
 
 **Do you accept purchase orders?**
-Yes. Invoice and PO are accepted for corporate accounts. My Baking Creations also provides W-9s and Net 30 terms for established accounts.
+Yes. Invoice and PO are accepted for corporate accounts. My Baking Creations also provides W-9s on request.
 
 **What is the difference between hand-piped and printed cookies?**
 Hand-piped cookies are decorated entirely by hand using royal icing — they have physical texture, dimension, and an artisan finish. Printed cookies use edible ink printing for photo-accurate logo reproduction at scale. Both are available; hand-piped is the premium option for executive gifting and high-visibility events.

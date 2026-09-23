@@ -66,7 +66,7 @@ Marketing coordinators and event planners in SoMa (94103), the Financial Distric
 4. **Approve and confirm** — once you approve, your production date is locked in
 5. **Pickup or delivery** — collect from our Daly City kitchen at 1096 Wildwood Ave (94015), or we deliver directly to your office or event venue
 
-**Lead time:** Corporate cake pop orders require advance notice. Standard orders need at least 1–2 weeks. Large orders (100+ pieces) benefit from 3 weeks of lead time. Rush availability depends on current production schedule — contact us directly at (415) 568-8060 to discuss.
+**Lead time:** Corporate cake pop orders require advance notice. Standard orders need at least 1–2 weeks. Rush availability depends on current production schedule — contact us directly at (415) 568-8060 to discuss.
 
 **Location and access:** Our bakery is based in Daly City (94015), making us a convenient option for Peninsula clients in Burlingame (94010), San Mateo (94401), and Palo Alto (94301), as well as San Francisco offices and Silicon Valley campuses.
 
@@ -111,8 +111,8 @@ We recommend 2 weeks minimum for standard corporate cake pop orders. For large q
 **Can cake pops be combined with logo cookies or cupcakes for a full branded dessert spread?**
 Absolutely. Many of our corporate clients — including tech and fintech companies across the Bay Area — order cake pops alongside hand-piped logo cookies and branded cupcakes for cohesive event dessert setups. We'll quote the full package together.
 
-**Do you accept purchase orders or invoices for corporate accounts?**
-Yes. My Baking Creations accepts purchase orders, invoices, credit cards, PayPal, Apple Pay, and Zelle. We provide W-9s and itemized invoices for procurement teams, and Net 30 terms are available for established accounts.
+**How can I pay for a corporate order?**
+Yes. My Baking Creations accepts credit cards, PayPal, Apple Pay, and Zelle. We provide W-9s for procurement teams.
 
 ---
 

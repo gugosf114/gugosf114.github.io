@@ -64,8 +64,7 @@ Every element is edible. Internal supports, when structurally necessary, are foo
 These cakes are the natural choice for milestone birthdays — 30th, 40th, 50th — or for the person who has received every conventional gift and deserves something genuinely one-of-a-kind. Customers who order sculpted cakes are not price-sensitive; they are investing in a centerpiece that becomes the defining memory of the event.
 
 We serve the affluent communities of **Marin County**, including **Tiburon** and **San Rafael**, alongside our home base in **Daly City 94015** and **94014**. Sculpted cake delivery is included within 20 miles of our Wildwood Avenue kitchen.
-
-Lead time for sculpted cakes is 2 to 4 weeks for most designs. Complex multi-element sculptures may require 4 to 6 weeks. Contact us as early as possible to secure your date.
+ Complex multi-element sculptures may require 4 to 6 weeks. Contact us as early as possible to secure your date.
 
 **[View the sculpted cake gallery →](https://mybakingcreations.com/gallery-cakes-sculpted)**  
 **[Submit a custom sculpted cake inquiry →](https://mybakingcreations.com/order-form)**

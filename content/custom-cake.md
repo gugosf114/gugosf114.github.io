@@ -92,7 +92,7 @@ Yana reviews your request and responds — typically within 24 to 48 hours — w
 **Step 3: Approve your design and confirm your order**
 Once you're happy with the design direction, you confirm the order and secure your date. From there, the team handles production. You don't need to follow up or check in — you'll hear from us when your cake is ready.
 
-**Lead time:** Custom cakes generally require **2 to 3 weeks** of advance notice. Sculpted 3D cakes may require 2 to 4 weeks depending on complexity. Booking early is strongly recommended for weekend dates and peak seasons (graduation in May–June, holidays in November–December).
+Sculpted 3D cakes may require 2 to 4 weeks depending on complexity. Booking early is strongly recommended for weekend dates and peak seasons (graduation in May–June, holidays in November–December).
 
 The bakery serves clients throughout Daly City (94015), the adjacent 94014 zip code, Sunset District (94122), Ingleside/Excelsior (94112), Burlingame (94010), and San Mateo (94401). Pickup is available at the Wildwood Avenue kitchen with free street parking.
 
