@@ -173,3 +173,49 @@ body.mbc-ink .search-wrapper .search-input{width:100%!important;min-width:0}}
 body.mbc-ink .nav-links{gap:10px}
 body.mbc-ink .nav-links a{font-size:14px}
 body.mbc-ink .brand-wordmark{width:150px!important;height:54px}}
+/* Homepage "Why Choose" - fact strip, drawn-icon glass cards, CTA bar. */
+@property --why-a{syntax:'<angle>';initial-value:0deg;inherits:false}
+.why-mbc{max-width:1060px;margin:0 auto;color:var(--mix-panel-muted)}
+.why-facts{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);margin:6px 0 34px;padding:0;border:1px solid var(--mix-line);border-radius:18px;background:#ffffff08;overflow:hidden}
+.why-facts li{padding:18px 14px;text-align:center;display:flex;flex-direction:column;gap:3px}
+.why-facts li+li{border-left:1px solid var(--mix-line)}
+.why-facts strong{font:17px/1.2 'Fredoka One','Fredoka Fallback',sans-serif;color:var(--mix-panel-ink);letter-spacing:.2px}
+.why-facts span{font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--mix-accent);font-weight:700}
+.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.why-card{position:relative;padding:30px 30px 26px;border-radius:22px;border:1px solid transparent;background:linear-gradient(160deg,#46527a,#39445f) padding-box,linear-gradient(var(--mix-line),var(--mix-line)) border-box;box-shadow:0 14px 34px #0b102226,inset 0 1px 0 #ffffff14;transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s ease}
+.why-card:hover{transform:translateY(-6px);box-shadow:0 22px 44px #0b10223d,inset 0 1px 0 #ffffff1f;background:linear-gradient(160deg,#4b587f,#3c4764) padding-box,conic-gradient(from var(--why-a),#ec268f00 0deg,#ec268f 70deg,#ffc532 140deg,#ffc53200 210deg,#ec268f00 360deg) border-box;animation:why-sweep 2.4s linear infinite}
+@keyframes why-sweep{to{--why-a:360deg}}
+.why-card h3{font:22px/1.25 'Fredoka One','Fredoka Fallback',sans-serif;color:var(--mix-panel-ink);margin:16px 0 10px}
+.why-card p,.why-cta p{text-align:justify;hyphens:auto;-webkit-hyphens:auto;line-height:1.75;font-size:15.5px;margin:0}
+.why-icon{width:50px;height:50px;fill:none;stroke:url(#why-grad);stroke:#ffc532;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;padding:9px;border-radius:14px;background:linear-gradient(135deg,#ec268f33,#ffc53226);box-sizing:content-box}
+.why-icon *{stroke-dasharray:1;stroke-dashoffset:1}
+body.mbc-ink .section-beige .seo-content.why-mbc a{color:inherit;font-weight:700;text-decoration:underline;text-decoration-color:#ffda8366;text-decoration-thickness:1.5px;text-underline-offset:3px;transition:color .2s,text-decoration-color .2s}
+body.mbc-ink .section-beige .seo-content.why-mbc a:hover{color:#ffda83;text-decoration-color:#ffda83}
+.why-cta{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:22px;margin-top:22px;padding:22px 26px;border-radius:20px;background:linear-gradient(110deg,#ec268f26,#ffc5321c);border:1px solid #ffc53240}
+.why-cta p{text-align:left}
+.why-cta strong{color:var(--mix-panel-ink)}
+.why-cta-actions{display:flex;flex-direction:column;gap:9px}
+body.mbc-ink .section-beige .seo-content.why-mbc .why-cta-actions .btn{text-decoration:none;font-weight:700;font-size:14px;padding:11px 18px;white-space:nowrap;text-align:center}
+body.mbc-ink .section-beige .seo-content.why-mbc .why-cta-actions .btn-primary{color:#fff!important}
+body.mbc-ink .section-beige .seo-content.why-mbc .why-cta-actions .btn-secondary{color:#48281f!important}
+/* entrance: cards rise in sequence, icons draw themselves */
+.reveal .why-facts,.reveal .why-card,.reveal .why-cta{opacity:0;transform:translateY(22px)}
+.reveal.visible .why-facts,.reveal.visible .why-card,.reveal.visible .why-cta{opacity:1;transform:none;transition:opacity .7s ease calc(var(--i,0)*.12s + .1s),transform .7s cubic-bezier(.2,.8,.2,1) calc(var(--i,0)*.12s + .1s)}
+.reveal.visible .why-cta{--i:4}
+.reveal.visible .why-card:hover{transform:translateY(-6px);transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s ease}
+.reveal.visible .why-icon *{animation:why-draw 1.3s ease forwards calc(var(--i,0)*.12s + .45s)}
+.why-cta .why-icon *{stroke-dashoffset:0!important;animation:none!important}
+@keyframes why-draw{to{stroke-dashoffset:0}}
+@media(max-width:760px){.why-facts{grid-template-columns:1fr 1fr;margin-bottom:22px}
+.why-facts li:nth-child(3){border-left:0}
+.why-facts li:nth-child(n+3){border-top:1px solid var(--mix-line)}
+.why-facts strong{font-size:15px}
+.why-grid{grid-template-columns:1fr;gap:14px}
+.why-card{padding:22px 20px 20px}
+.why-card h3{font-size:19px;margin:12px 0 8px}
+.why-card p,.why-cta p{font-size:15px;text-align:left;hyphens:manual}
+.why-cta{grid-template-columns:1fr;gap:14px;padding:20px}
+.why-cta .why-icon{display:none}}
+@media(prefers-reduced-motion:reduce){.reveal .why-facts,.reveal .why-card,.reveal .why-cta{opacity:1;transform:none}
+.why-icon *{stroke-dashoffset:0!important;animation:none!important}
+.why-card:hover{animation:none}}
