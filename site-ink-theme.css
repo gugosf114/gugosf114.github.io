@@ -1,5 +1,5 @@
 /* Ink website theme. Enabled only by the mbc-ink body class. */
-body.mbc-ink{background:var(--mix-page);color:var(--mix-page-ink);isolation:isolate;padding-bottom:0}
+body.mbc-ink{visibility:visible;background:var(--mix-page);color:var(--mix-page-ink);isolation:isolate;padding-bottom:0}
 body.mbc-ink #particles-canvas,body.mbc-ink #nav-particles{display:none!important}
 .site-atmosphere{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;background:radial-gradient(ellipse at 85% 0%,var(--mix-sheen),transparent 65%),radial-gradient(ellipse at 4% 100%,#140a0725,transparent 60%)}
 .site-atmosphere::before,.site-atmosphere::after{content:'';position:absolute;inset:-60px;pointer-events:none}
