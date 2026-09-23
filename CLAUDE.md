@@ -20,6 +20,7 @@
 - **Push design/CSS/HTML changes straight to `main`.** No side branches, no PRs, no asking.
 - **Send George only the NEW version** (screenshots of the updated page). No before/after.
 - **Don't hand George options or settings to change.** Pick the route with the best visibility and do it. Work from the repo code, served locally: that is the exact code GitHub Pages serves, and it lets you inspect buttons, colors, hover effects and tiles directly.
+- **Fonts in cloud screenshots:** Google Fonts is blocked in the cloud sandbox. Before judging any screenshot, serve the real fonts (`npm i @fontsource/fredoka-one @fontsource/nunito` and route `fonts.googleapis.com` to them in Playwright). Site fonts: Fredoka One (headings), Nunito (body/buttons).
 - **Images/photos are out of scope in cloud sessions**, because they live on the laptop. Do image work from the laptop or Termux.
 4. **Token Management**: If the context window feels heavy, proactively suggest the `/compact` command to summarize progress and clear "fog."
 5. **Ghost Client Isolation**: When in "Business Mode," use Gemini/Sheets integration to cross-reference 2024 corporate orders vs. current silence to isolate "ghost" leads.
