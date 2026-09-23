@@ -100,8 +100,7 @@ Yes. My Baking Creations delivers directly to offices and campuses across San Fr
 **Can multiple departments at the same company place separate orders?**
 Yes. Different departments can order independently — there is no requirement to consolidate into a single company-wide order. Each team submits its own request and receives its own delivery.
 
-**How can I pay?**
-Yes. My Baking Creations also provides W-9s and itemized invoices for procurement teams.
+**How can I pay?** Credit cards, PayPal, Apple Pay, and Zelle. W-9s on request.
 
 **What logo file formats do you need?**
 PNG, SVG, AI, or EPS files work best. Include your brand color codes (Pantone or hex) so colors can be matched accurately.

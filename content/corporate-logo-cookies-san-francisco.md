@@ -119,8 +119,7 @@ PNG, SVG, AI, or EPS files work best. Include your brand color codes (Pantone or
 **Do you deliver to corporate campuses?**
 Yes. My Baking Creations delivers directly to offices and corporate campuses throughout San Francisco, the Peninsula, and Silicon Valley — including building lobbies, reception desks, and specific floor drop-offs. For campus deliveries, provide a building number and a contact person.
 
-**Do you accept purchase orders?**
-Yes. Invoice and PO are accepted for corporate accounts. My Baking Creations also provides W-9s on request.
+**How can I pay?** Credit cards, PayPal, Apple Pay, and Zelle. My Baking Creations also provides W-9s on request.
 
 **What is the difference between hand-piped and printed cookies?**
 Hand-piped cookies are decorated entirely by hand using royal icing — they have physical texture, dimension, and an artisan finish. Printed cookies use edible ink printing for photo-accurate logo reproduction at scale. Both are available; hand-piped is the premium option for executive gifting and high-visibility events.

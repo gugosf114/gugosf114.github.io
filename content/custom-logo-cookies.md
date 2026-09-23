@@ -144,8 +144,7 @@ Yes. My Baking Creations delivers to offices throughout San Francisco (SoMa 9410
 **Can you match our exact brand colors?**
 For edible print cookies, color reproduction is photo-accurate. For hand-piped cookies, provide your Pantone or HEX codes and the artist will mix icing colors to match as closely as possible. Brand color matching is standard practice — clients including Google, Meta, and Salesforce provide their brand guidelines and receive cookies that meet their standards.
 
-**How can I pay?**
-Yes. Invoice and PO are accepted for established corporate accounts. My Baking Creations also accepts credit card, PayPal, Apple Pay, and Zelle. W-9s and itemized invoices are available for procurement teams.
+**How can I pay?** Credit card, PayPal, Apple Pay, and Zelle. W-9s on request.
 
 **What is the difference between hand-piped and printed cookies?**
 Hand-piped cookies are decorated entirely by hand using royal icing — each one is individually crafted, with a tactile, dimensional finish. Printed cookies use high-resolution edible ink printing for photo-accurate logo reproduction. Hand-piped is the premium choice for executive gifting; printed is ideal for large quantities and complex artwork. Both are available from My Baking Creations.
