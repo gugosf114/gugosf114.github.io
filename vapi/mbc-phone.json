@@ -1,5 +1,5 @@
 {
-  "_note": "Copy of the Vapi phone assistant \"My Baking Creations\" (id 086d84b7-92cc-4825-8779-943556453329). Built 2026-09-24 on the Stratos Concierge pattern. NOT attached to any phone number yet. The live brain is in Vapi; this is a backup.",
+  "_note": "Copy of the Vapi phone assistant \"My Baking Creations\" (id 086d84b7-92cc-4825-8779-943556453329). Built 2026-09-24 on the Stratos Concierge pattern. Voice = Microsoft Ava (en-US-AvaNeural), same voice as the Google Voice greeting. NOT attached to any phone number yet. The live brain is in Vapi; this is a backup.",
   "savedAt": "2026-09-24T21:06:08.937Z",
   "name": "My Baking Creations",
   "firstMessage": "Thank you for calling My Baking Creations. How can I help with your order today?",
@@ -9,11 +9,8 @@
     "talk to you soon"
   ],
   "voice": {
-    "model": "eleven_flash_v2_5",
-    "voiceId": "sarah",
-    "provider": "11labs",
-    "stability": 0.5,
-    "similarityBoost": 0.75
+    "provider": "azure",
+    "voiceId": "en-US-AvaNeural"
   },
   "transcriber": {
     "model": "nova-3",
