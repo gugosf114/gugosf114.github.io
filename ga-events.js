@@ -13,3 +13,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+// Every page loads this file, so it also pulls in the phone scroll reveal
+// (phone-reveal.js). Phones only; the file checks again itself.
+(function () {
+  if (!window.matchMedia || !window.matchMedia('(max-width: 768px)').matches) return;
+  var s = document.createElement('script');
+  s.src = '/phone-reveal.js';
+  s.defer = true;
+  document.head.appendChild(s);
+})();

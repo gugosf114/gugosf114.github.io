@@ -48,3 +48,10 @@ ul.nav-links li.li-ordernow a.nav-cta.nav-cta--pink{background:linear-gradient(1
 .reveal.visible:not(.reveal-done){opacity:1;transform:none;transition-property:opacity,transform!important;transition-duration:.9s,.9s!important;transition-timing-function:cubic-bezier(.23,1,.32,1),cubic-bezier(.23,1,.32,1)!important}
 body.mbc-home #services>.section-wrapper.reveal,body.mbc-home #services .service-card:first-child.reveal{opacity:1;transform:none;transition:none}
 }
+/* Phones: phone-reveal.js splits .reveal sections into pieces (Stratos style).
+   The section itself stays put; each piece rises 40px and fades over 0.9s. */
+@media (max-width:768px) and (prefers-reduced-motion:no-preference){
+.reveal.m-split{opacity:1!important;transform:none!important;transition:none!important}
+.m-rise{opacity:0!important;transform:translateY(40px)!important}
+.m-rise.m-in{opacity:1!important;transform:none!important;transition-property:opacity,transform!important;transition-duration:.9s,.9s!important;transition-timing-function:cubic-bezier(.23,1,.32,1),cubic-bezier(.23,1,.32,1)!important}
+}
