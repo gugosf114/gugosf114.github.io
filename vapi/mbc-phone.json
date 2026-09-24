@@ -1,8 +1,8 @@
 {
-  "_note": "Copy of the Vapi phone assistant \"My Baking Creations\" (id 086d84b7-92cc-4825-8779-943556453329). Built 2026-09-24 on the Stratos Concierge pattern. Voice = Microsoft Ava (en-US-AvaNeural), same voice as the Google Voice greeting. NOT attached to any phone number yet. The live brain is in Vapi; this is a backup.",
+  "_note": "Copy of the Vapi phone assistant \"My Baking Creations\" (id 086d84b7-92cc-4825-8779-943556453329). Built 2026-09-24 on the Stratos Concierge pattern. Voice = Microsoft Ava (en-US-AvaNeural), same voice as the Google Voice greeting. Role: answers Yana's missed calls instead of voicemail (quote questions, messages, personal calls). NOT attached to a phone number yet: Vapi needs a card on file for a 2nd number. After-call texts to Yana: /root/.gmail/aicalls.py in the 30-min mail check. The live brain is in Vapi; this is a backup.",
   "savedAt": "2026-09-24T21:06:08.937Z",
   "name": "My Baking Creations",
-  "firstMessage": "Thank you for calling My Baking Creations. How can I help with your order today?",
+  "firstMessage": "Hi, you've reached My Baking Creations. We can't get to the phone right now \u2014 I'm Yana's assistant. If you'd like a quote, I'll ask you a few quick questions and hand them to our baker, and she'll get back to you in under 24 hours. I can also answer any questions. And if you'd like to leave a message, just tell me now, and I'll pass it to Yana when she's back.",
   "endCallMessage": "Thank you for calling My Baking Creations. We'll be in touch soon.",
   "endCallPhrases": [
     "goodbye",
@@ -27,5 +27,7 @@
     "model": "claude-sonnet-4-6",
     "provider": "anthropic",
     "temperature": 0.5
-  }
+  },
+  "maxDurationSeconds": 900,
+  "silenceTimeoutSeconds": 30
 }
