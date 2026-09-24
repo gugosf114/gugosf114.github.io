@@ -194,12 +194,13 @@
     const vw = document.documentElement.clientWidth;
     const vh = vv ? vv.height : window.innerHeight;
     const offTop = vv ? vv.offsetTop : 0;
-    const pad = 10, gap = 10;
-    const width = Math.min(380, vw - pad * 2);
+    // Stratos size: 350 x 450 at most, and never more than ~60% of the visible screen on a phone.
+    const pad = 12, gap = 10;
+    const width = Math.min(350, vw - pad * 2);
     const above = b.top - offTop - gap - pad;
     const below = offTop + vh - b.bottom - gap - pad;
     const up = above >= below;
-    const height = Math.max(260, Math.min(500, up ? above : below));
+    const height = Math.max(240, Math.min(450, Math.round(vh * 0.6), up ? above : below));
     let left = b.left + b.width / 2 - width / 2;
     left = Math.min(Math.max(pad, left), vw - width - pad);
     let top = up ? b.top - gap - height : b.bottom + gap;
