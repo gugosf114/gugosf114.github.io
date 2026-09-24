@@ -395,11 +395,21 @@ return;
 }
 const revealElements = document.querySelectorAll('.reveal');
 if (revealElements.length === 0) return;
+// Phones get the Stratos feel: a tile starts only once it is on screen,
+// then glides up. Desktop keeps the early start.
+const isPhone = window.matchMedia('(max-width: 768px)').matches;
 const observerOptions = {
 root: null,
-rootMargin: '0px 0px 300px 0px',
+rootMargin: isPhone ? '0px 0px -60px 0px' : '0px 0px 300px 0px',
 threshold: 0
 };
+// Once the glide ends, hand the tile back its normal hover/tilt timing.
+document.addEventListener('transitionend', e => {
+const el = e.target;
+if (el.classList && el.classList.contains('reveal') && el.classList.contains('visible') && e.propertyName === 'opacity') {
+el.classList.add('reveal-done');
+}
+});
 const revealObserver = new IntersectionObserver((entries, observer) => {
 entries.forEach(entry => {
 if (entry.isIntersecting) {
@@ -416,7 +426,7 @@ const vh = window.innerHeight;
 revealElements.forEach(el => {
 if (el.classList.contains('visible')) return;
 const rect = el.getBoundingClientRect();
-if (rect.top < vh + 300) {
+if (rect.top < (isPhone ? vh - 60 : vh + 300)) {
 el.classList.add('visible');
 }
 });

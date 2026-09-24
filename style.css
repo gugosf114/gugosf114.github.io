@@ -38,3 +38,13 @@ ul.nav-links li.li-ordernow a.nav-cta.nav-cta--pink{background:linear-gradient(1
 .related-pages a{font-size:.9rem;color:#82665b;text-decoration:none;border-bottom:1px solid #e6dbcd}
 .related-pages a:hover{color:#622d2b;border-bottom-color:#622d2b}
 .related-pages a:focus-visible{outline:3px solid #ec268f;outline-offset:2px}
+
+/* Phones: Stratos-style scroll reveal. Tiles wait until they are on screen,
+   then rise 40px and fade in over 0.9s on a soft glide. Longhands keep the
+   .reveal-delay-N stagger; !important beats the inline timing tilt-effects.js
+   puts on cards, only until .reveal-done hands hover/tilt timing back. */
+@media (max-width:768px) and (prefers-reduced-motion:no-preference){
+.reveal:not(.visible){opacity:0;transform:translateY(40px)}
+.reveal.visible:not(.reveal-done){opacity:1;transform:none;transition-property:opacity,transform!important;transition-duration:.9s,.9s!important;transition-timing-function:cubic-bezier(.23,1,.32,1),cubic-bezier(.23,1,.32,1)!important}
+body.mbc-home #services>.section-wrapper.reveal,body.mbc-home #services .service-card:first-child.reveal{opacity:1;transform:none;transition:none}
+}
