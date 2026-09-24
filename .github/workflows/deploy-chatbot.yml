@@ -1,0 +1,32 @@
+# Puts chatbot-worker.js live on the Cloudflare Worker "mbc-chatbot" (account info@mybakingcreations.com)
+# every time it changes on main. The Claude key stays on the worker as a secret; this only swaps the code.
+name: Deploy chat bot
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'chatbot-worker.js'
+      - '.github/scripts/deploy-chatbot.mjs'
+      - '.github/workflows/deploy-chatbot.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency: deploy-chatbot
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Upload worker
+        env:
+          CF_API_KEY: ${{ secrets.CF_API_KEY }}
+          CF_EMAIL: ${{ secrets.CF_EMAIL }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+        run: node .github/scripts/deploy-chatbot.mjs

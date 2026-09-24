@@ -107,8 +107,14 @@
     const sendBtn = document.getElementById('chatbot-send');
     const input = document.getElementById('chatbot-input');
 
-    // Toggle chat open/close
-    toggle.addEventListener('click', toggleChat);
+    // Toggle chat open/close (a drag is not a tap: suppress the click that follows a drag)
+    toggle.addEventListener('click', (e) => {
+      if (justDragged) { justDragged = false; e.preventDefault(); return; }
+      toggleChat();
+    });
+    enableDrag(toggle);
+    window.addEventListener('resize', () => { if (isOpen) placeWindow(); });
+    if (window.visualViewport) window.visualViewport.addEventListener('resize', () => { if (isOpen) placeWindow(); });
     closeBtn.addEventListener('click', closeChat);
 
     // Send message
@@ -137,6 +143,73 @@
   }
 
   // ===========================================
+  // Drag the round button anywhere (finger or mouse), like the Stratos bubble
+  // ===========================================
+  let justDragged = false;
+
+  function enableDrag(btn) {
+    let start = null;
+    btn.addEventListener('pointerdown', (e) => {
+      if (e.button !== undefined && e.button !== 0) return;
+      const r = btn.getBoundingClientRect();
+      start = { x: e.clientX, y: e.clientY, left: r.left, top: r.top, moved: false, id: e.pointerId };
+      // Hold on to this finger/mouse even when it slides off the button mid-drag.
+      try { btn.setPointerCapture(e.pointerId); } catch (_) {}
+    });
+    btn.addEventListener('pointermove', (e) => {
+      if (!start || e.pointerId !== start.id) return;
+      const dx = e.clientX - start.x, dy = e.clientY - start.y;
+      if (!start.moved && Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+      if (!start.moved) {
+        start.moved = true;
+        btn.classList.add('dragging');
+      }
+      const w = btn.offsetWidth, h = btn.offsetHeight;
+      const vw = document.documentElement.clientWidth, vh = window.innerHeight;
+      const left = Math.min(Math.max(6, start.left + dx), vw - w - 6);
+      const top = Math.min(Math.max(6, start.top + dy), vh - h - 6);
+      btn.style.left = left + 'px';
+      btn.style.top = top + 'px';
+      btn.style.right = 'auto';
+      btn.style.bottom = 'auto';
+      if (isOpen) placeWindow();
+    });
+    const end = (e) => {
+      if (!start || (e && e.pointerId !== start.id)) return;
+      if (start.moved) { justDragged = true; setTimeout(() => { justDragged = false; }, 400); }
+      btn.classList.remove('dragging');
+      start = null;
+    };
+    btn.addEventListener('pointerup', end);
+    btn.addEventListener('pointercancel', end);
+  }
+
+  // Put the chat window right next to wherever the button is: on the side with more room,
+  // lined up with the button, sized to what fits (the phone keyboard included).
+  function placeWindow() {
+    const win = document.getElementById('chatbot-window');
+    const btn = document.getElementById('chatbot-toggle');
+    const b = btn.getBoundingClientRect();
+    const vv = window.visualViewport;
+    const vw = document.documentElement.clientWidth;
+    const vh = vv ? vv.height : window.innerHeight;
+    const offTop = vv ? vv.offsetTop : 0;
+    const pad = 10, gap = 10;
+    const width = Math.min(380, vw - pad * 2);
+    const above = b.top - offTop - gap - pad;
+    const below = offTop + vh - b.bottom - gap - pad;
+    const up = above >= below;
+    const height = Math.max(260, Math.min(500, up ? above : below));
+    let left = b.left + b.width / 2 - width / 2;
+    left = Math.min(Math.max(pad, left), vw - width - pad);
+    let top = up ? b.top - gap - height : b.bottom + gap;
+    top = Math.min(Math.max(offTop + pad, top), offTop + vh - height - pad);
+    Object.assign(win.style, { left: left + 'px', top: top + 'px', width: width + 'px', height: height + 'px', right: 'auto', bottom: 'auto', maxWidth: 'none' });
+    win.classList.toggle('from-bottom', up);
+    win.classList.toggle('from-top', !up);
+  }
+
+  // ===========================================
   // Chat Window Controls
   // ===========================================
   function toggleChat() {
@@ -153,6 +226,7 @@
     const notification = document.getElementById('chatbot-notification');
     const input = document.getElementById('chatbot-input');
 
+    placeWindow();
     window.classList.add('open');
     toggle.classList.add('open');
     notification.style.display = 'none';
@@ -163,10 +237,6 @@
       input.focus();
     }, 300);
 
-    // Prevent body scroll on mobile
-    if (window.innerWidth <= 480) {
-      document.body.style.overflow = 'hidden';
-    }
   }
 
   function closeChat() {
@@ -177,8 +247,6 @@
     toggle.classList.remove('open');
     isOpen = false;
 
-    // Restore body scroll
-    document.body.style.overflow = '';
   }
 
   // ===========================================
