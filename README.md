@@ -13,7 +13,8 @@ Built by George Abrahamyan. Baked by Yana.
 - **Fonts**: Google Fonts (Nunito, Fredoka One)
 - **Analytics**: Google Analytics (GA4) + Google Tag Manager
 - **Forms**: Web3Forms + Google reCAPTCHA
-- **Chatbot**: Cloudflare Worker backend
+- **Chatbot**: Cloudflare Worker `mbc-chatbot` running Claude Sonnet 4.6, reads the live site (see *AI Phone Helper & Website Chat Bot*)
+- **Phone helper**: Vapi AI assistant answers Yana's missed calls (see *AI Phone Helper & Website Chat Bot*)
 - **Printed-cookie checkout**: Cloudflare Worker + private R2 + Queues + server-side PayPal + Resend
 - **Internal Dashboard**: Firebase Realtime Database + Firebase Storage (thursday/)
 - **Images**: All WebP format (converted via `convert-to-webp.py`, quality 82)
@@ -123,7 +124,7 @@ Built by George Abrahamyan. Baked by Yana.
 | `tilt-effects.js` | 232 | 3D tilt hover effects on service cards, Instagram posts, company logos, spark effects |
 | `activity-feed-widget.js` | 42 | Live recent-orders feed widget (fetches `recent-orders.json`) |
 | `chatbot.js` | ~350 | AI chatbot widget, Cloudflare Worker integration, conversation history |
-| `chatbot-worker.js` | — | Chatbot backend worker logic |
+| `chatbot-worker.js` | — | Chatbot brain (Cloudflare Worker `mbc-chatbot`, Claude). Auto-deploys on push to main |
 | `consultation-widget.js` | — | Consultation booking widget |
 | `activity-feed.js` | — | Activity feed functionality |
 | `generate-sitemap.js` | 209 | Node.js sitemap generator, scans all HTML, generates `sitemap.xml` |
@@ -261,6 +262,59 @@ Password-protected PWA at `/thursday/` for internal order management:
 - Due date alerts
 - Smart email parser for extracting order details
 - Contact links and gold-accented UI
+
+## AI Phone Helper & Website Chat Bot
+
+Two AI helpers answer customers. Both follow the same rules. Secrets are NOT in this repo; they live in Google Secret Manager, project `bakers-agent`.
+
+### House rules both helpers follow
+- Minimum is **one dozen (12)** for cookies, cake pops, and cupcakes. No other minimums or quantity ranges.
+- **Never** a number of days/weeks for lead time, and never promise a date. Say "earlier is better; quicker turnaround depends on availability."
+- **Never** quote custom prices. The only price said out loud: Order Now photo/logo cookies, $60 for 12, plus shipping.
+- **Never** mention purchase orders, Net 30, invoice billing, or payment terms. Never call anything "free."
+- Plain words, no made-up products, flavors, policies, or allergen claims.
+
+### Phone helper (Vapi) — Yana's missed calls
+| What | Value |
+|---|---|
+| How calls get there | Yana's phone **415-568-8060** forwards missed/busy/unreachable calls after 10 s to the Vapi number |
+| Vapi number | **+1 650-446-8721** |
+| Vapi account (org) | "My Baking Creations", billing email info@, pay-as-you-go credit (card: Chime), auto top-up OFF |
+| Assistant id | `9e5e978c-1ccb-4a99-a903-150a5019ec6b` |
+| API key | Secret Manager `mbc-vapi-private-key` |
+| Brain / voice / ears | Claude Sonnet 4.6 · Microsoft Ava (`azure` `en-US-AvaNeural`, same voice as the old voicemail greeting) · Deepgram nova-3 · background sound `office` |
+| Instructions copy | `vapi/mbc-phone-prompt.md` (the live copy is in Vapi; keep this file in sync) |
+
+**What she does:** opens as Yana's assistant ("If you'd like a quote, I'll ask you a few quick questions and hand them to our baker, and she'll get back to you in under 24 hours… or leave a message"). She takes quote requests with the Request-an-Order form's questions, takes messages like voicemail, and handles personal callers (it's also Yana's personal phone) with no sales pitch.
+
+**After each call:** `/root/.gmail/aicalls.py` (runs in the 30-min mail check on George's phone) texts Yana a one-line summary (QUOTE / MESSAGE / PERSONAL) and adds it to the house notes, `customers-open.md` → "AI phone calls".
+
+**Change what she says (no browser needed):**
+```bash
+KB=$(gcloud secrets versions access latest --secret mbc-vapi-private-key --project bakers-agent)
+A=9e5e978c-1ccb-4a99-a903-150a5019ec6b
+curl -s -H "Authorization: Bearer $KB" https://api.vapi.ai/assistant/$A > a.json   # read
+# edit model.messages[0].content (instructions) or firstMessage (greeting), then:
+curl -s -X PATCH -H "Authorization: Bearer $KB" -H 'Content-Type: application/json' \
+  --data '{"model": <whole model object>}' https://api.vapi.ai/assistant/$A
+```
+Then copy the new instructions into `vapi/mbc-phone-prompt.md`.
+
+**Money:** adding credit only works on the Vapi website (the API key cannot buy credit). Minimum purchase $10.
+
+**Forwarding codes (dial on Yana's phone, press Call):**
+- On: `**004*16504468721#` then `**61*16504468721**10#` (10-second ring first)
+- Off: `##004#`
+- Old Google Voice voicemail (510-221-6946), if ever needed again: `**004*15102216946#` then `**61*15102216946**10#`
+
+### Website chat bot
+| What | Value |
+|---|---|
+| Widget | `chatbot.js` + `chatbot.css` (draggable button, opens next to it, loaded as `?v=3`) |
+| Brain | `chatbot-worker.js` → Cloudflare Worker `mbc-chatbot` (account info@, `summer-lake-b6ea.workers.dev`), Claude Sonnet 4.6 |
+| Knowledge | Fixed notes in `chatbot-worker.js` **plus the live site**: it re-reads home, about, buy-now, order-form, design-studio, contact, corporate, corporate-order, delivery-areas, custom-cookies every 30 min, and filters out banned sentences before reading |
+| Deploy | Push to `main` touching `chatbot-worker.js` → `.github/workflows/deploy-chatbot.yml` uploads it (repo secrets `CF_API_KEY`, `CF_EMAIL`, `CF_ACCOUNT_ID`) |
+| Keys | Claude key = Worker secret `ANTHROPIC_API_KEY` (from Secret Manager `anthropic-api-key`); Cloudflare = Secret Manager `cloudflare-mbc-global-key` + `cloudflare-mbc-email` |
 
 ## SEO & Indexing
 
