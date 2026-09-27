@@ -1,0 +1,46 @@
+/* Tablet-sized windows only; phone and wide desktop layouts keep their rules. */
+@media (min-width: 651px) and (max-width: 1200px) {
+  .showcase-stage {
+    --tablet-photo-height: clamp(240px, 34vw, 360px);
+    height: auto;
+    padding-top: var(--tablet-photo-height);
+    background: var(--mix-panel-end);
+  }
+
+  .showcase-scene {
+    bottom: auto;
+    height: var(--tablet-photo-height);
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .showcase-scene .carousel-slide:nth-child(2) { display: none; }
+
+  body.mbc-ink .showcase-overlay {
+    position: relative;
+    inset: auto;
+    transform: none;
+    width: 100%;
+    max-width: none;
+    padding: 16px;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: var(--mix-panel-end) !important;
+  }
+
+  .showcase-logo { display: none; }
+  .showcase-badge { margin-bottom: 8px; }
+  .showcase-overlay h1 { font-size: 26px; margin-bottom: 12px; }
+  body.mbc-ink .showcase-actions .btn { min-height: 44px; font-size: 14px; }
+}
+
+@media (min-width: 769px) and (max-width: 1100px) {
+  body.mbc-ink .gallery-categories-grid,
+  body.mbc-ink .tile-grid-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 651px) and (max-width: 768px) {
+  body.mbc-ink .section-wrapper { margin-left: 0; margin-right: 0; }
+}
