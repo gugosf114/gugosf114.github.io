@@ -1,5 +1,36 @@
 [
   {
+    "id": "7f379d872169b09ee6221de537ad9c73689fbac4c52d142267d2fcc2f13b68c3",
+    "title": "Realistic Sculpted Watermelon Birthday Cake",
+    "caption": "A fully sculpted cake built to look like a whole watermelon — hand-painted rind detail, glossy finish, and a sculpted stem on top. Made to order for birthday celebrations across the Bay Area, including Daly City 94015 and San Francisco.",
+    "alt_text": "Sculpted cake designed to look like a whole watermelon with hand-painted green and yellow rind, sitting on a red fondant board reading Happy Birthday Caleb, made in the Bay Area.",
+    "classification": {
+      "audience": "personal",
+      "product_type": "cake",
+      "occasion": "birthday",
+      "styles": [
+        "sculpted",
+        "realistic"
+      ],
+      "brand_or_theme": "watermelon",
+      "gallery_targets": [
+        "all",
+        "cakes",
+        "cakes-sculpted",
+        "cakes-realistic"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cakes",
+      "cakes-sculpted",
+      "cakes-realistic"
+    ],
+    "image_path": "images/gallery/bakers-agent/cake/realistic-sculpted-watermelon-birthday-cake-7f379d8721.webp",
+    "image_url": "/images/gallery/bakers-agent/cake/realistic-sculpted-watermelon-birthday-cake-7f379d8721.webp",
+    "published_at": "2026-09-29T20:12:28.168850+00:00"
+  },
+  {
     "id": "37b723df233b2c8c896aea32b9c720bac905f640a2c815985103a717622f4273",
     "title": "Sculpted Burberry Plaid Handbag Cake",
     "caption": "A fully sculpted cake built to look like a Burberry plaid Boston bag — complete with fondant leather handles, stitched trim, and gold metallic hardware. Custom sculpted cakes made to order for Bay Area celebrations.",
