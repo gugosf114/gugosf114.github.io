@@ -1,5 +1,34 @@
 [
   {
+    "id": "136b1bdd6d286153410b38e0984d091c9a73f7b76bdf3d1d05575962b14746b7",
+    "title": "Custom Sewing Theme Birthday Cake Sara",
+    "caption": "A single-tier sculpted fondant cake built around a sewing theme — complete with a miniature Singer sewing machine topper, dress form mannequin, measuring tape trim, and thread spools. Custom birthday cakes made to order across the Bay Area.",
+    "alt_text": "Single-tier light green fondant birthday cake with sculpted Singer sewing machine topper, dress form mannequin, measuring tape trim, and Arabic name plaque, made for Sara in the Bay Area.",
+    "classification": {
+      "audience": "personal",
+      "product_type": "cake",
+      "occasion": "birthday",
+      "styles": [
+        "sculpted",
+        "hand-piped"
+      ],
+      "brand_or_theme": "sewing and fashion design theme, Singer sewing machine",
+      "gallery_targets": [
+        "all",
+        "cakes",
+        "cakes-sculpted"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cakes",
+      "cakes-sculpted"
+    ],
+    "image_path": "images/gallery/bakers-agent/cake/custom-sewing-theme-birthday-cake-sara-136b1bdd6d.webp",
+    "image_url": "/images/gallery/bakers-agent/cake/custom-sewing-theme-birthday-cake-sara-136b1bdd6d.webp",
+    "published_at": "2026-09-29T18:58:18.906386+00:00"
+  },
+  {
     "id": "657baed3c0e13c436e44ce929eb9f79e8d6283eb0c62aae3951731d0def2ada8-3",
     "title": "Flagstar Branded Cake Pops and Corporate Cupcakes",
     "caption": "White chocolate cake pops and frosted cupcakes printed with the Flagstar logo — available in vanilla and chocolate. A complete branded dessert set for corporate events and client gifting across the Bay Area. Custom orders welcome.",
