@@ -1,5 +1,36 @@
 [
   {
+    "id": "2232609dcff1b161ccb98968efb7791ea5a434dab8cdc700d690ced21ca6874e",
+    "title": "Sculpted Golf Ball Birthday Cake",
+    "caption": "A 3D sculpted golf ball cake with a dimpled fondant exterior, grass-textured green base, and a custom flag topper. Built for a 38th birthday celebration. Custom sculpted birthday cakes made to order across the Bay Area, including Daly City 94015.",
+    "alt_text": "3D sculpted golf ball cake on a green fondant putting green base with a red flag reading \"38 ain't great\" and \"Happy Birthday Cole,\" made in the Bay Area.",
+    "classification": {
+      "audience": "personal",
+      "product_type": "cake",
+      "occasion": "birthday",
+      "styles": [
+        "sculpted",
+        "realistic"
+      ],
+      "brand_or_theme": "golf",
+      "gallery_targets": [
+        "all",
+        "cakes",
+        "cakes-sculpted",
+        "cakes-realistic"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cakes",
+      "cakes-sculpted",
+      "cakes-realistic"
+    ],
+    "image_path": "images/gallery/bakers-agent/cake/sculpted-golf-ball-birthday-cake-2232609dcf.webp",
+    "image_url": "/images/gallery/bakers-agent/cake/sculpted-golf-ball-birthday-cake-2232609dcf.webp",
+    "published_at": "2026-09-29T23:21:12.481240+00:00"
+  },
+  {
     "id": "7f379d872169b09ee6221de537ad9c73689fbac4c52d142267d2fcc2f13b68c3",
     "title": "Realistic Sculpted Watermelon Birthday Cake",
     "caption": "A fully sculpted cake built to look like a whole watermelon — hand-painted rind detail, glossy finish, and a sculpted stem on top. Made to order for birthday celebrations across the Bay Area, including Daly City 94015 and San Francisco.",
