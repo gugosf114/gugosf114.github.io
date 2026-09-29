@@ -1,5 +1,36 @@
 [
   {
+    "id": "16e42c835e5a87231e177b2b722e827a9314d6f5a8fa007deb9d5c6bc23b7988",
+    "title": "Baby Dinosaur Hatching Egg Birthday Cake",
+    "caption": "A fully sculpted baby triceratops hatching from an egg, built for a 4th birthday in the Bay Area. Hand-painted skin texture, detailed blue eyes, and a cracked shell base — every element is edible. Custom sculpted cakes made to order.",
+    "alt_text": "Sculpted birthday cake depicting a baby triceratops emerging from a speckled egg on a textured brown board, personalized for Aleksandr's 4th birthday, Bay Area.",
+    "classification": {
+      "audience": "personal",
+      "product_type": "cake",
+      "occasion": "birthday",
+      "styles": [
+        "sculpted",
+        "realistic"
+      ],
+      "brand_or_theme": "dinosaur hatching egg",
+      "gallery_targets": [
+        "all",
+        "cakes",
+        "cakes-sculpted",
+        "cakes-realistic"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cakes",
+      "cakes-sculpted",
+      "cakes-realistic"
+    ],
+    "image_path": "images/gallery/bakers-agent/cake/baby-dinosaur-hatching-egg-birthday-cake-16e42c835e.webp",
+    "image_url": "/images/gallery/bakers-agent/cake/baby-dinosaur-hatching-egg-birthday-cake-16e42c835e.webp",
+    "published_at": "2026-09-29T19:21:18.140919+00:00"
+  },
+  {
     "id": "136b1bdd6d286153410b38e0984d091c9a73f7b76bdf3d1d05575962b14746b7",
     "title": "Custom Sewing Theme Birthday Cake Sara",
     "caption": "A single-tier sculpted fondant cake built around a sewing theme — complete with a miniature Singer sewing machine topper, dress form mannequin, measuring tape trim, and thread spools. Custom birthday cakes made to order across the Bay Area.",
