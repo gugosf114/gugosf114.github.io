@@ -1,5 +1,36 @@
 [
   {
+    "id": "d29e6bd0458dd871f83a5f6c45c6e12455144a3fbf44bcfaa805e9e05536c43d",
+    "title": "Custom UCSF Emergency Medicine Doctor Celebration Cake",
+    "caption": "Two-tiered custom cake celebrating a UCSF Department of Emergency Medicine doctor. Red fondant base with EKG detail, sculpted stethoscope, and caduceus topper. Custom celebration cakes made to order in the Bay Area, serving Daly City 94015 and San Francisco.",
+    "alt_text": "Two-tiered red and white fondant cake with UCSF Department of Emergency Medicine label, sculpted stethoscope, EKG line, and caduceus topper, made for San Francisco.",
+    "classification": {
+      "audience": "personal",
+      "product_type": "cake",
+      "occasion": "general",
+      "styles": [
+        "sculpted",
+        "tiered",
+        "printed",
+        "branded"
+      ],
+      "brand_or_theme": "UCSF Department of Emergency Medicine",
+      "gallery_targets": [
+        "all",
+        "cakes",
+        "cakes-sculpted"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cakes",
+      "cakes-sculpted"
+    ],
+    "image_path": "images/gallery/bakers-agent/cake/custom-ucsf-emergency-medicine-doctor-celebration-cake-d29e6bd045.webp",
+    "image_url": "/images/gallery/bakers-agent/cake/custom-ucsf-emergency-medicine-doctor-celebration-cake-d29e6bd045.webp",
+    "published_at": "2026-09-30T04:32:12.603451+00:00"
+  },
+  {
     "id": "98c831ff025e73ceb1cf7aa3e1d19ecffb95374bb6518d0c789da71d76b40eb7",
     "title": "Custom Law School Graduation Sculpted Cake",
     "caption": "A fully sculpted Criminal Law textbook stack cake with a fondant gavel, graduation cap, and diploma. Built for a J.D. graduation celebration. Custom sculpted cakes made to order across the Bay Area, including Daly City 94015.",
