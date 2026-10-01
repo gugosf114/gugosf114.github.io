@@ -1,5 +1,34 @@
 [
   {
+    "id": "7e60eb819b77132c492054d5a37d100303cbb186329f2d3d54e6775dcee06bf0",
+    "title": "Corporate Logo Cake Pops Bay Area",
+    "caption": "Custom branded cake pops made for real Bay Area companies — Alaska Airlines, Anduril, Fujifilm Sonosite, Kneat, PayPal, and Venmo. Precision color matching, printed edible logos, and clean presentation. Built for corporate events, product launches, and client gifting across San Francisco and the Peninsula.",
+    "alt_text": "Branded cake pops featuring logos for Alaska Airlines, Anduril, Fujifilm Sonosite, Kneat, PayPal, and Venmo, made for corporate clients in the Bay Area.",
+    "classification": {
+      "audience": "corporate",
+      "product_type": "cake-pops",
+      "occasion": "corporate-event",
+      "styles": [
+        "printed",
+        "branded"
+      ],
+      "brand_or_theme": "Alaska Airlines, Anduril Industries, Fujifilm Sonosite, Kneat, PayPal, Venmo",
+      "gallery_targets": [
+        "all",
+        "cake-pops",
+        "corporate-cake-pops"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cake-pops",
+      "corporate-cake-pops"
+    ],
+    "image_path": "images/gallery/bakers-agent/cake-pops/corporate-logo-cake-pops-bay-area-7e60eb819b.webp",
+    "image_url": "/images/gallery/bakers-agent/cake-pops/corporate-logo-cake-pops-bay-area-7e60eb819b.webp",
+    "published_at": "2026-10-01T18:03:56.536684+00:00"
+  },
+  {
     "id": "b3e71742f1ab576ae0a4448d2e44cd718a3d6e7f7eda037559d5c2f04b7d423c-3",
     "title": "Custom Book Shaped Realistic Sculpted Cakes",
     "caption": "Edible plot twists! 📚✨ These sculpted book cakes are so realistic, you'll want to read them before you eat them. Custom-made to match real covers — from dusty textbooks to beloved classics. Perfect for book launches, graduations, and anyone who's ever said \"I could eat this whole book.\" Serving the Bay Area, Daly City 94015, and San Francisco. 🎂",
