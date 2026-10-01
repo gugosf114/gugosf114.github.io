@@ -1,5 +1,31 @@
 [
   {
+    "id": "2ee6f83cf0c01484ba2f3ea454f510024249cf0f4a8278e18f1ace606eb3e8b2",
+    "title": "Prince Airplane Themed Cake Pops",
+    "caption": "Pink cake pops featuring a crowned prince on a yellow airplane — custom made for birthday parties and baby showers in the Bay Area. Made to order with printed edible toppers. Custom orders available for Daly City 94015 and San Francisco.",
+    "alt_text": "Pink cake pops with printed edible toppers showing a cartoon crowned prince riding a yellow airplane with clouds, displayed on a kraft box stand, made in the Bay Area.",
+    "classification": {
+      "audience": "personal",
+      "product_type": "cake-pops",
+      "occasion": "birthday",
+      "styles": [
+        "printed"
+      ],
+      "brand_or_theme": "prince on airplane, clouds, crown",
+      "gallery_targets": [
+        "all",
+        "cake-pops"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cake-pops"
+    ],
+    "image_path": "images/gallery/bakers-agent/cake-pops/prince-airplane-themed-cake-pops-2ee6f83cf0.webp",
+    "image_url": "/images/gallery/bakers-agent/cake-pops/prince-airplane-themed-cake-pops-2ee6f83cf0.webp",
+    "published_at": "2026-10-01T22:57:11.852062+00:00"
+  },
+  {
     "id": "7e60eb819b77132c492054d5a37d100303cbb186329f2d3d54e6775dcee06bf0-5",
     "title": "Corporate Logo Cake Pops Bay Area",
     "caption": "Custom branded cake pops made for real Bay Area companies — Alaska Airlines, Anduril, Fujifilm Sonosite, Kneat, PayPal, and Venmo. Precision color matching, printed edible logos, and clean presentation. Built for corporate events, product launches, and client gifting across San Francisco and the Peninsula.",
