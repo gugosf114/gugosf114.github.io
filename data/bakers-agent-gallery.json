@@ -1,5 +1,37 @@
 [
   {
+    "id": "b3e71742f1ab576ae0a4448d2e44cd718a3d6e7f7eda037559d5c2f04b7d423c",
+    "title": "Custom Book Shaped Realistic Sculpted Cakes",
+    "caption": "Edible plot twists! 📚✨ These sculpted book cakes are so realistic, you'll want to read them before you eat them. Custom-made to match real covers — from dusty textbooks to beloved classics. Perfect for book launches, graduations, and anyone who's ever said \"I could eat this whole book.\" Serving the Bay Area, Daly City 94015, and San Francisco. 🎂",
+    "alt_text": "Three sculpted cakes shaped like hardcover books — blue Proust cover, dark navy spiritual sun cover, and green dispute system design textbook — made in the Bay Area.",
+    "classification": {
+      "audience": "personal",
+      "product_type": "cake",
+      "occasion": "general",
+      "styles": [
+        "sculpted",
+        "realistic",
+        "printed"
+      ],
+      "brand_or_theme": "The World According to Proust by Joshua Landy; Tales of a Spiritual Sun by Paul Kiritsis; Dispute System Design by Lisa",
+      "gallery_targets": [
+        "all",
+        "cakes",
+        "cakes-sculpted",
+        "cakes-realistic"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cakes",
+      "cakes-sculpted",
+      "cakes-realistic"
+    ],
+    "image_path": "images/gallery/bakers-agent/cake/custom-book-shaped-realistic-sculpted-cakes-b3e71742f1.webp",
+    "image_url": "/images/gallery/bakers-agent/cake/custom-book-shaped-realistic-sculpted-cakes-b3e71742f1.webp",
+    "published_at": "2026-10-01T17:49:24.286407+00:00"
+  },
+  {
     "id": "859146c63cd0062ca2590a7f83465ba213ceafc49f7cf01c05c192a9ccb022b3",
     "title": "Law School Graduation Sculpted Cake J.D.",
     "caption": "A sculpted cake built to look like stacked Criminal Law textbooks, complete with a fondant gavel, graduation cap, and diploma scroll. Made to order for J.D. graduates across the Bay Area, including San Francisco and Daly City 94015.",
