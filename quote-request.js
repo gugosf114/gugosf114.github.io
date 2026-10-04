@@ -151,7 +151,7 @@
     data.set('product_type',selected.join(' + '));data.set('event_date',date);data.set('date_status',date?'Date provided':'Not sure yet');
     data.set('delivery_method',fulfillment());data.set('delivery_city',fulfillment()==='Delivery'?$('qLocation').value.trim():'');
     data.set('delivery_address',fulfillment()==='Delivery'?'Exact address to be confirmed with customer.':'');
-    data.set('occasion',$('qOccasion').value.trim());
+    data.set('occasion',$('qOccasion').value.trim());data.set('heard_from',($('qHeard')&&$('qHeard').value)||'');
     data.set('order_details',[$('qIdea').value.trim(),$('qNeedHelp').checked?'Please help me choose a design.':''].filter(Boolean).join('\n'));
     data.set('party_size',selected.includes('Cake')?(items.Cake?.quantity||'Unknown'):'Unknown');
     data.set('quantities',productLines().join('\n'));

@@ -259,6 +259,7 @@
         <section class="q-step" data-step="1" aria-labelledby="qEventTitle">
           <div class="q-step-count">3 of 3<span>When and where.</span></div><h2 id="qEventTitle" tabindex="-1">Tell us when and where.</h2><p class="q-lead">Choose your date and pickup or delivery. Still undecided? You can tell us that, too.</p>
           <label for="qOccasion" class="q-label">What’s the occasion? <span>Optional</span></label><input id="qOccasion" name="occasion" type="text" placeholder="Birthday, team celebration, wedding…" maxlength="200">
+          <label for="qHeard" class="q-label">How did you hear about us? <span>Optional</span></label><select id="qHeard" name="heard_from" style="width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(0,0,0,.15);font:inherit;background:#fff"><option value="">Choose one</option><option value="Google search">Google search</option><option value="Google Maps">Google Maps</option><option value="Instagram">Instagram</option><option value="Facebook">Facebook</option><option value="Pinterest">Pinterest</option><option value="YouTube">YouTube</option><option value="A friend or coworker">A friend or coworker</option><option value="We ordered before">We ordered before</option><option value="Other">Other</option></select>
           <div class="q-date-heading"><label for="qDate" class="q-label">Event date</label><label class="q-check"><input id="qDateUnsure" name="dateUnsure" type="checkbox"><span>Date not set yet</span></label></div><input id="qDate" name="date" type="date"><p id="qDateError" class="q-field-error" hidden></p>
           <p class="q-rush" id="qRush" hidden>Your date is coming up. <a href="tel:+14155688060">Call</a> or <a href="sms:+14155688060">text us</a> to check availability while we review your request.</p>
           <fieldset class="q-fulfillment"><legend>How would you like to receive it?</legend><div><label><input type="radio" name="fulfillment" value="Pickup"><span>Pickup</span></label><label><input type="radio" name="fulfillment" value="Delivery"><span>Delivery</span></label><label><input type="radio" name="fulfillment" value="Not sure yet"><span>Not sure yet</span></label></div></fieldset><p id="qFulfillmentError" class="q-field-error" hidden></p>
@@ -352,6 +353,6 @@
 
     <!-- Event Date: "Not sure yet" toggle -->
     <script src="autoresponder.js" defer></script>
-    <script src="quote-request.js?v=3" defer></script>
+    <script src="quote-request.js?v=4" defer></script>
 <link rel="stylesheet" href="site-ink-theme.css?v=15"><link rel="stylesheet" href="site-ink-pages.css?v=5"><link rel="stylesheet" href="site-ink-forms.css?v=8"></body>
 </html>

@@ -240,6 +240,10 @@
                                 <textarea placeholder=" " id="contact-message" name="message" rows="5" required></textarea>
                                 <label for="contact-message">Message</label>
                         </div>
+                        <div class="form-group">
+                                <label for="contact-heard" style="display:block;font-size:.9rem;margin-bottom:6px">How did you hear about us? (optional)</label>
+                                <select id="contact-heard" name="heard_from" style="width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(0,0,0,.15);font:inherit;background:#fff"><option value="">Choose one</option><option value="Google search">Google search</option><option value="Google Maps">Google Maps</option><option value="Instagram">Instagram</option><option value="Facebook">Facebook</option><option value="Pinterest">Pinterest</option><option value="YouTube">YouTube</option><option value="A friend or coworker">A friend or coworker</option><option value="We ordered before">We ordered before</option><option value="Other">Other</option></select>
+                        </div>
                         <button type="submit" class="btn btn-primary cx-send"><span>Send message</span></button>
                     </form>
                     <div class="cx-sent" id="cx-sent" hidden><svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-16"/></svg><h3>Sent!</h3><p>Thanks — we’ll reply within 24 hours.</p><button type="button" id="cx-again">Send another message</button></div>
