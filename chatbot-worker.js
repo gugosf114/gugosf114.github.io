@@ -202,11 +202,41 @@ const MAX_TOKENS = 400;
 const MAX_HISTORY = 10;
 const MAX_MSG_LEN = 800;
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type',
-};
+// Only our own sites may call the bot from a browser. A request whose Origin
+// is set and is NOT one of these is turned away, so a stranger can't embed the
+// bot on their page and run up the Claude bill. A request with no Origin at
+// all (same-origin, or a non-browser caller) still passes here and is held by
+// the rate limit and the daily cap below.
+const ALLOWED_ORIGINS = [
+  'https://mybakingcreations.com',
+  'https://www.mybakingcreations.com',
+  'https://gugosf114.github.io',
+];
+function originAllowed(origin) {
+  return !origin || ALLOWED_ORIGINS.includes(origin);
+}
+function corsFor(origin) {
+  return {
+    'Access-Control-Allow-Origin': origin && ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0],
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Vary': 'Origin',
+  };
+}
+
+// Global daily spend cap (in-memory). A hard ceiling on how many Claude calls
+// the bot makes in one day, no matter who calls, so a flood can't run the bill
+// past this. It resets at UTC midnight and when the worker restarts, so it is
+// a soft bound per running copy, not a bank-grade limit; a KV-backed counter
+// would make it exact. Real bakery traffic is a tiny fraction of this.
+const DAILY_MAX = 1200;
+let daily = { day: '', count: 0 };
+function dayKey() { return new Date().toISOString().slice(0, 10); }
+function underDailyCap() {
+  const today = dayKey();
+  if (daily.day !== today) daily = { day: today, count: 0 };
+  return daily.count < DAILY_MAX;
+}
 
 // Simple per-IP rate limit (in-memory, resets when the worker restarts)
 const rateLimitMap = new Map();
@@ -238,23 +268,33 @@ function cleanHistory(raw) {
   return out;
 }
 
-function json(body, status = 200) {
-  return new Response(JSON.stringify(body), { status, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+function json(body, status = 200, cors = corsFor(null)) {
+  return new Response(JSON.stringify(body), { status, headers: { ...cors, 'Content-Type': 'application/json' } });
 }
 
 export default {
   async fetch(request, env) {
-    if (request.method === 'OPTIONS') return new Response(null, { headers: corsHeaders });
-    if (request.method !== 'POST') return json({ error: 'Method not allowed' }, 405);
+    const origin = request.headers.get('Origin');
+    const cors = corsFor(origin);
+
+    if (request.method === 'OPTIONS') return new Response(null, { headers: cors });
+    if (request.method !== 'POST') return json({ error: 'Method not allowed' }, 405, cors);
+
+    // Turn away a browser call from a site that isn't ours.
+    if (!originAllowed(origin)) return json({ error: 'Not allowed from this site.' }, 403, cors);
 
     const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
-    if (!checkRateLimit(ip)) return json({ error: 'Too many requests. Please wait a moment before trying again.', showPhone: true }, 429);
+    if (!checkRateLimit(ip)) return json({ error: 'Too many requests. Please wait a moment before trying again.', showPhone: true }, 429, cors);
+
+    // Hard daily ceiling on Claude calls, so a flood can't run up the bill.
+    if (!underDailyCap()) return json({ error: 'Our chat is busy right now. Please call us at (415) 568-8060.', showPhone: true }, 429, cors);
 
     try {
       const body = await request.json();
       const messages = cleanHistory(body && body.messages);
-      if (!messages.length) return json({ error: 'Invalid request format' }, 400);
+      if (!messages.length) return json({ error: 'Invalid request format' }, 400, cors);
 
+      daily.count++; // count this Claude call against the daily ceiling
       const res = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
         headers: {
@@ -276,14 +316,14 @@ export default {
 
       if (!res.ok) {
         console.error('Anthropic API error', res.status, await res.text());
-        return json({ error: 'AI service temporarily unavailable. Please try again or contact us directly.', showPhone: true }, 502);
+        return json({ error: 'AI service temporarily unavailable. Please try again or contact us directly.', showPhone: true }, 502, cors);
       }
       const data = await res.json();
       const reply = (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('').trim();
-      return json({ reply: reply || 'Sorry, I had trouble with that. Please try again or call us at (415) 568-8060.' });
+      return json({ reply: reply || 'Sorry, I had trouble with that. Please try again or call us at (415) 568-8060.' }, 200, cors);
     } catch (err) {
       console.error('Worker error', err);
-      return json({ error: 'Something went wrong. Please try again or contact us directly.', showPhone: true }, 500);
+      return json({ error: 'Something went wrong. Please try again or contact us directly.', showPhone: true }, 500, cors);
     }
   },
 };
