@@ -1,5 +1,30 @@
 [
   {
+    "id": "b5c377a09cc2171115a44c3e0c094a1773b743928a31e07eaead730b44068e1c-2",
+    "title": "GFiber Corporate Cookies, Cupcakes and Cake Pops",
+    "caption": "Three formats, one consistent brand — printed logo cookies, cupcake toppers, and individually wrapped cake pops, all carrying the Google Fiber identity. Built for corporate events, client gifting, and product launches across the Bay Area.",
+    "alt_text": "Printed gfiber logo cookies, chocolate cupcakes with gfiber fondant toppers, and wrapped gfiber cake pops on sticks, made for a Bay Area corporate event.",
+    "classification": {
+      "audience": "corporate",
+      "product_type": "other",
+      "occasion": "corporate-event",
+      "styles": [
+        "printed",
+        "branded"
+      ],
+      "brand_or_theme": "Google Fiber (gfiber)",
+      "gallery_targets": [
+        "all"
+      ]
+    },
+    "gallery_targets": [
+      "all"
+    ],
+    "image_path": "images/gallery/bakers-agent/other/gfiber-corporate-cookies-cupcakes-and-cake-pops-b5c377a09c-2.webp",
+    "image_url": "/images/gallery/bakers-agent/other/gfiber-corporate-cookies-cupcakes-and-cake-pops-b5c377a09c-2.webp",
+    "published_at": "2026-10-13T07:27:13.919855+00:00"
+  },
+  {
     "id": "b5c377a09cc2171115a44c3e0c094a1773b743928a31e07eaead730b44068e1c",
     "title": "GFiber Corporate Cookies, Cupcakes and Cake Pops",
     "caption": "Three formats, one consistent brand — printed logo cookies, cupcake toppers, and individually wrapped cake pops, all carrying the Google Fiber identity. Built for corporate events, client gifting, and product launches across the Bay Area.",
