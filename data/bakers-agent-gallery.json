@@ -1,5 +1,34 @@
 [
   {
+    "id": "27f1959b7a1bc13212c2076921dc57f01b8903f21838fc7ff8bb9f0a39b75339",
+    "title": "Custom Branded Cake Pops Google Fiber",
+    "caption": "A dozen vanilla cake pops printed with the Google Fiber logo, individually wrapped and ready for corporate gifting or a product launch. Made to order for tech companies across San Francisco and the Bay Area.",
+    "alt_text": "Dozen white chocolate cake pops with Google Fiber logo printed on each, individually wrapped in clear cellophane with silver twist ties, displayed in a white box. Made in the Bay Area.",
+    "classification": {
+      "audience": "corporate",
+      "product_type": "cake-pops",
+      "occasion": "corporate-event",
+      "styles": [
+        "printed",
+        "branded"
+      ],
+      "brand_or_theme": "Google Fiber (gfiber)",
+      "gallery_targets": [
+        "all",
+        "cake-pops",
+        "corporate-cake-pops"
+      ]
+    },
+    "gallery_targets": [
+      "all",
+      "cake-pops",
+      "corporate-cake-pops"
+    ],
+    "image_path": "images/gallery/bakers-agent/cake-pops/custom-branded-cake-pops-google-fiber-27f1959b7a.webp",
+    "image_url": "/images/gallery/bakers-agent/cake-pops/custom-branded-cake-pops-google-fiber-27f1959b7a.webp",
+    "published_at": "2026-10-27T03:31:28.479423+00:00"
+  },
+  {
     "id": "4f3f76737b922bb3a01d8ba6915514e2a41a7e5100039603acc38978a4910b33",
     "title": "Custom Baby Shower Cake with Fondant Blocks and Booties",
     "caption": "A single-tier custom baby shower cake decorated with fondant baby booties, a clothesline of miniature baby clothes, and BABY alphabet blocks at the base. Made to order for Bay Area families. Custom orders accepted for Daly City 94015 and San Francisco 94122.",
