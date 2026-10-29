@@ -14,7 +14,7 @@
 </head>
 <body><main>
   <h1>Privacy Policy</h1>
-  <p class="muted">WiM: What I Meant for Android<br>Developer: WiM Labs, package com.wimlabs.wim<br>Last updated: October 27, 2026</p>
+  <p class="muted">WiM: What I Meant for Android<br>Developer: WiM Labs, package com.wimlabs.wim<br>Last updated: October 29, 2026</p>
   <p>WiM is voice typing designed for speech that includes blocks, repetitions, prolongations, false starts, and fillers. Its default Layer 1 mode runs privately on your phone. Cloud features are optional, require Google sign-in, and require an active WiM Cloud subscription.</p>
   <p class="notice"><strong>WiM is an assistive dictation tool, not a medical device.</strong> It does not diagnose, treat, cure, or prevent any medical condition. Consult a qualified healthcare professional for medical advice, diagnosis, or treatment.</p>
 
@@ -22,7 +22,7 @@
   <h3>Local Layer 1 — default</h3>
   <ul><li>Recording, transcription, and basic cleanup run on your phone.</li><li>No dictation audio, transcript, or Script Prep context is transmitted. If WiM reads up to 200 characters immediately before the cursor for sentence continuity, local Layer 1 keeps that short context on your phone.</li></ul>
   <h3>Cloud speech — optional</h3>
-  <p>L1 Cloud and Layers 2–4 upload the recording to WiM's authenticated Google Cloud backend. Audio is sent to OpenAI for transcription. Transcripts, derived speech context, optional Script Prep notes, and up to 200 characters immediately before the cursor may be sent to OpenAI for reconstruction; Layer 4 may also send that text context to Anthropic. The short pre-cursor context is used only to preserve sentence continuity for the dictation you requested. WiM does not store raw audio. Request logs contain operational fields such as user ID, layer, model, latency, and error type, not audio or transcript contents.</p>
+  <p>L1 Cloud and Layers 2–4 upload the recording to WiM's authenticated Google Cloud backend. Audio is sent to OpenAI for transcription. Transcripts, derived speech context, optional Script Prep notes, the name of the app you are typing in, and up to 200 characters immediately before the cursor may be sent to OpenAI for reconstruction; Layer 4 may also send that text context to Anthropic. The short pre-cursor context is used only to preserve sentence continuity for the dictation you requested. Once, after your fifth cloud reconstruction, if you have not set a first language, WiM sends that one cleaned-up message (up to 3,000 characters) through its backend to OpenAI to guess your first language, then shows the guess as a one-time prompt. WiM does not store raw audio. Request logs contain operational fields such as user ID, layer, model, latency, and error type, not audio or transcript contents.</p>
   <p class="notice"><strong>Simple version:</strong> a new install stays on-device. Choosing a cloud mode sends that dictation to the providers named above. Switching back to local L1 stops cloud speech transmission.</p>
 
   <h2>2. Accessibility Service</h2>
