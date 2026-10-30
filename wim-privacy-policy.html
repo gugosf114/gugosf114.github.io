@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="robots" content="noindex, follow">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Privacy Policy — WiM: What I Meant</title>
-  <meta name="description" content="Privacy policy for WiM, the Android voice-typing app built for speech disfluencies.">
+  <title>Privacy Policy — WiM: What I Meant Voice Typing</title>
+  <meta name="description" content="Privacy policy for WiM: What I Meant Voice Typing, a voice typing accessibility tool for Android.">
   <link rel="canonical" href="https://mybakingcreations.com/wim-privacy-policy">
   <style>
     *{box-sizing:border-box}body{margin:0;background:#171719;color:#d7d4cf;font:16px/1.7 system-ui,-apple-system,sans-serif;padding:32px 18px}
@@ -14,8 +14,8 @@
 </head>
 <body><main>
   <h1>Privacy Policy</h1>
-  <p class="muted">WiM: What I Meant for Android<br>Developer: WiM Labs, package com.wimlabs.wim<br>Last updated: October 29, 2026</p>
-  <p>WiM is voice typing designed for speech that includes blocks, repetitions, prolongations, false starts, and fillers. Its default Layer 1 mode runs privately on your phone. Cloud features are optional, require Google sign-in, and require an active WiM Cloud subscription.</p>
+  <p class="muted">WiM: What I Meant Voice Typing for Android<br>Developer: WiM Labs, package com.wimlabs.wim<br>Last updated: October 29, 2026</p>
+  <p>WiM is a voice typing accessibility tool for people who stutter or block, and for anyone whose speech includes repetitions, prolongations, false starts, and fillers. Its default Layer 1 mode runs privately on your phone. Cloud features are optional, require Google sign-in, and require an active WiM Cloud subscription.</p>
   <p class="notice"><strong>WiM is an assistive dictation tool, not a medical device.</strong> It does not diagnose, treat, cure, or prevent any medical condition. Consult a qualified healthcare professional for medical advice, diagnosis, or treatment.</p>
 
   <h2>1. Voice and text processing</h2>
@@ -23,6 +23,8 @@
   <ul><li>Recording, transcription, and basic cleanup run on your phone.</li><li>No dictation audio, transcript, or Script Prep context is transmitted. If WiM reads up to 200 characters immediately before the cursor for sentence continuity, local Layer 1 keeps that short context on your phone.</li></ul>
   <h3>Cloud speech — optional</h3>
   <p>L1 Cloud and Layers 2–4 upload the recording to WiM's authenticated Google Cloud backend. Audio is sent to OpenAI for transcription. Transcripts, derived speech context, optional Script Prep notes, the name of the app you are typing in, and up to 200 characters immediately before the cursor may be sent to OpenAI for reconstruction; Layer 4 may also send that text context to Anthropic. The short pre-cursor context is used only to preserve sentence continuity for the dictation you requested. Once, after your fifth cloud reconstruction, if you have not set a first language, WiM sends that one cleaned-up message (up to 3,000 characters) through its backend to OpenAI to guess your first language, then shows the guess as a one-time prompt. WiM does not store raw audio. Request logs contain operational fields such as user ID, layer, model, latency, and error type, not audio or transcript contents.</p>
+  <h3>Fix text by voice — optional, WiM Cloud</h3>
+  <p>When you highlight text in another app, drop the bubble on it, and confirm, WiM reads the highlighted text. It sends that text and your spoken command (for example "shorter" or "in Spanish") through WiM's authenticated backend to OpenAI, which returns the rewritten text. WiM then replaces your highlighted text with it. Nothing is sent until you confirm.</p>
   <p class="notice"><strong>Simple version:</strong> a new install stays on-device. Choosing a cloud mode sends that dictation to the providers named above. Switching back to local L1 stops cloud speech transmission.</p>
 
   <h2>2. Accessibility Service</h2>
@@ -30,6 +32,7 @@
   <ul>
     <li>When you invoke dictation, WiM may read up to 200 characters immediately before the cursor to preserve sentence continuity. Local Layer 1 keeps this context on your phone. If you choose a cloud layer, the short context is encrypted in transit and included in that reconstruction request.</li>
     <li>If you enable tap-to-send assist, WiM can locate the visible Send button and move the bubble there, but it clicks Send only after your separate tap on the green bubble. The five-second timer cancels without sending.</li>
+    <li>If you use Fix text by voice, WiM reads the text you highlighted and, after you confirm, replaces it with the rewritten version. It reads no other text on the screen.</li>
     <li>WiM blocks dictation entirely when the focused field is a password input.</li>
     <li>Accessibility data is not used for advertising, sale, or unrelated cross-app profiling.</li>
   </ul>
@@ -48,7 +51,7 @@
   <table><thead><tr><th>Provider</th><th>Purpose</th><th>When</th></tr></thead><tbody>
     <tr><td>Google Play</td><td>Distribution, subscription processing, status verification, and restoration</td><td>Install, subscribe, renew, manage, or restore</td></tr>
     <tr><td>Firebase / Google Cloud</td><td>Sign-in, backend, sync, analytics, diagnostics</td><td>As described above</td></tr>
-    <tr><td>OpenAI</td><td>Cloud transcription and reconstruction</td><td>Cloud speech only</td></tr>
+    <tr><td>OpenAI</td><td>Cloud transcription, reconstruction, and Fix text by voice</td><td>Cloud speech only</td></tr>
     <tr><td>Anthropic</td><td>Text cleanup on some cloud gears</td><td>Cloud speech only</td></tr>
   </tbody></table>
   <p>These providers process data to deliver WiM's features. WiM does not sell or rent personal data and does not use it for advertising.</p>
@@ -64,5 +67,5 @@
   <p>WiM is not directed to children under 13. Updated policies will appear at this same address with a new update date; material changes will also be surfaced in the app or store listing.</p>
 
   <h2>10. Contact</h2>
-  <p>WiM Labs (George Abrahamyants)<br><a href="mailto:gugosf@gmail.com">gugosf@gmail.com</a><br><a href="https://github.com/gugosf114/wim-android">WiM source repository</a></p>
+  <p>WiM Labs (George Abrahamyants)<br><a href="mailto:gugosf@gmail.com">gugosf@gmail.com</a></p>
 </main></body></html>
